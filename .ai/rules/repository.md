@@ -45,6 +45,7 @@ External reference material needed to understand or validate the project.
 Examples:
 
 - Illustrator JavaScript reference PDF
+- FreeHand MX documentation
 - screenshots
 - videos
 - reference test data
@@ -67,6 +68,7 @@ Examples:
 - specifications
 - reverse-engineering findings
 - project instructions
+- conversation handoffs
 
 ### `.ai/`
 
@@ -76,13 +78,23 @@ These files describe how AI-assisted work should be performed.
 
 They are not application source code.
 
-## 5. Do not commit local build output
+## 5. Conversation state and durable memory
+
+Conversation history is temporary working context.
+
+The repository is the durable technical memory of the project.
+
+Stable knowledge belongs in normal documentation. Conversation-specific migration state belongs in `docs/handoffs/`.
+
+Do not rely on a previous chat remaining fully available to a future chapter.
+
+## 6. Do not commit local build output
 
 Build products and machine-specific generated files should normally remain outside version control.
 
 The repository should contain source, configuration, documentation, tests, and intentional project artifacts rather than local build output.
 
-## 6. Do not commit secrets
+## 7. Do not commit secrets
 
 Never commit:
 
@@ -95,42 +107,34 @@ Never commit:
 
 Use appropriate local or CI configuration instead.
 
-## 7. Keep commits coherent
+## 8. Keep commits coherent
 
 A commit should represent one logical change.
 
-Avoid mixing unrelated:
+Avoid mixing unrelated features, fixes, refactors, documentation changes, and experiments when they can reasonably be separated.
 
-- features
-- fixes
-- refactors
-- documentation changes
-- experiments
-
-when they can reasonably be separated.
-
-## 8. Preserve traceability
+## 9. Preserve traceability
 
 Important architectural decisions should be represented in repository documentation rather than existing only in chat.
 
 When a decision materially affects implementation, record it in the appropriate documentation.
 
-## 9. Avoid unnecessary repository growth
+## 10. Avoid unnecessary repository growth
 
 Do not create large directory trees or placeholder files before they are needed.
 
 Directories should generally appear when their contents have a real purpose.
 
-The initial repository should remain intentionally small.
+The initial repository should remain intentionally small, while justified infrastructure such as `docs/handoffs/` should be created when the workflow requires it.
 
-## 10. External projects remain separate
+## 11. External projects remain separate
 
 Other external repositories, libraries, and projects should not be copied into AIP Mirror unless there is a clear project requirement and the licensing and maintenance implications are understood.
 
 In particular, the Adobe Illustrator SDK remains external and canonical.
 
-## 11. Repository is the durable project memory
+## 12. Repository is the durable project memory
 
 Conversation history is useful for collaboration, but the repository is the durable technical record.
 
-Important behavior, architecture, specifications, research findings, and decisions should eventually be captured in files under version control.
+Important behavior, architecture, specifications, research findings, decisions, and validated handoff state should eventually be captured in files under version control.

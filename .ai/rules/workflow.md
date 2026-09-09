@@ -26,75 +26,35 @@ For non-trivial work, prefer:
 
 Not every task requires every stage, but significant architectural or behavioral work should follow this order.
 
-## 2. Three project conversations
+## 2. Three project specializations
 
-The project uses three complementary conversations.
+The project uses three complementary conversation specializations. Each specialization may span multiple alphabetical chapters.
 
 ### AIP Mirror — 01 — JSX Prototype
 
-Purpose:
+Purpose: behavioral experiments, Illustrator JSX prototyping, interaction and geometry experiments, and rapid validation of user-visible behavior.
 
-- behavioral experiments
-- Illustrator JSX prototyping
-- interaction experiments
-- geometry experiments
-- rapid validation of user-visible behavior
-
-The JSX prototype should answer questions such as:
-
-- What should the interaction feel like?
-- How should the mirror axis behave?
-- What happens when drawing crosses the axis?
-- How should the reflected geometry be generated?
-- Which modifier-key behaviors are desirable?
-
-The JSX prototype is not the final native implementation.
+Current chapter: `AIP Mirror — 01A — JSX Prototype`
 
 ### AIP Mirror — 02 — Native AIP Plugin
 
-Purpose:
+Purpose: C++ implementation, Illustrator AIP integration, native interactive tool behavior, Illustrator event handling, live preview, object/path manipulation, undo/cancel behavior, and production architecture.
 
-- C++ implementation
-- Illustrator AIP integration
-- native interactive tool
-- Illustrator event handling
-- live preview
-- object/path manipulation
-- undo/cancel behavior
-- production architecture
-
-This conversation should use the validated behavior and specifications produced by the research and prototype work.
+Current chapter: `AIP Mirror — 02A — Native AIP Plugin`
 
 ### AIP Mirror — 03 — Architecture & Research
 
-Purpose:
+Purpose: reverse engineering, architecture, specifications, technical research, FreeHand MX behavior analysis, Illustrator behavior analysis, technology evaluation, and cross-project decisions.
 
-- reverse engineering
-- architecture
-- specifications
-- technical research
-- FreeHand MX behavior analysis
-- Illustrator behavior analysis
-- technology evaluation
-- cross-project decisions
-
-Important decisions affecting multiple parts of the project should be recorded in the repository.
+Current chapter: `AIP Mirror — 03A — Architecture & Research`
 
 ## 3. Do not duplicate reasoning across conversations
 
-If a question belongs primarily to one conversation, keep the detailed investigation there.
+If a question belongs primarily to one specialization, keep the detailed investigation there.
 
 Use repository documentation when the result is important to the entire project.
 
-For example:
-
-    Chat 03
-       ↓
-    architecture decision
-       ↓
-    docs/architecture/
-       ↓
-    Chat 02 uses the decision
+If a specialization reaches a contextual limit or needs a clean continuation, create the next alphabetical chapter and use a handoff from `docs/handoffs/`.
 
 ## 4. JSX to native transition
 
@@ -116,8 +76,6 @@ The intended transition is:
 
 Do not perform a mechanical JSX-to-C++ translation.
 
-The native implementation should be based on the validated behavior and appropriate native architecture.
-
 ## 5. Research before major implementation
 
 Before implementing an unfamiliar or technically significant area:
@@ -135,14 +93,7 @@ Use the `deep-understanding` skill for substantial investigations.
 
 A behavior discovered during reverse engineering is not automatically a project requirement.
 
-Classify findings as:
-
-- observed fact
-- inference
-- assumption
-- specification
-- implementation detail
-- open question
+Classify findings as observed fact, inference, assumption, specification, implementation detail, or open question.
 
 Promote a finding to specification only when the project has intentionally accepted it.
 
@@ -162,13 +113,9 @@ For significant features:
         ↓
     next step
 
-Avoid large unreviewed changes when the behavior or architecture is still uncertain.
-
 ## 8. Testing
 
-When practical, test at the lowest appropriate level.
-
-Prefer:
+When practical, test at the lowest appropriate level:
 
     geometry
        ↓
@@ -206,17 +153,25 @@ A useful default workflow is:
         ↓
     commit when requested
 
-For larger changes, a feature branch and pull request may be preferable.
+## 11. Conversation lifecycle
 
-## 11. Documentation follows decisions
+A chat is a finite working context. Do not claim an exact remaining context percentage or exact number of remaining messages.
+
+When contextual risk becomes significant, warn the user and recommend a handoff rather than continuing until important state is lost.
+
+Use the `conversation-handoff` skill to create a state snapshot under `docs/handoffs/`.
+
+The user should know when a migration is recommended and decides when the next chapter is started unless they explicitly delegate that decision.
+
+## 12. Documentation follows decisions
 
 When an architectural or behavioral decision becomes stable, update the appropriate repository documentation.
 
 Do not allow important decisions to exist only in temporary conversation context.
 
-## 12. Keep the project understandable
+## 13. Keep the project understandable
 
-Prefer explicit, boring, maintainable solutions over clever systems.
+Prefer explicit, maintainable solutions over clever systems.
 
 The goal is a robust Illustrator plugin, not an elaborate AI-development framework.
 

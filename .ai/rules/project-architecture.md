@@ -24,26 +24,11 @@ Project-owned geometry, reflection, transformation, and behavioral logic should 
 
 Illustrator-specific integration belongs at the plugin boundary.
 
-Conceptually:
-
-    core
-      ↓
-    plugin adapter
-      ↓
-    Illustrator AIP SDK
-
-Do not unnecessarily couple reusable geometry logic to Illustrator SDK objects.
-
 ## 4. Geometry is a first-class subsystem
 
 Reflection and transformation mathematics should be treated as project-owned logic.
 
-Geometry code should be:
-
-- deterministic
-- testable independently
-- documented
-- usable without a running Illustrator instance where practical
+Geometry code should be deterministic, independently testable, documented, and usable without a running Illustrator instance where practical.
 
 ## 5. Behavior precedes implementation
 
@@ -71,17 +56,7 @@ Keep these concerns distinct.
 
 ## 7. Prefer incremental native implementation
 
-The native plugin should initially prioritize:
-
-- plugin lifecycle
-- Illustrator integration
-- interactive mouse handling
-- mirror-axis interaction
-- live preview
-- geometry
-- path/object handling
-- undo/cancel behavior
-- basic tool functionality
+The native plugin should initially prioritize plugin lifecycle, Illustrator integration, interactive mouse handling, mirror-axis interaction, live preview, geometry, path/object handling, undo/cancel behavior, and basic tool functionality.
 
 UI polish and advanced presentation should not unnecessarily block the core interactive engine.
 
@@ -97,13 +72,7 @@ If a web UI becomes desirable later, treat it as a separate architectural decisi
 
 The project aims to reproduce an interactive mirror workflow rather than merely provide a static mirror command.
 
-The desired behavior includes:
-
-- an interactively positioned mirror axis
-- live reflected preview
-- flexible source-side behavior
-- the ability to draw across the mirror axis when appropriate
-- behavior inspired by FreeHand MX and comparable interactive mirror tools
+The desired behavior includes an interactively positioned mirror axis, live reflected preview, flexible source-side behavior, and the ability to draw across the mirror axis when appropriate.
 
 Exact behavior must be validated experimentally and documented before being considered final.
 
@@ -111,14 +80,7 @@ Exact behavior must be validated experimentally and documented before being cons
 
 Do not create abstractions solely because they might become useful later.
 
-Introduce abstractions when:
-
-- a real duplication exists
-- a boundary is technically meaningful
-- testing benefits from the abstraction
-- the architecture requires it
-
-Keep the initial implementation understandable.
+Introduce abstractions when a real duplication exists, a boundary is technically meaningful, testing benefits from the abstraction, or the architecture requires it.
 
 ## 11. Experiments are disposable
 
@@ -138,13 +100,15 @@ Where practical, maintain separate testing levels:
 
 Do not require Illustrator to test mathematical operations that can be tested independently.
 
-## 13. Preserve the three-conversation separation
+## 13. Preserve the conversation specialization boundaries
 
-The project has three complementary conversation roles:
+The project uses three complementary specializations:
 
 - `AIP Mirror — 01 — JSX Prototype`
 - `AIP Mirror — 02 — Native AIP Plugin`
 - `AIP Mirror — 03 — Architecture & Research`
+
+The current chapters use the `A` suffix, and later chapters advance alphabetically within the same specialization.
 
 The roles are complementary, not competing.
 
