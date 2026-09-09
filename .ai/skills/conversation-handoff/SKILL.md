@@ -98,6 +98,38 @@ Use this structure unless a project-specific format requires otherwise:
 
     ## Recommended starting context for next chapter
 
+## Lifecycle rules
+
+Handoff status is a state machine, not an informal label:
+
+    DRAFT
+      ↓
+    READY_FOR_HANDOFF
+      ↓
+    HANDED_OFF
+      ↓
+    SUPERSEDED
+
+The valid forward transitions are:
+
+- `DRAFT` → `READY_FOR_HANDOFF`
+- `READY_FOR_HANDOFF` → `HANDED_OFF`
+- `HANDED_OFF` → `SUPERSEDED`
+
+Do not skip states.
+
+### Ownership of transitions
+
+The chapter that is closing prepares its handoff and may move it from `DRAFT` to `READY_FOR_HANDOFF` once the next chapter can continue without guessing.
+
+The receiving chapter, not the previous chapter, owns the transition from `READY_FOR_HANDOFF` to `HANDED_OFF`. It must make this transition only after successfully starting from the previous handoff.
+
+A later chapter owns the transition from `HANDED_OFF` to `SUPERSEDED` when a newer handoff for the same specialization replaces the older one.
+
+The previous chapter must never mark its own handoff `HANDED_OFF` merely because the handoff was written, committed, or communicated.
+
+`SUPERSEDED` is not an automatic migration status. It means that a later handoff has subsequently replaced the historical handoff.
+
 ## Writing rules
 
 Be concrete.
@@ -132,7 +164,7 @@ Use the handoff for temporary or chapter-specific state such as:
 - what the next chapter should do first;
 - which conversation-specific assumptions still need validation.
 
-## Before closing the chapter
+## Before marking READY_FOR_HANDOFF
 
 Verify that the handoff answers:
 
@@ -147,6 +179,19 @@ Verify that the handoff answers:
 
 Only mark the handoff `READY_FOR_HANDOFF` when the next chapter can reasonably continue without guessing.
 
+## Receiving a handoff
+
+When a new chapter starts from a previous handoff:
+
+1. read the applicable project rules;
+2. read the previous handoff;
+3. inspect the current files identified by the handoff;
+4. confirm that the new chapter can continue from the recorded state;
+5. update the previous handoff status to `HANDED_OFF`;
+6. commit that lifecycle transition using the `commit-message` skill.
+
+Do not mark `HANDED_OFF` before the receiving chapter has actually started from the handoff.
+
 ## After migration
 
-When the next chapter has started successfully, the previous handoff may be marked `HANDED_OFF` or `SUPERSEDED` while remaining in the repository as historical state.
+A handoff remains `HANDED_OFF` after successful migration until a later handoff for the same specialization replaces it. At that point, the later chapter may update the older handoff to `SUPERSEDED` and must commit that lifecycle transition.

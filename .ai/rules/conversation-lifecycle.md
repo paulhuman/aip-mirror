@@ -125,12 +125,44 @@ A handoff must never silently promote an inference or assumption into a confirme
 
 ## 10. Handoff status
 
-Use an explicit status where practical:
+Every handoff must contain an explicit lifecycle status:
 
 - `DRAFT` — work in progress
 - `READY_FOR_HANDOFF` — safe starting point for the next chapter
-- `HANDED_OFF` — next chapter has started from this state
-- `SUPERSEDED` — replaced by a later handoff
+- `HANDED_OFF` — the next chapter has successfully started from this handoff
+- `SUPERSEDED` — this handoff was later replaced by a newer handoff for the same specialization
+
+### Allowed transitions
+
+Handoff status changes follow this state machine:
+
+    DRAFT
+      ↓
+    READY_FOR_HANDOFF
+      ↓
+    HANDED_OFF
+      ↓
+    SUPERSEDED
+
+Only the following forward transitions are valid:
+
+- `DRAFT` → `READY_FOR_HANDOFF`
+- `READY_FOR_HANDOFF` → `HANDED_OFF`
+- `HANDED_OFF` → `SUPERSEDED`
+
+Do not skip states.
+
+`SUPERSEDED` is not the normal immediate result of migration. A handoff becomes `HANDED_OFF` when the receiving chapter successfully starts from it. It becomes `SUPERSEDED` only later, when a newer handoff for the same specialization replaces it.
+
+### Transition ownership
+
+The responsibility for each transition is explicit:
+
+- The current chapter creates or updates its handoff and is responsible for `DRAFT` → `READY_FOR_HANDOFF`.
+- The receiving chapter is responsible for `READY_FOR_HANDOFF` → `HANDED_OFF`, after it has successfully started from the previous handoff.
+- A later chapter is responsible for `HANDED_OFF` → `SUPERSEDED` when a newer handoff has replaced the older one.
+
+The previous chapter must not mark its own handoff `HANDED_OFF` merely because it has finished writing or delivering it. `HANDED_OFF` confirms successful receipt and startup by the next chapter.
 
 ## 11. Starting a new chapter
 
@@ -141,9 +173,25 @@ The next chapter should read:
 3. the previous chapter's handoff;
 4. any files identified as current implementation state.
 
+After successfully starting from the previous handoff, the receiving chapter must update that handoff from `READY_FOR_HANDOFF` to `HANDED_OFF`.
+
 The new chapter should not assume that every detail from the previous chat remains available.
 
-## 12. Avoid duplicated state
+## 12. Handoff lifecycle and Git traceability
+
+Every lifecycle transition must be represented by a Git commit.
+
+A lifecycle transition may be combined with logically related handoff content changes in the same commit. A separate status-only commit is not required when the transition is part of the same coherent handoff update.
+
+Use the `commit-message` skill for the required commit-message vocabulary and style.
+
+The repository history should therefore make the handoff lifecycle auditable:
+
+    handoff created/updated → READY_FOR_HANDOFF
+    receiving chapter starts → HANDED_OFF
+    later handoff replaces it → SUPERSEDED
+
+## 13. Avoid duplicated state
 
 Project knowledge belongs in normal project documentation.
 
@@ -151,7 +199,7 @@ Conversation-specific migration state belongs in `docs/handoffs/`.
 
 Do not turn handoffs into a second, competing documentation system.
 
-## 13. User control
+## 14. User control
 
 Do not silently migrate a conversation or create a new chapter without telling the user.
 

@@ -99,6 +99,7 @@ Common scopes include:
 - tests
 - build
 - docs
+- handoff
 
 Do not force a scope when none is useful.
 
@@ -124,6 +125,45 @@ over:
 
     added some code for the mirror thing
 
+## Handoff commits
+
+Handoff lifecycle changes are part of the project's auditable workflow and must be represented by Git commits.
+
+Use the `handoff` scope for commits whose primary purpose is creating, updating, or changing the lifecycle status of a handoff.
+
+Recommended vocabulary:
+
+    docs(handoff): add 01A JSX prototype handoff
+
+    docs(handoff): update 01A JSX prototype handoff
+
+    docs(handoff): mark 01A handoff ready
+
+    docs(handoff): mark 01A handoff handed off
+
+    docs(handoff): mark 01A handoff superseded
+
+Rules:
+
+- Every handoff lifecycle transition must appear in Git history.
+- A transition may be combined with logically related handoff content changes in one coherent commit.
+- A separate status-only commit is not required when the transition is already part of the same logical handoff update.
+- The commit message should describe the primary handoff action, not every changed field.
+- The chapter that owns the transition must perform the corresponding commit.
+
+Transition ownership is defined by the conversation lifecycle rules:
+
+    current chapter:
+        DRAFT → READY_FOR_HANDOFF
+
+    receiving chapter:
+        READY_FOR_HANDOFF → HANDED_OFF
+
+    later chapter:
+        HANDED_OFF → SUPERSEDED
+
+The previous chapter must not create a commit claiming `HANDED_OFF` merely because it has completed the handoff document.
+
 ## Choosing the message
 
 Describe the primary purpose of the commit, not every changed file.
@@ -131,6 +171,8 @@ Describe the primary purpose of the commit, not every changed file.
 If a commit changes several files as part of one coherent feature, use one message describing the feature.
 
 If unrelated changes are present, recommend splitting them into separate commits.
+
+For handoff work, prefer one coherent commit when content and lifecycle status change together rather than creating unnecessary status-only commits.
 
 ## When the user asks for commit messages
 
@@ -177,6 +219,8 @@ Avoid inventing alternate names for established project concepts unless there is
     docs(reverse-engineering): document FreeHand mirror behavior
 
     docs(architecture): document JSX to AIP transition
+
+    docs(handoff): update 01A JSX prototype handoff
 
     refactor(core): separate geometry from Illustrator adapters
 
