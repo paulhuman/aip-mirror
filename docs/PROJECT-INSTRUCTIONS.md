@@ -19,27 +19,85 @@ These are not four separate projects. They are four workstreams around the same 
 
 # Conversation specialization model
 
-### 01 — JSX Prototype
+## AIP Mirror — 01 — JSX Prototype
 
-Behavioral prototype only. Use it for Illustrator JSX prototyping, interaction and geometry experiments, rapid behavioral validation, and establishing expected results before native implementation.
+This specialization is for the **behavioral prototype only**.
 
-The JSX implementation is an executable behavioral reference, not the final architecture.
+The JSX implementation is a reference/proof-of-concept used to:
 
-### 02 — Native AIP Plugin
+- discover and validate the desired interaction;
+- reproduce FreeHand-like mirror behavior;
+- experiment with geometry and transformations;
+- test UX decisions quickly;
+- establish expected results before native implementation.
 
-Production implementation stream. Use it for C++, Illustrator 2026 AIP SDK integration, Illustrator suites/APIs, native interactive tool behavior, event handling, live preview, object/path manipulation, undo/cancel behavior, plugin lifecycle, and production architecture.
+Do **not** treat the JSX prototype as the final architecture.
+
+When behavior is sufficiently understood and validated, development moves toward the native implementation in `02`.
+
+---
+
+## AIP Mirror — 02 — Native AIP Plugin
+
+This specialization is for the actual Illustrator native plugin:
+
+- C++;
+- Illustrator AIP SDK;
+- Illustrator-specific suites and APIs;
+- native interactive tool implementation;
+- Adobe Dialog Manager (ADM), where appropriate;
+- plugin lifecycle and integration;
+- Windows/macOS native concerns;
+- eventual production architecture.
 
 The native interactive mirror engine should live in C++/Illustrator SDK rather than depending on CEP or UXP.
 
-### 03 — Architecture & Research
+### Important
 
-Shared architectural and research stream. Use it for reverse engineering, FreeHand MX behavior research, Illustrator SDK research, specifications, technology evaluation, boundaries between JSX and native code, and decisions affecting multiple workstreams.
+**AIP does not require CEP or UXP.**
 
-Do not move detailed implementation work here when it belongs naturally in 01 or 02.
+CEP and UXP are separate extension/UI technologies.
 
-### 04 — Project Workshop
+A pure native AIP can be implemented using:
 
-Practical support and learning stream. Use it for questions and tasks that support the project without belonging to the primary behavioral, native, or architectural workstreams, including:
+```text
+C++
++
+Illustrator SDK
++
+Illustrator suites
++
+native plugin UI (e.g. ADM)
+```
+
+For the first native milestone, a simple/ugly ADM settings dialog is completely acceptable. The important part is the interactive mirror tool itself.
+
+---
+
+## AIP Mirror — 03 — Architecture & Research
+
+This specialization is the shared architectural/research space.
+
+Use it for:
+
+- project-wide architecture;
+- reverse engineering;
+- FreeHand MX behavior research;
+- Illustrator SDK research;
+- technology decisions;
+- boundaries between JSX and native code;
+- decisions that affect multiple workstreams;
+- documenting assumptions and discovered facts.
+
+Do not move detailed implementation work here if it belongs naturally in the JSX or native implementation specialization.
+
+---
+
+## AIP Mirror — 04 — Project Workshop
+
+This specialization is the project's practical support and learning workspace.
+
+Use it for questions and tasks that support development without belonging to the primary behavioral, native, or architectural workstreams, including:
 
 - IDE configuration and project setup;
 - CMake, compiler, debugger, and toolchain configuration;
@@ -48,9 +106,9 @@ Practical support and learning stream. Use it for questions and tasks that suppo
 - ChatGPT interface and workflow questions;
 - debugging development-environment problems;
 - general programming learning and explanations;
-- other small or routine technical questions that would unnecessarily distract 01, 02, or 03.
+- small or routine technical questions that would unnecessarily distract `01`, `02`, or `03`.
 
-`04` is a support/workshop space, not a competing implementation stream. If a Workshop discussion produces a durable architecture or project-wide decision, record it in the repository and, when appropriate, route the decision through 03.
+`04` is a support/workshop space, not a competing implementation stream. If a Workshop discussion produces a durable architecture or project-wide decision, record it in the repository and, when appropriate, route the decision through `03`.
 
 ---
 
@@ -115,10 +173,10 @@ See `.ai/rules/conversation-lifecycle.md` and `.ai/skills/conversation-handoff/S
 
 # Critical workflow rule
 
-The intended project chain is:
+The key project chain is:
 
 ```text
-FreeHand / Illustrator research
+reverse engineering
         ↓
 observations
         ↓
@@ -133,7 +191,7 @@ native design
 C++ / AIP implementation
 ```
 
-Do not perform a mechanical JSX-to-C++ translation.
+The JSX prototype is an **executable behavioral reference**. The C++ implementation should reproduce the behavior defined by the specification and validated by the prototype, rather than blindly porting JSX line-by-line.
 
 ---
 
@@ -143,17 +201,25 @@ The project has two GitHub repositories with deliberately different roles.
 
 ## 1. `paulhuman/adobe-illustrator-2026-sdk`
 
-This is the **canonical Adobe SDK reference repository**. Treat it as reference-only for AIP development.
+This is the **canonical Adobe SDK reference repository**.
 
-Do not copy the complete SDK into `aip-mirror`.
+It contains the complete Illustrator 2026 SDK, including things such as `docs`, `illustratorapi`, `samplecode`, `tools`, and other SDK material.
+
+Treat this repository as **reference-only** for AIP development.
+
+Do not copy the SDK into `aip-mirror`.
 
 When an exact Illustrator AIP API detail is needed, inspect this repository instead of asking the user to upload SDK files.
 
+Original Adobe sample code also remains in the SDK repository. If a sample is adapted for AIP Mirror, the adapted project-specific version belongs in `aip-mirror`, not as a copy of the entire SDK.
+
 ## 2. `paulhuman/aip-mirror`
 
-This is the actual project repository. It should contain project source code, JSX prototypes, documentation, specifications, research notes, experiments, test data, project resources, conversation handoffs, and eventually the native AIP implementation.
+This is the actual project repository.
 
-It should not contain a copy of the Adobe SDK.
+It should contain project source code, JSX prototypes, documentation, specifications, research notes, experiments, test data, project resources, conversation handoffs, and eventually the native AIP implementation.
+
+It should **not** contain a copy of the Adobe SDK.
 
 ---
 
@@ -185,6 +251,15 @@ aip-mirror/
 │   └── PROJECT-INSTRUCTIONS.md
 │
 ├── references/
+│   ├── freehand/
+│   │   ├── FreehandMX-MirrorTool-Manual.png
+│   │   └── using-freehandmx.pdf
+│   ├── javascript/
+│   │   └── Illustrator-JavaScript-Scripting-Reference-Nov-2025.pdf
+│   └── test-data/
+│       ├── screenshots/
+│       └── videos/
+│
 ├── prototypes/
 │   └── jsx/
 │
@@ -193,7 +268,54 @@ aip-mirror/
 └── .gitignore
 ```
 
-Later, when justified, the repository can grow toward architecture/specification/research docs, JSX geometry/mirror prototypes, native `src/core`, `src/plugin`, `src/ui`, tests, experiments, resources, and development tools. Do not create empty directories merely for symmetry.
+Later, when native development starts, the repository can grow toward:
+
+```text
+aip-mirror/
+├── docs/
+│   ├── architecture/
+│   ├── handoffs/
+│   ├── reverse-engineering/
+│   │   ├── freehand-mx/
+│   │   └── illustrator/
+│   └── specifications/
+│
+├── references/
+├── prototypes/
+│   └── jsx/
+│       ├── mirror/
+│       └── geometry/
+├── src/
+│   ├── core/
+│   │   ├── geometry/
+│   │   ├── mirror/
+│   │   └── transform/
+│   ├── plugin/
+│   │   ├── tools/
+│   │   ├── commands/
+│   │   ├── suites/
+│   │   └── notifiers/
+│   ├── ui/
+│   └── bridge/
+├── resources/
+│   ├── icons/
+│   └── strings/
+├── tests/
+│   ├── geometry/
+│   ├── mirror/
+│   ├── fixtures/
+│   └── integration/
+├── experiments/
+│   ├── sdk/
+│   ├── adm/
+│   ├── geometry/
+│   └── bridge/
+└── tools/
+    ├── analysis/
+    └── development/
+```
+
+Do not create empty directories merely for symmetry.
 
 ---
 
@@ -227,9 +349,9 @@ UI polish comes later.
 
 These technologies must not be conflated.
 
-CEP is a legacy Adobe extension technology and is not a prerequisite for AIP.
+CEP is a legacy Adobe extension technology based around a browser/CEF-style environment. It is not a prerequisite for AIP.
 
-UXP is a separate Adobe extension runtime. Current Illustrator support should be verified against current Adobe documentation before being treated as a project dependency. UXP is not a prerequisite for AIP.
+UXP is Adobe's newer JavaScript/HTML/CSS extension runtime. For Illustrator, third-party availability should be verified against current Adobe documentation/status before being treated as a project dependency. UXP is not a prerequisite for AIP.
 
 NUXP is a third-party architecture/workaround connecting a native C++ Illustrator plugin to a modern web frontend. It is interesting as an architectural reference, but is not required for AIP Mirror. Do not port NUXP wholesale at the beginning.
 
@@ -294,23 +416,67 @@ These are behavioral requirements to validate against the intended FreeHand-styl
 
 ---
 
-# Geometry, testing, and documentation
+# Geometry and testing
 
-Keep project-owned geometry as independent from Illustrator APIs as practical. Geometry should be deterministic and independently testable.
+Keep project-owned geometry as independent from Illustrator APIs as practical. Point/vector, line/axis, affine transform, reflection, intersection, tolerance, and coordinate conversion logic can conceptually belong in `src/core/geometry/`.
 
 The project should eventually test at several levels:
 
-- geometry tests;
-- mirror behavior tests;
-- Illustrator integration tests.
+### Geometry tests
 
-Document discoveries by distinguishing:
+Pure mathematical behavior such as point reflection, vector reflection, line/axis reflection, affine transforms, tolerances, and coordinate conversion.
 
-- **Observed fact** — directly observed in a reference, test, SDK document, or runtime;
-- **Inference** — conclusion derived from observations;
-- **Assumption** — believed true but not sufficiently verified;
-- **Specification** — deliberate project requirement;
-- **Implementation detail** — technical choice used to satisfy the specification.
+### Mirror behavior tests
+
+Source/mirrored side, axis behavior, crossing the axis, preview expectations, and repeated transformations.
+
+### Integration tests
+
+Illustrator-specific object/path creation, selection, transforms, undo, plugin lifecycle, and actual document interaction.
+
+The JSX prototype can also serve as a behavioral oracle for many cases before the C++ implementation exists.
+
+---
+
+# Documentation rules
+
+When documenting discoveries, distinguish clearly between:
+
+### Observed fact
+
+Something directly observed in FreeHand, Illustrator, a test, SDK documentation, or actual runtime behavior.
+
+### Inference
+
+A conclusion derived from observations.
+
+### Assumption
+
+Something believed to be true but not yet sufficiently verified.
+
+### Specification
+
+A deliberate project requirement.
+
+### Implementation detail
+
+A technical choice used to satisfy the specification.
+
+Example:
+
+```text
+Observed:
+FreeHand previews the mirrored object while the user moves the axis.
+
+Inference:
+The operation is fundamentally interactive rather than a post-hoc transform.
+
+Specification:
+AIP Mirror must provide a live mirrored preview during axis manipulation.
+
+Implementation:
+The native C++ tool updates preview geometry from mouse events.
+```
 
 This distinction prevents assumptions from accidentally becoming requirements.
 
@@ -335,9 +501,9 @@ When a question concerns:
 - **architecture/research/FreeHand behavior/project-wide decisions** → primarily the `03` specialization.
 - **IDE/toolchain/Git/repository mechanics/SDK tooling/ChatGPT interface/general development support** → primarily the `04` specialization.
 
-If a topic crosses boundaries, keep the durable architectural decision in the `03` specialization and the implementation work in the appropriate implementation specialization. Use `04` to support the work, not to relocate it.
-
 Each specialization may have multiple chapters (`A`, `B`, `C`, ...). If a chapter becomes too large or contextually risky, warn the user and create a handoff before continuing in the next chapter.
+
+If a topic crosses boundaries, keep the architectural decision in the `03` specialization and the implementation work in the appropriate implementation specialization. Use `04` to support the work, not to relocate it.
 
 The `aip-mirror` repository is the shared source of truth for project artifacts.
 
