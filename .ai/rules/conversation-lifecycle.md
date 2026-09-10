@@ -26,6 +26,10 @@ Each specialization uses a numeric identity followed by an alphabetical chapter 
     AIP Mirror — 03B — Architecture & Research
     AIP Mirror — 03C — Architecture & Research
 
+    AIP Mirror — 04A — Project Workshop
+    AIP Mirror — 04B — Project Workshop
+    AIP Mirror — 04C — Project Workshop
+
 The number identifies the specialization. The letter identifies the conversation chapter.
 
 Continue alphabetically within the same specialization.
@@ -39,6 +43,7 @@ The current project chapters are:
 - `AIP Mirror — 01A — JSX Prototype`
 - `AIP Mirror — 02A — Native AIP Plugin`
 - `AIP Mirror — 03A — Architecture & Research`
+- `AIP Mirror — 04A — Project Workshop`
 
 ## 4. Early warning
 
@@ -88,6 +93,7 @@ Use one file per chapter:
     docs/handoffs/01A-JSX-Prototype.md
     docs/handoffs/02A-Native-AIP-Plugin.md
     docs/handoffs/03A-Architecture-Research.md
+    docs/handoffs/04A-Project-Workshop.md
 
 When a chapter is superseded, retain its handoff as historical project state.
 
@@ -203,4 +209,4 @@ Do not turn handoffs into a second, competing documentation system.
 
 Do not silently migrate a conversation or create a new chapter without telling the user.
 
-The AI may warn that a handoff is advisable, but the user decides when to start the next chapter unless the user has explicitly delegated that decision.
+The AI may warn that a handoff is advisable, but the user decides when the next chapter is started unless the user has explicitly delegated that decision.

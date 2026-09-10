@@ -102,14 +102,23 @@ Do not require Illustrator to test mathematical operations that can be tested in
 
 ## 13. Preserve the conversation specialization boundaries
 
-The project uses three complementary specializations:
+The project uses four complementary specializations:
 
 - `AIP Mirror — 01 — JSX Prototype`
 - `AIP Mirror — 02 — Native AIP Plugin`
 - `AIP Mirror — 03 — Architecture & Research`
+- `AIP Mirror — 04 — Project Workshop`
 
 The current chapters use the `A` suffix, and later chapters advance alphabetically within the same specialization.
 
 The roles are complementary, not competing.
 
 Architecture decisions that affect multiple areas should be documented in the repository so they are not dependent on conversation history alone.
+
+## 14. Project Workshop is support, not a competing implementation stream
+
+The `04` specialization is for practical development support and learning: IDE configuration, build/toolchain setup, Git usage, repository mechanics, ChatGPT interface questions, SDK/tooling setup, and other routine technical questions that do not belong in the primary workstreams.
+
+It may explain, troubleshoot, and prepare changes, but it should not become an alternative place for project architecture, behavioral research, JSX implementation, or native plugin implementation.
+
+When a question produces a durable project decision, the decision belongs in the appropriate project documentation and, when cross-cutting, primarily in the `03` specialization.

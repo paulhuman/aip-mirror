@@ -42,6 +42,7 @@ Examples:
     01A-JSX-Prototype.md
     02A-Native-AIP-Plugin.md
     03A-Architecture-Research.md
+    04A-Project-Workshop.md
 
 ## Handoff structure
 
@@ -53,7 +54,7 @@ Use this structure unless a project-specific format requires otherwise:
     AIP Mirror — XXY — <Specialization>
 
     Specialization:
-    <01 / 02 / 03>
+    <01 / 02 / 03 / 04>
 
     Chapter:
     <A / B / C / ...>
@@ -195,3 +196,15 @@ Do not mark `HANDED_OFF` before the receiving chapter has actually started from 
 ## After migration
 
 A handoff remains `HANDED_OFF` after successful migration until a later handoff for the same specialization replaces it. At that point, the later chapter may update the older handoff to `SUPERSEDED` and must commit that lifecycle transition.
+
+## Project Workshop boundary
+
+The `04` specialization may help with IDE configuration, build systems, Git commands, repository mechanics, SDK/tooling setup, ChatGPT interface questions, and general development learning.
+
+When a Workshop discussion produces a durable project decision, record it in the appropriate project documentation rather than leaving it only in the Workshop conversation.
+
+Do not use `04` as a substitute for:
+
+- `01` JSX behavioral prototyping;
+- `02` native C++/AIP implementation;
+- `03` architecture, research, specifications, or project-wide decisions.

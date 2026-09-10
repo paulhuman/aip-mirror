@@ -26,9 +26,9 @@ For non-trivial work, prefer:
 
 Not every task requires every stage, but significant architectural or behavioral work should follow this order.
 
-## 2. Three project specializations
+## 2. Four project specializations
 
-The project uses three complementary conversation specializations. Each specialization may span multiple alphabetical chapters.
+The project uses four complementary conversation specializations. Each specialization may span multiple alphabetical chapters.
 
 ### AIP Mirror — 01 — JSX Prototype
 
@@ -47,6 +47,14 @@ Current chapter: `AIP Mirror — 02A — Native AIP Plugin`
 Purpose: reverse engineering, architecture, specifications, technical research, FreeHand MX behavior analysis, Illustrator behavior analysis, technology evaluation, and cross-project decisions.
 
 Current chapter: `AIP Mirror — 03A — Architecture & Research`
+
+### AIP Mirror — 04 — Project Workshop
+
+Purpose: practical development support and learning outside the primary implementation/research streams, including IDE configuration, CMake/build setup, Git commands and repository mechanics, SDK/tooling setup, ChatGPT interface questions, debugging of development environment issues, and routine technical questions.
+
+Current chapter: `AIP Mirror — 04A — Project Workshop`
+
+The `04` specialization is a support/workshop space. It should not become a competing architecture, research, JSX, or native implementation stream.
 
 ## 3. Do not duplicate reasoning across conversations
 
@@ -176,3 +184,11 @@ Prefer explicit, maintainable solutions over clever systems.
 The goal is a robust Illustrator plugin, not an elaborate AI-development framework.
 
 AI instructions should help development rather than become development overhead.
+
+## 14. Project Workshop routing rule
+
+Use `04` for questions about the development environment, IDE, toolchain, Git mechanics, repository operations, SDK/tooling setup, ChatGPT interface, and other routine support.
+
+If the answer establishes a project-wide architectural decision, move the durable decision into repository documentation and, when appropriate, the `03` architecture/research specialization.
+
+If the work is actual JSX behavior/prototyping, continue in `01`. If it is actual native C++/AIP implementation, continue in `02`.

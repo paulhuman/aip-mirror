@@ -17,11 +17,31 @@ Use the specialization number and chapter letter:
     03A-Architecture-Research.md
     03B-Architecture-Research.md
 
+    04A-Project-Workshop.md
+    04B-Project-Workshop.md
+
+## Current specializations
+
+AIP Mirror currently has four complementary conversation specializations:
+
+- `01` — JSX Prototype
+- `02` — Native AIP Plugin
+- `03` — Architecture & Research
+- `04` — Project Workshop
+
+The current chapters are `01A`, `02A`, `03A`, and `04A`.
+
 ## Purpose
 
 A handoff records conversation-specific state needed to continue work safely in the next chapter.
 
 It is not a replacement for normal project documentation.
+
+## Project Workshop
+
+`04 — Project Workshop` is the project's practical support and learning workspace. It is intended for IDE and toolchain configuration, CMake/build setup, Git commands and repository mechanics, SDK/tooling setup, ChatGPT interface questions, debugging of development-environment problems, and other routine technical questions that would otherwise distract from the primary workstreams.
+
+The Workshop does not own project architecture, FreeHand research, JSX implementation, or native AIP implementation. Durable decisions produced there should be moved into the appropriate repository documentation.
 
 ## Required distinction
 
