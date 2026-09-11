@@ -63,7 +63,7 @@ Use this structure unless a project-specific format requires otherwise:
     <chapter or N/A>
 
     Status:
-    READY_FOR_HANDOFF
+    DRAFT
 
     ## Current objective
 
@@ -129,7 +129,53 @@ A later chapter owns the transition from `HANDED_OFF` to `SUPERSEDED` when a new
 
 The previous chapter must never mark its own handoff `HANDED_OFF` merely because the handoff was written, committed, or communicated.
 
-`SUPERSEDED` is not an automatic migration status. It means that a later handoff has subsequently replaced the historical handoff.
+`SUPERSEDED` is a required historical transition, not an optional status. When a later handoff for the same specialization reaches `READY_FOR_HANDOFF`, the later chapter must mark the previously `HANDED_OFF` handoff `SUPERSEDED` and commit that lifecycle transition. The older handoff remains in the repository as historical state.
+
+## New chapter initialization
+
+When a new chapter is initialized, it must immediately create its own handoff file with status `DRAFT`.
+
+This is mandatory for every new chapter, including the first chapter of a specialization and every later alphabetical chapter.
+
+The new chapter may create this initial `DRAFT` handoff without asking the user for permission. The initialization is part of the standard bootstrap procedure, not an optional development change.
+
+The initial handoff should capture the chapter identity, previous chapter, starting objective, known starting state, and any other information already established during bootstrap. It may be incomplete because its purpose is to become the live checkpoint document for the new chapter.
+
+The initial creation must be committed immediately. This is an explicit exception to the normal user-review-before-commit rule for AI-assisted changes.
+
+## Checkpoint updates
+
+A handoff in `DRAFT` is a live checkpoint document for the current chapter.
+
+The user may request a checkpoint update with:
+
+    Пора обновить handoff
+
+When this command is used, the current chapter must:
+
+1. create the handoff if it does not yet exist;
+2. update it with the current chapter state;
+3. keep its status as `DRAFT`;
+4. verify the resulting content and scope;
+5. commit the checkpoint without asking for separate user permission.
+
+Checkpoint commits are not migrations. They are ordinary, auditable `DRAFT` checkpoint commits that preserve the current working state.
+
+Checkpoint updates may be repeated throughout the chapter. A checkpoint should be created when meaningful state has accumulated, not after every ordinary message.
+
+## Migration
+
+When the user requests migration to the next chapter, for example:
+
+    Пора выполнять миграцию в чат 02B
+
+finish the current work, update the current handoff, and move it from `DRAFT` to `READY_FOR_HANDOFF` only when the next chapter can continue without guessing.
+
+The current chapter owns this transition and must commit it.
+
+After that, generate the standard bootstrap instruction for the receiving chapter using `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
+
+Do not mark the handoff `HANDED_OFF` in the closing chapter.
 
 ## Writing rules
 
@@ -184,18 +230,23 @@ Only mark the handoff `READY_FOR_HANDOFF` when the next chapter can reasonably c
 
 When a new chapter starts from a previous handoff:
 
-1. read the applicable project rules;
-2. read the previous handoff;
-3. inspect the current files identified by the handoff;
-4. confirm that the new chapter can continue from the recorded state;
-5. update the previous handoff status to `HANDED_OFF`;
-6. commit that lifecycle transition using the `commit-message` skill.
+1. read `.ai/skills/conversation-handoff/BOOTSTRAP.md`;
+2. read the applicable project rules;
+3. read the previous handoff;
+4. inspect the current files identified by the handoff;
+5. confirm that the new chapter can continue from the recorded state;
+6. create the new chapter's handoff with status `DRAFT` if it does not already exist;
+7. commit the new `DRAFT` handoff immediately without asking the user for permission;
+8. update the previous handoff status to `HANDED_OFF`;
+9. commit that lifecycle transition.
+
+The receiving chapter owns the transition from the previous handoff to `HANDED_OFF`.
 
 Do not mark `HANDED_OFF` before the receiving chapter has actually started from the handoff.
 
 ## After migration
 
-A handoff remains `HANDED_OFF` after successful migration until a later handoff for the same specialization replaces it. At that point, the later chapter may update the older handoff to `SUPERSEDED` and must commit that lifecycle transition.
+A handoff remains `HANDED_OFF` after successful migration until a later handoff for the same specialization reaches `READY_FOR_HANDOFF`. At that point, the later chapter must update the older handoff to `SUPERSEDED` and commit that lifecycle transition.
 
 ## Project Workshop boundary
 
