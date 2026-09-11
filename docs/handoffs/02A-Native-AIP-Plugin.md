@@ -13,7 +13,7 @@ Previous chapter:
 N/A — this is the first handoff record for the 02 specialization
 
 Status:
-READY_FOR_HANDOFF
+HANDED_OFF
 
 ## Current objective
 
