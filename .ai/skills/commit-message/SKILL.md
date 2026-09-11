@@ -125,6 +125,22 @@ over:
 
     added some code for the mirror thing
 
+## Repository verification
+
+Choosing a commit message does not replace verifying the repository change.
+
+Before a commit is created, follow the repository write-safety rules in `.ai/rules/repository.md` and the commit verification procedure in `.ai/rules/workflow.md`.
+
+In particular, when an existing file is changed through a full-content API update:
+
+- fetch the current file before editing;
+- preserve unrelated content;
+- read the file back after writing;
+- verify content integrity and the intended change;
+- inspect the resulting diff and changed-file scope before committing.
+
+A successful API write or valid Git commit does not by itself prove that the content is correct.
+
 ## Handoff commits
 
 Handoff lifecycle changes are part of the project's auditable workflow and must be represented by Git commits.
