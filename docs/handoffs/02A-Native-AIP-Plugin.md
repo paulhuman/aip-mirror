@@ -13,7 +13,7 @@ Previous chapter:
 N/A — this is the first handoff record for the 02 specialization
 
 Status:
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
@@ -108,7 +108,7 @@ Formalized and tested the conversation handoff workflow, including mandatory ini
 
 ## Immediate next task
 
-Finalize this handoff as `READY_FOR_HANDOFF`, then initialize chapter 02B using the static bootstrap procedure.
+Initialize chapter 02B using the static bootstrap procedure.
 
 ## Things not to redo
 
@@ -120,4 +120,4 @@ Finalize this handoff as `READY_FOR_HANDOFF`, then initialize chapter 02B using 
 
 ## Recommended starting context for next chapter
 
-Start by reading `.ai/skills/conversation-handoff/BOOTSTRAP.md`, `.ai/rules/conversation-lifecycle.md`, `.ai/rules/workflow.md`, and this handoff. Then inspect the relevant native-plugin/project files and references before beginning implementation. Chapter 02B should create its own `docs/handoffs/02B-Native-AIP-Plugin.md` with status `DRAFT` immediately during bootstrap and commit it without asking for permission. After successful bootstrap, 02B must change this handoff from `READY_FOR_HANDOFF` to `HANDED_OFF` and commit that transition.
+Start by reading `.ai/skills/conversation-handoff/BOOTSTRAP.md`, `.ai/rules/conversation-lifecycle.md`, and `.ai/rules/workflow.md`, then read this handoff and inspect the relevant native-plugin/project files and references before beginning implementation. Chapter 02B must create its own `docs/handoffs/02B-Native-AIP-Plugin.md` with status `DRAFT` immediately during bootstrap and commit it without asking for permission. After successful bootstrap, 02B must change this handoff from `READY_FOR_HANDOFF` to `HANDED_OFF` and commit that transition.
