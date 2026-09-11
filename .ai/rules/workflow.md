@@ -147,6 +147,44 @@ Use the `commit-message` skill when a commit message needs to be formulated.
 
 Do not commit unrelated changes.
 
+### Repository write verification
+
+When modifying an existing repository file through an API or other full-content write mechanism, use this verification sequence:
+
+    read current file
+          ↓
+    make minimal intended change
+          ↓
+    write complete file
+          ↓
+    read file back
+          ↓
+    verify intended change
+          ↓
+    verify unrelated content preserved
+          ↓
+    inspect diff
+          ↓
+    verify scope
+          ↓
+    commit
+          ↓
+    verify resulting commit/ref
+
+A successful write operation is not evidence that the content is correct. A valid blob SHA or Git commit is also not sufficient evidence of content integrity.
+
+Before committing, confirm that:
+
+- every intended file is present in the changed-file set;
+- no unrelated file was changed;
+- the modified file still contains all required pre-existing content unless its removal was intentional;
+- the resulting diff contains only the intended change;
+- the commit points to the intended repository state.
+
+If an unexpected deletion, truncation, replacement, or unrelated modification is discovered, stop the workflow and correct the file before proceeding.
+
+For existing files, prefer editing freshly fetched repository content rather than reconstructing the file from memory.
+
 ## 10. User control over commits
 
 AI-assisted changes should not be committed automatically unless the user has explicitly requested the commit.
