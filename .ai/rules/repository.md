@@ -138,3 +138,25 @@ In particular, the Adobe Illustrator SDK remains external and canonical.
 Conversation history is useful for collaboration, but the repository is the durable technical record.
 
 Important behavior, architecture, specifications, research findings, decisions, and validated handoff state should eventually be captured in files under version control.
+
+## 13. Repository write safety
+
+GitHub API file updates are full-content replacements, not line-level edits. When an existing file is updated through an API that accepts complete file content, the new content must contain the entire intended file.
+
+Therefore:
+
+- Read the current file from the repository before modifying it.
+- Use the current file content as the source of truth; do not reconstruct an existing file from memory when it can be fetched.
+- Preserve all unrelated content exactly unless the change intentionally modifies it.
+- Treat the current blob SHA as part of the write precondition for an existing file.
+- Make the smallest intended change to the fetched content.
+- After writing, read the resulting file back from the repository.
+- Verify that the intended change is present and that unrelated content was not accidentally removed or altered.
+- Inspect the resulting diff before considering the change ready for commit.
+- If the resulting content differs unexpectedly, stop and restore the correct content before making further changes.
+
+A successful API operation, a valid blob SHA, or a valid Git commit does not by itself prove that the repository content is correct.
+
+Content integrity must be verified independently of API success.
+
+This rule applies to source code, documentation, configuration, scripts, tests, AI instructions, and every other existing repository file.
