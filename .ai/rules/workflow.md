@@ -187,17 +187,15 @@ For existing files, prefer editing freshly fetched repository content rather tha
 
 ## 10. User control over commits
 
-AI-assisted changes should not be committed automatically unless the user has explicitly requested the commit.
+AI-assisted development changes should not be committed automatically unless the user has explicitly requested the commit or the change is an explicit part of an established automated workflow.
 
-A useful default workflow is:
+The conversation handoff workflow is an explicit established workflow for:
 
-    make change
-        ↓
-    show / explain change
-        ↓
-    user review
-        ↓
-    commit when requested
+- creating a new chapter's mandatory initial `DRAFT` handoff;
+- checkpoint commits requested with `Пора обновить handoff`;
+- handoff lifecycle transitions owned by the active chapter under the conversation lifecycle rules.
+
+These handoff actions are procedural repository state rather than discretionary feature-development commits.
 
 ## 11. Conversation lifecycle
 
@@ -207,7 +205,9 @@ When contextual risk becomes significant, warn the user and recommend a handoff 
 
 Use the `conversation-handoff` skill to create a state snapshot under `docs/handoffs/`.
 
-The user should know when a migration is recommended and decides when the next chapter is started unless they explicitly delegate that decision.
+When a new chapter starts, its `DRAFT` handoff must be created immediately as part of bootstrap. Do not defer this initialization until ordinary chapter work begins.
+
+The user controls when the next chapter is started unless they explicitly delegate that decision.
 
 ## 12. Documentation follows decisions
 
