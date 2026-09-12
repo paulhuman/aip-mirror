@@ -12,23 +12,20 @@ Do not rely on a long conversation remaining fully available forever. Important 
 
 ## 2. Chapter naming
 
-Each specialization uses a numeric identity followed by an alphabetical chapter letter:
+Each specialization uses a numeric identity followed by an alphabetical chapter letter.
 
-    AIP Mirror — 01A — JSX Prototype
-    AIP Mirror — 01B — JSX Prototype
-    AIP Mirror — 01C — JSX Prototype
+The generic chapter identifier is:
 
-    AIP Mirror — 02A — Native AIP Plugin
-    AIP Mirror — 02B — Native AIP Plugin
-    AIP Mirror — 02C — Native AIP Plugin
+    [0-9]{2}[A-Z]
 
-    AIP Mirror — 03A — Architecture & Research
-    AIP Mirror — 03B — Architecture & Research
-    AIP Mirror — 03C — Architecture & Research
+Examples of the chapter-name pattern:
 
-    AIP Mirror — 04A — Project Workshop
-    AIP Mirror — 04B — Project Workshop
-    AIP Mirror — 04C — Project Workshop
+    AIP Mirror — 01[A-Z] — JSX Prototype
+    AIP Mirror — 02[A-Z] — Native AIP Plugin
+    AIP Mirror — 03[A-Z] — Architecture & Research
+    AIP Mirror — 04[A-Z] — Project Workshop
+
+Concrete chapters retain their normal IDs, for example `03A`, `02B`, and `04C`.
 
 The number identifies the specialization. The letter identifies the conversation chapter.
 
@@ -38,12 +35,9 @@ Do not rename the numeric specialization when starting a new chapter.
 
 ## 3. Current chapters
 
-The current project chapters are:
+Project-wide rules use the chapter pattern rather than hard-coding a single set of current chapter letters.
 
-- `AIP Mirror — 01A — JSX Prototype`
-- `AIP Mirror — 02A — Native AIP Plugin`
-- `AIP Mirror — 03A — Architecture & Research`
-- `AIP Mirror — 04A — Project Workshop`
+The concrete current chapter is determined by the active conversation and its corresponding handoff document.
 
 ## 4. Early warning
 
@@ -100,8 +94,12 @@ Conversation handoffs belong under:
 
 Use one file per chapter:
 
+    docs/handoffs/<specialization><chapter>-<short-name>.md
+
+For example:
+
     docs/handoffs/01A-JSX-Prototype.md
-    docs/handoffs/02A-Native-AIP-Plugin.md
+    docs/handoffs/02B-Native-AIP-Plugin.md
     docs/handoffs/03A-Architecture-Research.md
     docs/handoffs/04A-Project-Workshop.md
 
@@ -199,6 +197,25 @@ For a chapter created from a previous handoff, the receiving chapter should read
 
 After successfully starting from the previous handoff, the receiving chapter must update that previous handoff from `READY_FOR_HANDOFF` to `HANDED_OFF` and commit that transition.
 
+### Post-bootstrap consistency verification
+
+The receiving chapter must not declare bootstrap complete immediately after writing the previous handoff's `HANDED_OFF` transition. Before considering bootstrap complete, it must verify the resulting state as a coherent lifecycle pair.
+
+At minimum, the receiving chapter must:
+
+1. read back its own handoff after creation;
+2. confirm that its own handoff still has `Status: DRAFT`;
+3. confirm that its `Previous chapter` identifies the handoff from which it actually started;
+4. confirm that its `Immediate next task` describes the first real task after bootstrap, not an already-completed bootstrap action;
+5. read back the previous handoff after the `READY_FOR_HANDOFF` → `HANDED_OFF` transition;
+6. confirm that the previous handoff is now `HANDED_OFF`;
+7. confirm that the previous and receiving handoffs form a consistent lifecycle pair;
+8. if any of these checks fail, treat bootstrap as incomplete and correct the receiving chapter's own handoff before beginning substantive chapter work.
+
+A bootstrap is therefore complete only after both the lifecycle transition and the post-bootstrap consistency verification succeed.
+
+The receiving chapter owns correction of its own handoff when this verification detects stale or contradictory bootstrap state. A different specialization may detect and report such an inconsistency, but must not edit the receiving chapter's handoff on its behalf.
+
 The new chapter should not assume that every detail from the previous chat remains available.
 
 ## 12. Handoff lifecycle and Git traceability
@@ -215,6 +232,7 @@ The repository history should therefore make the workflow auditable:
     checkpoint → DRAFT handoff updated/committed
     current chapter migrates → READY_FOR_HANDOFF
     receiving chapter starts → HANDED_OFF
+    post-bootstrap consistency verification → bootstrap complete
     later replacement reaches READY_FOR_HANDOFF → older handoff SUPERSEDED
 
 Use the `commit-message` skill for the required commit-message vocabulary and style.
