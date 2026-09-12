@@ -37,12 +37,18 @@ Naming convention:
 
     <specialization><chapter>-<short-name>.md
 
-Examples:
+The generic chapter identifier is:
 
-    01A-JSX-Prototype.md
-    02A-Native-AIP-Plugin.md
-    03A-Architecture-Research.md
-    04A-Project-Workshop.md
+    [0-9]{2}[A-Z]
+
+Examples of specialization patterns:
+
+    01[A-Z]-JSX-Prototype.md
+    02[A-Z]-Native-AIP-Plugin.md
+    03[A-Z]-Architecture-Research.md
+    04[A-Z]-Project-Workshop.md
+
+Concrete chapter IDs retain their normal form, for example `01A`, `02B`, or `03C`.
 
 ## Handoff structure
 
@@ -238,11 +244,28 @@ When a new chapter starts from a previous handoff:
 6. create the new chapter's handoff with status `DRAFT` if it does not already exist;
 7. commit the new `DRAFT` handoff immediately without asking the user for permission;
 8. update the previous handoff status to `HANDED_OFF`;
-9. commit that lifecycle transition.
+9. commit that lifecycle transition;
+10. perform the post-bootstrap consistency verification below before declaring bootstrap complete or beginning substantive work.
 
-The receiving chapter owns the transition from the previous handoff to `HANDED_OFF`.
+### Post-bootstrap consistency verification
 
-Do not mark `HANDED_OFF` before the receiving chapter has actually started from the handoff.
+The receiving chapter must verify the resulting state as a coherent lifecycle pair after both required bootstrap commits have completed.
+
+At minimum:
+
+1. read back the receiving chapter's own handoff;
+2. confirm that its own status remains `DRAFT`;
+3. confirm that `Previous chapter` identifies the handoff from which it actually started;
+4. confirm that `Immediate next task` describes the first real task after bootstrap, not an action already completed during bootstrap;
+5. read back the previous handoff after the lifecycle transition;
+6. confirm that the previous handoff is now `HANDED_OFF`;
+7. confirm that the previous and receiving handoffs form a consistent lifecycle pair;
+8. if any check fails, treat bootstrap as incomplete and correct the receiving chapter's own handoff before beginning substantive chapter work;
+9. re-read the corrected handoff and repeat the verification until it passes.
+
+The receiving chapter owns correction of its own handoff. Another specialization may detect and report an inconsistency, but must not edit the receiving chapter's handoff on its behalf.
+
+Bootstrap is complete only after this verification succeeds.
 
 ## After migration
 
