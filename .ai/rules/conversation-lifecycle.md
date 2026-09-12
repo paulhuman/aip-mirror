@@ -255,6 +255,6 @@ Do not turn handoffs into a second, competing documentation system.
 
 Do not silently migrate a conversation or create a new chapter without telling the user.
 
-When contextual risk makes a handoff advisable, the AI must warn the user and may recommend creating a handoff checkpoint. The user decides when the next chapter is started unless the user has explicitly delegated that decision.
+When contextual risk makes a handoff advisable, the AI must warn the user and should recommend creating a handoff checkpoint. The user decides when the next chapter is started unless the user has explicitly delegated that decision.
 
 Handoff bootstrap and checkpoint actions that are explicitly defined as pre-authorized by these rules are not subject to an additional approval step.
