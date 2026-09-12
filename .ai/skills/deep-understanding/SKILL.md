@@ -5,7 +5,7 @@ description: Require a thorough study of the relevant codebase, SDK material, do
 
 # Deep understanding
 
-Every meaningful non-trivial task should begin with a deliberate study of the relevant material before planning or implementation.
+Every meaningful non-trivial task must begin with a deliberate study of the relevant material before planning or implementation.
 
 The goal is not to produce an immediate solution. The goal is to establish a reliable understanding of the system first.
 
