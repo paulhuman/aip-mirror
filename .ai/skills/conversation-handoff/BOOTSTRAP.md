@@ -52,7 +52,7 @@ The receiving chapter owns correction of its own handoff. Another specialization
 
 ## Initial DRAFT handoff
 
-The initial handoff should use the standard handoff structure from the `conversation-handoff` skill and should contain, at minimum:
+The initial handoff must use the standard handoff structure from the `conversation-handoff` skill unless a project-specific format requires otherwise and must contain, at minimum:
 
 - conversation/chapter identity;
 - specialization;
