@@ -54,7 +54,7 @@ Instead, monitor for contextual risk, including:
 - signs that context may no longer be safely retained;
 - increasing risk of reconstructing details from incomplete context.
 
-When contextual risk becomes significant, warn the user before continuing a large task and recommend creating a handoff checkpoint.
+When contextual risk becomes significant, the AI must warn the user before continuing a large task and recommend creating a handoff checkpoint.
 
 Do not wait until context has already been lost.
 
@@ -75,6 +75,12 @@ The standard user command is:
 When this command is used, update the current handoff, keep `DRAFT`, verify the result, and create a checkpoint commit. Handoff checkpoint commits are pre-authorized by this project workflow and do not require a separate approval step.
 
 Checkpoint commits are not migration commits. They preserve working state while the chapter remains active.
+
+The standard user migration command is:
+
+    Пора выполнять миграцию в чат [0-9]{2}[A-Z]
+
+This command explicitly requests migration to the specified receiving chapter. When it is used, follow the migration procedure in the conversation-handoff skill and the rules below.
 
 ## 6. Handoff trigger
 
@@ -186,9 +192,9 @@ This is mandatory for every new chapter and is part of chapter initialization.
 
 The initial `DRAFT` handoff creation and its bootstrap commit are pre-authorized parts of the handoff procedure. They must be completed immediately rather than waiting for a separate approval step.
 
-The initial `DRAFT` may be incomplete. At minimum it should identify the new chapter, specialization, previous chapter, starting objective, and starting state established during bootstrap.
+The initial `DRAFT` may be incomplete. At minimum it must identify the new chapter, specialization, previous chapter, starting objective, and starting state established during bootstrap.
 
-For a chapter created from a previous handoff, the receiving chapter should read:
+For a chapter created from a previous handoff, the receiving chapter must read:
 
 1. `.ai/skills/conversation-handoff/BOOTSTRAP.md`;
 2. the applicable project rules;
@@ -216,7 +222,7 @@ A bootstrap is therefore complete only after both the lifecycle transition and t
 
 The receiving chapter owns correction of its own handoff when this verification detects stale or contradictory bootstrap state. A different specialization may detect and report such an inconsistency, but must not edit the receiving chapter's handoff on its behalf.
 
-The new chapter should not assume that every detail from the previous chat remains available.
+The new chapter must not assume that every detail from the previous chat remains available.
 
 ## 12. Handoff lifecycle and Git traceability
 
@@ -249,6 +255,6 @@ Do not turn handoffs into a second, competing documentation system.
 
 Do not silently migrate a conversation or create a new chapter without telling the user.
 
-The AI may warn that a handoff is advisable, but the user decides when the next chapter is started unless the user has explicitly delegated that decision.
+When contextual risk makes a handoff advisable, the AI must warn the user and may recommend creating a handoff checkpoint. The user decides when the next chapter is started unless the user has explicitly delegated that decision.
 
 Handoff bootstrap and checkpoint actions that are explicitly defined as pre-authorized by these rules are not subject to an additional approval step.
