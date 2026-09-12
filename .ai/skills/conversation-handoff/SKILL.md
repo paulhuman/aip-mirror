@@ -260,7 +260,7 @@ At minimum:
 5. read back the previous handoff after the lifecycle transition;
 6. confirm that the previous handoff is now `HANDED_OFF`;
 7. confirm that the previous and receiving handoffs form a consistent lifecycle pair;
-8. if any check fails, treat bootstrap as incomplete and correct the receiving chapter's own handoff before beginning substantive work;
+8. if any check fails, treat bootstrap as incomplete and correct the receiving chapter's own handoff before beginning substantive chapter work;
 9. re-read the corrected handoff and repeat the verification until it passes.
 
 The receiving chapter owns correction of its own handoff. Another specialization may detect and report an inconsistency, but must not edit the receiving chapter's handoff on its behalf.
