@@ -145,7 +145,7 @@ This is mandatory for every new chapter, including the first chapter of a specia
 
 The new chapter may create this initial `DRAFT` handoff without asking the user for permission. The initialization is part of the standard bootstrap procedure, not an optional development change.
 
-The initial handoff should capture the chapter identity, previous chapter, starting objective, known starting state, and any other information already established during bootstrap. It may be incomplete because its purpose is to become the live checkpoint document for the new chapter.
+The initial handoff must capture the chapter identity, previous chapter, starting objective, known starting state, and any other information already established during bootstrap. It may be incomplete because its purpose is to become the live checkpoint document for the new chapter.
 
 The initial creation must be committed immediately. This is an explicit exception to the normal user-review-before-commit rule for AI-assisted changes.
 
@@ -260,7 +260,7 @@ At minimum:
 5. read back the previous handoff after the lifecycle transition;
 6. confirm that the previous handoff is now `HANDED_OFF`;
 7. confirm that the previous and receiving handoffs form a consistent lifecycle pair;
-8. if any check fails, treat bootstrap as incomplete and correct the receiving chapter's own handoff before beginning substantive chapter work;
+8. if any check fails, treat bootstrap as incomplete and correct the receiving chapter's own handoff before beginning substantive work;
 9. re-read the corrected handoff and repeat the verification until it passes.
 
 The receiving chapter owns correction of its own handoff. Another specialization may detect and report an inconsistency, but must not edit the receiving chapter's handoff on its behalf.
