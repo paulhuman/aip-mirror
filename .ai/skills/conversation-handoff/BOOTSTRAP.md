@@ -28,9 +28,27 @@ When a new chapter is initialized:
 8. Commit that initial `DRAFT` handoff as part of bootstrap; this is a pre-authorized procedural commit and does not require a separate approval step.
 9. Update the previous chapter's handoff from `READY_FOR_HANDOFF` to `HANDED_OFF`.
 10. Commit that lifecycle transition.
-11. Only after bootstrap is complete, proceed with new implementation or other chapter work.
+11. Perform the mandatory post-bootstrap consistency verification described below.
+12. Only after bootstrap is complete, proceed with new implementation or other chapter work.
 
-If the new chapter is the first chapter of a specialization, there is no previous handoff to mark `HANDED_OFF`; still create and commit the new chapter's `DRAFT` handoff immediately.
+If the new chapter is the first chapter of a specialization, there is no previous handoff to mark `HANDED_OFF`; still create and commit the new chapter's `DRAFT` handoff immediately, then perform the applicable post-bootstrap consistency verification.
+
+## Post-bootstrap consistency verification
+
+Bootstrap is not complete merely because the receiving handoff was created and the previous handoff was transitioned to `HANDED_OFF`.
+
+Before beginning substantive chapter work, the receiving chapter must verify the resulting lifecycle state as a coherent pair:
+
+1. Read back the receiving chapter's own handoff after creation.
+2. Confirm that its own handoff still has `Status: DRAFT`.
+3. Confirm that its `Previous chapter` identifies the handoff from which it actually started.
+4. Confirm that its `Immediate next task` describes the first real task after bootstrap, not an action already completed as part of bootstrap.
+5. If a previous handoff exists, read it back after the `READY_FOR_HANDOFF` → `HANDED_OFF` transition.
+6. Confirm that the previous handoff is now `HANDED_OFF`.
+7. Confirm that the previous and receiving handoffs form a consistent lifecycle pair.
+8. If any check fails, treat bootstrap as incomplete. Correct the receiving chapter's own handoff, re-read it, and repeat the verification before beginning substantive work.
+
+The receiving chapter owns correction of its own handoff. Another specialization may detect and report an inconsistency, but must not edit the receiving chapter's handoff on its behalf.
 
 ## Initial DRAFT handoff
 
@@ -70,6 +88,6 @@ When the user explicitly requests migration to `NEXT_CHAPTER`, the current chapt
 4. verify the repository change and commit the transition;
 5. generate the bootstrap message for the receiving chapter using this static procedure.
 
-The receiving chapter later changes the previous handoff `READY_FOR_HANDOFF` → `HANDED_OFF` after successful bootstrap.
+The receiving chapter later changes the previous handoff `READY_FOR_HANDOFF` → `HANDED_OFF` after successful bootstrap and post-bootstrap consistency verification.
 
 When the receiving chapter's own handoff eventually reaches `READY_FOR_HANDOFF`, that later chapter must also change the older `HANDED_OFF` handoff for the same specialization to `SUPERSEDED` and commit that transition. This historical transition is mandatory when its condition is met.
