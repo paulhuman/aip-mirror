@@ -6,12 +6,12 @@
 
 The project is intentionally split into four complementary working specializations around the same `aip-mirror` repository. Each specialization may span multiple conversation chapters as the project grows.
 
-### Current chapters
+### Specialization chapter patterns
 
-1. **AIP Mirror — 01A — JSX Prototype**
-2. **AIP Mirror — 02A — Native AIP Plugin**
-3. **AIP Mirror — 03A — Architecture & Research**
-4. **AIP Mirror — 04A — Project Workshop**
+1. **AIP Mirror — 01[A-Z] — JSX Prototype**
+2. **AIP Mirror — 02[A-Z] — Native AIP Plugin**
+3. **AIP Mirror — 03[A-Z] — Architecture & Research**
+4. **AIP Mirror — 04[A-Z] — Project Workshop**
 
 These are not four separate projects. They are four workstreams around the same repository.
 
@@ -91,6 +91,14 @@ Use it for:
 
 Do not move detailed implementation work here if it belongs naturally in the JSX or native implementation specialization.
 
+### Cross-specialization consistency responsibility
+
+`03` may review the repository and detect architectural, lifecycle, documentation, or consistency problems in handoffs belonging to other specializations.
+
+When such a problem is found, `03` should report the inconsistency and route correction to the owning specialization. `03` must not edit another specialization's handoff on its behalf.
+
+In particular, if a receiving chapter has stale or contradictory post-bootstrap state, the receiving chapter owns correction of its own handoff.
+
 ---
 
 ## AIP Mirror — 04 — Project Workshop
@@ -124,25 +132,24 @@ When contextual risk becomes significant, the AI should warn the user early and 
 
 ## Chapter naming
 
-Each specialization uses a numeric identity followed by an alphabetical chapter letter:
+Each specialization uses a numeric identity followed by an alphabetical chapter letter.
+
+The generic chapter identifier is:
 
 ```text
-AIP Mirror — 01A — JSX Prototype
-AIP Mirror — 01B — JSX Prototype
-AIP Mirror — 01C — JSX Prototype
-
-AIP Mirror — 02A — Native AIP Plugin
-AIP Mirror — 02B — Native AIP Plugin
-AIP Mirror — 02C — Native AIP Plugin
-
-AIP Mirror — 03A — Architecture & Research
-AIP Mirror — 03B — Architecture & Research
-AIP Mirror — 03C — Architecture & Research
-
-AIP Mirror — 04A — Project Workshop
-AIP Mirror — 04B — Project Workshop
-AIP Mirror — 04C — Project Workshop
+[0-9]{2}[A-Z]
 ```
+
+Examples of the chapter-name pattern:
+
+```text
+AIP Mirror — 01[A-Z] — JSX Prototype
+AIP Mirror — 02[A-Z] — Native AIP Plugin
+AIP Mirror — 03[A-Z] — Architecture & Research
+AIP Mirror — 04[A-Z] — Project Workshop
+```
+
+Concrete chapters retain their normal IDs, for example `03A`, `02B`, and `04C`.
 
 The number identifies the specialization; the letter identifies the conversation chapter.
 
@@ -158,7 +165,7 @@ Use one state snapshot per chapter, for example:
 
 ```text
 docs/handoffs/01A-JSX-Prototype.md
-docs/handoffs/02A-Native-AIP-Plugin.md
+docs/handoffs/02B-Native-AIP-Plugin.md
 docs/handoffs/03A-Architecture-Research.md
 docs/handoffs/04A-Project-Workshop.md
 ```
@@ -501,9 +508,11 @@ When a question concerns:
 - **architecture/research/FreeHand behavior/project-wide decisions** → primarily the `03` specialization.
 - **IDE/toolchain/Git/repository mechanics/SDK tooling/ChatGPT interface/general development support** → primarily the `04` specialization.
 
-Each specialization may have multiple chapters (`A`, `B`, `C`, ...). If a chapter becomes too large or contextually risky, warn the user and create a handoff before continuing in the next chapter.
+Each specialization may have multiple chapters (`A`, `B`, `C`, ...), following the generic chapter identifier `[0-9]{2}[A-Z]`. If a chapter becomes too large or contextually risky, warn the user and create a handoff before continuing in the next chapter.
 
 If a topic crosses boundaries, keep the architectural decision in the `03` specialization and the implementation work in the appropriate implementation specialization. Use `04` to support the work, not to relocate it.
+
+If `03` detects a lifecycle or consistency problem in a handoff owned by another specialization, report it to that specialization rather than editing its handoff. The owning chapter is responsible for correcting its own handoff.
 
 The `aip-mirror` repository is the shared source of truth for project artifacts.
 
