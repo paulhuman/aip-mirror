@@ -201,7 +201,7 @@ These handoff actions are procedural repository state rather than discretionary 
 
 A chat is a finite working context. Do not claim an exact remaining context percentage or exact number of remaining messages.
 
-When contextual risk becomes significant, warn the user and recommend a handoff rather than continuing until important state is lost.
+When contextual risk becomes significant, the AI must warn the user and recommend a handoff rather than continuing until important state is lost.
 
 Use the `conversation-handoff` skill to create a state snapshot under `docs/handoffs/`.
 
