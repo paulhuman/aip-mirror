@@ -17,7 +17,7 @@ DRAFT
 
 ## Current objective
 
-Continue the project-wide AI-instruction architecture work from 03A. The pre-change audit and migration/ownership map are complete, and Architecture Decision Pass v1 is complete conceptually. Next: formalize the decisions, resolve remaining design details, then begin the structural refactor in small, verifiable steps.
+Continue the project-wide AI-instruction architecture work from 03A. The pre-change audit and migration/ownership map are complete, and Architecture Decision Pass v1 is complete conceptually. The current focus is formalizing applicability, activation, precedence, explicit `OVERRIDE`, and TRACE semantics before beginning the structural refactor.
 
 ## Current state
 
@@ -126,6 +126,69 @@ Instruction authority comes from semantic role and precedence, not discovery ord
 
 `extensions/` means repository-defined extensions to the core AI instruction architecture, not vendor/plugin packages. Do not create `.ai/plugins/`. TRACE is a likely extension; HANDOFF remains built-in/core lifecycle.
 
+## Architecture Decision Pass v2 — current checkpoint
+
+The following principles were explicitly agreed while refining `OVERRIDE`, activation, and TRACE. They remain to be formalized in the canonical architecture files.
+
+### Rule identity and explicit OVERRIDE
+
+- Semantic RULE IDs are preferred as stable identifiers for rules, analogous to stable HTML `id` anchors.
+- A semantic RULE ID should be independent of filename, filesystem path, or directory depth.
+- `OVERRIDE` should be represented semantically in YAML/frontmatter rather than inferred from file location.
+- Candidate declaration shape:
+
+```yaml
+---
+id: REPO-EDIT-LOCAL-001
+type: RULE
+
+relation: OVERRIDE
+
+override:
+  target: REPO-EDIT-001
+  reason: ...
+---
+```
+
+- Candidate required fields are `id`, `type`, `relation`, `override.target`, and `override.reason`.
+- `override.scope` remains an open design question.
+- `OVERRIDE` is a source-to-target relation: the overriding rule explicitly identifies the semantic rule it replaces.
+- `SPECIALIZE` is a distinct relation used to extend, narrow, or contextualize an applicable rule without replacing it.
+- More-specific scope does not itself imply `OVERRIDE`.
+- `specificity ≠ authority` remains a core principle.
+- Proposed safety behavior is fail-closed for invalid or ambiguous override targets: do not apply the override; surface the problem as a warning/unresolved conflict.
+- An `OVERRIDE` must target a specific semantic RULE ID; filename, path, directory depth, or specificity alone cannot constitute an override.
+
+### Activation
+
+- `activation` is distinct from `applicability`.
+- Candidate simple activation states are `auto`, `manual`, and `hybrid`.
+- Skills should generally be discoverable/activatable from metadata and relevance; manual-only workflows remain valid.
+- No separate `activation.json` is currently planned; `.ai/config.json` remains system-level machine-readable configuration.
+
+### TRACE
+
+- TRACE remains observability only; it must not determine which rule wins.
+- TRACE should explicitly represent `CONFLICT` and `OVERRIDE` events.
+- `RESOLVE` is proposed as an additional event to make the resolution step observable without making TRACE the authority mechanism.
+- Candidate event vocabulary now includes:
+
+```text
+DISCOVER
+READ
+APPLY
+ACTIVATE
+SPECIALIZE
+OVERRIDE
+CONFLICT
+RESOLVE
+WARNING
+HANDOFF
+COMMIT
+```
+
+The exact final vocabulary and event schema remain open until the dedicated TRACE design pass.
+
 ## Current implementation state
 
 No structural architecture refactor has been committed. Work since bootstrap has been architecture/research/design only.
@@ -134,6 +197,7 @@ Relevant commits:
 
 - `9d2cbaf` — `docs(handoff): initialize 03B architecture research draft`.
 - `5548b2d` — `docs(handoff): mark 03A handoff handed off`.
+- `628ac85e` — `docs(handoff): update 03B architecture research checkpoint`.
 
 ## Repository safety
 
@@ -151,6 +215,8 @@ GitHub API writes to existing files may be full-content replacements, so success
 
 ## Open questions
 
+- Whether `OVERRIDE` may be explicitly temporary (e.g. `temporary: true`) or should always represent a durable architectural declaration.
+- Whether `override.scope` is needed, and if so, its exact semantics.
 - Exact applicability schema and trigger representation.
 - Exact responsibility split between `AGENTS.md` and `.ai/README.md`.
 - Exact `.ai/config.json` schema.
@@ -163,6 +229,7 @@ GitHub API writes to existing files may be full-content replacements, so success
 - Exact redistribution map for `docs/PROJECT-INSTRUCTIONS.md` before deletion.
 - Exact TRACE/mini-log implementation mechanism.
 - Whether the preliminary precedence sequence should become normative unchanged.
+- Whether `RESOLVE` belongs in the final TRACE event vocabulary.
 
 ## Evidence / confidence
 
@@ -181,12 +248,15 @@ GitHub API writes to existing files may be full-content replacements, so success
 - Compact `AGENTS.md` + `.ai/README.md` should prevent root instructions from becoming an encyclopedia.
 - `consistency-pass` should help detect cascading contradictions after redistribution.
 - Semantic TRACE events can provide the desired short real-time AI status/debug messages without becoming an authority layer.
+- Stable semantic RULE IDs should make explicit overrides more robust than path- or depth-based semantics.
+- Fail-closed handling of invalid/ambiguous overrides should prevent silent authority corruption.
 
 ### Assumed / unverified
 
 - Actual runtime support for `AGENTS.md`, `.ai/README.md`, and `.ai/config.json` varies by host/tool.
 - Exact mechanism for conversational AI to expose repository-defined TRACE events in real time is not established.
 - Exact precedence/override syntax and applicability/config schemas remain unimplemented.
+- Final TRACE event vocabulary is not yet fixed.
 
 ### Open
 
@@ -197,14 +267,11 @@ GitHub API writes to existing files may be full-content replacements, so success
 
 ## Last completed task
 
-Completed Architecture Decision Pass v1 after the audit and comparison against the user's `codex`, `skills`, and `agent.md` forks. The conceptual vocabulary and ownership model are now established, including RULE/SKILL/WORKFLOW boundaries, HANDOFF/TRACE treatment, automatic skill discovery, manual-only workflows, and discovery-versus-authority separation.
+Captured the latest Architecture Decision Pass checkpoint for `OVERRIDE`, `SPECIALIZE`, semantic RULE IDs, activation states, and TRACE observability. The user agreed with the semantic YAML approach, stable RULE-ID targeting, the distinction between `SPECIALIZE` and `OVERRIDE`, `specificity ≠ authority`, simple activation states, and TRACE visibility for `CONFLICT` and `OVERRIDE`. The questions of temporary overrides, `override.scope`, and adding `RESOLVE` remain open for the next dedicated design pass.
 
 ## Immediate next task
 
-1. Turn AD-01 through AD-16 into a compact Architecture Decision Record with explicit status (`accepted`, `provisional`, or `open`).
-2. Resolve remaining details: precedence/override, applicability/activation, `AGENTS.md` vs `.ai/README.md`, TRACE schema, and workflow/skill boundaries.
-3. Produce the final structural migration plan and deletion gate for `docs/PROJECT-INSTRUCTIONS.md`.
-4. Only then begin the repository refactor in small, auditable commits.
+When work resumes, perform the dedicated Architecture Decision Pass on explicit `OVERRIDE` first: settle temporary-vs-durable semantics, determine whether `override.scope` is necessary, and decide whether `RESOLVE` belongs in the TRACE vocabulary. Then formalize the resulting precedence/override model and continue with the applicability/activation schema and final structural migration plan.
 
 ## Things not to redo
 
@@ -218,7 +285,8 @@ Completed Architecture Decision Pass v1 after the audit and comparison against t
 - Do not begin native AIP implementation merely because this architecture refactor is underway.
 - Do not delete `docs/PROJECT-INSTRUCTIONS.md` before redistribution and verification.
 - Do not create a temporary transcript dump in `.ai/memory/`.
+- Do not treat specificity, directory depth, or file location as an implicit override.
 
 ## Recommended starting context
 
-Start from this checkpoint and the existing 03A/03B architecture work. The next substantive output should formalize AD-01 through AD-16 as an Architecture Decision Record, separating accepted decisions from provisional/open details. Resolve the remaining architecture questions before structural file changes. When implementation begins, use small auditable changes with full read-back/diff verification after every existing-file replacement.
+Start from this checkpoint and the existing 03A/03B architecture work. The next substantive output should be the dedicated `OVERRIDE` Architecture Decision Pass, followed by formalization of precedence/override and then applicability/activation and TRACE schemas. Only after those semantics are sufficiently stable should structural file changes begin. When implementation begins, use small auditable changes with full read-back/diff verification after every existing-file replacement.
