@@ -17,111 +17,208 @@ DRAFT
 
 ## Current objective
 
-Continue the project-wide AI-instruction architecture refactor from 03A. First complete the pre-change audit and produce a concrete migration/ownership map for the existing AI-facing files; then execute the structural refactor in coherent, verifiable steps.
+Continue the project-wide AI-instruction architecture work from 03A. The pre-change audit and migration/ownership map are complete, and Architecture Decision Pass v1 is complete conceptually. Next: formalize the decisions, resolve remaining design details, then begin the structural refactor in small, verifiable steps.
 
-## Starting state
+## Current state
 
-03A has been finalized as `READY_FOR_HANDOFF`. Its checkpoint records the agreed architecture, audit findings, open decisions, constraints, and the new requirement that AI explicitly tell the user which handoff command is needed when requesting a handoff-related action.
+03B has completed the audit/design pass without changing the repository structure. The repository is still in the legacy/pre-refactor layout; the structural refactor has NOT yet been executed.
 
-The repository is still in the pre-refactor layout. No structural refactor should be assumed complete merely because the target architecture has been agreed.
+Reference forks compared:
 
-## Relevant starting decisions
+- `paulhuman/codex` — `AGENTS.md` hierarchy and operational instruction model.
+- `paulhuman/skills` — Agent Skills metadata/discovery/progressive disclosure model.
+- `paulhuman/agent.md` — vendor-neutral conceptual comparison.
 
-- Keep handoffs under `docs/handoffs/`; handoffs are chapter state, not memory.
-- Use generic chapter identifiers `[0-9]{2}[A-Z]` with concrete chapters such as `03A` and `03B`.
-- 03 may detect/report problems in other specializations' handoffs but must not edit them.
-- Use ontology: RULE, SKILL, WORKFLOW, REFERENCE, MEMORY, HANDOFF.
-- Use applicability categories: Always applicable, Task-applicable, Conditionally applicable.
-- Keep trigger type separate from obligation, precedence, ownership, and observability; candidate trigger types are path/file scope, task/intent, conditional state, and explicit user invocation.
-- Semantic tracing vocabulary: `📘 READ`, `🧭 APPLY`, `🛡️ CHECK`, `⚠️ WARNING`, `🔀 HANDOFF`, `💾 COMMIT`.
-- Root `AGENTS.md` should be the AI router; `.ai/README.md` the AI system map.
-- Add `.ai/config.json`, `.ai/rules/applicability.md`, structured `.ai/memory/`, workflows, and a reusable `consistency-pass` capability as justified by the audit.
-- Move the procedural handoff bootstrap from `.ai/skills/conversation-handoff/BOOTSTRAP.md` to `.ai/workflows/conversation-handoff/`.
-- Remove `docs/PROJECT-INSTRUCTIONS.md` only after all necessary content has been redistributed to canonical locations.
-- Do not globally replace `should`/`may`; review them semantically.
-- Do not start native implementation merely because this refactor is underway.
+No additional reference fork is currently needed.
 
-## Handoff command requirement
+## Completed
 
-There are two distinct user commands:
+### Migration / ownership map
 
-- `Пора обновить handoff` — update the current `DRAFT` checkpoint and remain in the current chapter.
-- `Пора выполнять миграцию в чат [0-9]{2}[A-Z]` — finalize the current handoff for migration and initiate the receiving chapter bootstrap.
+- `.ai/rules/conversation-lifecycle.md` — RETAIN → REFACTOR; canonical lifecycle RULE.
+- `.ai/rules/project-architecture.md` — RETAIN → REFACTOR; canonical architecture RULE.
+- `.ai/rules/repository.md` — RETAIN → REFACTOR; canonical repository-safety RULE.
+- `.ai/rules/workflow.md` — SPLIT/REFACTOR into general workflow RULE plus procedural WORKFLOW files.
+- `.ai/skills/commit-message/SKILL.md` — RETAIN → REFACTOR; canonical commit-message SKILL.
+- `.ai/skills/conversation-handoff/SKILL.md` — SPLIT/REFACTOR; conceptual capability remains SKILL while bootstrap becomes WORKFLOW.
+- `.ai/skills/conversation-handoff/BOOTSTRAP.md` — MOVE to future `.ai/workflows/conversation-handoff/`; exact filename open.
+- `.ai/skills/deep-understanding/SKILL.md` — RETAIN → REFACTOR; canonical research methodology SKILL.
+- `docs/PROJECT-INSTRUCTIONS.md` — REDISTRIBUTE → DELETE only after extraction and verification.
+- `docs/handoffs/README.md` — RETAIN → REFACTOR; human-facing handoff documentation.
+- `docs/handoffs/*.md` — RETAIN; chapter state records.
 
-Whenever AI proposes a handoff-related user action, canonical guidance must make clear which command the user should issue. For migration, use the concrete receiving chapter, e.g. `Пора выполнять миграцию в чат 03C`.
+Target additions:
 
-## Open design questions
+- `AGENTS.md` — AI entry/router.
+- `.ai/README.md` — AI instruction-system map/ontology.
+- `.ai/config.json` — machine-readable metadata/config only, not policy.
+- `.ai/rules/applicability.md` — applicability/activation/precedence model.
+- `.ai/memory/` — selective durable AI-specific context.
+- `.ai/workflows/` — ordered procedures.
+- `.ai/extensions/trace/` — repository-defined TRACE extension specification.
+- potentially `.ai/skills/consistency-pass/` — reusable consistency capability, pending scope/trigger decisions.
+
+### Canonical ownership
+
+One concept should have one canonical authority. Other files may reference, specialize, or operationalize it but must not silently redefine it.
+
+- Lifecycle state machine → `.ai/rules/conversation-lifecycle.md`.
+- Repository write safety → `.ai/rules/repository.md`.
+- Commit message format → `.ai/skills/commit-message/SKILL.md`.
+- Handoff execution → future `.ai/workflows/conversation-handoff/`.
+- Research methodology → `.ai/skills/deep-understanding/SKILL.md`.
+- Project architecture → `.ai/rules/project-architecture.md`.
+- AI routing → `AGENTS.md` / `.ai/README.md`.
+- Applicability/activation/precedence → future `.ai/rules/applicability.md`.
+- Handoff state → `docs/handoffs/`.
+- External evidence → `references/`.
+- Durable project knowledge → appropriate `docs/` files.
+
+## Architecture Decision Pass v1
+
+- **AD-01:** Core = `RULE / SKILL / WORKFLOW / REFERENCE / MEMORY`; `EXTENSIONS` are separate repository-defined extensions.
+- **AD-02:** RULE = policy/authority/constraint; SKILL = capability/methodology; WORKFLOW = ordered procedure.
+- **AD-03:** REFERENCE = evidence/source, not instruction or authority.
+- **AD-04:** MEMORY = durable context, not authority automatically.
+- **AD-05:** HANDOFF is a cross-cutting lifecycle mechanism, not a core instruction type or optional extension; it spans RULE + WORKFLOW + state documents.
+- **AD-06:** TRACE is an extension, likely `.ai/extensions/trace/`, with schema/events documentation and no runtime code required at this stage.
+- **AD-07:** TRACE is observability, not authority. Candidate events: `📘 READ`, `🧭 APPLY`, `🛡️ CHECK`, `⚠️ WARNING`, `🔀 HANDOFF`, `💾 COMMIT`.
+- **AD-08:** Applicability, Activation, and Precedence are distinct concepts.
+- **AD-09:** A more-specific RULE does not automatically override a global RULE; by default it specializes it. `specificity ≠ authority`.
+- **AD-10:** Explicit override may exist, but must be explicit, limited, explainable, and traceable; deeper files are not silent overrides.
+- **AD-11:** Preliminary resolution order = `Applicability → Activation → Authority → Specificity → Conflict resolution`. Higher authority wins; specificity may specialize; explicit override is required to replace higher authority; unresolved conflicts must not be silently resolved and should surface through TRACE/WARNING.
+- **AD-12:** `AGENTS.md` is the compact AI entry/router/map. `.ai/README.md` is the instruction-system map/ontology, not a second policy encyclopedia.
+- **AD-13:** `.ai/config.json` contains machine-readable metadata/config only and must not duplicate policy.
+- **AD-14:** Skills should be discoverable/activatable automatically from metadata/relevance; users should not have to name every skill. Automatic discovery does not mean mandatory activation.
+- **AD-15:** Manual-only WORKFLOWs are valid; handoff is a principal example.
+- **AD-16:** Target structure is approximately:
+
+```text
+AGENTS.md
+.ai/
+├── README.md
+├── config.json
+├── rules/
+│   ├── applicability.md
+│   ├── conversation-lifecycle.md
+│   ├── project-architecture.md
+│   ├── repository.md
+│   └── workflow.md
+├── skills/
+├── workflows/
+├── memory/
+└── extensions/
+    └── trace/
+        ├── README.md
+        ├── schema.md
+        └── events.md
+```
+
+### Discovery versus authority
+
+Discovery path:
+
+`AGENTS.md → .ai/README.md → applicability → activation → RULE/SKILL/WORKFLOW`
+
+Instruction authority comes from semantic role and precedence, not discovery order or directory depth. TRACE observes this process; it does not control authority.
+
+### Extension model
+
+`extensions/` means repository-defined extensions to the core AI instruction architecture, not vendor/plugin packages. Do not create `.ai/plugins/`. TRACE is a likely extension; HANDOFF remains built-in/core lifecycle.
+
+## Current implementation state
+
+No structural architecture refactor has been committed. Work since bootstrap has been architecture/research/design only.
+
+Relevant commits:
+
+- `9d2cbaf` — `docs(handoff): initialize 03B architecture research draft`.
+- `5548b2d` — `docs(handoff): mark 03A handoff handed off`.
+
+## Repository safety
+
+For future repository changes:
+
+1. read the current file;
+2. preserve unrelated content during full-content replacement;
+3. write complete intended content;
+4. read back;
+5. verify integrity, diff, and scope;
+6. commit;
+7. verify resulting ref/commit.
+
+GitHub API writes to existing files may be full-content replacements, so successful API write alone is not proof of preservation.
+
+## Open questions
 
 - Exact applicability schema and trigger representation.
-- Exact division of responsibility between root `AGENTS.md` and `.ai/README.md`.
-- Exact `.ai/config.json` machine-readable schema.
-- Final rule decomposition and merge/split map.
-- Whether Project Workshop boundaries should include explicit hard `must not` constraints and where.
-- Initial `.ai/memory/` structure and its boundary with normal project documentation.
-- Exact destination/name and contents of the moved bootstrap workflow.
-- `consistency-pass` scope, triggers, report format, and automatic/manual behavior.
+- Exact responsibility split between `AGENTS.md` and `.ai/README.md`.
+- Exact `.ai/config.json` schema.
+- Final RULE/SKILL/WORKFLOW decomposition.
+- Formal precedence and explicit-override syntax/semantics.
+- Project Workshop hard `must not` boundaries and ownership.
+- Initial `.ai/memory/` structure and its boundary with normal docs.
+- Exact handoff bootstrap WORKFLOW destination/name/content.
+- `consistency-pass` scope, triggers, report format, automatic/manual behavior.
 - Exact redistribution map for `docs/PROJECT-INSTRUCTIONS.md` before deletion.
-- Exact implementation mechanism for semantic mini-logs.
-
-## Current implementation files to audit
-
-- `.ai/rules/conversation-lifecycle.md`
-- `.ai/rules/project-architecture.md`
-- `.ai/rules/repository.md`
-- `.ai/rules/workflow.md`
-- `.ai/skills/commit-message/SKILL.md`
-- `.ai/skills/conversation-handoff/BOOTSTRAP.md`
-- `.ai/skills/conversation-handoff/SKILL.md`
-- `.ai/skills/deep-understanding/SKILL.md`
-- `docs/PROJECT-INSTRUCTIONS.md`
-- `docs/handoffs/README.md`
-- existing handoffs, treated as lifecycle/state records
-
-## Important constraints
-
-- Follow repository write safety: read existing file, make minimal intended full-content replacement, read back, verify integrity/diff/scope, commit, then verify ref.
-- Lifecycle/handoff bootstrap commits are pre-authorized by workflow; ordinary development commits remain user-controlled unless explicitly delegated.
-- Another specialization's handoff must not be edited from 03.
-- Handoffs and memory must not become competing stores of the same state.
-- Do not blindly copy Spectrum Web Components; use it only as architectural inspiration.
-- Treat the supplied skill guide as reference, not project authority.
-- Runtime support for `AGENTS.md`, `.ai/README.md`, and `.ai/config.json` is not yet established; these are project conventions unless a runtime supports them.
+- Exact TRACE/mini-log implementation mechanism.
+- Whether the preliminary precedence sequence should become normative unchanged.
 
 ## Evidence / confidence
 
 ### Confirmed / observed
 
-- 03A is `READY_FOR_HANDOFF` and contains the migration checkpoint.
-- Current lifecycle rules define the chapter pattern, lifecycle states, both user commands, and post-bootstrap consistency verification.
-- Current bootstrap is under `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
-- Current repository uses `docs/handoffs/` for chapter handoffs.
-- The structural AI-instruction refactor has not yet been executed.
+- 03A is `HANDED_OFF`; 03B is active `DRAFT`.
+- Audit and preliminary migration/ownership map are complete.
+- AD-01 through AD-16 are conceptually established.
+- Structural refactor has not yet begun.
+- `codex`, Agent Skills, and vendor-neutral models were compared through existing forks.
+- No additional fork is currently needed.
 
 ### Inferred
 
-- Explicit applicability should make source activation and tracing more auditable.
-- Root `AGENTS.md` + `.ai/README.md` should clarify AI entry and routing without duplicating detailed rules.
-- `consistency-pass` should help detect cascading contradictions across the instruction system.
+- Discovery/authority separation should make routing and conflicts more auditable.
+- Compact `AGENTS.md` + `.ai/README.md` should prevent root instructions from becoming an encyclopedia.
+- `consistency-pass` should help detect cascading contradictions after redistribution.
+- Semantic TRACE events can provide the desired short real-time AI status/debug messages without becoming an authority layer.
 
 ### Assumed / unverified
 
-- Exact runtime behavior for the proposed root/config conventions.
-- Exact applicability/config/mini-log implementation design.
+- Actual runtime support for `AGENTS.md`, `.ai/README.md`, and `.ai/config.json` varies by host/tool.
+- Exact mechanism for conversational AI to expose repository-defined TRACE events in real time is not established.
+- Exact precedence/override syntax and applicability/config schemas remain unimplemented.
+
+### Open
+
+- Final normative precedence/override wording.
+- Final workflow/skill/rule redistribution.
+- Final machine-readable and TRACE schemas.
+- Final refactor sequence and deletion gate for `docs/PROJECT-INSTRUCTIONS.md`.
+
+## Last completed task
+
+Completed Architecture Decision Pass v1 after the audit and comparison against the user's `codex`, `skills`, and `agent.md` forks. The conceptual vocabulary and ownership model are now established, including RULE/SKILL/WORKFLOW boundaries, HANDOFF/TRACE treatment, automatic skill discovery, manual-only workflows, and discovery-versus-authority separation.
 
 ## Immediate next task
 
-Complete the pre-change repository audit and produce the concrete migration map for every existing AI-facing file: `retain`, `rename`, `move`, `split`, `merge`, or `delete`; identify canonical ownership for every important rule/procedure/knowledge area; and list contradictions or duplicated authority. Do not perform structural refactoring until this map is coherent.
+1. Turn AD-01 through AD-16 into a compact Architecture Decision Record with explicit status (`accepted`, `provisional`, or `open`).
+2. Resolve remaining details: precedence/override, applicability/activation, `AGENTS.md` vs `.ai/README.md`, TRACE schema, and workflow/skill boundaries.
+3. Produce the final structural migration plan and deletion gate for `docs/PROJECT-INSTRUCTIONS.md`.
+4. Only then begin the repository refactor in small, auditable commits.
 
 ## Things not to redo
 
-- Do not redesign the chapter model.
-- Do not move handoffs out of `docs/handoffs/`.
-- Do not edit another specialization's handoff.
-- Do not recreate the 03A architecture decisions from scratch.
-- Do not blindly copy Spectrum Web Components.
-- Do not globally replace `should`/`may`.
+- Do not redesign the chapter model or move handoffs out of `docs/handoffs/`.
+- Do not edit another specialization's handoff from 03.
+- Do not recreate 03A decisions from scratch.
+- Do not blindly copy external repositories or Spectrum Web Components.
+- Do not globally replace `should`/`may`; classify semantics case by case.
+- Do not create `.ai/plugins/`.
+- Do not treat HANDOFF as an optional extension or TRACE as authority.
+- Do not begin native AIP implementation merely because this architecture refactor is underway.
+- Do not delete `docs/PROJECT-INSTRUCTIONS.md` before redistribution and verification.
 - Do not create a temporary transcript dump in `.ai/memory/`.
 
 ## Recommended starting context
 
-Read this handoff and the 03A handoff, then read applicable lifecycle/workflow/repository/architecture guidance. Inspect the actual current files before designing the migration map. The first substantive 03B output should be the audit/migration/ownership map and its rationale; structural file changes come afterward.
+Start from this checkpoint and the existing 03A/03B architecture work. The next substantive output should formalize AD-01 through AD-16 as an Architecture Decision Record, separating accepted decisions from provisional/open details. Resolve the remaining architecture questions before structural file changes. When implementation begins, use small auditable changes with full read-back/diff verification after every existing-file replacement.
