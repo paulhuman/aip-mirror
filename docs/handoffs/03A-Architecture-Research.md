@@ -13,7 +13,7 @@ Previous chapter:
 N/A — first handoff for specialization 03
 
 Status:
-READY_FOR_HANDOFF
+HANDED_OFF
 
 ## Current objective
 
