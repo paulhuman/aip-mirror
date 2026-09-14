@@ -261,6 +261,14 @@ The architecture should be tested conceptually against at least these future dom
 
 The purpose of these cases is architectural validation only. They are not current migration targets and do not justify creating `.ai` files in those repositories during this chapter.
 
+## Architecture Decision Pass v2 — additions
+
+- **AD-17:** Project-agnosticity is an explicit architectural criterion. Core instruction semantics, lifecycle, workflows, observability, discovery/activation, and authority/precedence must not depend on a particular software domain.
+- **AD-18:** Project-specific domain knowledge, rules, technical references, tests/fixtures, and project workflows must remain separate from the reusable AI-system core.
+- **AD-19:** Each proposed `.ai` element should be evaluated with `CORE / PROJECT-SPECIFIC / ADAPTABLE` classification before the architecture is frozen.
+- **AD-20:** The rule portability test is: “Could this rule be copied unchanged into a completely unrelated software project?” A positive answer is strong evidence for `CORE`; otherwise the element must be justified as project-specific or generalized as `ADAPTABLE`.
+- **AD-21:** Future repositories such as `gearmulator`, `RmlUi`, and `virus-ti2-adssr` are theoretical validation cases only during this chapter. No files are to be created or modified there. Ableton Live Extensions remain a later validation domain because the relevant SDK is not yet publicly available to the user.
+
 ## Current implementation state
 
 No structural architecture refactor has been committed. This checkpoint adds research/design criteria only; no future-project repository has been modified.
