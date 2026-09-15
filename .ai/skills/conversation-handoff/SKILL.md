@@ -129,7 +129,7 @@ Do not skip states.
 
 The chapter that is closing prepares its handoff and may move it from `DRAFT` to `READY_FOR_HANDOFF` once the next chapter can continue without guessing.
 
-The receiving chapter, not the previous chapter, owns the transition from `READY_FOR_HANDOFF` to `HANDED_OFF`. It must make this transition only after successfully starting from the previous handoff.
+The receiving chapter, not the previous chapter, owns the transition from `READY_FOR_HANDOFF` to `HANDED_OFF`. It must make this transition only after successfully starting from the previous handoff, except when an explicitly authorized Lifecycle Recovery establishes that the required terminal state already exists and must not be repeated.
 
 A later chapter owns the transition from `HANDED_OFF` to `SUPERSEDED` when a newer handoff for the same specialization replaces the older one.
 
@@ -204,16 +204,6 @@ After the explicit user recovery command, the receiving chapter must:
 13. continue to the normal post-bootstrap consistency verification before declaring `BOOTSTRAP = COMPLETE` or beginning substantive work.
 
 Recovery does not erase the original violation. Git history remains the authoritative record of what happened.
-
-### Ownership of transitions
-
-The chapter that is closing prepares its handoff and may move it from `DRAFT` to `READY_FOR_HANDOFF` once the next chapter can continue without guessing.
-
-The receiving chapter, not the previous chapter, owns the transition from `READY_FOR_HANDOFF` to `HANDED_OFF`. It must make this transition only after successfully starting from the previous handoff, except when an explicitly authorized Lifecycle Recovery establishes that the required terminal state already exists and must not be repeated.
-
-A later chapter owns the transition from `HANDED_OFF` to `SUPERSEDED` when a newer handoff for the same specialization replaces the older one.
-
-The previous chapter must never mark its own handoff `HANDED_OFF` merely because the handoff was written, committed, or communicated.
 
 ## New chapter initialization
 
@@ -333,7 +323,7 @@ If Lifecycle Recovery is authorized, follow the recovery procedure above. Do not
 
 ### Post-bootstrap consistency verification
 
-The receiving chapter must verify the resulting state as a coherent lifecycle pair after normal bootstrap or authorized recovery.
+The receiving chapter must verify the resulting state as a coherent lifecycle pair after both required bootstrap commits have completed, or after authorized recovery where applicable.
 
 At minimum:
 
@@ -345,7 +335,7 @@ At minimum:
 6. confirm that the previous handoff is now `HANDED_OFF`;
 7. confirm that the previous and receiving handoffs form a consistent lifecycle pair;
 8. if any check fails, treat bootstrap as incomplete and correct only the receiving chapter's own handoff when the correction is within normal ownership or explicitly authorized recovery scope; otherwise stop and report the inconsistency;
-9. re-read the corrected handoff and repeat verification until it passes.
+9. re-read the corrected handoff and repeat the verification until it passes.
 
 The receiving chapter owns correction of its own handoff. Another specialization may detect and report an inconsistency, but must not edit the receiving chapter's handoff on its behalf.
 
