@@ -184,6 +184,38 @@ The responsibility for each transition is explicit:
 
 The previous chapter must not mark its own handoff `HANDED_OFF` merely because it has finished writing or delivering it.
 
+### Non-negotiable handoff ownership invariants
+
+These are mandatory lifecycle constraints, not recommendations:
+
+1. **The closing chapter MUST modify only its own handoff during the closing/migration phase.**
+2. **The closing chapter MUST NOT create the receiving chapter's handoff file.**
+3. **The closing chapter MUST NOT modify, finalize, or assign a lifecycle status to the receiving chapter's handoff.**
+4. **The closing chapter MUST NOT change its own handoff from `READY_FOR_HANDOFF` to `HANDED_OFF`.**
+5. **Only the receiving chapter MAY create and own its own initial `DRAFT` handoff.**
+6. **Only the receiving chapter MAY perform `READY_FOR_HANDOFF` → `HANDED_OFF` on the previous chapter's handoff.**
+7. **The migration command does NOT change the identity of the current conversation.** The current chapter remains the closing chapter until a new receiving conversation is actually initialized.
+8. **The closing chapter MUST treat the next chapter as a future recipient, not as the current execution context.**
+9. **A bootstrap instruction is a message for a future receiving conversation; generating that instruction MUST NOT be interpreted as having entered or initialized that next chapter.**
+10. **If the current chapter has already created or modified the receiving chapter's handoff, the lifecycle procedure has been violated and the AI MUST stop before performing further lifecycle transitions and report the inconsistency.**
+11. **The receiving chapter MUST correct its own handoff if bootstrap verification finds an inconsistency; another specialization MUST NOT repair that receiving handoff on its behalf.**
+
+The canonical migration ownership model is therefore:
+
+    CLOSING CHAPTER
+        owns:
+        current handoff DRAFT → READY_FOR_HANDOFF
+        |
+        +--> generates bootstrap instruction only
+
+    RECEIVING CHAPTER
+        owns:
+        creates own DRAFT handoff
+        |
+        +--> previous handoff READY_FOR_HANDOFF → HANDED_OFF
+
+No step in the closing chapter's migration procedure transfers conversational identity or grants the closing chapter ownership of the receiving handoff.
+
 ## 11. Starting a new chapter
 
 A new chapter must immediately create its own handoff file with status `DRAFT`.
