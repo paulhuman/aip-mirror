@@ -21,7 +21,13 @@ Continue the project-wide AI-instruction architecture work from 03B. The immedia
 
 ## Starting state
 
-The repository remains in the legacy/pre-refactor layout. No structural architecture refactor has been executed. 03B completed the audit/design pass and is now `READY_FOR_HANDOFF`.
+The repository remains in the legacy/pre-refactor layout. No structural architecture refactor has been executed. 03B completed the audit/design pass and is now `HANDED_OFF`.
+
+## Controlled lifecycle recovery
+
+This handoff was a pre-existing artifact created before the receiving chapter's bootstrap. Its creation and the subsequent `03B → HANDED_OFF` transition were performed in violation of the handoff ownership invariants before 03C began its bootstrap.
+
+Controlled lifecycle recovery was explicitly authorized after the violation was detected. The existing 03C handoff is retained and owned by 03C; it is not recreated, and the original Git history is not rewritten. The handoff is normalized as the receiving chapter's canonical `DRAFT` checkpoint. The already-completed `03B → HANDED_OFF` transition is accepted as historical state and is not repeated.
 
 ## Established architecture decisions
 
