@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03A — Architecture & Research
 
 Status:
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
@@ -277,7 +277,7 @@ Relevant commits:
 
 - `9d2cbaf` — `docs(handoff): initialize 03B architecture research draft`.
 - `5548b2d` — `docs(handoff): mark 03A handoff handed off`.
-- `628ac85e` — `docs(handoff): update 03B architecture research checkpoint`.
+- `628ac85` — `docs(handoff): update 03B architecture research checkpoint`.
 - `29f5af1` — `docs(handoff): update 03B architecture research checkpoint`.
 - `104fd438` — `docs(handoff): add project-agnostic architecture criteria`.
 
@@ -321,65 +321,45 @@ GitHub API writes to existing files may be full-content replacements, so success
 ### Confirmed / observed
 
 - 03A is `HANDED_OFF`; 03B is active `DRAFT`.
-- Audit and preliminary migration/ownership map are complete.
-- AD-01 through AD-16 are conceptually established; AD-17 through AD-21 now record the project-agnosticity additions.
-- Structural refactor has not yet begun.
-- `codex`, Agent Skills, and vendor-neutral models were compared through existing forks.
-- No additional fork is currently needed.
-- The user has identified `gearmulator`, `RmlUi`, and `virus-ti2-adssr` as future reference/test cases for project-agnosticity; no files are to be created there now.
-- Ableton Live Extensions SDK access is currently unavailable to the user while the SDK remains in beta/closed access.
+- The legacy/pre-refactor structure remains intact.
+- Project-agnosticity is an explicit architecture criterion.
+- `OVERRIDE` remains a semantic relation, not a filesystem-depth convention.
+- TRACE remains observational rather than authoritative.
 
-### Inferred
+### Confidence
 
-- Discovery/authority separation should make routing and conflicts more auditable.
-- Compact `AGENTS.md` + `.ai/README.md` should prevent root instructions from becoming an encyclopedia.
-- `consistency-pass` should help detect cascading contradictions after redistribution.
-- Semantic TRACE events can provide the desired short real-time AI status/debug messages without becoming an authority layer.
-- Stable semantic RULE IDs should make explicit overrides more robust than path- or depth-based semantics.
-- Fail-closed handling of invalid/ambiguous overrides should prevent silent authority corruption.
-- Project-agnostic core semantics should allow the same instruction architecture to be bootstrapped into unrelated software projects without redesigning its fundamental model.
-- A formal Project-Agnosticity Check should help detect accidental Illustrator-specific coupling before the architecture is frozen.
-
-### Assumed / unverified
-
-- Actual runtime support for `AGENTS.md`, `.ai/README.md`, and `.ai/config.json` varies by host/tool.
-- Exact mechanism for conversational AI to expose repository-defined TRACE events in real time is not established.
-- Exact precedence/override syntax and applicability/config schemas remain unimplemented.
-- Final TRACE event vocabulary is not yet fixed.
-- The final boundary between reusable AI infrastructure and project-specific instruction content has not yet been formally encoded in repository files.
-
-### Open
-
-- Final normative precedence/override wording.
-- Final workflow/skill/rule redistribution.
-- Final machine-readable and TRACE schemas.
-- Final refactor sequence and deletion gate for `docs/PROJECT-INSTRUCTIONS.md`.
-- Final project-agnosticity classification and boundary model.
+High for the semantic model and migration/ownership map. Medium for final `OVERRIDE`, applicability/activation, and TRACE schemas because those design passes are intentionally still open.
 
 ## Last completed task
 
-Expanded the 03B architecture research checkpoint to explicitly include project-agnosticity as an architectural criterion. The research now distinguishes reusable AI-system semantics from project-specific instruction/domain knowledge, defines the `CORE / PROJECT-SPECIFIC / ADAPTABLE` classification, adds the “Could this rule be copied unchanged into a completely unrelated software project?” test, and records `gearmulator`, `RmlUi`, and the future Ableton Extensions domain as theoretical validation cases only. No files were created or modified in those future repositories.
+Established project-agnostic architecture criteria and classification, then prepared the chapter for a dedicated `OVERRIDE` architecture decision pass.
 
 ## Immediate next task
 
-Continue the dedicated Architecture Decision Pass on explicit `OVERRIDE`: settle temporary-vs-durable semantics, determine whether `override.scope` is necessary, and decide whether `RESOLVE` belongs in the TRACE vocabulary. Apply the Project-Agnosticity Check alongside that work so the emerging model does not accidentally acquire Illustrator-specific semantics. Then formalize precedence/override, continue with applicability/activation and TRACE schemas, and only after those semantics are sufficiently stable begin structural file changes.
+The receiving 03C chapter should perform the dedicated **OVERRIDE Architecture Decision Pass** first:
+
+1. Decide whether `OVERRIDE` is inherently durable or can be explicitly temporary.
+2. Decide whether `override.scope` is necessary and define it if retained.
+3. Define `OVERRIDE` interaction with authority and specificity.
+4. Define invalid, ambiguous, inactive, chained, and cyclic override behavior.
+5. Decide whether `RESOLVE` belongs in TRACE.
+6. Record resulting decisions as new AD entries.
+7. Apply the Project-Agnosticity Check to every resulting decision.
+
+After that, formalize precedence/override, continue applicability/activation, define TRACE schema/events, and only then begin the structural refactor.
 
 ## Things not to redo
 
-- Do not redesign the chapter model or move handoffs out of `docs/handoffs/`.
-- Do not edit another specialization's handoff from 03.
 - Do not recreate 03A decisions from scratch.
-- Do not blindly copy external repositories or Spectrum Web Components.
-- Do not globally replace `should`/`may`; classify semantics case by case.
+- Do not redesign the chapter/handoff model.
 - Do not create `.ai/plugins/`.
-- Do not treat HANDOFF as an optional extension or TRACE as authority.
-- Do not begin native AIP implementation merely because this architecture refactor is underway.
-- Do not delete `docs/PROJECT-INSTRUCTIONS.md` before redistribution and verification.
-- Do not create a temporary transcript dump in `.ai/memory/`.
-- Do not treat specificity, directory depth, or file location as an implicit override.
-- Do not create or modify future-project instruction files merely to test project-agnosticity during this chapter.
-- Do not prematurely rename the resulting reusable system as a “framework” or introduce framework-level engineering unless later research justifies it.
-
-## Recommended starting context
-
-Start from this checkpoint and the existing 03A/03B architecture work. The next substantive output should be the dedicated `OVERRIDE` Architecture Decision Pass, with the Project-Agnosticity Check applied alongside it. Follow with formalization of precedence/override, then applicability/activation and TRACE schemas. Only after those semantics are sufficiently stable should structural file changes begin. When implementation begins, use small auditable changes with full read-back/diff verification after every existing-file replacement.
+- Do not treat HANDOFF as an optional extension.
+- Do not treat TRACE as authority.
+- Do not treat specificity/path/depth as implicit override.
+- Do not globally replace `should`/`may`; classify semantics case by case.
+- Do not begin native AIP implementation merely because architecture refactor is underway.
+- Do not delete `docs/PROJECT-INSTRUCTIONS.md` before semantic redistribution and verification.
+- Do not create temporary transcript dumps in `.ai/memory/`.
+- Do not modify future repositories merely to test portability.
+- Do not force-push merely to clean up an API incident.
+- Never trust a successful GitHub write without readback/diff verification.
