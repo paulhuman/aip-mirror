@@ -159,6 +159,8 @@ Recommended vocabulary:
 
     docs(handoff): mark 01A handoff superseded
 
+    docs(handoff): correct overdue 03A handoff supersession
+
 Rules:
 
 - Every handoff lifecycle transition must appear in Git history.
@@ -166,6 +168,8 @@ Rules:
 - A separate status-only commit is not required when the transition is already part of the same logical handoff update.
 - The commit message should describe the primary handoff action, not every changed field.
 - The chapter that owns the transition must perform the corresponding commit.
+- A Lifecycle Correction commit records a later correction of repository state; it must not imply that the corrected transition happened at its original historical time.
+- Lifecycle Correction commits must preserve the historical commits that show the original violation.
 
 Transition ownership is defined by the conversation lifecycle rules:
 
@@ -178,6 +182,8 @@ Transition ownership is defined by the conversation lifecycle rules:
     later chapter:
         HANDED_OFF → SUPERSEDED
 
+A Lifecycle Correction is not an additional lifecycle state transition and must not be represented as a skipped or replacement transition. Its commit records the controlled correction of the durable handoff state.
+
 The previous chapter must not create a commit claiming `HANDED_OFF` merely because it has completed the handoff document.
 
 ## Choosing the message
@@ -189,6 +195,8 @@ If a commit changes several files as part of one coherent feature, use one messa
 If unrelated changes are present, recommend splitting them into separate commits.
 
 For handoff work, prefer one coherent commit when content and lifecycle status change together rather than creating unnecessary status-only commits.
+
+For Lifecycle Correction, use a message that clearly identifies the correction as a later repair of durable handoff state. Do not phrase it as though the historical transition happened normally.
 
 ## When the user asks for commit messages
 
@@ -237,6 +245,8 @@ Avoid inventing alternate names for established project concepts unless there is
     docs(architecture): document JSX to AIP transition
 
     docs(handoff): update 01A JSX prototype handoff
+
+    docs(handoff): correct overdue 03A handoff supersession
 
     refactor(core): separate geometry from Illustrator adapters
 
