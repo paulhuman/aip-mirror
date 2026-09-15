@@ -124,6 +124,20 @@ The intended system separates:
 - Do not start native implementation merely because this refactor is underway.
 - Do not create a temporary memory/transcript dump for migration; preserve semantic state in handoff.
 
+### Open decisions for 03B
+
+- Exact applicability schema: representation of categories and trigger types while keeping precedence, ownership, obligation, and observability separate.
+- Exact `AGENTS.md` versus `.ai/README.md` boundary.
+- Exact `.ai/config.json` schema and machine-readable fields.
+- Final rule decomposition and merge/split plan.
+- Whether the Project Workshop boundary should be an explicit hard `must not` rule and where it belongs.
+- Initial `.ai/memory/` subsection/file structure and its boundary with normal project documentation.
+- Exact destination/name for moved bootstrap workflow.
+- `consistency-pass` scope, triggers, report format, and automatic/manual behavior.
+- Exact content migration map for `docs/PROJECT-INSTRUCTIONS.md` before deletion.
+- Exact mini-log implementation mechanism without unnecessary development overhead.
+- Exact wording/placement of the command-guidance requirement so AI always tells the user whether the needed action is checkpoint or migration.
+
 ## Decisions
 
 ### Instruction ontology
