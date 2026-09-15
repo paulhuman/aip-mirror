@@ -94,13 +94,107 @@ Candidate required fields: `id`, `type`, `relation`, `override.target`, and `ove
 
 `SPECIALIZE` is distinct from `OVERRIDE`: it extends, narrows, or contextualizes without replacing the target. Invalid or ambiguous override targets should fail closed: do not apply the override and surface a warning/unresolved conflict.
 
-Open OVERRIDE questions inherited from 03B:
+## OVERRIDE decisions reached during 03C
 
-1. Is OVERRIDE inherently durable, or may it be explicitly temporary?
-2. Is `override.scope` necessary? If so, what exactly does it mean?
+The following are **working architectural decisions agreed during this chapter**. They should be promoted to formal AD entries after the complete OVERRIDE Architecture Decision Pass is finished; until then, this handoff is the durable record of the decisions and rationale.
+
+### Durable by default; explicit temporary override supported
+
+- `OVERRIDE` is **durable by default**.
+- If an override declaration says nothing about temporariness, it is treated as durable.
+- The architecture **officially supports explicit temporary OVERRIDE** for cases such as controlled migration/recovery, debugging, or other bounded workflows where a permanent repository override would be inappropriate.
+- Temporary status must be **explicitly declared**. It must never be inferred from context or assumed by the AI.
+- Durable and temporary overrides have the same requirements for authority, validity, reason, and traceability. They differ in lifecycle only.
+- A temporary override must not silently disappear from historical state when it stops being active. Its lifecycle and eventual expiration/revocation must remain auditable.
+- When a temporary override is active, the user should receive an explicit status/observability signal that a temporary override is currently being applied, particularly for debugging and controlled exception handling.
+- `lifetime` and `scope` are separate concepts. The chosen architecture must not conflate how long an override exists with where it applies.
+
+Conceptual durable form:
+
+```yaml
+override:
+  target: REPO-EDIT-001
+  reason: ...
+```
+
+Conceptual temporary form:
+
+```yaml
+override:
+  target: REPO-EDIT-001
+  reason: ...
+  lifetime:
+    kind: temporary
+    ...
+```
+
+The exact temporary-lifetime schema remains open until the rest of the OVERRIDE pass is complete.
+
+### No `override.scope` for now
+
+The architecture currently chooses **Variant A: no `override.scope`**.
+
+Rationale:
+
+- The existing semantic model already has `Applicability` and `Activation`; adding another scope mechanism would risk duplicating or complicating applicability semantics.
+- A workflow-specific or chapter-specific temporary exception can generally be modeled through workflow/context activation rather than a new OVERRIDE scope mechanism.
+- Debugging status/observability can be handled by TRACE and activation state without introducing `scope`.
+- Object/type-specific restrictions can generally be expressed through the target's existing applicability model.
+- Introducing scope merely for hypothetical future flexibility would add semantic surface area before a demonstrated need exists.
+
+Current rule:
+
+> **OVERRIDE inherits the applicability of its target; no separate `override.scope` exists in the current architecture.**
+
+Future escape hatch:
+
+> **If real architectural scenarios demonstrate that the existing Applicability + Activation + WORKFLOW mechanisms are insufficient to restrict an OVERRIDE safely, `override.scope` may be introduced later as a separate Architecture Decision.**
+
+The following useful Variant B design notes are intentionally preserved here so that a future scope decision does not require rediscovery:
+
+- If `scope` is ever introduced, it should be **optional**, not mandatory.
+- No scope would mean **inherit target applicability**.
+- An explicit scope would **restrict** the target's applicability rather than replace it with a second applicability model.
+- Conceptually, effective override applicability could be treated as the intersection of target applicability and override scope.
+- A scope wider than the target's applicability would be **invalid and fail closed**.
+- Scope must never expand the target's applicability or authority.
+- Scope should not become a free-form policy language or a second independent applicability system.
+- Concrete scope values (repository/workflow/chapter/file/object/etc.) were deliberately **not** selected; they must not be assumed later without a dedicated architecture decision.
+- Before introducing scope, test every proposed use case against existing Applicability, Activation, and WORKFLOW semantics. A scope mechanism should be added only when those mechanisms demonstrably cannot provide a safe and understandable restriction.
+
+### OVERRIDE must not expand target applicability
+
+The following principle is adopted independently of whether a future `scope` mechanism is ever introduced:
+
+> **OVERRIDE may preserve or narrow the applicability of its target, but it must never expand the target's applicability or authority.**
+
+Therefore, any future explicit restriction mechanism must obey:
+
+```text
+No restriction
+    ↓
+inherit target applicability
+
+Explicit restriction
+    ↓
+restrict target applicability
+
+Restriction wider than target
+    ↓
+INVALID → fail closed
+```
+
+An OVERRIDE is not a mechanism for granting broader reach or authority than the target already possesses.
+
+## Open OVERRIDE questions inherited from 03B
+
+1. Durable vs explicitly temporary: **working decision reached — durable by default, explicit temporary supported.**
+2. `override.scope`: **working decision reached — omit for now; preserve Variant B notes above as a future escape hatch.**
 3. How does OVERRIDE interact with authority and specificity?
 4. What happens with invalid, ambiguous, inactive, chained, or cyclic targets?
 5. Does `RESOLVE` belong in TRACE?
+
+The remaining open questions must still be resolved before the OVERRIDE Architecture Decision Pass is complete and before the decisions above are promoted to final AD entries.
 
 ## Activation checkpoint
 
@@ -125,6 +219,8 @@ COMMIT
 ```
 
 The final event vocabulary and schema remain open.
+
+For temporary OVERRIDE specifically, TRACE/observability should make the active exception visible to the user and preserve its lifecycle in historical state. The exact event payloads remain open.
 
 ## Project-agnosticity
 
@@ -154,15 +250,14 @@ No structural refactor has been committed. `docs/PROJECT-INSTRUCTIONS.md` remain
 
 ## Immediate next task
 
-Perform the dedicated **OVERRIDE Architecture Decision Pass**:
+Continue the **OVERRIDE Architecture Decision Pass**:
 
-1. Decide durable vs explicitly temporary OVERRIDE semantics.
-2. Decide whether `override.scope` is necessary and define it if retained.
-3. Define OVERRIDE interaction with authority and specificity.
-4. Define behavior for invalid, ambiguous, inactive, chained, and cyclic overrides.
-5. Decide whether `RESOLVE` belongs in TRACE.
-6. Record resulting decisions as new AD entries.
-7. Apply the Project-Agnosticity Check to every resulting decision.
+1. Finalize the interaction of OVERRIDE with authority and specificity.
+2. Define behavior for invalid, ambiguous, inactive, chained, and cyclic overrides.
+3. Decide whether `RESOLVE` belongs in TRACE.
+4. Finalize temporary OVERRIDE lifecycle semantics and user-facing observability requirements.
+5. Promote the completed OVERRIDE decisions to formal AD entries.
+6. Apply the Project-Agnosticity Check to every resulting decision.
 
 Then formalize precedence/override, continue applicability/activation, define TRACE schema/events, and only then begin structural refactoring.
 
@@ -174,6 +269,9 @@ Then formalize precedence/override, continue applicability/activation, define TR
 - Do not treat HANDOFF as an optional extension.
 - Do not treat TRACE as authority.
 - Do not treat specificity/path/depth as implicit override.
+- Do not treat temporary OVERRIDE as implicitly inferred from context.
+- Do not add `override.scope` unless a future architecture pass demonstrates a real semantic need and explicitly decides it.
+- Do not allow any future scope mechanism to expand target applicability or authority.
 - Do not globally replace `should`/`may`; classify semantics case by case.
 - Do not begin native AIP implementation merely because architecture refactoring is underway.
 - Do not delete `docs/PROJECT-INSTRUCTIONS.md` before semantic redistribution and verification.
