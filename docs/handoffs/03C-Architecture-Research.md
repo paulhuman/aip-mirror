@@ -230,6 +230,41 @@ The architecture must keep reusable AI-system semantics project-agnostic while p
 
 Current project facts that remain project-specific include Adobe Illustrator 2026/AIP, the JSX prototype, FreeHand MX Mirror behavior, Illustrator/FreeHand coordinate conventions and test fixtures, screenshots/videos, and the eventual native AIP implementation. These facts must not leak into the reusable core architecture semantics.
 
+## Research references
+
+These are the external repositories that are materially required to understand or continue the research represented by this handoff. They are preserved intentionally; this is **not** a list of everything opened during web research.
+
+### External repositories
+
+- paulhuman/codex
+  - Fork of: openai/codex
+  - Role: Research reference for coding-agent architecture, agent behavior, instruction handling, and repository-oriented workflows relevant to the AI-instruction system being designed here.
+  - URL: https://github.com/paulhuman/codex
+
+- paulhuman/skills
+  - Fork of: anthropics/skills
+  - Role: Research reference for reusable AI skill structure, skill packaging/discovery conventions, and capability-oriented instruction design.
+  - URL: https://github.com/paulhuman/skills
+
+- paulhuman/agent.md
+  - Role: Research reference for agent instruction-file conventions, instruction hierarchy/routing, and durable repository-level AI guidance.
+  - URL: https://github.com/paulhuman/agent.md
+
+## Handoff reference preservation
+
+This chapter adopts the following reusable rule and skill as part of the handoff architecture:
+
+- Rule: `.ai/rules/handoff-references.md`
+- Skill: `.ai/skills/handoff-reference-preservation/SKILL.md`
+
+Core principle:
+
+> **A handoff must preserve not only decisions, but also the references materially required to understand, validate, or continue those decisions.**
+
+The preservation rule deliberately distinguishes **material references** from incidental browsing. A handoff must not become an internet transcript dump. Every preserved external reference should have a concise **Role** explaining why the reference matters; otherwise a future chapter may inherit URLs without knowing their purpose.
+
+This rule is project-agnostic. Concrete research references remain in the applicable handoff or project documentation.
+
 ## Repository safety
 
 For every future repository modification:
@@ -279,3 +314,5 @@ Then formalize precedence/override, continue applicability/activation, define TR
 - Do not modify future repositories merely to test portability.
 - Do not force-push merely to clean up an API incident.
 - Never trust a successful GitHub write without readback/diff verification.
+- Do not copy every browsed URL into a handoff; preserve only materially required research references.
+- Do not preserve a material external reference without recording its Role.
