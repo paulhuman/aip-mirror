@@ -174,7 +174,7 @@ This verification must inspect repository state, not rely on the AI remembering 
 
 These are mandatory lifecycle constraints, not recommendations:
 
-1. **The closing chapter MUST modify only its own handoff during the closing/migration phase.**
+1. **The closing chapter MUST modify only its own handoff during the closing/migration phase, except for the mandatory `HANDED_OFF` → `SUPERSEDED` transition on the previous same-specialization handoff required by the `READY_FOR_HANDOFF supersession invariant`.**
 2. **The closing chapter MUST NOT create the receiving chapter's handoff file.**
 3. **The closing chapter MUST NOT modify, finalize, or assign a lifecycle status to the receiving chapter's handoff.**
 4. **The closing chapter MUST NOT change its own handoff from `READY_FOR_HANDOFF` to `HANDED_OFF`.**
