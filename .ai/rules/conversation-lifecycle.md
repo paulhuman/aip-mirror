@@ -82,6 +82,12 @@ The standard user migration command is:
 
 This command explicitly requests migration to the specified receiving chapter. When it is used, follow the migration procedure in the conversation-handoff skill and the rules below.
 
+The temporary recovery command is:
+
+    Пора восстановить handoff
+
+This command is valid only inside a blocked receiving-chapter bootstrap whose cause has been identified as a pre-existing lifecycle violation. It is an explicit user authorization for the bounded `Lifecycle Recovery` procedure below. It is not a general-purpose handoff repair command and must not be interpreted outside that recovery context.
+
 ## 6. Handoff trigger
 
 A handoff is appropriate when:
@@ -216,6 +222,75 @@ The canonical migration ownership model is therefore:
 
 No step in the closing chapter's migration procedure transfers conversational identity or grants the closing chapter ownership of the receiving handoff.
 
+### Lifecycle Recovery
+
+`Lifecycle Recovery` is a bounded procedure for restoring bootstrap preconditions after a pre-existing lifecycle violation is detected by the receiving chapter.
+
+The governing principle is:
+
+> **Detection does not imply authorization.**
+
+Detection of a lifecycle violation does not grant the AI permission to correct it. The receiving chapter must stop and report the inconsistency until the user explicitly authorizes recovery.
+
+Recovery is permitted only when **all** of the following conditions are true:
+
+1. The current conversation is the receiving chapter.
+2. Bootstrap is not yet complete.
+3. The violation was detected before the current chapter performed any lifecycle transition.
+4. The violation existed in the repository before bootstrap of the current chapter began.
+5. The violation directly concerns the handoff/lifecycle state of the current migration.
+6. The required recovery can be determined unambiguously from the canonical lifecycle rules.
+7. The user has explicitly authorized recovery with the temporary compatibility command:
+
+       Пора восстановить handoff
+
+If any condition is false, **RECOVERY MUST NOT be performed**.
+
+The recovery command is valid only in this blocked receiving-chapter recovery context. It must not be treated as a general-purpose request to repair handoffs or lifecycle state.
+
+#### Recovery invariants
+
+`RECOVERY` is not a new ordinary lifecycle transition. It is a controlled recovery procedure that may make only the minimum repository changes necessary to restore canonical bootstrap preconditions for the current receiving chapter.
+
+`RECOVERY`:
+
+- MUST NOT rewrite Git history;
+- MUST NOT use reset, force-push, or history rewriting to hide or erase the violation;
+- MUST NOT change conversational identity;
+- MUST NOT create a receiving handoff again when it already exists;
+- MUST NOT repeat a lifecycle transition that has already occurred;
+- MUST NOT introduce, remove, skip, or reinterpret lifecycle transitions except where this recovery procedure explicitly permits it;
+- MUST NOT repair unrelated or newly discovered lifecycle violations;
+- MUST NOT grant the receiving chapter ownership of another chapter's handoff beyond the ownership explicitly defined by the normal lifecycle rules;
+- MUST preserve correct existing repository state when no correction is necessary;
+- MUST use the minimum necessary repository changes;
+- MUST verify the repository state and relevant Git history before making recovery changes;
+- MUST verify the resulting lifecycle state after recovery before declaring bootstrap complete.
+
+If an existing state already satisfies the required final lifecycle condition, RECOVERY MUST NOT perform a redundant transition merely to establish or simulate ownership provenance.
+
+For example, if the previous handoff is already `HANDED_OFF` because of a pre-existing violation, the receiving chapter MUST NOT repeat `READY_FOR_HANDOFF` → `HANDED_OFF`. If that terminal state is otherwise correct and the recovery conditions are satisfied, it may be accepted as the existing lifecycle state without an additional transition.
+
+#### Recovery procedure
+
+After explicit user authorization, the receiving chapter must:
+
+1. Re-check the repository state and relevant Git history before changing anything.
+2. Confirm that the originally detected violation still matches the pre-existing recovery scenario.
+3. If the observed state has changed or the recovery scope is no longer unambiguous, stop and report the new inconsistency.
+4. Adopt and normalize its own pre-existing receiving handoff as the canonical `DRAFT` handoff rather than pretending that it was newly created during bootstrap.
+5. Preserve valid existing checkpoint and architectural context while making only the minimum corrections required by the canonical handoff structure.
+6. Inspect the previous handoff's current status and do not repeat any transition that has already occurred.
+7. If the previous handoff already has the required terminal `HANDED_OFF` state, accept that existing state when it is otherwise correct; do not create a redundant lifecycle transition.
+8. Make only the minimum repository changes necessary for the recovery.
+9. Verify each changed file, the diff, and the changed-file scope before committing.
+10. Create only the recovery commit(s) required by the actual changes, using the project's commit-message rules and clearly identifying the commit as lifecycle recovery.
+11. Verify the resulting repository state and lifecycle pair.
+12. Only after recovery verification succeeds may the receiving chapter declare `RECOVERY = COMPLETE`.
+13. Recovery completion does **not** by itself authorize substantive work. The receiving chapter must separately complete the normal post-bootstrap consistency verification before declaring `BOOTSTRAP = COMPLETE`.
+
+Recovery does not erase the fact that the original violation occurred. Git history remains the authoritative record of that history.
+
 ## 11. Starting a new chapter
 
 A new chapter must immediately create its own handoff file with status `DRAFT`.
@@ -233,7 +308,7 @@ For a chapter created from a previous handoff, the receiving chapter must read:
 3. the previous chapter's handoff;
 4. any files identified as current implementation state.
 
-After successfully starting from the previous handoff, the receiving chapter must update that previous handoff from `READY_FOR_HANDOFF` to `HANDED_OFF` and commit that transition.
+After successfully starting from the previous handoff, the receiving chapter must update that previous handoff from `READY_FOR_HANDOFF` to `HANDED_OFF` and commit that transition, **unless a previously authorized Lifecycle Recovery procedure has explicitly established that the required terminal state already exists and must not be repeated**.
 
 ### Post-bootstrap consistency verification
 
@@ -241,16 +316,16 @@ The receiving chapter must not declare bootstrap complete immediately after writ
 
 At minimum, the receiving chapter must:
 
-1. read back its own handoff after creation;
+1. read back its own handoff after creation or recovery;
 2. confirm that its own handoff still has `Status: DRAFT`;
 3. confirm that its `Previous chapter` identifies the handoff from which it actually started;
 4. confirm that its `Immediate next task` describes the first real task after bootstrap, not an already-completed bootstrap action;
-5. read back the previous handoff after the `READY_FOR_HANDOFF` → `HANDED_OFF` transition;
+5. read back the previous handoff after the normal lifecycle transition or authorized recovery;
 6. confirm that the previous handoff is now `HANDED_OFF`;
 7. confirm that the previous and receiving handoffs form a consistent lifecycle pair;
-8. if any of these checks fail, treat bootstrap as incomplete and correct the receiving chapter's own handoff before beginning substantive chapter work.
+8. if any of these checks fail, treat bootstrap as incomplete and correct the receiving chapter's own handoff before beginning substantive chapter work, or stop if the inconsistency is outside the authorized recovery scope.
 
-A bootstrap is therefore complete only after both the lifecycle transition and the post-bootstrap consistency verification succeed.
+A bootstrap is therefore complete only after the lifecycle state and the post-bootstrap consistency verification succeed.
 
 The receiving chapter owns correction of its own handoff when this verification detects stale or contradictory bootstrap state. A different specialization may detect and report such an inconsistency, but must not edit the receiving chapter's handoff on its behalf.
 
@@ -264,12 +339,15 @@ Initial creation of a new chapter's `DRAFT` handoff and subsequent `DRAFT` updat
 
 A lifecycle transition may be combined with logically related handoff content changes in one coherent commit.
 
+Lifecycle Recovery commits are also Git-traceable. They must record only the actual recovery changes performed and must not rewrite or erase the historical commits that caused the violation.
+
 The repository history should therefore make the workflow auditable:
 
     new chapter starts → DRAFT handoff created
     checkpoint → DRAFT handoff updated/committed
     current chapter migrates → READY_FOR_HANDOFF
     receiving chapter starts → HANDED_OFF
+    pre-existing violation → blocked bootstrap → user-authorized Lifecycle Recovery → minimal recovery commit(s)
     post-bootstrap consistency verification → bootstrap complete
     later replacement reaches READY_FOR_HANDOFF → older handoff SUPERSEDED
 
@@ -290,3 +368,5 @@ Do not silently migrate a conversation or create a new chapter without telling t
 When contextual risk makes a handoff advisable, the AI must warn the user and should recommend creating a handoff checkpoint. The user decides when the next chapter is started unless the user has explicitly delegated that decision.
 
 Handoff bootstrap and checkpoint actions that are explicitly defined as pre-authorized by these rules are not subject to an additional approval step.
+
+Lifecycle Recovery is different: it is **never pre-authorized**. It requires the explicit user command defined above after a qualifying pre-existing lifecycle violation has been detected and reported.
