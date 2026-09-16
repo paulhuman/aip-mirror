@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03D — Architecture & Research
 
 Status:
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
@@ -81,10 +81,10 @@ Conflict detection
 - **Candidate:** an already eligible policy-bearing decision source that may participate in conflict resolution.
 - **Eligibility:** determination that a candidate may participate in precedence/conflict resolution in the current context.
 - **Predicate:** logical test/evaluation input that may contribute to eligibility; not authority or outcome.
-- **Condition:** semantic condition whose evaluation may contribute to eligibility; not precedence semantics.
-- **Candidate effect / semantic contribution:** what a candidate semantically specifies if it governs; precedence does not need to enumerate every effect type.
-- **Governing candidate:** the eligible candidate selected by applicable explicit precedence to govern a conflict.
-- **Effective outcome:** result derived from the governing candidate's semantic effect after conflict resolution.
+- **Condition:** semantic condition contributing to eligibility; not precedence semantics.
+- **Candidate effect / semantic contribution:** what a candidate specifies if it governs; precedence does not need to enumerate every effect type.
+- **Governing candidate:** the eligible candidate selected by precedence.
+- **Effective outcome:** result derived from the governing candidate effect after conflict resolution.
 - **Prerequisite:** intentionally not collapsed into `condition`; may be a context prerequisite or a dependency on another decision source.
 - **Dependency:** intentionally underspecified until its semantic role is explicitly defined; must not become a generic catch-all relationship.
 
@@ -165,7 +165,7 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 - Do not make `dependency` a generic catch-all semantic category without defining its role.
 - Do not begin structural refactoring until the relevant semantics are sufficiently stable.
 - Do not delete `docs/PROJECT-INSTRUCTIONS.md` before semantic redistribution and verification.
-- Preserve repository write-safety: read current files, make minimal changes, write complete content, read back, verify content/diff/scope, then commit and verify the resulting ref.
+- Preserve repository write-safety: read current files, make minimal changes, write complete content, read back, verify content/diff/scope, then commit and verify resulting ref.
 
 ## Evidence / confidence
 
@@ -191,10 +191,16 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 - Final TRACE, temporary OVERRIDE lifetime, and authority integration contracts remain unverified.
 - The root cause and best future hardening mechanism for the recurring handoff ownership failure remain unverified.
 
+### Open
+
+- Prerequisite/dependency semantics remain open.
+- Decision-source dependency graph/cycle semantics remain open.
+- Candidate-level precedence formalization remains open until this boundary is tested.
+
 ## Last completed task
 
 03D completed the focused candidate-level precedence pass and prepared this handoff. The resulting model distinguishes eligibility, candidate effect, governing candidate, and effective outcome, while leaving prerequisite/dependency semantics open. During the 03D → 03E migration, the lifecycle issue was detected and corrected, and the recurring handoff ownership failure was identified as a future architecture/process concern.
 
 ## Immediate next task
 
-Run the **Prerequisite / Dependency Semantics** counterexample pass. Start with context prerequisites versus decision-source prerequisites, then test dependencies involving candidate effects and conflicts, including cyclic cases. Keep the analysis project-agnostic and defer structural changes and implementation schemas until the semantic boundary is stable.
+Run the **Prerequisite / Dependency Semantics** counterexample pass in **03AF — Architecture & Research**. Start with context prerequisites versus decision-source prerequisites, then test dependencies involving candidate effects and conflicts, including cyclic cases. Keep the analysis project-agnostic and defer structural changes and implementation schemas until the semantic boundary is stable.
