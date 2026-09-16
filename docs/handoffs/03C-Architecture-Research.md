@@ -13,23 +13,23 @@ Previous chapter:
 AIP Mirror — 03B — Architecture & Research
 
 Status:
-DRAFT
+READY_FOR_HANDOFF
 
 ## Starting objective
 
-Continue the project-wide AI-instruction architecture work from 03B. The immediate task is the dedicated **OVERRIDE Architecture Decision Pass**, followed by formalization of precedence/override, applicability/activation, and TRACE semantics. Structural refactoring must wait until these semantics are sufficiently stable.
+Continue the project-wide AI-instruction architecture work from 03B. The immediate task was the dedicated **OVERRIDE Architecture Decision Pass**, followed by formalization of precedence/override, applicability/activation, and TRACE semantics. Structural refactoring was explicitly deferred until these semantics became sufficiently stable.
 
 ## Starting state
 
-The repository remains in the legacy/pre-refactor layout. No structural architecture refactor has been executed. 03B completed the audit/design pass and is now `HANDED_OFF`.
+The repository remains in the legacy/pre-refactor layout. No structural architecture refactor has been executed. 03B completed the audit/design pass and was `HANDED_OFF`; during this migration 03B has now been correctly marked `SUPERSEDED` as required when 03C reaches `READY_FOR_HANDOFF`.
 
 ## Controlled lifecycle recovery
 
 This handoff was a pre-existing artifact created before the receiving chapter's bootstrap. Its creation and the subsequent `03B → HANDED_OFF` transition were performed in violation of the handoff ownership invariants before 03C began its bootstrap.
 
-Controlled lifecycle recovery was explicitly authorized after the violation was detected. The existing 03C handoff is retained and owned by 03C; it is not recreated, and the original Git history is not rewritten. The handoff is normalized as the receiving chapter's canonical `DRAFT` checkpoint. The already-completed `03B → HANDED_OFF` transition is accepted as historical state and is not repeated.
+Controlled lifecycle recovery was explicitly authorized after the violation was detected. The existing 03C handoff is retained and owned by 03C; it is not recreated, and the original Git history is not rewritten. The handoff was normalized as the receiving chapter's canonical `DRAFT` checkpoint. The already-completed `03B → HANDED_OFF` transition was accepted as historical state and was not repeated.
 
-## Established architecture decisions
+## Established architecture decisions inherited from 03B
 
 - **AD-01:** Core semantic types are `RULE / SKILL / WORKFLOW / REFERENCE / MEMORY`; `EXTENSIONS` are separate repository-defined extensions.
 - **AD-02:** RULE = policy/authority/constraint; SKILL = capability/methodology; WORKFLOW = ordered procedure.
@@ -96,13 +96,13 @@ Candidate required fields: `id`, `type`, `relation`, `override.target`, and `ove
 
 ## OVERRIDE decisions reached during 03C
 
-The following are **working architectural decisions agreed during this chapter**. They should be promoted to formal AD entries after the complete OVERRIDE Architecture Decision Pass is finished; until then, this handoff is the durable record of the decisions and rationale.
+The following points were worked through during this chapter. They are intentionally preserved here as the durable checkpoint for 03D. They should be promoted to formal AD entries only after 03D performs the final Architecture Decision Pass and confirms the remaining open semantics.
 
 ### Durable by default; explicit temporary override supported
 
 - `OVERRIDE` is **durable by default**.
 - If an override declaration says nothing about temporariness, it is treated as durable.
-- The architecture **officially supports explicit temporary OVERRIDE** for cases such as controlled migration/recovery, debugging, or other bounded workflows where a permanent repository override would be inappropriate.
+- The architecture **officially supports explicit temporary OVERRIDE** for controlled migration/recovery, debugging, or other bounded workflows where a permanent repository override would be inappropriate.
 - Temporary status must be **explicitly declared**. It must never be inferred from context or assumed by the AI.
 - Durable and temporary overrides have the same requirements for authority, validity, reason, and traceability. They differ in lifecycle only.
 - A temporary override must not silently disappear from historical state when it stops being active. Its lifecycle and eventual expiration/revocation must remain auditable.
@@ -128,7 +128,7 @@ override:
     ...
 ```
 
-The exact temporary-lifetime schema remains open until the rest of the OVERRIDE pass is complete.
+The exact temporary-lifetime schema remains open.
 
 ### No `override.scope` for now
 
@@ -150,7 +150,7 @@ Future escape hatch:
 
 > **If real architectural scenarios demonstrate that the existing Applicability + Activation + WORKFLOW mechanisms are insufficient to restrict an OVERRIDE safely, `override.scope` may be introduced later as a separate Architecture Decision.**
 
-The following useful Variant B design notes are intentionally preserved here so that a future scope decision does not require rediscovery:
+Preserved Variant B notes for future:
 
 - If `scope` is ever introduced, it should be **optional**, not mandatory.
 - No scope would mean **inherit target applicability**.
@@ -162,13 +162,13 @@ The following useful Variant B design notes are intentionally preserved here so 
 - Concrete scope values (repository/workflow/chapter/file/object/etc.) were deliberately **not** selected; they must not be assumed later without a dedicated architecture decision.
 - Before introducing scope, test every proposed use case against existing Applicability, Activation, and WORKFLOW semantics. A scope mechanism should be added only when those mechanisms demonstrably cannot provide a safe and understandable restriction.
 
-### OVERRIDE must not expand target applicability
+### OVERRIDE must not expand target applicability or authority
 
 The following principle is adopted independently of whether a future `scope` mechanism is ever introduced:
 
 > **OVERRIDE may preserve or narrow the applicability of its target, but it must never expand the target's applicability or authority.**
 
-Therefore, any future explicit restriction mechanism must obey:
+Therefore:
 
 ```text
 No restriction
@@ -186,15 +186,178 @@ INVALID → fail closed
 
 An OVERRIDE is not a mechanism for granting broader reach or authority than the target already possesses.
 
-## Open OVERRIDE questions inherited from 03B
+## OVERRIDE authority and specificity: current research conclusions
 
-1. Durable vs explicitly temporary: **working decision reached — durable by default, explicit temporary supported.**
-2. `override.scope`: **working decision reached — omit for now; preserve Variant B notes above as a future escape hatch.**
-3. How does OVERRIDE interact with authority and specificity?
-4. What happens with invalid, ambiguous, inactive, chained, or cyclic targets?
-5. Does `RESOLVE` belong in TRACE?
+The following conclusions were deliberately held as **research conclusions / hypotheses**, not yet final AD entries:
 
-The remaining open questions must still be resolved before the OVERRIDE Architecture Decision Pass is complete and before the decisions above are promoted to final AD entries.
+1. **OVERRIDE is a semantic relation, not an authority level.**
+2. `relation: OVERRIDE` does **not** itself grant permission to establish or apply an override.
+3. An effective OVERRIDE requires independently established authorization to perform that relation against its target in the applicable context.
+4. General authority to govern and authority/permission to override may be distinct concepts; they must not be assumed identical until the authority model is formalized.
+5. **Specificity never creates, grants, or strengthens OVERRIDE authority.**
+6. A more-specific rule without explicit OVERRIDE remains a `SPECIALIZE`/contextual rule rather than an override.
+7. OVERRIDE cannot expand the target's applicability or authority.
+8. Delegated override permission may preserve or narrow an existing permission but must not silently amplify it.
+9. Numeric or path-depth-based authority is not justified by the current research and should not be introduced merely to obtain a deterministic ordering.
+
+Important unresolved point:
+
+> **The exact semantics of “authority to override” remain open. Rule 3 above is a strong working hypothesis, but must be analyzed and explicitly accepted before being promoted to a final AD.**
+
+## Multiple-valid-OVERRIDE conflict model
+
+Research and counterexample testing produced a deliberately conservative baseline:
+
+```text
+0 valid OVERRIDE
+    ↓
+no override
+
+1 valid OVERRIDE
+    ↓
+apply
+
+2+ valid OVERRIDEs
+    ↓
+UNRESOLVED
+```
+
+This is a **safe baseline hypothesis**, not yet a final architecture decision.
+
+Key conclusions:
+
+- `A = VALID` and `B = VALID` does not imply that either A or B wins.
+- Multiple valid/authorized OVERRIDEs are a **conflict-resolution problem**, not an authorization problem.
+- A deterministic A/B winner would require an additional semantic ordering/precedence mechanism that the current architecture does not need and should not invent merely to resolve this case.
+- There is therefore **no “last found rule wins” semantics**.
+- Discovery order, filesystem order, path depth, filename order, traversal order, or incidental processing order must not become hidden precedence.
+- If multiple valid OVERRIDEs remain unresolved, the combined result is `UNRESOLVED` and the override must not be silently applied.
+- `UNRESOLVED` is intentionally fail-closed for OVERRIDE.
+
+This gives a clean three-stage baseline:
+
+```text
+VALIDITY / AUTHORIZATION
+        ↓
+0 / 1 / 2+ valid OVERRIDEs
+        ↓
+NO OVERRIDE / APPLY / UNRESOLVED
+```
+
+`decision_id` becomes useful as a correlation identifier for such a decision: it can associate the evaluated candidates, authorization evidence, applicable context, rule revisions, conflict-resolution result, and final outcome. A mandatory-safety-vs-ordinary-override distinction would be a separate future architectural layer and is explicitly out of scope for the current architecture pass.
+
+## Counterexample pass completed in 03C
+
+The following twelve scenarios were checked against the emerging model:
+
+1. Low-authority rule attempts to override high-authority rule → relation alone is insufficient; without `may_override` authorization, deny.
+2. High-authority rule attempts to override low-authority rule → high authority alone does not automatically grant override permission; explicit authorization is still required.
+3. OVERRIDE relation exists but authorization is missing → relation may remain syntactically/semantically declared but is ineffective; TRACE may explain the denial.
+4. Delegated override permission → valid when delegation explicitly permits the relation and applicability, target, activation, and lifetime remain valid.
+5. Narrow delegated permission → delegated actor may override only the permitted target set/context.
+6. Delegation attempts to expand authority → invalid/deny; delegation must not silently amplify authority.
+7. Temporary permission expires → historical rule/relation remains auditable, but authorization is expired and ineffective.
+8. Permission is revoked before expiration → `REVOKED` is distinct from `EXPIRED`; the override becomes ineffective immediately under the applicable revocation semantics.
+9. Target becomes inapplicable → valid override authorization cannot make an inapplicable target applicable.
+10. TRACE exists but authorization is missing → TRACE can observe/log/explain; it cannot grant authorization.
+11. Authorization source becomes `SUPERSEDED` → HANDOFF lifecycle and authorization lifecycle are separate state machines; `SUPERSEDED` must not automatically mean `REVOKED`.
+12. Two valid authorized OVERRIDEs conflict → both may be valid, but without explicit conflict semantics the result is `UNRESOLVED`; no implicit winner.
+
+These counterexamples passed the current safety model. They are validation evidence, not automatically formal ADs.
+
+## Strong research hypotheses carried into 03D
+
+- **H-01:** `OVERRIDE` is a semantic relation, not an authority level.
+- **H-02:** Declaring `OVERRIDE` does not itself grant permission.
+- **H-03:** Effective OVERRIDE requires independently established authorization to perform the relation against the target in applicable context.
+- **H-04:** General authority to govern and authority/permission to override are distinct unless an explicit architectural rule establishes their relationship.
+- **H-05:** Specificity never creates/grants/strengthens override authorization.
+- **H-06:** Delegation may preserve/narrow override authorization but not expand it.
+- **H-07:** OVERRIDE cannot expand target applicability or authority.
+- **H-08:** Expiration and explicit revocation are distinct authorization lifecycle events.
+- **H-09:** Handoff lifecycle states, including `SUPERSEDED`, must not be conflated with authorization lifecycle.
+- **H-10:** TRACE records/explains decisions but cannot grant, extend, revive, or strengthen authorization.
+- **H-11:** Authorization and conflict resolution are distinct stages.
+- **H-12:** Ambiguous/unresolved OVERRIDE authorization/conflict fails closed.
+- **H-13:** Multiple authorized OVERRIDEs require explicit conflict-resolution semantics; no implicit winner from path/depth/discovery order.
+- **H-14:** Specificity/precedence/authority/delegation may be inputs to conflict resolution, but none automatically becomes OVERRIDE authority.
+- **H-15:** Safe baseline: 0 candidates = no override; 1 candidate = eligible effective candidate; 2+ candidates require explicit resolution; absent resolution = unresolved/no apply.
+
+## External research references required for continuation
+
+The following references are materially relevant to the 03C OVERRIDE/authorization/conflict-resolution work and should be preserved for 03D. This is intentionally **not** a transcript of every URL visited.
+
+### AI instruction / agent architecture
+
+- **OpenAI Model Spec** — authority levels, applicability, and instruction conflict/override semantics. Role: conceptual reference for separating authority from applicability and for comparing explicit versus implicit override behavior.
+  - https://model-spec.openai.com/
+
+- **Anthropic Agent Skills specification** — skill discovery, activation, and execution. Role: reference for separating discovery from activation and capability execution.
+  - https://agentskills.io/specification
+
+- **GitHub Copilot custom instructions documentation** — repository-wide and path-specific instruction application. Role: evidence that specificity/context can coexist without implying automatic replacement/override.
+  - https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot
+
+- **Cursor Rules documentation** — multiple rule activation modes and explicit enforcement. Role: reference for distinguishing discovery/activation/context from stronger enforcement semantics.
+  - https://docs.cursor.com/context/rules
+
+- **Model Context Protocol authorization** — authorization, scopes, expiration, and least-privilege concepts. Role: reference for separating resource targeting, permission, scope, and lifecycle.
+  - https://modelcontextprotocol.io/specification/draft/basic/authorization
+
+### Authorization / policy / provenance
+
+- **NIST Attribute Based Access Control (ABAC)** — authorization as a function of subject, object, operation, environment, and policy attributes. Role: reference against a simplistic single numeric “authority” model.
+  - https://csrc.nist.gov/projects/attribute-based-access-control
+
+- **OpenFGA documentation** — relationship-based authorization and derived permissions. Role: reference supporting a distinct relation such as `may_override(A,B)` rather than treating override as a universal authority level.
+  - https://openfga.dev/docs
+
+- **Open Policy Agent (OPA)** — policy decisions, conflict handling, explicit combining/ordering, and decision logging. Role: reference for separating policy evaluation from conflict resolution and observability.
+  - https://www.openpolicyagent.org/docs
+  - https://www.openpolicyagent.org/docs/faq
+
+- **AWS Cedar documentation** — default deny, explicit policy effects, determining policies, and diagnostics. Role: comparative reference showing one explicit conflict model without assuming it is appropriate for OVERRIDE.
+  - https://docs.cedarpolicy.com/
+
+- **XACML / NIST policy-combining material** — deny-overrides, permit-overrides, first-applicable, only-one-applicable. Role: comparative reference demonstrating that conflict resolution is an explicit architectural choice rather than a universal ordering rule.
+  - https://csrc.nist.gov/projects/attribute-based-access-control
+
+- **W3C PROV** — provenance entities, activities, agents, derivations, responsibility, and time. Role: reference for future decision provenance/TRACE semantics.
+  - https://www.w3.org/TR/prov-overview/
+
+- **Google Zanzibar paper** — authorization state consistency and coherent policy/ACL evaluation. Role: comparative reference for relationship-based authorization and deterministic policy state, without importing its semantics directly.
+  - https://storage.googleapis.com/pub-tools-public-publication-data/pdf/10683a8984f2e0a4a4f8b3f2e4e0d6e0e6e8d8c9.pdf
+
+### External repositories
+
+- **paulhuman/codex**
+  - Fork of: openai/codex
+  - Role: Research reference for coding-agent architecture, agent behavior, instruction handling, and repository-oriented workflows relevant to the AI-instruction system being designed here.
+  - URL: https://github.com/paulhuman/codex
+
+- **paulhuman/skills**
+  - Fork of: anthropics/skills
+  - Role: Research reference for reusable AI skill structure, skill packaging/discovery conventions, and capability-oriented instruction design.
+  - URL: https://github.com/paulhuman/skills
+
+- **paulhuman/agent.md**
+  - Role: Research reference for agent instruction-file conventions, instruction hierarchy/routing, and durable repository-level AI guidance.
+  - URL: https://github.com/paulhuman/agent.md
+
+## Handoff reference preservation
+
+This chapter adopts the following reusable rule and skill as part of the handoff architecture:
+
+- Rule: `.ai/rules/handoff-references.md`
+- Skill: `.ai/skills/handoff-reference-preservation/SKILL.md`
+
+Core principle:
+
+> **A handoff must preserve not only decisions, but also the references materially required to understand, validate, or continue those decisions.**
+
+The preservation rule deliberately distinguishes **material references** from incidental browsing. A handoff must not become an internet transcript dump. Every preserved external reference should have a concise **Role** explaining why the reference matters; otherwise a future chapter may inherit URLs without knowing their purpose.
+
+This rule is project-agnostic. Concrete research references remain in the applicable handoff or project documentation.
 
 ## Activation checkpoint
 
@@ -220,7 +383,7 @@ COMMIT
 
 The final event vocabulary and schema remain open.
 
-For temporary OVERRIDE specifically, TRACE/observability should make the active exception visible to the user and preserve its lifecycle in historical state. The exact event payloads remain open.
+For temporary OVERRIDE specifically, TRACE/observability should make the active exception visible to the user and preserve its lifecycle in historical state. `decision_id` is a promising correlation field for future TRACE, but its exact schema remains open.
 
 ## Project-agnosticity
 
@@ -230,71 +393,32 @@ The architecture must keep reusable AI-system semantics project-agnostic while p
 
 Current project facts that remain project-specific include Adobe Illustrator 2026/AIP, the JSX prototype, FreeHand MX Mirror behavior, Illustrator/FreeHand coordinate conventions and test fixtures, screenshots/videos, and the eventual native AIP implementation. These facts must not leak into the reusable core architecture semantics.
 
-## Research references
-
-These are the external repositories that are materially required to understand or continue the research represented by this handoff. They are preserved intentionally; this is **not** a list of everything opened during web research.
-
-### External repositories
-
-- paulhuman/codex
-  - Fork of: openai/codex
-  - Role: Research reference for coding-agent architecture, agent behavior, instruction handling, and repository-oriented workflows relevant to the AI-instruction system being designed here.
-  - URL: https://github.com/paulhuman/codex
-
-- paulhuman/skills
-  - Fork of: anthropics/skills
-  - Role: Research reference for reusable AI skill structure, skill packaging/discovery conventions, and capability-oriented instruction design.
-  - URL: https://github.com/paulhuman/skills
-
-- paulhuman/agent.md
-  - Role: Research reference for agent instruction-file conventions, instruction hierarchy/routing, and durable repository-level AI guidance.
-  - URL: https://github.com/paulhuman/agent.md
-
-## Handoff reference preservation
-
-This chapter adopts the following reusable rule and skill as part of the handoff architecture:
-
-- Rule: `.ai/rules/handoff-references.md`
-- Skill: `.ai/skills/handoff-reference-preservation/SKILL.md`
-
-Core principle:
-
-> **A handoff must preserve not only decisions, but also the references materially required to understand, validate, or continue those decisions.**
-
-The preservation rule deliberately distinguishes **material references** from incidental browsing. A handoff must not become an internet transcript dump. Every preserved external reference should have a concise **Role** explaining why the reference matters; otherwise a future chapter may inherit URLs without knowing their purpose.
-
-This rule is project-agnostic. Concrete research references remain in the applicable handoff or project documentation.
-
-## Repository safety
-
-For every future repository modification:
-
-1. read the current file;
-2. preserve unrelated content during full-content replacement;
-3. write the complete intended content;
-4. read back;
-5. verify integrity, diff, and changed-file scope;
-6. commit;
-7. verify the resulting ref/commit.
-
-Never trust a successful GitHub write without readback/diff verification. Do not force-push merely to clean up an API incident.
-
 ## Implementation state
 
 No structural refactor has been committed. `docs/PROJECT-INSTRUCTIONS.md` remains a legacy aggregate and must be redistributed and verified before deletion. No future-project repository has been modified.
 
-## Immediate next task
+## Research stopping point
 
-Continue the **OVERRIDE Architecture Decision Pass**:
+03C deliberately stops the research phase here. The research has established enough evidence and counterexamples to begin the **OVERRIDE Architecture Decision Pass** in 03D. Do not restart broad research unless a concrete unresolved semantic question requires new evidence.
 
-1. Finalize the interaction of OVERRIDE with authority and specificity.
-2. Define behavior for invalid, ambiguous, inactive, chained, and cyclic overrides.
-3. Decide whether `RESOLVE` belongs in TRACE.
-4. Finalize temporary OVERRIDE lifecycle semantics and user-facing observability requirements.
-5. Promote the completed OVERRIDE decisions to formal AD entries.
-6. Apply the Project-Agnosticity Check to every resulting decision.
+## Immediate next task for 03D
 
-Then formalize precedence/override, continue applicability/activation, define TRACE schema/events, and only then begin structural refactoring.
+1. Perform the **OVERRIDE Architecture Decision Pass** using the research conclusions and hypotheses above.
+2. Resolve the exact semantics of authority/permission to establish and apply an OVERRIDE, without introducing a numeric or incidental path-based authority model merely to obtain ordering.
+3. Decide the formal behavior for invalid, ambiguous, inactive, chained, and cyclic OVERRIDEs.
+4. Decide whether `RESOLVE` is a TRACE event and define its semantic boundary so TRACE remains observational.
+5. Finalize temporary OVERRIDE lifecycle semantics and explicit user-facing observability requirements.
+6. Promote only sufficiently validated OVERRIDE conclusions to formal AD entries.
+7. Apply the `CORE / PROJECT-SPECIFIC / ADAPTABLE` Project-Agnosticity Check to each resulting AD.
+8. Then formalize precedence/override and continue the Applicability/Activation work.
+9. Define the TRACE schema/events and provenance fields, including whether/how `decision_id` participates.
+10. Only after those semantics are sufficiently stable, begin structural refactoring.
+
+## Migration state
+
+This handoff is finalized as `READY_FOR_HANDOFF` for **AIP Mirror — 03D — Architecture & Research**.
+
+The previous same-specialization handoff `03B` was physically verified as `SUPERSEDED` before this handoff was transitioned to `READY_FOR_HANDOFF`, satisfying the mandatory READY_FOR_HANDOFF supersession invariant.
 
 ## Things not to redo
 
