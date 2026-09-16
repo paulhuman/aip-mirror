@@ -118,6 +118,24 @@ Test whether B's decision is required to establish A's eligibility, whether it i
 
 Do not introduce a general dependency engine merely because the word `dependency` appears. First establish the semantic relationship actually needed.
 
+## Future architecture/process task: revisit conversation handoff
+
+The current handoff mechanism has now exhibited a recurring ownership failure: a closing chapter has created or initialized the receiving chapter's handoff even though the canonical `rules` and `skills` already assign that work to the receiving chapter. This happened in the earlier 03A → 03B migration and recurred in 03D → 03E.
+
+This is a **future architecture/process task**, not a reason to refactor the workflow during the current research pass.
+
+When the project reaches a sufficiently mature architecture, the conversation-handoff mechanism itself must be revisited and hardened. The review should specifically investigate why an otherwise explicit ownership model can still be bypassed in practice, including risks caused by very large conversations, degraded or incomplete context retention, incomplete reading of applicable repository instruction files, or confusion between preparing a future bootstrap instruction and actually entering the receiving chapter.
+
+The future review should determine whether the handoff mechanism, its bootstrap protocol, its ownership model, or its verification gates need architectural changes so that:
+
+- the closing chapter cannot accidentally assume receiving-side ownership;
+- the receiving chapter remains the authoritative creator of its own `DRAFT` handoff;
+- bootstrap instructions for a future chapter cannot be mistaken for execution in that chapter;
+- repository state is used as the authoritative verification point rather than conversational memory;
+- repeated lifecycle/bootstrap failures become detectable earlier and are harder to reproduce.
+
+**Do not implement or structurally refactor this mechanism in 03E merely because this task is recorded here.** The purpose of this checkpoint is to preserve the issue as durable project knowledge so it is not forgotten when the architecture is later reconsidered.
+
 ## Current implementation state
 
 The repository remains in the legacy/pre-refactor AI-instruction layout. No structural architecture refactor has been executed. `docs/PROJECT-INSTRUCTIONS.md` remains a legacy aggregate and must be semantically redistributed and verified before deletion.
@@ -156,11 +174,14 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 - 03D was prepared as `READY_FOR_HANDOFF` to 03E.
 - 03D explicitly accepted the candidate-level working direction, eligibility-before-precedence, candidate-effect/effective-outcome distinction, and implementation-order independence.
 - 03E is initialized as `DRAFT` from that checkpoint.
+- The closing chapter has created the receiving chapter's handoff in two observed migrations (03A → 03B and 03D → 03E), despite the canonical ownership rules forbidding that behavior.
+- The current project rules explicitly state that the closing chapter must not create or modify the receiving chapter's handoff and that only the receiving chapter may create its own initial `DRAFT` handoff.
 
 ### Inferred
 
 - The remaining difficulty is not whether precedence should understand each effect type; it is where semantic prerequisites/dependencies belong relative to eligibility and effect evaluation.
 - Context predicates/conditions naturally contribute to eligibility, while decision-source prerequisites require additional testing.
+- The repeated handoff ownership failure suggests that explicit repository rules alone may not be sufficient protection against context-related workflow errors; the exact architectural/process remedy remains to be determined later.
 
 ### Assumed / unverified
 
@@ -168,10 +189,11 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 - Cycle semantics remain unverified.
 - Candidate-level precedence has not yet been promoted to a formal numbered AD.
 - Final TRACE, temporary OVERRIDE lifetime, and authority integration contracts remain unverified.
+- The root cause and best future hardening mechanism for the recurring handoff ownership failure remain unverified.
 
 ## Last completed task
 
-03D completed the focused candidate-level precedence pass and prepared this handoff. The resulting model distinguishes eligibility, candidate effect, governing candidate, and effective outcome, while leaving prerequisite/dependency semantics open.
+03D completed the focused candidate-level precedence pass and prepared this handoff. The resulting model distinguishes eligibility, candidate effect, governing candidate, and effective outcome, while leaving prerequisite/dependency semantics open. During the 03D → 03E migration, the lifecycle issue was detected and corrected, and the recurring handoff ownership failure was identified as a future architecture/process concern.
 
 ## Immediate next task
 
