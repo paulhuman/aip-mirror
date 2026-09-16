@@ -8,10 +8,20 @@ The project is intentionally split into four complementary working specializatio
 
 ### Specialization chapter patterns
 
-1. **AIP Mirror — 01[A-Z] — JSX Prototype**
-2. **AIP Mirror — 02[A-Z] — Native AIP Plugin**
-3. **AIP Mirror — 03[A-Z] — Architecture & Research**
-4. **AIP Mirror — 04[A-Z] — Project Workshop**
+The current Chapter Identifier Format is:
+
+    [0-9]{2}[A-Z]{2}
+
+The first two digits identify the specialization. The final two uppercase letters identify the chapter using a continuous base-26 alphabetical sequence:
+
+    AA → AB → ... → AZ → BA → BB → ... → BZ → CA → ... → ZZ
+
+No letters are skipped.
+
+1. **AIP Mirror — 01[A-Z]{2} — JSX Prototype**
+2. **AIP Mirror — 02[A-Z]{2} — Native AIP Plugin**
+3. **AIP Mirror — 03[A-Z]{2} — Architecture & Research**
+4. **AIP Mirror — 04[A-Z]{2} — Project Workshop**
 
 These are not four separate projects. They are four workstreams around the same repository.
 
@@ -132,26 +142,77 @@ When contextual risk becomes significant, the AI should warn the user early and 
 
 ## Chapter naming
 
-Each specialization uses a numeric identity followed by an alphabetical chapter letter.
+Each specialization uses a numeric identity followed by a two-letter chapter suffix.
 
-The generic chapter identifier is:
+The current Chapter Identifier Format is:
+
+```text
+[0-9]{2}[A-Z]{2}
+```
+
+The first two digits identify the specialization. The final two uppercase letters identify the chapter using a continuous base-26 alphabetical sequence:
+
+```text
+AA → AB → ... → AZ → BA → BB → ... → BZ → CA → ... → ZZ
+```
+
+No letters are skipped.
+
+The sequence is positional and mathematical:
+
+```text
+AA = chapter ordinal 1
+AB = chapter ordinal 2
+AC = chapter ordinal 3
+...
+AE = chapter ordinal 5
+AF = chapter ordinal 6
+...
+ZZ = chapter ordinal 676
+```
+
+The ordinal position of a chapter must not be confused with the identity of its identifier.
+
+### Legacy historical identifiers
+
+The former Chapter Identifier Format was:
 
 ```text
 [0-9]{2}[A-Z]
 ```
 
-Examples of the chapter-name pattern:
+Identifiers created under that format remain valid historical identifiers. They MUST NOT be rewritten merely to conform to the current Chapter Identifier Format, and a legacy identifier MUST NOT be interpreted as a current-format identifier.
+
+Legacy and current identifiers occupy different identifier namespaces by format. Historical handoff documents retain their original chapter identifiers and filenames.
+
+Historical chapters occupy their existing ordinal positions when the current format is introduced. They are not renamed into the current format. New chapters continue from the next unused ordinal position.
+
+For specialization `03`, the historical/current ordinal correspondence is:
 
 ```text
-AIP Mirror — 01[A-Z] — JSX Prototype
-AIP Mirror — 02[A-Z] — Native AIP Plugin
-AIP Mirror — 03[A-Z] — Architecture & Research
-AIP Mirror — 04[A-Z] — Project Workshop
+ordinal   legacy ID   current-format position
+
+1         03A         AA
+2         03B         AB
+3         03C         AC
+4         03D         AD
+5         03E         AE
+6         —           AF  ← first new-format Chapter
 ```
 
-Concrete chapters retain their normal IDs, for example `03A`, `02B`, and `04C`.
+This is **ordinal correspondence only**. It does NOT establish identifier identity. In particular:
 
-The number identifies the specialization; the letter identifies the conversation chapter.
+```text
+03A ≠ 03AA
+03B ≠ 03AB
+03C ≠ 03AC
+03D ≠ 03AD
+03E ≠ 03AE
+```
+
+`03AA`–`03AE` are not historical aliases and are not physically used as current identifiers in this repository.
+
+Concrete chapters therefore use identifiers such as `03AF`, while historical chapters retain their original legacy identifiers such as `03A`–`03E`.
 
 ## Handoff documents
 
@@ -164,10 +225,20 @@ docs/handoffs/
 Use one state snapshot per chapter, for example:
 
 ```text
-docs/handoffs/01A-JSX-Prototype.md
-docs/handoffs/02B-Native-AIP-Plugin.md
+docs/handoffs/01AA-JSX-Prototype.md
+docs/handoffs/02AB-Native-AIP-Plugin.md
+docs/handoffs/03AF-Architecture-Research.md
+docs/handoffs/04AA-Project-Workshop.md
+```
+
+Historical handoff documents created under the legacy one-letter format remain unchanged, for example:
+
+```text
 docs/handoffs/03A-Architecture-Research.md
-docs/handoffs/04A-Project-Workshop.md
+docs/handoffs/03B-Architecture-Research.md
+docs/handoffs/03C-Architecture-Research.md
+docs/handoffs/03D-Architecture-Research.md
+docs/handoffs/03E-Architecture-Research.md
 ```
 
 A handoff is a **state snapshot**, not a casual conversation summary. It should record the current objective, completed work, implementation state, decisions, open questions, relevant files and references, constraints, assumptions, last completed task, immediate next task, things not to redo, and recommended starting context for the next chapter.
@@ -508,7 +579,11 @@ When a question concerns:
 - **architecture/research/FreeHand behavior/project-wide decisions** → primarily the `03` specialization.
 - **IDE/toolchain/Git/repository mechanics/SDK tooling/ChatGPT interface/general development support** → primarily the `04` specialization.
 
-Each specialization may have multiple chapters (`A`, `B`, `C`, ...), following the generic chapter identifier `[0-9]{2}[A-Z]`. If a chapter becomes too large or contextually risky, warn the user and create a handoff before continuing in the next chapter.
+Each specialization may have multiple chapters using the current two-letter Chapter Identifier Format (`[0-9]{2}[A-Z]{2}`), with the suffix advancing continuously from `AA` through `ZZ`. If a chapter becomes too large or contextually risky, warn the user and create a handoff before continuing in the next chapter.
+
+Legacy one-letter chapter identifiers remain valid historical identifiers and must not be rewritten merely to conform to the current format. Historical handoff files retain their original names and identifiers.
+
+For specialization `03`, the legacy chapters `03A`–`03E` occupy ordinal positions 1–5; the first newly created current-format chapter is `03AF` at ordinal position 6. This is ordinal correspondence only, not identifier identity.
 
 If a topic crosses boundaries, keep the architectural decision in the `03` specialization and the implementation work in the appropriate implementation specialization. Use `04` to support the work, not to relocate it.
 

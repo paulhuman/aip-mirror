@@ -109,7 +109,13 @@ The project uses four complementary specializations:
 - `AIP Mirror — 03 — Architecture & Research`
 - `AIP Mirror — 04 — Project Workshop`
 
-The current chapters use the `A` suffix, and later chapters advance alphabetically within the same specialization.
+The current Chapter Identifier Format is `[0-9]{2}[A-Z]{2}`. The final two uppercase letters advance through the continuous sequence `AA → AB → ... → AZ → BA → ... → ZZ` with no skipped letters.
+
+Legacy one-letter chapter identifiers remain valid historical identifiers and must not be rewritten merely to conform to the current format. Legacy identifiers must not be interpreted as current-format identifiers; the two formats occupy different identifier namespaces.
+
+Historical chapters retain their existing identifiers and ordinal positions. For specialization `03`, the legacy chapters `03A`–`03E` occupy ordinal positions 1–5, so `03AF` is the first newly created current-format chapter and occupies ordinal position 6.
+
+This is ordinal correspondence only, not identifier identity. In particular, `03A` is not an alias for `03AA`, and `03E` is not an alias for `03AE`.
 
 The roles are complementary, not competing.
 

@@ -28,33 +28,53 @@ Not every task requires every stage, but significant architectural or behavioral
 
 ## 2. Four project specializations
 
-The project uses four complementary conversation specializations. Each specialization may span multiple alphabetical chapters.
+The project uses four complementary conversation specializations. Each specialization may span multiple chapters using the current two-letter Chapter Identifier Format.
+
+The current Chapter Identifier Format is:
+
+    [0-9]{2}[A-Z]{2}
+
+The final two uppercase letters form a continuous base-26 alphabetical sequence:
+
+    AA → AB → ... → AZ → BA → BB → ... → BZ → CA → ... → ZZ
+
+No letters are skipped.
 
 ### AIP Mirror — 01 — JSX Prototype
 
 Purpose: behavioral experiments, Illustrator JSX prototyping, interaction and geometry experiments, and rapid validation of user-visible behavior.
 
-Current chapter: `AIP Mirror — 01A — JSX Prototype`
+Example initial chapter: `AIP Mirror — 01AA — JSX Prototype`
 
 ### AIP Mirror — 02 — Native AIP Plugin
 
 Purpose: C++ implementation, Illustrator AIP integration, native interactive tool behavior, Illustrator event handling, live preview, object/path manipulation, undo/cancel behavior, and production architecture.
 
-Current chapter: `AIP Mirror — 02A — Native AIP Plugin`
+Example initial chapter: `AIP Mirror — 02AA — Native AIP Plugin`
 
 ### AIP Mirror — 03 — Architecture & Research
 
 Purpose: reverse engineering, architecture, specifications, technical research, FreeHand MX behavior analysis, Illustrator behavior analysis, technology evaluation, and cross-project decisions.
 
-Current chapter: `AIP Mirror — 03A — Architecture & Research`
+Example initial chapter: `AIP Mirror — 03AA — Architecture & Research`
 
 ### AIP Mirror — 04 — Project Workshop
 
 Purpose: practical development support and learning outside the primary implementation/research streams, including IDE configuration, CMake/build setup, Git commands and repository mechanics, SDK/tooling setup, ChatGPT interface questions, debugging of development environment issues, and routine technical questions.
 
-Current chapter: `AIP Mirror — 04A — Project Workshop`
+Example initial chapter: `AIP Mirror — 04AA — Project Workshop`
 
 The `04` specialization is a support/workshop space. It should not become a competing architecture, research, JSX, or native implementation stream.
+
+### Legacy chapter identifiers
+
+Before the current two-letter format was introduced, chapters used the legacy `[0-9]{2}[A-Z]` format. Existing legacy chapter identifiers remain valid historical identifiers and are not rewritten merely to conform to the current format.
+
+Legacy identifiers MUST NOT be interpreted as current-format identifiers. Legacy and current identifiers occupy different identifier namespaces by format.
+
+For specialization `03`, `03A` through `03E` remain the historical identifiers of the first five chapter ordinals. The first newly created current-format chapter after them is `03AF`, which occupies ordinal position 6.
+
+This is ordinal correspondence only; it does not establish identity such as `03A = 03AA` or `03E = 03AE`.
 
 ## 3. Do not duplicate reasoning across conversations
 
@@ -62,7 +82,7 @@ If a question belongs primarily to one specialization, keep the detailed investi
 
 Use repository documentation when the result is important to the entire project.
 
-If a specialization reaches a contextual limit or needs a clean continuation, create the next alphabetical chapter and use a handoff from `docs/handoffs/`.
+If a specialization reaches a contextual limit or needs a clean continuation, create the next chapter and use a handoff from `docs/handoffs/`.
 
 ## 4. JSX to native transition
 

@@ -28,32 +28,73 @@ The repository handoff state must therefore outlive the conversation that create
 
 ## 2. Chapter naming
 
-Each specialization uses a numeric identity followed by an alphabetical chapter letter.
+Each specialization uses a numeric identity followed by a two-letter chapter suffix.
 
-The generic chapter identifier is:
+The current Chapter Identifier Format is:
+
+    [0-9]{2}[A-Z]{2}
+
+The first two digits identify the specialization. The final two uppercase letters identify the chapter using a continuous base-26 alphabetical sequence:
+
+    AA → AB → ... → AZ → BA → BB → ... → BZ → CA → ... → ZZ
+
+No letters are skipped.
+
+The sequence is positional and mathematical:
+
+    AA = chapter ordinal 1
+    AB = chapter ordinal 2
+    AC = chapter ordinal 3
+    ...
+    AE = chapter ordinal 5
+    AF = chapter ordinal 6
+    ...
+    ZZ = chapter ordinal 676
+
+The ordinal position of a chapter must not be confused with the identity of its identifier.
+
+### Legacy historical identifiers
+
+The former Chapter Identifier Format was:
 
     [0-9]{2}[A-Z]
 
-Examples of the chapter-name pattern:
+Identifiers created under that format remain valid historical identifiers. They MUST NOT be rewritten merely to conform to the current Chapter Identifier Format, and a legacy identifier MUST NOT be interpreted as a current-format identifier.
 
-    AIP Mirror — 01[A-Z] — JSX Prototype
-    AIP Mirror — 02[A-Z] — Native AIP Plugin
-    AIP Mirror — 03[A-Z] — Architecture & Research
-    AIP Mirror — 04[A-Z] — Project Workshop
+Legacy and current identifiers occupy different identifier namespaces by format. Historical handoff documents retain their original chapter identifiers and filenames.
 
-Concrete chapters retain their normal IDs, for example `03A`, `02B`, and `04C`.
+Historical chapters occupy their existing ordinal positions when the current format is introduced. They are not renamed into the current format. New chapters continue from the next unused ordinal position.
 
-The number identifies the specialization. The letter identifies the conversation chapter.
+For specialization `03`, the historical/current ordinal correspondence is:
 
-Continue alphabetically within the same specialization.
+    ordinal   legacy ID   current-format position
 
-Do not rename the numeric specialization when starting a new chapter.
+    1         03A         AA
+    2         03B         AB
+    3         03C         AC
+    4         03D         AD
+    5         03E         AE
+    6         —           AF  ← first new-format Chapter
+
+This is **ordinal correspondence only**. It does NOT establish identifier identity. In particular:
+
+    03A ≠ 03AA
+    03B ≠ 03AB
+    03C ≠ 03AC
+    03D ≠ 03AD
+    03E ≠ 03AE
+
+`03AA`–`03AE` are not historical aliases and are not physically used as current identifiers in this repository.
+
+Concrete chapters therefore use the two-letter format. Historical chapters retain their original legacy identifiers.
 
 ## 3. Current chapters
 
-Project-wide rules use the chapter pattern rather than hard-coding a single set of current chapter letters.
+Project-wide rules use the current two-letter Chapter Identifier Format rather than hard-coding a single set of current chapter letters.
 
 The concrete current chapter is determined by the active conversation and its corresponding handoff document.
+
+Legacy identifiers may appear in historical repository state and MUST be interpreted as historical identifiers, not as current-format identifiers.
 
 ## 4. Early warning
 
@@ -94,7 +135,7 @@ Checkpoint commits are not migration commits. They preserve working state while 
 
 The standard user migration command is:
 
-    Пора выполнять миграцию в чат [0-9]{2}[A-Z]
+    Пора выполнять миграцию в чат [0-9]{2}[A-Z]{2}
 
 This command explicitly requests migration to the specified receiving chapter. When it is used, follow the migration procedure in the conversation-handoff skill and the rules below.
 
@@ -130,12 +171,20 @@ Use one file per chapter:
 
     docs/handoffs/<specialization><chapter>-<short-name>.md
 
-For example:
+For current-format chapters, the chapter identifier uses `[0-9]{2}[A-Z]{2}`. Examples:
 
-    docs/handoffs/01A-JSX-Prototype.md
-    docs/handoffs/02B-Native-AIP-Plugin.md
+    docs/handoffs/01AA-JSX-Prototype.md
+    docs/handoffs/02AB-Native-AIP-Plugin.md
+    docs/handoffs/03AF-Architecture-Research.md
+    docs/handoffs/04AA-Project-Workshop.md
+
+Historical handoff files created under the legacy one-letter format remain unchanged, for example:
+
     docs/handoffs/03A-Architecture-Research.md
-    docs/handoffs/04A-Project-Workshop.md
+    docs/handoffs/03B-Architecture-Research.md
+    docs/handoffs/03C-Architecture-Research.md
+    docs/handoffs/03D-Architecture-Research.md
+    docs/handoffs/03E-Architecture-Research.md
 
 When a chapter is superseded, retain its handoff as historical project state.
 
