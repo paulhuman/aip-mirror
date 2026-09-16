@@ -13,13 +13,13 @@ Previous chapter:
 AIP Mirror — 03C — Architecture & Research
 
 Status:
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
-Continue the project-wide AI-instruction architecture research from 03C. The current focus is the **OVERRIDE Architecture Decision Pass**, now concentrated on authorization boundaries and precedence semantics. Structural refactoring remains deferred until the relevant semantics are sufficiently stable.
+Continue the project-wide AI-instruction architecture research from 03C. The current focus is the **OVERRIDE Architecture Decision Pass**, now concentrated on authorization boundaries, precedence semantics, and the boundary between eligibility, candidate semantics, and effective outcome. Structural refactoring remains deferred until the relevant semantics are sufficiently stable.
 
-The immediate unresolved boundary is whether precedence selects a governing policy-bearing candidate/rule or merely selects among already computed outcomes. The next step should continue the one-decision-at-a-time counterexample process rather than prematurely freezing the model.
+The candidate-level precedence model is now strongly supported by the counterexample pass, but its formal AD is still pending. The next chapter should continue the one-decision-at-a-time counterexample process, now concentrating on `prerequisite` and `dependency` semantics and the exact boundary of candidate eligibility versus effect evaluation.
 
 ## Completed
 
@@ -39,6 +39,31 @@ Bootstrap established the canonical starting state from 03C. The 03C checkpoint 
 - **OVERRIDE-04F — Specificity:** specificity may participate in conflict resolution only when an explicit precedence rule assigns it that role. Specificity must not create/grant/expand/strengthen authorization. If applicable precedence rules do not produce a unique result, the conflict remains `UNRESOLVED`.
 - **OVERRIDE-04G — Authority vs precedence:** authority level does not independently determine conflict precedence. Authority may participate in conflict resolution only when an explicit precedence rule assigns it that role. Authority establishes authorization standing; precedence determines which authorized outcome governs a conflict. Equal precedence remains unresolved unless another explicit applicable rule deterministically resolves it.
 - **OVERRIDE-04H — Precedence policy:** Model B is the baseline: precedence rules are ordinary policy inputs, not a universal fixed Core hierarchy. Core MUST NOT recursively invent higher-order precedence rules to resolve conflicts between precedence rules. Precedence policy itself must be established authority/policy and must not emerge from file layout, path depth, discovery order, or incidental processing order. If applicable resolution rules do not produce a unique deterministic result within the defined resolution boundary, Core MUST return `UNRESOLVED` rather than invent a winner.
+
+### Candidate-level precedence conclusions from the current pass
+
+The following conclusions were reached after the OVERRIDE-04H checkpoint and counterexample pass:
+
+- **Governing candidate is needed when there is a conflict.** Multiple sources producing the same outcome do not require a governing candidate; they may provide `MULTIPLE SUPPORT`.
+- **Eligibility precedes precedence.** Precedence receives only candidates that are already eligible. It cannot bypass applicability, activation, validity, authority, or other eligibility requirements.
+- **Precedence does not compute conditions.** Conditions/predicates are evaluated before a candidate can participate in precedence.
+- **Candidate-level precedence is the accepted working direction.** Precedence selects a governing policy-bearing decision source rather than selecting or combining bare outcome values.
+- **Precedence selects a decision source, not its interpretation.** A governing candidate carries its own semantic effect; precedence does not need to understand every possible effect type.
+- **Specificity and authority remain inputs only through explicit precedence policy.** Neither independently becomes a precedence mechanism.
+- **Semantic effect and effective outcome are distinct.** A candidate may have a semantic effect/contribution before precedence, while the effective outcome exists only after a governing candidate has been selected.
+- **Evaluation strategy is not yet an architectural requirement.** An implementation may compute candidate effects eagerly or lazily when semantically equivalent. Architecture should define semantic dependencies, not unnecessarily prescribe execution order.
+
+### Working vocabulary accepted in this pass
+
+- **Candidate:** an already eligible policy-bearing decision source that may participate in conflict resolution.
+- **Eligibility:** the determination that a candidate may participate in precedence/conflict resolution in the current context.
+- **Candidate effect / semantic contribution:** what a candidate semantically specifies if it governs; Core precedence does not need to enumerate every possible effect type.
+- **Governing candidate:** the eligible candidate selected by applicable explicit precedence to govern a conflict.
+- **Effective outcome:** the result derived from the governing candidate's semantic effect after conflict resolution.
+- **Predicate:** a logical test/evaluation input that may contribute to determining eligibility; it is not itself an authority or outcome.
+- **Condition:** a semantic condition whose evaluation may contribute to candidate eligibility; condition is not part of precedence semantics.
+- **Prerequisite:** intentionally not yet collapsed into `condition`; it may be a context prerequisite or a semantic dependency on another decision source.
+- **Dependency:** intentionally remains an underspecified relationship term until its semantic role is explicitly defined. It must not become a generic mechanism that silently absorbs unrelated concepts.
 
 ## Accepted working invariants from the current OVERRIDE pass
 
@@ -66,85 +91,107 @@ The following invariants are accepted as working invariants unless a later count
 20. **No recursive invention.** Core MUST NOT invent or recursively infer higher-order precedence solely to resolve a conflict between precedence rules.
 21. **Deterministic-or-unresolved.** If applicable precedence/resolution rules do not produce a unique deterministic result within the defined resolution boundary, Core MUST return `UNRESOLVED` rather than invent a winner.
 22. **Precedence cannot make an ineligible candidate eligible.** Precedence may resolve a conflict between eligible candidates, but it cannot make an otherwise unauthorized, inapplicable, inactive, or invalid candidate eligible for conflict resolution.
-23. **Precedence cannot create authority.** `Precedence MUST NOT create, grant, expand, or strengthen authorization.` This remains a working invariant pending the next candidate-level precedence decision.
-24. **Precedence acts only on eligible candidates.** `Precedence MAY select a governing outcome only among candidates that are already authorized, applicable, active, and valid.`
+23. **Precedence cannot create authority.** `Precedence MUST NOT create, grant, expand, or strengthen authorization.`
+24. **Precedence acts only on eligible candidates.** `Precedence MAY select a governing candidate only among candidates that are already authorized, applicable, active, and valid.`
 25. **Precedence cannot bypass eligibility.** `A precedence rule MUST NOT make an otherwise unauthorized, inapplicable, inactive, or invalid candidate eligible for conflict resolution.`
 26. **Conflict resolution does not mutate authorization.** `Resolving a policy conflict through precedence MUST NOT mutate the authorization status of the participating candidates.`
-27. **Outcome change is not authority mutation.** Selecting a governing candidate/outcome may change the effective policy result without changing the authorization standing of any participating candidate.
+27. **Outcome change is not authority mutation.** Selecting a governing candidate may change the effective policy result without changing the authorization standing of any participating candidate.
+28. **Precedence does not interpret effect types.** Precedence selects a governing candidate; it does not need outcome-specific semantics for every possible candidate effect.
+29. **Effective outcome follows governing candidate selection.** A candidate's semantic effect may be established independently of precedence, but the effective outcome is derived only after a governing candidate is selected.
+30. **Execution order is not semantic order by default.** The architecture does not require eager or lazy effect evaluation when either strategy preserves the same defined semantics.
 
-## Current precedence model
+## Current conceptual evaluation pipeline
 
-The current working pipeline is:
+The working conceptual pipeline is now:
 
 ```text
 Context
   ↓
-Applicability / Activation / Validity / Authority evaluation
+Candidate evaluation
+  ├─ Applicability
+  ├─ Activation
+  ├─ Validity
+  ├─ Authority
+  └─ Conditions / predicates / applicable prerequisites
   ↓
 Eligible candidates
   ↓
 Conflict detection
-  ↓
-Applicable explicit precedence rules
-  ↓
-Unique deterministic result?
-  ├─ YES → governing candidate/outcome → effective result
-  └─ NO  → UNRESOLVED
+  ├─ No conflict → no governing-candidate selection required
+  │                 → effective result from applicable candidate semantics
+  │
+  └─ Conflict
+       ↓
+   Applicable explicit precedence rules
+       ↓
+   Unique deterministic result?
+       ├─ YES → governing candidate
+       │          ↓
+       │       candidate effect / effect evaluation
+       │          ↓
+       │       effective outcome
+       │
+       └─ NO  → UNRESOLVED
 ```
 
 Important distinctions:
 
 - **Authority** answers whether a candidate has authorization standing to participate.
-- **Eligibility** captures the conditions required before precedence can consider a candidate, including authorization, applicability, activation, and validity.
+- **Eligibility** captures the requirements that must be satisfied before precedence can consider a candidate, including authorization, applicability, activation, validity, and relevant conditions/predicates/prerequisites.
 - **Precedence** resolves a conflict among eligible candidates only when an explicit applicable policy assigns it that role.
-- **Effective outcome** is the resulting governing policy effect; it must not be confused with authorization standing.
+- **Candidate effect** is the semantic contribution/effect carried by a policy-bearing candidate; it is not itself the governing result.
+- **Governing candidate** is selected only when a conflict requires a winner among eligible candidates.
+- **Effective outcome** is derived from the governing candidate's effect after conflict resolution.
 - A candidate that loses precedence remains authorized if it was authorized before conflict resolution; precedence does not revoke or rewrite that authorization.
 - A precedence rule is itself a policy input and therefore cannot gain authority merely by being closer in the repository, more specific by path, discovered first, or otherwise incidentally ordered.
+- Conditions and predicates may contribute to eligibility, but precedence does not evaluate them.
+- A prerequisite may be a context-level condition or may represent a semantic dependency on another decision source; the latter case remains an open semantic question.
+- `Dependency` is deliberately not yet a Core semantic category because its meaning depends on the relationship being represented.
+- An implementation may compute effects before or after candidate selection when the resulting semantics are equivalent; this is an execution-strategy question unless a concrete semantic dependency proves otherwise.
 
-## Current unresolved decision point
+## Current candidate-level precedence decision point
 
-### Precedence candidate semantics: outcome vs governing policy-bearing candidate
+The earlier outcome-vs-candidate question has been narrowed substantially by the counterexample pass.
 
-Two models are under consideration:
+**Working model — Candidate-level precedence**
 
-**Model A — Outcome-level precedence**
-
-Precedence selects among already computed outcomes such as `ALLOW` and `DENY`:
-
-```text
-Rule A → ALLOW
-Rule B → DENY
-        ↓
-    precedence
-        ↓
-      DENY
-```
-
-**Model B — Candidate/rule-level precedence**
-
-Precedence selects a governing eligible policy-bearing candidate/rule, whose already-established semantic outcome then governs:
+Precedence selects a governing eligible policy-bearing candidate:
 
 ```text
-Rule A → ALLOW
-Rule B → DENY
-        ↓
-    precedence
-        ↓
-   Rule B governs
-        ↓
-      DENY
+Candidate A → eligible → effect ALLOW
+Candidate B → eligible → effect DENY
+                  ↓
+              conflict
+                  ↓
+              precedence
+                  ↓
+           Candidate B governs
+                  ↓
+          effective outcome DENY
 ```
 
-The current discussion leans toward candidate/rule-level precedence because policy-bearing candidates contain more semantics than a bare outcome and because it keeps precedence expressed as a relation among decision sources rather than turning it into an `ALLOW/DENY` combining language. However, this is **not yet an accepted Architecture Decision**. Continue with counterexamples before freezing it.
+This model is currently the preferred semantic direction because:
 
-Potential terminology under consideration: `governing candidate` is intentionally broader than `governing rule` until it is established which policy-bearing entities can participate in conflict resolution.
+- precedence remains a relation among decision sources rather than a language over outcome values;
+- new effect types do not require extending precedence semantics;
+- candidate semantics can contain more information than a bare outcome;
+- eligibility remains a prerequisite to precedence;
+- authorization, precedence, and effective outcome remain distinct.
+
+This is still a **working model**, not yet a formal numbered Architecture Decision. The next chapter should test it further around prerequisites and decision-source dependencies before promotion.
 
 ## Open questions
 
-- Whether precedence selects governing policy-bearing candidates/rules or merely computed outcomes.
-- What exactly constitutes a `candidate` for precedence and whether the term should remain generic (`policy-bearing candidate`) rather than `RULE`-specific.
-- Formal semantics for invalid, ambiguous, inactive, expired, revoked, chained, and cyclic OVERRIDEs.
+- What exactly constitutes a `candidate` for precedence and whether `policy-bearing candidate` should remain the Core abstraction rather than `RULE`-specific terminology.
+- What exactly constitutes eligibility beyond applicability, activation, validity, and authority.
+- Where `conditions` and `predicates` end and other forms of semantic prerequisite begin.
+- How to distinguish **context prerequisites** from **decision prerequisites** without introducing unnecessary machinery.
+- Whether a prerequisite that depends on another decision source creates a dependency graph that affects eligibility evaluation.
+- What semantic roles `dependency` may represent; avoid making it an unrestricted catch-all relationship.
+- Whether decision prerequisites can create cycles and, if so, how cycles terminate as `UNRESOLVED` or otherwise under explicit semantics.
+- Whether effect evaluation can itself contain prerequisites/dependencies that are not eligibility requirements.
 - Whether `RESOLVE` is a TRACE event and its exact semantic boundary.
+- Formal semantics for invalid, ambiguous, inactive, expired, revoked, chained, and cyclic OVERRIDEs.
 - Final temporary OVERRIDE lifetime/expiration/revocation semantics and user-facing observability.
 - Which accepted working invariants should be promoted into numbered formal AD entries.
 - Final interaction among precedence, Applicability, Activation, Authority, Specificity, and OVERRIDE.
@@ -156,7 +203,7 @@ Potential terminology under consideration: `governing candidate` is intentionall
 
 The repository remains in the legacy/pre-refactor AI-instruction layout. No structural architecture refactor has been executed. `docs/PROJECT-INSTRUCTIONS.md` remains a legacy aggregate and must be semantically redistributed and verified before deletion.
 
-No implementation of an OVERRIDE engine, authorization engine, precedence engine, or TRACE subsystem has been started as part of this architecture pass.
+No implementation of an OVERRIDE engine, authorization engine, precedence engine, candidate evaluator, or TRACE subsystem has been started as part of this architecture pass.
 
 ## Current files
 
@@ -229,20 +276,23 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 ### Confirmed / observed
 
 - 03C is `HANDED_OFF`; 03B is `SUPERSEDED`; 03A is `SUPERSEDED`; the lifecycle chain is coherent for the current 03D chapter.
-- 03D was initialized from the 03C receiving checkpoint and remains `DRAFT`.
+- 03D was initialized from the 03C receiving checkpoint and has now been prepared as `READY_FOR_HANDOFF` to 03E.
 - No structural architecture refactor has been committed.
 - The authorization/precedence conclusions listed above were explicitly accepted during the 03D discussion as working architecture semantics.
-- The repository handoff document was read before update and the resulting file must be read back and verified after the write.
+- Candidate-level precedence, eligibility-before-precedence, and the distinction between candidate effect and effective outcome were explicitly accepted as the current working direction.
+- The repository handoff document was read before update and must be read back and verified after the write.
 
 ### Inferred
 
 - The evidence accumulated in 03C plus the focused 03D decision pass is sufficient to continue with targeted semantic counterexamples rather than broad exploratory research.
-- Candidate-level precedence is currently a promising model, but remains provisional until tested against cases where a policy-bearing candidate contains semantics beyond a simple `ALLOW/DENY` outcome.
+- Candidate-level precedence is currently the strongest working model, but remains provisional until prerequisite/decision-dependency cases are tested and the model is promoted to a formal AD.
 - Keeping authorization standing separate from governing/effective outcome is a strong architectural boundary and should be preserved unless a counterexample requires refinement.
+- Conditions/predicates naturally contribute to eligibility, while effect semantics belong to the candidate and effective outcome follows governing-candidate selection; the remaining difficult boundary is semantic prerequisites/dependencies.
 
 ### Assumed / unverified
 
-- Exact candidate semantics for precedence remain unverified.
+- Exact candidate semantics for all possible precedence participants remain unverified.
+- Exact semantics of decision prerequisites and dependencies remain unverified.
 - The final authority mechanism remains external/abstract by design, but its concrete integration contract is unverified.
 - The final TRACE schema and temporary OVERRIDE lifetime schema remain unverified.
 
@@ -252,30 +302,8 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 
 ## Last completed task
 
-Updated this 03D handoff in detail after the OVERRIDE-04H precedence-policy decision pass. The checkpoint now records the accepted authorization/precedence working invariants, the distinction between authorization standing and effective outcome, the deterministic-or-`UNRESOLVED` resolution boundary, and the next unresolved candidate-level precedence question.
+Completed the candidate-level precedence counterexample pass and established the current working vocabulary and semantic boundary: eligibility precedes precedence; precedence selects a governing policy-bearing candidate only for conflicts; candidate effect is distinct from effective outcome; and implementation evaluation order is not prescribed by the architecture unless semantics require it. The next unresolved area is the distinction between context conditions and prerequisites/dependencies on other decision sources.
 
 ## Immediate next task
 
-Continue the **Precedence Candidate Semantics** decision point: test **outcome-level precedence vs governing policy-bearing candidate/rule-level precedence** with concrete counterexamples. Establish what qualifies as a precedence candidate and whether `governing candidate` should remain the Core abstraction. Do not promote the provisional model to a formal AD until the counterexample pass is complete.
-
-After that, continue the remaining OVERRIDE semantics (invalid/ambiguous/inactive/chained/cyclic behavior, temporary lifecycle, TRACE `RESOLVE`) and then perform the Project-Agnosticity Check before structural refactoring.
-
-## Things not to redo
-
-- Do not recreate 03A or 03B architecture decisions from scratch.
-- Do not redesign the chapter/handoff model.
-- Do not recreate the 03C OVERRIDE counterexample pass unless a new semantic question requires it.
-- Do not treat specificity/path/depth as implicit override authority or precedence.
-- Do not treat authority level as implicit conflict precedence.
-- Do not treat temporary OVERRIDE as implicitly inferred from context.
-- Do not add `override.scope` without a new architecture decision.
-- Do not allow precedence to make an ineligible candidate eligible.
-- Do not allow precedence to create, grant, expand, or strengthen authorization.
-- Do not mutate authorization standing merely because a candidate loses a policy conflict through precedence.
-- Do not begin structural refactoring prematurely.
-- Do not begin native AIP implementation merely because architecture work continues.
-- Do not copy every browsed URL into the handoff; preserve only materially relevant references with Roles.
-
-## Recommended starting context for next chapter
-
-Start with this `DRAFT` and `docs/handoffs/03C-Architecture-Research.md`. The lifecycle/bootstrap procedure has already been applied. The current checkpoint includes the focused OVERRIDE authorization and precedence decisions through **OVERRIDE-04H**. Before substantive work, complete post-bootstrap/read-back verification against the repository state, then continue from the unresolved **Precedence Candidate Semantics** decision point rather than restarting earlier research.
+Continue in **03E — Architecture & Research** with a focused counterexample pass for **prerequisite and dependency semantics**. In particular, determine whether decision-source prerequisites belong to eligibility, how they interact with candidate-level precedence, and whether dependency graphs/cycles require explicit Core semantics. Do not promote candidate-level precedence to a formal AD until this boundary is sufficiently tested.
