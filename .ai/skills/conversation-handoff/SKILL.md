@@ -306,7 +306,7 @@ After the explicit user recovery command, the receiving chapter must:
 7. accept an already-correct `HANDED_OFF` previous handoff without creating a redundant transition;
 8. make only the minimum repository changes required for recovery;
 9. verify every changed file, the diff, and changed-file scope before committing;
-10. create only the recovery commit(s) actually required by the changes, using the commit-message rules and clearly identifying lifecycle recovery;
+10. create only the recovery commit(s) actually required by the changes, using the commit-message rules and clearly identifying the commit as lifecycle recovery;
 11. verify the resulting repository state and lifecycle pair;
 12. declare `RECOVERY = COMPLETE` only after those checks succeed;
 13. continue to the normal post-bootstrap consistency verification before declaring `BOOTSTRAP = COMPLETE` or beginning substantive work.
@@ -432,7 +432,7 @@ Checkpoint updates may be repeated throughout the chapter. A checkpoint should b
 
 When the user requests migration to the next chapter, for example:
 
-    Пора выполнять миграцию в чат 02B
+    Пора выполнять миграцию в чат 02AB
 
 finish the current work, update the current handoff, and move it from `DRAFT` to `READY_FOR_HANDOFF` only when the next chapter can continue without guessing.
 
