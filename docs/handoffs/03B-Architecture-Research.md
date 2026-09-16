@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03A — Architecture & Research
 
 Status:
-HANDED_OFF
+SUPERSEDED
 
 ## Handoff destination
 
