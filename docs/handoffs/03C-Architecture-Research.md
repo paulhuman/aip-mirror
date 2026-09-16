@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03B — Architecture & Research
 
 Status:
-HANDED_OFF
+SUPERSEDED
 
 ## Starting objective
 
