@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03B — Architecture & Research
 
 Status:
-READY_FOR_HANDOFF
+HANDED_OFF
 
 ## Starting objective
 
