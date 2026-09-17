@@ -26,7 +26,7 @@ Establish the durable handoff state for chapter 02A and migrate the Native AIP P
 - Established that every new chapter must immediately create its own `DRAFT` handoff and commit it without a separate user approval step.
 - Established the user checkpoint command `Пора обновить handoff` for repeated `DRAFT` checkpoint commits.
 - Established that checkpoint commits are not migration commits.
-- Established the migration command `Пора выполнять миграцию в чат XXY`.
+- Established the migration command `Пора выполнить миграцию в чат XXY`.
 - Established that the receiving chapter owns `READY_FOR_HANDOFF` → `HANDED_OFF`.
 - Established that a later chapter must mark the older `HANDED_OFF` handoff `SUPERSEDED` when the later handoff reaches `READY_FOR_HANDOFF`.
 - Added the static bootstrap procedure at `.ai/skills/conversation-handoff/BOOTSTRAP.md`.

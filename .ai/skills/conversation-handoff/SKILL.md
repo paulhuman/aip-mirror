@@ -265,7 +265,7 @@ Recovery is allowed only when all of these conditions are satisfied:
 6. the required recovery is unambiguous under the canonical lifecycle rules;
 7. the user explicitly authorizes recovery with the temporary compatibility command:
 
-       Пора восстановить handoff
+   Пора восстановить handoff
 
 If any condition is not satisfied, do not perform RECOVERY.
 
@@ -331,7 +331,7 @@ A lifecycle correction is appropriate when all of the following are true:
 6. the correction scope is limited to the identified lifecycle inconsistency and directly required audit/verification updates;
 7. the user explicitly authorizes the correction with:
 
-       Пора выполнить handoff lifecycle correction
+   Пора выполнить handoff lifecycle correction
 
 If any condition is false, CORRECTION MUST NOT be performed.
 
@@ -432,7 +432,7 @@ Checkpoint updates may be repeated throughout the chapter. A checkpoint should b
 
 When the user requests migration to the next chapter, for example:
 
-    Пора выполнять миграцию в чат 02AB
+    Пора выполнить миграцию в чат 02AB
 
 finish the current work, update the current handoff, and move it from `DRAFT` to `READY_FOR_HANDOFF` only when the next chapter can continue without guessing.
 

@@ -43,7 +43,7 @@ This migration checkpoint preserves the architectural reasoning and audit state 
 - Strengthened lifecycle/workflow wording so mandatory procedures use `must` intentionally and recommendations retain `should` where flexibility is intended.
 - Explicitly decided not to globally replace `should` or `may`; retain them where they intentionally express recommendations, permission, or uncertainty.
 - Confirmed standard checkpoint command: `Пора обновить handoff`.
-- Confirmed standard migration command: `Пора выполнять миграцию в чат [0-9]{2}[A-Z]`.
+- Confirmed standard migration command: `Пора выполнить миграцию в чат [0-9]{2}[A-Z]`.
 - New user requirement: whenever AI proposes changing a handoff, AI should explicitly tell the user which of those two commands is appropriate, so the required user action is immediately unambiguous. This should become canonical rule/workflow behavior, not merely a conversational convention.
 
 ## Current implementation state
@@ -154,9 +154,9 @@ Applicability, obligation level, precedence, ownership, and observability are se
 ### Handoff command semantics
 
 - `Пора обновить handoff` — update the current chapter's `DRAFT` checkpoint and remain in the current chapter.
-- `Пора выполнять миграцию в чат [0-9]{2}[A-Z]` — finalize the current handoff for migration and initiate the receiving chapter bootstrap.
+- `Пора выполнить миграцию в чат [0-9]{2}[A-Z]` — finalize the current handoff for migration and initiate the receiving chapter bootstrap.
 
-Whenever AI proposes a handoff change, future canonical guidance must make the required user command explicit. If only a checkpoint is needed, tell the user to issue `Пора обновить handoff`. If migration is needed, tell the user to issue `Пора выполнять миграцию в чат [0-9]{2}[A-Z]`, replacing the pattern with the concrete next chapter.
+Whenever AI proposes a handoff change, future canonical guidance must make the required user command explicit. If only a checkpoint is needed, tell the user to issue `Пора обновить handoff`. If migration is needed, tell the user to issue `Пора выполнить миграцию в чат [0-9]{2}[A-Z]`, replacing the pattern with the concrete next chapter.
 
 ### AI entry points
 

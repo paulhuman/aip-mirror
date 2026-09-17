@@ -135,7 +135,7 @@ Checkpoint commits are not migration commits. They preserve working state while 
 
 The standard user migration command is:
 
-    Пора выполнять миграцию в чат [0-9]{2}[A-Z]{2}
+    Пора выполнить миграцию в чат [0-9]{2}[A-Z]{2}
 
 This command explicitly requests migration to the specified receiving chapter. When it is used, follow the migration procedure in the conversation-handoff skill and the rules below.
 
@@ -332,7 +332,7 @@ Recovery is permitted only when **all** of the following conditions are true:
 6. The required recovery can be determined unambiguously from the canonical lifecycle rules.
 7. The user has explicitly authorized recovery with the temporary compatibility command:
 
-       Пора восстановить handoff
+   Пора восстановить handoff
 
 If any condition is false, **RECOVERY MUST NOT be performed**.
 
@@ -399,7 +399,7 @@ A lifecycle correction is appropriate when **all** of the following are true:
 6. The correction scope is limited to the identified lifecycle inconsistency and directly required audit/verification updates.
 7. The user explicitly authorizes the correction with:
 
-       Пора выполнить handoff lifecycle correction
+   Пора выполнить handoff lifecycle correction
 
 If any condition is false, **CORRECTION MUST NOT be performed**.
 
