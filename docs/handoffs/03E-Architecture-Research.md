@@ -13,7 +13,13 @@ Previous chapter:
 AIP Mirror — 03D — Architecture & Research
 
 Status:
-HANDED_OFF
+SUPERSEDED
+
+## Supersession
+
+This handoff was superseded when the successor chapter `03AF` reached `READY_FOR_HANDOFF` and was handed off to `03AG`.
+
+The historical research state below is retained unchanged for traceability.
 
 ## Current objective
 
@@ -130,7 +136,7 @@ The future review should determine whether the handoff mechanism, its bootstrap 
 
 - the closing chapter cannot accidentally assume receiving-side ownership;
 - the receiving chapter remains the authoritative creator of its own `DRAFT` handoff;
-- bootstrap instructions for a future chapter cannot be mistaken for execution in that chapter;
+- bootstrap instructions for a future chapter cannot be mistaken for execution in the receiving chapter;
 - repository state is used as the authoritative verification point rather than conversational memory;
 - repeated lifecycle/bootstrap failures become detectable earlier and are harder to reproduce.
 
@@ -173,8 +179,8 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 
 - 03D was prepared as `READY_FOR_HANDOFF` to 03E.
 - 03D explicitly accepted the candidate-level working direction, eligibility-before-precedence, candidate-effect/effective-outcome distinction, and implementation-order independence.
-- 03E is initialized as `DRAFT` from that checkpoint.
-- The closing chapter has created the receiving chapter's handoff in two observed migrations (03A → 03B and 03D → 03E), despite the canonical ownership rules forbidding that behavior.
+- 03E was initialized as `DRAFT` from that checkpoint.
+- The closing chapter created the receiving chapter's handoff in two observed migrations (03A → 03B and 03D → 03E), despite the canonical ownership rules forbidding that behavior.
 - The current project rules explicitly state that the closing chapter must not create or modify the receiving chapter's handoff and that only the receiving chapter may create its own initial `DRAFT` handoff.
 
 ### Inferred
