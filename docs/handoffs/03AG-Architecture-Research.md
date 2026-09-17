@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03AF — Architecture & Research
 
 Status:
-READY_FOR_HANDOFF
+HANDED_OFF
 
 ## Current objective
 
@@ -768,7 +768,7 @@ Do not formalize this pattern as a reusable skill/workflow yet.
 - The state/reason/origin/provenance/consumer-consequence separation may provide a cleaner semantic model than the proposed typed taxonomy.
 - Model B may preserve the semantic expressiveness of the U-1…U-10 cases while reducing semantic coupling, but this must be demonstrated rather than assumed.
 - `PROPAGATED` is likely an origin/mechanism dimension rather than a semantic subtype.
-- Explicit `subject` may be more important than additional semantic state types for distinguishing unresolved resolutions.
+- Explicit `subject` may be more important than additional semantic state types.
 - Conflict is a particularly strong stress case because it can occur with complete information and no missing evidence.
 
 ### Assumed / unverified
@@ -887,5 +887,3 @@ The primary discriminator remains:
 If yes, Model B remains viable for that case.
 
 If no, identify the precise semantic distinction that must become part of the state itself.
-
-Keep the burden of proof on adding semantic types, and keep the human as final decision-maker for any eventual architecture decision.
