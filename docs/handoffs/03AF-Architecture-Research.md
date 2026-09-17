@@ -19,11 +19,11 @@ DRAFT
 
 Continue the project-wide AI-instruction architecture research from 03E. The current focus is the semantic boundary between **prerequisites**, **dependencies**, **candidate eligibility**, **candidate effects**, and **candidate-level precedence**.
 
-The immediate task is a focused **Prerequisite / Dependency Semantics counterexample pass**. Establish the concrete semantic relationship before introducing any generic dependency mechanism.
+The immediate task was a focused **Prerequisite / Dependency Semantics counterexample pass**. The concrete semantic relationship was to be established before introducing any generic dependency mechanism.
 
 ## Completed
 
-Bootstrap has established this chapter from the 03E handoff. The 03E working model remains the starting point:
+Bootstrap established this chapter from the 03E handoff. The 03E working model remained the starting point:
 
 ```text
 eligibility
@@ -34,13 +34,43 @@ eligibility
   → effective outcome
 ```
 
-Candidate-level precedence remains a working direction, not yet a formal Architecture Decision.
+The prerequisite/dependency counterexample pass was extended through chains and cycles. The resulting working model is now:
+
+```text
+1. Relationship structure
+2. Semantic resolution
+3. Execution strategy
+```
+
+This separation is explicit: dependency relationships describe semantic structure; semantic resolution determines what those relationships mean and what result follows; execution strategy is an implementation concern and must not be allowed to create semantic meaning through incidental ordering.
+
+The chain/cycle pass established the following working observations:
+
+- An acyclic dependency chain can be resolved from an independent source when the relevant consumer semantics are defined.
+- A dependency predicate being `FALSE` does not by itself imply a particular consumer result such as `DENIED`; the consequence is defined by the consumer semantics.
+- `UNRESOLVED` at a dependency target does not automatically define the consumer result; propagation semantics remain a separate open question.
+- A cycle is a recursive relationship structure, not automatically an error and not automatically `UNRESOLVED`.
+- A cycle may admit self-consistent states, but the existence of such a fixed point does not itself specify a rule that selects it.
+- Incidental execution order cannot resolve a semantic cycle.
+- If cyclic dependencies are to be supported, explicit cycle-resolution/termination semantics would be required. Whether Core needs such semantics remains open.
+
+Candidate-level precedence was also tested against dependency targets. The working distinction remains:
+
+```text
+dependency target
+        ≠
+consumer role
+        ≠
+precedence
+```
+
+Precedence may change a dependency result when the dependency explicitly targets a semantic result that precedence changes (for example, an effective outcome), while a dependency targeting a candidate effect or authority standing can remain unchanged. Precedence does not become a generic dependency resolver.
 
 ## Current implementation state
 
 The repository remains in the legacy/pre-refactor AI-instruction layout. No structural architecture refactor has been executed.
 
-No implementation of a generic dependency engine, precedence engine, candidate evaluator, authorization engine, or TRACE subsystem has been started as part of this research pass.
+No implementation of a generic dependency engine, precedence engine, authorization engine, candidate evaluator, or TRACE subsystem has been started as part of this research pass.
 
 ## Decisions / working invariants carried forward
 
@@ -58,50 +88,122 @@ No implementation of a generic dependency engine, precedence engine, candidate e
 - Execution order is not semantic order by default; architecture should not prescribe eager versus lazy evaluation without a semantic reason.
 - `Dependency` is intentionally not yet a generic Core semantic category.
 
-## Prerequisite / dependency counterexample scope
+## Prerequisite / dependency semantic boundary
 
-Test the following distinctions one at a time:
-
-1. **Context prerequisites** — requirements about the current context that can plausibly be evaluated as predicates/conditions contributing to eligibility.
-2. **Decision-source prerequisites** — requirements whose truth depends on another policy-bearing decision source.
-3. **Eligibility requirements** — requirements that must hold before a candidate may participate in conflict resolution.
-4. **Candidate-effect dependencies** — relationships needed to evaluate or realize a candidate's effect but not necessarily required for the candidate to be eligible.
-5. **Dependency graphs and cycles** — determine whether decision-source relationships form semantic graphs and what explicit semantics, if any, are required for cycles.
-6. **Candidate-level precedence interaction** — determine whether dependencies change the meaning or ordering of eligibility, conflict detection, precedence, governing candidate selection, or effect evaluation.
-
-### Starting counterexample
+The research now uses the following working model:
 
 ```text
-Candidate A:
-  prerequisite = B must authorize X
-  effect = TRANSFORM(X)
+DEPENDENCY TARGET
+    authority standing
+    candidate-level result / candidate effect
+    effective decision result
 
-Candidate B:
-  effect = ALLOW
+        ×
+
+CONSUMER ROLE
+    eligibility-related requirement
+    effect/effective-outcome evaluation
 ```
 
-Ask separately:
+This is a working semantic model, not yet a formal Architecture Decision. Not every combination is assumed to be valid.
 
-- Is B's decision required to establish A's eligibility?
-- Is B required only to evaluate A's effect?
-- Is the relationship itself a distinct semantic dependency rather than an eligibility predicate?
-- What happens if A and B both participate in a conflict-resolution relationship?
-- What happens if B depends on A?
-- What happens if A and B form a cycle?
+A **decision-source relationship** is therefore not assumed to be an eligibility prerequisite merely because it references another decision source. The relationship references a semantic result/property of the source; the **consumer role** determines where and how that referenced result is used.
 
-Do not infer an implementation engine from the existence of these relationships. First determine whether the architecture actually needs a first-class dependency semantic, and if so, exactly what it means.
+A dependency may connect two decision/pipeline instances without becoming a universal pipeline stage.
+
+## Chain and cycle semantics — current working conclusions
+
+### Chain
+
+For a chain such as:
+
+```text
+A → B → C
+```
+
+what propagates is not simply `C result → B result → A result`. The semantic structure is better represented as:
+
+```text
+C semantic result
+     ↓
+relationship predicate
+     ↓
+B consumer semantics
+     ↓
+B semantic result
+     ↓
+relationship predicate
+     ↓
+A consumer semantics
+```
+
+The exact consumer consequence of `TRUE`, `FALSE`, or `UNRESOLVED` remains relationship/consumer-specific.
+
+### Cycle
+
+For a cycle such as:
+
+```text
+A → B → A
+```
+
+there is no independent semantic source inside the cycle. The cycle therefore requires explicit semantics if it is to be resolved.
+
+Working rule:
+
+```text
+cycle
+  ≠ automatically invalid
+  ≠ automatically UNRESOLVED
+  → requires explicit resolution/termination semantics if supported
+```
+
+Execution order must not be used as an implicit cycle-breaking mechanism.
+
+### Precedence interaction
+
+If a dependency targets `B.effective_outcome`, precedence may change the dependency result by changing B's effective outcome. If it targets `B.candidate_effect`, precedence may leave that target unchanged even when B loses precedence. Therefore dependency target must remain distinct from both consumer role and precedence.
+
+## Completed counterexample pass
+
+The following four cases were tested with resolved-positive, resolved-negative, and `UNRESOLVED` states:
+
+1. **Eligibility chain** — `A eligibility → B → C`.
+2. **Eligibility cycle** — `A eligibility → B eligibility → A eligibility`.
+3. **Effect chain** — `A.effect → B.effective_outcome → C.effective_outcome`.
+4. **Effect cycle** — `A.effect → B.effective_outcome → A.effective_outcome`.
+
+The pass did not justify introducing a generic dependency engine or a universal propagation mechanism.
+
+## Candidate-level precedence status
+
+Candidate-level precedence remains a working direction, not yet a formal Architecture Decision.
+
+The counterexamples support keeping precedence separate from dependency semantics:
+
+```text
+eligibility
+  → conflict detection
+  → explicit precedence
+  → governing candidate
+  → candidate effect
+  → effective outcome
+```
+
+A dependency may reference a result produced within or around this process, but its presence does not by itself redefine the pipeline or grant precedence permission to bypass eligibility.
 
 ## Open questions
 
 - Which prerequisites are context predicates/conditions and therefore part of eligibility?
 - Which prerequisites are decision-source relationships?
-- Whether decision-source prerequisites are eligibility requirements, distinct dependencies, or can occupy more than one semantic role depending on the relationship.
+- Which combinations of dependency target and consumer role should Core permit?
 - Whether a dependency may be evaluated without making eligibility equivalent to hidden full candidate/effect evaluation.
 - Whether candidate effects may contain dependencies that do not affect eligibility.
+- Exact semantics for `UNRESOLVED` dependency predicates and their consumer consequences.
 - Whether dependency graphs have semantic ordering, implementation ordering, or both.
-- Whether cycles are possible, and whether an explicit cycle rule is required (for example, termination as `UNRESOLVED`) or whether some cycles are structurally invalid.
-- Whether candidate-level precedence remains stable when eligible candidates depend on other decision sources.
-- Whether a governing candidate can depend on a candidate that loses precedence, and what semantic consequences follow.
+- Whether cycles should be supported at all in Core semantics.
+- If cycles are supported, what explicit resolution/termination semantics should apply.
+- Whether a governing candidate can depend on a candidate that loses precedence, and what semantic consequences follow for different dependency targets.
 - Whether dependency relationships themselves can conflict and, if so, whether they require precedence or a separate resolution boundary.
 - Candidate-level precedence remains unformalized until these questions are sufficiently tested.
 
@@ -139,7 +241,7 @@ Conflict detection
        └─ NO  → UNRESOLVED
 ```
 
-This pipeline must be refined if counterexamples demonstrate that a decision-source dependency crosses the current eligibility/effect boundary.
+This pipeline remains a working direction. It must be refined if future counterexamples demonstrate that a decision-source dependency crosses the current eligibility/effect boundary in a way that cannot be represented by an explicit relationship plus consumer semantics.
 
 ## Relevant files
 
@@ -157,6 +259,10 @@ This pipeline must be refined if counterexamples demonstrate that a decision-sou
 - `.ai/rules/workflow.md`
 - `.ai/rules/repository.md`
 - `.ai/skills/deep-understanding/SKILL.md`
+
+### Persistent research
+
+- `docs/architecture/prerequisite-dependency-semantics.md`
 
 ## Important constraints
 
@@ -179,17 +285,20 @@ This pipeline must be refined if counterexamples demonstrate that a decision-sou
 - 03E explicitly left prerequisite/dependency semantics open.
 - The candidate-level precedence model is a supported working direction, but is not yet a formal numbered Architecture Decision.
 - Current-format chapter identity is `03AF`; `03AA`–`03AE` are not physically used. `03AF` is the first physically created current-format Chapter for specialization 03. Its relationship to 03A–03E is ordinal correspondence only, not identifier identity.
+- The chains/cycles counterexample pass was completed for eligibility and effect chains/cycles, including resolved-positive, resolved-negative, and `UNRESOLVED` states.
 
 ### Inferred
 
-- Context prerequisites likely fit naturally within eligibility, while decision-source prerequisites may require a distinct semantic relationship.
+- Context prerequisites likely fit naturally within eligibility, while decision-source prerequisites require an explicit relationship whose consumer role must be identified rather than assumed.
 - The key architectural boundary is whether a dependency is a requirement for candidate participation or a relationship needed only to evaluate a candidate's effect.
+- Cycles introduce a distinct semantic problem because they lack an independent source within the recursive relationship structure.
 
 ### Assumed / unverified
 
-- Exact semantics of decision-source prerequisites remain unverified.
-- Dependency graph semantics and cycle handling remain unverified.
-- The effect of dependencies on candidate-level precedence remains unverified.
+- Exact semantics of `UNRESOLVED` dependency predicates and consumer consequences remain unverified.
+- Whether cycles should be supported in Core remains unverified.
+- Exact dependency graph semantics remain unverified.
+- The final effect of dependencies on candidate-level precedence remains unverified.
 
 ### Open
 
@@ -199,18 +308,29 @@ This pipeline must be refined if counterexamples demonstrate that a decision-sou
 
 ## Last completed task
 
-03E completed the handoff checkpoint after the candidate-level precedence counterexample pass and identified prerequisite/dependency semantics as the next unresolved boundary.
+Completed the focused chains-and-cycles counterexample pass for prerequisite/dependency semantics. The working separation `relationship structure → semantic resolution → execution strategy` was confirmed, and the pass did not justify a generic dependency engine or universal propagation semantics.
 
 ## Immediate next task
 
-Run the **Prerequisite / Dependency Semantics counterexample pass**, beginning with context prerequisites versus decision-source prerequisites and then testing candidate-effect dependencies, dependency graphs/cycles, and interactions with candidate-level precedence.
+Proceed to the next research step after the chains/cycles checkpoint. The exact next step is intentionally left open for the next discussion rather than precommitting the architecture to a particular dependency/cycle mechanism.
 
 ## Things not to redo
 
 - Do not restart broad OVERRIDE research unless a new counterexample requires it.
 - Do not re-derive the established authorization boundary decisions from 03D/03E unless the new prerequisite/dependency evidence directly challenges them.
 - Do not redesign the handoff mechanism as part of this semantic research task; the recurring handoff ownership problem is preserved as a separate future architecture/process task.
+- Do not repeat the completed chains/cycles counterexample pass unless new evidence directly challenges its conclusions.
 
 ## Recommended starting context for next chapter
 
-Begin with the smallest counterexample that distinguishes a context prerequisite from a decision-source prerequisite. For each case, record whether the relationship affects eligibility, effect evaluation, or both; only then test dependency chains and cycles. Preserve the working direction `eligibility → conflict detection → explicit precedence → governing candidate → candidate effect → effective outcome` unless a concrete counterexample demonstrates that the boundary must change.
+Use the current working model as the baseline:
+
+```text
+Relationship structure
+        ↓
+Semantic resolution
+        ↓
+Execution strategy
+```
+
+Keep dependency target, consumer role, and precedence as separate semantic dimensions. Continue with the smallest counterexample that can distinguish the next unresolved boundary, and preserve the working direction `eligibility → conflict detection → explicit precedence → governing candidate → candidate effect → effective outcome` unless a concrete counterexample demonstrates that the boundary must change.
