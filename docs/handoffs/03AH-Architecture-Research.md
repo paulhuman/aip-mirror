@@ -50,21 +50,61 @@ U-3 → Model B survives preliminarily
 U-4 → Model B survives preliminarily
 U-5 → Model B survives preliminarily
 U-6 → Model B survives preliminarily, but pressure increases
+U-7 → Model B survives preliminarily; consumer role is contextual/semantic input, not yet a demonstrated unresolved subtype
 ```
 
-The research refined the semantic representation around explicit subject identification:
+### U-7 — Dependency Predicate / propagated effective-outcome unresolved
+
+Exact case supplied by Qwen:
 
 ```text
-subject
-state
-cause
-origin / propagation
-source / provenance
-relation / context
-consumer consequence
+Candidate I:
+  dependency: requires J.effective_outcome == ALLOW
+
+Candidate J:
+  effective_outcome: UNRESOLVED (see U-6)
 ```
 
-The current working view keeps semantic state distinct from cause, propagation mechanism, provenance, and consumer consequence.
+The unresolved subject is the **dependency predicate** for I, specifically the relation `I → J.effective_outcome`. Its unresolvedness is propagated from J's unresolved effective outcome.
+
+Model A can encode this as a typed unresolved subtype, e.g. `UNRESOLVED{dependency}`.
+
+Model B can encode the same semantic information without changing the state vocabulary:
+
+```text
+subject     = dependency predicate(I → J.effective_outcome)
+state       = UNRESOLVED
+cause       = propagated unresolvedness from dependency target
+origin      = propagated
+source      = J.effective_outcome
+relation    = dependency / requires == ALLOW
+```
+
+The important observation is that U-7 contains more than the scalar state: the dependency relation and provenance identify what is unresolved and where the unresolvedness came from. Removing that relation would lose semantic information, but that does not show that the information must be encoded as a subtype of `UNRESOLVED`; it can remain an orthogonal relation/context field.
+
+The consumer-role distinction is also real but does not, by itself, force a typed unresolved state. The same unresolved predicate may be consumed by different semantic rules, for example an eligibility requirement versus effect evaluation, and the consuming rule may legitimately produce different consequences. This is a difference in **consumer semantics/context**, not necessarily a difference in the state of the predicate itself.
+
+Therefore the hidden-subtype test is not yet defeated: two instances can both expose `state = UNRESOLVED` while explicit relation, provenance, and consumer context preserve the information needed for different downstream behavior.
+
+U-7 does, however, strengthen the requirement that the architecture must not collapse these dimensions into a bare boolean-like `UNRESOLVED`. In particular, propagated unresolvedness should preserve its dependency source and relation, and downstream consumers must not infer a universal consequence such as `FALSE` or `DENIED` from the propagated state alone.
+
+A further useful distinction is:
+
+```text
+J.effective_outcome
+    state  = UNRESOLVED
+    cause  = conflict
+
+        ↓ propagation through dependency
+
+I.dependency_predicate
+    state  = UNRESOLVED
+    cause  = propagated unresolvedness
+    source = J.effective_outcome
+    relation = requires J.effective_outcome == ALLOW
+```
+
+The root cause (`conflict`) and the local propagation cause (`dependency target unresolved`) should remain distinguishable through provenance/causal context rather than being flattened into a new semantic state subtype.
 
 ## Current implementation state
 
@@ -94,12 +134,14 @@ Working invariants carried forward from 03AG:
 - Candidate-level precedence remains a working direction, not a formal Architecture Decision.
 - Qwen's typed `UNRESOLVED` taxonomy remains a research hypothesis, not adopted architecture.
 - The burden of proof for a semantic subtype is a demonstrated downstream semantic requirement that the orthogonal representation cannot express correctly.
+- U-7 does not yet demonstrate that consumer role must become an `UNRESOLVED` subtype; consumer role can remain explicit semantic context for the consuming rule.
+- Propagation from a dependency target must preserve the dependency relation and provenance; propagation is not itself a new semantic state.
 
 ## Open questions
 
-- Does U-7 demonstrate a semantic distinction that Model B cannot preserve?
-- Does a dependency predicate receiving a propagated unresolved effective outcome require a typed semantic state?
-- Which dimensions of U-7 are semantic state versus cause, origin, provenance, relation/context, or consumer consequence?
+- Does U-8 or a later nested/mixed case demonstrate a semantic distinction that Model B cannot preserve?
+- Does a dependency predicate receiving a propagated unresolved effective outcome ever require a typed semantic state rather than explicit relation/context?
+- Which dimensions of later cases are semantic state versus cause, origin, provenance, dependency relation, conflict context, or consumer consequence?
 - Does propagation depth carry semantic meaning or only diagnostic value?
 - Do nested or mixed unresolved cases require additional semantic distinctions?
 - Can conflict and cycle context remain orthogonal without becoming hidden semantic subtypes?
@@ -152,42 +194,44 @@ Working invariants carried forward from 03AG:
 - 03AG is the immediate `READY_FOR_HANDOFF` source for this receiving chapter.
 - 03AF is already `SUPERSEDED` and is the previous same-specialization predecessor of 03AG.
 - No U-1 through U-6 case has demonstrated a semantic requirement that Model B cannot preserve.
-- The exact U-7 case has not yet been supplied in this chapter.
+- The exact U-7 case was supplied by Qwen and analyzed in this chapter.
+- U-7 preserves the distinction between the unresolved dependency predicate and the unresolved dependency target through explicit subject/source/relation context.
+- U-7's different downstream consequences can be expressed by consumer semantics without requiring different unresolved state values.
 
 ### Inferred
 
 - Explicit subject identification may be more important than adding semantic state types.
-- Model B may preserve semantic expressiveness for U-7, but this must be tested against the exact counterexample.
-- `PROPAGATED` likely describes origin/mechanism rather than semantic state.
+- Model B preserves semantic expressiveness for the supplied U-7 case.
+- `PROPAGATED` describes origin/mechanism rather than semantic state.
+- Root cause and local propagation cause should remain distinguishable through causal/provenance context.
 
 ### Assumed / unverified
 
-- Whether U-7 requires a typed unresolved state.
+- Whether U-7's orthogonal representation remains sufficient under more deeply nested propagation.
 - Whether propagation depth has semantic meaning.
-- Whether a dependency predicate can consume propagated unresolved information without requiring additional semantic state.
-- Whether orthogonal metadata remains sufficient for all downstream consumer behavior in U-7.
+- Whether later cases create a downstream semantic requirement that cannot be expressed by explicit context/relation.
+- Whether orthogonal metadata remains sufficient for all downstream consumer behavior in the complete U-1…U-10 set.
 
 ### Open
 
-- Exact Qwen U-7 fragment and its subsequent analysis.
 - U-8 through U-10 comparison after U-7, if still warranted by evidence.
 - Mixed/nested unresolved cases.
 - Final disposition of Model A vs Model B.
 
 ## Last completed task
 
-03AG completed U-6 — Effective Outcome / Conflict Without Resolution.
+03AH analyzed U-7 — Dependency Predicate / propagated effective-outcome unresolved.
 
 ## Immediate next task
 
-Receive the exact Qwen U-7 fragment from the user, then analyze **U-7 — Dependency Predicate / propagated effective-outcome unresolved** under Model A and Model B.
+Obtain the exact Qwen fragment for **U-8**, if further testing is warranted, and apply the same Model A vs Model B discriminator without reconstructing the case from memory.
 
-Do not infer the contents of U-7 before receiving the fragment.
+Do not infer the contents of U-8 before receiving the fragment.
 
 ## Things not to redo
 
 - Do not restart the broad UNRESOLVED research pass.
-- Do not redo U-1 through U-6 without a specific evidentiary reason.
+- Do not redo U-1 through U-7 without a specific evidentiary reason.
 - Do not redo the earlier dependency chain/cycle counterexample pass.
 - Do not restart OVERRIDE research.
 - Do not formalize the Qwen taxonomy.
@@ -197,7 +241,7 @@ Do not infer the contents of U-7 before receiving the fragment.
 
 ## Recommended starting context for next chapter
 
-Use this semantic frame when the U-7 fragment arrives:
+Use this semantic frame when the next fragment arrives:
 
 ```text
 SEMANTIC STATE
