@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03AH — Architecture & Research
 
 Status:
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
@@ -778,13 +778,15 @@ Working invariants carried forward and consolidated by Synthesis-1 and C-1.5-T1:
 
 ## Last completed task
 
-**C-1.6-T2 — `dependency relation`**.
+**C-1.6-T4 — `consumer role`**.
 
-Result: no independent semantic necessity was demonstrated for `dependency relation` as an internal Resolution Context axis. It is currently classified as semantically necessary relationship information / graph-edge semantics rather than an intrinsic Resolution field.
+Result: no independent semantic necessity was demonstrated for `consumer role` as an internal Resolution Context axis. It is currently classified as evaluation-context information / consumer-policy input, with possible relationship-level ownership between Resolution and Consumer remaining unresolved.
+
+C-1.6-T5 has been commissioned; its Qwen response is pending.
 
 ## Immediate next task
 
-Continue **C-1.6 — remaining-context minimality** with **C-1.6-T3 — `dependency target`**.
+Continue **C-1.6 — remaining-context minimality** with **C-1.6-T5 — `applicability / applicability condition`**.
 
 Current provisional candidate set:
 
@@ -856,6 +858,203 @@ Primary discriminator for future adversarial tests:
 > Can two instances that both expose `UNRESOLVED` have the same currently represented orthogonal context yet still require different downstream semantic behavior?
 
 If yes, identify the missing intrinsic semantic distinction and test whether that distinction genuinely belongs in state rather than context/rules. If no, Model B remains viable for that case, while the architecture still must solve context preservation and rule/policy organization.
+
+
+
+### C-1.6-T3 — `dependency target`
+
+C-1.6-T3 tested whether `dependency target` has independent semantic necessity as an internal Resolution Context attribute, or whether its semantics belong to the relationship between Resolution instances.
+
+Qwen returned:
+
+```
+B — no independent semantic necessity demonstrated
+(as an internal Resolution Context attribute)
+```
+
+No minimal counterexample was found in which changing only `dependency target` required different downstream semantic behavior that could not be expressed through the relation, target Resolution semantics, or consumer policy.
+
+Working classification:
+
+```
+dependency target
+→ semantically necessary relationship information
+→ relationship-level / graph-edge semantics
+→ not an independent internal Resolution Context axis
+```
+
+Important qualification:
+
+```
+semantic necessity of relationship information
+≠
+necessity to store it inside Resolution
+```
+
+The result does not establish a final graph architecture and does not prove that target information can never be denormalized for implementation reasons. It establishes only that independent semantic ownership inside the source Resolution was not demonstrated.
+
+### C-1.6-T3 semantic ownership refinement
+
+A useful distinction emerged during review:
+
+```
+target identity
+≠
+independent Resolution property
+```
+
+but:
+
+```
+target identity
+=
+semantically significant parameter of the Relation
+```
+
+For example:
+
+```
+A ──depends_on──▶ B
+```
+
+and:
+
+```
+A ──depends_on──▶ C
+```
+
+are different relations even when source and relation type are otherwise equal. The difference belongs to relationship semantics, not to an intrinsic target field of the source Resolution.
+
+This remains a provisional semantic classification, not an Architecture Decision.
+
+### C-1.6-T4 — `consumer role`
+
+C-1.6-T4 tested whether `consumer role` has independent semantic necessity as an internal Resolution Context axis, or whether it belongs to evaluation/consumer context.
+
+Qwen returned:
+
+```
+B — no independent semantic necessity demonstrated
+(as an internal Resolution Context axis)
+```
+
+No minimal counterexample was found.
+
+The strongest attacks were the same-Resolution/different-consumer and multi-consumer cases. A single Resolution can be evaluated by multiple consumers with different roles without changing the Resolution's own semantic state. Therefore a single intrinsic `consumer role` field creates an ownership ambiguity.
+
+Working classification:
+
+```
+consumer role
+→ evaluation-context information
+→ consumer-policy input
+→ possibly relationship-level semantics between Resolution and Consumer
+```
+
+The exact ownership boundary between Consumer, Evaluation Context, and a possible Consumer-Resolution Relation remains unresolved. The test does NOT establish that `consumer role` must be implemented as a graph edge.
+
+### C-1.6-T4 semantic boundary
+
+T4 reinforces:
+
+```
+Resolution semantics
+    ≠
+evaluation context
+    ≠
+consumer policy
+    ≠
+consumer consequence
+```
+
+A useful provisional model is:
+
+```
+Resolution
+    │
+    ▼
+Evaluation Context
+    ├── consumer
+    ├── role
+    └── policy
+    │
+    ▼
+consumer consequence
+    │
+    ▼
+effective outcome
+```
+
+This is a research model only and does not establish a final implementation architecture.
+
+### C-1.6-T5 — `applicability / applicability condition`
+
+T5 has been commissioned as the next adversarial test. The Qwen response is pending.
+
+Research question:
+
+> Is `applicability condition` independently necessary semantic information belonging to the Resolution itself, or can applicability be represented as evaluation context, consumer policy, relationship semantics, eligibility logic, authority/authorization logic, external-context predicates, or another semantic level without loss of meaning?
+
+The test must distinguish:
+
+```
+applicability
+eligibility
+authority
+authorization
+consumer role
+consumer policy
+```
+
+and search specifically for the smallest counterexample showing semantic information loss if applicability condition is not an intrinsic Resolution Context axis.
+
+Required attack areas:
+
+- applicability vs eligibility;
+- applicability vs consumer role;
+- applicability vs consumer policy;
+- external context;
+- conditional applicability;
+- subject-specific applicability;
+- temporal applicability;
+- applicability vs authority/authorization;
+- applicability vs eligibility pipeline position;
+- reconstructability;
+- multi-consumer / multi-subject applicability;
+- definition-level ownership.
+
+No result has been adopted yet. No Architecture Decision has been made.
+
+### C-1.6 interim candidate map after T4
+
+Current provisional semantic map:
+
+```
+Resolution Context
+├── subject
+├── state
+├── cause / reason
+└── conflict / cycle context
+
+Relation Context / relationship semantics
+├── source
+├── target
+├── relation_type
+└── ...
+
+Evaluation / Consumer Context
+├── consumer
+├── consumer role
+├── policy
+└── ...
+
+Derived consumer result
+└── consumer consequence
+```
+
+This map is intentionally provisional. It does not establish that every remaining Resolution Context element is independently necessary, nor that every relationship must be implemented as a graph edge.
+
+The current research question is increasingly about semantic ownership and minimumity rather than simply collecting fields.
 
 ## C-1 research checkpoint
 
