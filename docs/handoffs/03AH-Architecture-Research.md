@@ -54,7 +54,6 @@ reason / source / propagation / conflict / cycle
 | U-9 | Search for the smallest semantic-information-loss counterexample | No counterexample found | For the tested distinctions, Model B preserved the necessary information when sufficient context/graph/rules were available. This does not prove universal superiority. |
 | U-10 | Combinatorial growth across cause × consumer role × dependency target | Neither model wins by simple counting | Complexity can accumulate in Model A's taxonomy or in Model B's rules/policies. The architectural question is where complexity is intentionally located and structured. |
 
-
 ### C-1.4 — `origin`
 
 C-1.4 tested whether `origin` is independently necessary as a Resolution Context axis, or whether its required information can be expressed through existing context such as cause, provenance, and dependency relation.
@@ -101,7 +100,7 @@ This wording is intentionally provisional because C-1 has not yet established th
 
 ### C-1.5 — `provenance`
 
-C-1.5 tests whether **`provenance` is independently necessary** as a Resolution Context axis, or whether every semantically required distinction can be reconstructed from the other retained context.
+C-1.5 tested whether **`provenance` is independently necessary** as a Resolution Context axis, or whether every semantically required distinction can be reconstructed from the other retained context.
 
 Adversarial question:
 
@@ -109,11 +108,11 @@ Adversarial question:
 
 ### C-1.5-T1 — semantic-necessity counterexample
 
-The primary test is intentionally symmetric with C-1.4-T1:
+The primary test was intentionally symmetric with C-1.4-T1:
 
 > Find a minimal counterexample in which two Resolution instances have the same currently retained context except for `provenance`, and the difference in provenance produces different required downstream semantic behavior.
 
-The test should hold the following dimensions constant unless the counterexample specifically demonstrates that one of them cannot be held constant:
+The test held the following dimensions constant unless a proposed counterexample specifically demonstrated that one could not be held constant:
 
 ```text
 subject
@@ -125,15 +124,15 @@ consumer role
 consumer consequence inputs
 ```
 
-The only intended discriminator is:
+The intended discriminator was only:
 
 ```text
 provenance
 ```
 
-The burden of proof is **semantic necessity**, not observability.
+The burden of proof was **semantic necessity**, not observability.
 
-The following do **not** establish independent necessity by themselves:
+The following were explicitly rejected as insufficient on their own:
 
 - diagnostic usefulness;
 - logging or tracing convenience;
@@ -143,43 +142,93 @@ The following do **not** establish independent necessity by themselves:
 - easier human inspection;
 - easier AI reasoning.
 
-A valid counterexample must show that changing only provenance requires a **different downstream semantic rule, eligibility result, candidate effect, effective outcome, authority consequence, precedence consequence, or other architecture-level semantic behavior**.
+A valid counterexample had to show that changing only provenance requires a **different downstream semantic rule, eligibility result, candidate effect, effective outcome, authority consequence, precedence consequence, or other architecture-level semantic behavior**.
 
-If no such counterexample can be constructed, the bounded result should be:
+#### C-1.5-T1 independent-review result
+
+Qwen 05AB returned:
+
+```text
+B — No counterexample found
+
+No minimal counterexample demonstrating independent semantic necessity
+of provenance was found.
+```
+
+Three principal attack directions were executed:
+
+1. **Source-sensitive semantics** — attempted to make different semantic sources require different downstream behavior.
+2. **Consumer-policy semantics** — attempted to make a consumer branch solely on provenance while all other context remained equal.
+3. **Dependency reconstruction** — attempted to identify information in provenance that could not be reconstructed from subject, cause, dependency relation, dependency target, and consumer role.
+
+The reviewed counterexamples were rejected for the following reasons:
+
+- **Authority-based routing:** the proposed distinction collapsed into authority/trust level rather than independent provenance semantics.
+- **Explicit vs implicit authorization:** the proposed distinction collapsed into authority consequence / authority level.
+- **Mutable vs immutable source:** the distinction was a property of the dependency target, not an independent provenance fact.
+- **Same-source re-validation:** this introduced a new policy not currently defined by the architecture and therefore could not serve as evidence for an existing semantic requirement.
+- **Override eligibility by establisher:** the proposed distinction required additional authority/precedence rules; provenance alone did not establish the different behavior.
+
+The recurring result was:
 
 ```text
 provenance
-→ not demonstrated as an independent semantic Context axis
-→ candidate for derived/reconstructable information
-→ retained only where required to preserve the relations/context from which it can be reconstructed
+    ↓
+attempted downstream semantic distinction
+    ↓
+either already represented by another context field,
+or requires a new semantic policy,
+or contains hidden information in a supposedly fixed field
 ```
 
-That result would remain provisional and subject to later falsification, just as with `origin`.
+Qwen also identified several remaining areas where future architecture could change the result:
 
-### C-1.5-T1 review protocol
+1. future source-dependent policies;
+2. a stricter distinction between provenance and authority;
+3. temporal semantics if a separate ordering/timestamp concept becomes relevant;
+4. multi-source evaluation where source identity itself becomes a required semantic discriminator.
 
-Use the independent reviewer to attack the hypothesis rather than confirm it.
+These are open possibilities, not demonstrated counterexamples.
 
-At minimum, attempt distinct semantic uses of provenance, such as:
+### C-1.5-T1 bounded conclusion
 
-1. **Authority/source-sensitive behavior** — whether the identity of the supplying result changes what a consumer is permitted or required to do.
-2. **Conflicting-source behavior** — whether two otherwise equivalent unresolved results require different resolution because they came from different semantic sources.
-3. **Dependency reconstruction** — whether provenance carries a distinction that cannot already be recovered from subject, cause, dependency relation, and target.
-4. **Consumer-policy behavior** — whether a consumer must apply different semantics solely because the supplying source differs.
+**Current status: independent semantic necessity of `provenance` was not demonstrated by the tested counterexamples.**
 
-Each proposed counterexample must be reduced to the smallest case possible and checked for hidden information already encoded in subject, cause, relation, target, role, or consumer rule.
+This does **not** establish that provenance is universally unnecessary. It establishes only that, under the current architectural definitions and tested scenarios, no minimal counterexample showed that provenance must exist as an independent semantic Context axis.
 
-Do not treat a proposed counterexample as valid merely because provenance makes the case easier to explain or trace.
+Working treatment:
 
-### C-1.5 current status
+```text
+provenance
+→ independent semantic necessity NOT demonstrated
+→ candidate for derived / reconstructable information
+→ must not be assumed to be an independent Context axis
+→ may still be retained where needed to preserve or reconstruct semantic relations
+→ diagnostic / tracing convenience alone does not justify independent storage
+```
 
-**Research status: in progress.**
+This is a Working Decision, not a final Architecture Decision.
+
+### C-1.5 conclusion
+
+For the current candidate pass:
+
+```text
+origin
+→ independent axis not demonstrated
+→ currently treated as derived / reconstructable
+
+provenance
+→ independent axis not demonstrated
+→ currently treated as derived / reconstructable candidate
+```
+
+The two results are analogous but not identical in evidentiary scope: each is bounded by its own adversarial test.
+
+The minimum Resolution Context is **still not established**. The remaining candidate fields must be tested before a minimum Context Contract is formalized.
 
 No Architecture Decision has been made.
 
-The outcome of C-1.5-T1 must determine whether `provenance` remains a candidate independent Context axis or, provisionally, joins `origin` as information that can be derived/reconstructed from retained semantic context.
-
-Diagnostic, logging, tracing, or UI convenience alone is not sufficient to establish necessity.
 ### 2. Established semantic invariants
 
 The investigation consistently supports keeping the following dimensions separate:
@@ -221,6 +270,7 @@ Established working invariants:
 - The burden of proof for a semantic subtype is a demonstrated downstream semantic requirement that an orthogonal representation cannot express correctly.
 - The burden of proof for an independent Resolution Context axis is a demonstrated semantic distinction that cannot be correctly expressed from the other retained context.
 - C-1.4-T1 found no demonstrated semantic necessity for independently storing `origin`; it is currently treated as derived information.
+- C-1.5-T1 found no demonstrated semantic necessity for independently storing `provenance`; it is currently treated as derived/reconstructable information candidate.
 
 ### 3. Expressiveness
 
@@ -313,7 +363,7 @@ This table is a trade-off map, not a ranking.
 
 ### 8. Architecture questions that remain
 
-The following are not resolved by Synthesis-1:
+The following are not resolved by Synthesis-1 or C-1.5:
 
 1. What exact minimum context must travel with an unresolved result so that downstream consumers cannot lose required semantics?
 2. Where should consumer rules live, and how should they be discovered without creating opaque cross-file policy dependencies?
@@ -325,7 +375,7 @@ The following are not resolved by Synthesis-1:
 8. How should the representation expose root cause versus local propagation cause without creating ambiguous causal chains?
 9. How should precedence and eligibility interact with unresolved values while preserving the existing authority/eligibility boundaries?
 
-No Architecture Decision is made on these questions by Synthesis-1.
+No Architecture Decision is made on these questions.
 
 ### 9. Decision readiness
 
@@ -341,7 +391,7 @@ Otherwise, the next productive step is architecture design work around **context
 
 ### 10. Handoff update
 
-This handoff has been updated with Synthesis-1 and the C-1.4 research checkpoint. No Architecture Decision has been recorded.
+This handoff has been updated with Synthesis-1, the C-1.4 research checkpoint, and the completed C-1.5-T1 provenance adversarial pass. No Architecture Decision has been recorded.
 
 The chapter remains `DRAFT` because the research synthesis does not by itself satisfy the conditions for a final architecture decision or handoff readiness.
 
@@ -357,7 +407,7 @@ This chapter remains research/specification analysis only.
 
 ## Decisions
 
-Working invariants carried forward and consolidated by Synthesis-1:
+Working invariants carried forward and consolidated by Synthesis-1 and C-1.5-T1:
 
 - `UNRESOLVED` is a semantic state; typed subtypes have not been justified by the current evidence.
 - `UNRESOLVED` must not be treated as automatically equivalent to `DENIED` or `FALSE`.
@@ -373,15 +423,18 @@ Working invariants carried forward and consolidated by Synthesis-1:
 - Candidate-level precedence remains a working direction, not a formal Architecture Decision.
 - Qwen's typed `UNRESOLVED` taxonomy remains a research hypothesis, not adopted architecture.
 - The burden of proof for a semantic subtype is a demonstrated downstream semantic requirement that the orthogonal representation cannot express correctly.
-- Propagation from a dependency target must preserve dependency relation and provenance.
+- The burden of proof for an independent Resolution Context axis is a demonstrated semantic distinction that cannot be correctly expressed from the other retained context.
+- Propagation from a dependency target must preserve dependency relation and provenance where that information is retained.
 - Root cause and local propagation cause should remain distinguishable.
 - U-9 provides no demonstrated semantic-information-loss counterexample against Model B for the tested cases.
 - U-10 establishes a complexity-location trade-off, not a model winner.
+- C-1.4-T1 found no demonstrated semantic necessity for independently storing `origin`.
+- C-1.5-T1 found no demonstrated semantic necessity for independently storing `provenance`.
 
 ## Open questions
 
 - What minimum context must accompany `UNRESOLVED`?
-- Is `provenance` independently necessary, or can it be derived/reconstructed from other retained context?
+- Are the remaining candidate context axes independently necessary, or are some also derivable/reconstructable?
 - How should consumer rules/policies be organized and discovered?
 - Which distinctions, if any, are intrinsic semantic state rather than context?
 - Can conflict and cycle remain orthogonal without obscuring deterministic behavior?
@@ -429,7 +482,7 @@ Working invariants carried forward and consolidated by Synthesis-1:
 - Do not equate `UNRESOLVED` with `DENIED`, `FALSE`, or any universal fail-closed consequence.
 - Do not introduce a generic dependency engine.
 - Do not prematurely formalize candidate-level precedence.
-- Keep semantic state, cause, origin/propagation, provenance, relation/context, consumer role, and consumer consequence distinct.
+- Keep semantic state, cause, origin/propagation, provenance, relation/context, consumer role, and consumer consequence distinct while their independent necessity is being tested.
 - Do not treat U-9 as proof of universal Model B superiority.
 - Do not treat U-10 as proof that both models scale identically.
 - Do not use fixed reasoning-step counts as an AI benchmark without evidence.
@@ -447,12 +500,14 @@ Working invariants carried forward and consolidated by Synthesis-1:
 - U-10 demonstrated that complexity can accumulate in different architectural locations depending on representation.
 - The tested cases consistently required distinctions beyond a scalar `UNRESOLVED` value, but those distinctions remained representable as explicit orthogonal context in the tested cases.
 - C-1.4-T1 found no demonstrated semantic necessity for independently storing `origin`.
+- C-1.5-T1 found no demonstrated semantic necessity for independently storing `provenance` in the tested scenarios.
 
 ### Inferred
 
 - Model B remains expressively viable for the tested cases if required context and rules are preserved and accessible.
 - Explicit subject identification and provenance may be more important than expanding the semantic state vocabulary.
 - `origin` currently appears to be derivable from retained context rather than an independent semantic axis, based on C-1.4-T1.
+- `provenance` currently appears to be a derived/reconstructable candidate rather than an independently necessary semantic axis, based on C-1.5-T1.
 - The main unresolved architecture question has shifted from basic expressiveness toward context preservation and rule/policy organization.
 - Model A's subtype taxonomy and Model B's rule/policy layer are alternative locations for complexity; neither has been established as universally preferable.
 
@@ -461,33 +516,40 @@ Working invariants carried forward and consolidated by Synthesis-1:
 - That a complete Model B implementation can maintain discoverability and consistency as rule/policy complexity grows.
 - That no future semantic case will require an intrinsic unresolved subtype.
 - That propagation depth remains diagnostic/provenance information rather than semantic state.
-- That future cases will not establish an independent semantic need for `origin`; C-1.4 only found no such case so far.
+- That future cases will not establish an independent semantic need for `origin` or `provenance`; C-1.4-T1 and C-1.5-T1 only found no such case so far.
 - That conflict and cycle context can remain orthogonal without hidden semantic coupling.
 
 ### Open
 
 - Final Model A vs Model B Architecture Decision.
 - Minimum required context contract for `UNRESOLVED` propagation.
-- Whether `provenance` is independently necessary.
+- Whether any remaining candidate context axis is independently necessary.
 - Rule/policy organization and discoverability.
-- Whether another adversarial test is necessary after these design questions are made concrete.
+- Whether another adversarial test is necessary after the remaining candidate axes are made concrete.
 
 ## Last completed task
 
-**C-1.4 — `origin`**, including adversarial test **C-1.4-T1**.
+**C-1.5 — `provenance`**, including adversarial test **C-1.5-T1**.
 
-Result: no counterexample demonstrated independent semantic necessity for `origin`; it is currently excluded from the candidate minimum Resolution Context as a derived field.
+Result: no counterexample demonstrated independent semantic necessity for `provenance`; it is currently treated as a derived/reconstructable candidate rather than an established independent Context axis.
 
 ## Immediate next task
 
-Continue **C-1.5 — `provenance`**.
+Begin **C-1.6 — remaining-context minimality**.
 
-Do not jump to a final Architecture Decision or formal minimum-context data structure yet. Test whether `provenance` is independently necessary using the same semantic-necessity burden of proof.
+Question:
+
+> What remains in Resolution Context after excluding `origin` as an independently necessary axis and treating `provenance` as not independently demonstrated, and is each remaining candidate axis independently necessary?
+
+Do not formalize the final minimum Context Contract yet. First identify the remaining candidate axes and attack their necessity one at a time.
+
+Do not jump to a final Architecture Decision between Model A and Model B.
 
 ## Things not to redo
 
 - Do not restart the broad UNRESOLVED research pass.
 - Do not redo U-1 through U-10 without a specific evidentiary reason.
+- Do not repeat C-1.4-T1 or C-1.5-T1 unless a new concrete counterexample invalidates their bounded results.
 - Do not formalize the Qwen taxonomy.
 - Do not introduce generic dependency/precedence/authorization engines.
 - Do not redesign the handoff mechanism.
@@ -496,38 +558,32 @@ Do not jump to a final Architecture Decision or formal minimum-context data stru
 
 ## Recommended starting context for next chapter
 
-Use this semantic frame:
+Use this provisional frame for C-1.6:
 
 ```text
-SEMANTIC STATE
-    TRUE / FALSE / UNRESOLVED
+CANDIDATE RESOLUTION CONTEXT
 
-SUBJECT
-    what is being resolved
-
-CAUSE / REASON
-    why resolution is unavailable
-
-ORIGIN / PROPAGATION
-    how unresolvedness reached the subject
-
-PROVENANCE
-    which source/result supplied the information
-
-RELATION / CONTEXT
-    dependency, conflict, cycle, etc.
-
-DEPENDENCY TARGET
-    what prerequisite result is being depended upon
-
-CONSUMER ROLE
-    eligibility, effect evaluation, precedence, etc.
-
-CONSUMER CONSEQUENCE
-    what the consuming rule does with the result
+subject
+state
+cause / reason
+dependency relation
+dependency target
+consumer role
+consumer consequence
+conflict / cycle context
 ```
 
-Primary discriminator for any future adversarial test:
+Do **not** assume every item in this list is independent or mandatory.
+
+For each candidate axis, ask:
+
+> Can two otherwise identical Resolution instances differ only in this axis and thereby require different downstream semantic behavior?
+
+If no minimal counterexample can be found, provisionally classify the axis as derived/reconstructable or as a consequence/rule rather than an independent Context axis.
+
+If a counterexample is found, minimize it and verify that the distinction is not already encoded in another retained field.
+
+Primary discriminator for future adversarial tests:
 
 > Can two instances that both expose `UNRESOLVED` have the same currently represented orthogonal context yet still require different downstream semantic behavior?
 
@@ -543,10 +599,19 @@ STATUS
 - origin may be derived/reconstructed when needed.
 - This remains a Working Decision, not a final Architecture Decision.
 
+C-1.5 — provenance
+STATUS
+- No semantic-necessity counterexample found by Qwen 05AB.
+- Tested source-sensitive, consumer-policy, and dependency-reconstruction attacks.
+- Rejected counterexamples either collapsed into other fields or required new policies not currently defined.
+- provenance is not currently demonstrated as an independent Context axis.
+- This remains a Working Decision, not a final Architecture Decision.
+
 NEXT
-- C-1.5 — provenance.
-- Apply the same adversarial semantic-necessity test.
-- Keep the overall minimum Context Contract provisional until the candidate-by-candidate pass is complete.
+- C-1.6 — remaining-context minimality.
+- Enumerate remaining candidate axes.
+- Attack independent necessity one axis at a time.
+- Keep the final minimum Context Contract provisional until the candidate-by-candidate pass is complete.
 ```
 
 ## Final Synthesis-1 status
@@ -555,16 +620,19 @@ NEXT
 WHAT WE KNOW
 - No U-1…U-10 case demonstrated necessary semantic information loss in Model B.
 - The tested distinctions can currently be represented as state + orthogonal context.
-- Semantic state, cause, propagation, provenance, dependency, consumer role, and consequence should remain distinct.
+- C-1.4-T1 found no independent semantic necessity for origin.
+- C-1.5-T1 found no independent semantic necessity for provenance in the tested scenarios.
 - Complexity is relocated, not eliminated, by choosing a representation.
 
 WHAT WE DO NOT KNOW
 - Whether Model B remains maintainable and inspectable at full rule/policy scale.
 - Whether a future case will demonstrate an intrinsic semantic subtype requirement.
 - The final minimum context contract and rule/policy organization.
+- Whether any remaining candidate context axis is itself derived/reconstructable.
 
 RECOMMENDED NEXT STEP
-- Continue C-1 candidate-by-candidate testing, starting with `provenance`, before formalizing the minimum Context Contract.
+- Begin C-1.6 remaining-context minimality.
+- Test remaining candidate axes one at a time using the same semantic-necessity burden of proof.
 - Keep Model A vs Model B formally undecided.
 - Commission further adversarial tests only when they target a concrete remaining uncertainty.
 ```
