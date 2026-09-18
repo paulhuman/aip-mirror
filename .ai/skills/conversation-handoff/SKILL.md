@@ -43,6 +43,18 @@ Do not claim to know an exact remaining context percentage or exact number of re
 
 Use qualitative contextual-risk assessment instead.
 
+## Repository write-capability self-check
+
+Before any handoff operation that could modify the repository, the AI MUST determine which capability applies:
+
+- **WRITE-CAPABLE AI** — the AI can create/update repository files and create commits in the target repository.
+- **READ-ONLY AI** — the AI can inspect repository contents but cannot create/update repository files or create commits.
+- **UNCERTAIN** — if write capability cannot be reliably established, treat the AI as READ-ONLY AI.
+
+Follow exactly one capability branch in the relevant handoff procedure. A WRITE-CAPABLE AI must ignore READ-ONLY instructions; a READ-ONLY AI must ignore repository-write instructions.
+
+An AI must never claim a repository operation or lifecycle transition occurred unless it actually performed and verified it.
+
 ## Output location
 
 Create or update the applicable file under:
@@ -434,7 +446,11 @@ When the user requests migration to the next chapter, for example:
 
     Пора выполнить миграцию в чат 02AB
 
-finish the current work, update the current handoff, and move it from `DRAFT` to `READY_FOR_HANDOFF` only when the next chapter can continue without guessing.
+first perform the repository write-capability self-check above.
+
+### WRITE-CAPABLE AI migration branch
+
+A WRITE-CAPABLE AI must finish the current work, update the current handoff, and move it from `DRAFT` to `READY_FOR_HANDOFF` only when the next chapter can continue without guessing.
 
 The current chapter owns this transition and must commit it.
 
@@ -443,6 +459,22 @@ Before declaring `DRAFT` → `READY_FOR_HANDOFF` complete, apply the `READY_FOR_
 After that, generate the standard bootstrap instruction for the receiving chapter using `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
 
 Do not mark the handoff `HANDED_OFF` in the closing chapter.
+
+### READ-ONLY AI migration branch
+
+A READ-ONLY AI must not modify or commit the repository.
+
+Instead, it must prepare the complete current handoff as it should exist for migration, including `DRAFT` → `READY_FOR_HANDOFF` only as the **proposed manual repository state** when that transition is appropriate. It must return the entire proposed handoff file content to the user and provide the exact commit message for the manual handoff update.
+
+A READ-ONLY AI must not claim that the handoff was changed to `READY_FOR_HANDOFF`, that any supersession transition was performed, or that any commit occurred.
+
+A READ-ONLY AI must not append the separate bootstrap instruction to this long handoff response. If the user needs the missing bootstrap instruction, use the explicit `Пора выдать bootstrap-инструкцию` command separately.
+
+A READ-ONLY AI may identify the lifecycle transition(s) that the user must apply manually, but must not represent those transitions as completed.
+
+### Common migration rule
+
+No migration branch may mark the handoff `HANDED_OFF` in the closing chapter.
 
 ### Bootstrap instruction recovery command
 
