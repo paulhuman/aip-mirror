@@ -229,6 +229,164 @@ The minimum Resolution Context is **still not established**. The remaining candi
 
 No Architecture Decision has been made.
 
+
+### C-1.6-T1 — `consumer consequence`
+
+C-1.6-T1 tested whether **`consumer consequence` is independently necessary** as a Resolution Context axis, or whether it is a derived result of applying a consumer rule to retained Resolution Context.
+
+The adversarial question was:
+
+> Can two otherwise identical Resolution instances have different `consumer consequence` values such that the difference requires different downstream semantic behavior that cannot be derived from the retained context, consumer role, and applicable consumer rules?
+
+The test held the following dimensions constant where possible:
+
+```text
+subject
+state
+cause / reason
+dependency relation
+dependency target
+consumer role
+conflict / cycle context
+applicable consumer rule
+```
+
+The burden of proof was **independent semantic necessity**, not caching, logging, diagnostic usefulness, implementation convenience, or performance.
+
+#### C-1.6-T1 independent-review result
+
+Qwen 05AB returned:
+
+```text
+B — no independent semantic necessity demonstrated
+```
+
+No minimal counterexample was found.
+
+The principal attack directions were:
+
+1. **Eligibility** — a difference in consequence could not change eligibility while all inputs and applicable rules remained identical without introducing a new policy or changing an existing input.
+2. **Candidate effect** — consequence could be represented as an intermediate result of consumer-policy evaluation rather than an independent input.
+3. **Effective outcome** — storing the consequence would record an intermediate result rather than add independent semantic information; caching would be an optimization, not semantic necessity.
+4. **Authority / precedence** — proposed uses either collapsed into existing authority/precedence concepts or required introducing a new policy that depends on stored consequence.
+5. **Consumer-role attack** — different consumers can legitimately produce different consequences from the same Resolution because consumer role and consumer rules differ; this shows that consequence is a property of the Resolution-consumer interaction rather than an intrinsic property of the Resolution.
+6. **Definition-level derivation** — the tested cases were adequately represented by:
+
+```text
+consumer_consequence
+    =
+ConsumerRule(
+    Resolution Context,
+    consumer role,
+    applicable policy
+)
+```
+
+The reviewer therefore classified `consumer consequence` as:
+
+```text
+derived semantic result
+consumer-policy output
+```
+
+Qwen identified bounded future cases that could change the result, including temporal/history semantics, genuinely nondeterministic consumer rules, future policies that explicitly consume a stored consequence, or protocol-level requirements for cross-system consistency. None of these was established by the current architecture or by the test.
+
+### C-1.6-T1 bounded conclusion
+
+**Current status: independent semantic necessity of `consumer consequence` was not demonstrated by the tested counterexamples.**
+
+This does **not** prove that storing a consumer consequence is universally wrong. It establishes only that, under the current architectural definitions and tested scenarios, no minimal counterexample demonstrated that it must be an independent Resolution Context axis.
+
+Working treatment:
+
+```text
+consumer consequence
+→ not an independent Context axis under current evidence
+→ derived semantic result
+→ consumer-policy output
+→ computed from retained context + consumer role + applicable rules
+→ must not be treated as an intrinsic property of Resolution
+```
+
+This is a Working Decision, not a final Architecture Decision.
+
+### C-1.6-T1 conclusion
+
+The current candidate set is reduced by one additional element:
+
+```text
+consumer consequence
+→ independent axis not demonstrated
+→ currently treated as a derived consumer-policy result
+```
+
+The remaining candidate set is now:
+
+```text
+Resolution Context
+├── subject
+├── state
+├── cause / reason
+├── dependency relation
+├── dependency target
+├── consumer role
+└── conflict / cycle context
+```
+
+This list remains **provisional**. The remaining fields have not yet been proven independently necessary or mutually independent.
+
+## Interim Synthesis after C-1.6-T1
+
+C-1.4, C-1.5, and C-1.6-T1 now provide three consecutive bounded tests of candidate context elements:
+
+| Candidate | Current result | Working treatment |
+|---|---|---|
+| `origin` | No independent semantic-necessity counterexample found | Derived / reconstructable information candidate |
+| `provenance` | No independent semantic-necessity counterexample found | Derived / reconstructable information candidate |
+| `consumer consequence` | No independent semantic-necessity counterexample found | Derived semantic result / consumer-policy output |
+
+The three results reinforce a common distinction:
+
+```text
+semantic state
+    ≠
+context required to evaluate it
+    ≠
+derived result of consuming it
+```
+
+More specifically:
+
+```text
+Resolution
+    │
+    ├── retained semantic/context information
+    │
+    ▼
+Consumer role + applicable rule
+    │
+    ▼
+Consumer consequence
+```
+
+This reduces pressure to enlarge the semantic state vocabulary or the Resolution Context merely because a concept has a distinct name and participates in downstream reasoning.
+
+At the same time, the results do **not** establish that every remaining context element is independent, mandatory, or intrinsic. The remaining candidate set must still be examined for hidden level-mixing between Resolution properties, dependency relationships, consumer context, and conflict/cycle context.
+
+### Interim synthesis conclusion
+
+The research is increasingly separating three questions that were previously easy to conflate:
+
+1. **What is the semantic state of the Resolution?**
+2. **What information/relations must remain available to evaluate downstream rules correctly?**
+3. **What result is produced when a consumer applies its rule to that Resolution?**
+
+C-1.4 through C-1.6-T1 provide no demonstrated need to promote `origin`, `provenance`, or `consumer consequence` into independent semantic axes merely because they are useful concepts.
+
+The next research step should therefore shift from testing already-excluded candidates toward checking whether the **remaining candidate set itself mixes different semantic levels** and whether each remaining element is independently necessary.
+
+No Architecture Decision has been made.
+
 ### 2. Established semantic invariants
 
 The investigation consistently supports keeping the following dimensions separate:
@@ -257,7 +415,7 @@ Established working invariants:
 - Semantic state is not the same thing as source/provenance.
 - Dependency relation and dependency target identify what a propagated unresolved result is about; they are not automatically unresolved-state types.
 - Consumer role can change the rule applied to an unresolved result without changing the result's semantic state.
-- Consumer consequence is a separate semantic rule and must not be inferred universally from `UNRESOLVED`.
+- Consumer consequence is a derived consumer-policy result, not currently an independent Resolution Context axis; it must not be inferred universally from `UNRESOLVED`.
 - `UNRESOLVED` must not automatically mean `DENIED`, `FALSE`, blocked, or ineligible.
 - `PROPAGATED` was previously treated as an origin/mechanism distinction; C-1.4 now provides evidence that a separately stored `origin` field is not currently required as an independent Context axis.
 - Root cause and local propagation cause may both be relevant and should remain distinguishable through causal/provenance context.
@@ -271,6 +429,7 @@ Established working invariants:
 - The burden of proof for an independent Resolution Context axis is a demonstrated semantic distinction that cannot be correctly expressed from the other retained context.
 - C-1.4-T1 found no demonstrated semantic necessity for independently storing `origin`; it is currently treated as derived information.
 - C-1.5-T1 found no demonstrated semantic necessity for independently storing `provenance`; it is currently treated as derived/reconstructable information candidate.
+- C-1.6-T1 found no demonstrated semantic necessity for independently storing `consumer consequence`; it is currently treated as a derived consumer-policy result.
 
 ### 3. Expressiveness
 
@@ -435,6 +594,7 @@ Working invariants carried forward and consolidated by Synthesis-1 and C-1.5-T1:
 
 - What minimum context must accompany `UNRESOLVED`?
 - Are the remaining candidate context axes independently necessary, or are some also derivable/reconstructable?
+- Does the remaining candidate set mix Resolution properties with dependency relations, consumer context, or conflict/cycle context?
 - How should consumer rules/policies be organized and discovered?
 - Which distinctions, if any, are intrinsic semantic state rather than context?
 - Can conflict and cycle remain orthogonal without obscuring deterministic behavior?
@@ -501,6 +661,7 @@ Working invariants carried forward and consolidated by Synthesis-1 and C-1.5-T1:
 - The tested cases consistently required distinctions beyond a scalar `UNRESOLVED` value, but those distinctions remained representable as explicit orthogonal context in the tested cases.
 - C-1.4-T1 found no demonstrated semantic necessity for independently storing `origin`.
 - C-1.5-T1 found no demonstrated semantic necessity for independently storing `provenance` in the tested scenarios.
+- C-1.6-T1 found no demonstrated semantic necessity for independently storing `consumer consequence`; it is currently classified as a derived semantic result / consumer-policy output.
 
 ### Inferred
 
@@ -529,19 +690,34 @@ Working invariants carried forward and consolidated by Synthesis-1 and C-1.5-T1:
 
 ## Last completed task
 
-**C-1.5 — `provenance`**, including adversarial test **C-1.5-T1**.
+**C-1.6-T1 — `consumer consequence`**.
 
-Result: no counterexample demonstrated independent semantic necessity for `provenance`; it is currently treated as a derived/reconstructable candidate rather than an established independent Context axis.
+Result: no counterexample demonstrated independent semantic necessity for `consumer consequence`; it is currently treated as a derived semantic result / consumer-policy output rather than an independent Context axis.
+
+Interim synthesis has also been completed across C-1.4, C-1.5, and C-1.6-T1.
 
 ## Immediate next task
 
-Begin **C-1.6 — remaining-context minimality**.
+Continue **C-1.6 — remaining-context minimality**, now by examining the structure and semantic level of the remaining candidate set.
 
-Question:
+Current provisional candidate set:
 
-> What remains in Resolution Context after excluding `origin` as an independently necessary axis and treating `provenance` as not independently demonstrated, and is each remaining candidate axis independently necessary?
+```text
+Resolution Context
+├── subject
+├── state
+├── cause / reason
+├── dependency relation
+├── dependency target
+├── consumer role
+└── conflict / cycle context
+```
 
-Do not formalize the final minimum Context Contract yet. First identify the remaining candidate axes and attack their necessity one at a time.
+Next question:
+
+> Does the remaining candidate set itself mix Resolution properties with dependency relations, consumer context, or conflict/cycle context, and are the remaining elements independently necessary?
+
+Do not formalize the final minimum Context Contract yet. Continue testing the remaining candidates and their semantic level one at a time.
 
 Do not jump to a final Architecture Decision between Model A and Model B.
 
@@ -569,7 +745,6 @@ cause / reason
 dependency relation
 dependency target
 consumer role
-consumer consequence
 conflict / cycle context
 ```
 
@@ -607,10 +782,23 @@ STATUS
 - provenance is not currently demonstrated as an independent Context axis.
 - This remains a Working Decision, not a final Architecture Decision.
 
+C-1.6-T1 — consumer consequence
+STATUS
+- No semantic-necessity counterexample found by Qwen 05AB.
+- Eligibility, candidate effect, effective outcome, authority/precedence, consumer-role, and definition-level derivation attacks were tested.
+- consumer consequence is currently classified as a derived semantic result / consumer-policy output.
+- It is not currently demonstrated as an independent Resolution Context axis.
+- This remains a Working Decision, not a final Architecture Decision.
+
+INTERIM SYNTHESIS
+- origin, provenance, and consumer consequence have each failed to demonstrate independent semantic necessity in their bounded tests.
+- The remaining candidate set is therefore reduced to subject, state, cause/reason, dependency relation, dependency target, consumer role, and conflict/cycle context.
+- The next task is to test whether these remaining elements are independently necessary and whether the set mixes different semantic levels.
+
 NEXT
-- C-1.6 — remaining-context minimality.
-- Enumerate remaining candidate axes.
-- Attack independent necessity one axis at a time.
+- Continue C-1.6 remaining-context minimality.
+- Examine the semantic level of the remaining candidate axes.
+- Attack independent necessity one axis at a time where needed.
 - Keep the final minimum Context Contract provisional until the candidate-by-candidate pass is complete.
 ```
 
@@ -622,6 +810,8 @@ WHAT WE KNOW
 - The tested distinctions can currently be represented as state + orthogonal context.
 - C-1.4-T1 found no independent semantic necessity for origin.
 - C-1.5-T1 found no independent semantic necessity for provenance in the tested scenarios.
+- C-1.6-T1 found no independent semantic necessity for consumer consequence; it is currently classified as a derived consumer-policy result.
+- Across C-1.4 through C-1.6-T1, distinct concepts have not automatically justified promotion to independent semantic axes.
 - Complexity is relocated, not eliminated, by choosing a representation.
 
 WHAT WE DO NOT KNOW
@@ -629,9 +819,11 @@ WHAT WE DO NOT KNOW
 - Whether a future case will demonstrate an intrinsic semantic subtype requirement.
 - The final minimum context contract and rule/policy organization.
 - Whether any remaining candidate context axis is itself derived/reconstructable.
+- Whether the remaining candidate set mixes different semantic levels.
 
 RECOMMENDED NEXT STEP
-- Begin C-1.6 remaining-context minimality.
+- Continue C-1.6 remaining-context minimality.
+- Examine the remaining candidate set for semantic-level mixing.
 - Test remaining candidate axes one at a time using the same semantic-necessity burden of proof.
 - Keep Model A vs Model B formally undecided.
 - Commission further adversarial tests only when they target a concrete remaining uncertainty.
