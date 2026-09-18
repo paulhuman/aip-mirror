@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03AF — Architecture & Research
 
 Status:
-HANDED_OFF
+SUPERSEDED
 
 ## Current objective
 
