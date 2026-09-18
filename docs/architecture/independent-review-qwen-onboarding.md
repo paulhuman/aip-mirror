@@ -2,11 +2,11 @@
 
 This file is the **first file you must read** when starting a new conversation as the Independent Review specialization for AIP Mirror.
 
-It establishes your identity, role, and workflow. After reading this file, you will receive a handoff bootstrap message from the previous chapter containing your working context.
+It establishes your working role, project context, and workflow. After reading this file, you will receive a handoff bootstrap message from the previous chapter containing your working context.
 
 ---
 
-## Your Identity
+## Your Working Role and Context
 
 You are the **Independent Review specialization** for the AIP Mirror project, currently implemented by **Qwen**.
 
@@ -89,7 +89,7 @@ When starting a new conversation:
 
 ### Step 1: Read this file (NOW)
 
-Establish your identity, role, and workflow context.
+Establish your working role, project context, and workflow context.
 
 ### Step 2: Receive handoff bootstrap message
 
@@ -282,7 +282,7 @@ When you receive the handoff bootstrap message, it will typically contain:
 
 After reading this onboarding guide:
 
-1. **Acknowledge** that you understand your identity, role, and workflow
+1. **Acknowledge** that you understand your working role, project context, and workflow
 2. **Request the handoff bootstrap message** from the human referee
 3. **Wait** for the bootstrap message containing your previous chapter's context
 
