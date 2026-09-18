@@ -99,24 +99,87 @@ This is a Working Decision, not a final Architecture Decision.
 
 This wording is intentionally provisional because C-1 has not yet established the minimumity of the remaining fields.
 
-### C-1.5 — next candidate
+### C-1.5 — `provenance`
 
-The next candidate to test is **`provenance`**.
+C-1.5 tests whether **`provenance` is independently necessary** as a Resolution Context axis, or whether every semantically required distinction can be reconstructed from the other retained context.
 
 Adversarial question:
 
 > Is `provenance` genuinely an independently necessary element of Resolution Context, or can every required semantic distinction be expressed through `subject + state + cause + dependency relation` and other retained context?
 
-Use the same burden of proof:
+### C-1.5-T1 — semantic-necessity counterexample
 
-> Find a minimal counterexample where two Resolution instances have the same currently retained context except for `provenance`, and where that provenance difference creates different required downstream semantic behavior.
+The primary test is intentionally symmetric with C-1.4-T1:
+
+> Find a minimal counterexample in which two Resolution instances have the same currently retained context except for `provenance`, and the difference in provenance produces different required downstream semantic behavior.
+
+The test should hold the following dimensions constant unless the counterexample specifically demonstrates that one of them cannot be held constant:
+
+```text
+subject
+state
+cause / reason
+dependency relation
+dependency target
+consumer role
+consumer consequence inputs
+```
+
+The only intended discriminator is:
+
+```text
+provenance
+```
+
+The burden of proof is **semantic necessity**, not observability.
+
+The following do **not** establish independent necessity by themselves:
+
+- diagnostic usefulness;
+- logging or tracing convenience;
+- UI display;
+- audit/history convenience;
+- easier debugging;
+- easier human inspection;
+- easier AI reasoning.
+
+A valid counterexample must show that changing only provenance requires a **different downstream semantic rule, eligibility result, candidate effect, effective outcome, authority consequence, precedence consequence, or other architecture-level semantic behavior**.
+
+If no such counterexample can be constructed, the bounded result should be:
+
+```text
+provenance
+→ not demonstrated as an independent semantic Context axis
+→ candidate for derived/reconstructable information
+→ retained only where required to preserve the relations/context from which it can be reconstructed
+```
+
+That result would remain provisional and subject to later falsification, just as with `origin`.
+
+### C-1.5-T1 review protocol
+
+Use the independent reviewer to attack the hypothesis rather than confirm it.
+
+At minimum, attempt distinct semantic uses of provenance, such as:
+
+1. **Authority/source-sensitive behavior** — whether the identity of the supplying result changes what a consumer is permitted or required to do.
+2. **Conflicting-source behavior** — whether two otherwise equivalent unresolved results require different resolution because they came from different semantic sources.
+3. **Dependency reconstruction** — whether provenance carries a distinction that cannot already be recovered from subject, cause, dependency relation, and target.
+4. **Consumer-policy behavior** — whether a consumer must apply different semantics solely because the supplying source differs.
+
+Each proposed counterexample must be reduced to the smallest case possible and checked for hidden information already encoded in subject, cause, relation, target, role, or consumer rule.
+
+Do not treat a proposed counterexample as valid merely because provenance makes the case easier to explain or trace.
+
+### C-1.5 current status
+
+**Research status: in progress.**
+
+No Architecture Decision has been made.
+
+The outcome of C-1.5-T1 must determine whether `provenance` remains a candidate independent Context axis or, provisionally, joins `origin` as information that can be derived/reconstructed from retained semantic context.
 
 Diagnostic, logging, tracing, or UI convenience alone is not sufficient to establish necessity.
-
-U-9 is particularly important: the independent reviewer did not find a minimal case where Model B, with sufficiently rich orthogonal context, necessarily loses semantic information that Model A can represent.
-
-This is evidence against the claim that Model B is inherently less expressive for the tested cases. It is not proof that Model B is universally sufficient or superior.
-
 ### 2. Established semantic invariants
 
 The investigation consistently supports keeping the following dimensions separate:
