@@ -444,6 +444,26 @@ After that, generate the standard bootstrap instruction for the receiving chapte
 
 Do not mark the handoff `HANDED_OFF` in the closing chapter.
 
+### Bootstrap instruction recovery command
+
+The standard migration workflow must generate the bootstrap instruction for the future receiving chapter. If the AI completed or discussed the migration but forgot to provide that instruction, the user may explicitly issue:
+
+    Пора выдать bootstrap-инструкцию
+
+Treat this as a direct request to generate the missing bootstrap instruction for the receiving chapter using `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
+
+This command does **not** initialize the next chapter, does **not** change lifecycle state, and does **not** authorize repository writes by itself.
+
+The generated instruction must contain the required runtime values for the receiving chapter:
+
+    CURRENT_CHAPTER = <current chapter>
+    NEXT_CHAPTER = <next chapter>
+    SPECIALIZATION = <specialization>
+
+The instruction is for a future receiving conversation. It must not be presented as evidence that the receiving chapter has already started.
+
+This command may be used both by WRITE-CAPABLE and READ-ONLY AI. A READ-ONLY AI must generate only the bootstrap instruction requested by this command and must not claim that the receiving chapter was initialized or that any repository lifecycle operation occurred.
+
 ## Writing rules
 
 Be concrete.
@@ -497,20 +517,19 @@ Only mark the handoff `READY_FOR_HANDOFF` when the next chapter can reasonably c
 
 ## Receiving a handoff
 
-When a new chapter starts from a previous handoff:
+When a new chapter starts from a previous handoff, first read `.ai/skills/conversation-handoff/BOOTSTRAP.md` and perform its repository write-capability self-check.
 
-1. read `.ai/skills/conversation-handoff/BOOTSTRAP.md`;
-2. read the applicable project rules;
-3. read the previous handoff;
-4. inspect the current files identified by the handoff;
-5. confirm that the new chapter can continue from the recorded state;
-6. create the new chapter's handoff with status `DRAFT` if it does not already exist;
-7. commit the new `DRAFT` handoff immediately without asking the user for permission;
-8. update the previous handoff status to `HANDED_OFF`;
-9. commit that lifecycle transition;
-10. perform the post-bootstrap consistency verification below before declaring bootstrap complete or beginning substantive work.
+Then follow exactly one of the capability branches defined by BOOTSTRAP.md:
 
-If step 6 discovers that the receiving handoff already exists, do not pretend that normal initial creation occurred. If the existing state constitutes a qualifying pre-existing lifecycle violation, bootstrap must become BLOCKED and the receiving chapter must wait for the explicit Lifecycle Recovery command before performing recovery.
+- A **WRITE-CAPABLE AI** performs the repository-writing bootstrap procedure and its post-bootstrap verification.
+- A **READ-ONLY AI** performs only the read-only branch: it does not create, update, or commit repository files; it prepares the complete proposed receiving handoff with status `DRAFT` and provides the exact manual initial-DRAFT commit message to the user.
+- An AI that cannot establish write capability must treat itself as READ-ONLY.
+
+A READ-ONLY AI must not claim that `DRAFT` creation, `HANDED_OFF`, a commit, post-bootstrap verification, or `BOOTSTRAP = COMPLETE` occurred.
+
+If a read-only bootstrap is being performed, do not append the separate bootstrap-instruction command to the handoff response. The complete handoff file and its manual commit message are the required output of the read-only bootstrap branch.
+
+If the receiving handoff already exists, do not pretend that normal initial creation occurred. Apply the capability-specific rules in BOOTSTRAP.md. A qualifying pre-existing lifecycle violation blocks normal bootstrap; a READ-ONLY AI must report it and cannot perform Lifecycle Recovery.
 
 If Lifecycle Recovery is authorized, follow the recovery procedure above. Do not repeat a lifecycle transition that the repository already contains in the required final state.
 
