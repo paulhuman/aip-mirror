@@ -14,6 +14,21 @@ The bootstrap message supplies:
 
 These values are runtime context for the current migration. Do not write them into this template.
 
+## Repository write-capability self-check
+
+Before executing the repository-mutating parts of bootstrap, the AI MUST determine which capability branch applies:
+
+- **WRITE-CAPABLE AI** — the AI has a working mechanism that can create/update repository files and create commits in the target repository.
+- **READ-ONLY AI** — the AI can inspect repository contents but cannot create/update repository files or create commits.
+- **UNCERTAIN** — if the AI cannot reliably establish that repository writes and commits are available and working, it MUST treat itself as **READ-ONLY AI** for this bootstrap.
+
+After this self-check:
+
+- Follow **exactly one** capability branch below.
+- A WRITE-CAPABLE AI MUST follow the WRITE-CAPABLE branch and MUST ignore the READ-ONLY branch.
+- A READ-ONLY AI MUST follow the READ-ONLY branch and MUST ignore all repository-write instructions in the WRITE-CAPABLE branch.
+- An AI MUST NOT claim that a repository write, lifecycle transition, commit, or bootstrap completion occurred unless it actually performed and verified that operation.
+
 ## Required procedure
 
 ### Shared bootstrap steps — all AI
@@ -59,9 +74,13 @@ If the previous handoff is `READY_FOR_HANDOFF`, the READ-ONLY AI may state that 
 
 If the receiving handoff already exists and indicates a qualifying pre-existing lifecycle violation, the READ-ONLY AI must report the blocked condition and MUST NOT attempt Lifecycle Recovery.
 
-If the new chapter is the first chapter of a specialization, there is no previous handoff to mark `HANDED_OFF`; still create and commit the new chapter's `DRAFT` handoff immediately, then perform the applicable post-bootstrap consistency verification.
+If the new chapter is the first chapter of a specialization, there is no previous handoff to mark `HANDED_OFF`.
 
-If the receiving handoff already exists when bootstrap begins, do **not** recreate it or pretend that normal initial creation occurred. Determine whether the existing state represents a qualifying pre-existing lifecycle violation. If so, bootstrap must be treated as blocked and the receiving chapter must wait for explicit user authorization before performing Lifecycle Recovery.
+For a WRITE-CAPABLE AI, the first chapter of a specialization still requires immediate creation and commit of the new chapter's `DRAFT` handoff, followed by the applicable post-bootstrap consistency verification.
+
+For a READ-ONLY AI, the first chapter case follows Branch B: prepare and return the complete proposed `DRAFT` handoff and its manual initial-DRAFT commit message, without performing repository writes.
+
+If the receiving handoff already exists when bootstrap begins, no AI may recreate it or pretend that normal initial creation occurred. Determine whether the existing state represents a qualifying pre-existing lifecycle violation. A WRITE-CAPABLE AI must block and wait for explicit user authorization before performing Lifecycle Recovery. A READ-ONLY AI must report the blocked condition and must not attempt Lifecycle Recovery.
 
 ## Why handoffs exist
 
