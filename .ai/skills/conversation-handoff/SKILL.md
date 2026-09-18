@@ -408,17 +408,19 @@ For a missed `HANDED_OFF` → `SUPERSEDED` transition, the correction must recor
 
 ## New chapter initialization
 
-When a new chapter is initialized, it must immediately create its own handoff file with status `DRAFT`.
+When a new chapter is initialized, a WRITE-CAPABLE AI must immediately create its own handoff file with status `DRAFT`.
 
 This is mandatory for every new chapter, including the first chapter of a specialization and every later alphabetical chapter.
 
 The new chapter may create this initial `DRAFT` handoff without asking the user for permission. The initialization is part of the standard bootstrap procedure, not an optional development change.
 
+A READ-ONLY AI must not create or overwrite the repository file. It must instead prepare the complete proposed initial `DRAFT` handoff and provide the exact manual commit message, following the READ-ONLY branch in `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
+
 If a pre-existing receiving handoff is discovered during bootstrap, do not silently recreate or overwrite it as though it were a normal initial-DRAFT creation. Apply the lifecycle rules and, if the bootstrap is blocked by a qualifying pre-existing violation, wait for the explicit Lifecycle Recovery command before making recovery changes.
 
 The initial handoff must capture the chapter identity, previous chapter, starting objective, known starting state, and any other information already established during bootstrap. It may be incomplete because its purpose is to become the live checkpoint document for the new chapter.
 
-The initial creation must be committed immediately. This is an explicit exception to the normal user-review-before-commit rule for AI-assisted changes.
+A WRITE-CAPABLE AI must commit the initial creation immediately. This is an explicit exception to the normal user-review-before-commit rule for AI-assisted changes.
 
 ## Checkpoint updates
 
@@ -428,13 +430,27 @@ The user may request a checkpoint update with:
 
     Пора обновить handoff
 
-When this command is used, the current chapter must:
+When this command is used:
+
+### WRITE-CAPABLE AI
+
+A WRITE-CAPABLE AI must:
 
 1. create the handoff if it does not yet exist;
 2. update it with the current chapter state;
 3. keep its status as `DRAFT`;
 4. verify the resulting content and scope;
 5. commit the checkpoint without asking for separate user permission.
+
+### READ-ONLY AI
+
+A READ-ONLY AI must:
+
+1. not create, update, or commit any repository file;
+2. prepare the complete proposed handoff with status `DRAFT`;
+3. return the entire handoff file content to the user;
+4. provide the exact manual checkpoint commit message;
+5. not claim that the checkpoint was written or committed.
 
 Checkpoint commits are not migrations. They are ordinary, auditable `DRAFT` checkpoint commits that preserve the current working state.
 
