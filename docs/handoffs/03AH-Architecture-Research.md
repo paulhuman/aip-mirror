@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03AG — Architecture & Research
 
 Status:
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
@@ -552,7 +552,95 @@ Otherwise, the next productive step is architecture design work around **context
 
 This handoff has been updated with Synthesis-1, the C-1.4 research checkpoint, and the completed C-1.5-T1 provenance adversarial pass. No Architecture Decision has been recorded.
 
-The chapter remains `DRAFT` because the research synthesis does not by itself satisfy the conditions for a final architecture decision or handoff readiness.
+The chapter is now `READY_FOR_HANDOFF` for migration to **AIP Mirror — 03AI — Architecture & Research**. The research remains provisional and no final Architecture Decision has been made.
+
+
+### C-1.6-T2 — `dependency relation`
+
+C-1.6-T2 tested whether **`dependency relation` has independent semantic necessity as an internal Resolution Context axis**, or whether its semantics belong to the relationship between Resolution instances.
+
+The key methodological distinction was:
+
+```
+semantic necessity of information
+≠
+necessity to store that information inside Resolution Context
+```
+
+Qwen 05AB returned:
+
+```
+B — no independent semantic necessity demonstrated
+(as an internal Resolution Context axis)
+```
+
+The result has an important qualification: `dependency relation` appears semantically necessary as a property of the relationship between Resolution instances, but not as an internal field of the Resolution itself.
+
+Attack directions covered:
+
+1. Eligibility — differences collapsed into consumer rules interpreting relation types.
+2. Candidate effect — relation functions as an input to consumer policy rather than an intrinsic Resolution property.
+3. Effective outcome — differences are attributable to graph structure or consumer policy.
+4. Authority / precedence — proposed differences require authority/precedence rules; the relation itself does not establish an independent internal axis.
+5. Relation-vs-target — relation type and target jointly describe a relationship between two Resolution instances rather than two independent internal Resolution fields.
+6. Graph / edge ownership — multiple outgoing relations naturally form graph edges.
+7. Multi-consumer — the same relation may be interpreted differently by different consumers.
+8. Definition-level — relation is naturally represented as edge semantics.
+
+### C-1.6-T2 bounded conclusion
+
+**Current status: independent semantic necessity of `dependency relation` was not demonstrated as an internal Resolution Context axis.**
+
+This does **not** mean that dependency relation is semantically unnecessary. Its current classification is:
+
+```
+dependency relation
+→ semantically necessary relationship information
+→ relationship / graph-edge semantics
+→ not an independent internal Resolution Context axis
+```
+
+The provisional semantic model is:
+
+```
+Resolution = semantic node
+
+Relation = semantic relationship between Resolution nodes
+
+Relation
+├── source
+├── target
+├── relation_type
+└── possibly other relation-level semantics
+```
+
+This is a Working Decision / provisional semantic classification, not a final Architecture Decision that all relations must necessarily be implemented as graph edges.
+
+Remaining uncertainty includes relationships without a target Resolution, temporal/dynamic relations, multiple relation graphs, and implementation-level denormalization. None currently reverses the bounded result.
+
+### C-1.6-T2 conclusion
+
+The candidate set is now provisionally split by semantic level:
+
+```
+Resolution Context
+├── subject
+├── state
+├── cause / reason
+├── dependency target        ← still under test
+├── consumer role
+└── conflict / cycle context
+
+Relation Context / Graph semantics
+├── source
+├── target
+├── relation_type
+└── ...
+```
+
+The placement of `dependency target` remains unresolved and is intentionally tested separately in C-1.6-T3.
+
+No Architecture Decision has been made.
 
 ## Current implementation state
 
@@ -690,32 +778,37 @@ Working invariants carried forward and consolidated by Synthesis-1 and C-1.5-T1:
 
 ## Last completed task
 
-**C-1.6-T1 — `consumer consequence`**.
+**C-1.6-T2 — `dependency relation`**.
 
-Result: no counterexample demonstrated independent semantic necessity for `consumer consequence`; it is currently treated as a derived semantic result / consumer-policy output rather than an independent Context axis.
-
-Interim synthesis has also been completed across C-1.4, C-1.5, and C-1.6-T1.
+Result: no independent semantic necessity was demonstrated for `dependency relation` as an internal Resolution Context axis. It is currently classified as semantically necessary relationship information / graph-edge semantics rather than an intrinsic Resolution field.
 
 ## Immediate next task
 
-Continue **C-1.6 — remaining-context minimality**, now by examining the structure and semantic level of the remaining candidate set.
+Continue **C-1.6 — remaining-context minimality** with **C-1.6-T3 — `dependency target`**.
 
 Current provisional candidate set:
 
-```text
+```
 Resolution Context
 ├── subject
 ├── state
 ├── cause / reason
-├── dependency relation
 ├── dependency target
 ├── consumer role
 └── conflict / cycle context
+
+Relation Context / Graph semantics
+├── source
+├── target
+├── relation_type
+└── ...
 ```
 
 Next question:
 
-> Does the remaining candidate set itself mix Resolution properties with dependency relations, consumer context, or conflict/cycle context, and are the remaining elements independently necessary?
+> Can `dependency target` have independent semantic necessity specifically as an internal Resolution Context attribute, or does its semantics belong entirely to the Relation / Edge connecting Resolution instances?
+
+Do not assume the C-1.6-T2 graph-edge classification is automatically correct; test `dependency target` independently.
 
 Do not formalize the final minimum Context Contract yet. Continue testing the remaining candidates and their semantic level one at a time.
 
@@ -792,14 +885,44 @@ STATUS
 
 INTERIM SYNTHESIS
 - origin, provenance, and consumer consequence have each failed to demonstrate independent semantic necessity in their bounded tests.
-- The remaining candidate set is therefore reduced to subject, state, cause/reason, dependency relation, dependency target, consumer role, and conflict/cycle context.
-- The next task is to test whether these remaining elements are independently necessary and whether the set mixes different semantic levels.
+- C-1.6-T2 additionally found no independent semantic necessity for dependency relation as an internal Resolution Context axis.
+- dependency relation is currently classified as semantically necessary relationship / graph-edge information rather than an intrinsic Resolution property.
+- The remaining internal candidate set is provisionally reduced to subject, state, cause/reason, dependency target, consumer role, and conflict/cycle context.
+- The relation-level model remains provisional and does not constitute a final graph architecture decision.
+
+C-1.6-T2 — dependency relation
+STATUS
+- No semantic-necessity counterexample found by Qwen 05AB for dependency relation as an internal Resolution Context axis.
+- dependency relation is currently classified as relationship / graph-edge semantics.
+- This does not mean dependency relation is semantically unnecessary; it means its semantic necessity belongs to the relationship between Resolution instances rather than to the internal state/context of one Resolution.
+- dependency target remains under separate test in C-1.6-T3.
+- This remains a Working Decision, not a final Architecture Decision.
 
 NEXT
-- Continue C-1.6 remaining-context minimality.
-- Examine the semantic level of the remaining candidate axes.
-- Attack independent necessity one axis at a time where needed.
+- Continue C-1.6 with C-1.6-T3 — dependency target.
+- Test whether dependency target is an independent Resolution Context axis or another relation/edge-level property.
 - Keep the final minimum Context Contract provisional until the candidate-by-candidate pass is complete.
+```
+
+## C-1.6-T2 handoff checkpoint
+
+```
+COMPLETED
+- C-1.6-T2 — dependency relation
+- No independent semantic-necessity counterexample found for dependency relation as an internal Resolution Context axis.
+- dependency relation is currently classified as relationship / graph-edge semantics.
+- This is a semantic-level classification, not a final implementation/graph architecture decision.
+
+REMAINING
+- dependency target
+- consumer role
+- conflict / cycle context
+- subject / state / cause and their exact minimumity/independence
+- final minimum Resolution Context contract
+
+NEXT
+- C-1.6-T3 — dependency target
+- Test target independently using the same semantic-necessity burden of proof.
 ```
 
 ## Final Synthesis-1 status
@@ -828,3 +951,12 @@ RECOMMENDED NEXT STEP
 - Keep Model A vs Model B formally undecided.
 - Commission further adversarial tests only when they target a concrete remaining uncertainty.
 ```
+
+
+## Handoff readiness
+
+This chapter is **READY_FOR_HANDOFF** for migration to **AIP Mirror — 03AI — Architecture & Research**.
+
+The receiving chapter should continue from **C-1.6-T3 — dependency target**. The C-1.6-T3 adversarial instruction has already been prepared; the next expected external-review input is the Qwen 05AB response to C-1.6-T3.
+
+No final Architecture Decision has been made.
