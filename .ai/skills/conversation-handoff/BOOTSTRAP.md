@@ -16,20 +16,48 @@ These values are runtime context for the current migration. Do not write them in
 
 ## Required procedure
 
-When a new chapter is initialized:
+### Shared bootstrap steps — all AI
+
+When a new chapter is initialized, all AI MUST:
 
 1. Confirm the new chapter identity and specialization from the bootstrap message.
 2. Read this file.
-3. Read the applicable project rules, especially `.ai/rules/conversation-lifecycle.md` and `.ai/rules/workflow.md`.
+3. Read the applicable project rules, especially `.ai/rules/conversation-lifecycle.md`, `.ai/rules/workflow.md`, and `.ai/rules/handoff-references.md`.
 4. Read the previous chapter's handoff under `docs/handoffs/`.
 5. Inspect the current implementation files and references identified by that handoff.
 6. Confirm that the new chapter can continue from the recorded state without guessing.
+
+### Branch A — WRITE-CAPABLE AI
+
+**A WRITE-CAPABLE AI MUST read and execute this branch and MUST ignore Branch B.**
+
 7. Immediately create the new chapter's handoff under `docs/handoffs/` with status `DRAFT` **if it does not already exist**.
 8. Commit that initial `DRAFT` handoff as part of bootstrap; this is a pre-authorized procedural commit and does not require a separate approval step **when normal initial creation is applicable**.
 9. Update the previous chapter's handoff from `READY_FOR_HANDOFF` to `HANDED_OFF`.
 10. Commit that lifecycle transition.
 11. Perform the mandatory post-bootstrap consistency verification described below.
 12. Only after bootstrap is complete, proceed with new implementation or other chapter work.
+
+If the receiving handoff already exists when bootstrap begins, do **not** recreate it or pretend that normal initial creation occurred. Determine whether the existing state represents a qualifying pre-existing lifecycle violation. If so, bootstrap must be treated as blocked and the receiving chapter must wait for explicit user authorization before performing Lifecycle Recovery.
+
+### Branch B — READ-ONLY AI
+
+**A READ-ONLY AI MUST read and execute this branch and MUST ignore Branch A.**
+
+7. Do **not** create, update, or commit any repository file.
+8. If the receiving handoff already exists, do **not** overwrite or normalize it.
+9. Prepare the complete proposed receiving handoff with status `DRAFT`, using the standard handoff structure and all information that can be verified from the repository and current conversation.
+10. Return the **entire handoff file content** to the user as plain Markdown so the user can place it in `docs/handoffs/` manually.
+11. Provide the exact commit message that should be used for the manual initial-DRAFT commit.
+12. Do **not** provide the separate bootstrap instruction for the next chat in the same response. A read-only AI MUST keep its response focused on the complete handoff file and its manual commit message so that constrained interfaces are not unnecessarily burdened by a second long artifact.
+13. Do not claim `DRAFT` creation, `HANDED_OFF`, a commit, post-bootstrap verification, or `BOOTSTRAP = COMPLETE` because those repository operations were not performed by the AI.
+14. The user is responsible for applying the supplied handoff file and completing the required repository lifecycle writes manually before treating bootstrap as complete.
+
+For a READ-ONLY AI, the supplied handoff is a proposed repository state, not evidence that the repository already contains that state.
+
+If the previous handoff is `READY_FOR_HANDOFF`, the READ-ONLY AI may state that the manual bootstrap must subsequently perform the corresponding `READY_FOR_HANDOFF` → `HANDED_OFF` lifecycle update, but it MUST NOT present that transition as completed.
+
+If the receiving handoff already exists and indicates a qualifying pre-existing lifecycle violation, the READ-ONLY AI must report the blocked condition and MUST NOT attempt Lifecycle Recovery.
 
 If the new chapter is the first chapter of a specialization, there is no previous handoff to mark `HANDED_OFF`; still create and commit the new chapter's `DRAFT` handoff immediately, then perform the applicable post-bootstrap consistency verification.
 
