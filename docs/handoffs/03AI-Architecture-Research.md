@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03AH — Architecture & Research
 
 Status:
-READY_FOR_HANDOFF
+HANDED_OFF
 
 ## Current objective
 
@@ -41,18 +41,18 @@ reason / source / propagation / conflict / cycle
 
 ### 1. Evidence summary
 
-| Test | What was tested | Result | What it establishes / does not establish |
-|---|---|---|---|
-| U-1 | Predicate/condition evaluation with missing context | Model B survives preliminarily | Missing evidence can remain a cause/context distinction; no need for a typed state was demonstrated. |
-| U-2 | Authority standing with missing/ambiguous authority evidence | Model B survives preliminarily | Authority uncertainty can be represented through subject + cause/context without proving a semantic subtype. |
-| U-3 | Core current-operation result at an operation boundary | Model B survives preliminarily | An unresolved operation result need not become a new state subtype merely because its cause differs. |
-| U-4 | Candidate eligibility propagated from an unresolved predicate | Model B survives preliminarily | Propagation can be represented through subject, cause, origin, source, and dependency context. `PROPAGATED` is not demonstrated to be a semantic state. |
-| U-5 | Candidate effect depending on an unresolved effective outcome | Model B survives preliminarily | Dependency relation and provenance preserve the relevant distinction without requiring a typed `UNRESOLVED`. |
-| U-6 | Effective outcome with competing eligible ALLOW/DENY candidates and no resolving precedence | Model B survives preliminarily, with increased pressure | Conflict is semantically relevant context, but the test did not prove that `CONFLICT` must be encoded as a subtype of `UNRESOLVED`. |
-| U-7 | Dependency predicate whose target effective outcome is unresolved | Model B survives preliminarily | The dependency relation, target, source, and consumer context preserve the distinction; consumer consequence need not be encoded in the state itself. |
-| U-8 | Eligibility dependency on unresolved authority | Model B survives preliminarily | Dependency target and consumer role can affect downstream behavior while remaining explicit context rather than becoming unresolved-state subtypes. |
-| U-9 | Search for the smallest semantic-information-loss counterexample | No counterexample found | For the tested distinctions, Model B preserved the necessary information when sufficient context/graph/rules were available. This does not prove universal superiority. |
-| U-10 | Combinatorial growth across cause × consumer role × dependency target | Neither model wins by simple counting | Complexity can accumulate in Model A's taxonomy or in Model B's rules/policies. The architectural question is where complexity is intentionally located and structured. |
+| Test | What was tested                                                                             | Result                                                  | What it establishes / does not establish                                                                                                                                |
+| ---- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| U-1  | Predicate/condition evaluation with missing context                                         | Model B survives preliminarily                          | Missing evidence can remain a cause/context distinction; no need for a typed state was demonstrated.                                                                    |
+| U-2  | Authority standing with missing/ambiguous authority evidence                                | Model B survives preliminarily                          | Authority uncertainty can be represented through subject + cause/context without proving a semantic subtype.                                                            |
+| U-3  | Core current-operation result at an operation boundary                                      | Model B survives preliminarily                          | An unresolved operation result need not become a new state subtype merely because its cause differs.                                                                    |
+| U-4  | Candidate eligibility propagated from an unresolved predicate                               | Model B survives preliminarily                          | Propagation can be represented through subject, cause, origin, source, and dependency context. `PROPAGATED` is not demonstrated to be a semantic state.                 |
+| U-5  | Candidate effect depending on an unresolved effective outcome                               | Model B survives preliminarily                          | Dependency relation and provenance preserve the relevant distinction without requiring a typed `UNRESOLVED`.                                                            |
+| U-6  | Effective outcome with competing eligible ALLOW/DENY candidates and no resolving precedence | Model B survives preliminarily, with increased pressure | Conflict is semantically relevant context, but the test did not prove that `CONFLICT` must be encoded as a subtype of `UNRESOLVED`.                                     |
+| U-7  | Dependency predicate whose target effective outcome is unresolved                           | Model B survives preliminarily                          | The dependency relation, target, source, and consumer context preserve the distinction; consumer consequence need not be encoded in the state itself.                   |
+| U-8  | Eligibility dependency on unresolved authority                                              | Model B survives preliminarily                          | Dependency target and consumer role can affect downstream behavior while remaining explicit context rather than becoming unresolved-state subtypes.                     |
+| U-9  | Search for the smallest semantic-information-loss counterexample                            | No counterexample found                                 | For the tested distinctions, Model B preserved the necessary information when sufficient context/graph/rules were available. This does not prove universal superiority. |
+| U-10 | Combinatorial growth across cause × consumer role × dependency target                       | Neither model wins by simple counting                   | Complexity can accumulate in Model A's taxonomy or in Model B's rules/policies. The architectural question is where complexity is intentionally located and structured. |
 
 ### C-1.4 — `origin`
 
@@ -229,7 +229,6 @@ The minimum Resolution Context is **still not established**. The remaining candi
 
 No Architecture Decision has been made.
 
-
 ### C-1.6-T1 — `consumer consequence`
 
 C-1.6-T1 tested whether **`consumer consequence` is independently necessary** as a Resolution Context axis, or whether it is a derived result of applying a consumer rule to retained Resolution Context.
@@ -339,10 +338,10 @@ This list remains **provisional**. The remaining fields have not yet been proven
 
 C-1.4, C-1.5, and C-1.6-T1 now provide three consecutive bounded tests of candidate context elements:
 
-| Candidate | Current result | Working treatment |
-|---|---|---|
-| `origin` | No independent semantic-necessity counterexample found | Derived / reconstructable information candidate |
-| `provenance` | No independent semantic-necessity counterexample found | Derived / reconstructable information candidate |
+| Candidate              | Current result                                         | Working treatment                                |
+| ---------------------- | ------------------------------------------------------ | ------------------------------------------------ |
+| `origin`               | No independent semantic-necessity counterexample found | Derived / reconstructable information candidate  |
+| `provenance`           | No independent semantic-necessity counterexample found | Derived / reconstructable information candidate  |
 | `consumer consequence` | No independent semantic-necessity counterexample found | Derived semantic result / consumer-policy output |
 
 The three results reinforce a common distinction:
@@ -485,13 +484,13 @@ Neither statement implies identical scaling, nor does the combination count alon
 
 The current evidence suggests a real trade-off rather than a universal winner.
 
-| Concern | Model A | Model B |
-|---|---|---|
-| Local readability of one rule | Often easier when the subtype directly names the relevant semantic case | Can be concise, but important meaning may be distributed across fields |
-| Cross-file navigation | Potentially lower when behavior is coupled to the subtype taxonomy | Can be higher if policies/rules are externalized |
-| Transparency of semantic state | Strong when subtype taxonomy is well designed | Strong separation between state and context, but requires the reader to inspect context |
-| Debugging / provenance | Can require reconstructing why a subtype was assigned | Natural fit for explicit source/origin/cause fields |
-| Risk of taxonomy growth | Higher if every new distinction becomes a subtype | Lower at the state-vocabulary level, but rule/policy growth remains possible |
+| Concern                        | Model A                                                                 | Model B                                                                                 |
+| ------------------------------ | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Local readability of one rule  | Often easier when the subtype directly names the relevant semantic case | Can be concise, but important meaning may be distributed across fields                  |
+| Cross-file navigation          | Potentially lower when behavior is coupled to the subtype taxonomy      | Can be higher if policies/rules are externalized                                        |
+| Transparency of semantic state | Strong when subtype taxonomy is well designed                           | Strong separation between state and context, but requires the reader to inspect context |
+| Debugging / provenance         | Can require reconstructing why a subtype was assigned                   | Natural fit for explicit source/origin/cause fields                                     |
+| Risk of taxonomy growth        | Higher if every new distinction becomes a subtype                       | Lower at the state-vocabulary level, but rule/policy growth remains possible            |
 
 The independent review's usability observations should be treated as qualitative analysis, not as an objective benchmark. In particular, no fixed step-count comparison is established.
 
@@ -507,16 +506,16 @@ No quantitative AI benchmark was established by U-1 through U-10. Claims such as
 
 ### 7. Remaining trade-offs
 
-| Dimension | Model A | Model B |
-|---|---|---|
-| Semantic vocabulary | More descriptive, potentially more specialized | Small and stable |
-| Context separation | Some context can become embedded in types | Explicit by design |
-| Local pattern matching | Potentially simpler | Requires context-aware interpretation |
-| Provenance/debugging | May require additional metadata anyway | Naturally represented by orthogonal fields |
-| Taxonomy growth | Risk of subtype proliferation | State vocabulary remains stable |
-| Rule/policy growth | Some behavior may be encoded through subtype dispatch | More behavior may live in rules/policies |
-| Cross-context consistency | Depends on keeping subtype meanings stable | Depends on consistent interpretation of shared fields/rules |
-| Extensibility | New semantic distinctions may invite new subtypes | New dimensions can often be added orthogonally, subject to rule complexity |
+| Dimension                 | Model A                                               | Model B                                                                    |
+| ------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------- |
+| Semantic vocabulary       | More descriptive, potentially more specialized        | Small and stable                                                           |
+| Context separation        | Some context can become embedded in types             | Explicit by design                                                         |
+| Local pattern matching    | Potentially simpler                                   | Requires context-aware interpretation                                      |
+| Provenance/debugging      | May require additional metadata anyway                | Naturally represented by orthogonal fields                                 |
+| Taxonomy growth           | Risk of subtype proliferation                         | State vocabulary remains stable                                            |
+| Rule/policy growth        | Some behavior may be encoded through subtype dispatch | More behavior may live in rules/policies                                   |
+| Cross-context consistency | Depends on keeping subtype meanings stable            | Depends on consistent interpretation of shared fields/rules                |
+| Extensibility             | New semantic distinctions may invite new subtypes     | New dimensions can often be added orthogonally, subject to rule complexity |
 
 This table is a trade-off map, not a ranking.
 
@@ -553,7 +552,6 @@ Otherwise, the next productive step is architecture design work around **context
 This handoff has been updated with Synthesis-1, the C-1.4 research checkpoint, and the completed C-1.5-T1 provenance adversarial pass. No Architecture Decision has been recorded.
 
 The chapter is now `READY_FOR_HANDOFF` for migration to **AIP Mirror — 03AI — Architecture & Research**. The research remains provisional and no final Architecture Decision has been made.
-
 
 ### C-1.6-T2 — `dependency relation`
 
@@ -859,8 +857,6 @@ Primary discriminator for future adversarial tests:
 
 If yes, identify the missing intrinsic semantic distinction and test whether that distinction genuinely belongs in state rather than context/rules. If no, Model B remains viable for that case, while the architecture still must solve context preservation and rule/policy organization.
 
-
-
 ### C-1.6-T3 — `dependency target`
 
 C-1.6-T3 tested whether `dependency target` has independent semantic necessity as an internal Resolution Context attribute, or whether its semantics belong to the relationship between Resolution instances.
@@ -1151,12 +1147,12 @@ RECOMMENDED NEXT STEP
 - Commission further adversarial tests only when they target a concrete remaining uncertainty.
 ```
 
-
 ## Bootstrap continuation
 
 This chapter was initialized from **AIP Mirror — 03AH — Architecture & Research**.
 
 Bootstrap state:
+
 - Previous handoff: `03AH`
 - Current handoff: `03AI`
 - Status: `DRAFT`
