@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03AJ — Architecture & Research
 
 Status:
-READY_FOR_HANDOFF
+HANDED_OFF
 
 ## Migration checkpoint
 
