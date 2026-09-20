@@ -17,6 +17,10 @@ The canonical project repository is:
 
     REPOSITORY_ROOT = https://github.com/paulhuman/aip-mirror
 
+A qualified internal repository path is represented as:
+
+    REPOSITORY_REFERENCE = paulhuman/aip-mirror@<ref>:/path/to/file.md
+
 Unless explicitly qualified otherwise, every repository-relative path in this skill resolves to the root of aip-mirror on the main branch.
 
 When an exact branch, tag, or commit matters for historical or reproducibility purposes, use the qualified internal reference form:
