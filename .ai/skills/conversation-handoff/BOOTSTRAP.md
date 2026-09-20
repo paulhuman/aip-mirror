@@ -20,6 +20,10 @@ Bootstrap operates on the canonical AIP Mirror repository:
 
     REPOSITORY_ROOT = https://github.com/paulhuman/aip-mirror
 
+A qualified internal repository path is represented as:
+
+    REPOSITORY_REFERENCE = paulhuman/aip-mirror@<ref>:/path/to/file.md
+
 The canonical project branch is:
 
     main
