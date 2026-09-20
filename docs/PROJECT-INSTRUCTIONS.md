@@ -6,6 +6,10 @@ The canonical AIP Mirror project repository is:
 
     REPOSITORY_ROOT = https://github.com/paulhuman/aip-mirror
 
+A qualified internal repository path is represented as:
+
+    REPOSITORY_REFERENCE = paulhuman/aip-mirror@<ref>:/path/to/file.md
+
 The repository's canonical project branch is:
 
     main
