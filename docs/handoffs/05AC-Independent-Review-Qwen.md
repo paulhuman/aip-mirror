@@ -13,7 +13,7 @@ AC
 05AB — Independent Review (Qwen)
 
 **Status:**
-READY_FOR_HANDOFF
+HANDED_OFF
 
 ---
 
