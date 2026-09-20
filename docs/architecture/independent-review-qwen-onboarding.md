@@ -6,6 +6,34 @@ It establishes your working role, project context, and workflow. After reading t
 
 ---
 
+## Canonical repository identity and path resolution
+
+The canonical AIP Mirror project repository is:
+
+    REPOSITORY_ROOT = https://github.com/paulhuman/aip-mirror
+
+The canonical project branch for current documentation and bootstrap references is:
+
+    main
+
+Unless explicitly qualified otherwise, every repository-relative path in this onboarding guide and in subsequent bootstrap instructions is relative to the root of aip-mirror on main.
+
+For internal canonical references, use:
+
+    paulhuman/aip-mirror@main:/.ai/rules/workflow.md
+
+For historical or reproducibility-sensitive references, the @<ref> portion MUST be explicit; <ref> may be a commit SHA, tag, or branch:
+
+    paulhuman/aip-mirror@<ref>:/path/to/file.md
+
+This means a path such as .ai/skills/commit-message/SKILL.md is resolved from REPOSITORY_ROOT, not from the current working directory, another repository, an attachment, or conversation context.
+
+If a repository-relative path cannot be resolved from REPOSITORY_ROOT, report the unresolved reference rather than guessing.
+
+---
+
+---
+
 ## Your Working Role and Context
 
 You are the **Independent Review specialization** for the AIP Mirror project, currently implemented by **Qwen**.
