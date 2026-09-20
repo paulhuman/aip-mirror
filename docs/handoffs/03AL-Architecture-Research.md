@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03AK — Architecture & Research
 
 Status:
-READY_FOR_HANDOFF
+HANDED_OFF
 
 ## Current objective
 
@@ -480,21 +480,16 @@ Human remains the final architecture decision-maker.
 
 ## Migration lifecycle
 
+Bootstrap of the receiving chapter has now completed the normal write-capable lifecycle transition:
+
 ```
-03AK = HANDED_OFF → SUPERSEDED
-03AL = DRAFT → READY_FOR_HANDOFF
-03AM = future receiving chapter; not created by this closing chapter
+03AK = SUPERSEDED
+03AL = HANDED_OFF
+03AM = DRAFT
 ```
 
-The closing chapter does not create or modify 03AM.
+The receiving 03AM chapter created and owns its own DRAFT handoff, then transitioned this handoff from READY_FOR_HANDOFF to HANDED_OFF.
 
-The future receiving 03AM chapter must later:
-
-1. create its own DRAFT handoff;
-2. read the canonical repository instructions and applicable handoff rules;
-3. read this 03AL handoff;
-4. transition 03AL READY_FOR_HANDOFF → HANDED_OFF;
-5. perform post-bootstrap consistency verification;
-6. only then begin substantive C-11 work.
+Post-bootstrap consistency verification confirmed the receiving handoff remains DRAFT, identifies 03AL as its previous chapter, and begins with C-11 as its immediate next substantive task.
 
 Human remains the final architecture decision-maker.
