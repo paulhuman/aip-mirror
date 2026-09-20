@@ -1,5 +1,19 @@
 # Conversation lifecycle rules
 
+## Repository path resolution
+
+This rule inherits the canonical repository identity and path-resolution rule from docs/PROJECT-INSTRUCTIONS.md.
+
+All unqualified repository-relative paths in this rule resolve from:
+
+    REPOSITORY_ROOT = https://github.com/paulhuman/aip-mirror
+
+on the main branch. Use paulhuman/aip-mirror@<ref>:/path when a specific branch, tag, or commit must be explicit for historical or reproducibility purposes.
+
+Do not resolve repository paths from the current working directory, another repository, an attachment, or conversation context.
+
+---
+
 These rules define how AIP Mirror conversations are split into chapters and how work is handed from one conversation to the next.
 
 ## Repository path resolution
