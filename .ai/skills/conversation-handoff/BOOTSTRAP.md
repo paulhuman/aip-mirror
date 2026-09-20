@@ -14,6 +14,32 @@ The bootstrap message supplies:
 
 These values are runtime context for the current migration. Do not write them into this template.
 
+## Canonical repository identity and path resolution
+
+Bootstrap operates on the canonical AIP Mirror repository:
+
+    REPOSITORY_ROOT = https://github.com/paulhuman/aip-mirror
+
+The canonical project branch is:
+
+    main
+
+All repository-relative paths used by this bootstrap procedure MUST be resolved from REPOSITORY_ROOT on main unless the path is explicitly given as an absolute filesystem path, URL, or qualified repository reference.
+
+For an internal canonical reference, use:
+
+    paulhuman/aip-mirror@main:/.ai/rules/workflow.md
+
+For historical or reproducibility-sensitive references, the branch, tag, or commit MUST be explicit, for example:
+
+    paulhuman/aip-mirror@<commit-sha>:/docs/handoffs/03AK-Architecture-Research.md
+
+The bootstrap AI MUST NOT resolve .ai/..., docs/..., or other unqualified repository paths from its current working directory, another repository, an attachment, or conversational context.
+
+**Bootstrap ordering requirement:** this repository identity/path rule MUST be established before the AI attempts to read any .ai/... path. The first repository-controlled document read after this bootstrap template must therefore be docs/PROJECT-INSTRUCTIONS.md from REPOSITORY_ROOT, followed by the applicable .ai/... rules and skills.
+
+If a referenced repository-relative path cannot be resolved from REPOSITORY_ROOT, bootstrap MUST stop and report the unresolved reference rather than guessing.
+
 ## Repository write-capability self-check
 
 Before executing the repository-mutating parts of bootstrap, the AI MUST determine which capability branch applies:
