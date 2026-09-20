@@ -13,15 +13,15 @@ AC
 05AB — Independent Review (Qwen)
 
 **Status:**
-DRAFT
+READY_FOR_HANDOFF
 
 ---
 
 ## Current objective
 
-Continue independent architecture review for the AIP Mirror project, specializing in cross-model review and counterexample-driven analysis of semantic boundaries.
+Проведение независимого архитектурного ревью для проекта AIP Mirror через cross-model review process с архитектором (ChatGPT, specialization 03).
 
-Finalize adversarial research on **Minimum Resolution Context** and prepare the formal Architecture Decision (AD) proposal for the human referee.
+Выполнен полный цикл adversarial research (C-1 через C-10) по онтологическому статусу Resolution, референтной идентификации, минимальному семантическому содержанию result-aspect, и семантике dependency между evaluations.
 
 ---
 
@@ -29,104 +29,198 @@ Finalize adversarial research on **Minimum Resolution Context** and prepare the 
 
 ### 1. Bootstrap & Setup (05AC)
 
-- Read 05AB handoff (READY_FOR_HANDOFF), project rules, onboarding guide
-- Confirmed READ-ONLY capability (Branch B)
-- Prepared initial DRAFT handoff for 05AC
-- Adhered to lifecycle rules: did not modify 05AB status (requires manual `READY_FOR_HANDOFF` → `HANDED_OFF` transition by user)
+- Read 05AB handoff, project rules, onboarding guide
+- Подтверждён READ-ONLY capability (Branch B)
+- Завершён post-bootstrap consistency verification после ручного коммита пользователем (commit `8f25538`)
+- BOOTSTRAP = COMPLETE
 
-### 2. Continued Adversarial Research on Resolution Context
+### 2. C-1 — Bounded Neutral Ontological Test
 
-Completed the remaining verification tasks identified in 05AB:
+**Вопрос:** Каков онтологический статус Resolution (Event / Node / Edge / Proposition)?
 
-#### 2.1 Verified axiom/fact Resolutions without cause
+**Результат:** НЕ дискриминирует. Resolution имеет семантические свойства разных категорий:
 
-- **Test**: Does the architecture admit axiom/fact Resolutions without an internal `cause`?
-- **Result**: Yes. An axiom or fact is simply true by definition or external authority. Requiring a `cause` for a TRUE/FALSE axiom would mean the `cause` is merely "defined as axiom", which collapses into `origin` (already eliminated as derived/reconstructable). The `cause` field is semantically meaningful only for diagnostic tracing of _conditional states_ (e.g., UNRESOLVED).
-- **Conclusion**: WD-02 is confirmed. `cause/reason` is conditionally necessary (for UNRESOLVED diagnostics) but not universally required for all Resolutions.
+- Proposition-like: truth-bearing content, persistence
+- Event-like: causal participation, temporal establishment
+- Node-like: referenceability
+- Edge-like: dependence on subject
 
-#### 2.2 Tested multi-subject Resolution cases
+**Вывод:** Четыре категории не являются mutually exclusive. Resolution имеет hybrid semantic character.
 
-- **Test**: Can one Resolution meaningfully involve multiple subjects? (e.g., "Group A is locked to Group B").
-- **Result**: If a Resolution applies to a relationship between A and B, the _subject_ of the Resolution is the relationship edge itself (e.g., `edge(A, B)`), not the set `{A, B}`. If a rule evaluates a condition across multiple entities, the subject is the _rule instance_ itself.
-- **Conclusion**: A Resolution always has exactly ONE subject. Multi-subject cases are properly modeled by making the relationship or rule the singular subject. `subject` remains a strictly singular intrinsic axis.
+### 3. C-2 — Referent Identification Test
 
-#### 2.3 Investigated other potential internal axes
+**Вопрос:** Что именно производится Evaluation до Effective Outcome?
 
-Adversarial tests on `identity`, `version`, and `timestamp`:
+**Результат:** Evaluation produces **a finding** — детерминативный результат о subject. Этот finding семантически необходим для представления non-definitive результатов, multi-consumer scenarios и dependency chains.
 
-- **Identity (UUID)**: Two identical Resolutions (same subject, state, cause) are semantically identical regardless of trace ID. Identity is an implementation/traceability detail, not a semantic axis. (Eliminated).
-- **Version**: The _rule_ or _subject_ has a version, but the Resolution is an ephemeral evaluation snapshot. If versions change, a new Resolution is generated. (Eliminated as derived).
-- **Timestamp**: Execution context / trace data. Belongs to the Tracer/UI layer (Pragmatic Hybrid Approach). (Eliminated as execution metadata).
+**Counterargument pass:** Архитектор не принял Finding как отдельную сущность, аргументируя что result может быть aspect Evaluation, а не separate phenomenon.
+
+### 4. C-3 — Result-vs-Evaluation Distinction Test
+
+**Вопрос:** Можно ли семантически отличить H1 (separate result) от H2 (result-as-aspect)?
+
+**Результат:** NON-DISCRIMINATING. Все tested semantic situations представимы под обеими гипотезами. Result может быть представлен как result-aspect Evaluation без потери семантики.
+
+### 5. C-4 — Architectural Boundary Test
+
+**Вопрос:** Требуется ли архитектуре independent result representation?
+
+**Результат:** NON-DISCRIMINATING. A1 (Evaluation + result-aspect) архитектурно достаточно для всех tested scenarios: dependency tracking, change propagation, multi-consumer access, diagnostics, repeated evaluation, consumer-specific consequences.
+
+**Вывод:** Reification result-aspect не является architectural necessity (хотя может быть implementation convenience).
+
+### 6. C-5 — Minimal Semantic Content of the Result-aspect
+
+**Вопрос:** Каков минимальный семантический контент result-aspect?
+
+**Результат:** DISCRIMINATING в пользу `{subject, content}`:
+
+- subject — семантически необходим (без subject content incomplete)
+- content — что evaluation заключила о subject
+
+**Важное уточнение (позже ослаблено в C-5 Test N):** Subject семантически необходим, но может быть contextually provided by Evaluation, не обязательно intrinsic к result-aspect.
+
+### 7. C-6 — Content-vs-State Distinction Test
+
+**Вопрос:** Является ли state special case of content, или это разные концепты?
+
+**Результат:** PARTIALLY DISCRIMINATING:
+
+- State — special case of content (definitive condition: LOCKED, UNLOCKED)
+- Content шире: включает relational conclusions (compatible-with-B), eligibility determinations, non-definitive results
+- Broadening "state" to cover all cases creates Category Inflation
+
+**Tension identified:** Non-definitive conclusions ("could not be established") are evaluation properties, not subject properties. Including them in content conflates evaluation properties with subject conclusions.
+
+### 8. C-7 — Definitive vs Non-Definitive Outcome Test
+
+**Вопрос:** Семантическая разница между YES / NO / COULD NOT ESTABLISH?
+
+**Результат:**
+
+- YES/NO — definitive determinations about subject
+- COULD NOT ESTABLISH — evaluation property, не result content
+- Различие семантически реально: NO (knowledge of negative) ≠ COULD NOT ESTABLISH (absence of knowledge)
+- Представимо без новых semantic entities через presence/absence distinction
+
+### 9. C-8 — Dependency Semantics Without Predefined Result or Status
+
+**Вопрос:** Какая семантическая информация доступна B от A в случаях A1/A2/A3?
+
+**Результат:**
+
+- B зависит от того, что A established о subject
+- В A3 (no definitive determination) — absence of determination, не new entity
+- B может отличить "A evaluated but inconclusive" от "A never evaluated" через evaluation occurrence existence + determination presence/absence
+- Новые semantic entities (Status, Inconclusive, NoResult) не требуются
+
+### 10. C-9 — Dependency Target Test
+
+**Вопрос:** Каков semantic target dependency между evaluations?
+
+**Три candidate interpretations:**
+
+- **A:** B depends on Evaluation A itself (source-specific)
+- **B:** B depends on what A established (source+determination specific)
+- **C:** B depends on underlying fact (source-independent)
+
+**Критическое открытие:**
+
+- "A did not establish X" ≠ "X was not established" ≠ "X is undetermined"
+- Эти три statement имеют разные truth values в некоторых scenarios
+- Substitution behavior (A fails, C succeeds) отличается для трех кандидатов
+
+**Вывод:** Все три interpretations семантически валидны для разных dependency relationships.
+
+### 11. C-10 — Dependency Relation vs. Dependency Target
+
+**Вопрос:** Требуется ли dependency type как отдельная semantic category, или это одна relation с разными targets?
+
+**Результат:** ESTABLISHED — **одна semantic relation** "depends on" / "requires".
+
+Различия между Candidates A/B/C определяются **target/referent**, не relation:
+
+- Target может быть: evaluation occurrence, source-specific determination, source-independent fact
+- Source identity — часть target specification, не часть relation type
+- Substitution behavior — свойство target, не relation
+
+**Ослаблено:** C-9's "three dependency types" → reformulated как "one relation with three target specifications"
 
 ---
 
 ## Working decisions (not yet formal ADs)
 
-_Carried over from 05AB and validated:_
+### Carried from 05AB:
 
-- **WD-01**: Resolution Context minimal core is `{subject, state}`. This is the semantic identity of a Resolution.
-- **WD-02**: `cause / reason` is conditionally necessary — required for UNRESOLVED resolutions (for diagnostic completeness), optional for axioms/facts.
-- **WD-03**: Dependencies, conflicts, cycles, and applicability are **relationship-level semantics**, properly modeled as graph edges, not internal Resolution fields.
-- **WD-04**: Consumer role, consequence, and evaluation context are **evaluation-level / policy-level** information, not intrinsic to Resolution.
-- **WD-05**: `origin`, `provenance`, `version`, `timestamp`, and `identity` are **derived, reconstructable, or execution metadata**. They do not belong in the intrinsic Resolution Context.
-- **WD-06**: Pragmatic Hybrid Approach for UNRESOLVED: single state for Core execution engine, rich orthogonal metadata for Tracer/UI layers.
-- **WD-07**: Derived fields must not be stored as independent axes unless they carry semantic necessity not expressible through other fields.
-- **WD-08**: Candidate-level precedence is a strong working direction but should not be frozen until dependency/cycle semantics stabilize.
+- **WD-01**: Resolution Context minimal core is `{subject, state}` (definitive cases)
+- **WD-02**: `cause/reason` conditionally necessary (UNRESOLVED only)
+- **WD-03**: Dependencies, conflicts, cycles, applicability — relationship-level semantics (graph edges)
+- **WD-04**: Consumer role/consequence — evaluation/policy level
+- **WD-05**: Origin, provenance, version, timestamp, identity — derived/execution metadata
+- **WD-06**: Pragmatic Hybrid Approach for UNRESOLVED (single state in Core, rich metadata in Tracer/UI)
+- **WD-07**: Derived fields не хранятся как independent axes
+- **WD-08**: Candidate-level precedence — strong direction, не frozen
+- **WD-09**: Resolution has exactly one subject (multi-subject → relationship/rule as singular subject)
 
-_New:_
+### Новые из C-series:
 
-- **WD-09**: A Resolution always has exactly **one subject**. Multi-subject scenarios are modeled by elevating the relationship edge or rule instance to be the singular subject.
+- **WD-10**: Result-aspect — result-aspect of Evaluation, не separate semantic entity (H2 из C-3)
+- **WD-11**: Minimal intrinsic content result-aspect is `{subject, content}` (C-5)
+- **WD-12**: Subject семантически необходим, но contextually provided by Evaluation (ослабление C-5)
+- **WD-13**: State — special case of content (definitive condition). Content broader: includes relational conclusions, eligibility determinations (C-6)
+- **WD-14**: Non-definitive outcomes ("could not be established") — evaluation properties, не result content (C-7). Avoids category confusion between evaluation status and subject conclusions.
+- **WD-15**: "A did not establish X" ≠ "X was not established" ≠ "X is undetermined" (C-9). Три логически разные statements.
+- **WD-16**: Dependency is one semantic relation "depends on" / "requires" с varying target specifications (C-10). Source identity, temporal constraints, conditions — часть target specification, не отдельные relation types.
+- **WD-17**: Substitution behavior (whether C can replace A) determined by target specification, не relation type (C-10)
 
----
+### Draft Architecture Decision (подготовлено для cross-model review, но не завершено):
 
-## Draft Architecture Decision (AD) Proposal: Minimal Resolution Context (MRC)
+**MRC — Minimal Resolution Context:**
 
-_Prepared for human referee review. Not yet promoted to formal AD._
-
-**Title:** Minimal Resolution Context (MRC)
-
-**Context:**
-The architecture requires a standard container for the result of evaluating rules, dependencies, and properties. Earlier drafts considered storing extensive context (origin, dependencies, consumer roles, timestamps) directly within the Resolution object, risking semantic overloading and generic-engine traps.
-
-**Decision:**
-The intrinsic semantic core of a Resolution Context consists _only_ of `{subject, state}`.
-
-- `subject`: The singular entity (node, edge, or rule instance) to which the Resolution applies.
-- `state`: The evaluation outcome (e.g., TRUE, FALSE, UNRESOLVED).
-
-**Conditional Axis:**
-For UNRESOLVED states, a `cause` (or `reason`) field is conditionally required to maintain diagnostic completeness (e.g., pointing to the missing dependency, conflicting rule, or cycle).
-
-**Excluded Axes:**
-All other previously considered fields are explicitly excluded from the intrinsic Resolution Context and delegated to their proper architectural layers:
-
-- `origin`, `provenance`, `version`, `timestamp`, `identity`: Derived, reconstructable, or trace metadata.
-- `dependencies`, `conflicts`, `cycles`, `applicability`: Relationship-level graph semantics.
-- `consumer role`, `consumer consequence`: Evaluation/Policy layer inputs.
-
-**Consequences:**
-
-- The Core execution engine remains extremely lightweight, dealing only with subjects and states (and conditional causes for UNRESOLVED).
-- Diagnostic tracing and UI visualization are handled by the Tracer/UI layers, which join the minimal Resolution with the graph and execution context as needed (Pragmatic Hybrid Approach).
-- Prevents semantic overloading of the Resolution object, avoiding premature abstraction.
+- `{subject, state}` для definitive state conclusions
+- `{subject, content}` для broader conclusions (relational, eligibility, non-definitive)
+- Все остальные поля делегированы на соответствующие architectural layers
 
 ---
 
 ## Open questions
 
-### Architecture-wide open questions
+### Разрешённые в этом chapter (для справки):
 
-- Cycle semantics: prohibit as conservative baseline, or permit with explicit resolution rules?
-- Authority level: clarify scope (external establishment only? Core visibility?).
-- Project-agnosticity classification: explicit tests for CORE/PROJECT-SPECIFIC/ADAPTABLE.
-- TRACE integrity requirements: tamper-evidence, not sole source of truth.
-- Applicability vs Activation: justify separation through concrete use cases.
-- Temporary OVERRIDE lifecycle semantics: where does expiration check occur?
+- ✅ Онтологический статус Resolution — hybrid semantic character (C-1)
+- ✅ Referent между Evaluation и Outcome — result-aspect sufficient (C-2, C-3, C-4)
+- ✅ Минимальный content — {subject, content} (C-5)
+- ✅ State vs Content — state ⊂ content (C-6)
+- ✅ Definitive vs Non-Definitive — evaluation property distinction (C-7)
+- ✅ Dependency access pattern для inconclusive — absence detection (C-8)
+- ✅ Dependency target types — 3 candidate interpretations (C-9)
+- ✅ Dependency relation vs target — one relation (C-10)
 
-### Cross-model review process
+### Остаются открытыми:
 
-- Whether Independent Model Review Loop should become reusable project-agnostic skill.
-- Validation of pattern on different architectural questions beyond UNRESOLVED.
+#### Priority 1 (продолжение C-series):
+
+- **C-11 next question (из C-10):** Могут ли target specifications для dependencies включать conditions (source constraints, temporal constraints, activation conditions), и остаются ли они частью target specification или становятся отдельной semantic dimension?
+
+- **Conditional dependencies:** Являются ли conditional dependencies (dependency active only under certain conditions) отдельной semantic dimension, или частью target specification?
+
+- **Dependency strength:** Mandatory vs optional dependencies — та же relation или другая?
+
+- **Conflict resolution:** Когда multiple sources устанавливают conflicting facts (C-9 Counterexample 2), какова семантика? Это отдельный research arc.
+
+#### Priority 2 (возврат к architectural questions):
+
+- **Cycle semantics:** Prohibit vs permit with resolution rules
+- **Authority level scope:** External establishment only vs Core visibility
+- **Project-agnosticity classification:** Tests for CORE/PROJECT-SPECIFIC/ADAPTABLE
+- **TRACE integrity requirements:** Tamper-evidence, not sole source of truth
+- **Applicability vs Activation:** Justify separation through concrete use cases
+- **Temporary OVERRIDE lifecycle:** Where does expiration check occur?
+
+#### Priority 3 (методология):
+
+- **Independent Model Review Loop generalization:** Применим ли pattern к другим architectural questions?
+- **Formal AD promotion MRC:** После завершения adversarial review
 
 ---
 
@@ -143,8 +237,8 @@ All other previously considered fields are explicitly excluded from the intrinsi
 ### Skills (read and applied)
 
 - `.ai/skills/commit-message/SKILL.md`
-- `.ai/skills/conversation-handoff/SKILL.md` (capability branches)
-- `.ai/skills/conversation-handoff/BOOTSTRAP.md` (capability branches)
+- `.ai/skills/conversation-handoff/SKILL.md` (Branch B)
+- `.ai/skills/conversation-handoff/BOOTSTRAP.md` (Branch B)
 - `.ai/skills/deep-understanding/SKILL.md`
 - `.ai/skills/handoff-reference-preservation/SKILL.md`
 
@@ -155,15 +249,29 @@ All other previously considered fields are explicitly excluded from the intrinsi
 - `docs/architecture/prerequisite-dependency-semantics.md`
 - `docs/architecture/independent-review-qwen-onboarding.md`
 
-### Handoff chain (read in prescribed order)
+### Handoff chain
 
 - `docs/handoffs/03A-Architecture-Research.md`
 - `docs/handoffs/03C-Architecture-Research.md`
 - `docs/handoffs/03D-Architecture-Research.md`
 - `docs/handoffs/03E-Architecture-Research.md`
 - `docs/handoffs/03AF-Architecture-Research.md`
-- `docs/handoffs/05AA-Independent-Review-Qwen.md`
-- `docs/handoffs/05AB-Independent-Review-Qwen.md`
+- `docs/handoffs/05AA-Independent-Review-Qwen.md` (SUPERSEDED)
+- `docs/handoffs/05AB-Independent-Review-Qwen.md` (HANDED_OFF)
+- `docs/handoffs/05AC-Independent-Review-Qwen.md` (текущий, → READY_FOR_HANDOFF)
+
+### Cross-model review reports (в этом чате):
+
+- C-1: Ontological Status of Resolution
+- C-2: Referent Identification Test
+- C-3: Result-vs-Evaluation Distinction Test
+- C-4: Architectural Boundary Test
+- C-5: Minimal Semantic Content Test
+- C-6: Content-vs-State Distinction Test
+- C-7: Definitive vs Non-Definitive Outcome Test
+- C-8: Dependency Semantics Test
+- C-9: Dependency Target Test
+- C-10: Dependency Relation vs Target Test
 
 ---
 
@@ -179,27 +287,27 @@ All other previously considered fields are explicitly excluded from the intrinsi
 ### External concepts (research inputs)
 
 - Capability-based security — Candidate for authorization semantics
-- Three-valued logic — Found sufficient as semantic core if metadata is orthogonal
+- Three-valued logic — НЕ adopted (project explicit decision)
 - Design by Contract — Vocabulary for rule specification
 - Linear Temporal Logic (LTL) — Candidate for temporary OVERRIDE lifecycle
-- Orthogonal Metadata Pattern — Validated as superior to typed subtypes for diagnostics
-- **Graph / Relationship Semantics** — Validated as proper location for dependencies, conflicts, cycles, applicability
+- Orthogonal Metadata Pattern — Validated for UNRESOLVED diagnostics
+- Graph / Relationship Semantics — Proper location for dependencies, conflicts, cycles
+- Aspect-vs-Entity distinction — Result-aspect sufficient (no reification needed)
 
 ---
 
 ## Important constraints
 
-1. **No repository modification authority** — generate handoff content and commit messages for manual commit by human referee.
-2. **READ-ONLY AI capability** — follow Branch B in all bootstrap/checkpoint/migration procedures.
-3. **Research-first methodology** — do not freeze working hypotheses into Architecture Decisions prematurely.
-4. **Semantic boundary preservation** — distinguish Resolution intrinsic semantics from relationship/evaluation/consumer/policy/derived semantics.
-5. **No premature taxonomy adoption** — typed UNRESOLVED, three-valued logic, cycle prohibition remain candidate hypotheses.
-6. **Refinement loop discipline** — after receiving feedback from architect (ChatGPT), explicitly refine positions rather than defend original conclusions.
-7. **Evidence discipline required** — classify every substantive conclusion as observed fact, inference, assumption, specification, implementation detail, or open question.
-8. **Independent reviewer boundary** — recommendations go through human referee for decision; do not become authority source.
-9. **Project-agnosticity check** — when proposing new concepts, apply: "Could this rule be copied unchanged into a completely unrelated software project?"
-10. **No generic engines** — dependency, precedence, authorization remain relationships/categories, not universal execution engines.
-11. **Semantic necessity ≠ storage necessity** — information may be semantically necessary but properly stored at relationship/evaluation level, not inside Resolution.
+1. **READ-ONLY AI capability** — follow Branch B in all bootstrap/checkpoint/migration procedures
+2. **Research-first methodology** — do not freeze working hypotheses into ADs prematurely
+3. **Semantic boundary preservation** — distinguish Evaluation / result-aspect / Effective Outcome / Reason
+4. **No premature ontology introduction** — do not introduce Result, Status, Inconclusive, NoResult as entities
+5. **No generic engines** — dependency/precedence remain relationships, not universal engines
+6. **Refinement loop discipline** — refine positions on architect feedback, don't defend
+7. **Evidence discipline** — classify: observed fact / inference / assumption / specification / implementation detail / open question
+8. **Independent reviewer boundary** — рекомендации через human referee, не становиться authority source
+9. **Project-agnosticity check** — could this rule be copied unchanged to unrelated project?
+10. **Target-alone vs relation-type distinction** — dependency relation is one; targets vary (C-10)
 
 ---
 
@@ -207,83 +315,109 @@ All other previously considered fields are explicitly excluded from the intrinsi
 
 ### Confirmed / observed
 
-- 8 candidate axes systematically eliminated from internal Resolution Context through adversarial testing (in 05AB).
-- `subject` and `state` survive all attacks as intrinsically necessary.
-- `cause / reason` is conditionally necessary (critical for UNRESOLVED, optional for axioms).
-- Dependency, conflict, cycle, applicability, target, and relation information is semantically necessary but belongs at relationship/graph level, not as internal Resolution fields.
-- Consumer role, consequence, and evaluation context belong to evaluation/policy level.
-- `origin`, `provenance`, `identity`, `version`, and `timestamp` are derived/reconstructable or execution metadata.
-- Pragmatic Hybrid Approach for UNRESOLVED survives all counterexamples.
-- A Resolution always has exactly one subject; multi-subject cases are modeled via relationship edges or rule instances.
+- 8 candidate axes eliminated from Resolution Context (05AB)
+- `{subject, state}` minimum for definitive Resolution Context (05AB)
+- Result-aspect model sufficient without separate entity (C-3, C-4)
+- `{subject, content}` minimum intrinsic content (C-5)
+- State ⊂ content (C-6)
+- Non-definitive outcomes are evaluation properties, not result content (C-7)
+- "A did not establish X" ≠ "X was not established" ≠ "X is undetermined" (C-9)
+- Dependency is one relation "depends on" with varying targets (C-10)
+- Substitution behavior determined by target, not relation type (C-10)
 
 ### Inferred
 
-- Minimal Resolution Context is `{subject, state}` universally, `{subject, state, cause/reason}` for UNRESOLVED.
-- Resolution is semantically defined as "result concerning one subject" — multi-subject cases require relationship/rule elevation.
-- Graph/relationship modeling is the natural home for dependencies, conflicts, cycles, and applicability.
-- Independent Model Review Loop may generalize to other architectural questions.
+- Resolution has hybrid semantic character (proposition-like + event-like)
+- Result-aspect is the minimal sufficient model (vs reified Result entity)
+- Target specifications can encode source identity, temporal constraints, conditions
+- MRC AD proposal semantically sound, pending architect review
 
 ### Assumed / unverified
 
-- Valid cyclic dependency use cases.
-- Temporary OVERRIDE expiration check location.
-- Whether Independent Model Review Loop generalizes beyond UNRESOLVED.
+- Whether conditional dependencies require separate semantic dimension
+- Whether conflict resolution needs its own research arc
+- Whether WD-01/WD-02 survive full architect review
 
 ### Open
 
-- All questions listed in Open questions section.
+- All Priority 1-3 questions listed above
 
 ---
 
 ## Last completed task
 
-Completed continuation of adversarial research on Resolution Context:
+Завершён C-10 (Dependency Relation vs Target Test):
 
-- Verified axiom/fact Resolutions without cause (confirmed `cause` is conditional).
-- Tested multi-subject Resolution cases (confirmed `subject` is strictly singular; multi-subject cases use relationship edges or rule instances as the subject).
-- Investigated `identity`, `version`, and `timestamp` (all eliminated as derived or execution metadata).
-- Drafted formal Architecture Decision (AD) proposal for Minimal Resolution Context (MRC).
+- ESTABLISHED: одна dependency relation "depends on" / "requires"
+- ESTABLISHED: различия между Candidates A/B/C определяются target/referent
+- ESTABLISHED: source identity — часть target specification
+- WEAKENED: C-9's "three dependency types" → "one relation with three target specifications"
+- UNRESOLVED: conditional dependencies, dependency strength, conflict resolution
 
 ---
 
-## Immediate next task
+## Immediate next task (для 05AD)
 
-Submit the Minimal Resolution Context (MRC) AD proposal to the architect (ChatGPT) via the human referee (Paul) for cross-model review.
+### Priority 1 — Continuation of C-series:
 
-1. Wait for architect feedback on the MRC proposal.
-2. Defend or refine WD-01 through WD-09 based on architect's counterexamples.
-3. If MRC survives, promote it to a formal Architecture Decision in the repository.
-4. Begin investigating **Cycle semantics** (prohibit as conservative baseline vs permit with explicit resolution rules) using the same adversarial methodology.
+**C-11: Target Specification Complexity Test**
 
-Then await architect feedback before further AD promotion.
+Вопрос из C-10 unresolved: могут ли target specifications для dependencies включать conditions beyond identity (source constraints, temporal constraints, activation conditions), и остаются ли они частью target specification или становятся отдельной semantic dimension dependency?
+
+Тест cases:
+
+- B depends on X-as-established-by-A-after-event-E
+- B depends on X-if-Y-is-true (conditional dependency)
+- B depends on X-preferably (optional dependency)
+- B depends on X-from-{A,C,D} (source-set membership)
+
+### Priority 2 — Architect interaction:
+
+- Получить feedback от architect (ChatGPT) на C-1 through C-10 findings
+- Defend/refine working decisions based on architect counterexamples
+- Prepare MRC formal AD for human referee review when stable
+
+### Priority 3 — Expansion to other architectural questions:
+
+- Cycle semantics (after dependency work stabilizes)
+- Authority level scope
+- Project-agnosticity classification
 
 ---
 
 ## Things not to redo
 
-- Do not redo the 6-phase independent review.
-- Do not re-derive established decisions from 03A/03C/03D/03E/03AF/05AA/05AB.
-- Do not re-run the 8-axis elimination pass (results documented in 05AB).
-- Do not restart broad OVERRIDE research unless new counterexample requires it.
-- Do not prematurely adopt typed UNRESOLVED as formal AD for the Core execution engine.
-- Do not prohibit cycles without further research.
-- Do not remove authority level from external establishment vocabulary.
-- Do not begin implementation based on research hypotheses.
-- Do not modify repository files directly (READ-ONLY AI).
-- Do not assume semantic necessity implies storage necessity.
-- Do not assume reconstructability implies semantic irrelevance.
-- Do not assume multi-subject rules violate the singular `subject` constraint (they just use edges/rules as subjects).
+- Не повторять 6-phase independent review
+- Не переоткрывать WD-01 through WD-09 (established in 05AB/05AC)
+- Не ре-тестировать C-1 through C-10 (results documented)
+- Не вводить typed UNRESOLVED, 3-valued logic, fixed-point semantics
+- Не вводить generic dependency/precedence engines
+- Не вводить Result/Status/Inconclusive/NoResult как semantic entities (C-7, C-8, C-10 explicitly rejected)
+- Не форсировать dependency type differentiation (C-10 established one relation)
+- Не модифицировать repository files напрямую (READ-ONLY AI)
+- Не предполагать что semantic necessity implies storage necessity
+- Не предполагать что reconstructability implies semantic irrelevance
+- Не предполагать что multi-subject rules нарушают singular subject constraint
 
 ---
 
 ## Recommended starting context for next chapter
 
-Start with this handoff as baseline. The Minimum Resolution Context research is now complete and formalized as a draft AD proposal.
+Старт с этого хэндоффа как baseline. Chapter 05AC завершил полный C-series research arc (C-1 through C-10) по семантике evaluations и dependencies.
 
-Key working result: `{subject, state}` is the universal minimal core; `cause/reason` is conditionally required for UNRESOLVED resolutions. `subject` is strictly singular. All other tested candidates belong at relationship, evaluation, policy, or derived levels.
+**Ключевые established findings:**
 
-Next immediate task: route the MRC AD proposal through the cross-model review process, then pivot to adversarial research on **Cycle semantics**.
+1. Result-aspect модель достаточна без reification (C-3, C-4)
+2. `{subject, content}` minimum intrinsic content (C-5, C-6)
+3. Non-definitive outcomes — evaluation properties (C-7)
+4. Dependency is one relation "depends on" с varying targets (C-10)
 
-Work in research-first mode using minimal counterexamples. Interact with architect (ChatGPT) through the established cross-model review process with human referee (Paul) as final decision maker.
+**Ключевой unresolved:** Могут ли target specifications включать conditions, остающиеся частью target, или требуется отдельная semantic dimension.
 
-Remember to follow Branch B (READ-ONLY AI) in all bootstrap/checkpoint/migration procedures per updated rules.
+**Следующий immediate task:** C-11 (Target Specification Complexity Test), затем architect feedback loop для C-series findings, затем MRC formal AD promotion.
+
+**Methodology:** Research-first, minimal counterexamples, cross-model review через human referee.
+
+**Capability:** Branch B (READ-ONLY AI) во всех bootstrap/checkpoint/migration procedures.
+
+Работа продолжается с 05AD в том же adversarial, semantic-first режиме.
