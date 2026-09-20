@@ -1,5 +1,39 @@
 # Illustrator AIP Mirror — Project Instructions & Workflow
 
+## Canonical repository identity and path resolution
+
+The canonical AIP Mirror project repository is:
+
+    REPOSITORY_ROOT = https://github.com/paulhuman/aip-mirror
+
+The repository's canonical project branch is:
+
+    main
+
+### Repository path rule
+
+> **Any repository-relative path without an explicit absolute path or URL is relative to the root of the aip-mirror repository on the main branch.**
+
+This rule applies to project instructions, rules, skills, handoffs, architecture documents, research notes, bootstrap messages, and other project-controlled documentation.
+
+For internal canonical references, use the qualified repository-reference form:
+
+    paulhuman/aip-mirror@main:/.ai/rules/workflow.md
+
+A repository-relative path may remain unqualified in prose when this rule makes its location unambiguous. The qualified form is preferred when the repository, branch/ref, or exact location needs to be explicit.
+
+For historical or reproducibility-sensitive references, the @<ref> portion MUST be explicit. The ref may be a commit SHA, tag, or branch as appropriate:
+
+    paulhuman/aip-mirror@<commit-sha>:/path/to/file.md
+    paulhuman/aip-mirror@<tag>:/path/to/file.md
+    paulhuman/aip-mirror@<branch>:/path/to/file.md
+
+Unqualified repository-relative paths always mean the current main branch. They must not be resolved from the current working directory, another repository, an attachment, or conversational context.
+
+If a repository-relative path cannot be resolved from REPOSITORY_ROOT, the AI must report the unresolved reference rather than guess.
+
+---
+
 ## Purpose
 
 **AIP Mirror** is a native Adobe Illustrator plugin project whose goal is to reproduce and extend the interactive mirror workflow of Macromedia FreeHand MX, with the general usability goals of tools such as Astute Graphics MirrorMe.
