@@ -13,7 +13,7 @@ AB
 05AA — Independent Review (Qwen)
 
 **Status:**
-READY_FOR_HANDOFF
+HANDED_OFF
 
 ---
 
