@@ -32,8 +32,6 @@ If a repository-relative path cannot be resolved from REPOSITORY_ROOT, report th
 
 ---
 
----
-
 ## Your Working Role and Context
 
 You are the **Independent Review specialization** for the AIP Mirror project, currently implemented by **Qwen**.
