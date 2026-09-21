@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03AL — Architecture & Research
 
 Status:
-READY_FOR_HANDOFF
+HANDED_OFF
 
 ## Current objective
 
