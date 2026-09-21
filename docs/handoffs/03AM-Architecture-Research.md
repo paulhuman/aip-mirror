@@ -13,17 +13,17 @@ Previous chapter:
 AIP Mirror — 03AL — Architecture & Research
 
 Status:
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
-Continue the bounded dependency-semantics research line from C-10 and conduct C-11 — Target Sufficiency Counterexample Test.
+Continue the bounded dependency-semantics research line after C-11.2 and conduct C-11.3 — Rule/Relation/Context Discrimination Test.
 
-The immediate research target is the hypothesis:
+C-11.1b established that target identity does not, by itself, determine dependency applicability. C-11.2 tested ownership of a conditional guard Y and found multiple semantically equivalent interpretations remained: target specification, dependency relation, governing rule, and applicability/context could not be distinguished by the current minimal cases.
 
-> Dependency semantics can always be explained by identifying its target/referent.
+The conservative accepted result is: Y can affect applicability without changing apparent identity X; target-alone does not explain conditional applicability; B/C/D remain indistinguishable on current cases; A is not required, but not universally impossible.
 
-C-11 is explicitly adversarial: attempt to falsify target sufficiency rather than extending the target concept to absorb counterexamples.
+C-11.3 is the next bounded adversarial test and should discriminate Rule vs. Relation vs. Context ownership without assuming the answer in advance.
 
 No final Architecture Decision has been made.
 
@@ -78,6 +78,28 @@ only if Y
 ```
 
 where Y may be a condition on applicability rather than part of the target. C-10 did not determine whether such a condition belongs to the target, the dependency relation, B's rule, or another semantic context.
+
+### C-11.1b — Target Sufficiency Counterexample Test, applicability boundary
+
+C-11.1b established that the same apparent target X can have different dependency applicability depending on condition Y. The conservative accepted conclusion was:
+
+> C-11.1b establishes that target identity does not, by itself, determine dependency applicability. It does not determine whether target/referent is otherwise sufficient for dependency semantics.
+
+This weakens the stronger target-alone claim without establishing that target/referent is generally insufficient.
+
+### C-11.2 — Conditional Guard Ownership Test
+
+C-11.2 tested candidate ownership of Y across target specification, dependency relation, governing rule, applicability/context, and other.
+
+The architect-side synthesis was:
+
+> Multiple semantically equivalent interpretations remain.
+
+The accepted result is:
+
+> Y can affect applicability without changing apparent identity X; target-alone does not explain conditional applicability; B/C/D remain indistinguishable on current cases; A is not required, but not universally impossible.
+
+The test did not establish semantic ownership of Y, a new dependency type, a universal applicability/context mechanism, or a universal target-expansion rule.
 
 ## Current implementation state
 
@@ -227,10 +249,11 @@ Qwen remains an independent adversarial reviewer. The final architectural decisi
 - 03AL is READY_FOR_HANDOFF at bootstrap start.
 - 03AM did not exist before this bootstrap.
 - C-10 was completed and architect-reviewed.
-- For the tested C-10 A/B/C cases, different dependency behavior did not require different dependency types.
+- C-11.1b established that target identity does not, by itself, determine conditional applicability.
+- C-11.2 found multiple semantically equivalent interpretations for ownership of Y; B/C/D remain indistinguishable on the current minimal cases, while A is not required but not universally impossible.
 - Universal target sufficiency remains unproven.
-- The target-specification hypothesis was deliberately left as a hypothesis rather than adopted architecture.
-- The prior handoff explicitly identifies C-11 as the next bounded task.
+- The target-specification hypothesis remains a hypothesis rather than adopted architecture.
+- C-11.3 is the next bounded discrimination task.
 - No final Architecture Decision has been made.
 
 ### Inferred
@@ -255,35 +278,23 @@ Qwen remains an independent adversarial reviewer. The final architectural decisi
 
 ## Last completed task
 
-Bootstrap from 03AL and lifecycle transition verification.
+C-11.2 — Conditional Guard Ownership Test, including Qwen report review, architect-side counterargument, and conservative synthesis.
 
-The substantive research checkpoint inherited from 03AL is:
+The decisive current checkpoint is:
 
-> For the tested C-10 cases, different dependency behavior did not require different dependency types, but universal target sufficiency remains unproven.
+> Y can affect applicability without changing apparent identity X; target-alone does not explain conditional applicability; B/C/D remain indistinguishable on current cases; A is not required, but not universally impossible.
 
 ## Immediate next task
 
 Run:
 
-> C-11 — Target Sufficiency Counterexample Test
+> C-11.3 — Rule/Relation/Context Discrimination Test
 
-The purpose is to attempt to falsify:
+The purpose is to distinguish, using a new bounded case, whether conditional guard Y is semantically owned by the dependency relation, governing rule, applicability/context, target specification, or another explicitly justified semantic level.
 
-> Dependency semantics can always be explained by identifying its target/referent.
+Do not assume that Y belongs to the target or relation. Do not expand the target merely to preserve target sufficiency.
 
-The test should seek at least one of:
-
-1. two dependencies with the same apparent target but different semantic behavior; or
-2. dependency semantics that cannot be reduced to target identity/specification.
-
-Boundary cases to examine include:
-
-- conditional;
-- temporal;
-- provenance/source;
-- activation constraints.
-
-Do not classify any such condition as target property or relation property before the counterexample is analyzed.
+The test should use the smallest case that can produce genuinely different predictions under the candidate interpretations, and it must report when the candidates remain observationally equivalent rather than forcing a distinction.
 
 Preserve the sequence:
 
@@ -313,16 +324,16 @@ Do not begin implementation.
 
 ## Recommended starting context for next chapter
 
-Start with the verified 03AL checkpoint and C-10 synthesis.
+Start with the verified C-11.2 checkpoint and the meta-architecture north-star document `docs/architecture/ai-project-instruction-architecture.md`.
 
-Then formulate and run C-11 as a bounded adversarial test:
+Then formulate and run C-11.3 as a bounded discrimination test:
 
 ```
-C-10
+C-11.2
   ↓
-target sufficiency remains unproven
+B/C/D remain semantically indistinguishable on the current case
   ↓
-C-11 — Target Sufficiency Counterexample Test
+C-11.3 — Rule/Relation/Context Discrimination Test
   ↓
 Qwen report
   ↓
@@ -360,3 +371,21 @@ During this write-capable bootstrap:
 ## Bootstrap note
 
 This file is the receiving chapter's initial DRAFT state. It is created by 03AM itself as required by the conversation-handoff bootstrap procedure.
+
+
+## Migration lifecycle
+
+03AM is now the closing chapter for migration to 03AN.
+
+Lifecycle transition performed by this closing chapter:
+
+03AL = HANDED_OFF → SUPERSEDED
+03AM = DRAFT → READY_FOR_HANDOFF
+
+The receiving chapter 03AN must perform READY_FOR_HANDOFF → HANDED_OFF on this handoff during its bootstrap. When 03AN later reaches READY_FOR_HANDOFF, it must apply the required supersession invariant to the older HANDED_OFF 03AM handoff.
+
+## Migration note
+
+The substantive checkpoint for 03AN is C-11.2. The immediate next task is C-11.3.
+
+The north-star meta-architecture document must be restored as bootstrap context before local research state is resumed.
