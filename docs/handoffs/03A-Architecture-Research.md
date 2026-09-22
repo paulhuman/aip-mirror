@@ -12,9 +12,7 @@ A
 Previous chapter:
 N/A — first handoff for specialization 03
 
-Status:
-SUPERSEDED
-
+Status: HANDED_OFF
 ## Current objective
 
 Refactor and clarify the project-wide AI-assisted development architecture before substantive native implementation expands. The immediate focus is to turn the existing rules, skills, handoff procedures, and project instructions into a coherent, non-duplicated AI instruction system with explicit applicability, ownership, observability, and lifecycle behavior.
