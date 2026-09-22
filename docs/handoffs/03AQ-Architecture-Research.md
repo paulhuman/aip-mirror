@@ -227,8 +227,8 @@ HANDED_OFF
 Current lifecycle semantics:
 
 - `HANDED_OFF` is the terminal handoff state.
-- `SUPERSEDED` is not a handoff lifecycle state.
-- Historical lifecycle design that used `SUPERSEDED` must not be restored.
+- The retired lifecycle state is not part of the current handoff lifecycle.
+- The retired historical lifecycle design must not be restored.
 - Lifecycle history remains available through repository history and handoff provenance.
 
 This cleanup is now reflected in the applicable `.ai/rules`, handoff skills, and architecture documentation.
