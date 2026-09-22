@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03AN — Architecture & Research
 
 Status:
-HANDED_OFF
+SUPERSEDED
 
 ## Current objective
 
@@ -160,6 +160,7 @@ Accepted conservative result:
 Tested candidate independent bases did not establish a basis that determines or constrains the mapping without either circularly restating Role-A / Role-B or introducing an external convention.
 
 This does NOT establish:
+
 - that mapping is only ever a framework parameter;
 - that mapping is a semantic entity;
 - a mapping source, owner, or authority;
@@ -210,6 +211,7 @@ Accepted WD-25:
 > Representation, в которой mapping определяется исключительно через circular restatement behavioral positions, не предоставляет независимого основания для этого mapping.
 
 Important distinctions:
+
 - representation != interpretation context;
 - explicit binding is sufficient, not proven universally necessary;
 - unordered != informationless;
@@ -252,11 +254,11 @@ Open questions intentionally NOT answered by C-11:
 
 ### Working Decisions from C-11
 
-| ID | Decision | Status |
-|---|---|---|
-| WD-23 (rev2) | Mapping has no established independent semantic basis, but specification is semantically sensitive to mapping | Research finding |
-| WD-24 | Mapping-distinguishing information is necessary and not derivable from framework + independent facts in tested cases | Research finding |
-| WD-25 | Mapping-distinguishing information must be available to consumer; it may## C-12 — Cycle Semantics
+| ID           | Decision                                                                                                             | Status           |
+| ------------ | -------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| WD-23 (rev2) | Mapping has no established independent semantic basis, but specification is semantically sensitive to mapping        | Research finding |
+| WD-24        | Mapping-distinguishing information is necessary and not derivable from framework + independent facts in tested cases | Research finding |
+| WD-25        | Mapping-distinguishing information must be available to consumer; it may## C-12 — Cycle Semantics                    |
 
 ### Research status
 
