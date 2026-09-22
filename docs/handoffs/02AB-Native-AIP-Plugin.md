@@ -23,12 +23,12 @@ Continue the Native AIP Plugin specialization from the validated handoff state o
 
 - Bootstrap procedure for chapter 02AB has been started according to `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
 - Applicable lifecycle, workflow, repository, architecture, handoff, and commit-message rules have been read.
-- Previous handoff `docs/handoffs/02A-Native-AIP-Plugin.md` was verified as `READY_FOR_HANDOFF` before this receiving chapter's lifecycle transition.
+- Previous handoff `docs/handoffs/02AA-Native-AIP-Plugin.md` was verified as `READY_FOR_HANDOFF` before this receiving chapter's lifecycle transition.
 - This chapter's mandatory initial `DRAFT` handoff has been created as part of bootstrap.
 
 ## Current implementation state
 
-The 02A handoff records that native C++/AIP implementation has not yet been completed. The production target remains a native C++ plugin using the Illustrator 2026 AIP SDK, with an interactive Mirror tool as the priority.
+The 02AA handoff records that native C++/AIP implementation has not yet been completed. The production target remains a native C++ plugin using the Illustrator 2026 AIP SDK, with an interactive Mirror tool as the priority.
 
 No native implementation files were identified by the previous handoff as already established. The repository currently contains project documentation, references, and the JSX prototype area; the canonical Illustrator 2026 SDK remains external in `paulhuman/adobe-illustrator-2026-sdk`.
 
@@ -61,8 +61,8 @@ No native implementation files were identified by the previous handoff as alread
 - `.ai/rules/repository.md`
 - `.ai/rules/project-architecture.md`
 - `docs/PROJECT-INSTRUCTIONS.md`
-- `docs/handoffs/02A-Native-AIP-Plugin.md`
-- `docs/handoffs/02B-Native-AIP-Plugin.md`
+- `docs/handoffs/02AA-Native-AIP-Plugin.md`
+- `docs/handoffs/02AB-Native-AIP-Plugin.md`
 - `prototypes/jsx/`
 - `references/freehand/`
 - `references/javascript/`
@@ -89,14 +89,14 @@ No native implementation files were identified by the previous handoff as alread
 
 ### Confirmed / observed
 
-- `02A-Native-AIP-Plugin.md` was in `READY_FOR_HANDOFF` state at bootstrap start.
+- `02AA-Native-AIP-Plugin.md` was in `READY_FOR_HANDOFF` state at bootstrap start.
 - The project defines `02` as the Native AIP Plugin specialization.
 - The project uses C++ with the Illustrator 2026 AIP SDK for the production native plugin.
-- The native implementation was not yet completed according to the 02A handoff.
+- The native implementation was not yet completed according to the 02AA handoff.
 
 ### Inferred
 
-- Chapter 02B should begin native implementation investigation/design from the existing project state rather than recreating the handoff infrastructure.
+- Chapter 02AB should begin native implementation investigation/design from the existing project state rather than recreating the handoff infrastructure.
 
 ### Assumed / unverified
 
@@ -113,7 +113,7 @@ Created the mandatory initial `DRAFT` handoff for chapter 02AB during bootstrap.
 
 ## Immediate next task
 
-Complete the receiving-chapter bootstrap by updating `02A-Native-AIP-Plugin.md` from `READY_FOR_HANDOFF` to `HANDED_OFF`, commit that lifecycle transition, verify the resulting repository state, and only then begin chapter 02AB work.
+Complete the receiving-chapter bootstrap by updating `02AA-Native-AIP-Plugin.md` from `READY_FOR_HANDOFF` to `HANDED_OFF`, commit that lifecycle transition, verify the resulting repository state, and only then begin chapter 02AB work.
 
 ## Things not to redo
 
