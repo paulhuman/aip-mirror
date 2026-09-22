@@ -211,47 +211,6 @@ ZZ = chapter ordinal 676
 
 The ordinal position of a chapter must not be confused with the identity of its identifier.
 
-### Legacy historical identifiers
-
-The former Chapter Identifier Format was:
-
-```text
-[0-9]{2}[A-Z]
-```
-
-Identifiers created under that format remain valid historical identifiers. They MUST NOT be rewritten merely to conform to the current Chapter Identifier Format, and a legacy identifier MUST NOT be interpreted as a current-format identifier.
-
-Legacy and current identifiers occupy different identifier namespaces by format. Historical handoff documents retain their original chapter identifiers and filenames.
-
-Historical chapters occupy their existing ordinal positions when the current format is introduced. They are not renamed into the current format. New chapters continue from the next unused ordinal position.
-
-For specialization `03`, the historical/current ordinal correspondence is:
-
-```text
-ordinal   legacy ID   current-format position
-
-1         03A         AA
-2         03B         AB
-3         03C         AC
-4         03D         AD
-5         03E         AE
-6         —           AF  ← first new-format Chapter
-```
-
-This is **ordinal correspondence only**. It does NOT establish identifier identity. In particular:
-
-```text
-03A ≠ 03AA
-03B ≠ 03AB
-03C ≠ 03AC
-03D ≠ 03AD
-03E ≠ 03AE
-```
-
-`03AA`–`03AE` are not historical aliases and are not physically used as current identifiers in this repository.
-
-Concrete chapters therefore use identifiers such as `03AF`, while historical chapters retain their original legacy identifiers such as `03A`–`03E`.
-
 ## Handoff documents
 
 Conversation-specific migration state belongs under:
@@ -267,16 +226,6 @@ docs/handoffs/01AA-JSX-Prototype.md
 docs/handoffs/02AB-Native-AIP-Plugin.md
 docs/handoffs/03AF-Architecture-Research.md
 docs/handoffs/04AA-Project-Workshop.md
-```
-
-Historical handoff documents created under the legacy one-letter format remain unchanged, for example:
-
-```text
-docs/handoffs/03A-Architecture-Research.md
-docs/handoffs/03B-Architecture-Research.md
-docs/handoffs/03C-Architecture-Research.md
-docs/handoffs/03D-Architecture-Research.md
-docs/handoffs/03E-Architecture-Research.md
 ```
 
 A handoff is a **state snapshot**, not a casual conversation summary. It should record the current objective, completed work, implementation state, decisions, open questions, relevant files and references, constraints, assumptions, last completed task, immediate next task, things not to redo, and recommended starting context for the next chapter.
@@ -618,10 +567,6 @@ When a question concerns:
 - **IDE/toolchain/Git/repository mechanics/SDK tooling/ChatGPT interface/general development support** → primarily the `04` specialization.
 
 Each specialization may have multiple chapters using the current two-letter Chapter Identifier Format (`[0-9]{2}[A-Z]{2}`), with the suffix advancing continuously from `AA` through `ZZ`. If a chapter becomes too large or contextually risky, warn the user and create a handoff before continuing in the next chapter.
-
-Legacy one-letter chapter identifiers remain valid historical identifiers and must not be rewritten merely to conform to the current format. Historical handoff files retain their original names and identifiers.
-
-For specialization `03`, the legacy chapters `03A`–`03E` occupy ordinal positions 1–5; the first newly created current-format chapter is `03AF` at ordinal position 6. This is ordinal correspondence only, not identifier identity.
 
 If a topic crosses boundaries, keep the architectural decision in the `03` specialization and the implementation work in the appropriate implementation specialization. Use `04` to support the work, not to relocate it.
 
