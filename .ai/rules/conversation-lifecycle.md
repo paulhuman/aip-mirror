@@ -216,7 +216,7 @@ Historical handoff files created under the legacy one-letter format remain uncha
     docs/handoffs/03D-Architecture-Research.md
     docs/handoffs/03E-Architecture-Research.md
 
-When a chapter is superseded, retain its handoff as historical project state.
+When a chapter has completed handoff, retain its handoff as historical project state.
 
 ## 8. Handoff is a state snapshot, not a casual summary
 
@@ -257,7 +257,6 @@ Every handoff must contain an explicit lifecycle status:
 - `DRAFT` — live checkpoint state for the current chapter
 - `READY_FOR_HANDOFF` — safe starting point for the next chapter
 - `HANDED_OFF` — the next chapter has successfully started from this handoff
-- `SUPERSEDED` — a later handoff for the same specialization has replaced this handoff
 
 ### Allowed transitions
 
@@ -269,17 +268,14 @@ Handoff status changes follow this state machine:
       ↓
     HANDED_OFF
       ↓
-    SUPERSEDED
 
 Only these forward transitions are valid:
 
 - `DRAFT` → `READY_FOR_HANDOFF`
 - `READY_FOR_HANDOFF` → `HANDED_OFF`
-- `HANDED_OFF` → `SUPERSEDED`
 
 Do not skip states.
 
-`SUPERSEDED` is mandatory when its condition is met. When a later handoff for the same specialization reaches `READY_FOR_HANDOFF`, that later chapter must mark the previously `HANDED_OFF` handoff `SUPERSEDED` and commit that transition. The older handoff remains as historical state.
 
 ### Transition ownership
 
@@ -287,19 +283,15 @@ The responsibility for each transition is explicit:
 
 - The current chapter owns `DRAFT` → `READY_FOR_HANDOFF`.
 - The receiving chapter owns `READY_FOR_HANDOFF` → `HANDED_OFF`.
-- A later chapter owns `HANDED_OFF` → `SUPERSEDED` when its replacement handoff reaches `READY_FOR_HANDOFF`.
 
 The previous chapter must not mark its own handoff `HANDED_OFF` merely because it has finished writing or delivering it.
 
 ### READY_FOR_HANDOFF supersession invariant
 
-The `SUPERSEDED` transition is an explicit precondition/postcondition of a later handoff becoming successfully `READY_FOR_HANDOFF`.
 
 When the current chapter's handoff is about to move from `DRAFT` to `READY_FOR_HANDOFF` and a previous handoff for the same specialization is already `HANDED_OFF`:
 
 1. the current chapter MUST identify that previous handoff;
-2. the current chapter MUST own and perform `HANDED_OFF` → `SUPERSEDED` on that previous handoff;
-3. the current chapter MUST verify the previous handoff now reads `SUPERSEDED`;
 4. the current chapter MUST verify that the current handoff reads `READY_FOR_HANDOFF`;
 5. the current chapter MUST NOT declare the `READY_FOR_HANDOFF` transition complete while the previous handoff remains `HANDED_OFF`;
 6. the lifecycle result MUST be represented by Git commit(s), with one coherent commit containing both related changes preferred when practical.
@@ -312,7 +304,6 @@ This verification must inspect repository state, not rely on the AI remembering 
 
 These are mandatory lifecycle constraints, not recommendations:
 
-1. **The closing chapter MUST modify only its own handoff during the closing/migration phase, except for the mandatory `HANDED_OFF` → `SUPERSEDED` transition on the previous same-specialization handoff required by the `READY_FOR_HANDOFF supersession invariant`.**
 2. **The closing chapter MUST NOT create the receiving chapter's handoff file.**
 3. **The closing chapter MUST NOT modify, finalize, or assign a lifecycle status to the receiving chapter's handoff.**
 4. **The closing chapter MUST NOT change its own handoff from `READY_FOR_HANDOFF` to `HANDED_OFF`.**
@@ -490,7 +481,6 @@ After explicit user authorization, the active correcting chapter must:
 11. Verify the resulting commit/ref and repository state.
 12. Declare `CORRECTION = COMPLETE` only after all checks succeed.
 
-For a missed `HANDED_OFF` → `SUPERSEDED` transition, the correction must record the affected older handoff as `SUPERSEDED` while preserving the historical commits that show the transition was missed. The corrective commit is the audit trail of the later correction; it must not be presented as the original lifecycle transition.
 
 ## 11. Starting a new chapter
 
@@ -550,7 +540,6 @@ The repository history should therefore make the workflow auditable:
 
     new chapter starts → DRAFT handoff created
     checkpoint → DRAFT handoff updated/committed
-    current chapter prepares migration → READY_FOR_HANDOFF plus required SUPERSEDED verification
     receiving chapter starts → HANDED_OFF
     pre-existing violation → blocked bootstrap → user-authorized Lifecycle Recovery → minimal recovery commit(s)
     post-bootstrap consistency verification → bootstrap complete
