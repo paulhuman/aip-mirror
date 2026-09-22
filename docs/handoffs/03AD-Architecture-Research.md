@@ -17,7 +17,7 @@ HANDED_OFF
 
 ## Current objective
 
-Continue the project-wide AI-instruction architecture research from 03C. The current focus is the **OVERRIDE Architecture Decision Pass**, now concentrated on authorization boundaries, precedence semantics, and the boundary between eligibility, candidate semantics, and effective outcome. Structural refactoring remains deferred until the relevant semantics are sufficiently stable.
+Continue the project-wide AI-instruction architecture research from 03AC. The current focus is the **OVERRIDE Architecture Decision Pass**, now concentrated on authorization boundaries, precedence semantics, and the boundary between eligibility, candidate semantics, and effective outcome. Structural refactoring remains deferred until the relevant semantics are sufficiently stable.
 
 The candidate-level precedence model is now strongly supported by the counterexample pass, but its formal AD is still pending. The next chapter should continue the one-decision-at-a-time counterexample process, now concentrating on `prerequisite` and `dependency` semantics and the exact boundary of candidate eligibility versus effect evaluation.
 
@@ -27,11 +27,11 @@ Bootstrap established the canonical starting state from 03AC. The 03AC checkpoin
 
 - **OVERRIDE-01 — Source of Authorization:** Model B, Explicit Authorization, is the baseline. Declaration of an OVERRIDE is not authorization; authorization is not itself effective application; TRACE is not authority. Automatic resolution is allowed only when the architecture can resolve deterministically; otherwise the result is `UNRESOLVED` and may require user decision.
 - **OVERRIDE-02 — Sufficient authorization:** authorization is a bounded grant with conceptual properties for subject, action, target boundary, applicability, activation, lifecycle validity, and delegation constraints. Delegation must itself be explicitly authorized and must not expand the source grant.
-- **OVERRIDE-02A — Target boundary:** target-specific authorization is the semantic primitive. Target-class authorization is not part of Core and may only be introduced later as a separate extension/architecture decision.
-- **OVERRIDE-02B — Bounded target set:** a bounded target set is semantically equivalent to an aggregation of independent target-specific grants when the grants share a compatible/common authorization boundary. It is a representation optimization, not a new authorization language.
+- **OVERRIDE-02AA — Target boundary:** target-specific authorization is the semantic primitive. Target-class authorization is not part of Core and may only be introduced later as a separate extension/architecture decision.
+- **OVERRIDE-02AB — Bounded target set:** a bounded target set is semantically equivalent to an aggregation of independent target-specific grants when the grants share a compatible/common authorization boundary. It is a representation optimization, not a new authorization language.
 - **OVERRIDE-03 — Authorization object boundary:** one authorization object has one authorization boundary and one lifecycle. A bounded target set may aggregate only targets whose authorization semantics do not require independent applicability, activation, or lifecycle states.
 - **OVERRIDE-04 — Authorization boundary contents:** subject, action, targets, applicability, activation, lifetime, and delegation constraints are semantic grant properties. Reason/provenance/identifiers are explanatory or provenance metadata unless separately defined as semantic. Reason must not become a hidden policy condition.
-- **OVERRIDE-04A — Issuer and authority:** issuer identity is not equivalent to issuer authority. An authorization record is a claim, not authority merely because it exists. Authority establishment has the distinct states `AUTHORIZED / DENIED / UNRESOLVED`.
+- **OVERRIDE-04AA — Issuer and authority:** issuer identity is not equivalent to issuer authority. An authorization record is a claim, not authority merely because it exists. Authority establishment has the distinct states `AUTHORIZED / DENIED / UNRESOLVED`.
 - **OVERRIDE-04B — Authority mechanism:** Core uses an abstract **established authority** boundary. Core does not define the mechanism for constructing/verifying the authority chain. An external authority mechanism establishes whether a claimed authorization is authorized; Core evaluates what an established authorization permits.
 - **OVERRIDE-04C — Authority result:** Model C, a two-level result, is the baseline. External authority establishment returns `AUTHORIZED / DENIED / UNRESOLVED` plus an established authorization boundary/evidence when appropriate. Core then evaluates that boundary for the current operation/context and may return `EFFECTIVE / DENIED / UNRESOLVED`. These levels must not be conflated.
 - **OVERRIDE-04D — Core evaluation boundary:** Core may evaluate an established authorization boundary against the current operation, but MUST NOT enlarge, reinterpret, or strengthen it. Specificity cannot create authority. Expiration yields denial; unknown validity yields unresolved. Delegation beyond the established boundary must not be silently transformed into a different grant.
@@ -226,10 +226,10 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 
 ### Handoff chain
 
-- `docs/handoffs/03A-Architecture-Research.md`
-- `docs/handoffs/03B-Architecture-Research.md`
-- `docs/handoffs/03C-Architecture-Research.md`
-- `docs/handoffs/03D-Architecture-Research.md`
+- `docs/handoffs/03AA-Architecture-Research.md`
+- `docs/handoffs/03AB-Architecture-Research.md`
+- `docs/handoffs/03AC-Architecture-Research.md`
+- `docs/handoffs/03AD-Architecture-Research.md`
 
 ## Relevant references
 
