@@ -446,7 +446,7 @@ then the system should be designed so that these transitions are difficult to fo
 
 Likewise, when a newer chapter reaches the relevant lifecycle point:
 
-    older HANDED_OFF → SUPERSEDED
+    completed handoff remains HANDED_OFF
 
 should be handled reliably rather than relying only on the model remembering the rule in a long conversation.
 
@@ -485,7 +485,7 @@ The intended lifecycle is:
       ↓
     HANDED_OFF
       ↓
-    SUPERSEDED
+    HANDED_OFF
 
 The lifecycle retains history.
 
@@ -501,7 +501,7 @@ The receiving chapter is responsible for recognizing the previous chapter's tran
 
 ### 10.3 Supersession
 
-When a newer handoff of the same specialization reaches the appropriate transfer state, the older HANDED_OFF handoff becomes SUPERSEDED.
+A completed handoff remains HANDED_OFF as durable historical project state.
 
 Historical state remains preserved.
 
