@@ -196,23 +196,20 @@ Use this structure unless a project-specific format requires otherwise:
 
 ## Lifecycle rules
 
-Handoff status is a state machine, not an informal label:
+Handoff status is a state machine representing migration progress:
 
     DRAFT
       ↓
     READY_FOR_HANDOFF
       ↓
     HANDED_OFF
-      ↓
-    SUPERSEDED
 
 The valid forward transitions are:
 
 - `DRAFT` → `READY_FOR_HANDOFF`
 - `READY_FOR_HANDOFF` → `HANDED_OFF`
-- `HANDED_OFF` → `SUPERSEDED`
 
-Do not skip states.
+There is no later lifecycle transition after `HANDED_OFF`. A completed handoff remains `HANDED_OFF) as durable historical project state.
 
 ### Ownership of transitions
 
@@ -220,34 +217,13 @@ The chapter that is closing prepares its handoff and may move it from `DRAFT` to
 
 The receiving chapter, not the previous chapter, owns the transition from `READY_FOR_HANDOFF` to `HANDED_OFF`. It must make this transition only after successfully starting from the previous handoff, except when an explicitly authorized Lifecycle Recovery establishes that the required terminal state already exists and must not be repeated.
 
-A later chapter owns the transition from `HANDED_OFF` to `SUPERSEDED` when a newer handoff for the same specialization replaces the older one.
-
 The previous chapter must never mark its own handoff `HANDED_OFF` merely because the handoff was written, committed, or communicated.
-
-`SUPERSEDED` is a required historical transition, not an optional status. When a later handoff for the same specialization reaches `READY_FOR_HANDOFF`, the later chapter must mark the previously `HANDED_OFF` handoff `SUPERSEDED` and commit that lifecycle transition. The older handoff remains in the repository as historical state.
-
-### READY_FOR_HANDOFF supersession invariant
-
-The `SUPERSEDED` transition is an explicit precondition/postcondition of a later handoff becoming successfully `READY_FOR_HANDOFF`.
-
-When the current chapter's handoff is about to move from `DRAFT` to `READY_FOR_HANDOFF` and a previous handoff for the same specialization is already `HANDED_OFF`:
-
-1. the current chapter MUST identify that previous handoff;
-2. the current chapter MUST own and perform `HANDED_OFF` → `SUPERSEDED` on that previous handoff;
-3. the current chapter MUST verify the previous handoff now reads `SUPERSEDED`;
-4. the current chapter MUST verify that the current handoff reads `READY_FOR_HANDOFF`;
-5. the current chapter MUST NOT declare the `READY_FOR_HANDOFF` transition complete while the previous handoff remains `HANDED_OFF`;
-6. the lifecycle result MUST be represented by Git commit(s), with one coherent commit containing both related changes preferred when practical.
-
-If the previous handoff remains `HANDED_OFF`, the current chapter must treat the `READY_FOR_HANDOFF` transition as incomplete/invalid and stop before proceeding with migration.
-
-This verification must inspect repository state, not rely on the AI remembering that the supersession step was performed.
 
 ### Non-negotiable handoff ownership invariants
 
 These are mandatory lifecycle constraints, not recommendations:
 
-1. **The closing chapter MUST modify only its own handoff during the closing/migration phase, except for the mandatory `HANDED_OFF` → `SUPERSEDED` transition on the previous same-specialization handoff required by the `READY_FOR_HANDOFF supersession invariant`.**
+1. **The closing chapter MUST modify only its own handoff during the closing/migration phase.**
 2. **The closing chapter MUST NOT create the receiving chapter's handoff file.**
 3. **The closing chapter MUST NOT modify, finalize, or assign a lifecycle status to the receiving chapter's handoff.**
 4. **The closing chapter MUST NOT change its own handoff from `READY_FOR_HANDOFF` to `HANDED_OFF`.**
@@ -258,7 +234,6 @@ These are mandatory lifecycle constraints, not recommendations:
 9. **A bootstrap instruction is a message for a future receiving conversation; generating that instruction MUST NOT be interpreted as having entered or initialized that next chapter.**
 10. **If the current chapter has already created or modified the receiving chapter's handoff, the lifecycle procedure has been violated and the AI MUST stop before performing further lifecycle transitions and report the inconsistency.**
 11. **The receiving chapter MUST correct its own handoff if bootstrap verification finds an inconsistency; another specialization MUST NOT repair that receiving handoff on its behalf.**
-12. **A current chapter performing `DRAFT` → `READY_FOR_HANDOFF` MUST NOT leave an older same-specialization `HANDED_OFF` handoff in that state after the transition is declared complete.**
 
 The canonical migration ownership model is therefore:
 
@@ -266,7 +241,6 @@ The canonical migration ownership model is therefore:
         owns:
         current handoff DRAFT → READY_FOR_HANDOFF
         |
-        +--> identifies and supersedes the previous HANDED_OFF handoff
         +--> generates bootstrap instruction only
 
     RECEIVING CHAPTER
@@ -424,7 +398,7 @@ After explicit user authorization, the active correcting chapter must:
 11. verify the resulting commit/ref and repository state;
 12. declare `CORRECTION = COMPLETE` only after all checks succeed.
 
-For a missed `HANDED_OFF` → `SUPERSEDED` transition, the correction must record the affected older handoff as `SUPERSEDED` while preserving the historical commits that show the transition was missed. The corrective commit is the audit trail of the later correction; it must not be presented as the original lifecycle transition.
+For a missed `HANDED_OFF` → `HANDED_OFF` transition, the correction must record the affected older handoff as `HANDED_OFF` while preserving the historical commits that show the transition was missed. The corrective commit is the audit trail of the later correction; it must not be presented as the original lifecycle transition.
 
 ## New chapter initialization
 
@@ -490,7 +464,7 @@ A WRITE-CAPABLE AI must finish the current work, update the current handoff, and
 
 The current chapter owns this transition and must commit it.
 
-Before declaring `DRAFT` → `READY_FOR_HANDOFF` complete, apply the `READY_FOR_HANDOFF supersession invariant` above. If a previous same-specialization handoff is `HANDED_OFF`, it must be changed to `SUPERSEDED` and physically verified before the migration transition is considered complete.
+Before declaring `DRAFT` → `READY_FOR_HANDOFF` complete, apply the `READY_FOR_HANDOFF supersession invariant` above. If a previous same-specialization handoff is `HANDED_OFF`, it must be changed to `HANDED_OFF` and physically verified before the migration transition is considered complete.
 
 After that, generate the standard bootstrap instruction for the receiving chapter using `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
 
@@ -581,7 +555,7 @@ Verify that the handoff answers:
 
 Also verify the `READY_FOR_HANDOFF supersession invariant` before declaring the transition complete.
 
-Only mark the handoff `READY_FOR_HANDOFF` when the next chapter can reasonably continue without guessing and the previous same-specialization handoff, when applicable, is already verified as `SUPERSEDED`.
+Only mark the handoff `READY_FOR_HANDOFF` when the next chapter can reasonably continue without guessing and the previous same-specialization handoff, when applicable, is already verified as `HANDED_OFF`.
 
 ## Receiving a handoff
 
@@ -627,7 +601,7 @@ Recovery completion is not itself bootstrap completion and does not by itself au
 
 ## After migration
 
-A handoff remains `HANDED_OFF` after successful migration until a later handoff for the same specialization reaches `READY_FOR_HANDOFF`. At that point, the later chapter must update the older handoff to `SUPERSEDED` and commit that lifecycle transition. The later chapter must physically verify the superseded state before declaring its own `READY_FOR_HANDOFF` transition complete.
+A handoff remains `HANDED_OFF` after successful migration until a later handoff for the same specialization reaches `READY_FOR_HANDOFF`. At that point, the later chapter must update the older handoff to `HANDED_OFF` and commit that lifecycle transition. The later chapter must physically verify the handed off state before declaring its own `READY_FOR_HANDOFF` transition complete.
 
 ## Project Workshop boundary
 
