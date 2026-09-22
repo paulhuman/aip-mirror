@@ -125,7 +125,7 @@ Important:
 - human acceptance is not the same thing as document lifecycle;
 - accepted working semantics are not necessarily formal Architecture Decisions;
 - HANDED_OFF does not mean every statement in the handoff is current canonical semantics;
-- SUPERSEDED does not automatically semantically invalidate all historical material;
+- Removal of a lifecycle state does not automatically semantically invalidate all historical material;
 - no Acceptance entity, approval protocol, or universal Decision registry is established.
 
 ## First substantive research question
