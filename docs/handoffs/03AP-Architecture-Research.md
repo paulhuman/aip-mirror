@@ -116,52 +116,34 @@ The following research steps are now complete:
    docs/architecture/c-13-authority-vs-effective-outcome-03AP.md
 7. Post-C-13 Architectural Leverage Audit:
    docs/architecture/post-c-13-architectural-leverage-audit-03AP.md
+8. C-14 evidence inspection / semantic-dimension discrimination protocol:
+   docs/architecture/c-14-override-semantic-dimension-03AP.md
 
-The cross-audit synthesis did not establish a universal bottleneck. It identified two strongest unresolved boundaries:
-- Dependency ↔ effective outcome ↔ Resolution/referent
-- Authority / Precedence ↔ OVERRIDE ↔ effective outcome
+## C-14 result
 
-C-13 then tested one narrow discrimination at the second/first boundary intersection:
-- B retains authority standing;
-- B's candidate effect loses precedence;
-- B's effective outcome changes;
-- dependency on B's authority standing remains satisfied;
-- dependency on B's effective outcome is not satisfied.
+C-14 behavioral execution was **not performed** because the current repository does not contain sufficiently explicit OVERRIDE semantics from which to instantiate a non-circular test.
 
-C-13 therefore established a bounded positive discrimination: dependency on a decision source is not semantically determined by source identity alone; the referenced result/property matters.
+The repository does establish:
+- authority ≠ precedence;
+- precedence can affect effective outcome without changing authority standing or the losing candidate effect;
+- temporary OVERRIDE is an unresolved semantic branch.
 
-C-13 did NOT establish a Dependency ontology, Resolution ontology, Result entity, universal consumer-consequence rule, or implementation architecture.
+It does not establish whether OVERRIDE changes:
+- authority;
+- precedence;
+- applicability;
+- candidate selection;
+- candidate effect;
+- effective outcome;
+- another relation.
 
-## prerequisite-dependency-semantics.md reconciliation
+Therefore no OVERRIDE behavior was invented.
 
-The deferred maintenance of:
-docs/architecture/prerequisite-dependency-semantics.md
+The C-14 protocol remains available for execution if authoritative project evidence later provides a concrete OVERRIDE operation/example.
 
-is now complete after the Grok response and cross-audit synthesis were reviewed.
+## Current architectural position
 
-The update:
-- reconciles the earlier cycle remarks with CLOSED C-12;
-- preserves the target × consumer-role working model;
-- records the current Dependency ↔ effective-outcome and Authority/Precedence ↔ OVERRIDE boundaries;
-- points to C-13 as the neutral discrimination test;
-- does not promote provisional cycle or UNRESOLVED hypotheses to formal semantics.
-
-## Post-C-13 architectural leverage audit
-
-A dedicated post-C-13 audit was completed:
-docs/architecture/post-c-13-architectural-leverage-audit-03AP.md
-
-Its conclusion is that the strongest current leverage is the boundary:
-
-- Authority / Precedence ↔ OVERRIDE ↔ effective outcome
-
-rather than another generic enumeration of Dependency targets.
-
-The reason is that C-13 already established the necessary divergence between authority standing, candidate effect, and effective outcome. The remaining high-leverage uncertainty is what semantic dimension an override intervention actually changes.
-
-## Current research position
-
-The current strongest result is not a selected ontology but a semantic discrimination:
+C-13 remains the strongest positive discrimination:
 
 ~~~text
 dependency on B
@@ -173,31 +155,21 @@ dependency on B's candidate effect
 dependency on B's effective outcome
 ~~~
 
-The exact ontology and consumer semantics remain open.
+C-14 adds an evidence-boundary result:
 
-## Next bounded research arc
+~~~text
+authority ≠ precedence
+        │
+        └── OVERRIDE semantics = unresolved / evidence-insufficient
+~~~
 
-The next selected research arc is:
+This is a research result, not an Architecture Decision.
 
-C-14 — OVERRIDE Semantic-Dimension Discrimination
+## Next action
 
-Research question:
+Do not manufacture a C-14 behavior case.
 
-> When an override is introduced into an otherwise fixed conflict, which already-distinguished semantic dimension changes: authority standing, precedence relation, candidate selection, candidate effect, or effective outcome?
-
-C-14 must remain ontology-neutral.
-
-It must first inspect existing project evidence for sufficiently explicit OVERRIDE semantics. If that evidence is insufficient, the correct result is to preserve the test as a research protocol rather than invent OVERRIDE semantics.
-
-C-14 must not introduce:
-- Resolution ontology;
-- Result ontology;
-- typed UNRESOLVED;
-- three-valued logic;
-- generic precedence/dependency engines;
-- graph implementation;
-- new mapping ontology;
-- universal consumer-consequence rules.
+The next research step should determine where authoritative evidence for OVERRIDE can legitimately come from, or whether the architecture can make useful progress by moving to another boundary without resolving OVERRIDE.
 
 No implementation authorization is granted.
 
