@@ -120,6 +120,8 @@ The following research steps are now complete:
    docs/architecture/c-14-override-semantic-dimension-03AP.md
 9. Semantic Source & Authority Audit:
    docs/architecture/semantic-source-authority-audit-03AP.md
+10. Intentional Acceptance Audit:
+   docs/architecture/intentional-acceptance-audit-03AP.md
 
 ## C-14 result
 
@@ -199,15 +201,58 @@ No total source hierarchy was established, and no claim/provenance ontology was 
 
 The C-14 evidence boundary is therefore preserved and refined: historical OVERRIDE evidence exists, but its current normative status must not be inferred automatically.
 
+## Intentional Acceptance Audit result
+
+The audit inspected the existing rules, architecture, handoff lifecycle, and historical 03D/03E practice to determine whether intentional acceptance already has a project-level mechanism.
+
+Established:
+- intentional acceptance is explicitly required before promotion of a finding to specification;
+- human/project decision authority is explicitly retained;
+- historical 03D/03E handoffs demonstrate accepted working semantics in practice;
+- accepted working semantics can remain provisional and distinct from a formal numbered Architecture Decision;
+- handoffs preserve accepted state across chapter migrations;
+- handoff lifecycle status does not itself establish semantic status;
+- SUPERSEDED is a document/lifecycle state, not automatic semantic invalidation;
+- no dedicated Acceptance artifact or universal Decision registry is currently established.
+
+The resulting working model is:
+
+~~~text
+research / finding
+        ↓
+human/project acceptance
+        ↓
+accepted working direction / invariant
+        ↓
+continued testing and refinement
+        ↓
+stable specification / architecture decision
+~~~
+
+with migration acting as a preservation path rather than the acceptance act itself.
+
+The audit therefore identifies the remaining architectural gap as:
+
+> What observable project-level act or repository state change proves that a particular finding was intentionally accepted, and what minimum durable information lets a later chapter recognize that status without conversational memory?
+
+No Acceptance entity, approval protocol, decision registry, or new semantic primitive was introduced.
+
 ## Next action
 
 Do not manufacture a C-14 behavior case.
 
-The next high-leverage question is narrower:
+The Intentional Acceptance Audit is CLOSED:
 
-> What project-level act or artifact constitutes intentional acceptance of a research finding as current normative project semantics, and how is that status preserved across document types and chapter migrations?
+docs/architecture/intentional-acceptance-audit-03AP.md
 
-Before creating a new bounded experiment, inspect the existing architecture/rules for whether this acceptance transition is already specified elsewhere.
+Before selecting a new C-series experiment or introducing any new acceptance mechanism, inspect whether existing project practice already provides a sufficient convention for recognizing:
+- accepted working invariants;
+- formal architecture decisions;
+- specifications;
+- inherited accepted state;
+- later refinement or supersession.
+
+The next migration is to be performed separately by the explicit chapter migration command, after this audit is complete.
 
 No implementation authorization is granted.
 
