@@ -147,106 +147,199 @@ Important qualifications:
 - Candidate-model terms such as "evaluated" must not be promoted to observed system semantics.
 - The mapping may be only a model parameter, or may have some further semantic basis; its status remains open.
 
-## C-11.11 — Role-Mapping Status Test
+## C-11.11 — C-11.15 Mapping Research Arc
+
+### C-11.11 — Role-Mapping Status Test
+
+Accepted conservative result:
+
+> No independent semantic status for the object-to-position mapping is established on the tested observation surface.
+
+Tested candidate independent bases did not establish a basis that determines or constrains the mapping without either circularly restating Role-A / Role-B or introducing an external convention.
+
+This does NOT establish:
+- that mapping is only ever a framework parameter;
+- that mapping is a semantic entity;
+- a mapping source, owner, or authority;
+- a particular ontology.
+
+### C-11.12 — Independent Mapping-Basis Tests
+
+Accepted:
+
+> Tested independently characterizable properties do not derive or constrain the object-to-position mapping on the tested observation surface.
+
+Tested candidates included temporal order, controllability, resource/precondition distinctions, causal dependence, physical containment, specificity/generality, verification target, and symmetric-object cases.
+
+Important correction:
+
+> Symmetric objects demonstrate non-discrimination by the tested properties; they do NOT prove that mapping must be externally supplied.
+
+### C-11.13 — Semantic Discrimination by Mapping
+
+Accepted WD-23 (rev2):
+
+> На tested observation surface object-to-position mapping не имеет установленного independent semantic basis, однако requirement specification семантически чувствительна к этому mapping: при сохранении рассматриваемых independent facts изменение mapping может производить семантически и поведенчески различную specification.
+
+This establishes semantic discriminating force of mapping within the specification, but does NOT establish mapping as an independent semantic entity, ontology, source, ownership, or authority.
+
+Illustrative analogy only:
+
+`R(X,Y) != R(Y,X)`
+
+The non-commutative analogy is not ontology evidence.
+
+### C-11.14 — Consumer Information Sufficiency Test
+
+Accepted WD-24:
+
+> Для consumer, который должен однозначно различать specifications, различающиеся только object-to-position mapping, одних framework definition и independent domain facts недостаточно. Информация, различающая mappings, является необходимым и невыводимым из этих входов информационным компонентом specification.
+
+Use the precise formulation "insufficient information for unambiguous interpretation"; do not upgrade this to a universal information-theoretic claim.
+
+### C-11.15 — Representation Information Preservation Test
+
+Accepted WD-25:
+
+> Для однозначной интерпретации specifications, различающихся object-to-position mapping, consumer должен иметь доступ к information, различающей эти mappings. Эта information может быть сохранена непосредственно в representation либо быть восстановима из representation совместно со стабильной внешней convention.
+>
+> Representation, из которой mapping-distinguishing information невозможно восстановить, теряет соответствующее semantic distinction.
+>
+> Representation, в которой mapping определяется исключительно через circular restatement behavioral positions, не предоставляет независимого основания для этого mapping.
+
+Important distinctions:
+- representation != interpretation context;
+- explicit binding is sufficient, not proven universally necessary;
+- unordered != informationless;
+- a representation plus stable external convention may preserve the distinction;
+- field names such as `required` are not intrinsically circular; circularity depends on their definition.
+
+### Consolidated C-11 Research Finding
+
+C-11.11 — C-11.15 is CLOSED as a bounded research arc.
+
+Established findings:
+
+- mapping is required by the tested frameworks for expressing the tested `S requires X when Y` form;
+- no independent semantic basis for mapping was established on the tested observation surface;
+- changing mapping can change the semantic and behavioral specification while independent facts remain fixed;
+- mapping-distinguishing information is not derivable from framework definition plus independent facts in the tested cases;
+- consumer access to mapping-distinguishing information is therefore required for unambiguous interpretation;
+- that information may be stored directly in representation or recovered through a stable external convention;
+- representations that cannot preserve/recover the distinction lose that semantic distinction;
+- unordered structure can preserve the distinction when it contains explicit binding information;
+- circular role-restatement does not provide an independent basis.
+
+Working interpretations only:
+
+- mapping is semantically consequential but ontologically unresolved;
+- Role-A / Role-B remain neutral behavioral positions;
+- representation and interpretation context are distinct information boundaries;
+- mapping may be structural binding, relation, parameter, or another construct; this remains open.
+
+Open questions intentionally NOT answered by C-11:
+
+- whether mapping is a semantic entity/property/relation;
+- source of mapping;
+- ownership of mapping;
+- authority governing mapping;
+- preferred representation;
+- reliability of external conventions;
+- interaction with Cycle semantics, Authority level scope, Conflict resolution, Applicability vs Activation, or Temporary OVERRIDE lifecycle;
+- whether other requirement frameworks behave differently.
+
+### Working Decisions from C-11
+
+| ID | Decision | Status |
+|---|---|---|
+| WD-23 (rev2) | Mapping has no established independent semantic basis, but specification is semantically sensitive to mapping | Research finding |
+| WD-24 | Mapping-distinguishing information is necessary and not derivable from framework + independent facts in tested cases | Research finding |
+| WD-25 | Mapping-distinguishing information must be available to consumer; it may be preserved directly or via stable convention | Research finding |
+
+These are NOT Architecture Decisions and are not to be promoted automatically.
+
+## C-12 — Cycle Semantics
+
+### Research status
+
+C-12 is the next bounded research arc selected by the architect.
 
 ### Objective
 
-Determine whether the observed mapping between objects and asymmetric behavioral positions is:
+Determine whether a dependency cycle has its own semantic consequence that cannot be reduced to already established properties of individual dependencies.
 
-- merely a parameter of a candidate semantic framework;
-- independently characterizable by some semantic property/relation;
-- or not independently isolable at all.
+Canonical minimal shape:
 
-Do NOT begin by asking who owns a presumed role-assignment entity.
+`A requires B`
+`B requires A`
+
+Do NOT pre-classify a cycle as:
+- conflict;
+- contradiction;
+- invalid specification;
+- unresolved state;
+- activation problem;
+- authority problem.
 
 ### Core question
 
-> Is the observed mapping between objects and asymmetric behavioral positions an independent semantic component, or merely a parameter of each candidate framework?
+> При сохранении одинаковых independently observable facts: отличается ли семантика specification с dependency cycle от соответствующей acyclic specification исключительно вследствие структуры cycle?
 
-### Candidate status hypotheses
+Possible conservative outcomes:
 
-#### A — Mapping is only a model parameter
+1. cycle is only a structural graph property with no independently established semantic consequence;
+2. cycle has an independently established semantic consequence;
+3. current observation surface is insufficient to establish either.
 
-Form:
+### Test discipline
 
-`framework + mapping(X→position-1, Y→position-2)`
+Use bounded adversarial semantic discrimination tests with minimal counterexamples.
 
-The mapping has no independently established semantic entity/status. It only instantiates a framework.
+Prefer paired cases where:
+- objects/facts are identical;
+- individual dependency semantics are identical;
+- only dependency structure changes;
+- acyclic and cyclic configurations are compared.
 
-#### B — Mapping has an independently characterizable semantic basis
+For each result distinguish:
+- observed fact;
+- inference;
+- working interpretation;
+- specification;
+- implementation detail;
+- open question.
 
-Some independently observable property, relation, or constraint may determine or constrain the mapping.
+Anti-circularity constraints:
+- do not define cycle as "problematic dependency structure";
+- do not define cycle as contradiction, unresolved, or conflict before testing;
+- do not use future architectural mechanisms (authority, conflict resolution, activation, override, validation/error handling) as evidence for the semantics of cycle itself.
 
-If this is proposed, the independent basis must be specified without defining it as "the thing that determines Role-A/Role-B." That would be circular.
+### Deliverable for C-12
 
-#### C — Mapping cannot be independently isolated
+Qwen should provide:
+1. minimal bounded tests;
+2. results of each test;
+3. distinguishing counterexamples;
+4. established findings;
+5. working interpretations;
+6. open questions;
+7. conservative synthesis.
 
-The mapping may remain a behavioral correspondence only. Role-A / Role-B remain positions characterized by observable consequences, with no separate semantic component established.
+No Architecture Decision.
+No ontology commitment.
+No implementation recommendation.
+No automatic proposal of the next research arc before conservative synthesis.
 
-### Anti-circularity gate
+### Research sequence
 
-Do NOT use:
+Maintain:
 
-> Role-A = whatever gets the Role-A behavior.
+Qwen report
+→ architect-side counterargument
+→ conservative synthesis
+→ next bounded research question
 
-Do NOT use:
-
-> Role assignment = the thing that assigns objects to roles.
-
-Do NOT rename the behavioral specification and call it an ontology.
-
-Do NOT infer a separate semantic entity merely because the notation contains an arrow such as X→Role-A.
-
-### Required test discipline
-
-For every proposed basis of the mapping, distinguish:
-
-1. independently observed fact;
-2. behavioral consequence already established by C-11.8;
-3. candidate model assumption;
-4. model construction;
-5. inference;
-6. circular restatement;
-7. genuinely independent semantic constraint.
-
-A candidate basis is not independent merely because it has a different name or comes from a familiar domain.
-
-### Important distinction
-
-The following are different claims:
-
-1. "The framework does not determine the mapping."
-2. "The mapping is a separate semantic component."
-3. "The mapping has an identifiable semantic owner."
-4. "The mapping is primitive."
-
-Only claim the strongest level actually established.
-
-### Possible observations
-
-Use bounded, model-neutral tests where possible.
-
-Examples:
-
-- substitution while holding all independently specified object properties fixed;
-- substitution while varying a proposed mapping-basis property;
-- reversal of object positions;
-- composition of independently specified structures;
-- persistence of the mapping under transformations that do not alter the proposed basis.
-
-Do not introduce an observation merely because it is useful to a candidate ontology. The observation must be stated independently enough to avoid building the conclusion into the test.
-
-### Required result branches
-
-A — Mapping is independently characterizable.
-
-B — Mapping is only established as a framework parameter.
-
-C — No independent semantic status for the mapping can be established on the tested observation surface.
-
-D — Test inconclusive because the candidate observation itself presupposes the disputed semantic structure.
-
-Do not select a framework or assign semantic ownership unless the evidence establishes more than compatibility.
+Human remains the final architecture decision-maker.
 
 ## Current implementation state
 
@@ -268,7 +361,11 @@ Dependency remains a semantic relationship under investigation, not an implement
 - semantic ownership remains unresolved where the current observation surface does not discriminate it;
 - ontology is not established as a necessary component;
 - "role assignment" is not established as a separate semantic entity;
-- independently defined semantic frameworks are not automatically ontologies of the AIP Mirror domain.
+- independently defined semantic frameworks are not automatically ontologies of the AIP Mirror domain;
+- mapping semantic consequence does not by itself establish mapping ontology, ownership, authority, or source;
+- representation choice is not established by C-11;
+- external convention is an information-recovery possibility, not an architectural recommendation;
+- cycle semantics must be tested before cycle handling mechanisms are specified.
 
 ## Important constraints
 
@@ -283,7 +380,8 @@ Do not introduce without separate evidence:
 - Resolution = {subject, state, cause/reason};
 - Finding as a semantic entity;
 - a separate Result referent;
-- graph implementation architecture.
+- graph implementation architecture;
+- cycle = conflict/contradiction/error/unresolved by assumption.
 
 Do not assume:
 
@@ -296,7 +394,12 @@ Do not assume:
 - neutral role labels are semantic primitives;
 - a role-mapping notation implies a separate semantic entity;
 - ontology is necessary;
-- a candidate framework is an ontology merely because it reproduces the behavioral pattern.
+- a candidate framework is an ontology merely because it reproduces the behavioral pattern;
+- mapping is only a framework parameter;
+- explicit binding is universally required in representation;
+- unordered representation is necessarily informationless;
+- a stable external convention should be used;
+- cycle is semantically problematic merely because it is cyclic.
 
 ## Evidence / confidence
 
@@ -309,51 +412,50 @@ Do not assume:
 - C-11.10 did not establish that those frameworks are ontologies of the AIP Mirror domain.
 - C-11.10 did not establish that ontology is necessary.
 - C-11.10 did not establish a separate semantic role-assignment entity or its owner.
+- C-11.11 — C-11.15 established the consolidated mapping findings above.
+- C-11.15 established the distinction between representation and interpretation context.
+- C-11.15 established that unordered structure can preserve mapping information when explicit binding is present.
 
 ### Inferred
 
-- Behavioral role constraints can be discussed without choosing an ontology.
-- The specific object-to-role mapping is not derived by the tested frameworks.
-- The status of that mapping should be investigated before asking for its owner.
+- Mapping is semantically consequential within the tested specification while its ontological status remains unresolved.
+- Mapping-distinguishing information is an information requirement for unambiguous consumer interpretation in the tested cases.
+- Semantic research can proceed without selecting an ontology for mapping.
 
 ### Assumed / unverified
 
-- Whether the mapping has independent semantic status.
+- Whether mapping has independent semantic status.
 - Whether a richer observation surface can distinguish a mapping parameter from an independently representable semantic component.
-- Whether any proposed mapping basis survives an anti-circularity test.
+- Whether any proposed mapping basis survives a future anti-circularity test.
+- Whether cycles have an independent semantic consequence.
 
 ### Open
 
-- C-11.11 result.
-- Qwen report.
-- Architect-side counterargument.
+- C-12 cycle semantics result.
+- Architect-side counterargument after C-12.
 - Conservative synthesis.
-- Next bounded research question.
+- Subsequent bounded research direction.
+- Future AD promotion, if and when sufficient architectural constraints accumulate.
 
 ## Last completed task
 
-C-11.10 — Independent Ontology Constraint Test.
+C-11.15 — Representation Information Preservation Test, followed by consolidated C-11.11 — C-11.15 research finding.
 
 ## Immediate next task
 
 Run:
 
-> C-11.11 — Role-Mapping Status Test
+> C-12 — Cycle Semantics
 
-Do not restart C-11.9 or C-11.10.
+Start from the C-12 objective and test discipline above.
 
-Preserve the research sequence:
-
-Qwen report
-→ architect-side counterargument
-→ conservative synthesis
-→ next bounded research question
-
-Human remains the final architecture decision-maker.
+Do not restart C-11.11 — C-11.15.
+Do not promote WD-23 — WD-25 to AD automatically.
+Do not begin implementation work.
 
 ## Things not to redo
 
-- Do not redo completed C-1 through C-11.10 without a concrete evidentiary reason.
+- Do not redo completed C-1 through C-11.15 without a concrete evidentiary reason.
 - Do not convert Qwen taxonomy into an Architecture Decision.
 - Do not broaden target merely to preserve target sufficiency.
 - Do not introduce a generic semantic engine or graph implementation.
@@ -363,6 +465,9 @@ Human remains the final architecture decision-maker.
 - Do not restart the linguistic-role-vs-semantic-role distinction.
 - Do not treat "ontology" as necessary.
 - Do not treat "role assignment" as an established semantic entity.
+- Do not treat mapping as ontologically resolved.
+- Do not treat representation choices from C-11 as architecture decisions.
+- Do not assume cycle is conflict, contradiction, invalidity, or unresolved state.
 
 ## Relevant files
 
@@ -399,7 +504,8 @@ Start with:
 3. docs/handoffs/03AN-Architecture-Research.md
 4. this handoff
 5. applicable conversation-handoff and workflow rules
+6. applicable deep-understanding guidance
 
-Then execute C-11.11 exactly as a bounded research test.
+Then execute C-12 exactly as a bounded research test.
 
 Do not select an ontology. Do not assign semantic ownership prematurely. Human remains the final architecture decision-maker.
