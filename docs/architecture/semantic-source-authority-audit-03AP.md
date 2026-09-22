@@ -283,7 +283,7 @@ The architecture does not yet formally specify:
 - what counts as "intentional acceptance";
 - whether every accepted finding becomes a specification;
 - how conflicting historical findings are retired;
-- whether a superseded handoff can contain still-valid decisions;
+- whether a handed-off handoff can contain still-valid decisions;
 - how an architectural decision becomes canonical across documents;
 - whether project specifications themselves have distinct authority scopes.
 
