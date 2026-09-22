@@ -13,7 +13,7 @@ Previous chapter:
 03AO — Architecture & Research
 
 Status:
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
@@ -257,3 +257,40 @@ The next migration is to be performed separately by the explicit chapter migrati
 No implementation authorization is granted.
 
 Human remains the final architecture decision-maker.
+
+## 03AP → 03AQ migration reading set
+
+The receiving chapter MUST read the following before selecting new substantive research:
+
+### Bootstrap / lifecycle
+- `.ai/skills/conversation-handoff/BOOTSTRAP.md`
+- `.ai/rules/conversation-lifecycle.md`
+- `.ai/rules/handoff-references.md`
+- `.ai/rules/workflow.md`
+- `.ai/rules/project-architecture.md`
+
+### Core architecture / semantic baseline
+- `docs/PROJECT-INSTRUCTIONS.md`
+- `docs/architecture/ai-project-instruction-architecture.md`
+- `docs/architecture/semantic-source-authority-audit-03AP.md`
+- `docs/architecture/intentional-acceptance-audit-03AP.md`
+
+### Dependency / result boundary
+- `docs/architecture/prerequisite-dependency-semantics.md`
+- `docs/architecture/c-13-authority-vs-effective-outcome-03AP.md`
+
+### Architectural leverage / bottleneck lineage
+- `docs/architecture/architectural-bottleneck-audit-03AP.md`
+- `docs/architecture/architectural-bottleneck-cross-audit-03AP.md`
+- `docs/architecture/post-c-13-architectural-leverage-audit-03AP.md`
+
+### OVERRIDE evidence boundary
+- `docs/architecture/c-14-override-semantic-dimension-03AP.md`
+- `docs/handoffs/03D-Architecture-Research.md` — historical accepted OVERRIDE/authority/precedence working semantics; historical evidence only, not automatically current canonical specification.
+- `docs/handoffs/03E-Architecture-Research.md` — inherited accepted working semantics and the transition into dependency research.
+
+The receiving chapter MUST treat the above as a reading set, not as a flat authority hierarchy. In particular, distinguish current canonical architecture, bounded research results, historical evidence, and chapter lifecycle state.
+
+The receiving chapter MUST NOT infer current OVERRIDE semantics merely from the historical 03D/03E material.
+
+The receiving chapter MUST NOT introduce an Acceptance entity or acceptance protocol before auditing whether the existing project convention is sufficient.
