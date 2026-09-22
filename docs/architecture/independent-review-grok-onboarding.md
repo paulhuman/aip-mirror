@@ -153,7 +153,7 @@ As meaningful state accumulates:
 
 - Update your DRAFT handoff with completed work, decisions, open questions
 - Commit checkpoint updates when requested: `Пора обновить handoff`
-- Prepare for migration when requested: `Пора выполнить миграцию в чат 05[A-Z]{2}`
+- Prepare for migration when requested: `Пора выполнить миграцию в чат 06[A-Z]{2}`
 
 ---
 
