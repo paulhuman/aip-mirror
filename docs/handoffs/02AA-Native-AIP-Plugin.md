@@ -22,15 +22,15 @@ Establish the durable handoff state for chapter 02AA and migrate the Native AIP 
 ## Completed
 
 - Defined the four-specialization / alphabetical-chapter conversation model.
-- Established the conversation handoff lifecycle: `DRAFT` → `READY_FOR_HANDOFF` → `HANDED_OFF` → `SUPERSEDED`.
+- Established the conversation handoff lifecycle: `DRAFT` → `READY_FOR_HANDOFF` → `HANDED_OFF`.
 - Established that every new chapter must immediately create its own `DRAFT` handoff and commit it without a separate user approval step.
 - Established the user checkpoint command `Пора обновить handoff` for repeated `DRAFT` checkpoint commits.
 - Established that checkpoint commits are not migration commits.
 - Established the migration command `Пора выполнить миграцию в чат XXY`.
 - Established that the receiving chapter owns `READY_FOR_HANDOFF` → `HANDED_OFF`.
-- Established that a later chapter must mark the older `HANDED_OFF` handoff `SUPERSEDED` when the later handoff reaches `READY_FOR_HANDOFF`.
+- Established that a later chapter must complete the handoff transition when the receiving chapter reaches `READY_FOR_HANDOFF`.
 - Added the static bootstrap procedure at `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
-- Updated the lifecycle/workflow rules to define bootstrap, checkpoint commits, pre-authorized handoff commits, and mandatory `SUPERSEDED` transitions.
+- Updated the lifecycle/workflow rules to define bootstrap, checkpoint commits, pre-authorized handoff commits, and mandatory handoff lifecycle transitions.
 
 ## Current implementation state
 
@@ -104,7 +104,7 @@ The native implementation is intended to use C++ with the Illustrator 2026 AIP S
 
 ## Last completed task
 
-Formalized and tested the conversation handoff workflow, including mandatory initial `DRAFT` creation, checkpoint commits, migration finalization, receiving-chapter ownership, and mandatory `SUPERSEDED` handling.
+Formalized and tested the conversation handoff workflow, including mandatory initial `DRAFT` creation, checkpoint commits, migration finalization, receiving-chapter ownership, and mandatory handoff lifecycle handling.
 
 ## Immediate next task
 
@@ -120,4 +120,4 @@ Initialize chapter 02AB using the static bootstrap procedure.
 
 ## Recommended starting context for next chapter
 
-Start by reading `.ai/skills/conversation-handoff/BOOTSTRAP.md`, `.ai/rules/conversation-lifecycle.md`, and `.ai/rules/workflow.md`, then read this handoff and inspect the relevant native-plugin/project files and references before beginning implementation. Chapter 02AB must create its own `docs/handoffs/02B-Native-AIP-Plugin.md` with status `DRAFT` immediately during bootstrap and commit it without asking for permission. After successful bootstrap, 02B must change this handoff from `READY_FOR_HANDOFF` to `HANDED_OFF` and commit that transition.
+Start by reading `.ai/skills/conversation-handoff/BOOTSTRAP.md`, `.ai/rules/conversation-lifecycle.md`, and `.ai/rules/workflow.md`, then read this handoff and inspect the relevant native-plugin/project files and references before beginning implementation. Chapter 02AB must create its own `docs/handoffs/02AB-Native-AIP-Plugin.md` with status `DRAFT` immediately during bootstrap and commit it without asking for permission. After successful bootstrap, 02AB must change this handoff from `READY_FOR_HANDOFF` to `HANDED_OFF` and commit that transition.
