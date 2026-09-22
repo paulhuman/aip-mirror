@@ -101,39 +101,65 @@ Previous chapter:
 
 This receiving handoff is intentionally created as DRAFT during lifecycle recovery/bootstrap.
 
-## Immediate next task
+## Completed 03AP research sequence
 
-1. Complete bootstrap verification of this handoff and repository state.
-2. Review the already-received Grok 06AA Independent Architectural Reconstruction / Baseline response.
-3. Separate its claims by evidence class and identify independent findings.
-4. Only after that select the next bounded research direction.
+The following research steps are now complete:
 
-Human remains the final architecture decision-maker.
+1. Grok 06AA Independent Architectural Reconstruction / Baseline review.
+2. 03AP Architectural Bottleneck Audit:
+   docs/architecture/architectural-bottleneck-audit-03AP.md
+3. Qwen 05AE independent bottleneck audit comparison.
+4. Grok 06AA bottleneck audit comparison.
+5. Cross-audit synthesis:
+   docs/architecture/architectural-bottleneck-cross-audit-03AP.md
+6. C-13 bounded semantic discrimination test:
+   docs/architecture/c-13-authority-vs-effective-outcome-03AP.md
 
+The cross-audit synthesis did not establish a universal bottleneck. It identified two strongest unresolved boundaries:
+- Dependency ↔ effective outcome ↔ Resolution/referent
+- Authority / Precedence ↔ OVERRIDE ↔ effective outcome
 
-## 03AP architectural bottleneck audit
+C-13 then tested one narrow discrimination at the second/first boundary intersection:
+- B retains authority standing;
+- B's candidate effect loses precedence;
+- B's effective outcome changes;
+- dependency on B's authority standing remains satisfied;
+- dependency on B's effective outcome is not satisfied.
 
-After the Grok 06AA baseline review, 03AP performed a broader architectural bottleneck audit rather than immediately selecting the next experiment.
+C-13 therefore established a bounded positive discrimination: dependency on a decision source is not semantically determined by source identity alone; the referenced result/property matters.
 
-The audit is recorded separately in:
-docs/architecture/architectural-bottleneck-audit-03AP.md
+C-13 did NOT establish a Dependency ontology, Resolution ontology, Result entity, universal consumer-consequence rule, or implementation architecture.
 
-The audit's current finding is:
+## prerequisite-dependency-semantics.md reconciliation
 
-- Resolution is a significant partial bottleneck, especially for Dependency references to effective outcomes and parts of precedence semantics.
-- Dependency is not globally blocked by Resolution; authority-standing and candidate-effect surfaces remain independently researchable.
-- Mapping is a deep but more local bottleneck around representation/binding/information preservation.
-- Applicability vs activation is comparatively autonomous.
-- Representation vs interpretation context and progressive activation remain important architectural constraints rather than immediate semantic bottlenecks.
-- No single global bottleneck has been established.
-
-The next bounded research question must therefore be selected only after comparing this audit with the pending independent Grok Dependency ↔ Resolution stress-test response.
-
-## Deferred architecture-document maintenance
-
-After the pending Grok Dependency ↔ Resolution stress-test response is received and reviewed, update:
+The deferred maintenance of:
 docs/architecture/prerequisite-dependency-semantics.md
 
-The update must reconcile the document with the closed C-11.11 — C-11.15 arc, the closed C-12 cycle-semantic arc, the current target × consumer-role research surface, and any new conclusion from the Grok stress test.
+is now complete after the Grok response and cross-audit synthesis were reviewed.
 
-Do not perform this update before the Grok response is reviewed; it is intentionally deferred to avoid rewriting the research note from incomplete evidence.
+The update:
+- reconciles the earlier cycle remarks with CLOSED C-12;
+- preserves the target × consumer-role working model;
+- records the current Dependency ↔ effective-outcome and Authority/Precedence ↔ OVERRIDE boundaries;
+- points to C-13 as the neutral discrimination test;
+- does not promote provisional cycle or UNRESOLVED hypotheses to formal semantics.
+
+## Current research position
+
+The current strongest result is not a selected ontology but a semantic discrimination:
+
+~~~text
+dependency on B
+    ≠
+dependency on B's authority standing
+    ≠
+dependency on B's candidate effect
+    ≠
+dependency on B's effective outcome
+~~~
+
+The exact ontology and consumer semantics remain open.
+
+No automatic next experiment is selected by C-13. The next chapter/research step should be chosen from the remaining architectural uncertainty after inspecting the consequences of this positive discrimination.
+
+Human remains the final architecture decision-maker.
