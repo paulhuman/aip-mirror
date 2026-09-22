@@ -91,8 +91,6 @@ Observation: A can be eligible even though B's result is not yet known. The depe
 
 Working interpretation: this is a candidate-effect dependency and must not automatically be folded into eligibility.
 
-This demonstrates that `dependency` cannot simply mean `eligibility prerequisite`.
-
 Result:
 
 ```text
@@ -548,4 +546,64 @@ The counterexample pass now supports a clearer working boundary: dependency is b
 
 The three tested target classes — authority standing, candidate effect, and effective outcome — are semantically distinct. The control check further suggests that **dependency target** and **consumer role** are separate dimensions. This remains a working research model, not a formal Architecture Decision.
 
-The next step is to test dependency chains and cycle semantics using this two-dimensional model, including separate treatment of eligibility-related cycles and effect/effective-outcome cycles.
+## C-12 reconciliation
+
+The earlier Counterexample 6 and Counterexample 7 cycle remarks predate the bounded C-12 research arc and must not be read as an established general cycle semantics.
+
+C-12 is CLOSED. Within the tested positive Boolean models of `requires`, a non-trivial cycle did not reveal an independent cycle-specific semantic consequence beyond composition of the individual dependencies.
+
+Therefore the following earlier statements remain only historical/provisional research hypotheses:
+
+- a strict eligibility cycle requires an explicit cycle outcome;
+- `UNRESOLVED` is the natural cycle outcome;
+- effect/effective-outcome cycles require a distinct cycle rule.
+
+The current evidence does **not** justify promoting any of these to formal semantics.
+
+## Post-audit status
+
+The later 03AP cross-audit synthesis confirms that:
+
+- Dependency is a broad unresolved semantic surface, not a single established ontology;
+- effective-outcome Dependency is more strongly coupled to unresolved result/referent questions than the authority-standing and candidate-effect surfaces;
+- Authority / Precedence ↔ OVERRIDE ↔ effective outcome is a separate high-value boundary;
+- Mapping and representation questions remain more localized;
+- no universal Dependency → Resolution dependency has been established.
+
+The strongest current statement is therefore:
+
+```text
+Dependency
+   ├─ authority standing ───────────────► relatively autonomous
+   ├─ candidate effect ─────────────────► partially autonomous
+   └─ effective outcome ────────────────► strongly coupled to result/referent questions
+```
+
+This is a research synthesis, not an Architecture Decision.
+
+## Deferred next test
+
+The next bounded research question should not be phrased as an ontology-selection test such as "which object is the true Dependency target?"
+
+A more neutral discrimination question is:
+
+> When one decision source has a stable authority standing but its candidate effect loses precedence and its effective outcome changes, does a dependent consumer behave observably differently when its reference is evaluated against the authority standing versus the effective outcome?
+
+This question isolates the already-observed divergence between authority standing and effective outcome without assuming a Resolution ontology.
+
+The corresponding bounded test is recorded separately in:
+
+`docs/architecture/c-13-authority-vs-effective-outcome-03AP.md`
+
+The test must remain limited to:
+
+- one conflict;
+- one dependent consumer;
+- positive dependency predicates;
+- authority standing versus effective outcome;
+- no cycle semantics;
+- no UNRESOLVED propagation;
+- no mapping/representation theory;
+- no new ontology.
+
+Human remains the final architecture decision-maker.
