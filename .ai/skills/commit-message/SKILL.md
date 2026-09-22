@@ -157,9 +157,7 @@ Recommended vocabulary:
 
     docs(handoff): mark 01A handoff handed off
 
-    docs(handoff): mark 01A handoff superseded
 
-    docs(handoff): correct overdue 03A handoff supersession
 
 Rules:
 
@@ -179,10 +177,8 @@ Transition ownership is defined by the conversation lifecycle rules:
     receiving chapter:
         READY_FOR_HANDOFF → HANDED_OFF
 
-    later chapter:
-        HANDED_OFF → SUPERSEDED
 
-A Lifecycle Correction is not an additional lifecycle state transition and must not be represented as a skipped or replacement transition. Its commit records the controlled correction of the durable handoff state.
+A Lifecycle Correction is not an additional lifecycle state. Its commit records the controlled correction of durable handoff state.
 
 The previous chapter must not create a commit claiming `HANDED_OFF` merely because it has completed the handoff document.
 
@@ -196,7 +192,7 @@ If unrelated changes are present, recommend splitting them into separate commits
 
 For handoff work, prefer one coherent commit when content and lifecycle status change together rather than creating unnecessary status-only commits.
 
-For Lifecycle Correction, use a message that clearly identifies the correction as a later repair of durable handoff state. Do not phrase it as though the historical transition happened normally.
+For Lifecycle Correction, use a message that clearly identifies the correction as a later repair of durable handoff state. Do not phrase it as though the corrected state was established at the original historical time.
 
 ## When the user asks for commit messages
 
@@ -246,7 +242,7 @@ Avoid inventing alternate names for established project concepts unless there is
 
     docs(handoff): update 01A JSX prototype handoff
 
-    docs(handoff): correct overdue 03A handoff supersession
+    docs(handoff): correct overdue 03A handoff lifecycle correction
 
     refactor(core): separate geometry from Illustrator adapters
 
