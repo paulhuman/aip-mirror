@@ -13,7 +13,7 @@ AA
 N/A — first handoff for specialization 05
 
 **Status:**
-SUPERSEDED
+HANDED_OFF
 
 ---
 

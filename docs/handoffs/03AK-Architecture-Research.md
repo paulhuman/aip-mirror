@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03AJ — Architecture & Research
 
 Status:
-SUPERSEDED
+HANDED_OFF
 
 ## Migration checkpoint
 

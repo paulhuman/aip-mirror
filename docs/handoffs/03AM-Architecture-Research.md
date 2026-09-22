@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03AL — Architecture & Research
 
 Status:
-SUPERSEDED
+HANDED_OFF
 
 ## Current objective
 
@@ -371,7 +371,6 @@ During this write-capable bootstrap:
 ## Bootstrap note
 
 This file was created by 03AM itself as the receiving chapter's initial DRAFT state, as required by the conversation-handoff bootstrap procedure. It has since been advanced to READY_FOR_HANDOFF as part of the migration to 03AN.
-
 
 ## Migration lifecycle
 

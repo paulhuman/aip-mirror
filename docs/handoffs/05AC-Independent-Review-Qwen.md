@@ -13,7 +13,7 @@ AC
 05AB — Independent Review (Qwen)
 
 **Status:**
-SUPERSEDED
+HANDED_OFF
 
 ---
 

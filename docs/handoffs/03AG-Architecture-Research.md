@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03AF — Architecture & Research
 
 Status:
-SUPERSEDED
+HANDED_OFF
 
 ## Current objective
 
@@ -500,14 +500,14 @@ If `cause` remains structured resolution context that consumers consult only whe
 
 ## U-1…U-6 synthesis
 
-| Case | Unresolved subject | Main cause/context | Origin | Current result |
-|---|---|---|---|---|
-| U-1 | predicate | missing context data | direct | Model B survives |
-| U-2 | authorization standing | missing/ambiguous authority evidence | direct | Model B survives |
-| U-3 | operation result | operation-boundary mismatch | direct | Model B survives |
-| U-4 | eligibility | unresolved predicate | propagated | Model B survives |
-| U-5 | candidate effect | dependency target unresolved | propagated | Model B survives |
-| U-6 | effective outcome | conflict / no resolving precedence | direct | Model B survives, under pressure |
+| Case | Unresolved subject     | Main cause/context                   | Origin     | Current result                   |
+| ---- | ---------------------- | ------------------------------------ | ---------- | -------------------------------- |
+| U-1  | predicate              | missing context data                 | direct     | Model B survives                 |
+| U-2  | authorization standing | missing/ambiguous authority evidence | direct     | Model B survives                 |
+| U-3  | operation result       | operation-boundary mismatch          | direct     | Model B survives                 |
+| U-4  | eligibility            | unresolved predicate                 | propagated | Model B survives                 |
+| U-5  | candidate effect       | dependency target unresolved         | propagated | Model B survives                 |
+| U-6  | effective outcome      | conflict / no resolving precedence   | direct     | Model B survives, under pressure |
 
 This is evidence inventory, not a winner declaration.
 

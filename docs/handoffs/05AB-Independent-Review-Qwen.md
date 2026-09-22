@@ -13,7 +13,7 @@ AB
 05AA — Independent Review (Qwen)
 
 **Status:**
-SUPERSEDED
+HANDED_OFF
 
 ---
 
