@@ -484,8 +484,6 @@ The intended lifecycle is:
     READY_FOR_HANDOFF
       ↓
     HANDED_OFF
-      ↓
-    HANDED_OFF
 
 The lifecycle retains history.
 
