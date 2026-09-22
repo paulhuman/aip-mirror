@@ -113,7 +113,7 @@ The intended system separates:
 - Keep memory separate from handoffs.
 - Use generic chapter notation `[0-9]{2}[A-Z]{2}`.
 - 03 may detect/report other handoff problems but cannot edit another specialization's handoff.
-- Receiving chapter owns `READY_FOR_HANDOFF` → `HANDED_OFF`; later chapter owns `HANDED_OFF` → `SUPERSEDED` when required.
+- Receiving chapter owns the `READY_FOR_HANDOFF` → `HANDED_OFF` transition.
 - Use explicit applicability categories and retain trigger type as a separate concept.
 - Candidate trigger types: path/file scope, task/intent, conditional state, explicit user invocation.
 - Treat `READ`, `APPLY`, and `CHECK` as different events.
