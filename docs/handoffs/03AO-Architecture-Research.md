@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03AN — Architecture & Research
 
 Status:
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
@@ -460,13 +460,21 @@ Do not assume:
 
 C-12 — Cycle Semantics, including the composition-vs-independent-consequence discrimination test and architect-side conservative synthesis.
 
+Grok 06AA bootstrap was completed independently. Grok then completed the requested first substantive task: Independent Architectural Reconstruction / Baseline. The full Grok response is intentionally not reproduced here because the source response is retained in the current conversation context for the receiving chapter.
+
 C-11.11 — C-11.15 remains CLOSED as a separate bounded research arc.
 
 ## Immediate next task
 
-Select the next bounded research question after reviewing the completed C-12 and the broader architecture/research roadmap.
+After initialization of chapter 03AP, the FIRST substantive action is to recover/review the Grok 06AA Independent Architectural Reconstruction / Baseline response that was completed immediately before this migration, and continue the work from that response.
+
+The Grok response itself has not been incorporated into this handoff as architectural fact; it must be reviewed as an independent external-review artifact before any synthesis or research direction is selected.
+
+In parallel, continue the controlled Qwen-vs-Grok experiment: compare the two independent reviewers under the same reviewer contract to identify where their reconstructions, distinctions, assumptions, counterexamples, and research proposals converge or diverge. Do not rank them or declare a winner prematurely; the purpose is to observe substantive model differences and assess the evidence quality of each.
 
 Do not automatically continue with any C-12 boundary question.
+Do not lose the pending Grok baseline review at migration: it is the first required input after 03AP bootstrap.
+Treat Qwen-vs-Grok parallel testing as an ongoing controlled comparison objective, not as a reason to contaminate either reviewer with the other's conclusions.
 Do not restart C-11.11 — C-11.15.
 Do not promote WD-23 — WD-25 or C-12 findings to AD automatically.
 Do not begin implementation work.
@@ -513,9 +521,11 @@ Process/rules:
 - .ai/skills/deep-understanding/SKILL.md
 - .ai/skills/commit-message/SKILL.md
 
-## Recommended starting context for next chapter
+## Migration-specific starting context for next chapter
 
-Start with:
+**FIRST ACTION AFTER BOOTSTRAP:** review the completed Grok 06AA Independent Architectural Reconstruction / Baseline response from the immediately preceding conversation context. Do not ask the human to repeat it unless the response is genuinely unavailable.
+
+Then start with:
 
 1. docs/PROJECT-INSTRUCTIONS.md
 2. docs/architecture/ai-project-instruction-architecture.md
@@ -524,6 +534,6 @@ Start with:
 5. applicable conversation-handoff and workflow rules
 6. applicable deep-understanding guidance
 
-Then execute C-12 exactly as a bounded research test.
+Then review the Grok baseline before selecting the next research arc. C-12 is already CLOSED and must not be re-executed merely because the chapter migrated.
 
 Do not select an ontology. Do not assign semantic ownership prematurely. Human remains the final architecture decision-maker.
