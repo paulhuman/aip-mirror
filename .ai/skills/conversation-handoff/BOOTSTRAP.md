@@ -275,7 +275,7 @@ After explicit user authorization, the active correcting chapter must:
 11. verify the resulting commit/ref and repository state;
 12. declare `CORRECTION = COMPLETE` only after all checks succeed.
 
-For a missed `HANDED_OFF` → `SUPERSEDED` transition, the correction must record the affected older handoff as `SUPERSEDED` while preserving the historical commits that show the transition was missed. The corrective commit is the audit trail of the later correction; it must not be presented as the original lifecycle transition.
+For a missed `HANDED_OFF` → `HANDED_OFF` transition, the correction must record the affected older handoff as `HANDED_OFF` while preserving the historical commits that show the transition was missed. The corrective commit is the audit trail of the later correction; it must not be presented as the original lifecycle transition.
 
 ## Post-bootstrap consistency verification
 
@@ -331,12 +331,9 @@ These commits are **checkpoint commits**, not migration commits.
 When the user explicitly requests migration to `NEXT_CHAPTER`, the current chapter must:
 
 1. finish the current work as appropriate;
-2. update and finalize its handoff;
+2. update and finalize its own handoff;
 3. change `DRAFT` → `READY_FOR_HANDOFF`;
-4. before declaring that transition complete, apply the `READY_FOR_HANDOFF supersession invariant` from the conversation lifecycle rules: if a previous same-specialization handoff is `HANDED_OFF`, change it to `SUPERSEDED` and physically verify both states;
-5. verify the repository change and commit the transition;
-6. generate the bootstrap message for the receiving chapter using this static procedure.
+4. verify the repository change and commit the transition;
+5. generate the bootstrap message for the receiving chapter using this static procedure.
 
 The receiving chapter later changes the previous handoff `READY_FOR_HANDOFF` → `HANDED_OFF` after successful bootstrap and post-bootstrap consistency verification.
-
-When the receiving chapter's own handoff eventually reaches `READY_FOR_HANDOFF`, that later chapter must also change the older `HANDED_OFF` handoff for the same specialization to `SUPERSEDED` and commit that transition. This historical transition is mandatory when its condition is met.
