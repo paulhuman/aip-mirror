@@ -418,7 +418,7 @@ No structural refactor has been committed. `docs/PROJECT-INSTRUCTIONS.md` remain
 
 This handoff is finalized as `READY_FOR_HANDOFF` for **AIP Mirror — 03AD — Architecture & Research**.
 
-The previous same-specialization handoff `03AB` was physically verified as `SUPERSEDED` before this handoff was transitioned to `READY_FOR_HANDOFF`, satisfying the mandatory READY_FOR_HANDOFF supersession invariant.
+The previous same-specialization handoff `03AB` had completed its handoff before this handoff was transitioned to `READY_FOR_HANDOFF`.
 
 ## Things not to redo
 
