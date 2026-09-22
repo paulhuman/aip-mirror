@@ -193,7 +193,7 @@ READY_FOR_HANDOFF
   ↓
 HANDED_OFF
   ↓
-SUPERSEDED
+HANDED_OFF
 ```
 
 But these lifecycle statuses describe the **chapter state**, not the normative status of every statement contained in the handoff.
@@ -248,9 +248,9 @@ Therefore:
 
 ## 8. Supersession does not mean semantic invalidation
 
-The lifecycle rules require older same-specialization handoffs to become SUPERSEDED when a newer handoff reaches READY_FOR_HANDOFF.
+The lifecycle rules do not require any later transition after HANDED_OFF.
 
-But a SUPERSEDED handoff remains historical repository state.
+A HANDED_OFF handoff remains durable historical repository state.
 
 This means:
 
@@ -320,7 +320,7 @@ This is currently the strongest architecture-level interpretation supported by t
 7. Accepted working semantics can remain provisional rather than becoming final architecture immediately.
 8. Handoffs preserve accepted project state across chapter migrations.
 9. Handoff lifecycle status does not by itself establish the semantic status of every statement contained in the handoff.
-10. SUPERSEDED is a document/chapter lifecycle state, not an automatic semantic invalidation mechanism.
+10. HANDED_OFF is a document/chapter lifecycle state, not an automatic semantic invalidation mechanism.
 11. The project therefore already has an operational acceptance mechanism, but it is distributed across human decision, durable documentation, and lifecycle preservation rather than represented by one formal primitive.
 
 ### Inferred
@@ -344,7 +344,7 @@ The audit does NOT establish:
 - a universal rule that acceptance must occur in a handoff;
 - a universal rule that only the human's chat message can constitute acceptance;
 - a formal semantic status machine for statements;
-- automatic invalidation when a document becomes SUPERSEDED.
+- automatic invalidation merely because a document is handed off.
 
 ## 11. The important architectural gap
 
@@ -403,7 +403,7 @@ For example:
 - a handoff can preserve an accepted provisional decision;
 - an architecture document can contain both established conclusions and open research;
 - a reference can establish an external fact without establishing a project requirement;
-- a superseded handoff can remain important historical evidence.
+- a handed-off handoff can remain important historical evidence.
 
 Therefore the next architectural layer may concern **semantic status and its preservation**, rather than source hierarchy or document hierarchy.
 
@@ -464,7 +464,7 @@ ACCEPTED_WORKING_STATE = OBSERVED_IN_HISTORICAL_PRACTICE
 FORMAL_AD_TRANSITION = NOT_FORMALLY_DEFINED
 HANDOFF_PRESERVES_ACCEPTED_STATE = ESTABLISHED
 HANDOFF_STATUS_EQUALS_SEMANTIC_STATUS = FALSE
-SUPERSEDED_EQUALS_SEMANTIC_INVALIDATION = FALSE
+HANDED_OFF_EQUALS_SEMANTIC_INVALIDATION = FALSE
 SEMANTIC_STATUS_MACHINE = NOT_ESTABLISHED
 NEW_ACCEPTANCE_PRIMITIVE = NOT_INTRODUCED
 NEW_C_SERIES_TEST = NOT_AUTOMATICALLY_SELECTED
