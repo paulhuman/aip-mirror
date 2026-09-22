@@ -275,7 +275,7 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 
 ### Confirmed / observed
 
-- 03AC is `HANDED_OFF`; 03AB is `SUPERSEDED`; 03AA is `SUPERSEDED`; the lifecycle chain is coherent for the current 03AD chapter.
+- 03AC is `HANDED_OFF`; 03AB and 03AA are completed earlier handoffs; the lifecycle chain is coherent for the current 03AD chapter.
 - 03AD was initialized from the 03AC receiving checkpoint and has now been prepared as `READY_FOR_HANDOFF` to 03AE.
 - No structural architecture refactor has been committed.
 - The authorization/precedence conclusions listed above were explicitly accepted during the 03AD discussion as working architecture semantics.
