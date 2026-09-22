@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03AM — Architecture & Research
 
 Status:
-HANDED_OFF
+SUPERSEDED
 
 ## Current objective
 
@@ -304,13 +304,13 @@ Question:
 Test at least these possibilities without presupposing any one ontology:
 
 A. Mapping is only a model parameter:
-   framework + mapping(X→position-1, Y→position-2).
+framework + mapping(X→position-1, Y→position-2).
 
 B. Mapping has an independently characterizable semantic basis:
-   some independently observable property or relation constrains the mapping.
+some independently observable property or relation constrains the mapping.
 
 C. Mapping cannot be independently isolated:
-   Role-A / Role-B remain behavioral positions only, with no separate semantic entity established.
+Role-A / Role-B remain behavioral positions only, with no separate semantic entity established.
 
 Do NOT ask prematurely who "owns" the mapping. First establish whether a separately meaningful mapping exists at all.
 
