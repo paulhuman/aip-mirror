@@ -212,6 +212,54 @@ The receiving chapter must preserve and use the following reading set:
 
 These references are not a flat authority hierarchy.
 
+## Handoff lifecycle discrimination — SUPERSEDED
+
+A concrete operational observation from 03AQ must be preserved:
+
+### OBSERVED FACT
+
+The handoff lifecycle has a clear operational path:
+
+```
+DRAFT
+  ↓
+READY_FOR_HANDOFF
+  ↓
+HANDED_OFF
+```
+
+No equally natural operational transition has been demonstrated for:
+
+```
+HANDED_OFF
+  ↓
+SUPERSEDED
+```
+
+The reason is semantic-axis contamination: a handoff document may be `HANDED_OFF` while still containing a mixture of accepted working invariants, open questions, historical evidence, old hypotheses, future tasks, and other material whose semantic status is independent of the document's migration state.
+
+Therefore, for current research purposes:
+
+- `HANDED_OFF` is sufficient to express that the chapter's context-transfer operation has completed.
+- `SUPERSEDED` should **not** be treated as a required handoff lifecycle state.
+- This is a research finding, not yet a lifecycle-rule correction. No existing lifecycle rule is to be changed without the explicitly authorized lifecycle-correction procedure.
+
+### Separate possible meaning of SUPERSEDED
+
+`SUPERSEDED` may still prove useful somewhere else in the future, but only if a concrete semantic need for such a state is demonstrated.
+
+A potentially useful meaning is **dead-end / already-explored warning** rather than document retirement:
+
+> This path, hypothesis, model, or approach was previously explored, tested, or attempted and subsequently abandoned or superseded; future AI should know that this route has already been investigated and should not casually re-enter it as if it were unexplored territory.
+
+In that interpretation, `SUPERSEDED` is not a handoff state and does not mean that every statement in the historical record is invalid. It is a warning about a previously explored semantic or research path.
+
+This distinction remains provisional. If no concrete future use requires such a warning state, `SUPERSEDED` may have no role in the architecture at all.
+
+### Research principle
+
+Do not retain `SUPERSEDED` merely because it exists in an earlier lifecycle design. First demonstrate the concrete question it answers, the axis on which it operates, and the information it preserves that `HANDED_OFF` or ordinary historical provenance cannot already provide.
+
 ## Current implementation state
 
 No implementation work is authorized by this research chapter.
