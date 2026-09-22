@@ -13,7 +13,7 @@ Previous chapter:
 AIP Mirror — 03AN — Architecture & Research
 
 Status:
-READY_FOR_HANDOFF
+HANDED_OFF
 
 ## Current objective
 
@@ -463,6 +463,10 @@ C-12 — Cycle Semantics, including the composition-vs-independent-consequence d
 Grok 06AA bootstrap was completed independently. Grok then completed the requested first substantive task: Independent Architectural Reconstruction / Baseline. The full Grok response is intentionally not reproduced here because the source response is retained in the current conversation context for the receiving chapter.
 
 C-11.11 — C-11.15 remains CLOSED as a separate bounded research arc.
+
+## Handoff lifecycle note
+
+This chapter is now HANDED_OFF to 03AP. The receiving chapter must preserve the migration-specific first action: review the completed Grok 06AA Independent Architectural Reconstruction / Baseline response before selecting the next research arc.
 
 ## Immediate next task
 
