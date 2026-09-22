@@ -118,6 +118,8 @@ The following research steps are now complete:
    docs/architecture/post-c-13-architectural-leverage-audit-03AP.md
 8. C-14 evidence inspection / semantic-dimension discrimination protocol:
    docs/architecture/c-14-override-semantic-dimension-03AP.md
+9. Semantic Source & Authority Audit:
+   docs/architecture/semantic-source-authority-audit-03AP.md
 
 ## C-14 result
 
@@ -165,11 +167,47 @@ authority ≠ precedence
 
 This is a research result, not an Architecture Decision.
 
+## Semantic Source & Authority Audit result
+
+The audit found that the project already distinguishes source roles and, more importantly, explicitly separates evidence/research from project specification.
+
+Established by the inspected rules and architecture:
+- References are evidence/source material and do not automatically acquire authority over project rules.
+- TRACE is not an authority source.
+- Memory is not automatically an instruction.
+- Observed behavior is not automatically a project requirement.
+- Research is distinct from specification.
+- A finding is promoted to specification only through intentional project acceptance.
+
+The audit also found substantial historical OVERRIDE reasoning in the superseded 03D/03E handoffs. Those artifacts are durable evidence of prior project reasoning, but their historical existence does not automatically establish every statement as current canonical specification.
+
+The resulting working boundary is:
+
+~~~text
+source / observation / reference
+            ↓
+          evidence
+            ↓
+      research / finding
+            ↓
+  intentional project acceptance
+            ↓
+     project semantics
+~~~
+
+No total source hierarchy was established, and no claim/provenance ontology was introduced.
+
+The C-14 evidence boundary is therefore preserved and refined: historical OVERRIDE evidence exists, but its current normative status must not be inferred automatically.
+
 ## Next action
 
 Do not manufacture a C-14 behavior case.
 
-The next research step should determine where authoritative evidence for OVERRIDE can legitimately come from, or whether the architecture can make useful progress by moving to another boundary without resolving OVERRIDE.
+The next high-leverage question is narrower:
+
+> What project-level act or artifact constitutes intentional acceptance of a research finding as current normative project semantics, and how is that status preserved across document types and chapter migrations?
+
+Before creating a new bounded experiment, inspect the existing architecture/rules for whether this acceptance transition is already specified elsewhere.
 
 No implementation authorization is granted.
 
