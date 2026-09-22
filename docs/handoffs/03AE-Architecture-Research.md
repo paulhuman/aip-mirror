@@ -50,7 +50,7 @@ The immediate task is a focused counterexample pass on `prerequisite` and `depen
 
 ## Candidate-level precedence working model
 
-The 03D counterexample pass strongly supported, but did not yet formally freeze, candidate-level precedence:
+The 03AD counterexample pass strongly supported, but did not yet formally freeze, candidate-level precedence:
 
 ```text
 Context
@@ -140,7 +140,7 @@ The future review should determine whether the handoff mechanism, its bootstrap 
 - repository state is used as the authoritative verification point rather than conversational memory;
 - repeated lifecycle/bootstrap failures become detectable earlier and are harder to reproduce.
 
-**Do not implement or structurally refactor this mechanism in 03E merely because this task is recorded here.** The purpose of this checkpoint is to preserve the issue as durable project knowledge so it is not forgotten when the architecture is later reconsidered.
+**Do not implement or structurally refactor this mechanism in 03AE merely because this task is recorded here.** The purpose of this checkpoint is to preserve the issue as durable project knowledge so it is not forgotten when the architecture is later reconsidered.
 
 ## Current implementation state
 
@@ -150,8 +150,8 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 
 ## Relevant handoff references
 
-- `docs/handoffs/03C-Architecture-Research.md` — previous chapter's OVERRIDE research checkpoint.
-- `docs/handoffs/03D-Architecture-Research.md` — immediate predecessor; contains the detailed 03AD authorization/precedence decisions and candidate-level counterexample conclusions.
+- `docs/handoffs/03AC-Architecture-Research.md` — previous chapter's OVERRIDE research checkpoint.
+- `docs/handoffs/03AD-Architecture-Research.md` — immediate predecessor; contains the detailed 03AD authorization/precedence decisions and candidate-level counterexample conclusions.
 - `.ai/skills/conversation-handoff/BOOTSTRAP.md` — receiving-chat bootstrap procedure.
 - `.ai/skills/conversation-handoff/SKILL.md` — handoff lifecycle/workflow guidance.
 - `.ai/rules/conversation-lifecycle.md` — chapter lifecycle semantics.
