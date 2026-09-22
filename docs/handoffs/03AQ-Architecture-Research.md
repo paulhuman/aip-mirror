@@ -13,7 +13,7 @@ Previous chapter:
 03AP — Architecture & Research
 
 Status:
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
@@ -212,13 +212,9 @@ The receiving chapter must preserve and use the following reading set:
 
 These references are not a flat authority hierarchy.
 
-## Handoff lifecycle discrimination — SUPERSEDED
+## Handoff lifecycle status
 
-A concrete operational observation from 03AQ must be preserved:
-
-### OBSERVED FACT
-
-The handoff lifecycle has a clear operational path:
+The handoff lifecycle was explicitly simplified during 03AQ after the research distinction above was operationally confirmed:
 
 ```
 DRAFT
@@ -228,37 +224,14 @@ READY_FOR_HANDOFF
 HANDED_OFF
 ```
 
-No equally natural operational transition has been demonstrated for:
+Current lifecycle semantics:
 
-```
-HANDED_OFF
-  ↓
-SUPERSEDED
-```
+- `HANDED_OFF` is the terminal handoff state.
+- `SUPERSEDED` is not a handoff lifecycle state.
+- Historical lifecycle design that used `SUPERSEDED` must not be restored.
+- Lifecycle history remains available through repository history and handoff provenance.
 
-The reason is semantic-axis contamination: a handoff document may be `HANDED_OFF` while still containing a mixture of accepted working invariants, open questions, historical evidence, old hypotheses, future tasks, and other material whose semantic status is independent of the document's migration state.
-
-Therefore, for current research purposes:
-
-- `HANDED_OFF` is sufficient to express that the chapter's context-transfer operation has completed.
-- `SUPERSEDED` should **not** be treated as a required handoff lifecycle state.
-- This is a research finding, not yet a lifecycle-rule correction. No existing lifecycle rule is to be changed without the explicitly authorized lifecycle-correction procedure.
-
-### Separate possible meaning of SUPERSEDED
-
-`SUPERSEDED` may still prove useful somewhere else in the future, but only if a concrete semantic need for such a state is demonstrated.
-
-A potentially useful meaning is **dead-end / already-explored warning** rather than document retirement:
-
-> This path, hypothesis, model, or approach was previously explored, tested, or attempted and subsequently abandoned or superseded; future AI should know that this route has already been investigated and should not casually re-enter it as if it were unexplored territory.
-
-In that interpretation, `SUPERSEDED` is not a handoff state and does not mean that every statement in the historical record is invalid. It is a warning about a previously explored semantic or research path.
-
-This distinction remains provisional. If no concrete future use requires such a warning state, `SUPERSEDED` may have no role in the architecture at all.
-
-### Research principle
-
-Do not retain `SUPERSEDED` merely because it exists in an earlier lifecycle design. First demonstrate the concrete question it answers, the axis on which it operates, and the information it preserves that `HANDED_OFF` or ordinary historical provenance cannot already provide.
+This cleanup is now reflected in the applicable `.ai/rules`, handoff skills, and architecture documentation.
 
 ## Current implementation state
 
@@ -300,11 +273,15 @@ These remain inferences until further evidence is inspected.
 
 ## Last completed task
 
-03AP completed the Semantic Source & Authority Audit and the Intentional Acceptance Audit. The latter established the current distributed acceptance practice and identified the remaining question of how intentional acceptance is observably represented and recognized without conversational memory.
+03AQ completed the lifecycle cleanup arising from the semantic distinction between handoff migration state and semantic status. The handoff lifecycle is now explicitly limited to DRAFT → READY_FOR_HANDOFF → HANDED_OFF, and the repository documentation was normalized accordingly. The final architecture-document lifecycle diagram was also corrected to remove an accidental duplicate HANDED_OFF node. The repository was checked for the exact duplicate sequence `HANDED_OFF HANDED_OFF` and no matches remained.
+
+The substantive research state from 03AP remains as documented above; no implementation work was authorized.
 
 ## Immediate next task
 
-Inspect existing repository practice and evidence for accepted working invariants, formal Architecture Decisions, specifications, handoff inheritance, later refinement, and supersession.
+Continue the bounded inspection of existing repository practice and evidence for accepted working invariants, formal Architecture Decisions, specifications, handoff inheritance, and later refinement. Do not reopen the completed lifecycle cleanup unless new concrete evidence requires it.
+
+The receiving chapter should first determine whether the existing repository already provides sufficient observable representation of intentional acceptance before designing any new acceptance mechanism.
 
 Do not design a new acceptance mechanism until this inspection establishes that existing practice is insufficient.
 
