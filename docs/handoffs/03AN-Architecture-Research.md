@@ -13,15 +13,17 @@ Previous chapter:
 AIP Mirror — 03AM — Architecture & Research
 
 Status:
-DRAFT
+HANDED_OFF
 
 ## Current objective
 
-Continue the bounded dependency-semantics research line through the semantic-role boundary established by C-11.8 and conduct the next bounded test:
+Close the 03AN research line and hand off the verified C-11.10 result to 03AO.
 
-> C-11.9 — Ontology Compatibility Test
+The next bounded question is:
 
-The test must determine whether the established behavioral role specification is compatible with multiple structurally different ontology models, without selecting an ontology or assigning semantic ownership prematurely.
+> C-11.11 — Role-Mapping Status Test
+
+The test must determine the status of the mapping between observed objects and asymmetric behavioral positions without presupposing that a separate semantic entity called “role assignment” exists.
 
 ## Completed
 
@@ -107,6 +109,45 @@ C-11.8 does NOT establish:
 
 No final Architecture Decision has been made.
 
+### C-11.9 — Ontology Compatibility Test
+
+Qwen's initial Branch-A conclusion was rejected after architect-side review.
+
+Qwen had constructed several candidate models, but the claims that Model B and Model C were "genuine explanations" were circular: their semantic rules encoded the C-11.8 behavioral specification rather than deriving it independently.
+
+Accepted result:
+
+> C-11.9 — INCONCLUSIVE / ontology compatibility not established.
+
+More precise formulation:
+
+> Several candidate semantic constructions can reproduce the established behavioral specification, but the test did not establish that their structural differences are semantically independent of the specification itself.
+
+Do not treat C-11.9 as proof of multiple ontology models, semantic equivalence, or ontology irrelevance.
+
+### C-11.10 — Independent Ontology Constraint Test
+
+Qwen repeated the test with an explicit anti-circularity gate:
+
+> ontology definition → ontology's own semantic rules → derived consequences → compare with C-11.8.
+
+Three independently defined semantic frameworks were tested: logical implication, permission/authorization, and temporal/event ordering.
+
+The strongest accepted result is:
+
+> Multiple independently defined semantic frameworks can reproduce the established behavioral pattern, but the specific mapping of objects to asymmetric behavioral positions is not derived by those frameworks.
+
+Important qualifications:
+
+- This does NOT establish that the tested frameworks are three ontologies of the AIP Mirror semantic domain.
+- This does NOT establish that ontology is necessary.
+- This does NOT establish that a separate semantic entity "role assignment" exists.
+- This does NOT establish the source or owner of the object-to-role mapping.
+- Candidate-model language such as "evaluated" must not be promoted to observed system semantics.
+- The mapping may be a model parameter or may have some further semantic basis; its status remains open.
+
+No final Architecture Decision has been made.
+
 ## Current implementation state
 
 No implementation work is authorized by this research chapter.
@@ -132,10 +173,10 @@ Current research boundaries include:
 
 ## Open questions
 
-1. Is the established behavioral role specification compatible with multiple structurally different ontology models?
-2. Can structurally different ontology models produce the same required behavioral consequences while assigning the asymmetry to different semantic owners?
-3. If multiple ontology models remain compatible, what is the narrowest specification that can be retained without selecting one?
-4. If an ontology model becomes incompatible with the behavioral specification, what exact observable constraint causes the incompatibility?
+1. What is the semantic status of the mapping between observed objects and asymmetric behavioral positions?
+2. Is that mapping merely a parameter of a candidate framework, or can it be independently characterized without presupposing an ontology?
+3. Can the mapping be related to independently observable properties without assigning it to subject, object, context, RULE, dependency, or another semantic owner?
+4. If no independent characterization is possible, should Role-A / Role-B remain purely behavioral positions at the architectural specification level?
 
 ## Current files
 
@@ -230,9 +271,9 @@ Do not begin implementation work.
 
 ### Inferred
 
-- Behavioral role constraints may be specifiable without choosing an ontology.
-- Multiple ontology models may remain compatible with the same behavioral role specification; this is the next question to test, not an established fact.
-- If multiple models remain observationally compatible, ontology ownership may remain unspecified at the architectural specification level.
+- Behavioral role constraints can be discussed without choosing an ontology.
+- Independently defined semantic frameworks can reproduce the tested behavioral pattern when supplied with an appropriate object-to-role mapping.
+- The source/status of that mapping remains unresolved.
 
 ### Assumed / unverified
 
@@ -242,33 +283,42 @@ Do not begin implementation work.
 
 ### Open
 
-- C-11.9 result.
-- Qwen report.
-- Architect-side counterargument.
-- Conservative synthesis.
-- Next bounded research question.
+- Whether the object-to-role mapping has independent semantic status.
+- Whether any richer observation can distinguish a mapping parameter from a separately representable semantic component.
+- No ontology selection.
 
 ## Last completed task
 
-C-11.8 — Semantic Role Specification Test.
+C-11.10 — Independent Ontology Constraint Test.
 
 ## Immediate next task
 
 Run:
 
-> C-11.9 — Ontology Compatibility Test
+> C-11.11 — Role-Mapping Status Test
 
 Question:
 
-> Given the established behavioral role specification, can multiple structurally different ontology models realize exactly the same required observable behavior?
+> Is the observed mapping between objects and asymmetric behavioral positions an independent semantic component, or merely a parameter of each candidate framework?
 
-Use a bounded set of candidate ontology models. Do not select an ontology by assumption. Do not use linguistic role names as definitions. Do not infer internal evaluation/execution mechanisms from truth-table behavior.
+Test at least these possibilities without presupposing any one ontology:
+
+A. Mapping is only a model parameter:
+   framework + mapping(X→position-1, Y→position-2).
+
+B. Mapping has an independently characterizable semantic basis:
+   some independently observable property or relation constrains the mapping.
+
+C. Mapping cannot be independently isolated:
+   Role-A / Role-B remain behavioral positions only, with no separate semantic entity established.
+
+Do NOT ask prematurely who "owns" the mapping. First establish whether a separately meaningful mapping exists at all.
 
 Preserve:
 
 Qwen report
 → architect-side counterargument
-→ synthesis
+→ conservative synthesis
 → next bounded research question
 
 ## Things not to redo
@@ -284,8 +334,10 @@ Qwen report
 
 ## Recommended starting context for next chapter
 
-Continue from the verified C-11.8 checkpoint in this chapter and the restored meta-architecture north-star:
+Continue from the verified C-11.10 checkpoint in this chapter and the restored meta-architecture north-star:
 
 paulhuman/aip-mirror@main:/docs/architecture/ai-project-instruction-architecture.md
 
-Then execute C-11.9 as a bounded ontology-compatibility test. Human remains the final architecture decision-maker.
+Read this handoff before beginning C-11.11. Treat Role-A / Role-B as neutral behavioral positions only. Do not infer an ontology or a separate "role assignment" entity from the mapping terminology.
+
+Human remains the final architecture decision-maker.
