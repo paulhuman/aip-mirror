@@ -1,33 +1,33 @@
 # Conversation Handoff
 
 Conversation:
-AIP Mirror — 03B — Architecture & Research
+AIP Mirror — 03AB — Architecture & Research
 
 Specialization:
 03
 
 Chapter:
-B
+AB
 
 Previous chapter:
-AIP Mirror — 03A — Architecture & Research
+AIP Mirror — 03AA — Architecture & Research
 
 Status:
 HANDED_OFF
 
 ## Handoff destination
 
-AIP Mirror — 03C — Architecture & Research
+AIP Mirror — 03AC — Architecture & Research
 
-03C was initialized from the complete 03B architecture checkpoint and is now the receiving chapter. The repository remains in the legacy/pre-refactor layout; no structural refactor has been executed.
+03AC was initialized from the complete 03AB architecture checkpoint and is now the receiving chapter. The repository remains in the legacy/pre-refactor layout; no structural refactor has been executed.
 
 ## Handoff state
 
-03B completed the audit/design pass and transferred the current architecture checkpoint to 03C. The substantive context is preserved in `docs/handoffs/03C-Architecture-Research.md`.
+03AB completed the audit/design pass and transferred the current architecture checkpoint to 03C. The substantive context is preserved in `docs/handoffs/03AC-Architecture-Research.md`.
 
 ## Completed architecture checkpoint
 
-03B established AD-01 through AD-21, including:
+03AB established AD-01 through AD-21, including:
 
 - semantic types `RULE / SKILL / WORKFLOW / REFERENCE / MEMORY`, with `EXTENSIONS` separate;
 - RULE/SKILL/WORKFLOW semantic boundaries;
@@ -46,7 +46,7 @@ AIP Mirror — 03C — Architecture & Research
 - the rule portability test;
 - future repositories as conceptual validation cases only.
 
-## Immediate next work transferred to 03C
+## Immediate next work transferred to 03AC
 
 Perform the dedicated **OVERRIDE Architecture Decision Pass** first:
 
@@ -66,7 +66,7 @@ For future repository changes: read current content; preserve unrelated content;
 
 ## Things not to redo
 
-- Do not recreate 03A decisions from scratch.
+- Do not recreate 03AA decisions from scratch.
 - Do not redesign the chapter/handoff model.
 - Do not create `.ai/plugins/`.
 - Do not treat HANDOFF as an optional extension.

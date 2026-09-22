@@ -1,27 +1,27 @@
 # Conversation Handoff
 
 Conversation:
-AIP Mirror — 02B — Native AIP Plugin
+AIP Mirror — 02AB — Native AIP Plugin
 
 Specialization:
 02
 
 Chapter:
-B
+AB
 
 Previous chapter:
-AIP Mirror — 02A — Native AIP Plugin
+AIP Mirror — 02AA — Native AIP Plugin
 
 Status:
 DRAFT
 
 ## Current objective
 
-Continue the Native AIP Plugin specialization from the validated handoff state of chapter 02A, without restarting the established project workflow or handoff system.
+Continue the Native AIP Plugin specialization from the validated handoff state of chapter 02AA, without restarting the established project workflow or handoff system.
 
 ## Completed
 
-- Bootstrap procedure for chapter 02B has been started according to `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
+- Bootstrap procedure for chapter 02AB has been started according to `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
 - Applicable lifecycle, workflow, repository, architecture, handoff, and commit-message rules have been read.
 - Previous handoff `docs/handoffs/02A-Native-AIP-Plugin.md` was verified as `READY_FOR_HANDOFF` before this receiving chapter's lifecycle transition.
 - This chapter's mandatory initial `DRAFT` handoff has been created as part of bootstrap.
@@ -109,11 +109,11 @@ No native implementation files were identified by the previous handoff as alread
 
 ## Last completed task
 
-Created the mandatory initial `DRAFT` handoff for chapter 02B during bootstrap.
+Created the mandatory initial `DRAFT` handoff for chapter 02AB during bootstrap.
 
 ## Immediate next task
 
-Complete the receiving-chapter bootstrap by updating `02A-Native-AIP-Plugin.md` from `READY_FOR_HANDOFF` to `HANDED_OFF`, commit that lifecycle transition, verify the resulting repository state, and only then begin chapter 02B work.
+Complete the receiving-chapter bootstrap by updating `02A-Native-AIP-Plugin.md` from `READY_FOR_HANDOFF` to `HANDED_OFF`, commit that lifecycle transition, verify the resulting repository state, and only then begin chapter 02AB work.
 
 ## Things not to redo
 

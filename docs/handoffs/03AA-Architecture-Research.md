@@ -1,13 +1,13 @@
 # Conversation Handoff
 
 Conversation:
-AIP Mirror — 03A — Architecture & Research
+AIP Mirror — 03AA — Architecture & Research
 
 Specialization:
 03
 
 Chapter:
-A
+AA
 
 Previous chapter:
 N/A — first handoff for specialization 03
@@ -221,7 +221,7 @@ The next chapter should resolve the open decisions above through repository-back
 
 ### Confirmed / observed
 
-- 03A existed as a `DRAFT` checkpoint before this migration preparation.
+- 03AA existed as a `DRAFT` checkpoint before this migration preparation.
 - Current lifecycle rules define `[0-9]{2}[A-Z]` and statuses `DRAFT`, `READY_FOR_HANDOFF`, `HANDED_OFF`, `SUPERSEDED`.
 - Current lifecycle rules define both standard user commands.
 - Existing handoffs are under `docs/handoffs/` and `docs/handoffs/README.md` exists.
@@ -247,11 +247,11 @@ The next chapter should resolve the open decisions above through repository-back
 
 ### Open
 
-- All open decisions listed above remain unresolved until 03B performs the repository-backed design work.
+- All open decisions listed above remain unresolved until 03AB performs the repository-backed design work.
 
 ## Last completed task
 
-Prepared and finalized the 03A migration checkpoint, consolidating the architecture-refactor state, audit findings, decisions, open design questions, constraints, research inputs, and the new user-command guidance requirement. The handoff is intended to be sufficient for 03B to continue without reconstructing the architecture discussion from the previous chat.
+Prepared and finalized the 03AA migration checkpoint, consolidating the architecture-refactor state, audit findings, decisions, open design questions, constraints, research inputs, and the new user-command guidance requirement. The handoff is intended to be sufficient for 03AB to continue without reconstructing the architecture discussion from the previous chat.
 
 ## Immediate next task
 

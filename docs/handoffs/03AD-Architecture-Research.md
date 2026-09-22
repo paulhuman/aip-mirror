@@ -1,16 +1,16 @@
 # Conversation Handoff
 
 Conversation:
-AIP Mirror — 03D — Architecture & Research
+AIP Mirror — 03AD — Architecture & Research
 
 Specialization:
 03
 
 Chapter:
-D
+AD
 
 Previous chapter:
-AIP Mirror — 03C — Architecture & Research
+AIP Mirror — 03AC — Architecture & Research
 
 Status:
 HANDED_OFF
@@ -23,7 +23,7 @@ The candidate-level precedence model is now strongly supported by the counterexa
 
 ## Completed
 
-Bootstrap established the canonical starting state from 03C. The 03C checkpoint recorded the completed OVERRIDE research/counterexample pass. During 03D, the authorization model has been substantially narrowed and clarified through explicit Architecture Decision Passes:
+Bootstrap established the canonical starting state from 03AC. The 03AC checkpoint recorded the completed OVERRIDE research/counterexample pass. During 03AD, the authorization model has been substantially narrowed and clarified through explicit Architecture Decision Passes:
 
 - **OVERRIDE-01 — Source of Authorization:** Model B, Explicit Authorization, is the baseline. Declaration of an OVERRIDE is not authorization; authorization is not itself effective application; TRACE is not authority. Automatic resolution is allowed only when the architecture can resolve deterministically; otherwise the result is `UNRESOLVED` and may require user decision.
 - **OVERRIDE-02 — Sufficient authorization:** authorization is a bounded grant with conceptual properties for subject, action, target boundary, applicability, activation, lifecycle validity, and delegation constraints. Delegation must itself be explicitly authorized and must not expand the source grant.
@@ -275,16 +275,16 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 
 ### Confirmed / observed
 
-- 03C is `HANDED_OFF`; 03B is `SUPERSEDED`; 03A is `SUPERSEDED`; the lifecycle chain is coherent for the current 03D chapter.
-- 03D was initialized from the 03C receiving checkpoint and has now been prepared as `READY_FOR_HANDOFF` to 03E.
+- 03AC is `HANDED_OFF`; 03AB is `SUPERSEDED`; 03AA is `SUPERSEDED`; the lifecycle chain is coherent for the current 03AD chapter.
+- 03AD was initialized from the 03AC receiving checkpoint and has now been prepared as `READY_FOR_HANDOFF` to 03AE.
 - No structural architecture refactor has been committed.
-- The authorization/precedence conclusions listed above were explicitly accepted during the 03D discussion as working architecture semantics.
+- The authorization/precedence conclusions listed above were explicitly accepted during the 03AD discussion as working architecture semantics.
 - Candidate-level precedence, eligibility-before-precedence, and the distinction between candidate effect and effective outcome were explicitly accepted as the current working direction.
 - The repository handoff document was read before update and must be read back and verified after the write.
 
 ### Inferred
 
-- The evidence accumulated in 03C plus the focused 03D decision pass is sufficient to continue with targeted semantic counterexamples rather than broad exploratory research.
+- The evidence accumulated in 03AC plus the focused 03AD decision pass is sufficient to continue with targeted semantic counterexamples rather than broad exploratory research.
 - Candidate-level precedence is currently the strongest working model, but remains provisional until prerequisite/decision-dependency cases are tested and the model is promoted to a formal AD.
 - Keeping authorization standing separate from governing/effective outcome is a strong architectural boundary and should be preserved unless a counterexample requires refinement.
 - Conditions/predicates naturally contribute to eligibility, while effect semantics belong to the candidate and effective outcome follows governing-candidate selection; the remaining difficult boundary is semantic prerequisites/dependencies.
@@ -306,4 +306,4 @@ Completed the candidate-level precedence counterexample pass and established the
 
 ## Immediate next task
 
-Continue in **03E — Architecture & Research** with a focused counterexample pass for **prerequisite and dependency semantics**. In particular, determine whether decision-source prerequisites belong to eligibility, how they interact with candidate-level precedence, and whether dependency graphs/cycles require explicit Core semantics. Do not promote candidate-level precedence to a formal AD until this boundary is sufficiently tested.
+Continue in **03AE — Architecture & Research** with a focused counterexample pass for **prerequisite and dependency semantics**. In particular, determine whether decision-source prerequisites belong to eligibility, how they interact with candidate-level precedence, and whether dependency graphs/cycles require explicit Core semantics. Do not promote candidate-level precedence to a formal AD until this boundary is sufficiently tested.

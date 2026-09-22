@@ -1,35 +1,35 @@
 # Conversation Handoff
 
 Conversation:
-AIP Mirror — 03C — Architecture & Research
+AIP Mirror — 03AC — Architecture & Research
 
 Specialization:
 03
 
 Chapter:
-C
+AC
 
 Previous chapter:
-AIP Mirror — 03B — Architecture & Research
+AIP Mirror — 03AB — Architecture & Research
 
 Status:
 HANDED_OFF
 
 ## Starting objective
 
-Continue the project-wide AI-instruction architecture work from 03B. The immediate task was the dedicated **OVERRIDE Architecture Decision Pass**, followed by formalization of precedence/override, applicability/activation, and TRACE semantics. Structural refactoring was explicitly deferred until these semantics became sufficiently stable.
+Continue the project-wide AI-instruction architecture work from 03AB. The immediate task was the dedicated **OVERRIDE Architecture Decision Pass**, followed by formalization of precedence/override, applicability/activation, and TRACE semantics. Structural refactoring was explicitly deferred until these semantics became sufficiently stable.
 
 ## Starting state
 
-The repository remains in the legacy/pre-refactor layout. No structural architecture refactor has been executed. 03B completed the audit/design pass and was `HANDED_OFF`; during this migration 03B has now been correctly marked `SUPERSEDED` as required when 03C reaches `READY_FOR_HANDOFF`.
+The repository remains in the legacy/pre-refactor layout. No structural architecture refactor has been executed. 03AB completed the audit/design pass and was `HANDED_OFF`; during this migration 03AB has now been correctly marked `SUPERSEDED` as required when 03AC reaches `READY_FOR_HANDOFF`.
 
 ## Controlled lifecycle recovery
 
-This handoff was a pre-existing artifact created before the receiving chapter's bootstrap. Its creation and the subsequent `03B → HANDED_OFF` transition were performed in violation of the handoff ownership invariants before 03C began its bootstrap.
+This handoff was a pre-existing artifact created before the receiving chapter's bootstrap. Its creation and the subsequent `03AB → HANDED_OFF` transition were performed in violation of the handoff ownership invariants before 03C began its bootstrap.
 
-Controlled lifecycle recovery was explicitly authorized after the violation was detected. The existing 03C handoff is retained and owned by 03C; it is not recreated, and the original Git history is not rewritten. The handoff was normalized as the receiving chapter's canonical `DRAFT` checkpoint. The already-completed `03B → HANDED_OFF` transition was accepted as historical state and was not repeated.
+Controlled lifecycle recovery was explicitly authorized after the violation was detected. The existing 03C handoff is retained and owned by 03C; it is not recreated, and the original Git history is not rewritten. The handoff was normalized as the receiving chapter's canonical `DRAFT` checkpoint. The already-completed `03AB → HANDED_OFF` transition was accepted as historical state and was not repeated.
 
-## Established architecture decisions inherited from 03B
+## Established architecture decisions inherited from 03AB
 
 - **AD-01:** Core semantic types are `RULE / SKILL / WORKFLOW / REFERENCE / MEMORY`; `EXTENSIONS` are separate repository-defined extensions.
 - **AD-02:** RULE = policy/authority/constraint; SKILL = capability/methodology; WORKFLOW = ordered procedure.
@@ -401,7 +401,7 @@ No structural refactor has been committed. `docs/PROJECT-INSTRUCTIONS.md` remain
 
 03C deliberately stops the research phase here. The research has established enough evidence and counterexamples to begin the **OVERRIDE Architecture Decision Pass** in 03D. Do not restart broad research unless a concrete unresolved semantic question requires new evidence.
 
-## Immediate next task for 03D
+## Immediate next task for 03AD
 
 1. Perform the **OVERRIDE Architecture Decision Pass** using the research conclusions and hypotheses above.
 2. Resolve the exact semantics of authority/permission to establish and apply an OVERRIDE, without introducing a numeric or incidental path-based authority model merely to obtain ordering.
@@ -418,7 +418,7 @@ No structural refactor has been committed. `docs/PROJECT-INSTRUCTIONS.md` remain
 
 This handoff is finalized as `READY_FOR_HANDOFF` for **AIP Mirror — 03D — Architecture & Research**.
 
-The previous same-specialization handoff `03B` was physically verified as `SUPERSEDED` before this handoff was transitioned to `READY_FOR_HANDOFF`, satisfying the mandatory READY_FOR_HANDOFF supersession invariant.
+The previous same-specialization handoff `03AB` was physically verified as `SUPERSEDED` before this handoff was transitioned to `READY_FOR_HANDOFF`, satisfying the mandatory READY_FOR_HANDOFF supersession invariant.
 
 ## Things not to redo
 

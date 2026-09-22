@@ -1,13 +1,13 @@
 # Conversation Handoff
 
 Conversation:
-AIP Mirror — 02A — Native AIP Plugin
+AIP Mirror — 02AA — Native AIP Plugin
 
 Specialization:
 02
 
 Chapter:
-A
+AA
 
 Previous chapter:
 N/A — this is the first handoff record for the 02 specialization
@@ -17,7 +17,7 @@ HANDED_OFF
 
 ## Current objective
 
-Establish the durable handoff state for chapter 02A and migrate the Native AIP Plugin work cleanly to chapter 02B.
+Establish the durable handoff state for chapter 02AA and migrate the Native AIP Plugin work cleanly to chapter 02AB.
 
 ## Completed
 
@@ -34,7 +34,7 @@ Establish the durable handoff state for chapter 02A and migrate the Native AIP P
 
 ## Current implementation state
 
-Chapter 02A is the Native AIP Plugin specialization stream. Native implementation has not yet been completed; this handoff captures the chapter/workflow state established before continuing in 02B.
+Chapter 02AA is the Native AIP Plugin specialization stream. Native implementation has not yet been completed; this handoff captures the chapter/workflow state established before continuing in 02AB.
 
 The native implementation is intended to use C++ with the Illustrator 2026 AIP SDK. The interactive Mirror tool is the production target. The JSX prototype is a behavioral reference and must not be mechanically translated into C++.
 
@@ -92,7 +92,7 @@ The native implementation is intended to use C++ with the Illustrator 2026 AIP S
 
 ### Inferred
 
-- 02B should continue from this chapter's Native AIP Plugin scope rather than restart project-wide architectural decisions.
+- 02AB should continue from this chapter's Native AIP Plugin scope rather than restart project-wide architectural decisions.
 
 ### Assumed / unverified
 
@@ -108,7 +108,7 @@ Formalized and tested the conversation handoff workflow, including mandatory ini
 
 ## Immediate next task
 
-Initialize chapter 02B using the static bootstrap procedure.
+Initialize chapter 02AB using the static bootstrap procedure.
 
 ## Things not to redo
 
@@ -116,8 +116,8 @@ Initialize chapter 02B using the static bootstrap procedure.
 - Do not recreate chapter-specific values inside `BOOTSTRAP.md`.
 - Do not treat checkpoint commits as migration commits.
 - Do not require a separate user approval for mandatory handoff bootstrap/checkpoint commits.
-- Do not mark this handoff `HANDED_OFF` from chapter 02A.
+- Do not mark this handoff `HANDED_OFF` from chapter 02AA.
 
 ## Recommended starting context for next chapter
 
-Start by reading `.ai/skills/conversation-handoff/BOOTSTRAP.md`, `.ai/rules/conversation-lifecycle.md`, and `.ai/rules/workflow.md`, then read this handoff and inspect the relevant native-plugin/project files and references before beginning implementation. Chapter 02B must create its own `docs/handoffs/02B-Native-AIP-Plugin.md` with status `DRAFT` immediately during bootstrap and commit it without asking for permission. After successful bootstrap, 02B must change this handoff from `READY_FOR_HANDOFF` to `HANDED_OFF` and commit that transition.
+Start by reading `.ai/skills/conversation-handoff/BOOTSTRAP.md`, `.ai/rules/conversation-lifecycle.md`, and `.ai/rules/workflow.md`, then read this handoff and inspect the relevant native-plugin/project files and references before beginning implementation. Chapter 02AB must create its own `docs/handoffs/02B-Native-AIP-Plugin.md` with status `DRAFT` immediately during bootstrap and commit it without asking for permission. After successful bootstrap, 02B must change this handoff from `READY_FOR_HANDOFF` to `HANDED_OFF` and commit that transition.
