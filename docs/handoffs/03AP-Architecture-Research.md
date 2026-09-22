@@ -109,3 +109,31 @@ This receiving handoff is intentionally created as DRAFT during lifecycle recove
 4. Only after that select the next bounded research direction.
 
 Human remains the final architecture decision-maker.
+
+
+## 03AP architectural bottleneck audit
+
+After the Grok 06AA baseline review, 03AP performed a broader architectural bottleneck audit rather than immediately selecting the next experiment.
+
+The audit is recorded separately in:
+docs/architecture/architectural-bottleneck-audit-03AP.md
+
+The audit's current finding is:
+
+- Resolution is a significant partial bottleneck, especially for Dependency references to effective outcomes and parts of precedence semantics.
+- Dependency is not globally blocked by Resolution; authority-standing and candidate-effect surfaces remain independently researchable.
+- Mapping is a deep but more local bottleneck around representation/binding/information preservation.
+- Applicability vs activation is comparatively autonomous.
+- Representation vs interpretation context and progressive activation remain important architectural constraints rather than immediate semantic bottlenecks.
+- No single global bottleneck has been established.
+
+The next bounded research question must therefore be selected only after comparing this audit with the pending independent Grok Dependency ↔ Resolution stress-test response.
+
+## Deferred architecture-document maintenance
+
+After the pending Grok Dependency ↔ Resolution stress-test response is received and reviewed, update:
+docs/architecture/prerequisite-dependency-semantics.md
+
+The update must reconcile the document with the closed C-11.11 — C-11.15 arc, the closed C-12 cycle-semantic arc, the current target × consumer-role research surface, and any new conclusion from the Grok stress test.
+
+Do not perform this update before the Grok response is reviewed; it is intentionally deferred to avoid rewriting the research note from incomplete evidence.
