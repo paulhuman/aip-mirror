@@ -21,13 +21,13 @@ Continue the project-wide AI-instruction architecture work from 03AB. The immedi
 
 ## Starting state
 
-The repository remains in the legacy/pre-refactor layout. No structural architecture refactor has been executed. 03AB completed the audit/design pass and was `HANDED_OFF`; during this migration 03AB has now been correctly marked `SUPERSEDED` as required when 03AC reaches `READY_FOR_HANDOFF`.
+The repository remains in the legacy/pre-refactor layout. No structural architecture refactor has been executed. 03AB completed the audit/design pass and was `HANDED_OFF`; the receiving chapter 03AC then continued from that completed handoff.
 
 ## Controlled lifecycle recovery
 
-This handoff was a pre-existing artifact created before the receiving chapter's bootstrap. Its creation and the subsequent `03AB → HANDED_OFF` transition were performed in violation of the handoff ownership invariants before 03C began its bootstrap.
+This handoff was a pre-existing artifact created before the receiving chapter's bootstrap. Its creation and the subsequent `03AB → HANDED_OFF` transition were performed in violation of the handoff ownership invariants before 03AC began its bootstrap.
 
-Controlled lifecycle recovery was explicitly authorized after the violation was detected. The existing 03C handoff is retained and owned by 03C; it is not recreated, and the original Git history is not rewritten. The handoff was normalized as the receiving chapter's canonical `DRAFT` checkpoint. The already-completed `03AB → HANDED_OFF` transition was accepted as historical state and was not repeated.
+Controlled lifecycle recovery was explicitly authorized after the violation was detected. The existing 03AC handoff is retained and owned by 03AC; it is not recreated, and the original Git history is not rewritten. The handoff was normalized as the receiving chapter's canonical `DRAFT` checkpoint. The already-completed `03AB → HANDED_OFF` transition was accepted as historical state and was not repeated.
 
 ## Established architecture decisions inherited from 03AB
 
@@ -75,7 +75,7 @@ AGENTS.md
 - **AD-20:** Rule portability test: **Could this rule be copied unchanged into a completely unrelated software project?**
 - **AD-21:** `aip-mirror`, `gearmulator` + `virus-ti2-adssr`, and a future Ableton Live Extensions project are conceptual validation cases only; no future-project repositories are to be modified during this chapter.
 
-## OVERRIDE checkpoint inherited from 03B
+## OVERRIDE checkpoint inherited from 03AB
 
 Semantic RULE IDs are preferred as stable identifiers, independent of filename/path/depth. `OVERRIDE` should be declared semantically in YAML/frontmatter, for example:
 
@@ -94,9 +94,9 @@ Candidate required fields: `id`, `type`, `relation`, `override.target`, and `ove
 
 `SPECIALIZE` is distinct from `OVERRIDE`: it extends, narrows, or contextualizes without replacing the target. Invalid or ambiguous override targets should fail closed: do not apply the override and surface a warning/unresolved conflict.
 
-## OVERRIDE decisions reached during 03C
+## OVERRIDE decisions reached during 03AC
 
-The following points were worked through during this chapter. They are intentionally preserved here as the durable checkpoint for 03D. They should be promoted to formal AD entries only after 03D performs the final Architecture Decision Pass and confirms the remaining open semantics.
+The following points were worked through during this chapter. They are intentionally preserved here as the durable checkpoint for 03AD. They should be promoted to formal AD entries only after 03AD performs the final Architecture Decision Pass and confirms the remaining open semantics.
 
 ### Durable by default; explicit temporary override supported
 
@@ -246,7 +246,7 @@ NO OVERRIDE / APPLY / UNRESOLVED
 
 `decision_id` becomes useful as a correlation identifier for such a decision: it can associate the evaluated candidates, authorization evidence, applicable context, rule revisions, conflict-resolution result, and final outcome. A mandatory-safety-vs-ordinary-override distinction would be a separate future architectural layer and is explicitly out of scope for the current architecture pass.
 
-## Counterexample pass completed in 03C
+## Counterexample pass completed in 03AC
 
 The following twelve scenarios were checked against the emerging model:
 
@@ -260,12 +260,12 @@ The following twelve scenarios were checked against the emerging model:
 8. Permission is revoked before expiration → `REVOKED` is distinct from `EXPIRED`; the override becomes ineffective immediately under the applicable revocation semantics.
 9. Target becomes inapplicable → valid override authorization cannot make an inapplicable target applicable.
 10. TRACE exists but authorization is missing → TRACE can observe/log/explain; it cannot grant authorization.
-11. Authorization source becomes `SUPERSEDED` → HANDOFF lifecycle and authorization lifecycle are separate state machines; `SUPERSEDED` must not automatically mean `REVOKED`.
+11. Authorization source lifecycle changes → HANDOFF lifecycle and authorization lifecycle are separate state machines; a handoff state must not automatically mean `REVOKED`.
 12. Two valid authorized OVERRIDEs conflict → both may be valid, but without explicit conflict semantics the result is `UNRESOLVED`; no implicit winner.
 
 These counterexamples passed the current safety model. They are validation evidence, not automatically formal ADs.
 
-## Strong research hypotheses carried into 03D
+## Strong research hypotheses carried into 03AD
 
 - **H-01:** `OVERRIDE` is a semantic relation, not an authority level.
 - **H-02:** Declaring `OVERRIDE` does not itself grant permission.
@@ -275,7 +275,7 @@ These counterexamples passed the current safety model. They are validation evide
 - **H-06:** Delegation may preserve/narrow override authorization but not expand it.
 - **H-07:** OVERRIDE cannot expand target applicability or authority.
 - **H-08:** Expiration and explicit revocation are distinct authorization lifecycle events.
-- **H-09:** Handoff lifecycle states, including `SUPERSEDED`, must not be conflated with authorization lifecycle.
+- **H-09:** Handoff lifecycle state must not be conflated with authorization lifecycle.
 - **H-10:** TRACE records/explains decisions but cannot grant, extend, revive, or strengthen authorization.
 - **H-11:** Authorization and conflict resolution are distinct stages.
 - **H-12:** Ambiguous/unresolved OVERRIDE authorization/conflict fails closed.
@@ -285,7 +285,7 @@ These counterexamples passed the current safety model. They are validation evide
 
 ## External research references required for continuation
 
-The following references are materially relevant to the 03C OVERRIDE/authorization/conflict-resolution work and should be preserved for 03D. This is intentionally **not** a transcript of every URL visited.
+The following references are materially relevant to the 03AC OVERRIDE/authorization/conflict-resolution work and should be preserved for 03AD. This is intentionally **not** a transcript of every URL visited.
 
 ### AI instruction / agent architecture
 
@@ -399,7 +399,7 @@ No structural refactor has been committed. `docs/PROJECT-INSTRUCTIONS.md` remain
 
 ## Research stopping point
 
-03C deliberately stops the research phase here. The research has established enough evidence and counterexamples to begin the **OVERRIDE Architecture Decision Pass** in 03D. Do not restart broad research unless a concrete unresolved semantic question requires new evidence.
+03AC deliberately stops the research phase here. The research has established enough evidence and counterexamples to begin the **OVERRIDE Architecture Decision Pass** in 03AD. Do not restart broad research unless a concrete unresolved semantic question requires new evidence.
 
 ## Immediate next task for 03AD
 
@@ -416,13 +416,13 @@ No structural refactor has been committed. `docs/PROJECT-INSTRUCTIONS.md` remain
 
 ## Migration state
 
-This handoff is finalized as `READY_FOR_HANDOFF` for **AIP Mirror — 03D — Architecture & Research**.
+This handoff is finalized as `READY_FOR_HANDOFF` for **AIP Mirror — 03AD — Architecture & Research**.
 
 The previous same-specialization handoff `03AB` was physically verified as `SUPERSEDED` before this handoff was transitioned to `READY_FOR_HANDOFF`, satisfying the mandatory READY_FOR_HANDOFF supersession invariant.
 
 ## Things not to redo
 
-- Do not recreate 03A decisions from scratch.
+- Do not recreate 03AA decisions from scratch.
 - Do not redesign the chapter/handoff model.
 - Do not create `.ai/plugins/`.
 - Do not treat HANDOFF as an optional extension.
