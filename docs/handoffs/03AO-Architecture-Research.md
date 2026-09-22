@@ -17,11 +17,13 @@ DRAFT
 
 ## Current objective
 
-Continue the bounded dependency-semantics research line from the verified C-11.10 checkpoint.
+Continue the bounded dependency-semantics research line after the completed C-12 cycle-semantics discrimination arc.
 
 Immediate task:
 
-> C-11.11 — Role-Mapping Status Test
+> Select the next bounded research question after conservative synthesis of C-12.
+
+C-12 is CLOSED as a bounded research arc. No next arc is selected automatically.
 
 The purpose is NOT to find the owner of a presumed "role assignment" entity. First determine whether the mapping between observed objects and asymmetric behavioral positions has independent semantic status at all.
 
@@ -254,87 +256,103 @@ Open questions intentionally NOT answered by C-11:
 |---|---|---|
 | WD-23 (rev2) | Mapping has no established independent semantic basis, but specification is semantically sensitive to mapping | Research finding |
 | WD-24 | Mapping-distinguishing information is necessary and not derivable from framework + independent facts in tested cases | Research finding |
-| WD-25 | Mapping-distinguishing information must be available to consumer; it may be preserved directly or via stable convention | Research finding |
-
-These are NOT Architecture Decisions and are not to be promoted automatically.
-
-## C-12 — Cycle Semantics
+| WD-25 | Mapping-distinguishing information must be available to consumer; it may## C-12 — Cycle Semantics
 
 ### Research status
 
-C-12 is the next bounded research arc selected by the architect.
+C-12 is **CLOSED** as a bounded research arc.
 
 ### Objective
 
-Determine whether a dependency cycle has its own semantic consequence that cannot be reduced to already established properties of individual dependencies.
+Determine whether a dependency cycle has an independently established semantic consequence that cannot be reduced to the composition of already established properties of individual dependencies.
 
-Canonical minimal shape:
+### Architect-side final synthesis
 
-`A requires B`
-`B requires A`
+The discrimination test compared:
 
-Do NOT pre-classify a cycle as:
-- conflict;
-- contradiction;
-- invalid specification;
-- unresolved state;
-- activation problem;
-- authority problem.
+- cyclic composition, e.g. `A → B; B → A`;
+- an equivalent composite constraint, e.g. `A ↔ B`;
 
-### Core question
+under two explicitly scoped Boolean test models:
 
-> При сохранении одинаковых independently observable facts: отличается ли семантика specification с dependency cycle от соответствующей acyclic specification исключительно вследствие структуры cycle?
+- M1: positive `requires` as implication, `A → B`;
+- M2: positive `requires` as biconditional, `A ↔ B`.
 
-Possible conservative outcomes:
+Neither model is established as the universal semantics of `requires`.
 
-1. cycle is only a structural graph property with no independently established semantic consequence;
-2. cycle has an independently established semantic consequence;
-3. current observation surface is insufficient to establish either.
+Within the tested models and bounded cases:
 
-### Test discipline
+- cyclic composition and the corresponding composite constraint had identical sets of satisfying assignments;
+- the tested logical consequences were identical;
+- self-loops were trivial in the tested models;
+- the observed semantic consequences were explainable through composition of the individual dependency constraints;
+- no additional semantic consequence attributable independently to the presence of the cycle was detected.
 
-Use bounded adversarial semantic discrimination tests with minimal counterexamples.
+Therefore the strongest accepted result is:
 
-Prefer paired cases where:
-- objects/facts are identical;
-- individual dependency semantics are identical;
-- only dependency structure changes;
-- acyclic and cyclic configurations are compared.
+> **В протестированном классе Boolean-моделей позитивного `requires` наличие non-trivial cycle не выявило semantic consequence, не объяснимого composition составляющих dependencies. Для проверенных случаев cyclic representations были семантически эквивалентны соответствующим composite constraints. Это не устанавливает отсутствие independent cycle semantics за пределами протестированного класса моделей.**
 
-For each result distinguish:
-- observed fact;
-- inference;
-- working interpretation;
-- specification;
-- implementation detail;
-- open question.
+This is a **bounded negative result**, not a universal claim that cycles have no semantic significance.
 
-Anti-circularity constraints:
-- do not define cycle as "problematic dependency structure";
-- do not define cycle as contradiction, unresolved, or conflict before testing;
-- do not use future architectural mechanisms (authority, conflict resolution, activation, override, validation/error handling) as evidence for the semantics of cycle itself.
+### Boundary findings
 
-### Deliverable for C-12
+The discrimination test also identified boundaries that were deliberately NOT promoted into the C-12 result:
 
-Qwen should provide:
-1. minimal bounded tests;
-2. results of each test;
-3. distinguishing counterexamples;
-4. established findings;
-5. working interpretations;
-6. open questions;
-7. conservative synthesis.
+- Negative dependencies can behave differently; the tested `A → ¬B; B → ¬A` case does not establish equivalence with a single `A ↔ ¬B` constraint. This is outside the positive-dependency scope of C-12.
+- Temporal ordering semantics can give cycles a different consequence, but this is a different semantic model and was not used to establish the C-12 result.
+- Representation-level or consumer-operational differences do not by themselves establish additional semantic content.
+- Logical equivalence does not automatically establish interchangeability for every possible consumer.
 
-No Architecture Decision.
-No ontology commitment.
-No implementation recommendation.
-No automatic proposal of the next research arc before conservative synthesis.
+These are boundary observations/open questions, not architecture decisions.
 
-### Research sequence
+### Established findings
 
-Maintain:
+- **EF-C12-R01:** In M1 and M2, the tested 2-node positive cycle is logically equivalent to the corresponding biconditional composite constraint.
+- **EF-C12-R02:** In M1, the tested 3-node positive cycle has the same satisfying assignments as the corresponding equality chain.
+- **EF-C12-R03:** In M1 and M2, the tested self-loop adds no constraint beyond the corresponding tautological self-constraint.
+- **EF-C12-R04:** In the tested cases, cyclic composition and the corresponding composite constraint have identical semantic consequences at the tested Boolean level.
+- **EF-C12-R05:** No independent cycle-specific semantic consequence was detected within the tested class of positive Boolean dependency models.
 
-Qwen report
+All findings above are explicitly scoped to the tested models and cases.
+
+### Working interpretations
+
+- **WI-C12-R01:** The tested evidence supports the compositional explanation (H-A) within M1/M2.
+- **WI-C12-R02:** A separate semantic category for `cycle` is not required to explain the observed consequences in the tested models.
+- **WI-C12-R03:** The cycle is, on the tested semantic surface, a representational configuration whose observed consequences arise from the composition of its dependencies.
+
+These remain bounded interpretations, not ontology claims.
+
+### Not established
+
+C-12 does NOT establish:
+
+- that cycle is a semantic entity or primitive;
+- that cycle is an SCC or any particular graph-theoretic semantic construct;
+- that cycles universally have no independent semantic consequence;
+- that cycles require special handling;
+- that cycles are conflicts, contradictions, invalid specifications, unresolved states, activation problems, or authority problems;
+- that M1 or M2 is the universal semantics of `requires`;
+- that cyclic and composite representations are interchangeable for every consumer;
+- any implementation, validation, ontology, ownership, or authority decision.
+
+### Open questions retained
+
+The following remain open without being promoted automatically to the next research arc:
+
+- behavior of negative dependencies;
+- temporal or other non-Boolean semantics;
+- interaction of cycles with other dependency structures;
+- whether representation-sensitive consumers introduce additional semantic distinctions;
+- whether larger classes of positive dependency models preserve the bounded compositional result.
+
+### Research-method conclusion
+
+C-12 does not justify introducing a separate cycle ontology or cycle-handling mechanism. It establishes only that, within the tested positive Boolean dependency models, the hypothesized independent cycle consequence was not detected.
+
+No Architecture Decision is created by this result.
+
+ort
 → architect-side counterargument
 → conservative synthesis
 → next bounded research question
@@ -405,6 +423,8 @@ Do not assume:
 
 ### Confirmed / observed
 
+- C-12 established a bounded negative result: within the tested positive Boolean dependency models, no independent cycle-specific semantic consequence was detected beyond composition of individual dependencies.
+- C-12 established the tested equivalence of cyclic compositions and corresponding composite constraints for the bounded cases.
 - C-11.4 established observable role asymmetry.
 - C-11.8 established behavioral semantic role characterization within the tested truth-functional observation surface.
 - C-11.9 did not establish ontology compatibility because candidate constructions encoded rather than independently derived the behavioral specification.
@@ -427,7 +447,6 @@ Do not assume:
 - Whether mapping has independent semantic status.
 - Whether a richer observation surface can distinguish a mapping parameter from an independently representable semantic component.
 - Whether any proposed mapping basis survives a future anti-circularity test.
-- Whether cycles have an independent semantic consequence.
 
 ### Open
 
@@ -439,18 +458,17 @@ Do not assume:
 
 ## Last completed task
 
-C-11.15 — Representation Information Preservation Test, followed by consolidated C-11.11 — C-11.15 research finding.
+C-12 — Cycle Semantics, including the composition-vs-independent-consequence discrimination test and architect-side conservative synthesis.
+
+C-11.11 — C-11.15 remains CLOSED as a separate bounded research arc.
 
 ## Immediate next task
 
-Run:
+Select the next bounded research question after reviewing the completed C-12 and the broader architecture/research roadmap.
 
-> C-12 — Cycle Semantics
-
-Start from the C-12 objective and test discipline above.
-
+Do not automatically continue with any C-12 boundary question.
 Do not restart C-11.11 — C-11.15.
-Do not promote WD-23 — WD-25 to AD automatically.
+Do not promote WD-23 — WD-25 or C-12 findings to AD automatically.
 Do not begin implementation work.
 
 ## Things not to redo
