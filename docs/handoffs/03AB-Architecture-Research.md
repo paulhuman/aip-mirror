@@ -23,7 +23,7 @@ AIP Mirror — 03AC — Architecture & Research
 
 ## Handoff state
 
-03AB completed the audit/design pass and transferred the current architecture checkpoint to 03C. The substantive context is preserved in `docs/handoffs/03AC-Architecture-Research.md`.
+03AB completed the audit/design pass and transferred the current architecture checkpoint to 03AC. The substantive context is preserved in `docs/handoffs/03AC-Architecture-Research.md`.
 
 ## Completed architecture checkpoint
 
