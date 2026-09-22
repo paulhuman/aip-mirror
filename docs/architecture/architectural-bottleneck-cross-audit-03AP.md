@@ -233,7 +233,7 @@ A more defensible formulation is:
 The claim that Resolution uncertainty blocks:
 
 ~~~text
-DRAFT → READY_FOR_HANDOFF → HANDED_OFF → SUPERSEDED
+DRAFT → READY_FOR_HANDOFF → HANDED_OFF
 ~~~
 
 is not supported.
