@@ -66,16 +66,6 @@ Example initial chapter: `AIP Mirror — 04AA — Project Workshop`
 
 The `04` specialization is a support/workshop space. It should not become a competing architecture, research, JSX, or native implementation stream.
 
-### Legacy chapter identifiers
-
-Before the current two-letter format was introduced, chapters used the legacy `[0-9]{2}[A-Z]` format. Existing legacy chapter identifiers remain valid historical identifiers and are not rewritten merely to conform to the current format.
-
-Legacy identifiers MUST NOT be interpreted as current-format identifiers. Legacy and current identifiers occupy different identifier namespaces by format.
-
-For specialization `03`, `03A` through `03E` remain the historical identifiers of the first five chapter ordinals. The first newly created current-format chapter after them is `03AF`, which occupies ordinal position 6.
-
-This is ordinal correspondence only; it does not establish identity such as `03A = 03AA` or `03E = 03AE`.
-
 ## 3. Do not duplicate reasoning across conversations
 
 If a question belongs primarily to one specialization, keep the detailed investigation there.
