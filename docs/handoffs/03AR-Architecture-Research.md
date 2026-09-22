@@ -149,6 +149,130 @@ inherited state
 
 The remaining uncertainty is whether existing project conventions already provide sufficient observable recognition of accepted semantic status.
 
+## Repository practice inspection — current result
+
+The bounded repository inspection was completed against concrete historical/current practice in the handoff lineage and architecture documents.
+
+### Observed acceptance pattern
+
+The repository does not use a separate Acceptance artifact. Instead, intentional acceptance is made observable through **explicit normative wording in durable project documents**, especially:
+
+- `accepted working direction`;
+- `accepted working invariants`;
+- `Decisions`;
+- `Established architecture decisions`;
+- `Inherited accepted decisions / invariants`.
+
+The clearest observed transition is:
+
+```
+research / counterexamples
+        ↓
+human/project discussion
+        ↓
+explicitly recorded accepted working direction / invariant
+        ↓
+durable handoff or architecture document
+        ↓
+later chapter inherits that stated status
+```
+
+The repository therefore already contains a practical acceptance signal: **the document explicitly records that a proposition/decision has been accepted**, rather than merely describing it, hypothesizing it, or listing it as open.
+
+### Working acceptance is distinct from formal Architecture Decision
+
+Concrete 03AC/03AD practice shows three distinguishable documentation states:
+
+1. **research / hypothesis / validation evidence** — not normative;
+2. **accepted working direction / invariant** — intentionally accepted for current architectural reasoning, but still provisional;
+3. **formal Architecture Decision (`AD-*`)** — explicitly established architecture semantics.
+
+For example, 03AC records inherited `AD-01` through `AD-21` as established architecture decisions, while its newly worked OVERRIDE conclusions are explicitly preserved as a durable checkpoint and are said to require a later Architecture Decision Pass before promotion to formal AD entries.
+
+03AD then records its OVERRIDE conclusions as **accepted working invariants**, while explicitly stating that candidate-level precedence remains a working model rather than a formal numbered Architecture Decision.
+
+This is important evidence that **acceptance does not equal finality**.
+
+### Human decision remains the actual acceptance act
+
+A later historical 03AF checkpoint makes the process explicit as:
+
+```
+research hypothesis
+        ↓
+independent review / counterexamples
+        ↓
+evidence synthesis
+        ↓
+HUMAN DECISION
+        ↓
+ARCHITECTURE DECISION
+```
+
+That process is itself documented as not yet being a formal project architecture decision, so it is evidence of the observed decision pattern, not a new workflow rule.
+
+The strongest current interpretation is therefore:
+
+> The acceptance act is a human/project decision, while the durable repository representation is an explicit status-bearing statement in project documentation.
+
+### Handoff inheritance is preservation, not acceptance
+
+03AE provides direct evidence of the preservation mechanism through its section **Inherited accepted decisions / invariants**.
+
+The receiving chapter can therefore recognize accepted state because the inherited document explicitly labels the material as accepted/inherited. The handoff lifecycle state itself remains separate.
+
+This reinforces:
+
+```
+acceptance status
+    ≠
+handoff lifecycle status
+```
+
+### Specifications
+
+The current `docs/` tree contains `architecture/`, `handoffs/`, and `PROJECT-INSTRUCTIONS.md`, but no dedicated `specifications/` directory or universal specification registry.
+
+Therefore no separate repository-level specification acceptance mechanism was observed.
+
+### What is actually observable
+
+A later chapter can distinguish at least these cases from repository text alone when the author has used the established conventions:
+
+| Repository wording/state | Observable semantic status |
+| --- | --- |
+| research / hypothesis / open question | not accepted |
+| validation evidence / counterexample result | evidence, not acceptance by itself |
+| explicit `accepted working direction/invariant` | intentionally accepted, still provisional |
+| explicit `AD-*` / established architecture decision | formalized architecture decision |
+| `Inherited accepted decisions / invariants` | accepted status preserved through migration |
+| `HANDED_OFF` alone | lifecycle state only; no semantic promotion |
+
+What remains **not mechanically encoded** is the identity of the particular human decision event itself, beyond the explicit durable statement that the project has accepted the proposition.
+
+### Current discrimination result
+
+The repository evidence therefore weakens the hypothesis that a new universal Acceptance primitive is immediately necessary.
+
+It supports a smaller interpretation:
+
+```
+HUMAN / PROJECT DECISION
+        ↓
+explicit semantic-status wording
+        ↓
+durable project document
+        ↓
+optional later promotion to formal AD / specification
+        ↓
+handoff preserves that status
+```
+
+The remaining gap is not "there is no acceptance mechanism". The gap is:
+
+> The repository convention is semantic and documentary rather than mechanically typed: a later chapter must recognize explicit status-bearing wording and distinguish it from ordinary discussion, without relying on conversational memory.
+
+This is an **observed repository limitation**, not yet a justification for introducing a new semantic entity.
 ## Evidence / confidence
 
 ### Confirmed / observed
@@ -159,6 +283,10 @@ The remaining uncertainty is whether existing project conventions already provid
 - The current lifecycle is DRAFT → READY_FOR_HANDOFF → HANDED_OFF.
 - Intentional project acceptance is an explicit workflow requirement before promoting research/finding to specification.
 - Accepted working semantics are observable in historical project practice.
+- The repository makes intentional acceptance observable through explicit status-bearing wording such as `accepted working direction`, `accepted working invariants`, `Decisions`, and `Established architecture decisions`.
+- Formal `AD-*` entries are explicitly distinguishable from provisional accepted working semantics in the 03AC/03AD lineage.
+- Handoff inheritance explicitly preserves accepted status through wording such as `Inherited accepted decisions / invariants`.
+- The current `docs/` tree has no dedicated `specifications/` directory or universal specification registry.
 - Handoff preserves accepted state but does not itself constitute acceptance.
 - No dedicated Acceptance artifact or universal Decision registry is established by the inspected 03AP audits.
 - C-13 positively distinguishes authority standing, candidate effect, and effective outcome as dependency-reference surfaces in the bounded model.
@@ -175,7 +303,7 @@ These remain inferences.
 ### Assumed / unverified
 
 - The exact observable act/state change that proves intentional acceptance has not yet been fully discriminated.
-- The minimum durable information needed for later recognition of acceptance has not yet been formally characterized.
+- The minimum durable information needed for later recognition of acceptance has not yet been formally characterized beyond the observed explicit status-bearing wording and its referenced proposition/decision.
 - It is not established whether a new formal mechanism is necessary.
 
 ### Open
@@ -191,22 +319,25 @@ These remain inferences.
 
 03AQ completed the handoff lifecycle cleanup and left the repository with the current three-state handoff lifecycle. The final architecture lifecycle diagram was corrected, and the exact duplicate sequence `HANDED_OFF HANDED_OFF` was checked and found absent.
 
+03AR then completed the first bounded inspection of existing intentional-acceptance practice. The inspection found an existing documentary convention: human/project acceptance is represented durably by explicit semantic-status wording, with a clear distinction between accepted working semantics and formal `AD-*` decisions. No dedicated Acceptance mechanism was introduced.
+
 ## Immediate next task
 
-Inspect existing repository practice and evidence for intentional acceptance before selecting another C-series experiment or designing a new mechanism.
+Perform the **second bounded discrimination pass**: inspect how the observed acceptance convention behaves under **later refinement, contradiction, and historical/supersession language**.
 
-The inspection should compare concrete examples of:
+The key question is now narrower:
 
-1. accepted working invariants;
-2. formal Architecture Decisions;
-3. specifications;
-4. handoff inheritance;
-5. later refinement;
-6. historical/supersession language where present.
+> When an explicitly accepted working invariant is later refined, narrowed, rejected, or promoted to a formal `AD-*` / specification, what durable repository evidence tells a later chapter which semantic status is current without conflating document history with current normative meaning?
 
-The output should classify what is actually observable in repository state versus what still depends on conversational context or interpretation.
+Compare concrete cases of:
 
-Do not automatically select C-15 or another new C-series test. First determine whether the acceptance question can be answered from existing project practice.
+1. accepted working invariant → later formal `AD-*`;
+2. accepted working invariant → later refinement/narrowing;
+3. accepted statement → later contradiction/rejection, if such a case exists;
+4. historical/superseded wording versus current normative wording;
+5. handoff inheritance after such changes.
+
+Do not introduce a new Acceptance entity or mechanism yet. Do not automatically select a new C-series experiment. First determine whether the existing documentary convention remains sufficient when semantic status changes over time.
 
 ## Things not to redo
 
@@ -248,6 +379,11 @@ Read:
 - `docs/architecture/c-13-authority-vs-effective-outcome-03AP.md`
 - `docs/architecture/c-14-override-semantic-dimension-03AP.md`
 
-The historical paths `docs/handoffs/03D-Architecture-Research.md` and `docs/handoffs/03E-Architecture-Research.md` referenced by 03AQ were not present on `main` during bootstrap and must not be guessed or reconstructed from memory.
+The historical OVERRIDE lineage referenced by earlier handoffs is now confirmed in the normalized current filenames:
+
+- `docs/handoffs/03AD-Architecture-Research.md`
+- `docs/handoffs/03AE-Architecture-Research.md`
+
+These are the post-cleanup filenames corresponding to the historical 03D/03E references; they were inspected directly and must be used in current references.
 
 Human remains the final architecture decision-maker.
