@@ -106,39 +106,6 @@ The sequence is positional and mathematical:
     ...
     ZZ = chapter ordinal 676
 
-### Legacy historical identifiers
-
-The former Chapter Identifier Format was:
-
-    [0-9]{2}[A-Z]
-
-Identifiers created under that format remain valid historical identifiers. They MUST NOT be rewritten merely to conform to the current Chapter Identifier Format, and a legacy identifier MUST NOT be interpreted as a current-format identifier.
-
-Legacy and current identifiers occupy different identifier namespaces by format. Historical handoff documents retain their original chapter identifiers and filenames.
-
-Historical chapters occupy their existing ordinal positions when the current format is introduced. They are not renamed into the current format. New chapters continue from the next unused ordinal position.
-
-For specialization `03`, the historical/current ordinal correspondence is:
-
-    ordinal   legacy ID   current-format position
-
-    1         03A         AA
-    2         03B         AB
-    3         03C         AC
-    4         03D         AD
-    5         03E         AE
-    6         —           AF  ← first new-format Chapter
-
-This is **ordinal correspondence only**. It does NOT establish identifier identity. In particular:
-
-    03A ≠ 03AA
-    03B ≠ 03AB
-    03C ≠ 03AC
-    03D ≠ 03AD
-    03E ≠ 03AE
-
-`03AA`–`03AE` are not historical aliases and are not physically used as current identifiers in this repository.
-
 ## Handoff structure
 
 Use this structure unless a project-specific format requires otherwise:
