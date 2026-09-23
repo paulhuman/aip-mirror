@@ -9,7 +9,7 @@
 
 ## Starting objective
 
-Continue the architecture/research work from 03AR while preserving the currently established context. The immediate purpose of this chapter is **not to design a new architecture yet**: first capture and integrate the remaining project constraints supplied by the project owner.
+Continue the architecture/research work from 03AR while preserving established context. The remaining project constraints have now been supplied and consolidated. The next task is to reduce the highest-leverage architectural uncertainty before selecting implementation structure.
 
 ## Bootstrap state
 
@@ -18,73 +18,134 @@ Continue the architecture/research work from 03AR while preserving the currently
 The current repository model remains:
 
 - `paulhuman/aip-mirror` on `main` is the canonical project repository.
-- `docs/handoffs/` is the temporary conversation context-transfer mechanism.
+- `docs/handoffs/` is temporary conversation context transfer.
 - Durable project knowledge belongs in authoritative project documentation.
-- The 03 specialization is responsible for architecture, research, cross-workstream decisions, and project-wide architectural consistency.
+- Specialization 03 owns architecture, research, cross-workstream decisions, and project-wide architectural consistency.
 
 ## Current research context
 
-03AR completed the first bounded inspection of intentional-acceptance practice. Existing repository conventions already make some semantic status observable through explicit wording, including accepted working semantics and formal `AD-*` decisions. No dedicated Acceptance entity or universal acceptance mechanism was introduced.
+03AR completed the bounded inspection of intentional-acceptance practice. No dedicated Acceptance entity or universal acceptance mechanism was introduced.
 
-The earlier research direction toward a historical semantic trace is currently **paused**.
+The historical semantic-trace direction remains paused.
 
-The latest constraints recorded by 03AR include:
+The new owner constraints are now explicit:
 
-1. Long conversations have produced observed contextual reliability degradation; this is evidence of a risk, not a finalized causal architecture claim.
-2. Action-scoped refresh of relevant `RULE`/`SKILL` fragments is a candidate direction, not an accepted design.
-3. Future project commands need a user-facing trigger that does not rely on leading `/` or `@`, because those prefixes are intercepted by the ChatGPT web UI. No command syntax has been selected.
-4. `.ai/memory/` is currently considered unnecessary; do not introduce it merely as another knowledge store.
-5. `docs/meta/` is being considered as a project-independent meta-system boundary, with a conceptual distinction between permanent reusable meta knowledge and temporary development/research material. This has not been accepted as a filesystem structure.
-6. `docs/handoffs/` is currently understood as temporary context transfer, not permanent knowledge or a required runtime source of truth.
-7. The eventual meta-system should be agnostic and reusable across projects, while AIP Mirror retains its project-specific authoritative documentation and implementation.
-8. Repository restructuring and architecture changes must be deferred until the remaining constraints have been supplied and mapped.
+1. The assistant is not a one-to-one command executor; the meta-system supports reasoning and work rather than replacing it with a rigid interpreter.
+2. `rules/` and `skills/` should be maximally compact, clear, and unambiguous, containing execution-critical knowledge rather than redundant explanation.
+3. Detailed rationale, history, examples, architecture explanation, and research context may live in Agents, README, docs, and handoffs.
+4. The system should minimize data reread before an action while preserving complete understanding of the relevant process.
+5. Compactness must not sacrifice semantic correctness.
+6. The eventual meta-system must remain project-agnostic and reusable outside AIP Mirror.
+7. Qwen and Grok are independent review inputs. They challenge the architecture but are not authority sources.
 
-## Important constraint for this chapter
+## Constraint → Problem Map
 
-**Do not resume the planned Phase 2 historical semantic trace yet.**
+The bounded map is recorded in:
 
-**Do not create `docs/meta/permanent/`, `docs/meta/temporary/`, `.ai/memory/`, a command registry, or a command prefix.**
+`docs/architecture/constraint-problem-map-03AS.md`
 
-**Do not begin a new C-series experiment merely because the current research ideas are visible.**
+The map separates owner constraints from architectural problems and deliberately avoids choosing a registry, router, manifest, memory store, command syntax, or filesystem structure.
 
-The first substantive task after bootstrap is to receive and consolidate the remaining user constraints into a bounded problem map, then determine what architectural uncertainty remains. Only after that should the next research step be selected.
+### Primary architectural uncertainty
+
+> **What is the Minimal Execution Context: the smallest set of knowledge and state that must be available to the assistant for a given action to be performed correctly, without requiring a full reread of the project's instruction system?**
+
+This is currently a semantic/operational research question, not an implementation commitment.
+
+## North-Star document assessment
+
+`docs/architecture/ai-project-instruction-architecture.md` remains valuable context, but is now outdated as a clean current North-Star specification.
+
+The bounded map identified concrete drift:
+
+- command examples still use leading `/`;
+- Memory is described as a standing architectural category without the current rejection of `.ai/memory/`;
+- the document predates the explicit compactness requirement for `rules/` and `skills/`;
+- the execution model does not explicitly formulate Minimal Execution Context;
+- lifecycle wording contains historical supersession language inconsistent with the current lifecycle;
+- current meta-system/project-boundary constraints are not integrated.
+
+**Do not patch it yet.** First complete the Minimal Execution Context research; then deliberately update or replace the North-Star document from the resulting model.
+
+## Independent review inputs
+
+### Qwen
+
+- `docs/architecture/independent-review-deepseek-onboarding.md` — repository filename; the document identifies the reviewer as DeepSeek.
+- Current observed Qwen handoff: `docs/handoffs/05AE-Independent-Review-Qwen.md`.
+
+### Grok
+
+- `docs/architecture/independent-review-grok-onboarding.md`
+- Current observed Grok handoff: `docs/handoffs/06AA-Independent-Review-Grok.md`.
+
+These remain review inputs, not authority sources. They should be consulted selectively when a bounded research question benefits from independent counterexamples or critique.
 
 ## Evidence / confidence
 
 ### Confirmed / observed
 
-- The canonical repository and branch are `paulhuman/aip-mirror` / `main`.
+- Canonical repository/branch: `paulhuman/aip-mirror` / `main`.
 - 03AR was `READY_FOR_HANDOFF` at bootstrap.
-- The current handoff lifecycle is `DRAFT → READY_FOR_HANDOFF → HANDED_OFF`.
-- 03AR completed the intentional-acceptance bounded inspection described above.
-- No dedicated Acceptance mechanism was introduced by that research.
-- The user explicitly requested that this chapter preserve current context and wait for remaining constraints before designing architecture.
+- Current lifecycle: `DRAFT → READY_FOR_HANDOFF → HANDED_OFF`.
+- 03AR intentional-acceptance inspection is complete.
+- No dedicated Acceptance mechanism was introduced.
+- The owner has supplied the remaining compactness / execution-context / project-agnosticity constraints.
+- The bounded Constraint → Problem Map has been created and read back successfully.
+- The North-Star document is stale in the specific areas listed above.
 
 ### Inferred
 
-- The next highest-value step may be a bounded constraint/problem map rather than another semantic experiment.
-- Existing documentary conventions may remain sufficient; whether additional mechanisms are necessary is still open.
-- Context handling, action-scoped instruction refresh, handoff lifetime, and the project/meta boundary may be related architectural concerns, but their exact relationship is not yet established.
+- Minimal Execution Context is currently the highest-leverage uncertainty to reduce.
+- The distinction between durable knowledge and active execution context is likely central to the eventual meta-system.
+- A compact execution layer may be possible without turning the assistant into a rigid command interpreter.
 
 ### Assumed / unverified
 
-- The final shape of any reusable meta-system.
-- Whether an action-scoped instruction registry is actually necessary.
-- Whether `docs/meta/` is the correct durable boundary.
-- Whether any replacement for or extension of handoffs is needed.
-- Whether a command registry should exist at all.
+- The final shape of the reusable meta-system.
+- Whether any routing mechanism is necessary.
+- Whether a registry, manifest, index, or equivalent mechanism is useful.
+- Whether existing handoffs need replacement or extension.
+- Whether a new filesystem boundary is needed.
 
 ### Open
 
-- Remaining project constraints not yet supplied by the user.
-- The minimum architectural changes, if any, required after those constraints are mapped.
-- Whether the paused intentional-acceptance research remains the correct next research target.
+- Exact definition of Minimal Execution Context.
+- What an action can infer from current task/conversation state.
+- What must be discovered from project state.
+- What must be explicit in execution-critical instructions.
+- What can remain explanatory-only.
+- How missing execution context should be detected.
+- How independent review material can remain useful without becoming default execution context.
+
+## Research boundary
+
+Before introducing any implementation structure, determine:
+
+1. what a representative action actually requires;
+2. what can be inferred from the current conversation/task;
+3. what must be discovered from project state;
+4. what must be explicit in execution instructions;
+5. what can remain explanatory-only;
+6. what failure occurs when a required element is absent.
+
+Do not create:
+
+- `docs/meta/permanent/`;
+- `docs/meta/temporary/`;
+- `.ai/memory/`;
+- a command registry;
+- a command prefix;
+
+merely to support this research.
+
+Do not resume the historical semantic-trace work or launch a new C-series experiment merely because the current ideas are visible.
 
 ## Immediate next task
 
-**Wait for and capture the remaining project constraints.**
+Run a bounded **Minimal Execution Context** analysis on a small set of representative actions.
 
-After they are supplied, consolidate them into a bounded problem map without prematurely choosing architecture, then identify which uncertainty should be reduced next.
+The analysis should begin with concrete action cases and a decomposition of the knowledge required for each case. It should not begin by proposing a universal meta-system architecture.
 
 ## Things not to redo
 
@@ -117,14 +178,21 @@ Already read during bootstrap:
 - `.ai/skills/commit-message/SKILL.md`
 - `docs/handoffs/03AR-Architecture-Research.md`
 
-Further architecture documents should be read selectively only when the user's remaining constraints make them relevant. Do not reload the full historical architecture corpus merely for migration.
+Additional research inputs now inspected selectively:
+
+- `docs/architecture/ai-project-instruction-architecture.md`
+- `docs/architecture/independent-review-deepseek-onboarding.md`
+- `docs/architecture/independent-review-grok-onboarding.md`
+- `docs/handoffs/05AE-Independent-Review-Qwen.md`
+- `docs/handoffs/06AA-Independent-Review-Grok.md`
+- `docs/architecture/constraint-problem-map-03AS.md`
+
+Further architecture documents should be read selectively according to the bounded research question. Do not reload the entire historical architecture corpus by default.
 
 ## Last completed task
 
-03AR completed its bounded intentional-acceptance inspection and finalized its handoff as `READY_FOR_HANDOFF`.
-
-03AS has completed bootstrap initialization up to creation of this `DRAFT` handoff; the predecessor lifecycle transition remains to be performed and verified as part of bootstrap.
+03AS consolidated the remaining owner constraints into `docs/architecture/constraint-problem-map-03AS.md`, verified the new document by read-back, and assessed `ai-project-instruction-architecture.md` as stale in several concrete areas.
 
 ## Bootstrap note
 
-This handoff is intentionally a compact live checkpoint. It preserves the active constraints and research pause without attempting to reproduce the accumulated architectural history.
+This handoff remains a compact live checkpoint. It records the active research frontier and constraints without reproducing the accumulated architecture history.
