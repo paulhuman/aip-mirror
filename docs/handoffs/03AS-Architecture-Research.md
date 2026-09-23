@@ -5,7 +5,7 @@
 - **Chapter:** 03AS
 - **Specialization:** 03 — Architecture & Research
 - **Previous chapter:** 03AR — Architecture & Research
-- **Status:** READY_FOR_HANDOFF
+- **Status:** HANDED_OFF
 
 ## Starting objective
 
