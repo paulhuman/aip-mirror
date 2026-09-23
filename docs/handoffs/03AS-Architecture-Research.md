@@ -52,6 +52,58 @@ The map separates owner constraints from architectural problems and deliberately
 
 This is currently a semantic/operational research question, not an implementation commitment.
 
+## Bounded MEC test: applicability selection
+
+The first bounded MEC test inspected these existing instruction sources:
+
+- `.ai/rules/conversation-lifecycle.md`
+- `.ai/rules/workflow.md`
+- `.ai/rules/repository.md`
+- `.ai/rules/handoff-references.md`
+- `.ai/skills/conversation-handoff/SKILL.md`
+- `.ai/skills/conversation-handoff/BOOTSTRAP.md`
+
+The test asked whether applicability can be determined cheaply enough to select MEC before loading a full instruction body.
+
+### Findings
+
+1. **Applicability is state-dependent.** Task intent alone does not always determine the applicable execution path.
+2. **Document-level applicability is often cheap.** The task normally identifies the relevant instruction domain without loading the whole corpus.
+3. **Section-level applicability is currently more expensive.** Conditional paths such as Lifecycle Recovery and Lifecycle Correction place their applicability conditions inside the execution body.
+4. **Conditional execution knowledge should remain dormant.** Recovery, correction, read-only branches, and similar paths should not enter normal MEC unless their conditions are met.
+5. **Current project state is a first-class applicability input.** Examples include current chapter identity, bootstrap state, handoff existence/status, detected lifecycle violation, capability, and explicit authorization.
+6. **Instruction duplication is a separate compression problem.** `SKILL.md` and `BOOTSTRAP.md` currently duplicate substantial lifecycle/recovery/correction semantics. This increases rereading pressure and should eventually be addressed through a single authoritative execution source plus cross-references, but that is not yet an implementation change.
+
+### Refined MEC model
+
+```
+MEC(action, state) =
+    task / intent
+  + applicable execution constraints
+  + required current project state
+  + required semantic/project knowledge
+  + applicable conditional context
+```
+
+Applicability determination itself is part of the execution problem, but its input should be substantially smaller than the full instruction corpus if rereading is to be minimized.
+
+## New architectural hypothesis from the owner
+
+The owner proposed a possible **compact command/action index**:
+
+- a short list of commands/actions available to the AI;
+- a very short description of each;
+- references to the relevant `rules/` and `skills/` sources;
+- references ideally identifying the applicable sections of those sources;
+- potentially load this compact index during bootstrap so the assistant knows what capabilities/actions are available;
+- use it as an index when a user explicitly invokes an action from the list, while still allowing the assistant to reason rather than behave as a rigid one-to-one command interpreter.
+
+This is a **research hypothesis, not an architecture decision**.
+
+Its relevance to MEC is specific: such an index could provide a cheap applicability surface while keeping detailed execution knowledge dormant until needed.
+
+The hypothesis must be tested against alternatives before any registry/router/manifest or command system is introduced.
+
 ## North-Star document assessment
 
 `docs/architecture/ai-project-instruction-architecture.md` remains valuable context, but is now outdated as a clean current North-Star specification.
@@ -93,18 +145,23 @@ These remain review inputs, not authority sources. They should be consulted sele
 - The owner has supplied the remaining compactness / execution-context / project-agnosticity constraints.
 - The bounded Constraint → Problem Map has been created and read back successfully.
 - The North-Star document is stale in the specific areas listed above.
+- The bounded MEC applicability test has been completed on the six listed instruction sources.
+- The test found state-dependent applicability, dormant conditional execution paths, and duplicated execution semantics.
+- The owner has proposed a compact action/command index as a possible applicability surface.
 
 ### Inferred
 
 - Minimal Execution Context is currently the highest-leverage uncertainty to reduce.
 - The distinction between durable knowledge and active execution context is likely central to the eventual meta-system.
 - A compact execution layer may be possible without turning the assistant into a rigid command interpreter.
+- A compact action index may reduce the cost of applicability selection, but its sufficiency and optimal form are unverified.
 
 ### Assumed / unverified
 
 - The final shape of the reusable meta-system.
 - Whether any routing mechanism is necessary.
-- Whether a registry, manifest, index, or equivalent mechanism is useful.
+- Whether the proposed index is necessary or merely one possible solution.
+- Whether an index should reference whole files, sections, IDs, or another semantic unit.
 - Whether existing handoffs need replacement or extension.
 - Whether a new filesystem boundary is needed.
 
@@ -116,6 +173,9 @@ These remain review inputs, not authority sources. They should be consulted sele
 - What must be explicit in execution-critical instructions.
 - What can remain explanatory-only.
 - How missing execution context should be detected.
+- What is the minimum information needed for cheap applicability selection.
+- Whether a compact action index can provide that information without becoming a rigid command registry/router.
+- How duplicated execution semantics should eventually be eliminated without losing semantic completeness.
 - How independent review material can remain useful without becoming default execution context.
 
 ## Research boundary
@@ -127,7 +187,8 @@ Before introducing any implementation structure, determine:
 3. what must be discovered from project state;
 4. what must be explicit in execution instructions;
 5. what can remain explanatory-only;
-6. what failure occurs when a required element is absent.
+6. what failure occurs when a required element is absent;
+7. what minimum applicability information is required before loading detailed execution knowledge.
 
 Do not create:
 
@@ -143,9 +204,15 @@ Do not resume the historical semantic-trace work or launch a new C-series experi
 
 ## Immediate next task
 
-Run a bounded **Minimal Execution Context** analysis on a small set of representative actions.
+Run a bounded **Applicability Surface Test**.
 
-The analysis should begin with concrete action cases and a decomposition of the knowledge required for each case. It should not begin by proposing a universal meta-system architecture.
+The test should compare whether cheap applicability selection can be achieved by:
+
+1. task/state inference alone;
+2. a minimal explicit applicability surface attached to execution knowledge;
+3. a compact action/command index that points to execution-critical sections.
+
+The test should use existing `rules/` and `skills/` material and minimal counterexamples. It should determine the minimum information required for selection before any new meta-system artifact is designed.
 
 ## Things not to redo
 
@@ -186,12 +253,18 @@ Additional research inputs now inspected selectively:
 - `docs/handoffs/05AE-Independent-Review-Qwen.md`
 - `docs/handoffs/06AA-Independent-Review-Grok.md`
 - `docs/architecture/constraint-problem-map-03AS.md`
+- `.ai/rules/conversation-lifecycle.md`
+- `.ai/rules/workflow.md`
+- `.ai/rules/repository.md`
+- `.ai/rules/handoff-references.md`
+- `.ai/skills/conversation-handoff/SKILL.md`
+- `.ai/skills/conversation-handoff/BOOTSTRAP.md`
 
 Further architecture documents should be read selectively according to the bounded research question. Do not reload the entire historical architecture corpus by default.
 
 ## Last completed task
 
-03AS consolidated the remaining owner constraints into `docs/architecture/constraint-problem-map-03AS.md`, verified the new document by read-back, and assessed `ai-project-instruction-architecture.md` as stale in several concrete areas.
+03AS completed the first bounded MEC applicability test on six existing instruction sources. It established state-dependent applicability, identified the cost of discovering section-level applicability from inside execution bodies, and identified duplicated lifecycle/recovery/correction semantics. The owner also proposed a compact action/command index as a possible applicability surface. These findings are now recorded in this handoff.
 
 ## Bootstrap note
 
