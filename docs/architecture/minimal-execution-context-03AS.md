@@ -250,3 +250,97 @@ Correct Qwen onboarding reference:
 `docs/architecture/independent-review-qwen-onboarding.md`.
 
 The older DeepSeek onboarding file remains untouched as historical repository content.
+
+
+## 10. Applicability Surface Test — Cases A/B/C
+
+The bounded Applicability Surface Test compared three ways of selecting the knowledge needed before detailed execution:
+
+1. task/state inference alone;
+2. a minimal explicit applicability surface attached to execution knowledge;
+3. a compact global capability index pointing to execution-critical knowledge.
+
+### Case A — Normal handoff
+
+Task inference can identify the handoff capability, but the exact execution path still depends on fresh project state. A local applicability surface can expose the required preconditions before the full handoff procedure is loaded.
+
+**Result:** a compact applicability surface is sufficient for path selection; the case does not establish that a global index is necessary.
+
+### Case B — Handoff with recovery ambiguity
+
+A receiving handoff already exists in an unexpected or inconsistent state. Task inference can eventually select the correct recovery/correction path, but only after discovering branch conditions and inspecting state.
+
+A local applicability surface can expose the state facts that must be checked first, the normal-path preconditions, the condition that makes the normal path inapplicable, and the existence of conditional recovery/correction knowledge.
+
+**Result:** capability discovery and applicability determination are distinct functions. The applicability surface can determine what execution knowledge should be loaded and what should remain dormant.
+
+### Case C — Safe modification of an existing repository file
+
+For an existing-file modification, the capability can be identified from the task, but correct execution still requires fresh project state such as the exact target, current file contents, current ref, and resulting diff/state.
+
+A compact applicability surface can expose the pre-execution requirements without loading the entire repository/workflow instruction corpus.
+
+A global capability index can additionally make the available capability discoverable without requiring the assistant to search the wider instruction corpus.
+
+**Result:** the index has a distinct potential function — capability discovery — but it does not resolve missing arguments, semantic ambiguity, applicability, or current project state.
+
+### Cross-case synthesis
+
+The three cases do not establish three competing architectures. They reveal three different functions:
+
+| Function | Question | Candidate knowledge surface |
+|---|---|---|
+| Capability discovery | What can I potentially do? | compact global capability surface |
+| Applicability determination | What applies now, and which path is active? | local applicability surface + current state |
+| Execution | How do I perform it correctly? | execution knowledge + required project knowledge |
+
+Reasoning remains with the assistant. A capability description does not become a rigid command interpreter or semantic router merely because it is indexed.
+
+The resulting bounded model is:
+
+    REASONING
+        |
+        +-----------------------+
+        |                       |
+        v                       v
+CAPABILITY DISCOVERY      APPLICABILITY
+        |                       |
+compact capability        local applicability
+   surface                    surface
+        |                       |
+        +-----------+-----------+
+                    |
+                    v
+            EXECUTION KNOWLEDGE
+                    |
+                    + CURRENT STATE
+                    |
+                    v
+                   MEC
+                    |
+                    v
+                EXECUTION
+
+The arrows describe knowledge availability and reasoning flow, not a mandatory programmatic pipeline.
+
+### Current bounded conclusion
+
+A compact capability description has a potentially independent role in capability discovery. That role is distinct from applicability determination and execution.
+
+This does **not** establish that a separate physical global index is required. The capability-discovery function might be implemented by a more compact or different mechanism.
+
+It also does not establish a registry, router, manifest, command syntax, or universal metadata schema.
+
+### Argument boundary
+
+A capability description may identify required arguments, but it should not silently supply missing values. For example:
+
+    MODIFY EXISTING FILE
+      needs:
+        target
+        intended change
+      requires:
+        current file contents
+        current repository state
+
+If the user says only “modify the existing file”, the assistant still has to resolve or ask for the missing target. The capability surface supports reasoning; it does not replace it.

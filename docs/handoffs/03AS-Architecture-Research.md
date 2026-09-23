@@ -123,8 +123,9 @@ The bounded map identified concrete drift:
 
 ### Qwen
 
-- `docs/architecture/independent-review-deepseek-onboarding.md` — repository filename; the document identifies the reviewer as DeepSeek.
+- `docs/architecture/independent-review-qwen-onboarding.md`
 - Current observed Qwen handoff: `docs/handoffs/05AE-Independent-Review-Qwen.md`.
+- The older `docs/architecture/independent-review-deepseek-onboarding.md` file is unrelated historical repository content and is not the Qwen onboarding source.
 
 ### Grok
 
@@ -202,17 +203,75 @@ merely to support this research.
 
 Do not resume the historical semantic-trace work or launch a new C-series experiment merely because the current ideas are visible.
 
-## Immediate next task
+## Completed bounded test: Applicability Surface Test
 
-Run a bounded **Applicability Surface Test**.
-
-The test should compare whether cheap applicability selection can be achieved by:
+Cases A/B/C compared:
 
 1. task/state inference alone;
 2. a minimal explicit applicability surface attached to execution knowledge;
-3. a compact action/command index that points to execution-critical sections.
+3. a compact global capability index pointing to execution-critical sections.
 
-The test should use existing `rules/` and `skills/` material and minimal counterexamples. It should determine the minimum information required for selection before any new meta-system artifact is designed.
+The test established a useful separation:
+
+### Capability discovery
+**Question:** What capabilities are available, and where can their execution knowledge be found?
+
+A compact capability surface can potentially answer this without becoming a router or semantic interpreter.
+
+### Applicability determination
+**Question:** What applies now, and which execution path is active?
+
+This depends on a small applicability surface plus current project state. Conditional execution knowledge can remain dormant until its applicability condition is met.
+
+### Execution
+**Question:** How is the action performed correctly?
+
+This still requires the applicable execution knowledge and the fresh project state needed by the action.
+
+The resulting bounded model is:
+
+    REASONING
+        |
+        +-----------------------+
+        |                       |
+        v                       v
+CAPABILITY DISCOVERY      APPLICABILITY
+        |                       |
+compact capability        local applicability
+   surface                    surface
+        |                       |
+        +-----------+-----------+
+                    |
+                    v
+            EXECUTION KNOWLEDGE
+                    |
+                    + CURRENT STATE
+                    |
+                    v
+                   MEC
+                    |
+                    v
+                EXECUTION
+
+The arrows represent knowledge availability/reasoning flow, not a mandatory programmatic pipeline.
+
+### Bounded conclusion
+
+A compact capability description has an independent potential role in capability discovery. This is distinct from applicability determination and execution.
+
+The test does **not** establish that a separate physical global index is required. The capability-discovery function could be implemented by a different or more compact mechanism.
+
+The test also does not establish a registry, router, manifest, command syntax, or universal metadata schema.
+
+### Argument boundary
+
+A capability description may identify required arguments, but it does not silently supply missing values. If the user gives an underspecified task such as “modify the existing file”, the assistant must resolve or ask for the missing target rather than having the capability surface guess it.
+
+## Immediate next task
+
+Do not add another bounded Case merely because the current hypothesis has more possible examples.
+
+First test the internal consistency of the A/B/C boundary and determine the minimum information each of the three functions must expose without duplicating execution semantics.
 
 ## Things not to redo
 
@@ -248,8 +307,9 @@ Already read during bootstrap:
 Additional research inputs now inspected selectively:
 
 - `docs/architecture/ai-project-instruction-architecture.md`
-- `docs/architecture/independent-review-deepseek-onboarding.md`
+- `docs/architecture/independent-review-qwen-onboarding.md`
 - `docs/architecture/independent-review-grok-onboarding.md`
+- `docs/architecture/independent-review-deepseek-onboarding.md` (historical leftover; not Qwen onboarding)
 - `docs/handoffs/05AE-Independent-Review-Qwen.md`
 - `docs/handoffs/06AA-Independent-Review-Grok.md`
 - `docs/architecture/constraint-problem-map-03AS.md`

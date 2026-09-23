@@ -57,12 +57,17 @@ We need to distinguish:
 
 **Open:** What is the minimum sufficient execution context for an action?
 
-### P-02 — Routing
-If only a subset of project knowledge is needed, something must make that subset discoverable.
+### P-02 — Context discovery and applicability
+If only a subset of project knowledge is needed, the relevant capability and applicable execution knowledge must be discoverable without loading the full instruction corpus.
 
-Possible mechanisms are deliberately undecided.
+The research now distinguishes two functions that must not be conflated:
 
-**Open:** How can relevant context be selected without creating a heavy command/router framework?
+- **capability discovery:** what capabilities are available and where their execution knowledge can be found;
+- **applicability determination:** whether a capability applies in the current state and which execution path is active.
+
+Possible mechanisms remain deliberately undecided. A compact capability surface may support discovery, while a local applicability surface may support path selection.
+
+**Open:** What is the minimum information required for capability discovery and applicability determination without creating a heavy command/router framework?
 
 ### P-03 — Compression boundary
 Rules/Skills need to become compact without becoming cryptic or losing semantics.
@@ -157,8 +162,35 @@ These are review inputs. They do not override specialization-03 architectural de
 
 ---
 
-## 9. Next step
+## 9. Bounded research result
 
-Run a bounded **Minimal Execution Context** analysis on a small set of representative actions.
+The Applicability Surface Test compared:
 
-Do not begin with a proposed meta-system architecture.
+1. task/state inference alone;
+2. a minimal applicability surface attached to execution knowledge;
+3. a compact global capability index.
+
+Across Cases A/B/C, the test separated:
+
+- **capability discovery** — identifying what the assistant can potentially do;
+- **applicability determination** — determining what applies now and which execution path is active;
+- **execution** — obtaining the knowledge and current state required to perform the action correctly.
+
+The assistant remains responsible for semantic reasoning and argument resolution. A capability surface does not become a rigid command interpreter merely because it is indexed.
+
+A compact capability description has a potentially independent role in capability discovery, but the test does not establish that a separate physical global index is required. It may be implemented by a different or more compact mechanism.
+
+This is a research finding, not an Architecture Decision.
+
+## 10. Next research boundary
+
+Before designing any index, registry, router, or equivalent structure, test the internal boundary between:
+
+- capability description;
+- applicability surface;
+- execution-critical knowledge;
+- fresh project state.
+
+The next useful work should determine what minimum information each layer must expose and whether the layers can be represented without duplication.
+
+Do not treat the current model as a mandatory physical file structure.
