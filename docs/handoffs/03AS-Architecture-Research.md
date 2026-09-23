@@ -5,7 +5,7 @@
 - **Chapter:** 03AS
 - **Specialization:** 03 — Architecture & Research
 - **Previous chapter:** 03AR — Architecture & Research
-- **Status:** DRAFT
+- **Status:** READY_FOR_HANDOFF
 
 ## Starting objective
 
@@ -267,11 +267,113 @@ The test also does not establish a registry, router, manifest, command syntax, o
 
 A capability description may identify required arguments, but it does not silently supply missing values. If the user gives an underspecified task such as “modify the existing file”, the assistant must resolve or ask for the missing target rather than having the capability surface guess it.
 
-## Immediate next task
+## Completed bounded test: Applicability as runtime reasoning result
 
-Do not add another bounded Case merely because the current hypothesis has more possible examples.
+Independent review by Grok and Qwen challenged the A/B/C boundary. The review surfaced two counterarguments: capability discovery and applicability may overlap when relevance is state-dependent; and treating applicability as a separate precondition/interface can create a circular dependency when the knowledge needed to evaluate that precondition exists only inside the execution body.
 
-First test the internal consistency of the A/B/C boundary and determine the minimum information each of the three functions must expose without duplicating execution semantics.
+The bounded follow-up test evaluated three hypotheses: applicability as separate knowledge; applicability as a capability interface/gate; and applicability as a runtime reasoning result.
+
+Current investigative model:
+
+```
+CAPABILITY KNOWLEDGE
+        +
+CURRENT STATE
+        +
+USER INTENT
+        +
+REASONING
+        ↓
+   APPLICABILITY
+        ↓
+ if applicable
+        ↓
+EXECUTION KNOWLEDGE
+        ↓
+       MEC
+        ↓
+    EXECUTION
+        ↓
+ NEW / OBSERVED STATE
+        │
+        └──────────► REASONING
+```
+
+This is an **investigative model, not an architecture, schema, or filesystem decision**.
+
+Key conclusions:
+
+1. Applicability is best treated as a reasoning result rather than a mandatory knowledge layer.
+2. Reasoning may need additional knowledge before it can reach a sufficiently reliable applicability judgment. Execution knowledge therefore does not have to be downstream of an already-complete applicability decision.
+3. Applicability may be refined iteratively as more relevant knowledge is obtained.
+4. After execution, observed current state returns to reasoning. Normal execution, correction, and recovery can therefore be understood as alternative execution knowledge selected by reasoning against newly observed state, rather than requiring a separate deterministic recovery subsystem.
+5. Current state remains distinct from instruction knowledge.
+6. The earlier A/B/C separation remains useful as a distinction of functions, but it should no longer be treated as a mandatory three-stage pipeline or as proof of three persistent artefacts.
+7. No global index, registry, router, manifest, command syntax, capability-ID scheme, universal metadata schema, .ai/memory/, or new filesystem boundary is justified by this result.
+
+### Current semantic model
+
+```
+                 ┌─────────────────────┐
+                 │ CAPABILITY KNOWLEDGE│
+                 │                     │
+                 │ what capabilities   │
+                 │ exist / what they   │
+                 │ are about / where   │
+                 │ detailed knowledge  │
+                 │ can be found        │
+                 └──────────┬──────────┘
+                            │
+                            ▼
+                     ┌────────────┐
+                     │  REASONING │◄──── USER INTENT
+                     └─────┬──────┘
+                           ▲
+                           │
+                     CURRENT STATE
+                           │
+                           ▼
+                    APPLICABILITY
+                           │
+                     "what applies?"
+                           │
+                           ▼
+                  REQUIRED KNOWLEDGE
+                           │
+                           ▼
+                          MEC
+                           │
+                           ▼
+                       EXECUTION
+                           │
+                           ▼
+                     OBSERVED STATE
+                           │
+                           └──────────► REASONING
+```
+
+The arrows represent semantic/information dependencies, not a mandatory programmatic pipeline.
+
+### Important unresolved point
+
+The bounded test does **not** prove that applicability can always be determined from capability knowledge + state + intent alone. Sometimes reasoning must obtain additional execution/project knowledge before reaching an applicability judgment.
+
+The resulting open question is therefore not "where is the applicability artefact?" but:
+
+> How does this reasoning-oriented model change the definition and boundary of Minimal Execution Context?
+
+## Immediate next task for 03AT
+
+Examine the consequences of the runtime-reasoning model for:
+
+1. the definition of MEC;
+2. P-01 Knowledge vs execution context;
+3. P-02 Context discovery and applicability;
+4. P-03 Compression boundary.
+
+Do this before introducing implementation structure. In particular, determine whether the word **minimal** in MEC describes a static preselected context, a dynamically sufficient context at a reasoning moment, or something more precise.
+
+Do not add another generic bounded case merely to generate more examples.
 
 ## Things not to redo
 
@@ -324,7 +426,13 @@ Further architecture documents should be read selectively according to the bound
 
 ## Last completed task
 
-03AS completed the first bounded MEC applicability test on six existing instruction sources. It established state-dependent applicability, identified the cost of discovering section-level applicability from inside execution bodies, and identified duplicated lifecycle/recovery/correction semantics. The owner also proposed a compact action/command index as a possible applicability surface. These findings are now recorded in this handoff.
+03AS completed the A/B/C Applicability Surface Test, the independent Grok/Qwen boundary review, and the bounded follow-up test of applicability as runtime reasoning. The current research position is that applicability is best treated as a reasoning result that may be refined after obtaining additional knowledge, with observed post-execution state feeding reasoning again for normal, correction, or recovery paths. The next chapter should now examine what this does to MEC and P-01/P-02/P-03.
+
+## Migration note
+
+03AS is finalized as `READY_FOR_HANDOFF` for migration to 03AT.
+
+The receiving chapter must create its own `docs/handoffs/03AT-Architecture-Research.md` as `DRAFT`, then perform the normal post-bootstrap verification and mark this handoff `HANDED_OFF`.
 
 ## Bootstrap note
 
