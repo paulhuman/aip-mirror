@@ -13,7 +13,7 @@ AE
 05AD — Independent Review (Qwen)
 
 **Status:**
-READY_FOR_HANDOFF
+HANDED_OFF
 
 ---
 
