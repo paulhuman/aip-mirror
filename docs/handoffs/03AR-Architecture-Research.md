@@ -389,6 +389,179 @@ These remain inferences.
 
 03AR then completed the first bounded inspection of existing intentional-acceptance practice. The inspection found an existing documentary convention: human/project acceptance is represented durably by explicit semantic-status wording, with a clear distinction between accepted working semantics and formal `AD-*` decisions. No dedicated Acceptance mechanism was introduced.
 
+## New constraints — context, command routing, and durable meta knowledge
+
+The project owner has now identified additional constraints that must be incorporated before the paused Phase 2 research is resumed.
+
+### 1. Context accumulation is an observed reliability risk
+
+`03AQ` was the longest chapter in the project and also produced the largest observed concentration of assistant errors. Earlier chapters were approximately 20–25% shorter and showed fewer failures. The observed failures included:
+
+- incorrect/non-existent repository path recall;
+- stale handoff filenames surviving after renaming;
+- omission of a required handoff-preparation step during migration;
+- duplication of the terminal `HANDED_OFF` lifecycle state;
+- degradation in reliable retrieval of `RULE`/`SKILL` content that had been read near the beginning of a long chapter.
+
+This is empirical project evidence of contextual reliability degradation. It does **not** establish a universal safe chat length or isolate one exact technical cause.
+
+The current working hypothesis is that long conversations create at least two distinct risks:
+
+1. **context accumulation / instruction retrieval degradation** — initially read rules and skills become less reliably available for later operations;
+2. **contextual interference after direction change** — a late change in research direction can leave obsolete active context competing with the newly established direction.
+
+Do not treat either hypothesis as a finalized architecture claim yet.
+
+### 2. Instruction refresh should become action-scoped
+
+A candidate future mechanism is a command/operation registry that maps a recognizable user/AI command to the minimal `RULE`/`SKILL` snippets required immediately before execution.
+
+Conceptually:
+
+```text
+command
+   ↓
+command registry
+   ↓
+required instruction snippets
+   ↓
+refresh from authoritative RULE/SKILL sources
+   ↓
+execute command
+```
+
+The purpose is not to reread all instructions on every operation. It is to refresh the **small semantic slices relevant to the current action**.
+
+Candidate configuration form: YAML or another machine-readable registry.
+
+Potential instruction references may use stable fragment identifiers, analogous to document-local `#id` anchors:
+
+```text
+conversation-lifecycle#handoff
+handoff-references#receiving-chapter
+conversation-handoff#bootstrap
+```
+
+This is a research direction, not an accepted schema.
+
+### 3. Commands need a stable user-facing trigger syntax
+
+The web interface now intercepts command-like prefixes beginning with `/` and `@` for its own UI command/autocomplete behavior. Therefore a future project command syntax should **not** depend on a leading slash or at-sign.
+
+Candidate forms discussed:
+
+```text
+>>handoff ...
+>/handoff ...
+```
+
+No prefix has been selected. The future syntax should be:
+
+- visually recognizable as a project command;
+- easy to type;
+- unlikely to trigger the ChatGPT web UI;
+- compatible with the command registry concept.
+
+Record this as an open design constraint, not as a decision.
+
+### 4. `.ai/memory/` is currently considered unnecessary
+
+The project owner questions the need for a separate persistent `.ai/memory/` directory if authoritative project knowledge belongs in durable documentation, temporary conversation transfer belongs in `docs/handoffs/`, and action-specific instruction refresh can retrieve relevant `RULE`/`SKILL` snippets.
+
+Current working direction:
+
+> Do not introduce `.ai/memory/` merely as another knowledge store.
+
+Reconsider only if evidence shows that a memory layer can replace the handoff mechanism with a substantially more useful and polished capability without creating another competing source of truth.
+
+No memory directory should be created merely because the concept exists.
+
+### 5. `docs/meta/` must distinguish permanent meta-system knowledge from temporary development research
+
+The current `docs/meta/` idea is refined as follows.
+
+The eventual meta-layer is intended to describe the **agnostic meta-project itself**: the reusable system that operates through `.ai/`, its specifications, architecture, operational conventions, registries/configuration, and final documentation that can be copied into other projects and adapted.
+
+Therefore distinguish:
+
+```text
+docs/meta/
+├── permanent/
+│   └── reusable agnostic-meta-project knowledge
+│
+└── temporary/
+    └── development/research artifacts needed only while building it
+```
+
+These names are conceptual for now; do not create the directories or mass-move files until the boundary has been researched and accepted.
+
+Permanent meta knowledge is intended to survive completion of the current development effort and be reusable across future projects.
+
+Temporary meta-development material may include research notes, experiments, audits, migration material, and other artifacts whose purpose ends when the meta-system is completed.
+
+The important distinction is:
+
+> Development knowledge is not automatically runtime/operational knowledge.
+
+### 6. Handoffs are temporary context-transfer buffers
+
+The current working direction is that `docs/handoffs/` is a **temporary context-transfer mechanism**, not permanent project knowledge and not a required source of truth for the finished system.
+
+Conceptually:
+
+```text
+conversation A
+    ↓
+handoff
+    ↓
+conversation B
+    ↓
+knowledge consolidated into authoritative docs
+    ↓
+handoff may eventually be deleted
+```
+
+A future project should not depend on historical handoffs for normal operation.
+
+For the finished AIP Mirror project, important project-specific knowledge should ultimately live in the appropriate durable `docs/` documentation. For the reusable meta-system, important meta knowledge should ultimately live in its permanent meta documentation.
+
+Handoffs remain useful during development and migration, but they should be removable without destroying the project's authoritative knowledge.
+
+### 7. Project-specific versus meta-system knowledge
+
+The intended final separation is approximately:
+
+```text
+AIP Mirror
+├── project-specific authoritative documentation
+├── project-specific source/prototypes
+└── reusable agnostic meta-system
+
+meta-system
+├── reusable .ai/
+├── operational entry points
+├── machine-readable registries/configuration
+└── permanent meta documentation
+```
+
+`README.md`, `Agents.md`, and YAML registries/configuration are candidate parts of the eventual reusable operational surface. Their exact roles and placement remain to be researched.
+
+### 8. Do not solve the new constraints prematurely
+
+The project owner explicitly requested that repository restructuring and architecture changes be deferred until all current constraints have been supplied and mapped.
+
+Therefore:
+
+- do not create `docs/meta/permanent/` or `docs/meta/temporary/` yet;
+- do not create `.ai/memory/` merely to address context loss;
+- do not introduce the command registry yet;
+- do not choose a command prefix yet;
+- do not mass-move existing research documents;
+- do not treat `README.md`, `Agents.md`, YAML registries, or memory as finalized architecture;
+- do not begin another C-series experiment merely because these ideas are now visible.
+
+The next chapter should first consolidate the constraints into a bounded problem map and then determine which architectural changes, if any, are actually necessary.
+
 ## Immediate next task
 
 **Paused pending additional project constraints.**
