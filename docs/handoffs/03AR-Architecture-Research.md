@@ -46,7 +46,7 @@ READY_FOR_HANDOFF
 HANDED_OFF
 ```
 
-The retired lifecycle state is not part of the current model and must not be restored.
+`SUPERSEDED` has been removed from the current lifecycle and must not be reintroduced. The current lifecycle is intentionally terminal at `HANDED_OFF`.
 
 03AP/03AQ research carried forward:
 
@@ -147,7 +147,7 @@ inherited state
 
 03AP audits found no established universal Acceptance entity, approval protocol, Decision registry, or total source hierarchy.
 
-The remaining uncertainty is whether existing project conventions already provide sufficient observable recognition of accepted semantic status.
+The remaining uncertainty is whether existing project conventions already provide sufficient observable recognition of accepted semantic status, especially when that status changes over time.
 
 ## Repository practice inspection — current result
 
@@ -273,6 +273,74 @@ The remaining gap is not "there is no acceptance mechanism". The gap is:
 > The repository convention is semantic and documentary rather than mechanically typed: a later chapter must recognize explicit status-bearing wording and distinguish it from ordinary discussion, without relying on conversational memory.
 
 This is an **observed repository limitation**, not yet a justification for introducing a new semantic entity.
+## Meta-layer boundary — current working direction
+
+A separate architectural boundary has now been identified between the project/domain architecture and the project-independent system used to reason about and evolve project architecture.
+
+Working boundary:
+
+```text
+docs/
+├── architecture/     ← project/domain-specific architecture
+├── meta/             ← project-independent meta-architecture/research
+└── handoffs/         ← chapter context-transfer mechanism
+```
+
+This is a **working architectural direction**, not yet a filesystem refactor and not yet a finalized ontology.
+
+The current interpretation is:
+
+- `docs/architecture/` is the natural home for architecture specific to AIP Mirror.
+- `docs/meta/` is a candidate home for project-independent research/architecture concerning mechanisms such as semantic status, intentional acceptance, provenance, source/decision handling, and related cross-project concerns.
+- `docs/handoffs/` is an operational context-transfer mechanism between research chapters, not a semantic ontology or general knowledge hierarchy.
+
+The former attempted hierarchy
+
+```text
+REFERENCE
+   ↓
+HANDOFF
+   ↓
+ARCHITECTURE
+   ↓
+RULE
+```
+
+is no longer treated as a valid universal hierarchy. These artifacts/mechanisms may belong to different dimensions rather than forming a single semantic/documentary chain.
+
+Do **not** mass-move existing files into `docs/meta/` yet. The boundary should be validated by research before structural refactoring. In particular, do not assume that every concept currently called `authority`, `source`, `decision`, `dependency`, or `status` belongs to the meta-layer; domain and meta meanings must be discriminated separately.
+
+The intentional-acceptance research currently appears conceptually project-independent and is therefore a strong candidate for the future meta-layer, but this is not yet a final architectural classification.
+
+## Current research state after the meta-layer discussion
+
+The next research pass remains the historical semantic trace, but it is now explicitly **deferred pending additional project constraints** that may materially change the research direction.
+
+When resumed, the bounded pass should compare at least:
+
+- an accepted working invariant;
+- a provisional/non-formal candidate such as candidate-level precedence;
+- a formal `AD-*` decision;
+
+and trace for each:
+
+1. origin;
+2. initial status;
+3. acceptance evidence;
+4. inheritance;
+5. refinement/narrowing;
+6. contradiction/rejection, if present;
+7. promotion to formal status, if present;
+8. current status;
+9. historical residue;
+10. authority/source supporting the current status.
+
+The key discrimination is:
+
+> Which independently observable semantic/documentary dimensions are necessary to reconstruct the current status of a specific proposition after later refinement, contradiction, promotion, and handoff inheritance, without conflating document history with current normative meaning?
+
+A possible minimal representation such as `subject + state` remains only a research hypothesis. Do not design an ontology, state enum, Acceptance entity, or new mechanism from it before the bounded evidence supports that move.
+
 ## Evidence / confidence
 
 ### Confirmed / observed
@@ -323,21 +391,21 @@ These remain inferences.
 
 ## Immediate next task
 
-Perform the **second bounded discrimination pass**: inspect how the observed acceptance convention behaves under **later refinement, contradiction, and historical/supersession language**.
+**Paused pending additional project constraints.**
 
-The key question is now narrower:
+Before resuming the planned Phase 2 historical semantic trace, incorporate the real constraints that will be supplied by the project owner. Those constraints may require revising the current research boundary, the proposed `docs/meta/` split, or the shape of the next bounded investigation.
 
-> When an explicitly accepted working invariant is later refined, narrowed, rejected, or promoted to a formal `AD-*` / specification, what durable repository evidence tells a later chapter which semantic status is current without conflating document history with current normative meaning?
-
-Compare concrete cases of:
+Once resumed, the planned Phase 2 remains the default starting point:
 
 1. accepted working invariant → later formal `AD-*`;
 2. accepted working invariant → later refinement/narrowing;
 3. accepted statement → later contradiction/rejection, if such a case exists;
-4. historical/superseded wording versus current normative wording;
+4. historical wording versus current normative wording;
 5. handoff inheritance after such changes.
 
-Do not introduce a new Acceptance entity or mechanism yet. Do not automatically select a new C-series experiment. First determine whether the existing documentary convention remains sufficient when semantic status changes over time.
+Do not begin this pass before incorporating the new constraints. Do not introduce a new Acceptance entity, mechanism, ontology, or C-series experiment merely because the plan is currently paused.
+
+The purpose of the eventual pass remains to determine whether the existing documentary convention is sufficient when semantic status changes over time, and to identify the minimum independently observable dimensions needed to reconstruct current normative meaning.
 
 ## Things not to redo
 
@@ -354,7 +422,7 @@ Do not repeat merely for migration:
 - the Post-C-13 Architectural Leverage Audit.
 - the completed 03AQ lifecycle cleanup.
 
-Do not restore the retired lifecycle state.
+Do not reintroduce `SUPERSEDED`; it has already been removed from the current lifecycle by project decision.
 
 ## Recommended starting context for next chapter
 
