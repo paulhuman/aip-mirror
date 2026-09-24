@@ -284,7 +284,7 @@ When you receive the handoff bootstrap message, it will typically contain:
 
 ### Required reading
 
-- Your previous chapter's handoff file (e.g., `docs/handoffs/05AA-Independent-Review-DeepSeek.md`)
+- Your previous chapter's handoff file (e.g., `.ai/handoffs/05AA-Independent-Review-DeepSeek.md`)
 - Relevant rules from `.ai/rules/`
 - Relevant skills from `.ai/skills/`
 - Architecture documents as needed

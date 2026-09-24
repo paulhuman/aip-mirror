@@ -56,4 +56,4 @@ The Workshop does not own project architecture, FreeHand research, JSX implement
 
 Handoffs must distinguish confirmed observations from inferences, assumptions, and open questions.
 
-See `.ai/skills/conversation-handoff/SKILL.md` and `.ai/rules/conversation-lifecycle.md` for the workflow and format.
+See `.ai/skills/handoff/SKILL.md` and `.ai/rules/handoff/lifecycle.md` for the workflow and format.

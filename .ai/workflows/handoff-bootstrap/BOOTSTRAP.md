@@ -36,7 +36,7 @@ For an internal canonical reference, use:
 
 For historical or reproducibility-sensitive references, the branch, tag, or commit MUST be explicit, for example:
 
-    paulhuman/aip-mirror@<commit-sha>:/docs/handoffs/03AK-Architecture-Research.md
+    paulhuman/aip-mirror@<commit-sha>:/.ai/handoffs/03AK-Architecture-Research.md
 
 The bootstrap AI MUST NOT resolve .ai/..., docs/..., or other unqualified repository paths from its current working directory, another repository, an attachment, or conversational context.
 
@@ -67,8 +67,8 @@ When a new chapter is initialized, all AI MUST:
 
 1. Confirm the new chapter identity and specialization from the bootstrap message.
 2. Read this file.
-3. Read the applicable project rules, especially `.ai/rules/conversation-lifecycle.md`, `.ai/rules/workflow.md`, and `.ai/rules/handoff-references.md`.
-4. Read the previous chapter's handoff under `docs/handoffs/`.
+3. Read the applicable project rules, especially `.ai/rules/handoff/lifecycle.md`, `.ai/rules/workflow.md`, and `.ai/rules/handoff/references.md`.
+4. Read the previous chapter's handoff under `.ai/handoffs/`.
 5. Inspect the current implementation files and references identified by that handoff.
 6. Confirm that the new chapter can continue from the recorded state without guessing.
 
@@ -76,7 +76,7 @@ When a new chapter is initialized, all AI MUST:
 
 **A WRITE-CAPABLE AI MUST read and execute this branch and MUST ignore Branch B.**
 
-7. Immediately create the new chapter's handoff under `docs/handoffs/` with status `DRAFT` **if it does not already exist**.
+7. Immediately create the new chapter's handoff under `.ai/handoffs/` with status `DRAFT` **if it does not already exist**.
 8. Commit that initial `DRAFT` handoff as part of bootstrap; this is a pre-authorized procedural commit and does not require a separate approval step **when normal initial creation is applicable**.
 9. Update the previous chapter's handoff from `READY_FOR_HANDOFF` to `HANDED_OFF`.
 10. Commit that lifecycle transition.
@@ -92,7 +92,7 @@ If the receiving handoff already exists when bootstrap begins, do **not** recrea
 7. Do **not** create, update, or commit any repository file.
 8. If the receiving handoff already exists, do **not** overwrite or normalize it.
 9. Prepare the complete proposed receiving handoff with status `DRAFT`, using the standard handoff structure and all information that can be verified from the repository and current conversation.
-10. Return the **entire handoff file content** to the user as plain Markdown so the user can place it in `docs/handoffs/` manually.
+10. Return the **entire handoff file content** to the user as plain Markdown so the user can place it in `.ai/handoffs/` manually.
 11. Provide the exact commit message that should be used for the manual initial-DRAFT commit.
 12. Do **not** provide the separate bootstrap instruction for the next chat in the same response. A read-only AI MUST keep its response focused on the complete handoff file and its manual commit message so that constrained interfaces are not unnecessarily burdened by a second long artifact.
 13. Do not claim `DRAFT` creation, `HANDED_OFF`, a commit, post-bootstrap verification, or `BOOTSTRAP = COMPLETE` because those repository operations were not performed by the AI.

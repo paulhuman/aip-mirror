@@ -158,18 +158,18 @@ A handoff is appropriate when:
 
 Conversation handoffs belong under:
 
-    docs/handoffs/
+    .ai/handoffs/
 
 Use one file per chapter:
 
-    docs/handoffs/<specialization><chapter>-<short-name>.md
+    .ai/handoffs/<specialization><chapter>-<short-name>.md
 
 For current-format chapters, the chapter identifier uses `[0-9]{2}[A-Z]{2}`. Examples:
 
-    docs/handoffs/01AA-JSX-Prototype.md
-    docs/handoffs/02AB-Native-AIP-Plugin.md
-    docs/handoffs/03AF-Architecture-Research.md
-    docs/handoffs/04AA-Project-Workshop.md
+    .ai/handoffs/01AA-JSX-Prototype.md
+    .ai/handoffs/02AB-Native-AIP-Plugin.md
+    .ai/handoffs/03AF-Architecture-Research.md
+    .ai/handoffs/04AA-Project-Workshop.md
 
 
 When a chapter has completed handoff, retain its handoff as historical project state.
@@ -450,7 +450,7 @@ The initial `DRAFT` may be incomplete. At minimum it must identify the new chapt
 
 For a chapter created from a previous handoff, the receiving chapter must read:
 
-1. `.ai/skills/conversation-handoff/BOOTSTRAP.md`;
+1. `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`;
 2. the applicable project rules;
 3. the previous chapter's handoff;
 4. any files identified as current implementation state.
@@ -507,7 +507,7 @@ Use the `commit-message` skill for the required commit-message vocabulary and st
 
 Project knowledge belongs in normal project documentation.
 
-Conversation-specific migration state belongs in `docs/handoffs/`.
+Conversation-specific migration state belongs in `.ai/handoffs/`.
 
 Do not turn handoffs into a second, competing documentation system.
 

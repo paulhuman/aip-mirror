@@ -79,7 +79,7 @@ An AI must never claim a repository operation or lifecycle transition occurred u
 
 Create or update the applicable file under:
 
-    docs/handoffs/
+    .ai/handoffs/
 
 Naming convention:
 
@@ -375,7 +375,7 @@ This is mandatory for every new chapter, including the first chapter of a specia
 
 The new chapter may create this initial `DRAFT` handoff without asking the user for permission. The initialization is part of the standard bootstrap procedure, not an optional development change.
 
-A READ-ONLY AI must not create or overwrite the repository file. It must instead prepare the complete proposed initial `DRAFT` handoff and provide the exact manual commit message, following the READ-ONLY branch in `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
+A READ-ONLY AI must not create or overwrite the repository file. It must instead prepare the complete proposed initial `DRAFT` handoff and provide the exact manual commit message, following the READ-ONLY branch in `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`.
 
 If a pre-existing receiving handoff is discovered during bootstrap, do not silently recreate or overwrite it as though it were a normal initial-DRAFT creation. Apply the lifecycle rules and, if the bootstrap is blocked by a qualifying pre-existing violation, wait for the explicit Lifecycle Recovery command before making recovery changes.
 
@@ -433,7 +433,7 @@ The current chapter owns this transition and must commit it.
 
 Before declaring `DRAFT` → `READY_FOR_HANDOFF` complete, apply the `READY_FOR_HANDOFF supersession invariant` above. If a previous same-specialization handoff is `HANDED_OFF`, it must be changed to `HANDED_OFF` and physically verified before the migration transition is considered complete.
 
-After that, generate the standard bootstrap instruction for the receiving chapter using `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
+After that, generate the standard bootstrap instruction for the receiving chapter using `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`.
 
 Do not mark the handoff `HANDED_OFF` in the closing chapter.
 
@@ -459,7 +459,7 @@ The standard migration workflow must generate the bootstrap instruction for the 
 
     Пора выдать bootstrap-инструкцию
 
-Treat this as a direct request to generate the missing bootstrap instruction for the receiving chapter using `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
+Treat this as a direct request to generate the missing bootstrap instruction for the receiving chapter using `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`.
 
 This command does **not** initialize the next chapter, does **not** change lifecycle state, and does **not** authorize repository writes by itself.
 
@@ -526,7 +526,7 @@ Only mark the handoff `READY_FOR_HANDOFF` when the next chapter can reasonably c
 
 ## Receiving a handoff
 
-When a new chapter starts from a previous handoff, first read `.ai/skills/conversation-handoff/BOOTSTRAP.md` and perform its repository write-capability self-check.
+When a new chapter starts from a previous handoff, first read `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md` and perform its repository write-capability self-check.
 
 Then follow exactly one of the capability branches defined by BOOTSTRAP.md:
 
