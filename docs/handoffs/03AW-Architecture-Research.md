@@ -171,7 +171,7 @@ Historical AI-infrastructure research is conceptually ARCHIVE under `.ai/archive
 ### `docs/handoffs/`
 Conceptually MOVE to `.ai/handoffs/`.
 
-Do not mechanically copy `docs/handoffs/README.md); it is navigation/orientation material.
+Do not mechanically copy `docs/handoffs/README.md`; it is navigation/orientation material.
 
 ### `docs/PROJECT-INSTRUCTIONS.md`
 Treat as composite and DECOMPOSE:
