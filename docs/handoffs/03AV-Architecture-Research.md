@@ -165,29 +165,21 @@ All unresolved architecture/taxonomy questions listed above remain open until th
 
 ## Last completed task
 
-Initialized 03AV bootstrap from the canonical 03AU handoff and durable architecture context, and verified the applicable repository-controlled bootstrap/lifecycle instructions.
+Completed the local inventory/classification and obtained independent blind semantic reviews from Grok and Qwen. Updated the durable 03AU restructuring notes with the resulting consensus and the newly identified handoff semantic model.
 
 ## Immediate next task
 
-Finish the local inventory/classification of existing `.ai/` and `docs/` materials, starting with all `.ai/rules/` files, then all `.ai/skills/`, `docs/PROJECT-INSTRUCTIONS.md`, `docs/architecture/`, `docs/handoffs/`, `README.md`, and the planned `AGENTS.md`.
+Perform the semantic comparison:
 
-For every relevant file, record:
+1. Consensus — our model + Grok + Qwen.
+2. Grok-only.
+3. Qwen-only.
+4. Our-only.
+5. Contradictions in semantic ownership.
+6. Architecture questions: principle versus experiment.
+7. Only then construct the v2 target tree.
 
-    KEEP
-    MOVE
-    DECOMPOSE
-    ARCHIVE
-
-along with:
-- current path;
-- primary subject;
-- type;
-- target layer;
-- current problem;
-- proposed action;
-- unresolved question.
-
-Do not start Grok/Qwen review until the local inventory is complete.
+Do not start physical restructuring.
 
 ## Handoff-specific TODO
 
