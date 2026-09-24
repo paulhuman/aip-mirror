@@ -1,8 +1,8 @@
 # Repository rules
 
-These rules define how AIP Mirror relates to its external repositories and how project files should be organized.
+These rules define how AIP Mirror relates to its repositories, how project files are organized, and how repository mutations are performed safely.
 
-## 1. AIP Mirror repository
+## 1. Repository identity
 
 The production project repository is:
 
@@ -10,21 +10,17 @@ The production project repository is:
 
 Project source code, prototypes, documentation, tests, experiments, and project-specific tooling belong here.
 
-## 2. Adobe Illustrator SDK repository
-
 The canonical Adobe Illustrator 2026 SDK repository is:
 
     paulhuman/adobe-illustrator-2026-sdk
 
-It is a reference repository.
+It is a reference repository. Use it when exact Illustrator AIP API information, SDK documentation, original Adobe samples, headers, suites, PiPL information, or other SDK material is required.
 
-Use it when exact Illustrator AIP API information, SDK documentation, original Adobe samples, headers, suites, PiPL information, or other SDK material is required.
-
-## 3. Never copy the Adobe SDK into AIP Mirror
+## 2. External repository boundaries
 
 Do not duplicate the complete Adobe Illustrator SDK inside `aip-mirror`.
 
-The two repositories have separate purposes:
+The repositories have separate purposes:
 
     adobe-illustrator-2026-sdk
         = canonical SDK reference
@@ -34,7 +30,9 @@ The two repositories have separate purposes:
 
 Project-specific adaptations of SDK samples may be placed in `aip-mirror` when needed, but the original SDK remains in its canonical repository.
 
-## 4. References versus project code
+Other external repositories, libraries, and projects should likewise remain separate unless there is a clear project requirement and the licensing and maintenance implications are understood.
+
+## 3. Repository content taxonomy
 
 Use these categories consistently.
 
@@ -44,7 +42,7 @@ External reference material needed to understand or validate the project.
 
 Examples:
 
-- Illustrator JavaScript reference PDF
+- Illustrator JavaScript reference material
 - FreeHand MX documentation
 - screenshots
 - videos
@@ -68,33 +66,21 @@ Examples:
 - specifications
 - reverse-engineering findings
 - project instructions
-- conversation handoffs
+- durable project documentation
+
+Conversation-specific migration state is owned by the handoff infrastructure under `.ai/handoffs/`.
 
 ### `.ai/`
 
 AI workflow instructions and project-specific AI rules.
 
-These files describe how AI-assisted work should be performed.
+These files describe how AI-assisted work should be performed. They are not application source code.
 
-They are not application source code.
+Do not create large directory trees or placeholder files before they are needed. Directories should generally appear when their contents have a real purpose.
 
-## 5. Conversation state and durable memory
-
-Conversation history is temporary working context.
-
-The repository is the durable technical memory of the project.
-
-Stable knowledge belongs in normal documentation. Conversation-specific migration state belongs in `docs/handoffs/`.
-
-Do not rely on a previous chat remaining fully available to a future chapter.
-
-## 6. Do not commit local build output
+## 4. Repository hygiene
 
 Build products and machine-specific generated files should normally remain outside version control.
-
-The repository should contain source, configuration, documentation, tests, and intentional project artifacts rather than local build output.
-
-## 7. Do not commit secrets
 
 Never commit:
 
@@ -105,43 +91,49 @@ Never commit:
 - personal authentication data
 - machine-specific secrets
 
-Use appropriate local or CI configuration instead.
+The repository should contain source, configuration, documentation, tests, and intentional project artifacts rather than local build output or secrets.
 
-## 8. Keep commits coherent
+## 5. Repository as durable project record
 
-A commit should represent one logical change.
+Conversation history is temporary working context. The repository is the durable technical record.
 
-Avoid mixing unrelated features, fixes, refactors, documentation changes, and experiments when they can reasonably be separated.
+Important behavior, architecture, specifications, research findings, decisions, and validated project state should be captured in files under version control.
 
-## 9. Preserve traceability
+The general development workflow requires stable decisions to be documented; this rule defines the repository-level durability of that documentation.
 
-Important architectural decisions should be represented in repository documentation rather than existing only in chat.
+Conversation continuity and handoff lifecycle are defined by `.ai/rules/handoff/lifecycle.md` and should not be redefined here.
 
-When a decision materially affects implementation, record it in the appropriate documentation.
+## 6. Documentation traceability
 
-## 10. Avoid unnecessary repository growth
+Important architectural or behavioral decisions must be represented in the appropriate repository documentation rather than existing only in chat.
 
-Do not create large directory trees or placeholder files before they are needed.
+When a decision materially affects implementation, record it in the appropriate project document.
 
-Directories should generally appear when their contents have a real purpose.
+Do not duplicate generic workflow guidance here; `.ai/rules/workflow.md` owns the general documentation principle.
 
-The initial repository should remain intentionally small, while justified infrastructure such as `docs/handoffs/` should be created when the workflow requires it.
-
-## 11. External projects remain separate
-
-Other external repositories, libraries, and projects should not be copied into AIP Mirror unless there is a clear project requirement and the licensing and maintenance implications are understood.
-
-In particular, the Adobe Illustrator SDK remains external and canonical.
-
-## 12. Repository is the durable project memory
-
-Conversation history is useful for collaboration, but the repository is the durable technical record.
-
-Important behavior, architecture, specifications, research findings, decisions, and validated handoff state should eventually be captured in files under version control.
-
-## 13. Repository write safety
+## 7. Repository write safety
 
 GitHub API file updates are full-content replacements, not line-level edits. When an existing file is updated through an API that accepts complete file content, the new content must contain the entire intended file.
+
+For an existing file:
+
+    READ CURRENT FILE
+        ↓
+    make minimal intended change
+        ↓
+    WRITE COMPLETE FILE
+        ↓
+    READ BACK
+        ↓
+    VERIFY CONTENT
+        ↓
+    INSPECT DIFF
+        ↓
+    VERIFY SCOPE
+        ↓
+    COMMIT
+        ↓
+    VERIFY RESULT
 
 Therefore:
 
@@ -149,10 +141,9 @@ Therefore:
 - Use the current file content as the source of truth; do not reconstruct an existing file from memory when it can be fetched.
 - Preserve all unrelated content exactly unless the change intentionally modifies it.
 - Treat the current blob SHA as part of the write precondition for an existing file.
-- Make the smallest intended change to the fetched content.
 - After writing, read the resulting file back from the repository.
-- Verify that the intended change is present and that unrelated content was not accidentally removed or altered.
-- Inspect the resulting diff before considering the change ready for commit.
+- Verify that the intended change is present and unrelated content was not accidentally removed or altered.
+- Inspect the resulting diff and changed-file scope before considering the change ready for commit.
 - If the resulting content differs unexpectedly, stop and restore the correct content before making further changes.
 
 A successful API operation, a valid blob SHA, or a valid Git commit does not by itself prove that the repository content is correct.
@@ -160,3 +151,9 @@ A successful API operation, a valid blob SHA, or a valid Git commit does not by 
 Content integrity must be verified independently of API success.
 
 This rule applies to source code, documentation, configuration, scripts, tests, AI instructions, and every other existing repository file.
+
+## 8. Commit policy
+
+Commit authorization and commit coherence are defined by `.ai/rules/commits.md`.
+
+Do not duplicate commit policy here.
