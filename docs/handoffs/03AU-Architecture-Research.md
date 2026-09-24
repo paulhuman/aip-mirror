@@ -13,7 +13,7 @@ Previous chapter:
 03AT — Architecture & Research
 
 Status:
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
@@ -324,6 +324,31 @@ For existing-file mutations:
 READ CURRENT FILE -> minimal change -> WRITE COMPLETE FILE -> READ BACK -> VERIFY CONTENT -> INSPECT DIFF -> VERIFY SCOPE -> COMMIT -> VERIFY RESULT.
 
 Do not physically restructure the repository until the target classification has been completed and reviewed.
+
+## Bootstrap instruction for successor
+
+Initialize the next chapter as:
+
+    CURRENT_CHAPTER = 03AU
+    NEXT_CHAPTER = 03AV
+    SPECIALIZATION = 03 — Architecture & Research
+    REPOSITORY = paulhuman/aip-mirror
+    BRANCH = main
+
+Before continuing research:
+
+1. Read .ai/skills/conversation-handoff/BOOTSTRAP.md.
+2. Read .ai/skills/conversation-handoff/SKILL.md.
+3. Read the applicable .ai/rules, especially conversation-lifecycle.md, workflow.md, repository.md, and handoff-references.md.
+4. Read this handoff completely.
+5. Read .ai/architecture/03AU_ai-infrastructure-restructuring.md completely; it is the primary durable 03AU research context.
+6. Verify the repository state and the existence/readability of the referenced files.
+7. Create docs/handoffs/03AV-Architecture-Research.md with status DRAFT as part of bootstrap, then commit it according to the handoff lifecycle.
+8. After bootstrap verification, continue from the Immediate next task below. Do not restart the architectural reasoning from conversation history.
+
+The successor must preserve the current boundary: .ai is portable AI infrastructure; docs is AIP Mirror project knowledge. Do not physically move, rename, merge, split, or delete files merely because the target tree is sketched here. Complete the local inventory/classification first, then target-tree review, then independent Grok/Qwen review, and only then physical restructuring.
+
+Do not use “bootstrap kernel” as an architecture term. The current working language is “non-empty initial active context” where that concept is needed historically or descriptively.
 
 ## Recommended starting context for next chapter
 
