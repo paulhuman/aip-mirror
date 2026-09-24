@@ -498,3 +498,229 @@ Instead, each old section should either:
 - or disappear when its content is already fully represented elsewhere.
 
 That last option is important for eliminating historical duplication rather than relocating it.
+
+
+# 8. .ai/rules/repository.md
+
+## 8.1 Repository identity
+
+Current content defines the canonical AIP Mirror repository and the external Adobe Illustrator SDK repository.
+
+Classification:
+- Kind: RULE / repository identity
+- Subject: which repositories are canonical
+- Canonical owner: .ai/rules/repository.md
+- Action: KEEP
+
+This is repository infrastructure and does not belong in workflow.md or project architecture docs.
+
+## 8.2 Repository boundary: AIP Mirror vs external SDK
+
+Current content defines that the Adobe Illustrator SDK remains external and canonical and must not be copied wholesale into AIP Mirror.
+
+Classification:
+- Kind: RULE
+- Subject: repository boundary and external reference ownership
+- Canonical owner: .ai/rules/repository.md
+- Action: KEEP
+
+Related project-specific SDK usage may be documented in docs/, but the repository boundary itself belongs here.
+
+## 8.3 Repository content taxonomy
+
+Current content defines:
+- references/
+- prototypes/
+- docs/
+- .ai/
+
+Classification:
+- Kind: RULE / routing
+- Subject: repository directory ownership
+- Canonical owner: .ai/rules/repository.md, unless a more specific repository-layout document is later established
+- Action: KEEP for now
+
+Dependency:
+- docs/PROJECT-INSTRUCTIONS.md also describes project structure and may duplicate parts of this taxonomy.
+- Before moving this content, compare both documents and establish one canonical repository-layout owner.
+
+Do not create a new file merely to hold these few categories unless the comparison proves a stable independent semantic owner is needed.
+
+## 8.4 Conversation state / durable project memory
+
+Current content contains two overlapping sections:
+- “Conversation state and durable memory”
+- “Repository is the durable project memory”
+
+Classification:
+- Kind: RULE
+- Subject: repository as durable technical memory
+- Canonical owner: split by semantic scope:
+  - generic AI continuity / conversation durability → .ai/rules/handoff/lifecycle.md
+  - repository-level documentation persistence → .ai/rules/repository.md
+- Action: DE-DUPLICATE / SPLIT
+
+The repository rule should retain only the repository-facing principle:
+important technical knowledge that must survive conversations belongs in version-controlled project files.
+
+Conversation-specific migration state belongs to handoff infrastructure and should not be redefined here.
+
+The two current repository.md sections must not survive as duplicated formulations.
+
+## 8.5 Generated output and secrets
+
+Current content defines:
+- do not commit local build output;
+- do not commit secrets.
+
+Classification:
+- Kind: RULE
+- Subject: repository hygiene
+- Canonical owner: .ai/rules/repository.md
+- Action: KEEP
+
+These are concrete repository integrity rules and are not commit-message rules.
+
+The distinction is:
+- repository.md → what must not enter the repository;
+- commits.md → how to create and verify a commit.
+
+## 8.6 Commit coherence
+
+Current content has a “Keep commits coherent” rule.
+
+Classification:
+- Kind: RULE
+- Canonical owner: .ai/rules/commits.md
+- Action: REMOVE FROM repository.md
+
+This is now fully represented by the commit rules.
+
+repository.md should not repeat it.
+
+## 8.7 Traceability / decisions in documentation
+
+Current content requires important architectural decisions to be represented in repository documentation.
+
+Classification:
+- Kind: RULE
+- Canonical ownership: potentially overlaps with .ai/rules/workflow.md
+- Action: KEEP only if repository-specific; otherwise route to workflow.md
+
+Boundary:
+- workflow.md → general principle that stable decisions should be documented;
+- repository.md → repository durability/mechanics only.
+
+Avoid keeping two near-identical “document decisions” rules.
+
+## 8.8 Repository growth
+
+Current content discourages unnecessary directory trees and placeholder files.
+
+Classification:
+- Kind: RULE
+- Subject: repository structure hygiene
+- Canonical owner: .ai/rules/repository.md
+- Action: KEEP
+
+This is a repository-specific constraint and should not move into generic workflow.
+
+## 8.9 External projects
+
+Current content repeats the Adobe SDK boundary in broader terms.
+
+Classification:
+- Kind: RULE
+- Canonical owner: .ai/rules/repository.md
+- Action: MERGE with 8.2
+
+Do not preserve two versions of the same external-repository boundary.
+
+## 8.10 Repository write safety
+
+Current content defines the canonical full-content API safety sequence and integrity requirements.
+
+Classification:
+- Kind: RULE
+- Subject: repository mutation safety
+- Canonical owner: .ai/rules/repository.md
+- Action: KEEP as the sole normative sequence
+
+The sequence is:
+
+READ CURRENT FILE
+→ minimal change
+→ WRITE COMPLETE FILE
+→ READ BACK
+→ VERIFY CONTENT
+→ INSPECT DIFF
+→ VERIFY SCOPE
+→ COMMIT
+→ VERIFY RESULT
+
+Other rules may route to this section but must not reproduce it.
+
+## 8.11 Accidental aggregation summary
+
+repository.md currently contains several semantic groups:
+
+1. repository identity and external boundaries;
+2. repository directory taxonomy;
+3. durable-memory policy;
+4. repository hygiene;
+5. commit policy;
+6. documentation traceability;
+7. repository growth;
+8. write safety.
+
+The physical DECOMPOSE should not automatically create eight files.
+
+Target:
+- keep stable repository-owned rules together;
+- remove commit policy because it has a canonical owner in commits.md;
+- merge duplicate external-boundary sections;
+- eliminate duplicate durable-memory text;
+- remove workflow-level documentation duplication where appropriate;
+- retain write safety as the canonical repository mutation rule.
+
+## 8.12 Dependency direction after repository decomposition
+
+Desired routing:
+
+    workflow.md
+        ↓
+    generic development principles
+
+    commits.md
+        ↓
+    commit policy
+
+    repository.md
+        ↓
+    repository identity, layout, hygiene, and write safety
+
+    handoff/lifecycle.md
+        ↓
+    conversation lifecycle and handoff continuity
+
+    docs/
+        ↓
+    AIP Mirror project semantics
+
+repository.md may be referenced by commits.md, workflow.md, and handoff infrastructure, but should not absorb their semantic policies.
+
+## 8.13 Physical decomposition target
+
+Do not split repository.md mechanically yet.
+
+First:
+1. compare its repository taxonomy with docs/PROJECT-INSTRUCTIONS.md;
+2. identify the canonical owner for shared directory-layout facts;
+3. remove commit coherence;
+4. merge the duplicate external-repository rules;
+5. collapse the duplicate durable-memory sections;
+6. separate repository-specific traceability from generic workflow documentation;
+7. preserve write safety as the sole canonical mutation-safety sequence;
+8. then rewrite repository.md as the smallest coherent repository rule set.
+
+No new file is justified by the current map yet.
