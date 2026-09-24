@@ -451,34 +451,6 @@ AGENTS.md is the AI repository entry point.
 
 No file should become a duplicate of another.
 
-## 15. New filename convention
-
-A new working naming rule has been proposed for documents produced by a specialization/chapter.
-
-Historical style:
-
-    architectural-bottleneck-cross-audit-03AP.md
-
-New style:
-
-    03AP_architectural-bottleneck-cross-audit.md
-
-Rationale:
-- chapter/specialization identity is immediately visible;
-- files sort naturally by chapter;
-- origin is visible without reading a suffix;
-- different AI specializations can use the same descriptive title without losing provenance;
-- the convention is compact;
-- underscore is preferred as separator for now.
-
-Do not mass-rename historical files yet.
-
-Treat this as a working rule for new chapter-produced documents. Formalize it in the canonical rule set after the inventory/target-tree review.
-
-Example for this chapter:
-
-    03AU_ai-infrastructure-restructuring.md
-
 ## 16. Diagrams / working model
 
 ### Portable infrastructure
@@ -553,7 +525,6 @@ Example for this chapter:
 18. The first structural pass must classify before moving.
 19. Independent Grok/Qwen review happens after local inventory/classification and before final target-tree selection.
 20. No physical restructuring has yet been performed in this pass.
-21. New chapter-produced documents should use chapter ID as a filename prefix in the form 03AU_document-name.md, with underscore separator, pending formalization.
 22. Independent Grok and Qwen reviews have now been completed as blind semantic reviews; neither was shown our target tree.
 23. Both independent reviews independently support the core .ai versus docs ownership boundary and the treatment of handoffs as conversation state rather than project documentation.
 24. Handoff lifecycle, handoff operations, and handoff commits are distinct semantic dimensions and must not be collapsed into one model.
