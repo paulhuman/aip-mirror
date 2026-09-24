@@ -122,8 +122,8 @@ Do not duplicate this in project documentation unless a project-specific excepti
 
 ## 2.8 Testing
 Current content mixes:
-- generic testing discipline;
-- AIP Mirror geometry → behavior → Illustrator integration layering.
+- a generic testing principle;
+- an AIP Mirror-specific three-layer test model.
 
 Classification:
 - Generic principle → .ai/rules/workflow.md
@@ -132,7 +132,9 @@ Classification:
 
 Canonical boundary:
 - .ai: test at the lowest appropriate level when practical.
-- docs: what the AIP Mirror test layers actually are.
+- docs: geometry / behavior / Illustrator integration as the project's concrete test architecture.
+
+The geometry → behavior → Illustrator integration ladder is not generic AI infrastructure. It must leave workflow.md.
 
 ## 2.9 Commit discipline
 Classification:
@@ -172,19 +174,34 @@ READ CURRENT FILE
 This is repository safety, not a general workflow definition.
 
 ## 2.11 User control over commits
+Current content actually combines three distinct concerns.
+
+### A. General commit authorization
 Classification:
 - Kind: RULE
 - Canonical owner: .ai/rules/workflow.md
-- Action: KEEP, but reduce handoff-specific details to a reference.
+- Action: KEEP, but make it short and generic.
 
 Generic rule:
-- AI-assisted development commits require user authorization unless explicitly covered by an established automated workflow.
+- AI-assisted development changes are not committed automatically unless the user explicitly requests the commit or an established automated workflow authorizes it.
 
-Handoff-specific commit authorization belongs to handoff lifecycle/workflow documentation.
+This belongs to the general development workflow because it governs ordinary project work.
 
-Duplication:
-- overlaps with .ai/rules/handoff/lifecycle.md
-- overlaps with .ai/skills/commit-message/SKILL.md
+### B. Handoff commit authorization
+Classification:
+- Kind: RULE / WORKFLOW
+- Canonical owner: .ai/rules/handoff/lifecycle.md + .ai/workflows/handoff-bootstrap/BOOTSTRAP.md
+- Action: REMOVE detailed exception from workflow.md; leave only a routing reference if needed.
+
+The fact that handoff creation/checkpoint/lifecycle commits are pre-authorized is part of the handoff mechanism, not general commit discipline.
+
+### C. Commit message formulation
+Classification:
+- Kind: SKILL
+- Canonical owner: .ai/skills/commit-message/SKILL.md
+- Action: reference only.
+
+Conclusion: User control over commits stays in workflow.md only as the short general authorization rule. The handoff exception moves out completely.
 
 ## 2.12 Conversation lifecycle
 Classification:
@@ -318,9 +335,9 @@ The resulting file should remain a small generic AI workflow rule:
 4. Prefer small, reviewable changes
 5. Generic testing principle
 6. Commit discipline (short)
-7. User control over commits
+7. General user control over commits (authorization rule only)
 8. Documentation follows decisions
-9. Keep the project understandable
+9. Keep the AI workflow understandable and lightweight
 
 It should route to, rather than duplicate:
 - repository safety → .ai/rules/repository.md
@@ -343,6 +360,7 @@ This is deliberately a compact rule document, not a catalogue of every project c
 7. Handoff lifecycle, handoff operations, and commit recording remain separate semantic layers.
 8. A file may remain composite when its units share one stable semantic owner.
 9. Physical DECOMPOSE is complete only when the resulting files are smaller semantically, not merely smaller physically.
+10. Generic workflow rules must not acquire project-specific examples merely because they are useful examples.
 
 # 6. Next physical operation
 
@@ -359,3 +377,124 @@ After this map is accepted:
 9. Then decompose docs/PROJECT-INSTRUCTIONS.md.
 
 Do not perform ARCHIVE as part of this step.
+
+# 7. Dependency-graph review — second pass
+
+This pass confirms several stronger boundaries before physical DECOMPOSE.
+
+## 7.1 workflow.md is currently too project-specific
+
+The current file begins with “preferred development workflow for AIP Mirror” and then defines AIP Mirror's four specializations, JSX/native architecture, Illustrator-specific testing layers, and Project Workshop routing.
+
+That is a boundary violation for the intended .ai / docs split.
+
+After decomposition, .ai/rules/workflow.md should be reusable infrastructure. It may be used by AIP Mirror, but it should not need to know that AIP Mirror has 01, 02, 03, or 04.
+
+## 7.2 User control over commits has a clean three-way split
+
+The dependency graph is:
+
+    general commit authorization
+        → .ai/rules/workflow.md
+
+    repository content/write safety
+        → .ai/rules/repository.md
+
+    handoff commit authorization
+        → .ai/rules/handoff/lifecycle.md
+          + .ai/workflows/handoff-bootstrap/BOOTSTRAP.md
+
+    commit message construction
+        → .ai/skills/commit-message/SKILL.md
+
+This avoids making workflow.md the hub for all commit-related policy.
+
+## 7.3 Commit discipline itself should remain thin
+
+workflow.md needs only the general principle:
+
+- verify the intended change before committing;
+- keep commits coherent;
+- use the commit-message skill when needed.
+
+The full API write-safety sequence belongs exclusively to repository.md.
+
+The handoff-specific commit rules belong exclusively to handoff infrastructure.
+
+## 7.4 Testing also has a clean split
+
+The generic rule is:
+
+    test at the lowest appropriate level when practical.
+
+The concrete AIP Mirror ladder:
+
+    geometry
+       ↓
+    behavior
+       ↓
+    Illustrator integration
+
+is project architecture and belongs in docs/.
+
+This is a good example of why semantic decomposition is preferable to file splitting: one source section contains both a portable rule and a project-specific realization.
+
+## 7.5 New dependency direction
+
+The desired dependency direction after decomposition is:
+
+    .ai/rules/workflow.md
+        ↓
+    generic AI workflow principles
+
+    .ai/rules/repository.md
+        ↓
+    repository safety
+
+    .ai/rules/handoff/lifecycle.md
+        ↓
+    lifecycle invariants
+
+    .ai/skills/*
+        ↓
+    reusable capabilities
+
+    .ai/workflows/*
+        ↓
+    ordered procedures
+
+    docs/
+        ↓
+    AIP Mirror project semantics
+
+The .ai layer may route into project documentation when necessary, but project facts should not be copied back into generic .ai rules.
+
+## 7.6 New physical target for workflow.md
+
+After decomposition, workflow.md should contain approximately 9 compact principles:
+
+1. general development cycle;
+2. research before major implementation;
+3. validate behavior before declaring it final;
+4. prefer small, reviewable changes;
+5. generic testing principle;
+6. thin commit discipline;
+7. general user control over commits;
+8. documentation follows decisions;
+9. keep the AI workflow understandable and lightweight.
+
+Everything else currently in workflow.md has a more specific canonical owner.
+
+## 7.7 One more important observation
+
+The current workflow.md is not merely composite; it is acting as an accidental aggregation point for several unrelated policies.
+
+The decomposition should therefore not preserve a shortened version of every old section.
+
+Instead, each old section should either:
+
+- remain as one of the nine generic principles;
+- move to a canonical project/infrastructure owner;
+- or disappear when its content is already fully represented elsewhere.
+
+That last option is important for eliminating historical duplication rather than relocating it.
