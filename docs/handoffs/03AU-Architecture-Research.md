@@ -17,191 +17,230 @@ DRAFT
 
 ## Current objective
 
-Continue the architecture/research work from 03AT after the bounded dynamic-context experiments.
+03AU has pivoted from further MEC/semantic research to Iteration 2 of the practical AI project-instruction infrastructure.
 
-The immediate goal is to select and investigate one clearly bounded remaining uncertainty without prematurely introducing implementation architecture.
+The immediate task is to restructure the repository so that AIP Mirror documentation remains in `docs/`, while meta-agnostic AI working infrastructure moves into `.ai/`.
 
-The current working MEC model is:
+The guiding principle is:
 
-> **MEC(t) = the operationally active context at reasoning moment t that is jointly sufficient either to perform the next permissible action or to decide reliably what additional knowledge or state must be obtained next.**
+> Do not design the architecture of an imaginary AI. Design the smallest practical external infrastructure that demonstrably helps the AI work on a real project.
 
-Current meaning of minimal:
+## Key methodological decision
 
-> **the least operationally active context that is sufficient for the current reasoning step.**
+The AI's internal algorithms, memory mechanisms, context handling, and model state are treated as a black box.
 
-Do not treat the initial active context as a persistent bootstrap component.
+We should work from observable interfaces only:
 
-## Completed
+- human natural-language instructions, text, files, and links;
+- AI conversation/context available to the current chapter;
+- repository reads/writes/inspection;
+- durable files used to preserve project and workflow state.
 
-Bootstrap completed for 03AU.
+Do not infer an internal AI ontology merely because a repository artifact exists.
 
-The canonical repository/path was resolved to:
+## Current practical findings
 
-    paulhuman/aip-mirror@main
+### Handoff
 
-Required bootstrap sources were read, including the project instructions, conversation-handoff bootstrap/skill, lifecycle/workflow/repository/handoff-reference rules, the 03AT handoff, and the 03AT MEC research document.
+The handoff mechanism exists because we practically needed a file in which the state of work could be recorded before closing a conversation.
 
-03AT's three bounded experiments are accepted as the starting research state:
+Therefore handoff is evidence of a practical workflow need, not evidence of a fundamental memory ontology.
 
-1. Dynamic Context Activation.
-2. Bootstrap vs Routing / Interface.
-3. Bootstrap Kernel vs MEC.
+### Conversation limit
 
-The resulting model treats retrieval/discovery as a transition or reasoning operation rather than proof of a routing layer.
+Through repeated use across the current 03A-series, the practical reliability boundary has been established at approximately:
 
-The hypothesis of a semantic `bootstrap kernel` has been rejected. The surviving concept is only:
+- 30 conversation turns/chats, and/or
+- ~2500 total text across posts,
 
-    non-empty initial active context
+for the current Free-plan/current-model environment.
 
-The initial active context is a temporal/functional condition and does not have permanent semantic privilege.
+Near this length, reliability degradation has repeatedly appeared. One concrete example was miscounting 8 old-format handoff files as 7.
 
-## Current implementation state
+Treat this as a real project operational limit, not a universal claim about the model.
 
-No implementation architecture has been introduced by this chapter.
+Prefer shorter chapters and earlier handoffs. Deliberately re-read critical instructions during longer chapters.
 
-No registry, router, manifest, capability-ID system, universal metadata schema, `.ai/memory/`, or `docs/meta/permanent/` / `docs/meta/temporary/` structure is justified by the current research.
+## Iteration 2 repository direction
 
-No implementation work is part of the immediate task.
+`docs/` should contain AIP Mirror documentation:
 
-## Decisions
+- product architecture;
+- implementation/design;
+- Illustrator/FreeHand research;
+- specifications;
+- validated behavior;
+- project decisions;
+- project references.
 
-Current research findings, not final Architecture Decisions:
+`.ai/` should contain AI working infrastructure:
 
-- MEC is modeled as dynamic operational context rather than a static package.
-- Minimality is moment-relative, task/reasoning-relative, and sufficiency-relative.
-- The current reasoning step may itself be finding/retrieval/activation rather than execution.
-- Available knowledge and active context need not coincide.
-- Active context may be replaced, reduced, or reorganized over time.
-- Routing is currently treated as a retrieval/activation transition, not a semantic layer.
-- No separate bootstrap kernel is to be introduced.
-- `non-empty initial active context` is retained only as a condition required to begin reasoning.
-- Applicability is currently best treated as a runtime reasoning result that may be refined as additional knowledge is obtained.
-- Current project state remains distinct from instruction knowledge.
+- rules;
+- skills;
+- workflows;
+- central index;
+- handoff state;
+- small operational metadata.
 
-## Open questions
+Practical classification rule:
 
-The next bounded uncertainty must be selected explicitly before generating more examples.
+> If the primary subject is how AI should work with the project, it belongs in `.ai/`. If the primary subject is what AIP Mirror is or how it works, it belongs in `docs/`.
 
-Current candidates:
+## Important target: `.ai` index
 
-1. minimum information required for capability description;
-2. minimum information required for local applicability determination;
-3. interaction of dynamic context with Dependency target/consequence semantics;
-4. interaction with Authority / Precedence;
-5. failure boundary when required knowledge/state cannot be obtained.
+Iteration 2 should introduce one central index answering:
 
-The selected question must remove a specific uncertainty rather than merely generate additional examples.
+> What operations are available, when should they be used, and where is the exact instruction for performing them?
 
-## Current files
+The future index should list at least:
 
-Primary current research:
-- docs/handoffs/03AT-Architecture-Research.md
-- docs/architecture/mec-dynamic-context-03AT.md
+- stable operation/command IDs;
+- simple command syntax;
+- short descriptions;
+- applicability/trigger conditions;
+- exact rule/skill/workflow locations;
+- section/fragment targets where practical.
 
-Historical MEC context:
-- docs/architecture/minimal-execution-context-03AS.md
-- docs/architecture/constraint-problem-map-03AS.md
-- docs/handoffs/03AS-Architecture-Research.md
+The exact format and command syntax are not yet decided.
 
-Bootstrap/workflow:
-- docs/PROJECT-INSTRUCTIONS.md
-- .ai/skills/conversation-handoff/BOOTSTRAP.md
-- .ai/skills/conversation-handoff/SKILL.md
-- .ai/skills/commit-message/SKILL.md
-- .ai/rules/conversation-lifecycle.md
-- .ai/rules/workflow.md
-- .ai/rules/repository.md
-- .ai/rules/handoff-references.md
+## Command design
 
-Independent reviews, only when directly useful:
-- docs/handoffs/06AA-Independent-Review-Grok.md
-- docs/handoffs/05AE-Independent-Review-Qwen.md
+The future command vocabulary should remain small and simple.
 
-## Relevant references
+Candidate operations include:
 
-The 03AT MEC research document is the primary current semantic checkpoint.
+- initialize/bootstrap;
+- read or refresh instructions;
+- inspect state;
+- create/update handoff;
+- migrate chapter;
+- verify repository state;
+- consistency check.
 
-The 03AS architecture documents provide historical context only and should not be reread wholesale unless the selected bounded question requires them.
+These are candidates only.
 
-Grok/Qwen material is evidence for counterargument and challenge, not authority.
+Low-risk choices such as command naming, syntax, ID conventions, index layout, file naming, and document granularity should be proposed independently by Grok and Qwen in future work. Their proposals are alternatives for comparison, not authority.
 
-## Important constraints
+## Bootstrap / re-read policy
 
-- Do not reintroduce `bootstrap kernel` as an architectural term.
-- Do not infer a routing layer, discovery metadata layer, interface/payload ontology, evaluative-surface ontology, registry, router, manifest, capability IDs, or universal metadata schema without new evidence.
-- Do not create `.ai/memory/`, `docs/meta/permanent/`, or `docs/meta/temporary/`.
-- Do not prematurely turn the dynamic-context model into implementation architecture.
-- Do not continue applicability research merely by inventing more examples.
-- If a new bounded test is needed, state exactly which uncertainty it is intended to remove first.
-- Preserve the distinction between observed facts, inferences, assumptions, specifications, and implementation details.
-- The human remains the final architecture decision-maker.
-- Repository state is the durable project memory.
+Bootstrap should read compact initial context:
+
+1. project instructions required for the chapter;
+2. `.ai` index;
+3. relevant bootstrap/lifecycle instructions;
+4. current handoff;
+5. only project documents needed for the specialization.
+
+Do not require full reading of every rule and skill.
+
+During longer chapters, re-read critical instructions:
+
+- after substantial work;
+- before high-risk repository operations;
+- when switching workflows;
+- near checkpoints;
+- whenever the user requests it.
+
+## Earlier semantic research
+
+The MEC/dynamic-context work from 03AT remains historical context.
+
+Useful surviving observation:
+
+> Active context is dynamic and may change during work.
+
+Do not continue the old semantic program merely because open questions remain.
+
+Do not reintroduce `bootstrap kernel` as an architectural term.
+
+Do not infer routing layers, discovery metadata, registries, routers, manifests, capability IDs, universal metadata schemas, dependency engines, precedence engines, or graph architectures without concrete evidence from practical work.
+
+## Current file updated
+
+`docs/architecture/ai-project-instruction-architecture.md` has been rewritten as the Iteration 2 working architecture.
+
+It now explicitly:
+
+- treats internal AI behavior as a black box;
+- grounds the architecture in observable workflow;
+- establishes the `docs/` versus `.ai/` boundary;
+- records the empirical conversation limit;
+- introduces the central-index direction;
+- leaves command syntax open;
+- delegates low-risk organizational design to Grok/Qwen;
+- treats earlier semantic research as historical rather than as a filesystem blueprint.
+
+## Immediate next task
+
+Perform an inventory/classification pass of the current `.ai/`, `docs/`, and especially `docs/architecture/`.
+
+Do not move or delete files yet.
+
+First produce a target structure and identify:
+
+- files that clearly belong in `.ai/`;
+- files that clearly remain in `docs/`;
+- duplicated instruction text;
+- oversized files suitable for splitting;
+- places where stable section/fragment IDs are preferable to additional files;
+- candidate operations for the central index.
+
+Then obtain Grok/Qwen alternatives for low-risk organization, naming, index format, and command syntax before choosing.
+
+## Things not to redo
+
+Do not restart the 03AS/03AT MEC bounded experiments merely because this chapter changed direction.
+
+Do not attempt to prove a universal AI memory model.
+
+Do not turn existing repository artifacts into evidence of hidden semantic layers.
+
+Do not try to make Iteration 2 perfect in one pass.
+
+## Repository safety
+
+Any existing-file mutation must follow:
+
+READ CURRENT FILE → minimal change → WRITE COMPLETE FILE → READ BACK → VERIFY CONTENT → INSPECT DIFF → VERIFY SCOPE → COMMIT → VERIFY RESULT.
 
 ## Evidence / confidence
 
 ### Confirmed / observed
 
-- Canonical repository: paulhuman/aip-mirror.
-- Canonical branch: main.
-- 03AT is `READY_FOR_HANDOFF` and is the immediate predecessor.
-- 03AT completed the three bounded experiments described above.
-- Dynamic operational activation is the current supported simplification.
-- A semantic bootstrap kernel was not established and is rejected as an architectural entity.
-- `non-empty initial active context` remains a necessary initial condition.
-- MEC minimality is currently interpreted as least sufficient active context for the current reasoning step.
-- No implementation artifact listed in the constraints has been justified.
+- 03AU is the current Architecture & Research chapter.
+- The practical handoff mechanism emerged from the need to preserve state across conversations.
+- Long chapters have repeatedly produced concrete reliability errors near the observed boundary.
+- The current architecture document has been rewritten for Iteration 2.
+- Grok/Qwen are to be used as independent proposal sources for low-risk organizational design.
 
 ### Inferred
 
-- The remaining high-leverage uncertainty lies in the boundary of what information must be active or obtainable for a particular reasoning step.
-- A bounded test around capability/applicability, dependency semantics, authority/precedence, or unavailable knowledge may further sharpen MEC without adding architectural entities.
-
-### Assumed / unverified
-
-- Which of the remaining candidates will provide the highest information gain.
-- Whether the final MEC definition should explicitly include the ability to determine what must be obtained next.
-- Whether Dependency or Authority/Precedence semantics materially alter the dynamic-context model.
+- `.ai/` is the natural home for meta-agnostic AI working infrastructure.
+- A central index can reduce repeated full-document reads if it can point to exact instruction fragments.
+- Smaller chapters plus explicit handoffs are preferable to relying on very long conversation context.
 
 ### Open
 
-- Exact final MEC formulation.
-- Exact minimum information required for selected capability/applicability or constraint semantics.
-- Failure boundary when required knowledge/state cannot be obtained.
-
-## Last completed task
-
-03AT completed the bounded dynamic-context research and rejected the bootstrap-kernel hypothesis as a distinct semantic component.
-
-## Immediate next task
-
-Select one bounded uncertainty from the current frontier, state precisely what uncertainty it is intended to remove, and perform that research without introducing implementation structure.
-
-## Things not to redo
-
-Do not repeat:
-
-- the 03AS applicability surface test;
-- the Grok/Qwen review of that test;
-- the applicability-as-runtime-reasoning follow-up;
-- the 03AT dynamic context activation experiment;
-- the 03AT bootstrap/routing-interface experiment;
-- the 03AT bootstrap-kernel experiment;
-- earlier 03A-series semantic-trace work.
-
-Use the existing research findings as premises unless the selected bounded question directly requires challenging one.
+- exact `.ai/` target tree;
+- exact files to move from `docs/`;
+- exact index representation;
+- exact operation IDs;
+- exact command syntax;
+- file-versus-fragment granularity;
+- which old instruction text is redundant or obsolete.
 
 ## Recommended starting context for next chapter
 
-For future migration, start with this handoff plus:
+Start with:
 
-1. docs/PROJECT-INSTRUCTIONS.md
-2. .ai/skills/conversation-handoff/BOOTSTRAP.md
-3. .ai/skills/conversation-handoff/SKILL.md
-4. .ai/rules/conversation-lifecycle.md
-5. .ai/rules/workflow.md
-6. .ai/rules/repository.md
-7. .ai/rules/handoff-references.md
-8. docs/handoffs/03AU-Architecture-Research.md
-9. docs/architecture/mec-dynamic-context-03AT.md
+1. `docs/PROJECT-INSTRUCTIONS.md`;
+2. `.ai/skills/conversation-handoff/BOOTSTRAP.md`;
+3. `.ai/skills/conversation-handoff/SKILL.md`;
+4. `.ai/rules/conversation-lifecycle.md`;
+5. `.ai/rules/workflow.md`;
+6. `.ai/rules/repository.md`;
+7. `.ai/rules/handoff-references.md`;
+8. this handoff;
+9. `docs/architecture/ai-project-instruction-architecture.md`.
 
-Then inspect historical 03AS material or independent review material only when required by the selected bounded research question.
+Then inventory the repository before proposing structural changes.
