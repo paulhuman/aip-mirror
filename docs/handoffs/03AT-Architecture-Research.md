@@ -13,7 +13,7 @@ Previous chapter:
 03AS — Architecture & Research
 
 Status:
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
