@@ -17,230 +17,325 @@ DRAFT
 
 ## Current objective
 
-03AU has pivoted from further MEC/semantic research to Iteration 2 of the practical AI project-instruction infrastructure.
+Continue Iteration 2 of the practical AI project-instruction infrastructure.
 
-The immediate task is to restructure the repository so that AIP Mirror documentation remains in `docs/`, while meta-agnostic AI working infrastructure moves into `.ai/`.
+The immediate goal is to finish a local inventory/classification of the existing .ai/ and docs/ structure before any physical restructuring.
 
-The guiding principle is:
+The central working boundary is:
 
-> Do not design the architecture of an imaginary AI. Design the smallest practical external infrastructure that demonstrably helps the AI work on a real project.
+> If the primary subject is how AI should work with the project, it belongs in .ai/. If the primary subject is what AIP Mirror is or how it works, it belongs in docs/.
 
-## Key methodological decision
+## Major architectural decisions reached in 03AU
 
-The AI's internal algorithms, memory mechanisms, context handling, and model state are treated as a black box.
+### .ai is portable AI infrastructure
 
-We should work from observable interfaces only:
+The .ai directory should be reusable when the repository is adapted to another project.
 
-- human natural-language instructions, text, files, and links;
-- AI conversation/context available to the current chapter;
-- repository reads/writes/inspection;
-- durable files used to preserve project and workflow state.
+Project-specific material must not be embedded in supposedly generic .ai files.
 
-Do not infer an internal AI ontology merely because a repository artifact exists.
+When .ai is migrated to another project:
+- reusable infrastructure remains;
+- current project handoffs can be removed/cleared;
+- archive can be cleared or selectively retained;
+- the new project's docs/ is populated independently.
 
-## Current practical findings
+This explains why several current .ai files are now recognized as misclassified: they describe AIP Mirror itself.
 
-### Handoff
+### docs is project knowledge
 
-The handoff mechanism exists because we practically needed a file in which the state of work could be recorded before closing a conversation.
-
-Therefore handoff is evidence of a practical workflow need, not evidence of a fundamental memory ontology.
-
-### Conversation limit
-
-Through repeated use across the current 03A-series, the practical reliability boundary has been established at approximately:
-
-- 30 conversation turns/chats, and/or
-- ~2500 total text across posts,
-
-for the current Free-plan/current-model environment.
-
-Near this length, reliability degradation has repeatedly appeared. One concrete example was miscounting 8 old-format handoff files as 7.
-
-Treat this as a real project operational limit, not a universal claim about the model.
-
-Prefer shorter chapters and earlier handoffs. Deliberately re-read critical instructions during longer chapters.
-
-## Iteration 2 repository direction
-
-`docs/` should contain AIP Mirror documentation:
-
-- product architecture;
+docs/ contains AIP Mirror-specific:
+- architecture;
 - implementation/design;
 - Illustrator/FreeHand research;
 - specifications;
 - validated behavior;
 - project decisions;
-- project references.
+- project-specific development knowledge.
 
-`.ai/` should contain AI working infrastructure:
+Root references/ remains AIP Mirror-specific and is not part of this .ai restructuring.
 
-- rules;
-- skills;
-- workflows;
-- central index;
-- handoff state;
-- small operational metadata.
+### .ai/architecture exists conceptually
 
-Practical classification rule:
+A new .ai/architecture/ area is now accepted.
 
-> If the primary subject is how AI should work with the project, it belongs in `.ai/`. If the primary subject is what AIP Mirror is or how it works, it belongs in `docs/`.
+Exact subfolders and exact filenames remain open.
 
-## Important target: `.ai` index
+Historical AI-infrastructure research will likely move into .ai/archive/.
 
-Iteration 2 should introduce one central index answering:
+### Handoffs
 
-> What operations are available, when should they be used, and where is the exact instruction for performing them?
+docs/handoffs/ is AI conversation state, not AIP Mirror project documentation.
 
-The future index should list at least:
+The likely target is:
 
-- stable operation/command IDs;
-- simple command syntax;
-- short descriptions;
-- applicability/trigger conditions;
-- exact rule/skill/workflow locations;
-- section/fragment targets where practical.
+    docs/handoffs/
+        -> .ai/handoffs/
 
-The exact format and command syntax are not yet decided.
+This is a target decision, not yet a physical move.
 
-## Command design
+### Shorter handoff/skill naming
 
-The future command vocabulary should remain small and simple.
+The current folder:
 
-Candidate operations include:
+    .ai/skills/conversation-handoff/
 
-- initialize/bootstrap;
-- read or refresh instructions;
-- inspect state;
-- create/update handoff;
-- migrate chapter;
-- verify repository state;
-- consistency check.
+is considered unnecessarily verbose.
 
-These are candidates only.
+Working target:
 
-Low-risk choices such as command naming, syntax, ID conventions, index layout, file naming, and document granularity should be proposed independently by Grok and Qwen in future work. Their proposals are alternatives for comparison, not authority.
+    .ai/skills/handoff/
 
-## Bootstrap / re-read policy
+Likewise:
 
-Bootstrap should read compact initial context:
+    .ai/rules/conversation-lifecycle.md
+        -> .ai/rules/handoff/lifecycle.md
 
-1. project instructions required for the chapter;
-2. `.ai` index;
-3. relevant bootstrap/lifecycle instructions;
-4. current handoff;
-5. only project documents needed for the specialization.
+and:
 
-Do not require full reading of every rule and skill.
+    .ai/rules/handoff-references.md
+        -> .ai/rules/handoff/references.md
 
-During longer chapters, re-read critical instructions:
+No physical move has been made yet.
 
-- after substantial work;
-- before high-risk repository operations;
-- when switching workflows;
-- near checkpoints;
-- whenever the user requests it.
+## Repository entry points
 
-## Earlier semantic research
+Three distinct roles are now the working model:
 
-The MEC/dynamic-context work from 03AT remains historical context.
+    README.md
+        -> human-facing repository introduction
 
-Useful surviving observation:
+    AGENTS.md
+        -> small AI repository entry point
 
-> Active context is dynamic and may change during work.
+    .ai/INDEX.md
+        -> operational map of AI infrastructure
 
-Do not continue the old semantic program merely because open questions remain.
+AGENTS.md must not become a copy of .ai/INDEX.md.
 
-Do not reintroduce `bootstrap kernel` as an architectural term.
+No nested AGENTS.md is currently needed.
 
-Do not infer routing layers, discovery metadata, registries, routers, manifests, capability IDs, universal metadata schemas, dependency engines, precedence engines, or graph architectures without concrete evidence from practical work.
+The root README.md is currently empty, so there is no historical content that must be preserved there.
 
-## Current file updated
+## docs/PROJECT-INSTRUCTIONS.md
 
-`docs/architecture/ai-project-instruction-architecture.md` has been rewritten as the Iteration 2 working architecture.
+Do not move or rename this file yet.
 
-It now explicitly:
+It is mixed and likely needs decomposition:
 
-- treats internal AI behavior as a black box;
-- grounds the architecture in observable workflow;
-- establishes the `docs/` versus `.ai/` boundary;
-- records the empirical conversation limit;
-- introduces the central-index direction;
-- leaves command syntax open;
-- delegates low-risk organizational design to Grok/Qwen;
-- treats earlier semantic research as historical rather than as a filesystem blueprint.
+    docs/PROJECT-INSTRUCTIONS.md
+        |
+        +-- AIP Mirror project knowledge -> docs/...
+        +-- AI infrastructure -> .ai/...
+        +-- repository entry point -> AGENTS.md
+
+Whether a reduced PROJECT-INSTRUCTIONS.md survives is still open.
+
+## Important classification findings
+
+### Clearly project-specific and therefore not portable .ai
+
+.ai/rules/project-architecture.md describes AIP Mirror architecture, including JSX/native boundaries, C++/AIP, geometry, FreeHand behavior, CEP/UXP, and AIP Mirror specializations.
+
+Working target:
+
+    docs/architecture/...
+
+It should not remain a generic .ai rule.
+
+.ai/rules/workflow.md is also substantially AIP Mirror-specific. It contains the AIP Mirror development cycle, four specializations, chapter numbering, and Workshop boundaries.
+
+It likely requires decomposition into project documentation plus any genuinely generic AI workflow material.
+
+.ai/rules/repository.md mixes project-specific repository facts with AI working behavior and requires content-level decomposition.
+
+### Clearly .ai infrastructure
+
+docs/architecture/ai-project-instruction-architecture.md is AI infrastructure architecture and belongs conceptually under:
+
+    .ai/architecture/...
+
+The exact name remains open.
+
+docs/architecture/independent-review-deepseek-onboarding.md
+docs/architecture/independent-review-grok-onboarding.md
+docs/architecture/independent-review-qwen-onboarding.md
+
+are AI onboarding/workflow material and are candidates for:
+
+    .ai/workflows/independent-review/...
+
+### Historical .ai research
+
+The following are strong .ai/archive candidates:
+
+- architectural-bottleneck-audit-03AP.md
+- architectural-bottleneck-cross-audit-03AP.md
+- c-13-authority-vs-effective-outcome-03AP.md
+- c-14-override-semantic-dimension-03AP.md
+- constraint-problem-map-03AS.md
+- intentional-acceptance-audit-03AP.md
+- mec-dynamic-context-03AT.md
+- minimal-execution-context-03AS.md
+- post-c-13-architectural-leverage-audit-03AP.md
+- prerequisite-dependency-semantics.md
+- semantic-source-authority-audit-03AP.md
+
+Reason: these primarily concern abstract AI/project-instruction infrastructure rather than AIP Mirror product architecture.
+
+MEC remains historical. Do not reintroduce "bootstrap kernel" as an architecture term.
+
+## New filename convention
+
+A new working naming rule was proposed for documents produced by a specialization/chapter.
+
+Old style:
+
+    architectural-bottleneck-cross-audit-03AP.md
+
+New style:
+
+    03AP_architectural-bottleneck-cross-audit.md
+
+For 03AU:
+
+    03AU_document-name.md
+
+Reason:
+- chapter identity is immediately visible;
+- files sort naturally by chapter;
+- provenance is visible without a suffix;
+- underscore is preferred for now.
+
+Do not mass-rename historical files yet.
+
+Treat this as a working rule for new chapter-produced documents. Formalize it in the canonical rule set after the inventory/target-tree review.
+
+## Durable working material
+
+The accumulated restructuring work has been preserved in:
+
+    .ai/architecture/03AU_ai-infrastructure-restructuring.md
+
+This file contains the working hypotheses, diagrams, classification findings, target-tree sketches, naming proposal, accepted decisions, open questions, and next work package.
+
+It was created and committed during 03AU.
+
+## Current target-tree hypothesis
+
+Conceptually:
+
+    .ai/
+    +-- INDEX.md
+    +-- rules/
+    |   +-- handoff/
+    |   +-- repository/
+    |   +-- ...
+    +-- skills/
+    |   +-- handoff/
+    |   +-- commit-message/
+    |   +-- deep-understanding/
+    |   +-- ...
+    +-- workflows/
+    |   +-- handoff-bootstrap/
+    |   +-- independent-review/
+    |   +-- ...
+    +-- references/
+    +-- handoffs/
+    +-- architecture/
+    +-- archive/
+
+This is not the final tree.
+
+## What has actually changed in the repository during this chapter
+
+No existing project files were moved or deleted.
+
+Created:
+
+    .ai/architecture/03AU_ai-infrastructure-restructuring.md
+
+Commit:
+
+    1dbee551106f398d18efc53ddd4e756b9facb83c
+
+The new file was read back from GitHub after creation and verified to contain the preserved working material.
 
 ## Immediate next task
 
-Perform an inventory/classification pass of the current `.ai/`, `docs/`, and especially `docs/architecture/`.
+Do not jump to Grok/Qwen review yet.
 
-Do not move or delete files yet.
+Finish the local inventory/classification first.
 
-First produce a target structure and identify:
+For every relevant existing document, classify:
 
-- files that clearly belong in `.ai/`;
-- files that clearly remain in `docs/`;
-- duplicated instruction text;
-- oversized files suitable for splitting;
-- places where stable section/fragment IDs are preferable to additional files;
-- candidate operations for the central index.
+    KEEP
+    MOVE
+    DECOMPOSE
+    ARCHIVE
 
-Then obtain Grok/Qwen alternatives for low-risk organization, naming, index format, and command syntax before choosing.
+Record:
+- current path;
+- primary subject;
+- type;
+- target layer;
+- current problem;
+- proposed action;
+- unresolved question.
 
-## Things not to redo
+Priority:
 
-Do not restart the 03AS/03AT MEC bounded experiments merely because this chapter changed direction.
+1. all .ai/rules/
+2. all .ai/skills/
+3. docs/PROJECT-INSTRUCTIONS.md
+4. all docs/architecture/
+5. all docs/handoffs/
+6. README.md
+7. planned AGENTS.md
 
-Do not attempt to prove a universal AI memory model.
+Then:
 
-Do not turn existing repository artifacts into evidence of hidden semantic layers.
+1. produce the first complete target tree;
+2. identify decomposition/merge/split operations;
+3. preserve the chapter-prefix naming proposal;
+4. obtain independent Grok and Qwen alternatives;
+5. compare them;
+6. only then perform physical moves/merges/splits.
 
-Do not try to make Iteration 2 perfect in one pass.
+## Open questions
+
+Do not silently resolve:
+- exact .ai/architecture taxonomy;
+- exact architecture filenames;
+- exact rules/skills/workflows taxonomy;
+- exact AGENTS.md contents;
+- exact README.md contents;
+- exact .ai/INDEX.md format;
+- command syntax and operation IDs;
+- section/fragment ID conventions;
+- exact split of .ai/rules/repository.md;
+- exact split of .ai/rules/workflow.md;
+- whether docs/PROJECT-INSTRUCTIONS.md survives in reduced form;
+- whether historical files should later be renamed to the chapter-prefix convention.
 
 ## Repository safety
 
-Any existing-file mutation must follow:
+For existing-file mutations:
 
-READ CURRENT FILE → minimal change → WRITE COMPLETE FILE → READ BACK → VERIFY CONTENT → INSPECT DIFF → VERIFY SCOPE → COMMIT → VERIFY RESULT.
+READ CURRENT FILE -> minimal change -> WRITE COMPLETE FILE -> READ BACK -> VERIFY CONTENT -> INSPECT DIFF -> VERIFY SCOPE -> COMMIT -> VERIFY RESULT.
 
-## Evidence / confidence
-
-### Confirmed / observed
-
-- 03AU is the current Architecture & Research chapter.
-- The practical handoff mechanism emerged from the need to preserve state across conversations.
-- Long chapters have repeatedly produced concrete reliability errors near the observed boundary.
-- The current architecture document has been rewritten for Iteration 2.
-- Grok/Qwen are to be used as independent proposal sources for low-risk organizational design.
-
-### Inferred
-
-- `.ai/` is the natural home for meta-agnostic AI working infrastructure.
-- A central index can reduce repeated full-document reads if it can point to exact instruction fragments.
-- Smaller chapters plus explicit handoffs are preferable to relying on very long conversation context.
-
-### Open
-
-- exact `.ai/` target tree;
-- exact files to move from `docs/`;
-- exact index representation;
-- exact operation IDs;
-- exact command syntax;
-- file-versus-fragment granularity;
-- which old instruction text is redundant or obsolete.
+Do not physically restructure the repository until the target classification has been completed and reviewed.
 
 ## Recommended starting context for next chapter
 
-Start with:
+1. .ai/architecture/03AU_ai-infrastructure-restructuring.md
+2. this handoff
+3. docs/PROJECT-INSTRUCTIONS.md
+4. .ai/skills/conversation-handoff/BOOTSTRAP.md
+5. .ai/skills/conversation-handoff/SKILL.md
+6. .ai/rules/conversation-lifecycle.md
+7. .ai/rules/workflow.md
+8. .ai/rules/repository.md
+9. .ai/rules/handoff-references.md
+10. docs/architecture/ai-project-instruction-architecture.md
 
-1. `docs/PROJECT-INSTRUCTIONS.md`;
-2. `.ai/skills/conversation-handoff/BOOTSTRAP.md`;
-3. `.ai/skills/conversation-handoff/SKILL.md`;
-4. `.ai/rules/conversation-lifecycle.md`;
-5. `.ai/rules/workflow.md`;
-6. `.ai/rules/repository.md`;
-7. `.ai/rules/handoff-references.md`;
-8. this handoff;
-9. `docs/architecture/ai-project-instruction-architecture.md`.
-
-Then inventory the repository before proposing structural changes.
+The new architecture working file should be treated as the main preserved 03AU research context; do not rely on conversation history to reconstruct the restructuring reasoning.
