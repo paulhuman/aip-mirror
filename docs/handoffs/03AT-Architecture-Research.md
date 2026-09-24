@@ -64,6 +64,105 @@ Current research findings, not final Architecture Decisions:
 - The earlier distinction between capability discovery, applicability, and execution remains useful as a functional distinction, not as proof of three persistent artefacts or a mandatory pipeline.
 - Minimal execution context is action-relative and must not be equated with minimum text or a universal instruction package.
 
+## 03AT bounded experiment results
+
+### Dynamic Context Activation
+
+The runtime-reasoning model is strongly supported as a unifying semantic description of P-01/P-02/P-03 and MEC.
+
+Current working interpretation:
+
+> **MEC(t) is the operationally active context at reasoning moment t that is jointly sufficient for the current reasoning step.**
+
+The current reasoning step may be execution or deciding what additional knowledge/state must be obtained next.
+
+Available knowledge and operationally active context need not coincide. Knowledge may remain durably available while dormant. Activation changes operationally active context without implying information loss.
+
+### Bootstrap vs Routing / Interface
+
+The experiment separated:
+
+- Claim A — non-empty initial active context is required;
+- Claim B — bounded discovery requires some accessible information about what is relevant;
+- Claim C — that information must be a separate routing/interface semantic layer.
+
+Claim A is supported. Claim B is supported functionally. Claim C is not established.
+
+Routing is best treated as a retrieval/activation transition rather than an architectural object:
+
+    available knowledge
+            ↓
+           find
+            ↓
+         activate
+
+A physical index may later assist this transition in implementation, but that does not establish a semantic routing layer.
+
+Interface/payload and evaluative-surface distinctions remain useful interpretations of compactness and activation cost, but are not established ontological categories.
+
+### Bootstrap Kernel vs MEC
+
+The third experiment falsified the hypothesis that a bootstrap kernel is a semantically distinct or permanent component of MEC.
+
+Both independent reviews converged on:
+
+- a reasoning process requires some non-empty initial active context;
+- the initial active set may later become dormant;
+- its role may be performed by other ordinary active knowledge;
+- no unique semantic property distinguishes its contents from ordinary active knowledge;
+- initial context may contain durable knowledge, observed state, or ephemeral reasoning state.
+
+Therefore **bootstrap kernel is no longer an architectural term**. It is retained only as a historical label for the rejected hypothesis.
+
+The surviving concept is:
+
+> **non-empty initial active context**
+
+This is a temporal/functional condition, not a semantic category.
+
+The initial active set need not persist or monotonically expand:
+
+    MEC(t₀) → MEC(t₁) → MEC(t₂)
+
+does not imply:
+
+    MEC(t₀) ⊂ MEC(t₁) ⊂ MEC(t₂)
+
+Active context may be replaced, reduced, or reorganized.
+
+### Current meaning of “minimal”
+
+The experiments do not support minimal as minimum text, a static package, a permanent kernel, or a universal knowledge set.
+
+Current working interpretation:
+
+> **minimal = the least operationally active context that is sufficient for the current reasoning step.**
+
+Minimality is therefore moment-relative, task/reasoning-relative, and sufficiency-relative.
+
+Non-empty is necessary for an initial reasoning context, but non-empty alone is not sufficient for MEC; sufficiency remains essential.
+
+### Semantic reduction
+
+The experiments do not justify introducing the following as mandatory semantic architecture:
+
+- bootstrap kernel;
+- routing layer;
+- discovery metadata category;
+- interface/payload ontology;
+- evaluative-surface ontology;
+- registry;
+- router;
+- manifest;
+- capability IDs;
+- universal metadata schema;
+- .ai/memory/;
+- new docs/meta/permanent/ / temporary/ boundaries.
+
+Detailed findings are recorded in:
+
+- docs/architecture/mec-dynamic-context-03AT.md
+
 ## Open questions
 
 ### P-01 — Knowledge vs Execution Context
@@ -175,7 +274,11 @@ These are evidence/reference inputs; they do not override 03 architectural decis
 
 ## Immediate next task
 
-Analyze the consequences of the runtime-reasoning model for MEC, P-01, P-02, and P-03, beginning with the meaning of "minimal".
+Receiving chapter 03AU should bootstrap from this handoff and continue from the reduced dynamic-context model.
+
+The runtime-reasoning consequences for MEC/P-01/P-02/P-03 and the bootstrap-kernel hypothesis have now been bounded. Do not reintroduce bootstrap kernel as an architectural entity.
+
+Next research should target one clearly bounded remaining uncertainty, with particular candidates being minimum information for capability description/applicability or interaction with Dependency/Authority/Precedence semantics.
 
 Do not begin with implementation structure.
 
