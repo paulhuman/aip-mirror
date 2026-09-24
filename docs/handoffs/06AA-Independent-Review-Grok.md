@@ -13,7 +13,7 @@ Previous chapter:
 N/A
 
 Status:
-READY_FOR_HANDOFF
+HANDED_OFF
 
 ## Current objective
 
@@ -40,26 +40,31 @@ Grok is an independent external reviewer only.
 These are independent review findings, not Architecture Decisions.
 
 ### From Independent Baseline
+
 - C-11 mapping and C-12 cycle results are bounded research findings, not frozen ADs.
 - Mapping is semantically consequential and informationally necessary for certain consumers, but ontologically unresolved.
 - No formal AD has been promoted from recent dependency research.
 
 ### From Dependency ↔ Resolution Stress Test
-- Uncertainty of Resolution blocks *full* uniform formalization of Dependency, but does not block useful target-specific work.
+
+- Uncertainty of Resolution blocks _full_ uniform formalization of Dependency, but does not block useful target-specific work.
 - Coupling is asymmetric: stronger for effective-outcome targets than for authority-standing targets.
 - prerequisite-dependency-semantics.md remains largely alive; its strongest distinctions survived later arcs.
 
 ### From Bottleneck Audit
+
 - Highest-severity blockages for further formalization sit at Authority/Precedence interactions with Dependency targets and at effective-outcome Resolution coupling.
 - Mapping and Representation/Interpretation produce more localized blockages.
 
 ### From Post A/B/C Review
+
 - Capability discovery, applicability determination, and execution are coherent functional distinctions on the tested surface.
 - They do **not** establish a physical global index, registry, router, manifest, command syntax, capability IDs, or universal metadata schema.
 - Strongest counterargument: when capability existence itself is state-dependent, discovery and applicability can collapse toward the same state inspection.
 - Minimal correction proposed: treat state-dependent capabilities as conditionally discoverable.
 
 ### From Dynamic Context Activation
+
 - Hypothesis partially supported: P-01/P-02/P-03 can largely be re-described as aspects of dynamic operational activation of available knowledge.
 - Residual distinctions that survive falsification:
   - Fresh **observed project state** is not activatable instruction knowledge.
@@ -87,15 +92,18 @@ These are independent review findings, not Architecture Decisions.
 ## Current files / relevant references
 
 ### Repository identity
+
 - Canonical: `paulhuman/aip-mirror@main`
 
 ### Primary current architecture research (as of end of 06AA)
+
 - `docs/handoffs/03AT-Architecture-Research.md` (current 03 frontier at time of this handoff)
 - `docs/handoffs/03AS-Architecture-Research.md`
 - `docs/architecture/constraint-problem-map-03AS.md`
 - `docs/architecture/minimal-execution-context-03AS.md`
 
 ### Project rules / skills (read during chapter)
+
 - `docs/PROJECT-INSTRUCTIONS.md`
 - `.ai/rules/conversation-lifecycle.md`
 - `.ai/rules/workflow.md`
@@ -108,6 +116,7 @@ These are independent review findings, not Architecture Decisions.
 - `docs/architecture/independent-review-grok-onboarding.md`
 
 ### Historical / selective
+
 - `docs/architecture/ai-project-instruction-architecture.md` (stale North-Star; do not treat as current specification)
 - `docs/architecture/prerequisite-dependency-semantics.md` (still relevant for earlier dependency distinctions)
 
@@ -125,19 +134,23 @@ These are independent review findings, not Architecture Decisions.
 ## Evidence / confidence
 
 ### Confirmed / observed
+
 - 06AA completed the five substantive review tasks listed above.
 - Current 03 research frontier (03AT) is focused on the meaning of “minimal” in MEC under a runtime-reasoning model.
 - Applicability is currently treated in 03 as a runtime reasoning result, not a mandatory persistent knowledge layer.
 - No implementation artefacts were justified by the completed 03 or 06 tests.
 
 ### Inferred
+
 - Dynamic activation + observed state is currently the most coherent semantic account of the MEC / P-01 / P-02 / P-03 cluster.
 - The bootstrap-kernel residual is the highest-leverage remaining uncertainty for further MEC work.
 
 ### Assumed / unverified
+
 - Whether a later controlled Grok↔Qwen comparison will surface material disagreements beyond those already visible from independent baselines.
 
 ### Open
+
 - See Open questions section.
 
 ## Last completed task
