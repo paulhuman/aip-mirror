@@ -13,7 +13,7 @@ Previous chapter:
 03AT — Architecture & Research
 
 Status:
-READY_FOR_HANDOFF
+HANDED_OFF
 
 ## Current objective
 
