@@ -13,7 +13,7 @@ Previous chapter:
 03AU — Architecture & Research
 
 Status:
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
@@ -37,7 +37,9 @@ Bootstrap source context has been read from the canonical repository on `main`, 
 
 The 03AU durable research context has been preserved as the primary architectural source for this chapter.
 
-The 03AU → 03AV lifecycle bootstrap is being performed by a write-capable AI.
+The 03AU → 03AV lifecycle bootstrap was completed by a write-capable AI.
+
+The local inventory/classification and two independent blind semantic reviews (Grok and Qwen) have now been completed. No target tree was shown to the independent reviewers.
 
 ## Current implementation state
 
@@ -63,6 +65,11 @@ The current repository still contains the historical/incremental organization. T
 14. No physical move, rename, merge, split, or deletion is authorized merely by the target-tree sketches.
 15. New chapter-produced documents use the working `03AV_document-name.md` filename-prefix convention, pending formalization after inventory/review.
 16. Do not use “bootstrap kernel” as an architecture term. Where historically needed, use “non-empty initial active context”.
+17. Handoff lifecycle, handoff operations, and handoff commits are distinct semantic dimensions.
+18. The handoffs README is navigation/orientation material, not a lifecycle event or canonical lifecycle rule.
+19. BOOTSTRAP is WORKFLOW material and should be evaluated for placement under .ai/workflows/.
+20. The current .ai/handoffs/ model with README.md plus numbered specialization directories 01–06 remains the working choice for now.
+21. A separate TODO file is not yet required; the expanding TODO remains in the 03AU architecture working document for now.
 
 ## Open questions
 
@@ -181,6 +188,24 @@ along with:
 - unresolved question.
 
 Do not start Grok/Qwen review until the local inventory is complete.
+
+## Handoff-specific TODO
+
+Before finalizing handoff infrastructure, separately analyze:
+
+- lifecycle states and transitions;
+- handoff operations;
+- handoff commits;
+- operations without lifecycle transitions;
+- durable-commit requirements;
+- complete normative handoff commit vocabulary;
+- current/receiving chapter ownership;
+- correction/recovery semantics;
+- navigation-only handoff README edits.
+
+Deferred experiment: Handoff Content Extraction Test.
+
+Deferred later-iteration question: whether .ai/INDEX.md is sufficient or a separate ENTRY.md has a justified role. Current position: no separate ENTRY.md.
 
 ## Things not to redo
 
