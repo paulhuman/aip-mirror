@@ -551,9 +551,18 @@ Example for this chapter:
 16. AI-infrastructure onboarding files belong conceptually under .ai/workflows/.
 17. Historical MEC/semantic infrastructure research belongs conceptually under .ai/archive/.
 18. The first structural pass must classify before moving.
-19. Grok/Qwen review happens after the local target structure is proposed, not before the inventory.
+19. Independent Grok/Qwen review happens after local inventory/classification and before final target-tree selection.
 20. No physical restructuring has yet been performed in this pass.
 21. New chapter-produced documents should use chapter ID as a filename prefix in the form 03AU_document-name.md, with underscore separator, pending formalization.
+22. Independent Grok and Qwen reviews have now been completed as blind semantic reviews; neither was shown our target tree.
+23. Both independent reviews independently support the core .ai versus docs ownership boundary and the treatment of handoffs as conversation state rather than project documentation.
+24. Handoff lifecycle, handoff operations, and handoff commits are distinct semantic dimensions and must not be collapsed into one model.
+25. Lifecycle describes handoff state; operations describe actions performed on handoffs; commits describe durable repository recording of those actions.
+26. A handoff-related operation does not necessarily imply a lifecycle transition, and a handoff-related commit does not necessarily represent a lifecycle transition.
+27. The handoffs README is navigation/orientation material, not a lifecycle event or canonical lifecycle rule.
+28. BOOTSTRAP is accepted as WORKFLOW material and should be evaluated for placement under .ai/workflows/ rather than .ai/skills/.
+29. The current .ai/handoffs/ model with README.md plus numbered specialization directories 01–06 remains the working choice for now; active/archive subdivision is deferred.
+30. A separate TODO file is not yet required. Keep the expanding TODO in this working architecture document until the semantic-comparison stage shows that TODO has become an independent durable artifact with its own ownership boundary.
 
 ## 18. Deliberately open
 
@@ -564,12 +573,16 @@ Do not silently resolve:
 - exact skills taxonomy;
 - exact workflows taxonomy;
 - whether .ai/handoffs replaces docs/handoffs immediately;
+- exact long-term retention/archive policy for handoffs;
 - whether docs/PROJECT-INSTRUCTIONS.md survives in reduced form;
 - exact AGENTS.md contents;
-- exact README.md contents;
-- exact .ai/INDEX.md format;
+- exact .ai/INDEX.md contents;
+- whether a separate ENTRY.md has any justified role; currently it appears to be a possible redundant semantic layer and is deferred to a later iteration;
 - command syntax;
+- complete handoff operation vocabulary;
 - stable operation IDs;
+- exact mapping from handoff operations to commit-message vocabulary;
+- whether every handoff operation requires a commit;
 - section/fragment ID conventions;
 - exact split of .ai/rules/repository.md;
 - exact split of .ai/rules/workflow.md;
@@ -578,41 +591,54 @@ Do not silently resolve:
 
 ## 19. Next work package
 
+The local inventory/classification and two independent blind reviews are now complete.
+
 Do not jump to physical restructuring.
 
-For every relevant document classify:
+The next stage is **semantic comparison**, not target-tree construction:
 
-    KEEP
-    MOVE
-    DECOMPOSE
-    ARCHIVE
+1. **Consensus** — findings independently supported by our model, Grok, and Qwen.
+2. **Grok-only** — proposals or distinctions introduced only by Grok.
+3. **Qwen-only** — proposals or distinctions introduced only by Qwen.
+4. **Our-only** — findings present in our model but not independently raised by either reviewer.
+5. **Contradictions** — genuine differences in semantic ownership or architecture, excluding mere naming/layout variants.
+6. **Architecture questions** — distinguish questions resolvable by principle from questions requiring empirical experiments.
+7. Only after that, produce the **v2 target tree**.
+8. Only after the v2 target tree is accepted, perform physical moves/merges/splits.
 
-Record:
-- current path;
-- primary subject;
-- type;
-- target layer;
-- current problem;
-- proposed action;
-- unresolved question.
+### Handoff TODO
 
-Priority:
-1. all .ai/rules/
-2. all .ai/skills/
-3. docs/PROJECT-INSTRUCTIONS.md
-4. all docs/architecture/
-5. all docs/handoffs/
-6. README.md
-7. planned AGENTS.md
+The handoff model requires a dedicated follow-up analysis of:
 
-Then:
-1. finish local inventory;
-2. produce first complete target tree;
-3. identify decomposition/merge/split operations;
-4. preserve the chapter-prefix naming proposal;
-5. obtain independent Grok and Qwen alternatives;
-6. compare them;
-7. only then perform physical moves/merges/splits.
+- lifecycle states and transitions;
+- handoff operations;
+- handoff commits;
+- which operations are lifecycle transitions;
+- which operations can occur without a state transition;
+- which operations require durable Git recording;
+- complete normative handoff commit vocabulary;
+- ownership of each operation and transition between current and receiving chapters;
+- lifecycle correction/recovery semantics;
+- navigation-only edits such as handoff README changes.
+
+Working distinction:
+
+    HANDOFF LIFECYCLE
+        = state of the handoff
+
+    HANDOFF OPERATION
+        = action performed on the handoff
+
+    HANDOFF COMMIT
+        = durable Git record of an operation
+
+Do not freeze the complete operation list or commit vocabulary until this analysis is performed.
+
+### Deferred experiments / research
+
+- Handoff Content Extraction Test: take a real handoff and semantically classify every content unit, attempting to move project knowledge to its canonical owners and testing whether the remainder is bounded conversation state.
+- Later iteration: revisit whether .ai/INDEX.md alone is sufficient as the AI infrastructure entry/routing document or whether a distinct ENTRY.md has a justified semantic role. Current working position: no separate ENTRY.md.
+- Later: evaluate whether TODO remains appropriately embedded in this architecture working document or has grown into an independent durable artifact.
 
 ## 20. Safety
 
