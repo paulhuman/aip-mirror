@@ -73,17 +73,14 @@ A pure mathematical transformation should not require launching Illustrator if i
 
 Follow `.ai/rules/commits.md` for commit policy and commit-related repository rules.
 
-## 7. General commit authorization
 
-AI-assisted development changes should not be committed automatically unless the user has explicitly requested the commit or an established automated workflow authorizes it.
-
-## 8. Documentation follows decisions
+## 7. Documentation follows decisions
 
 When an architectural or behavioral decision becomes stable, update the appropriate repository documentation.
 
 Do not allow important decisions to exist only in temporary conversation context.
 
-## 9. Keep AI workflow understandable and lightweight
+## 8. Keep AI workflow understandable and lightweight
 
 Prefer explicit, maintainable solutions over clever systems.
 
