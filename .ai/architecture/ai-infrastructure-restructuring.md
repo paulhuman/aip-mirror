@@ -494,6 +494,82 @@ Do not silently resolve:
 
 ENTRY currently appears to be a redundant semantic layer and is deferred to Iteration 3.
 
+### 17.1 Archived TODO-A — handoff operations and commit vocabulary
+
+Recovered from an earlier 03-series architecture discussion and preserved here as durable TODO context. This section is archival/analytical context, not an instruction to execute the listed operations now.
+
+The missing semantic model is:
+
+    HANDOFF LIFECYCLE
+        = state
+
+    HANDOFF OPERATION
+        = action
+
+    HANDOFF COMMIT
+        = durable Git record of an operation
+
+These dimensions must remain separate.
+
+An operation does not necessarily change lifecycle state:
+
+    UPDATE / CHECKPOINT
+        DRAFT → DRAFT
+
+    CORRECT
+        X → X
+
+Likewise, a commit is the durable recording of an operation; it does not itself define the lifecycle transition.
+
+The intended decision model is:
+
+    handoff operation
+          ↓
+    commit classification
+          ↓
+    commit message
+
+Lifecycle transition is an attribute of the operation, not the primary source of commit-message vocabulary.
+
+Archived examples of the distinction:
+
+| Operation | Lifecycle transition | Commit |
+|---|---|---|
+| CREATE DRAFT | no | yes |
+| CHECKPOINT | no | yes |
+| MARK READY | yes | yes |
+| HAND OFF | yes | yes |
+| CORRECT | no | yes |
+| RECOVER | possible | yes |
+| ARCHIVE | no | yes |
+| read/inspect only | no | no |
+
+This table is evidence from the earlier discussion, not yet the final normative operation set.
+
+### 17.2 Commit-message vocabulary TODO
+
+The previously discussed base vocabulary was intentionally only a starting point, not a complete hard-MUST set:
+
+    docs(handoff): add <chapter>
+    docs(handoff): update <chapter>
+    docs(handoff): mark <chapter> ready for handoff
+    docs(handoff): mark <chapter> handed off
+
+The shorter <chapter> form is the intended direction for these messages. Do not expand this into a complete normative vocabulary yet.
+
+The unresolved task is to derive the complete operation vocabulary from the actual handoff workflow/rules/skills and then define the corresponding commit classification and hard-MUST message vocabulary.
+
+Required future analysis:
+
+1. enumerate actual handoff operations from the current workflow/rules/skills;
+2. distinguish lifecycle transitions from non-transition operations;
+3. determine which operations require durable commits;
+4. map operations to commit classifications;
+5. define the minimal normative commit-message vocabulary;
+6. verify that the vocabulary matches actual repository operations rather than an invented operation list.
+
+Until that work is completed, the exact operation set, operation-to-commit mapping, and complete commit-message vocabulary remain open.
+
 ## 18. Deferred experiments
 
 ### Handoff Content Extraction Test
