@@ -1,6 +1,6 @@
 # Workflow rules
 
-These rules define the preferred development workflow for AIP Mirror.
+These rules define the preferred development workflow.
 
 ## 1. General development cycle
 
