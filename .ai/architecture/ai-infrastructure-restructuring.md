@@ -87,6 +87,7 @@ The accepted conceptual structure is:
     +-- AGENTS.md
     +-- .ai/
     |   +-- INDEX.md
+    |   +-- config.yaml
     |   +-- rules/
     |   |   +-- handoff/
     |   |   |   +-- lifecycle.md
@@ -102,7 +103,6 @@ The accepted conceptual structure is:
     |   |   +-- handoff-bootstrap/
     |   |   +-- independent-review/
     |   |   +-- ...
-    |   +-- references/
     |   +-- handoffs/
     |   |   +-- <specialization>/
     |   +-- architecture/
@@ -119,7 +119,6 @@ Important boundary:
 - .ai/ = AI working infrastructure;
 - docs/ = AIP Mirror project knowledge;
 - root references/ = AIP Mirror-specific references;
-- .ai/references/ = references needed to understand/operate the AI infrastructure itself.
 
 AGENTS.md and .ai/INDEX.md are accepted future entry points, but their final contents are still open.
 
@@ -217,10 +216,10 @@ Canonical operational ownership:
 
 ## 8. Major physical restructuring completed
 
-The following infrastructure moves/renames have been completed:
+The following infrastructure moves/renames have been completed, with the final active locations shown below:
 
-    docs/architecture/ai-project-instruction-architecture.md
-        -> .ai/architecture/ai-project-instruction-architecture.md
+    AI infrastructure architecture
+        -> .ai/architecture/ai-infrastructure-restructuring.md
 
     docs/architecture/independent-review-{grok,qwen,deepseek}-onboarding.md
         -> .ai/workflows/independent-review/
@@ -229,19 +228,21 @@ The following infrastructure moves/renames have been completed:
         -> .ai/rules/handoff/lifecycle.md
 
     .ai/rules/handoff-references.md
-        -> .ai/rules/handoff/handoff-references.md
+        -> .ai/rules/handoff/references.md
 
     .ai/skills/conversation-handoff/SKILL.md
-        -> .ai/skills/handoff/conversation-handoff/SKILL.md
+        -> .ai/skills/handoff/SKILL.md
 
     .ai/skills/conversation-handoff/BOOTSTRAP.md
         -> .ai/workflows/handoff-bootstrap/BOOTSTRAP.md
 
     .ai/skills/handoff-reference-preservation/SKILL.md
-        -> .ai/skills/handoff/handoff-reference-preservation/SKILL.md
+        -> .ai/skills/handoff/reference-preservation/SKILL.md
 
     docs/handoffs/
         -> .ai/handoffs/<specialization>/
+
+The handoff tree is now physically grouped by specialization directories (for example `02/`, `03/`, `04/`, `05/`, and `06/`).
 
 Architecture filenames were also simplified by removing historical chapter suffixes/prefixes where they no longer carried semantic value.
 
@@ -249,13 +250,13 @@ These operations were followed by content-level decomposition of several rule fi
 
 ## 9. Repository-rule consolidation
 
-The repository rule is now the canonical owner of:
-- repository identity;
-- external repository boundaries;
-- repository path resolution;
-- repository taxonomy/hygiene;
-- repository-facing durable knowledge;
-- repository write safety.
+Repository configuration and repository rules now have separate ownership:
+- `.ai/config.yaml` is the canonical owner of project repository identity;
+- `.ai/rules/repository.md` is the canonical owner of external repository boundaries;
+- `.ai/rules/repository.md` is the canonical owner of repository path resolution;
+- `.ai/rules/repository.md` is the canonical owner of repository taxonomy/hygiene;
+- `.ai/rules/repository.md` is the canonical owner of repository-facing durable knowledge;
+- `.ai/rules/repository.md` is the canonical owner of repository write safety.
 
 The canonical mutation sequence is:
 
@@ -430,13 +431,17 @@ Do not turn every useful sentence into infrastructure.
 
 The intended dependency direction is:
 
+    .ai/config.yaml
+        |
+        +--> project identity / configuration facts
+
     .ai/rules/workflow.md
         |
         +--> generic AI workflow principles
 
     .ai/rules/repository.md
         |
-        +--> repository identity / safety / path resolution
+        +--> repository boundaries / path resolution / safety
 
     .ai/rules/handoff/lifecycle.md
         |
