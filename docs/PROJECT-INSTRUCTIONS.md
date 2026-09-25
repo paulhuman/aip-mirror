@@ -31,15 +31,15 @@ AA → AB → ... → AZ → BA → ... → ZZ
 
 Conversation lifecycle, chapter transitions, and handoff state are defined by:
 
-``.ai/rules/handoff/lifecycle.md``
+`.ai/rules/handoff/lifecycle.md`
 
 The handoff procedure is defined by:
 
-``.ai/skills/handoff/SKILL.md``
+`.ai/skills/handoff/SKILL.md`
 
 The bootstrap procedure is defined by:
 
-``.ai/workflows/handoff-bootstrap/BOOTSTRAP.md``
+`.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`
 
 Do not duplicate those procedures here.
 
