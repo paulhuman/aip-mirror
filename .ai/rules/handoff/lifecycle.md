@@ -214,20 +214,6 @@ The responsibility for each transition is explicit:
 
 The previous chapter must not mark its own handoff `HANDED_OFF` merely because it has finished writing or delivering it.
 
-### READY_FOR_HANDOFF supersession invariant
-
-
-When the current chapter's handoff is about to move from `DRAFT` to `READY_FOR_HANDOFF` and a previous handoff for the same specialization is already `HANDED_OFF`:
-
-1. the current chapter MUST identify that previous handoff;
-4. the current chapter MUST verify that the current handoff reads `READY_FOR_HANDOFF`;
-5. the current chapter MUST NOT declare the `READY_FOR_HANDOFF` transition complete while the previous handoff remains `HANDED_OFF`;
-6. the lifecycle result MUST be represented by Git commit(s), with one coherent commit containing both related changes preferred when practical.
-
-If the previous handoff remains `HANDED_OFF`, the current chapter must treat the `READY_FOR_HANDOFF` transition as incomplete/invalid and stop before proceeding with migration.
-
-This verification must inspect repository state, not rely on the AI remembering that the supersession step was performed.
-
 ### Non-negotiable handoff ownership invariants
 
 These are mandatory lifecycle constraints, not recommendations:
@@ -242,7 +228,6 @@ These are mandatory lifecycle constraints, not recommendations:
 9. **A bootstrap instruction is a message for a future receiving conversation; generating that instruction MUST NOT be interpreted as having entered or initialized that next chapter.**
 10. **If the current chapter has already created or modified the receiving chapter's handoff, the lifecycle procedure has been violated and the AI MUST stop before performing further lifecycle transitions and report the inconsistency.**
 11. **The receiving chapter MUST correct its own handoff if bootstrap verification finds an inconsistency; another specialization MUST NOT repair that receiving handoff on its behalf.**
-12. **A current chapter performing `DRAFT` → `READY_FOR_HANDOFF` MUST NOT leave an older same-specialization `HANDED_OFF` handoff in that state after the transition is declared complete.**
 
 The canonical migration ownership model is therefore:
 
@@ -250,7 +235,6 @@ The canonical migration ownership model is therefore:
         owns:
         current handoff DRAFT → READY_FOR_HANDOFF
         |
-        +--> identifies and supersedes the previous HANDED_OFF handoff
         +--> generates bootstrap instruction only
 
     RECEIVING CHAPTER
