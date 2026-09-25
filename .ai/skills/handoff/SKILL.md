@@ -225,7 +225,7 @@ A READ-ONLY AI must not modify or commit the repository.
 
 Instead, it must prepare the complete current handoff as it should exist for migration, including `DRAFT` → `READY_FOR_HANDOFF` only as the **proposed manual repository state** when that transition is appropriate. It must return the entire proposed handoff file content to the user and provide the exact commit message for the manual handoff update.
 
-A READ-ONLY AI must not claim that the handoff was changed to `READY_FOR_HANDOFF`, that any supersession transition was performed, or that any commit occurred.
+A READ-ONLY AI must not claim that the handoff was changed to `READY_FOR_HANDOFF`, that any obsolete supersession transition was performed, or that any commit occurred.
 
 A READ-ONLY AI must not append the separate bootstrap instruction to this long handoff response. If the user needs the missing bootstrap instruction, use the explicit `Пора выдать bootstrap-инструкцию` command separately.
 
@@ -348,7 +348,7 @@ Recovery completion is not itself bootstrap completion and does not by itself au
 
 ## After migration
 
-A handoff remains `HANDED_OFF` after successful migration until a later handoff for the same specialization reaches `READY_FOR_HANDOFF`. At that point, the later chapter must update the older handoff to `HANDED_OFF` and commit that lifecycle transition. The later chapter must physically verify the handed off state before declaring its own `READY_FOR_HANDOFF` transition complete.
+A handoff remains `HANDED_OFF` after successful migration as durable historical state. A later handoff reaching `READY_FOR_HANDOFF` does not change that older handoff's lifecycle state.
 
 ## Project Workshop boundary
 
