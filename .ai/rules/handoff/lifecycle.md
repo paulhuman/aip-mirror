@@ -138,10 +138,10 @@ Use one file per chapter:
 
 For current-format chapters, the chapter identifier uses `[0-9]{2}[A-Z]{2}`. Examples:
 
-    .ai/handoffs/01/01AA-JSX-Prototype.md
-    .ai/handoffs/02/02AB-Native-AIP-Plugin.md
-    .ai/handoffs/03/03AF-Architecture-Research.md
-    .ai/handoffs/04/04AA-Project-Workshop.md
+    .ai/handoffs/01/01AA-Example.md
+    .ai/handoffs/02/02AB-Example.md
+    .ai/handoffs/03/03AF-Example.md
+    .ai/handoffs/04/04AA-Example.md
 
 
 When a chapter has completed handoff, retain its handoff as historical project state.
