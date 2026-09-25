@@ -11,6 +11,9 @@ references:
     illustrator_sdk:
       repository: paulhuman/adobe-illustrator-2026-sdk
       role: Canonical Adobe Illustrator 2026 SDK reference
+    spectrum_web_components:
+      repository: paulhuman/spectrum-web-components
+      role: Fork used as a research reference for Adobe Spectrum Web Components and potential future Spectrum-based UI work
     codex:
       repository: paulhuman/codex
       role: Fork used as a research reference for coding-agent architecture, agent behavior, instruction handling, and repository-oriented workflows
