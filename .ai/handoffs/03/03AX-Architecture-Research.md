@@ -88,6 +88,18 @@ The current repository state is authoritative.
 - Do not introduce ENTRY.md without new evidence.
 - Do not create a separate TODO file without a demonstrated ownership need.
 
+## Recovered handoff-operation context
+
+Important information recovered during 03AX and preserved for the next continuation:
+
+- Keep the three semantic dimensions distinct: **HANDOFF LIFECYCLE = state**, **HANDOFF OPERATION = action**, **HANDOFF COMMIT = durable Git record**.
+- Do not derive the operation vocabulary directly from lifecycle transitions. An operation may leave lifecycle state unchanged.
+- The archival analysis, examples, and unresolved TODO for operations and commit naming are preserved in:
+  - `.ai/architecture/ai-infrastructure-restructuring.md` §17.1 — **Archived TODO-A — handoff operations and commit vocabulary**
+  - `.ai/architecture/ai-infrastructure-restructuring.md` §17.2 — **Commit-message vocabulary TODO**
+- Those sections are durable context, not instructions to execute the analysis immediately.
+- When this TODO is eventually resumed, derive the operation vocabulary from the actual handoff workflow/rules/skills, then map operations to commit classifications and define the minimal hard-MUST commit-message vocabulary.
+
 ## Recommended starting context
 
 1. .ai/handoffs/03/03AW-Architecture-Research.md
