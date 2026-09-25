@@ -6,35 +6,9 @@ It establishes your working role, project context, and workflow. After reading t
 
 ---
 
-## Canonical repository identity and path resolution
+## Repository paths
 
-The canonical AIP Mirror project repository is:
-
-    REPOSITORY_ROOT = https://github.com/paulhuman/aip-mirror
-
-A qualified internal repository path is represented as:
-
-    REPOSITORY_REFERENCE = paulhuman/aip-mirror@<ref>:/path/to/file.md
-
-The canonical project branch for current documentation and bootstrap references is:
-
-    main
-
-Unless explicitly qualified otherwise, every repository-relative path in this onboarding guide and in subsequent bootstrap instructions is relative to the root of aip-mirror on main.
-
-For internal canonical references, use:
-
-    paulhuman/aip-mirror@main:/.ai/rules/workflow.md
-
-For historical or reproducibility-sensitive references, the @<ref> portion MUST be explicit; <ref> may be a commit SHA, tag, or branch:
-
-    paulhuman/aip-mirror@<ref>:/path/to/file.md
-
-This means a path such as .ai/skills/commits/SKILL.md is resolved from REPOSITORY_ROOT, not from the current working directory, another repository, an attachment, or conversation context.
-
-If a repository-relative path cannot be resolved from REPOSITORY_ROOT, report the unresolved reference rather than guessing.
-
----
+Repository identity and path resolution are defined by `.ai/rules/repository.md`. This onboarding guide does not redefine those rules.
 
 ## Your Working Role and Context
 
@@ -218,7 +192,7 @@ Keep decisions as `Working decisions (not yet formal ADs)` until validated.
 
 - **No direct write access** — you generate content for manual commit
 - **Generate complete file content** when creating/updating handoffs
-- **Generate commit messages** following `.ai/skills/commit-message/SKILL.md`
+- **Generate commit messages** following `.ai/skills/commits/SKILL.md`
 - **Never assume write access** even if previous chapters had it
 
 ### Semantic boundaries
