@@ -13,7 +13,7 @@ Previous chapter:
 03AW — Architecture & Research
 
 Status:
-DRAFT
+READY_FOR_HANDOFF
 
 ## Starting objective
 
@@ -121,4 +121,4 @@ Important information recovered during 03AX and preserved for the next continuat
 
 ## Migration note
 
-This chapter is now ready to hand off. The repository-wide sweep has produced a durable findings document and a bounded repair frontier. The next chapter should continue from those artifacts rather than reconstructing this analysis from chat history.
+This chapter is ready to hand off. The repository-wide sweep has produced a durable findings document and a bounded repair frontier. The next chapter should continue from those artifacts rather than reconstructing this analysis from chat history.
