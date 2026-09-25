@@ -163,6 +163,19 @@ When .ai is reused:
 
 This is why AIP Mirror product architecture belongs in docs/, even when an AI conversation first discovered it.
 
+## 6.1 Project-agnostic .ai content
+
+The `.ai` layer is project-agnostic infrastructure and must remain reusable without AIP Mirror-specific knowledge.
+
+Therefore:
+
+- generic `.ai` rules, skills, and workflows must not use AIP Mirror-specific names, paths, filenames, workstream labels, or product concepts as illustrative examples;
+- examples inside `.ai` should be abstract enough to survive reuse in another project;
+- when a concrete project-specific example is genuinely necessary to explain an infrastructure mechanism, prefer a reference to the project's `docs/` material rather than embedding project knowledge in `.ai`;
+- project-specific examples discovered during restructuring are consistency-sweep findings and should be removed or generalized.
+
+This is an architectural portability requirement, not merely a documentation-style preference.
+
 ## 7. Handoff architecture
 
 Three dimensions must remain distinct:
