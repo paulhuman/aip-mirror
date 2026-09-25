@@ -132,12 +132,9 @@ Use the semantic owner rather than duplicating project knowledge:
 - **Reusable AI capabilities** → `.ai/skills/`
 - **Ordered AI procedures** → `.ai/workflows/`
 
-Repository identity, repository boundaries, repository taxonomy, write safety, and commit policy are defined by:
+Repository identity is defined by `.ai/config.yaml`.
 
-```text
-.ai/rules/repository.md
-.ai/rules/commits.md
-```
+Repository boundaries, repository taxonomy, path resolution, and write safety are defined by `.ai/rules/repository.md`. Commit policy is defined by `.ai/rules/commits.md` and `.ai/skills/commits/SKILL.md`.
 
 Do not reproduce those rules here.
 
