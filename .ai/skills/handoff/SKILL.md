@@ -79,11 +79,11 @@ An AI must never claim a repository operation or lifecycle transition occurred u
 
 Create or update the applicable file under:
 
-    .ai/handoffs/
+    .ai/handoffs/<specialization>/
 
 Naming convention:
 
-    <specialization><chapter>-<short-name>.md
+    <chapter>-<short-name>.md
 
 The current generic chapter identifier is:
 

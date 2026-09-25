@@ -134,14 +134,14 @@ Conversation handoffs belong under:
 
 Use one file per chapter:
 
-    .ai/handoffs/<specialization><chapter>-<short-name>.md
+    .ai/handoffs/<specialization>/<chapter>-<short-name>.md
 
 For current-format chapters, the chapter identifier uses `[0-9]{2}[A-Z]{2}`. Examples:
 
-    .ai/handoffs/01AA-JSX-Prototype.md
-    .ai/handoffs/02AB-Native-AIP-Plugin.md
-    .ai/handoffs/03AF-Architecture-Research.md
-    .ai/handoffs/04AA-Project-Workshop.md
+    .ai/handoffs/01/01AA-JSX-Prototype.md
+    .ai/handoffs/02/02AB-Native-AIP-Plugin.md
+    .ai/handoffs/03/03AF-Architecture-Research.md
+    .ai/handoffs/04/04AA-Project-Workshop.md
 
 
 When a chapter has completed handoff, retain its handoff as historical project state.

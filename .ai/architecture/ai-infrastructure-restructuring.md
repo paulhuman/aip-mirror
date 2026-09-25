@@ -104,6 +104,7 @@ The accepted conceptual structure is:
     |   |   +-- ...
     |   +-- references/
     |   +-- handoffs/
+    |   |   +-- <specialization>/
     |   +-- architecture/
     |   +-- archive/
     |

@@ -29,16 +29,11 @@ The sequence is positional and mathematical:
 
 The ordinal position of a chapter must not be confused with the identity of its identifier.
 
-## Current specializations
+## Specialization directories
 
-AIP Mirror currently has four complementary conversation specializations:
+Handoffs are grouped by specialization under `.ai/handoffs/<specialization>/`.
 
-- `01` — JSX Prototype
-- `02` — Native AIP Plugin
-- `03` — Architecture & Research
-- `04` — Project Workshop
-
-A specific chapter is identified by its concrete chapter ID. Do not encode a single concrete chapter as the permanent project-wide "current chapter" here; chapter-specific state belongs in its handoff document.
+The README does not maintain a project-wide specialization registry. Specialization identity and chapter-specific state belong to the applicable project documentation and handoff files.
 
 ## Purpose
 
