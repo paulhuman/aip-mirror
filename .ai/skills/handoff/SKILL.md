@@ -215,8 +215,6 @@ A WRITE-CAPABLE AI must finish the current work, update the current handoff, and
 
 The current chapter owns this transition and must commit it.
 
-Before declaring `DRAFT` → `READY_FOR_HANDOFF` complete, apply the `READY_FOR_HANDOFF supersession invariant` above. If a previous same-specialization handoff is `HANDED_OFF`, it must be changed to `HANDED_OFF` and physically verified before the migration transition is considered complete.
-
 After that, generate the standard bootstrap instruction for the receiving chapter using `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`.
 
 Do not mark the handoff `HANDED_OFF` in the closing chapter.
@@ -304,8 +302,6 @@ Verify that the handoff answers:
 7. What should happen next?
 8. Which statements are confirmed versus uncertain?
 
-Also verify the `READY_FOR_HANDOFF supersession invariant` before declaring the transition complete.
-
 Only mark the handoff `READY_FOR_HANDOFF` when the next chapter can reasonably continue without guessing and the previous same-specialization handoff, when applicable, is already verified as `HANDED_OFF`.
 
 ## Receiving a handoff
@@ -324,7 +320,7 @@ If a read-only bootstrap is being performed, do not append the separate bootstra
 
 If the receiving handoff already exists, do not pretend that normal initial creation occurred. Apply the capability-specific rules in BOOTSTRAP.md. A qualifying pre-existing lifecycle violation blocks normal bootstrap; a READ-ONLY AI must report it and cannot perform Lifecycle Recovery.
 
-If Lifecycle Recovery is authorized, follow the recovery procedure above. Do not repeat a lifecycle transition that the repository already contains in the required final state.
+If Lifecycle Recovery is authorized, follow the canonical recovery procedure in `.ai/rules/handoff/lifecycle.md` and the bootstrap execution procedure in `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`. Do not repeat a lifecycle transition that the repository already contains in the required final state.
 
 ### Post-bootstrap consistency verification
 
