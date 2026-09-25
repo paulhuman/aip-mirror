@@ -1,6 +1,6 @@
 # Repository rules
 
-These rules define how AIP Mirror relates to its repositories, how project files are organized, and how repository mutations are performed safely.
+These rules define repository identity, repository boundaries, project file organization, repository durability, and safe repository mutation.
 
 ## 1. Repository identity
 
@@ -15,6 +15,20 @@ The canonical Adobe Illustrator 2026 SDK repository is:
     paulhuman/adobe-illustrator-2026-sdk
 
 It is a reference repository. Use it when exact Illustrator AIP API information, SDK documentation, original Adobe samples, headers, suites, PiPL information, or other SDK material is required.
+
+### Repository path resolution
+
+The canonical repository root is:
+
+    https://github.com/paulhuman/aip-mirror
+
+All unqualified repository-relative paths in project-controlled documentation resolve from that repository root on the `main` branch.
+
+When a specific branch, tag, or commit must be explicit, use:
+
+    paulhuman/aip-mirror@<ref>:/path/to/file.md
+
+Do not resolve repository-relative paths from the current working directory, another repository, an attachment, or conversational context.
 
 ## 2. External repository boundaries
 
@@ -151,9 +165,3 @@ A successful API operation, a valid blob SHA, or a valid Git commit does not by 
 Content integrity must be verified independently of API success.
 
 This rule applies to source code, documentation, configuration, scripts, tests, AI instructions, and every other existing repository file.
-
-## 8. Commit policy
-
-Commit authorization and commit coherence are defined by `.ai/rules/commits.md`.
-
-Do not duplicate commit policy here.
