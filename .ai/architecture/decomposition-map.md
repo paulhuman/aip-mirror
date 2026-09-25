@@ -46,7 +46,7 @@ Classification:
 - Action: KEEP, but remove AIP Mirror-specific framing
 - Dependencies: deep-understanding skill for substantial investigations; repository rule for write/commit safety
 
-This is a reusable workflow principle. It must not contain the four AIP Mirror specializations.
+This is a reusable workflow principle. It must not contain the AIP Mirror specialization registry.
 
 ## 2.2 Project specialization model
 Current content:
