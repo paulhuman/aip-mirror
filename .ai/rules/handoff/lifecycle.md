@@ -195,7 +195,6 @@ Handoff status changes follow this state machine:
     READY_FOR_HANDOFF
       ↓
     HANDED_OFF
-      ↓
 
 Only these forward transitions are valid:
 
