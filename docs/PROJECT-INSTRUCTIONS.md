@@ -8,14 +8,11 @@ The project uses the same `aip-mirror` repository for all workstreams. Workstrea
 
 ## 2. Workstreams
 
-The repository supports multiple complementary workstreams. Current work includes:
+The project uses multiple complementary workstreams. Here, a **workstream** is simply a project work area represented by one or more separate AI conversations. It is not an autonomous agent, service, or process that can communicate with other workstreams directly.
 
-- **01 — JSX Prototype**: behavioral prototype and executable reference for interaction, geometry, and UX experiments.
-- **02 — Native AIP Plugin**: production C++ / Illustrator AIP implementation.
-- **03 — Architecture & Research**: project-wide research, architectural decisions, and cross-cutting technical questions.
-- **04 — Project Workshop**: practical development support, tooling, setup, and routine technical questions.
+The user coordinates work between conversations and AI services. Cross-workstream communication therefore happens through the user and through durable repository files when the user asks an AI conversation to read or update them.
 
-Additional workstreams may exist as the project grows. Do not assume that a particular numeric specialization permanently owns a kind of project knowledge.
+Workstreams are organizational boundaries, not permanent ownership of all knowledge they produce. Additional workstreams may exist as the project grows. Do not assume that a particular numeric specialization permanently owns a kind of project knowledge.
 
 Each workstream may span multiple conversation chapters. Chapter identifiers use:
 
@@ -121,7 +118,7 @@ Use these principles when work crosses boundaries:
 
 An architectural finding discovered in any workstream belongs in the appropriate project architecture/research document when it becomes durable. Do not route all architecture through a permanently privileged workstream merely because it was discovered there.
 
-If a workstream detects a lifecycle or handoff inconsistency owned by another workstream, report it to the owner rather than editing that workstream's handoff on its behalf.
+If a workstream detects a lifecycle or handoff inconsistency belonging to another workstream, it cannot notify that workstream directly. The finding must be carried through the user or recorded in a repository file for the other conversation to read. The other workstream remains responsible for correcting its own handoff.
 
 ## 7. Canonical project-source routing
 
