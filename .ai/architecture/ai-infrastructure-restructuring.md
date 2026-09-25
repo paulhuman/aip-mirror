@@ -203,9 +203,6 @@ The active lifecycle is exactly:
       v
     HANDED_OFF
 
-Do not reintroduce SUPERSEDED as a lifecycle state.
-
-A prior handoff may cease to be the active handoff through a READY_FOR_HANDOFF invariant, but that is not a fourth lifecycle state.
 
 Canonical operational ownership:
 - lifecycle invariants → .ai/rules/handoff/lifecycle.md;
@@ -602,17 +599,7 @@ Revisit whether .ai/INDEX.md is sufficient as discovery/routing or whether a sep
 
 Current working position: no separate ENTRY.md.
 
-## 19. Historical terminology
-
-Do not reintroduce:
-- bootstrap kernel as an architecture term;
-- SUPERSEDED as a handoff lifecycle state;
-- permanent specialization ownership of knowledge;
-- autonomous workstream/agent semantics.
-
-Useful historical research such as MEC/dynamic-context work remains context, not current filesystem authority.
-
-## 20. Migration note for the next chapter
+## 19. Migration note for the next chapter
 
 The next chapter must start from the current repository state, not from the old 03AU/03AV physical plan.
 
