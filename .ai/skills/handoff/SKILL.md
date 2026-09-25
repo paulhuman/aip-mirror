@@ -1,11 +1,11 @@
 ---
 name: conversation-handoff
-description: Create a durable state snapshot when an AIP Mirror conversation approaches a contextual limit, reaches a major milestone, or is being continued in a new chapter.
+description: Create a durable state snapshot when a conversation approaches a contextual limit, reaches a major milestone, or is being continued in a new chapter.
 ---
 
 # Conversation handoff
 
-Use this skill to preserve the working state of an AIP Mirror conversation before continuing in a new chapter.
+Use this skill to preserve the working state of a conversation before continuing in a new chapter.
 
 The goal is continuity without requiring the next conversation to reconstruct important state from an old chat.
 
@@ -97,7 +97,7 @@ Use this structure unless a project-specific format requires otherwise:
     # Conversation Handoff
 
     Conversation:
-    AIP Mirror — XXYY — <Specialization>
+    <Project> — XXYY — <Specialization>
 
     Specialization:
     <01 / 02 / 03 / 04>
