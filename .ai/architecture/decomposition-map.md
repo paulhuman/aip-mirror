@@ -362,21 +362,151 @@ This is deliberately a compact rule document, not a catalogue of every project c
 9. Physical DECOMPOSE is complete only when the resulting files are smaller semantically, not merely smaller physically.
 10. Generic workflow rules must not acquire project-specific examples merely because they are useful examples.
 
-# 6. Next physical operation
+# 6. Post-decomposition consistency procedure
 
-After this map is accepted:
+Physical decomposition is not complete when the edited file looks correct.
 
-1. Decompose .ai/rules/workflow.md first.
-2. Keep the generic workflow rule as the canonical .ai rule.
-3. Move project-specific material to its canonical docs/ owner rather than creating another temporary file.
-4. Replace duplicated mechanics with references/routing.
-5. Read back every resulting file.
-6. Inspect the diff and changed-file scope.
-7. Commit the decomposition as one coherent refactor.
-8. Then repeat the same analysis for .ai/rules/repository.md.
-9. Then decompose docs/PROJECT-INSTRUCTIONS.md.
+After every move, rename, decomposition, canonical-owner change, or removal of duplicated normative text:
 
-Do not perform ARCHIVE as part of this step.
+1. Read back the edited file.
+2. Search the repository for the old path, old owner, old filename, obsolete terms, and duplicated normative wording.
+3. Classify every relevant hit as:
+   - valid surviving reference;
+   - stale dependency;
+   - duplicated normative content;
+   - historical evidence.
+4. Repair, remove, or deliberately retain each hit.
+5. Read back all changed files.
+6. Inspect the diff.
+7. Verify changed-file scope.
+8. Commit the coherent change.
+9. Verify the resulting repository state.
+
+Conceptual flow:
+
+    STRUCTURAL CHANGE
+          |
+          v
+    READ BACK
+          |
+          v
+    SEARCH FOR STALE DEPENDENCIES
+          |
+          v
+    CLASSIFY SEARCH HITS
+       /    |     |     \
+    valid stale duplicate historical
+       \     |      |      /
+          REPAIR / RETAIN
+                |
+                v
+         DIFF + SCOPE CHECK
+                |
+                v
+              COMMIT
+                |
+                v
+        VERIFY RESULT
+
+This procedure was added after Iteration 2 exposed a real stale dependency: repository path resolution moved out of docs/PROJECT-INSTRUCTIONS.md, but lifecycle.md still contained the old owner twice.
+
+The important lesson is that canonical-owner changes modify the dependency graph. The repository must therefore be checked for semantic consistency after the edit.
+
+Do not treat this sweep as optional cleanup.
+
+# 7. Current physical state
+
+Iteration 2 physical restructuring is underway and several planned operations are already complete.
+
+Completed areas include:
+- AI-infrastructure architecture/research documents moved out of docs/architecture/;
+- handoff infrastructure moved under .ai/handoffs/;
+- workflow/commit policy decomposition;
+- repository-rule consolidation;
+- docs/PROJECT-INSTRUCTIONS.md decomposition;
+- repository path resolution consolidated under .ai/rules/repository.md.
+
+The remaining map is therefore a live dependency map, not a pre-migration plan.
+
+When a mapped item has already been physically resolved, update or supersede its map entry rather than treating the old action as still pending.
+
+Do not mechanically repeat the original physical plan.
+
+# 8. Dependency-graph review — post-decomposition
+
+The dependency direction now being enforced is:
+
+    generic AI workflow
+            |
+            v
+    repository / handoff / skills / workflows
+            |
+            v
+    AIP Mirror project documentation
+
+A canonical-owner change must propagate outward to dependent documents rather than causing the new owner to absorb those dependents.
+
+The main Iteration 2 failure mode to watch for is:
+
+    canonical owner changed
+            |
+            v
+    stale old reference survives
+            |
+            v
+    two competing sources remain
+
+The consistency sweep is the control against that failure mode.
+
+# 9. .ai/rules/workflow.md
+
+The workflow rule has already been physically decomposed.
+
+Its intended remaining role is the compact generic AI workflow:
+1. general development cycle;
+2. research before major implementation;
+3. validate behavior before declaring final;
+4. prefer small, reviewable changes;
+5. generic testing principle;
+6. thin commit discipline;
+7. general user control over commits;
+8. documentation follows decisions;
+9. keep the AI workflow understandable and lightweight.
+
+It should route to canonical repository, commit, and handoff mechanisms rather than duplicate them.
+
+# 10. .ai/rules/repository.md
+
+Repository rule consolidation is also physically underway/completed for the current pass.
+
+Canonical ownership now includes repository identity and path resolution, repository safety, and repository-facing durable knowledge.
+
+The repository write-safety sequence remains canonical here.
+
+The important new verification point is that any future change to repository ownership must trigger the post-decomposition consistency sweep.
+
+# 11. docs/PROJECT-INSTRUCTIONS.md
+
+PROJECT-INSTRUCTIONS.md has been reduced to a thin project-specific instruction layer.
+
+It no longer owns generic repository path resolution.
+
+Its workstream definition explicitly describes workstreams as project work areas represented by one or more separate AI conversations, not autonomous agents or services.
+
+The remaining project-specific coordination principles should not be copied into generic .ai rules.
+
+# 12. Current decomposition invariants
+
+1. One canonical source per durable normative unit.
+2. References route to canonical owners; they do not recreate ownership.
+3. Do not create one file per source section.
+4. Remove duplication rather than relocating it.
+5. Generic .ai rules must remain project-agnostic.
+6. Project docs must remain the canonical source for AIP Mirror semantics.
+7. Handoff lifecycle, operations, and commits remain distinct.
+8. A structural change requires a post-edit consistency sweep.
+9. A refactor is not complete until stale dependencies are either repaired or deliberately classified as historical/valid.
+10. Do not let the map become a second source of normative operational rules.
 
 # 7. Dependency-graph review — second pass
 
