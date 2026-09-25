@@ -2,13 +2,17 @@
 
 ## Repository path resolution
 
-This rule inherits the canonical repository identity and path-resolution rule from .ai/rules/repository.md.
+This rule inherits repository identity and path resolution from `.ai/rules/repository.md`.
 
-All unqualified repository-relative paths in handoffs and preserved project references resolve from:
+Repository-relative paths resolve using the project repository configuration in `.ai/config.yaml`:
 
-    REPOSITORY_ROOT = https://github.com/paulhuman/aip-mirror
+- `project.repository` identifies the repository.
+- `project.default_branch` identifies the default branch.
+- `project.hosting.base_url` provides the hosting base URL.
 
-on the main branch. When a reference must remain reproducible against a specific branch, tag, or commit, use paulhuman/aip-mirror@<ref>:/path.
+When a reference must remain reproducible against a specific branch, tag, or commit, use:
+
+    <repository>@<ref>:/path
 
 ---
 
