@@ -48,28 +48,24 @@ Classification:
 
 This is a reusable workflow principle. It must not contain the four AIP Mirror specializations.
 
-## 2.2 Four project specializations
+## 2.2 Project specialization model
 Current content:
-- 01 JSX Prototype
-- 02 Native AIP Plugin
-- 03 Architecture & Research
-- 04 Project Workshop
-- chapter identifier format and examples
+- AIP Mirror workstreams/specializations and their project-specific roles.
 
 Classification:
 - Kind: PROJECT DOC / routing
 - Subject: AIP Mirror workstream model
 - Canonical owner: docs/ project documentation
-- Action: MOVE OUT OF .ai/rules/workflow.md
-- Dependencies: project-specific architecture documentation
+- Action: KEEP OUT OF .ai/rules/workflow.md
 
-Duplication:
-- duplicated in docs/PROJECT-INSTRUCTIONS.md
-- chapter identifier rules also duplicated in .ai/rules/handoff/lifecycle.md
+Dependency:
+- chapter identifier mechanics belong to .ai/rules/handoff/lifecycle.md;
+- generic handoff machinery may consume a specialization identifier;
+- the project-specific specialization registry and role definitions must remain outside generic .ai infrastructure.
 
 Decision:
-- The existence and purpose of AIP Mirror specializations belongs to docs/.
-- Generic handoff machinery may refer to a specialization identifier without defining AIP Mirror's four specializations.
+- The existence, names, and purposes of AIP Mirror specializations belong to docs/.
+- Do not maintain a closed specialization list in reusable .ai architecture/rules documents.
 
 ## 2.3 Do not duplicate reasoning across conversations
 Classification:
