@@ -9,25 +9,9 @@ Use this skill to preserve the working state of an AIP Mirror conversation befor
 
 The goal is continuity without requiring the next conversation to reconstruct important state from an old chat.
 
-## Repository identity and path resolution
+## Repository paths
 
-This skill inherits the canonical repository identity and path-resolution rule from .ai/rules/repository.md.
-
-The canonical project repository is:
-
-    REPOSITORY_ROOT = https://github.com/paulhuman/aip-mirror
-
-A qualified internal repository path is represented as:
-
-    REPOSITORY_REFERENCE = paulhuman/aip-mirror@<ref>:/path/to/file.md
-
-Unless explicitly qualified otherwise, every repository-relative path in this skill resolves to the root of aip-mirror on the main branch.
-
-When an exact branch, tag, or commit matters for historical or reproducibility purposes, use the qualified internal reference form:
-
-    paulhuman/aip-mirror@<ref>:/path/to/file.md
-
-Do not resolve repository-relative paths from the current working directory, another repository, an attachment, or conversation context.
+Repository identity and path resolution are owned by `.ai/rules/repository.md`. This skill does not redefine those rules.
 
 ## Why handoffs exist
 
