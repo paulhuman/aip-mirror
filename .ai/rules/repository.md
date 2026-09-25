@@ -4,47 +4,33 @@ These rules define repository identity, repository boundaries, project file orga
 
 ## 1. Repository identity
 
-The production project repository is:
+The project repository identity is defined by `.ai/config.yaml`.
 
-    paulhuman/aip-mirror
+Use:
 
-Project source code, prototypes, documentation, tests, experiments, and project-specific tooling belong here.
-
-The canonical Adobe Illustrator 2026 SDK repository is:
-
-    paulhuman/adobe-illustrator-2026-sdk
-
-It is a reference repository. Use it when exact Illustrator AIP API information, SDK documentation, original Adobe samples, headers, suites, PiPL information, or other SDK material is required.
+- `project.repository` for the repository identifier
+- `project.default_branch` for the default branch
+- `project.hosting.base_url` for constructing repository URLs
 
 ### Repository path resolution
 
-The canonical repository root is:
+The canonical repository root is constructed from the configured hosting base URL and repository identifier.
 
-    https://github.com/paulhuman/aip-mirror
-
-All unqualified repository-relative paths in project-controlled documentation resolve from that repository root on the `main` branch.
+All unqualified repository-relative paths in project-controlled documentation resolve from that repository root on the configured default branch.
 
 When a specific branch, tag, or commit must be explicit, use:
 
-    paulhuman/aip-mirror@<ref>:/path/to/file.md
+    <repository>@<ref>:/path/to/file.md
 
 Do not resolve repository-relative paths from the current working directory, another repository, an attachment, or conversational context.
 
 ## 2. External repository boundaries
 
-Do not duplicate the complete Adobe Illustrator SDK inside `aip-mirror`.
+External repositories should remain separate from the project repository unless there is a clear project requirement and the licensing and maintenance implications are understood.
 
-The repositories have separate purposes:
+Reference repositories used by the project are declared under `references.repositories` in `.ai/config.yaml`. Use their declared `role` to determine why a reference repository is relevant.
 
-    adobe-illustrator-2026-sdk
-        = canonical SDK reference
-
-    aip-mirror
-        = project source and documentation
-
-Project-specific adaptations of SDK samples may be placed in `aip-mirror` when needed, but the original SDK remains in its canonical repository.
-
-Other external repositories, libraries, and projects should likewise remain separate unless there is a clear project requirement and the licensing and maintenance implications are understood.
+Project-specific adaptations of material from a reference repository may be placed in the project repository when needed, but the original reference material remains in its canonical or declared external repository.
 
 ## 3. Repository content taxonomy
 
@@ -86,7 +72,7 @@ Conversation-specific migration state is owned by the handoff infrastructure und
 
 ### `.ai/`
 
-AI workflow instructions and project-specific AI rules.
+AI workflow instructions and generic AI infrastructure.
 
 These files describe how AI-assisted work should be performed. They are not application source code.
 
