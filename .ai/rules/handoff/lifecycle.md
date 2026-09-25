@@ -2,7 +2,7 @@
 
 Repository identity and path resolution are defined by `.ai/rules/repository.md`. All repository-relative paths in this rule use that canonical repository resolution.
 
-These rules define how AIP Mirror conversations are split into chapters and how work is handed from one conversation to the next.
+These rules define how conversations are split into chapters and how work is handed from one conversation to the next.
 
 ## 1. Conversations are finite workspaces
 
@@ -420,8 +420,8 @@ At minimum, the receiving chapter must:
 
 1. read back its own handoff after creation or recovery;
 2. confirm that its own handoff still has `Status: DRAFT`;
-3. confirm that its `Previous chapter` identifies the handoff from which it actually started;
-4. confirm that its `Immediate next task` describes the first real task after bootstrap, not an already-completed bootstrap action;
+3. confirm that `Previous chapter` identifies the handoff from which it actually started;
+4. confirm that `Immediate next task` describes the first real task after bootstrap, not an already-completed bootstrap action;
 5. read back the previous handoff after the normal lifecycle transition or authorized recovery;
 6. confirm that the previous handoff is now `HANDED_OFF`;
 7. confirm that the previous and receiving handoffs form a consistent lifecycle pair;
