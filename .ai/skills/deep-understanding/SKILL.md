@@ -9,13 +9,13 @@ Every meaningful non-trivial task must begin with a deliberate study of the rele
 
 The goal is not to produce an immediate solution. The goal is to establish a reliable understanding of the system first.
 
-For AIP Mirror, this is especially important when working with:
+The relevant material may include:
 
-- Adobe Illustrator AIP SDK APIs
-- Illustrator scripting behavior
-- FreeHand MX behavior
-- interactive mirror behavior
-- geometry and transformation algorithms
+- APIs and SDKs
+- scripting behavior
+- external application behavior
+- interactive tool behavior
+- algorithms and transformations
 - native plugin architecture
 - existing prototype code
 - unfamiliar parts of the codebase
@@ -36,15 +36,6 @@ Use this skill when:
 - an architectural decision depends on technical evidence
 - the user explicitly asks for deep research or detailed understanding
 - implementation based on an incorrect assumption could cause significant rework
-
-Typical AIP Mirror examples:
-
-- studying an Illustrator AIP suite before implementing a native feature
-- investigating FreeHand MX mirror behavior
-- studying Illustrator's interactive tool/event model
-- analyzing an existing JSX prototype before designing its native equivalent
-- determining how Illustrator represents or transforms paths
-- investigating ADM capabilities before designing a native settings UI
 
 ## When not to use
 
@@ -118,11 +109,9 @@ Study the relevant material thoroughly enough to understand:
 - error handling
 - edge cases
 
-For SDK investigations, inspect the canonical Adobe Illustrator SDK repository when appropriate:
+For SDK or external repository investigations, inspect the repositories declared in `.ai/config.yaml` when their configured Role makes them relevant to the current research.
 
-    paulhuman/adobe-illustrator-2026-sdk
-
-Do not duplicate the SDK into `aip-mirror`.
+Do not duplicate external reference repositories into the project repository unless there is a specific project requirement to do so.
 
 ### 3. Record evidence
 
@@ -200,7 +189,7 @@ Once the understanding has been reviewed, convert stable behavioral conclusions 
 
 Research documents describe what was discovered.
 
-Specification documents describe what AIP Mirror should do.
+Specification documents describe what the project should do.
 
 Do not mix the two unnecessarily.
 
@@ -208,35 +197,15 @@ Do not mix the two unnecessarily.
 
 Implementation should follow validated understanding and specification.
 
-For the JSX prototype:
+For a prototype-based workflow:
 
-    research → specification → JSX experiment
+    research → specification → prototype experiment
 
-For the native plugin:
+For a native implementation workflow:
 
-    research → specification → native design → C++ implementation
+    research → specification → native design → implementation
 
-Do not treat JSX source code as something that should simply be translated line-by-line into C++.
-
-## AIP Mirror-specific principle
-
-The project uses the following conceptual chain:
-
-    reverse engineering
-            ↓
-        observations
-            ↓
-       specification
-            ↓
-      JSX prototype
-            ↓
-         validation
-            ↓
-      native AIP design
-            ↓
-      C++ implementation
-
-The JSX prototype is an executable behavioral reference, not the production architecture.
+Do not treat prototype source code as something that should simply be translated line-by-line into another implementation language or architecture.
 
 ## Research quality
 
