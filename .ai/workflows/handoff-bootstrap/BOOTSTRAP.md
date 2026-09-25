@@ -40,7 +40,7 @@ For historical or reproducibility-sensitive references, the branch, tag, or comm
 
 The bootstrap AI MUST NOT resolve .ai/..., docs/..., or other unqualified repository paths from its current working directory, another repository, an attachment, or conversational context.
 
-**Bootstrap ordering requirement:** this repository identity/path rule MUST be established before the AI attempts to read any .ai/... path. The first repository-controlled document read after this bootstrap template must therefore be docs/PROJECT-INSTRUCTIONS.md from REPOSITORY_ROOT, followed by the applicable .ai/... rules and skills.
+**Bootstrap ordering requirement:** this repository identity/path rule MUST be established before the AI attempts to read any .ai/... path. The first repository-controlled document read after this bootstrap template must therefore be .ai/rules/repository.md from REPOSITORY_ROOT, followed by the applicable .ai/... rules and skills.
 
 If a referenced repository-relative path cannot be resolved from REPOSITORY_ROOT, bootstrap MUST stop and report the unresolved reference rather than guessing.
 

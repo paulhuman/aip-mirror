@@ -30,7 +30,7 @@ For historical or reproducibility-sensitive references, the @<ref> portion MUST 
 
     paulhuman/aip-mirror@<ref>:/path/to/file.md
 
-This means a path such as .ai/skills/commit-message/SKILL.md is resolved from REPOSITORY_ROOT, not from the current working directory, another repository, an attachment, or conversation context.
+This means a path such as .ai/skills/commits/SKILL.md is resolved from REPOSITORY_ROOT, not from the current working directory, another repository, an attachment, or conversation context.
 
 If a repository-relative path cannot be resolved from REPOSITORY_ROOT, report the unresolved reference rather than guessing.
 
@@ -284,7 +284,7 @@ When you receive the handoff bootstrap message, it will typically contain:
 
 ### Required reading
 
-- Your previous chapter's handoff file (e.g., `.ai/handoffs/05AA-Independent-Review-Qwen.md`)
+- Your previous chapter's handoff file (e.g., `.ai/handoffs/05/05AA-Independent-Review-Qwen.md`)
 - Relevant rules from `.ai/rules/`
 - Relevant skills from `.ai/skills/`
 - Architecture documents as needed

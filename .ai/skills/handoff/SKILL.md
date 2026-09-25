@@ -11,7 +11,7 @@ The goal is continuity without requiring the next conversation to reconstruct im
 
 ## Repository identity and path resolution
 
-This skill inherits the canonical repository identity and path-resolution rule from docs/PROJECT-INSTRUCTIONS.md.
+This skill inherits the canonical repository identity and path-resolution rule from .ai/rules/repository.md.
 
 The canonical project repository is:
 
