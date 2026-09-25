@@ -49,8 +49,8 @@ The current repository state is authoritative.
 ## Durable architectural context
 
 - .ai/architecture/ai-infrastructure-restructuring.md
-- .ai/architecture/ai-project-instruction-architecture.md
-- .ai/architecture/decomposition-map.md
+
+Historical Iteration 2 architecture/research artifacts are preserved under `.ai/archive/architecture/` and should be consulted only when their historical context is specifically needed.
 
 ## Operational sources
 
@@ -104,11 +104,9 @@ Important information recovered during 03AX and preserved for the next continuat
 
 1. .ai/handoffs/03/03AW-Architecture-Research.md
 2. .ai/architecture/ai-infrastructure-restructuring.md
-3. .ai/architecture/ai-project-instruction-architecture.md
-4. .ai/architecture/decomposition-map.md
-5. .ai/rules/repository.md
-6. .ai/rules/handoff/lifecycle.md
-7. .ai/rules/workflow.md
-8. .ai/rules/commits.md
-9. .ai/skills/commits/SKILL.md
-10. .ai/workflows/handoff-bootstrap/BOOTSTRAP.md
+3. .ai/rules/repository.md
+4. .ai/rules/handoff/lifecycle.md
+5. .ai/rules/workflow.md
+6. .ai/rules/commits.md
+7. .ai/skills/commits/SKILL.md
+8. .ai/workflows/handoff-bootstrap/BOOTSTRAP.md
