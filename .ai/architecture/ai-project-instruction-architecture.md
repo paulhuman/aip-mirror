@@ -1,6 +1,6 @@
 # AI Project-Instruction Architecture
 
-**Status:** Iteration 2 — working architecture
+**Status:** Iteration 2 — working architecture / migration context
 **Purpose:** Practical repository infrastructure for reliable AI-assisted work across finite conversation contexts.
 **Repository:** paulhuman/aip-mirror
 **Scope:** Meta-agnostic AI working infrastructure; this is not AIP Mirror product architecture.
@@ -9,178 +9,253 @@
 
 ## 1. What This Architecture Is
 
-This architecture exists because real AI-assisted project work needs durable external support.
+This architecture concerns the observable external support needed for reliable AI-assisted project work.
 
-The AI's internal algorithms, memory mechanisms, context handling, and model state are treated as a black box. This project does not attempt to infer or specify those internal mechanisms.
+The AI's internal algorithms, memory mechanisms, context handling, routing, and model state are treated as a black box.
 
 The observable working surface is:
 
     HUMAN
-      │ natural-language instruction / text / files / links
+      │ instructions / text / files / links
       ▼
-    AI / conversation
+    AI / CONVERSATION
       │ read / write / inspect
       ▼
     REPOSITORY
       │ durable project state and working instructions
 
-The architecture therefore concerns observable workflow and repository structure, not a hypothetical internal architecture of the model.
+The architecture therefore describes repository structure, reusable instructions, workflows, handoffs, and verification practices. It does not claim to describe the AI's internal architecture.
+
+---
 
 ## 2. Why It Exists
 
 The mechanisms in this architecture appeared because practical work required them.
 
-A handoff exists because we practically needed a file in which the state of work could be recorded before closing a conversation. Rules, skills, and supporting files likewise appeared because repeated work required reusable instructions and procedures.
+A handoff exists because conversations end while project work continues. Rules and skills exist because recurring constraints and capabilities should not be reconstructed from conversation history. Workflows exist because some operations need an ordered, repeatable procedure.
 
-They are engineering artifacts discovered through use, not evidence that corresponding abstract semantic layers must exist inside the AI.
+These are engineering artifacts discovered through use.
+
+The design principle is:
 
 > Make continuation, reliable execution, and recovery easier without turning ordinary project work into meta-management.
 
-## 3. Repository Boundaries
+---
 
-`docs/` primarily documents AIP Mirror itself: product architecture, implementation design, Illustrator/FreeHand research, specifications, validated behavior, project decisions, and project references.
+## 3. Central Ownership Boundary
 
-`.ai/` contains infrastructure for AI-assisted project work: rules, skills, workflows, indexes, handoff state, and other small operational metadata.
+The primary Iteration 2 boundary is:
 
-Practical rule:
+> If the primary subject is how AI should work with the project, it belongs in .ai/. If the primary subject is what AIP Mirror is or how it works, it belongs in docs/.
 
-> If the primary subject is how AI should work with the project, it belongs in `.ai/`. If the primary subject is what AIP Mirror is or how it works, it belongs in `docs/`.
+Therefore:
 
-This is the central boundary for Iteration 2 and will be applied to the current `docs/architecture` clutter.
+.ai/ contains:
+- rules;
+- reusable skills;
+- ordered workflows;
+- handoff state;
+- AI-infrastructure references;
+- AI-infrastructure architecture/research;
+- operational indexes and small metadata.
 
-## 4. Conversation and Durable State
+docs/ contains:
+- AIP Mirror architecture;
+- implementation/design;
+- Illustrator/FreeHand research;
+- specifications;
+- validated behavior;
+- project decisions;
+- project-specific development knowledge.
 
-Conversation is temporary working context. The repository is durable external project state.
+Root references/ remains AIP Mirror-specific.
 
-    current conversation
-          ↓
-       handoff
-          ↓
-      repository
-          ↓
-    new conversation
-          ↓
-       bootstrap
-          ↓
-    restored working state
+This boundary is about semantic ownership, not about which conversation happened to discover the information.
 
-A handoff is therefore a practical state-transfer mechanism, not merely a summary.
+---
 
-## 5. Empirical Conversation Limit
+## 4. Portability
 
-Long conversations have produced a repeatable practical failure boundary in this project.
-
-Current working limit for the current Free-plan/current-model environment:
-
-- approximately 30 conversation turns/chats, and/or
-- approximately 2500 total text across the posts.
-
-At this length, reliability degradation has been observed repeatedly and is treated as a real operational boundary for this project, not merely a speculative warning.
-
-One observed example: an earlier long chapter incorrectly counted 7 old-format handoff files when there were actually 8.
-
-This is not claimed as a universal model limit. It is a project-specific operational limit established through repeated observation.
-
-Therefore prefer shorter chapters, explicit handoffs, and deliberate re-reading of critical instructions. Do not wait for the boundary when reliability is already degrading.
-
-## 6. Bootstrap and Re-Read
-
-Bootstrap should establish compact initial working context rather than forcing the AI to read the entire instruction repository.
-
-At chapter start, read the project instructions, the `.ai` index, relevant bootstrap/lifecycle instructions, the current handoff, and only the project documents required for the specialization.
-
-During a long chapter, deliberately re-read critical instructions:
-
-- after substantial work;
-- before high-risk repository operations;
-- when switching workflows;
-- near a chapter checkpoint;
-- whenever the user explicitly requests it.
-
-The purpose is practical reliability. It does not model the AI's hidden memory algorithm.
-
-## 7. The Index
-
-Iteration 2 will introduce one central index for `.ai/`.
-
-The index must answer:
-
-> What operations are available, when should they be used, and where is the exact instruction for performing them?
-
-The future index should contain at least:
-
-- stable operation/command IDs;
-- simple future command syntax;
-- short descriptions;
-- applicability or trigger conditions;
-- exact rule/skill/workflow location;
-- preferably a section or fragment target rather than a whole large document.
+The .ai/ layer is intended to be reusable across projects.
 
 Conceptually:
 
-    command ID
-        ↓
-    simple syntax
-        ↓
-    short purpose
-        ↓
-    exact instruction fragment
-        ↓
-    execution
-        ↓
-    verification
+    Project
+      |
+      +-- .ai/          reusable AI working infrastructure
+      +-- docs/         project-specific knowledge
+      +-- references/   project-specific references
 
-The exact index format is not decided yet.
+When .ai/ is reused:
+- generic infrastructure should migrate;
+- current project handoffs should be cleared or replaced;
+- historical archive material should be retained deliberately;
+- project-specific assumptions must not remain hidden in generic rules.
 
-## 8. Commands
+AIP Mirror-specific architecture therefore belongs in docs/ even when an AI infrastructure conversation first discovered it.
 
-The future command language should be small and simple.
+---
 
-Candidate operation families include:
+## 5. Entry-Point Layers
 
-- initialize/bootstrap;
-- read or refresh instructions;
-- inspect state;
-- create/update handoff;
-- migrate chapter;
-- verify repository state;
-- run a consistency check.
+The intended entry-point relationship is:
 
-These are candidate operations, not a final command list or syntax.
+                     repository
+                         |
+              +----------+----------+
+              |                     |
+          README.md             AGENTS.md
+              |                     |
+        human orientation     AI repository entry
+                                    |
+                                    v
+                              .ai/INDEX.md
+                                    |
+                                    v
+                         rules / skills / workflows
 
-Command naming and syntax are deliberately delegated to future independent design proposals from Grok/Qwen alongside the primary architecture work.
+Roles:
+- README.md = human-facing repository orientation;
+- AGENTS.md = small AI repository entry point;
+- .ai/INDEX.md = discovery/routing map of AI infrastructure;
+- docs/PROJECT-INSTRUCTIONS.md = AIP Mirror project-specific instructions and coordination.
+
+These files may reference one another but must not become copies.
+
+A separate ENTRY.md is not currently justified. This remains a later Iteration 3 question.
+
+---
+
+## 6. Conversation Continuity
+
+Conversation is temporary working context. The repository is durable external state.
+
+    conversation N
+         |
+         | checkpoint / migration
+         v
+    .ai/handoffs/
+         |
+         | bootstrap
+         v
+    conversation N+1
+
+The active handoff lifecycle is:
+
+    DRAFT
+      |
+      v
+    READY_FOR_HANDOFF
+      |
+      v
+    HANDED_OFF
+
+Do not introduce SUPERSEDED as a fourth lifecycle state.
+
+Handoff lifecycle, handoff operations, and handoff commits are separate dimensions:
+
+    lifecycle = state
+    operation = action
+    commit    = durable Git record
+
+The detailed normative rules belong in .ai/rules/handoff/lifecycle.md and related handoff skills/workflows. This architecture document records the architectural distinction only.
+
+---
+
+## 7. Finite-Context Reliability
+
+Long conversations have repeatedly produced a practical reliability boundary in this project.
+
+The current operational estimate for the present environment is approximately:
+- 30 conversation turns/chats;
+- and/or roughly 2500 total post text.
+
+This is a project-specific observation, not a universal model limit.
+
+The architectural response is:
+- keep chapters reasonably bounded;
+- use explicit handoffs;
+- bootstrap from durable repository state;
+- re-read critical instructions at meaningful checkpoints;
+- verify repository changes instead of trusting successful API operations;
+- repair stale dependencies after structural changes.
+
+The objective is not to model hidden memory. It is to make the external workflow robust despite finite and uncertain context.
+
+---
+
+## 8. Bootstrap and Re-Read
+
+Bootstrap should establish a compact non-empty initial active context rather than force the AI to read the entire instruction repository.
+
+At chapter start, read:
+- project instructions;
+- .ai discovery/routing material;
+- applicable lifecycle/bootstrap rules;
+- the current handoff;
+- only project documents required for the specialization.
+
+During a long chapter, deliberately re-read critical instructions:
+- after substantial restructuring;
+- before high-risk repository operations;
+- when switching workflows;
+- near a checkpoint;
+- whenever the user explicitly requests it.
+
+This is a reliability practice, not a model-internal theory.
+
+---
 
 ## 9. Practical Artifact Types
 
 ### Rule
+
 A reusable constraint or invariant governing work.
 
 ### Skill
-A reusable procedure or capability for performing a kind of work.
+
+A reusable capability/procedure for performing a kind of work.
 
 ### Workflow
-An ordered procedure with a defined operational purpose. A workflow may physically live under a skill directory; physical location does not define its semantic role.
+
+An ordered procedure with a defined operational purpose.
 
 ### Handoff
-A durable transfer of chapter working state across conversation boundaries.
 
-These categories are practical distinctions. They must not be expanded into a larger ontology unless real work demonstrates a need.
+A durable transfer of conversation working state across a conversation boundary.
 
-## 10. Reliability by External Structure
+### README
 
-The reliability model is not: The AI will remember everything.
+Orientation/navigation material. It is not automatically a canonical normative source.
 
-It is:
+These categories are practical. Do not expand them into a larger ontology without evidence from real work.
+
+---
+
+## 10. Reliability Through External Structure
+
+The reliability model is:
 
 > Important behavior should be made structurally easier to perform correctly than incorrectly.
 
-Useful mechanisms include canonical instructions, a central index, explicit lifecycle state, handoffs, narrow workflow entry points, instruction re-reads, repository verification, short chapters, and human-triggered recovery.
+Useful mechanisms include:
+- canonical ownership;
+- central discovery/routing;
+- explicit lifecycle state;
+- handoffs;
+- narrow workflows;
+- deliberate re-reading;
+- repository verification;
+- post-edit consistency sweeps;
+- human-controlled recovery.
 
-The objective is to make the observable workflow robust despite unknown and finite model context.
+The system should reduce ambiguity rather than add management overhead.
 
-## 11. Repository Safety
+---
 
-For an existing file, the established safety pattern remains:
+## 11. Repository Mutation Safety
+
+For existing-file changes, the established sequence is:
 
     READ CURRENT FILE
           ↓
@@ -202,118 +277,300 @@ For an existing file, the established safety pattern remains:
 
 A successful API write or Git commit does not prove that the intended content was preserved.
 
-## 12. Handoff Lifecycle
+The detailed repository rule is canonical in .ai/rules/repository.md.
 
-The current lifecycle remains:
+---
 
-    DRAFT
-      ↓
-    READY_FOR_HANDOFF
-      ↓
-    HANDED_OFF
+## 12. Canonical-Owner Change and Consistency Sweep
 
-The detailed lifecycle procedure belongs in `.ai` workflow/rule files. This document records only the architectural purpose.
+Iteration 2 established an additional required procedure.
 
-## 13. Independent Design Review
+A structural change can leave stale references in files that were not edited.
 
-Low-risk organizational design should not all be invented inside the primary architecture conversation.
+Observed pattern:
 
-For Iteration 2, Grok and Qwen should be asked for alternative proposals concerning:
+    OLD CANONICAL OWNER
+           |
+           | ownership moved
+           v
+    NEW CANONICAL OWNER
+           |
+           X
+    stale dependent still points to old owner
 
-- file organization;
-- directory structure;
-- naming;
-- index format;
-- command syntax and naming;
-- document granularity;
-- ID/section conventions;
-- other repository ergonomics.
+Therefore every move, rename, decomposition, or canonical-ownership change requires a post-edit consistency sweep.
 
-Their proposals are alternatives for comparison, not authority. The human/project decision process chooses what to adopt.
+Procedure:
 
-    define problem and constraints
-              ↓
-        Grok proposal
-              +
-        Qwen proposal
-              ↓
-          compare
-              ↓
-       human decision
+    CHANGE
+      |
+      v
+    READ BACK EDITED FILE
+      |
+      v
+    SEARCH REPOSITORY FOR OLD PATHS / OWNERS / TERMS
+      |
+      v
+    CLASSIFY EACH HIT
+      |
+      +--> valid reference
+      |
+      +--> stale dependency
+      |
+      +--> duplicated normative content
+      |
+      +--> historical evidence
+      |
+      v
+    REPAIR / REMOVE / RETAIN
+      |
+      v
+    READ BACK
+      |
+      v
+    DIFF + SCOPE VERIFICATION
+      |
+      v
+    COMMIT
+      |
+      v
+    VERIFY RESULT
 
-This delegation keeps the main architecture work focused while still using independent models for straightforward design choices.
+Minimum search targets:
+- old file paths;
+- old filenames;
+- old canonical-owner references;
+- duplicated normative wording;
+- removed lifecycle states/concepts;
+- stale chapter or specialization identifiers;
+- bootstrap references to moved files;
+- routing/link targets.
 
-## 14. Explicit Non-Claims
+The sweep is semantic rather than a requirement to reread every repository file. Every relevant search hit must be interpreted before being ignored.
 
-This document does not establish:
+This procedure exists because ownership changes alter the dependency graph, not merely one file.
 
-- a model-internal memory architecture;
-- a routing layer inside the AI;
-- a universal discovery protocol;
-- a bootstrap kernel;
-- a universal metadata ontology;
-- a registry/router/manifest architecture;
-- a universal dependency engine;
-- a universal precedence engine;
-- a generic graph architecture;
-- a semantic theory of the AI.
+---
 
-Do not use `bootstrap kernel` as an architecture term.
+## 13. Why the Consistency Sweep Is Architectural
 
-Earlier research established only a practical observation that reasoning requires some available context to begin. That does not justify a permanent semantic component.
+The repository is a shared durable context.
 
-## 15. Relationship to Earlier Semantic Research
+If a new canonical owner is correct but stale dependents remain, the next conversation receives contradictory instructions:
 
-Earlier MEC/dynamic-context research remains historical research context.
+    canonical source
+          +
+    stale source
+          |
+          v
+    unnecessary ambiguity
+          |
+          v
+    larger active context
+          |
+          v
+    lower reliability
 
-Its useful practical observation is that active context is dynamic and may change during work.
+The consistency sweep therefore belongs to the architecture of reliable continuation, not merely to cleanup.
 
-Its more ambitious semantic hypotheses do not automatically determine the Iteration 2 filesystem or workflow.
+It is a practical form of dependency maintenance after semantic restructuring.
 
-Repository restructuring should proceed from observed workflow needs, not from forcing an old semantic model into the filesystem.
+---
 
-## 16. Iteration 2 Goals
+## 14. Decomposition Rules
 
-1. Separate AIP Mirror documentation in `docs/` from AI working infrastructure in `.ai/`.
-2. Remove duplicated instructions and obsolete structures.
-3. Split oversized instruction files where targeted reading benefits; otherwise use stable section/fragment IDs.
-4. Create one central `.ai` index.
-5. Make the index point to exact operational instructions rather than whole large files where practical.
-6. Establish a simple future command vocabulary.
-7. Keep bootstrap compact.
-8. Use deliberate re-reading of critical instructions during long chapters.
-9. Use the empirical ~30-turn/~2500-post-text boundary conservatively.
-10. Validate the new structure by real use rather than trying to make it perfect in one pass.
+For a mixed document:
 
-## 17. Design Test
+    source document
+          |
+          v
+    semantic classification
+          |
+     +----+----+----+----+
+     |    |    |    |    |
+    KEEP MOVE DECOMP ARCH REMOVE
 
-When proposing a new `.ai` component, ask:
+Use:
+- KEEP when one stable owner already fits;
+- MOVE when the content is coherent but located in the wrong semantic layer;
+- DECOMPOSE when one file contains multiple owners;
+- ARCHIVE when useful historical evidence is no longer active infrastructure;
+- REMOVE when the information is already canonically represented elsewhere or no longer needed.
+
+Do not create one file per old section.
+
+Do not relocate duplication merely to make a tree look cleaner.
+
+---
+
+## 15. Dependency Direction
+
+The intended direction is:
+
+    .ai/rules/workflow.md
+        |
+        +--> generic AI workflow principles
+
+    .ai/rules/repository.md
+        |
+        +--> repository identity / path resolution / safety
+
+    .ai/rules/handoff/lifecycle.md
+        |
+        +--> lifecycle invariants
+
+    .ai/skills/*
+        |
+        +--> reusable capabilities
+
+    .ai/workflows/*
+        |
+        +--> ordered procedures
+
+    docs/
+        |
+        +--> AIP Mirror project semantics
+
+The .ai layer may route to project documentation when necessary. Project facts should not be copied back into generic .ai rules.
+
+Avoid reciprocal dependencies that turn a file into an accidental aggregation point.
+
+---
+
+## 16. Iteration 2 Execution Record
+
+Iteration 2 has moved from planning into physical restructuring.
+
+Completed:
+- AI-infrastructure architecture/research documents moved from docs/architecture/ into .ai/architecture/ or .ai/workflows/ according to semantic ownership;
+- handoff infrastructure moved under .ai/;
+- architecture filenames were simplified;
+- .ai/rules/workflow.md was decomposed so commit policy has its canonical owner;
+- .ai/rules/commits.md was established;
+- .ai/skills/commit-message/SKILL.md was renamed to .ai/skills/commits/SKILL.md;
+- .ai/rules/repository.md was consolidated;
+- repository path resolution was established as a repository-rule responsibility;
+- .ai/rules/handoff/lifecycle.md was updated to route path resolution to repository.md;
+- docs/PROJECT-INSTRUCTIONS.md was reduced to a thin project-specific layer;
+- workstream semantics were clarified as non-autonomous conversation-based work areas;
+- .ai/architecture/decomposition-map.md was used to record semantic dependencies before physical changes.
+
+The important outcome is not only the resulting tree. It is the method of finding and removing stale ownership after the tree changes.
+
+---
+
+## 17. Lessons from Iteration 2
+
+The restructuring exposed a recurring pattern:
+
+> Removing an accidental aggregation point reveals dependencies that were previously hidden by duplication.
+
+Example:
+
+    PROJECT-INSTRUCTIONS.md
+          |
+          | old owner
+          v
+    repository path resolution
+
+After the ownership moved to:
+
+    .ai/rules/repository.md
+
+a stale dependency remained in lifecycle.md, twice.
+
+The stale text was found only by following the new ownership boundary and searching for the old dependency.
+
+This validates the need for the post-edit consistency sweep as a normal procedure.
+
+---
+
+## 18. Independent Review
+
+Independent Grok and Qwen reviews were completed as blind semantic reviews before the physical restructuring.
+
+Their role is comparative, not authoritative:
+
+    define constraints
+          |
+    independent proposals
+          |
+       compare
+          |
+    human/project decision
+
+Do not treat an external proposal as a decision merely because it is well argued.
+
+---
+
+## 19. Historical Research
+
+Earlier MEC/dynamic-context research remains historical context.
+
+Useful observation:
+- active context is dynamic and changes during work.
+
+Do not turn historical semantic hypotheses into filesystem requirements without current evidence.
+
+Do not use bootstrap kernel as an architecture term.
+
+---
+
+## 20. Iteration 2 Goals — Updated
+
+The original goals have been refined by actual execution:
+
+1. separate AI infrastructure from AIP Mirror project knowledge;
+2. establish canonical ownership before removing duplication;
+3. reduce accidental aggregation points;
+4. keep generic .ai infrastructure project-agnostic;
+5. keep project-specific semantics in docs/;
+6. keep bootstrap compact;
+7. make discovery/routing explicit without inventing unnecessary layers;
+8. verify structural changes with a post-edit consistency sweep;
+9. use real repository work as the validation of the architecture;
+10. preserve important migration decisions in durable architecture/handoff files.
+
+---
+
+## 21. Design Test
+
+For every proposed .ai component ask:
 
 1. What concrete failure or recurring task requires it?
-2. Can an existing file or procedure solve the problem?
+2. Can an existing owner or procedure solve the problem?
 3. Does it reduce work or add work?
 4. Can the AI find the relevant instruction quickly?
 5. Can the human understand and repair it?
-6. Can we validate it by actually using it?
+6. Can the idea be validated through real use?
+7. Will the component create another aggregation point or duplicate an existing owner?
 
 If the only justification is theoretical necessity, keep it as a proposal rather than infrastructure.
 
-## 18. Current Next Step
+---
 
-Iteration 2 begins with an inventory and classification pass:
+## 22. Current Frontier
 
-1. inspect current `.ai/`;
-2. inspect current `docs/`;
-3. inspect `docs/architecture/`;
-4. classify rules, skills, workflows, handoffs, and research documents;
-5. identify duplicated instruction text;
-6. identify documents that belong under `.ai/`;
-7. propose a target structure;
-8. obtain independent Grok/Qwen proposals for low-risk organization, naming, indexing, and command design;
-9. compare proposals;
-10. only then perform moves, merges, splits, or rewrites.
+The current frontier is no longer the initial target-tree design.
 
-## 19. North-Star
+The repository is in the physical Iteration 2 restructuring / consistency-repair stage.
+
+Next chapters should:
+- inspect the current repository state;
+- use the decomposition map and canonical owners;
+- apply the post-edit consistency sweep after structural changes;
+- avoid reconstructing earlier planning from chat history;
+- continue only where a real semantic or consistency issue remains.
+
+Iteration 3 can revisit:
+- the necessity of a separate ENTRY layer;
+- command syntax/IDs;
+- fragment-ID conventions;
+- further empirical tests of the handoff and index model.
+
+---
+
+## 23. North-Star
 
 > Keep the AI working on the project instead of making the AI manage an elaborate system for working on the project.
 
@@ -321,6 +578,6 @@ The repository supplies durable external structure.
 
 The conversation supplies temporary working context.
 
-Rules and skills supply reusable instructions. Workflows supply repeatable procedures. Handoffs bridge conversation boundaries. The index makes those mechanisms discoverable. Commands provide a simple explicit control surface. Independent reviewers provide alternative low-risk organizational designs. The human remains the final decision-maker.
+Rules and skills supply reusable instructions. Workflows supply repeatable procedures. Handoffs bridge conversation boundaries. The index makes those mechanisms discoverable. The human remains the final decision-maker.
 
-Everything else is implementation detail that must earn its place through real use.
+Every additional layer must earn its place through observed utility.
