@@ -10,27 +10,27 @@ Repository-relative paths resolve using the project repository configuration in 
 - `project.default_branch` identifies the default branch.
 - `project.hosting.base_url` provides the hosting base URL.
 
-When a reference must remain reproducible against a specific branch, tag, or commit, use:
+When a reference MUST remain reproducible against a specific branch, tag, or commit, use:
 
     <repository>@<ref>:/path
 
 ---
 
-These rules define which research references must survive a conversation handoff.
+These rules define which research references MUST survive a conversation handoff.
 
 ## 1. Handoffs preserve material research context
 
-A handoff must preserve not only conclusions and decisions, but also the **references materially required to understand, validate, or continue the work** represented by those conclusions and decisions.
+A handoff MUST preserve not only conclusions and decisions, but also the **references materially required to understand, validate, or continue the work** represented by those conclusions and decisions.
 
 The governing principle is:
 
-> **Repository handoff state must outlive the conversation that created it.**
+> **Repository handoff state MUST outlive the conversation that created it.**
 
-Therefore, a later chapter must not be forced to reconstruct a material research reference from the old conversation merely because the earlier chapter recorded the resulting conclusion.
+Therefore, a later chapter MUST NOT be forced to reconstruct a material research reference from the old conversation merely because the earlier chapter recorded the resulting conclusion.
 
 ## 2. Material references versus incidental browsing
 
-A handoff must **not** become a dump of everything ever opened on the internet.
+A handoff MUST NOT become a dump of everything ever opened on the internet.
 
 A reference is material when losing it would make a later chapter materially more likely to:
 
@@ -44,7 +44,7 @@ Incidental browsing, generic search results, temporary exploratory pages, and so
 
 ## 3. Record role, not only location
 
-Every preserved external research reference should include its **Role**: a concise explanation of why the reference matters to the current chapter's work.
+Every preserved external research reference MUST include its Role: a concise explanation of why the reference matters to the current chapter's work.
 
 A URL without a role is insufficient when the purpose of the reference would otherwise be ambiguous later.
 
