@@ -92,6 +92,25 @@ Resolve this deliberately before editing `.ai/rules/repository.md`.
 6. Run a second repository-wide consistency sweep.
 7. Only after the repaired repository is internally coherent, review `AGENTS.md` and `.ai/INDEX.md` entry surfaces.
 
+
+## TODO — recover external repository references from 03 handoffs
+
+Review the complete 03 handoff lineage for explicit external repository references, especially repositories created or forked specifically for project research/work.
+
+For each discovered repository:
+- preserve the repository identifier;
+- preserve the repository's documented role;
+- add it to .ai/config.yaml under references.repositories;
+- do not add a reference merely because it is project-specific: it must have a concrete consumer in generic .ai infrastructure;
+- distinguish canonical/reference repositories from research forks through the documented role, not by duplicating URL-only metadata.
+
+Initial recovered research forks:
+- paulhuman/codex
+- paulhuman/skills
+- paulhuman/agent.md
+
+This TODO was created because these repositories were found embedded in historical 03 handoffs and had not been preserved in the new configuration layer.
+
 ## Things not to redo
 
 - Do not reconstruct 03AU/03AV/03AW from conversation history.
