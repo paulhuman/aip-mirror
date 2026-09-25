@@ -261,7 +261,7 @@ Be concrete.
 
 Prefer:
 
-    `src/.../MirrorTool.cpp` currently handles mouse tracking.
+    A component in `src/...` currently handles input tracking.
 
 over:
 
