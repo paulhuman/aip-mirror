@@ -724,3 +724,107 @@ First:
 8. then rewrite repository.md as the smallest coherent repository rule set.
 
 No new file is justified by the current map yet.
+
+# 9. docs/PROJECT-INSTRUCTIONS.md
+
+## 9.1 Repository and handoff infrastructure
+
+Repository identity, path resolution, repository structure/hygiene, commit policy, chapter identifier semantics, conversation lifecycle, and handoff mechanics have stronger canonical owners in .ai/rules/repository.md, .ai/rules/commits.md, .ai/rules/handoff/lifecycle.md, .ai/skills/handoff/, and .ai/workflows/handoff-bootstrap/.
+
+Action: REMOVE duplicated infrastructure policy from PROJECT-INSTRUCTIONS.md. Do not create new files merely to receive these sections.
+
+## 9.2 Project orientation
+
+PROJECT-INSTRUCTIONS.md may retain genuinely project-specific orientation: what AIP Mirror is, its purpose, and the minimum project context needed to work correctly.
+
+Action: KEEP only material without a stronger canonical owner. Do not turn this into a second project architecture document.
+
+## 9.3 Workstream / specialization model
+
+The historical closed list of 01–04 must leave PROJECT-INSTRUCTIONS.md. The project now has at least 01–06, and future workstreams may be added.
+
+Canonical meaning of workstreams belongs to project documentation, not AI infrastructure.
+
+Distinction:
+- workstream model → project documentation;
+- workstream coordination → PROJECT-INSTRUCTIONS.md;
+- chapter identifier mechanics → handoff lifecycle.
+
+PROJECT-INSTRUCTIONS.md must not become the canonical registry of workstream names.
+
+## 9.4 Project architecture and JSX → native pipeline
+
+Research → specification → JSX → validation → native C++, native AIP strategy, geometry, interactive behavior, and UI technology decisions belong to docs/architecture/ or a more specific existing project-document owner.
+
+Action: REMOVE duplicated project architecture from PROJECT-INSTRUCTIONS.md; route to the canonical project documents.
+
+## 9.5 Testing
+
+The generic principle belongs to .ai/rules/workflow.md. The concrete AIP Mirror testing model, including geometry → behavior → Illustrator integration, belongs to project architecture/documentation.
+
+Action: REMOVE duplicated testing policy; do not create a new testing file without evidence that a durable owner is needed.
+
+## 9.6 Documentation/evidence discipline
+
+Observed fact, inference, assumption, specification, and implementation detail already form part of the reusable methodology in .ai/skills/deep-understanding/SKILL.md, which applies to JSX, C++, SDK study, reverse engineering, and other non-trivial work.
+
+Action: DO NOT create a second canonical evidence/documentation model merely because PROJECT-INSTRUCTIONS.md contains similar wording. Do not add a project-specific reference to deep-understanding unless a genuine AIP Mirror-specific documentation model is established.
+
+## 9.7 Cross-workstream coordination
+
+Four principles are genuine project-wide instructions and may remain in PROJECT-INSTRUCTIONS.md:
+
+1. Workstreams are organizational boundaries, not permanent ownership of all knowledge they produce.
+2. Results produced by one workstream may become inputs to another.
+3. Canonical project knowledge belongs to its semantic owner, not to the workstream that happened to discover it.
+4. Cross-workstream continuity must use durable repository knowledge rather than conversation history alone.
+
+These principles do not depend on the current number or names of workstreams.
+
+## 9.8 Architectural ownership across workstreams
+
+Do not preserve a rule equivalent to “03 owns architecture” merely because 03 historically carried Architecture & Research.
+
+Any workstream may discover architectural evidence or identify an architectural decision. Canonical architectural knowledge belongs to the appropriate semantic owner in docs/architecture/, regardless of which workstream discovered it.
+
+## 9.9 PROJECT-INSTRUCTIONS.md versus AGENTS.md and INDEX.md
+
+Working semantic distinction:
+
+    AGENTS.md
+        ↓
+    agent entry point
+
+    .ai/INDEX.md
+        ↓
+    AI infrastructure discovery / routing
+
+    docs/PROJECT-INSTRUCTIONS.md
+        ↓
+    AIP Mirror project-specific instructions / coordination
+
+These documents may reference one another, but none should become a general-purpose duplicate of the others. Additional AGENTS.md files may later exist in subdirectories without changing this distinction.
+
+## 9.10 Final semantic role
+
+PROJECT-INSTRUCTIONS.md should become a thin project instruction layer containing:
+- project orientation;
+- genuinely project-specific operating instructions;
+- project-level canonical-source routing where useful;
+- the small set of cross-workstream coordination principles above.
+
+It must not become a second INDEX, repository rules document, handoff document, complete architecture document, workstream registry, or copy of deep-understanding methodology.
+
+## 9.11 Physical DECOMPOSE precondition
+
+Before rewriting PROJECT-INSTRUCTIONS.md:
+1. read the current file again;
+2. read the current canonical owners;
+3. apply KEEP / REMOVE / REFERENCE decisions section by section;
+4. verify that removed material has not merely been moved into a new duplicate file;
+5. keep the resulting file small and semantically coherent;
+6. read it back;
+7. inspect diff and changed-file scope;
+8. commit the decomposition as one coherent refactor.
+
+Do not archive material as part of this physical DECOMPOSE.
