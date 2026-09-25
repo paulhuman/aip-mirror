@@ -349,15 +349,3 @@ Recovery completion is not itself bootstrap completion and does not by itself au
 ## After migration
 
 A handoff remains `HANDED_OFF` after successful migration as durable historical state. A later handoff reaching `READY_FOR_HANDOFF` does not change that older handoff's lifecycle state.
-
-## Project Workshop boundary
-
-The `04` specialization may help with IDE configuration, build systems, Git commands, repository mechanics, SDK/tooling setup, ChatGPT interface questions, and general development learning.
-
-When a Workshop discussion produces a durable project decision, record it in the appropriate project documentation rather than leaving it only in the Workshop conversation.
-
-Do not use `04` as a substitute for:
-
-- `01` JSX behavioral prototyping;
-- `02` native C++/AIP implementation;
-- `03` architecture, research, specifications, or project-wide decisions.
