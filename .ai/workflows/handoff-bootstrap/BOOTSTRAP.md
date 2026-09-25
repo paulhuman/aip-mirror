@@ -1,6 +1,6 @@
 # Conversation handoff bootstrap
 
-This file is a static procedural template for initializing a new AIP Mirror conversation chapter.
+This file is a static procedural template for initializing a new conversation chapter.
 
 It must not contain the identity of a specific current or next chapter. Actual chapter values are supplied by the bootstrap message that invokes this procedure.
 
@@ -16,33 +16,33 @@ These values are runtime context for the current migration. Do not write them in
 
 ## Canonical repository identity and path resolution
 
-Bootstrap operates on the canonical AIP Mirror repository:
+Bootstrap uses the repository that contains this bootstrap procedure as the canonical project repository.
 
-    REPOSITORY_ROOT = https://github.com/paulhuman/aip-mirror
+Before resolving any other repository-relative path, the bootstrap AI MUST read `.ai/config.yaml` from that repository and use:
+
+- `project.repository` as the repository identifier;
+- `project.default_branch` as the canonical project branch;
+- `project.hosting.base_url` as the hosting base URL.
 
 A qualified internal repository path is represented as:
 
-    REPOSITORY_REFERENCE = paulhuman/aip-mirror@<ref>:/path/to/file.md
+    <repository>@<ref>:/path/to/file.md
 
-The canonical project branch is:
+All repository-relative paths used by this bootstrap procedure MUST be resolved from the configured repository identity on the configured default branch unless the path is explicitly given as an absolute filesystem path, URL, or qualified repository reference.
 
-    main
+For an internal canonical reference, use the configured repository identifier and default branch, for example:
 
-All repository-relative paths used by this bootstrap procedure MUST be resolved from REPOSITORY_ROOT on main unless the path is explicitly given as an absolute filesystem path, URL, or qualified repository reference.
-
-For an internal canonical reference, use:
-
-    paulhuman/aip-mirror@main:/.ai/rules/workflow.md
+    <repository>@<default-branch>:/.ai/rules/workflow.md
 
 For historical or reproducibility-sensitive references, the branch, tag, or commit MUST be explicit, for example:
 
-    paulhuman/aip-mirror@<commit-sha>:/.ai/handoffs/03/03AK-Architecture-Research.md
+    <repository>@<commit-sha>:/.ai/handoffs/03/03AK-Architecture-Research.md
 
 The bootstrap AI MUST NOT resolve .ai/..., docs/..., or other unqualified repository paths from its current working directory, another repository, an attachment, or conversational context.
 
-**Bootstrap ordering requirement:** this repository identity/path rule MUST be established before the AI attempts to read any .ai/... path. The first repository-controlled document read after this bootstrap template must therefore be .ai/rules/repository.md from REPOSITORY_ROOT, followed by the applicable .ai/... rules and skills.
+**Bootstrap ordering requirement:** repository identity/path resolution MUST be established from `.ai/config.yaml` before the AI attempts to resolve any other .ai/... path. After reading the configuration, the first repository-controlled rule document read must be `.ai/rules/repository.md`, followed by the applicable .ai/... rules and skills.
 
-If a referenced repository-relative path cannot be resolved from REPOSITORY_ROOT, bootstrap MUST stop and report the unresolved reference rather than guessing.
+If a referenced repository-relative path cannot be resolved from the configured repository identity, bootstrap MUST stop and report the unresolved reference rather than guessing.
 
 ## Repository write-capability self-check
 
