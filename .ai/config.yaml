@@ -1,0 +1,44 @@
+project:
+  name: AIP Mirror
+  repository: paulhuman/aip-mirror
+  default_branch: main
+  hosting:
+    type: github
+    base_url: https://github.com/
+
+references:
+  repositories:
+    illustrator_sdk:
+      repository: paulhuman/adobe-illustrator-2026-sdk
+      role: Canonical Adobe Illustrator 2026 SDK reference
+    codex:
+      repository: paulhuman/codex
+      role: Fork used as a research reference for coding-agent architecture, agent behavior, instruction handling, and repository-oriented workflows
+    skills:
+      repository: paulhuman/skills
+      role: Fork used as a research reference for reusable skill structure, discovery, and capability conventions
+    agent_md:
+      repository: paulhuman/agent.md
+      role: Fork used as a research reference for agent instruction-file conventions, instruction hierarchy, and durable repository guidance
+
+terminology:
+  commit_scopes:
+    - mirror
+    - geometry
+    - core
+    - plugin
+    - ui
+    - adm
+    - jsx
+    - sdk
+    - repository
+
+  project_terms:
+    - JSX prototype
+    - native AIP plugin
+    - Illustrator AIP SDK
+    - mirror axis
+    - FreeHand MX behavior
+    - Illustrator integration
+    - core geometry
+    - ADM
