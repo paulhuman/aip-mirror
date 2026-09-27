@@ -4,12 +4,6 @@
 
 This rule inherits repository identity and path resolution from `.ai/rules/repository.md`.
 
-Repository-relative paths resolve using the project repository configuration in `.ai/config.yaml`:
-
-- `project.repository` identifies the repository.
-- `project.default_branch` identifies the default branch.
-- `project.hosting.base_url` provides the hosting base URL.
-
 When a reference MUST remain reproducible against a specific branch, tag, or commit, use:
 
     <repository>@<ref>:/path
