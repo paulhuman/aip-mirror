@@ -183,14 +183,3 @@ Treat this as a direct request to update the current handoff while keeping `Stat
 
 These commits are **checkpoint commits**, not migration commits.
 
-## Migration completion
-
-When the user explicitly requests migration to `NEXT_CHAPTER`, the current chapter must:
-
-1. finish the current work as appropriate;
-2. update and finalize its own handoff;
-3. change `DRAFT` → `READY_FOR_HANDOFF`;
-4. verify the repository change and commit the transition;
-5. generate the bootstrap message for the receiving chapter using this static procedure.
-
-The receiving chapter later changes the previous handoff `READY_FOR_HANDOFF` → `HANDED_OFF` after successful bootstrap and post-bootstrap consistency verification.
