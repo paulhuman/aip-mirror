@@ -116,11 +116,11 @@ Use this structure unless a project-specific format requires otherwise:
 
 Handoff lifecycle state, transition ownership, Lifecycle Recovery, and Lifecycle Correction are canonically defined by `.ai/rules/handoff/lifecycle.md`.
 
-This skill does not redefine those lifecycle rules. When a handoff operation depends on lifecycle state or transition ownership, follow the canonical lifecycle rule and use the operational procedures in this skill and `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md` to execute and verify the action.
+This skill does not redefine those lifecycle rules. When a handoff operation depends on lifecycle state or transition ownership, follow the canonical lifecycle rule and use the operational procedures in this skill and `.ai/workflows/handoff/BOOTSTRAP.md` to execute and verify the action.
 
 ## New chapter initialization
 
-New chapter initialization is operationally defined by `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`.
+New chapter initialization is operationally defined by `.ai/workflows/handoff/BOOTSTRAP.md`.
 
 This skill provides the handoff capability and structure; it does not duplicate the bootstrap procedure. When a new chapter is initialized, follow the applicable capability branch and verification sequence in BOOTSTRAP.md.
 
@@ -172,7 +172,7 @@ A WRITE-CAPABLE AI must finish the current work, update the current handoff, and
 
 The current chapter owns this transition and must commit it.
 
-After that, generate the standard bootstrap instruction for the receiving chapter using `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`.
+After that, generate the standard bootstrap instruction for the receiving chapter using `.ai/workflows/handoff/BOOTSTRAP.md`.
 
 Do not mark the handoff `HANDED_OFF` in the closing chapter.
 
@@ -198,7 +198,7 @@ The standard migration workflow must generate the bootstrap instruction for the 
 
     Пора выдать bootstrap-инструкцию
 
-Treat this as a direct request to generate the missing bootstrap instruction for the receiving chapter using `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`.
+Treat this as a direct request to generate the missing bootstrap instruction for the receiving chapter using `.ai/workflows/handoff/BOOTSTRAP.md`.
 
 This command does **not** initialize the next chapter, does **not** change lifecycle state, and does **not** authorize repository writes by itself.
 
@@ -263,6 +263,6 @@ Only mark the handoff `READY_FOR_HANDOFF` when the next chapter can reasonably c
 
 ## Receiving a handoff
 
-Receiving-chapter bootstrap is operationally defined by `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`.
+Receiving-chapter bootstrap is operationally defined by `.ai/workflows/handoff/BOOTSTRAP.md`.
 
 This skill does not duplicate the bootstrap branches, Lifecycle Recovery, Lifecycle Correction, or post-bootstrap verification procedure. After bootstrap, use this skill for the ongoing handoff capability and checkpoint/migration operations.
