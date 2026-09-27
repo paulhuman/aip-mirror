@@ -506,6 +506,7 @@ Do not silently resolve:
 - whether TODO should eventually become an independent durable artifact;
 - exact long-term .ai/architecture taxonomy;
 - whether any remaining mixed rule files require another decomposition pass.
+- if `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md` remains after the upper-surface and residual-core analysis, rename it to `.ai/workflows/handoff/BOOTSTRAP.md` to align workflow grouping with the `rules/handoff/` and `skills/handoff/` structure;
 
 ENTRY currently appears to be a redundant semantic layer and is deferred to Iteration 3.
 
