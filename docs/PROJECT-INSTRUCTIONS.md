@@ -138,13 +138,9 @@ Repository boundaries, repository taxonomy, path resolution, and write safety ar
 
 Do not reproduce those rules here.
 
-The canonical Adobe Illustrator SDK remains external to this repository:
+The canonical Adobe Illustrator SDK remains external to this repository. Its repository and reference role are recorded in `.ai/config.yaml`.
 
-```text
-paulhuman/adobe-illustrator-2026-sdk
-```
-
-Use it as the SDK reference; do not copy the complete SDK into `aip-mirror`.
+Use that external SDK reference when needed; do not copy the complete SDK into `aip-mirror`.
 
 ## 8. Scope of this document
 
