@@ -49,7 +49,6 @@ The current repository state is authoritative.
 ## Durable architectural context
 
 - .ai/architecture/ai-infrastructure-restructuring.md
-- docs/architecture/iteration-2-consistency-sweep.md
 
 Historical Iteration 2 architecture/research artifacts are preserved under `.ai/archive/architecture/` and should be consulted only when their historical context is specifically needed.
 
@@ -82,9 +81,7 @@ Historical Iteration 2 architecture/research artifacts are preserved under `.ai/
 7. `.ai/skills/handoff/SKILL.md` contains project-specific wording mixed with otherwise reusable handoff capability.
 8. `.ai/workflows/independent-review/` contains project-specific onboarding/configuration for current model reviews; determine whether it belongs as project configuration rather than reusable workflow infrastructure.
 
-Detailed sweep record and repair plan:
-
-- `docs/architecture/iteration-2-consistency-sweep.md`
+The bounded sweep findings and repair history are preserved in this handoff and in `.ai/architecture/ai-infrastructure-restructuring.md`.
 
 ## Recovered handoff-operation context
 
