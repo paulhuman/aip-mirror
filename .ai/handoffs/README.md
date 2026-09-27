@@ -1,8 +1,8 @@
 # Conversation handoffs
 
-This directory contains durable state snapshots for AIP Mirror conversation chapters.
+This directory contains durable state snapshots for conversation chapters.
 
-A chat is a finite working context. The repository is the durable project memory.
+A chat is a finite working context. The repository is the durable project record.
 
 ## Naming
 
@@ -40,12 +40,6 @@ The README does not maintain a project-wide specialization registry. Specializat
 A handoff records conversation-specific state needed to continue work safely in the next chapter.
 
 It is not a replacement for normal project documentation.
-
-## Project Workshop
-
-`04 — Project Workshop` is the project's practical support and learning workspace. It is intended for IDE and toolchain configuration, CMake/build setup, Git commands and repository mechanics, SDK/tooling setup, ChatGPT interface questions, debugging of development-environment problems, and other routine technical questions that would otherwise distract from the primary workstreams.
-
-The Workshop does not own project architecture, FreeHand research, JSX implementation, or native AIP implementation. Durable decisions produced there should be moved into the appropriate repository documentation.
 
 ## Required distinction
 
