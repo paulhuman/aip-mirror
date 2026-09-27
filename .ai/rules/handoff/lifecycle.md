@@ -102,7 +102,7 @@ The standard user migration command is:
 
     Пора выполнить миграцию в чат [0-9]{2}[A-Z]{2}
 
-This command explicitly requests migration to the specified receiving chapter. When it is used, follow the migration procedure in the conversation-handoff skill and the rules below.
+This command explicitly requests migration to the specified receiving chapter. When it is used, follow the migration procedure in the `.ai/skills/handoff/SKILL.md` and the rules below.
 
 The temporary recovery command is:
 
