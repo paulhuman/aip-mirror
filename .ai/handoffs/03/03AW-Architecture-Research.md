@@ -23,13 +23,16 @@ The repository has now moved beyond the original pre-physical-restructuring plan
 
 Important current sources:
 - docs/PROJECT-INSTRUCTIONS.md
+- .ai/config.yaml
 - .ai/architecture/ai-infrastructure-restructuring.md
-- .ai/architecture/ai-project-instruction-architecture.md
-- .ai/architecture/decomposition-map.md
 - .ai/rules/repository.md
 - .ai/rules/handoff/lifecycle.md
+- .ai/rules/handoff/references.md
 - .ai/rules/commits.md
+- .ai/rules/workflow.md
 - .ai/skills/commits/SKILL.md
+- .ai/skills/deep-understanding/SKILL.md
+- .ai/skills/handoff/SKILL.md
 - .ai/workflows/handoff-bootstrap/BOOTSTRAP.md
 - relevant .ai/handoffs/03/ handoff history.
 
