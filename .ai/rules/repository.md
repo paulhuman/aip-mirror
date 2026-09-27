@@ -40,21 +40,9 @@ Use these categories consistently.
 
 External reference material needed to understand or validate the project.
 
-Examples:
-
-- Illustrator JavaScript reference material
-- FreeHand MX documentation
-- screenshots
-- videos
-- reference test data
-
 ### `prototypes/`
 
-Executable experimental implementations.
-
-The JSX mirror prototype belongs under:
-
-    prototypes/jsx/
+Executable experimental implementations. Project-specific prototype locations and naming belong to project configuration or project documentation, not to these generic repository rules.
 
 ### `docs/`
 
