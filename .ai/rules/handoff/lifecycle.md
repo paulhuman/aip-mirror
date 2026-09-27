@@ -405,7 +405,7 @@ The initial `DRAFT` may be incomplete. At minimum it must identify the new chapt
 
 For a chapter created from a previous handoff, the receiving chapter must read:
 
-1. `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`;
+1. `.ai/workflows/handoff/BOOTSTRAP.md`;
 2. the applicable project rules;
 3. the previous chapter's handoff;
 4. any files identified as current implementation state.
