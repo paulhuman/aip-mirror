@@ -306,7 +306,7 @@ After explicit user authorization, the receiving chapter must:
 7. If the previous handoff already has the required terminal `HANDED_OFF` state, accept that existing state when it is otherwise correct; do not create a redundant lifecycle transition.
 8. Make only the minimum repository changes necessary for the recovery.
 9. Verify each changed file, the diff, and the changed-file scope before committing.
-10. Create only the recovery commit(s) required by the actual changes, using the project's commit-message rules and clearly identifying the commit as lifecycle recovery.
+10. Create only the recovery commit(s) required by the actual changes, using the project's commit rules and clearly identifying the commit as lifecycle recovery.
 11. Verify the resulting repository state and lifecycle pair.
 12. Only after recovery verification succeeds may the receiving chapter declare `RECOVERY = COMPLETE`.
 13. Recovery completion does **not** by itself authorize substantive work. The receiving chapter must separately complete the normal post-bootstrap consistency verification before declaring `BOOTSTRAP = COMPLETE`.
@@ -370,7 +370,7 @@ It must then wait for the explicit user correction command.
 - MUST verify every changed file, the resulting diff, and changed-file scope before committing;
 - MUST verify the corrected lifecycle chain after the correction;
 - MUST create an explicit Git commit for the correction;
-- MUST use the project's commit-message rules and clearly identify the commit as a lifecycle correction;
+- MUST use the project's commit rules and clearly identify the commit as a lifecycle correction;
 - MUST retain the original violating commits in Git history.
 
 A correction restores the repository's current canonical state; it does not rewrite the historical sequence that led to the inconsistency.
@@ -456,7 +456,7 @@ The repository history should therefore make the workflow auditable:
     post-bootstrap consistency verification → bootstrap complete
     historical inconsistency discovered later → report → user-authorized Lifecycle Correction → minimal correction commit → corrected lifecycle chain verified
 
-Use the `commit-message` skill for the required commit-message vocabulary and style.
+Use `.ai/skills/commits/SKILL.md` for the required commit-message vocabulary and style.
 
 ## 13. Avoid duplicated state
 
