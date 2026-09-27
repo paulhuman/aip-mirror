@@ -13,7 +13,7 @@ Previous chapter:
 03AX — Architecture & Research
 
 Status:
-DRAFT
+READY_FOR_HANDOFF
 
 ## Starting objective
 
@@ -51,24 +51,18 @@ After every MOVE, RENAME, DECOMPOSE, or canonical-owner change:
 
 ## 03AX sweep results
 
-Clean findings:
+The 03AX repair frontier has been worked through in 03AY.
 
-- no active `SUPERSEDED` residue;
-- no active `bootstrap kernel` terminology;
-- no active `ENTRY.md` layer;
-- no old `docs/handoffs/` routing requiring repair;
-- no stale active references to the archived architecture files.
+Completed:
+- genericized the active repository, workflow, commit, deep-understanding, and handoff infrastructure where project-specific leakage was confirmed;
+- separated project repository identity/configuration into `.ai/config.yaml`;
+- preserved repository path-resolution and safety mechanics in `.ai/rules/repository.md`;
+- centralized Chapter Identifier Format ownership in `.ai/rules/handoff/lifecycle.md`;
+- repaired stale operational references exposed by the 03AU–03AY consistency pass;
+- reduced independent-review onboarding to the current reusable workflow surface;
+- verified remaining checked historical matches are legitimate migration history rather than active operational references.
 
-Repair frontier:
-
-1. `.ai/rules/repository.md` — contains concrete AIP Mirror and Adobe Illustrator SDK repository identity. This is an architectural ownership question; do not fix by blind replacement.
-2. `.ai/rules/handoff/references.md` — contains project-specific repository identity; likely generic-rule leakage.
-3. `.ai/rules/handoff/lifecycle.md` — contains project-specific framing although lifecycle semantics are generic.
-4. `.ai/rules/workflow.md` — contains project-specific framing although workflow guidance is generic.
-5. `.ai/skills/commits/SKILL.md` — mixed generic procedure and project-specific references; inspect each occurrence.
-6. `.ai/skills/deep-understanding/SKILL.md` — AIP Mirror / Adobe Illustrator / JSX / FreeHand references; probable project leakage.
-7. `.ai/skills/handoff/SKILL.md` — mixed generic capability and project-specific wording.
-8. `.ai/workflows/independent-review/` — project-specific model-review onboarding/configuration; determine whether reusable mechanism and project configuration should be separated.
+The remaining frontier is semantic ownership analysis of the active repository-identity and path-resolution consumers. This is the next chapter's assignment.
 
 ## Important architectural question
 
@@ -105,6 +99,10 @@ Recovered research/reference repositories include:
 - `paulhuman/agent.md`
 
 No further recovery work remains in this TODO.
+
+## Migration boundary
+
+03AY is complete enough to hand off. The receiving chapter should continue from the repository state represented by this handoff and the durable architecture notes; it should not create a future chapter handoff as part of bootstrap.
 
 ## Things not to redo
 
