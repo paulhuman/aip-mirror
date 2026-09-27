@@ -456,7 +456,7 @@ The repository history should therefore make the workflow auditable:
     post-bootstrap consistency verification → bootstrap complete
     historical inconsistency discovered later → report → user-authorized Lifecycle Correction → minimal correction commit → corrected lifecycle chain verified
 
-Use `.ai/skills/commits/SKILL.md` for the required commit-message vocabulary and style.
+Use `.ai/skills/commits/SKILL.md` for the required commit message vocabulary and style.
 
 ## 13. Avoid duplicated state
 
