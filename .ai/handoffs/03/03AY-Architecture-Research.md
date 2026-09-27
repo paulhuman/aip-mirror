@@ -24,7 +24,7 @@ The immediate task is to inspect and repair the bounded set of project-specific 
 ## Durable context
 
 - `.ai/architecture/ai-infrastructure-restructuring.md` — current Iteration 2 architecture and migration context.
-- `docs/architecture/iteration-2-consistency-sweep.md` — current sweep findings, classifications, and repair plan.
+- `.ai/config.yaml` — current project configuration and recovered external repository references.
 - Historical architecture research is preserved under `.ai/archive/architecture/` and is not active operational context unless specifically needed.
 
 ## Current architectural boundary
@@ -93,23 +93,18 @@ Resolve this deliberately before editing `.ai/rules/repository.md`.
 7. Only after the repaired repository is internally coherent, review `AGENTS.md` and `.ai/INDEX.md` entry surfaces.
 
 
-## TODO — recover external repository references from 03 handoffs
+## External repository reference recovery — completed
 
-Review the complete 03 handoff lineage for explicit external repository references, especially repositories created or forked specifically for project research/work.
+The external repository references recovered from the 03 handoff lineage have been recorded in `.ai/config.yaml` under `references.repositories`, with their documented roles.
 
-For each discovered repository:
-- preserve the repository identifier;
-- preserve the repository's documented role;
-- add it to .ai/config.yaml under references.repositories;
-- do not add a reference merely because it is project-specific: it must have a concrete consumer in generic .ai infrastructure;
-- distinguish canonical/reference repositories from research forks through the documented role, not by duplicating URL-only metadata.
+Recovered research/reference repositories include:
+- `paulhuman/adobe-illustrator-2026-sdk`
+- `paulhuman/spectrum-web-components`
+- `paulhuman/codex`
+- `paulhuman/skills`
+- `paulhuman/agent.md`
 
-Initial recovered research forks:
-- paulhuman/codex
-- paulhuman/skills
-- paulhuman/agent.md
-
-This TODO was created because these repositories were found embedded in historical 03 handoffs and had not been preserved in the new configuration layer.
+No further recovery work remains in this TODO.
 
 ## Things not to redo
 
