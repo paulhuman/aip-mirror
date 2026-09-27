@@ -750,7 +750,9 @@ The active frontier is now:
        v
     BOOTSTRAP RESIDUAL-CORE DECISION
 
-The next chapter must design the actual `.ai/INDEX.md` contents from the verified routing table, without prematurely freezing command IDs or duplicating procedure text.## 18. Deferred experiments
+The next chapter must design the actual `.ai/INDEX.md` contents from the verified routing table, without prematurely freezing command IDs or duplicating procedure text.
+
+## 18. Deferred experiments
 
 ### Handoff Content Extraction Test
 
