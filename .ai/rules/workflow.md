@@ -67,7 +67,7 @@ For significant features:
 
 When practical, test at the lowest appropriate level.
 
-A pure mathematical transformation should not require launching Illustrator if it can be tested independently.
+A pure mathematical transformation should not require launching the host application if it can be tested independently.
 
 ## 6. Commits
 
