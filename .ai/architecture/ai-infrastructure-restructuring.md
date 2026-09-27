@@ -1,6 +1,6 @@
 # 03AU — AI Infrastructure Restructuring Working Notes
 
-Status: Durable migration context / Iteration 2 — updated through 03AW
+Status: Durable migration context / Iteration 2 — updated through 03AY
 Specialization: 03 — Architecture & Research
 Scope: .ai infrastructure, repository entry points, semantic ownership, restructuring, verification
 
@@ -585,6 +585,38 @@ Required future analysis:
 
 Until that work is completed, the exact operation set, operation-to-commit mapping, and complete commit-message vocabulary remain open.
 
+## 17.3 Next semantic-ownership task
+
+The next chapter should continue Iteration 2 with a focused **Repository Identity & Path Resolution ownership analysis**.
+
+Working ownership model:
+
+    .ai/config.yaml
+        = WHAT / WHERE
+        = project repository identity and configuration facts
+
+    .ai/rules/repository.md
+        = HOW
+        = repository identity interpretation, path resolution, boundaries, and safety
+
+    other .ai rules / skills / workflows
+        = USE / REFERENCE
+        = consume canonical definitions without redefining them
+
+The next chapter should inspect the active core first:
+- `.ai/config.yaml`
+- `.ai/rules/repository.md`
+- `.ai/rules/handoff/references.md`
+- `.ai/rules/workflow.md`
+- `.ai/skills/`
+- `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`
+- `.ai/handoffs/README.md`
+- `docs/PROJECT-INSTRUCTIONS.md`
+
+Classification must precede editing. A repository-related occurrence may be a canonical fact, reusable mechanism, legitimate consumer/reference, project-specific leakage, or stale duplication.
+
+Do not broaden this task into AGENTS.md / `.ai/INDEX.md` design until the active core is internally coherent.
+
 ## 18. Deferred experiments
 
 ### Handoff Content Extraction Test
@@ -602,6 +634,10 @@ Current working position: no separate ENTRY.md.
 ## 19. Migration note for the next chapter
 
 The next chapter must start from the current repository state, not from the old 03AU/03AV physical plan.
+
+03AY leaves the repository at a semantic-ownership frontier, not a physical-restructuring frontier. Its next assignment is the Repository Identity & Path Resolution analysis recorded in §17.3.
+
+The receiving chapter should continue from this durable architecture note and the 03AY handoff. It should not create a handoff for the future chapter during bootstrap.
 
 The critical Iteration 2 pattern to preserve is:
 
