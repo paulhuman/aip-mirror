@@ -1,5 +1,5 @@
 ---
-name: conversation-handoff
+name: handoff
 description: Create a durable state snapshot when a conversation approaches a contextual limit, reaches a major milestone, or is being continued in a new chapter.
 ---
 
