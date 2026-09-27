@@ -6,28 +6,13 @@ A chat is a finite working context. The repository is the durable project record
 
 ## Naming
 
-Use the specialization number and the current two-letter Chapter Identifier Format:
+Use the current Chapter Identifier Format defined canonically by `.ai/rules/handoff/lifecycle.md`.
 
-    [0-9]{2}[A-Z]{2}
+Handoff filenames use:
 
-The first two digits identify the specialization. The final two uppercase letters identify the chapter using a continuous base-26 alphabetical sequence:
+    <chapter>-<short-name>.md
 
-    AA → AB → ... → AZ → BA → BB → ... → BZ → CA → ... → ZZ
-
-No letters are skipped.
-
-The sequence is positional and mathematical:
-
-    AA = chapter ordinal 1
-    AB = chapter ordinal 2
-    AC = chapter ordinal 3
-    ...
-    AE = chapter ordinal 5
-    AF = chapter ordinal 6
-    ...
-    ZZ = chapter ordinal 676
-
-The ordinal position of a chapter must not be confused with the identity of its identifier.
+The README provides naming orientation only; it does not redefine the chapter identifier format or sequence.
 
 ## Specialization directories
 
