@@ -17,7 +17,7 @@ DRAFT
 
 ## Current objective
 
-Continue Iteration 2 from the current repository state by designing `.ai/INDEX.md` as an operational command router and capability-discovery surface, then determine whether the residual `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md` remains an independently justified ordered workflow.
+Continue Iteration 2 from the current repository state by completing the entry-layer command-routing design and validating the canonical bootstrap workflow boundary.
 
 ## Completed
 
@@ -37,13 +37,13 @@ Post-bootstrap consistency verification confirmed:
 - Physical Iteration 2 restructuring is complete.
 - `.ai/INDEX.md` has been implemented as the operational command router and capability-discovery surface.
 - `.ai/workflows/handoff/BOOTSTRAP.md` is now the canonical bootstrap workflow path.
-- The old `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md` path has been removed.
+- The old `.ai/workflows/handoff/BOOTSTRAP.md` path has been removed.
 - Repository Identity & Path Resolution ownership is already established:
   - `.ai/config.yaml` owns repository identity/configuration facts.
   - `.ai/rules/repository.md` owns repository interpretation, path resolution, boundaries, taxonomy/hygiene, durable repository knowledge, and write safety.
 - `.ai/AGENTS.md` exists as the AI operating-contract surface and is currently minimal.
-- `.ai/INDEX.md` exists but currently contains only its title and requires substantive design.
-- `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md` remains at its current path pending residual-core analysis.
+- `.ai/INDEX.md` contains the operational command-routing and capability-discovery model.
+- `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical ordered bootstrap workflow after the 03BA path decision.
 - The durable architecture note records the verified 03AZ routing model and 03BA assignment.
 
 ## Decisions
@@ -107,7 +107,7 @@ Canonical infrastructure owners:
 - `.ai/rules/commits.md`
 - `.ai/skills/handoff/SKILL.md`
 - `.ai/skills/commits/SKILL.md`
-- `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`
+- `.ai/workflows/handoff/BOOTSTRAP.md`
 
 Handoff state:
 
@@ -137,7 +137,7 @@ No external research reference is required for the current entry-layer design. T
 - The 03BA bootstrap lifecycle pair is verified: 03BA is `DRAFT`, 03AZ is `HANDED_OFF`, and 03AY is `HANDED_OFF`.
 - `.ai/INDEX.md` now contains the command-routing and capability-discovery model.
 - `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical bootstrap workflow path.
-- The old `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md` path has been removed.
+- The old `.ai/workflows/handoff/BOOTSTRAP.md` path has been removed.
 - The affected active files were read back after the path change and checked for stale references.
 - Repository identity is `paulhuman/aip-mirror`, default branch `main`.
 - 03AZ is `READY_FOR_HANDOFF` at bootstrap start.
