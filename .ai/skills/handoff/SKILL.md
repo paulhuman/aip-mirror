@@ -53,26 +53,9 @@ Naming convention:
 
     <chapter>-<short-name>.md
 
-The current generic chapter identifier is:
+The Chapter Identifier Format is defined canonically by `.ai/rules/handoff/lifecycle.md`.
 
-    [0-9]{2}[A-Z]{2}
-
-The final two uppercase letters form a continuous base-26 alphabetical sequence:
-
-    AA → AB → ... → AZ → BA → BB → ... → BZ → CA → ... → ZZ
-
-No letters are skipped.
-
-The sequence is positional and mathematical:
-
-    AA = chapter ordinal 1
-    AB = chapter ordinal 2
-    AC = chapter ordinal 3
-    ...
-    AE = chapter ordinal 5
-    AF = chapter ordinal 6
-    ...
-    ZZ = chapter ordinal 676
+Use that rule for the exact identifier format and sequence; this skill only uses the identifier when naming and operating on handoff files.
 
 ## Handoff structure
 
