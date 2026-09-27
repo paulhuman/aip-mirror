@@ -21,13 +21,23 @@ Continue Iteration 2 from the current repository state by designing `.ai/INDEX.m
 
 ## Completed
 
-Bootstrap has established the receiving chapter from the current repository state rather than reconstructing earlier chapters from conversation history.
+Bootstrap established the receiving chapter from the current repository state rather than reconstructing earlier chapters from conversation history.
 
-The previous handoff, 03AZ, was received in `READY_FOR_HANDOFF` state.
+The previous handoff, 03AZ, was received in `READY_FOR_HANDOFF` state and was transitioned to `HANDED_OFF` under the normal receiving-chapter lifecycle.
+
+Post-bootstrap consistency verification confirmed:
+- 03BA is `DRAFT`;
+- 03BA identifies 03AZ as its previous chapter;
+- 03AZ is `HANDED_OFF`;
+- 03AY, the earlier same-specialization predecessor, is also `HANDED_OFF`;
+- the 03AZ → 03BA lifecycle pair is coherent.
 
 ## Current implementation state
 
 - Physical Iteration 2 restructuring is complete.
+- `.ai/INDEX.md` has been implemented as the operational command router and capability-discovery surface.
+- `.ai/workflows/handoff/BOOTSTRAP.md` is now the canonical bootstrap workflow path.
+- The old `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md` path has been removed.
 - Repository Identity & Path Resolution ownership is already established:
   - `.ai/config.yaml` owns repository identity/configuration facts.
   - `.ai/rules/repository.md` owns repository interpretation, path resolution, boundaries, taxonomy/hygiene, durable repository knowledge, and write safety.
@@ -38,7 +48,7 @@ The previous handoff, 03AZ, was received in `READY_FOR_HANDOFF` state.
 
 ## Decisions
 
-The entry-layer model to evaluate is:
+The entry-layer model is now implemented as:
 
     user command
         ↓
@@ -73,12 +83,12 @@ Do not create `ENTRY.md`.
 
 ## Open questions
 
-- What compact INDEX structure best routes commands without duplicating canonical procedures?
 - What exact command-entry/operation identifier convention should remain provisional?
-- What capability/workflow discovery surface is sufficient without becoming another owner?
-- After INDEX design, whether BOOTSTRAP still has independent ordered-workflow semantics.
-- If BOOTSTRAP remains independently justified, whether it should move to `.ai/workflows/handoff/BOOTSTRAP.md`.
-- If canonical paths or ownership change, which stale references require semantic repair.
+- Whether additional user-facing command surfaces exist elsewhere in the active `.ai/` tree beyond the five currently documented.
+- Complete handoff operation vocabulary and operation-to-commit mapping.
+- Long-term handoff retention/archive policy.
+- Exact long-term `.ai/architecture/` taxonomy.
+- Whether any remaining mixed rule files require another decomposition pass.
 
 ## Current files
 
@@ -124,6 +134,11 @@ No external research reference is required for the current entry-layer design. T
 
 ### Confirmed / observed
 
+- The 03BA bootstrap lifecycle pair is verified: 03BA is `DRAFT`, 03AZ is `HANDED_OFF`, and 03AY is `HANDED_OFF`.
+- `.ai/INDEX.md` now contains the command-routing and capability-discovery model.
+- `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical bootstrap workflow path.
+- The old `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md` path has been removed.
+- The affected active files were read back after the path change and checked for stale references.
 - Repository identity is `paulhuman/aip-mirror`, default branch `main`.
 - 03AZ is `READY_FOR_HANDOFF` at bootstrap start.
 - 03AY is already `HANDED_OFF`.
@@ -140,22 +155,22 @@ No external research reference is required for the current entry-layer design. T
 
 ### Assumed / unverified
 
-- Whether additional user-facing command surfaces exist elsewhere in the active `.ai/` tree beyond the five already documented.
-- Whether BOOTSTRAP's residual semantics remain sufficiently independent after INDEX is designed.
+- Whether additional user-facing command surfaces exist elsewhere in the active `.ai/` tree beyond the five currently documented.
 
 ### Open
 
-- Final INDEX content.
-- Final command-entry/operation identifier convention.
-- Final BOOTSTRAP fate.
+- Exact command-entry/operation identifier convention.
+- Complete handoff operation vocabulary and operation-to-commit mapping.
+- Long-term handoff retention/archive policy.
+- Exact long-term `.ai/architecture/` taxonomy.
 
 ## Last completed task
 
-Completed standard 03BA bootstrap from the current repository state, including creation of this receiving handoff, lifecycle transition of 03AZ, and post-bootstrap consistency verification.
+Implemented the first operational `.ai/INDEX.md` command-routing model, compared it against the residual BOOTSTRAP core, retained BOOTSTRAP as an independent ordered workflow, renamed it to `.ai/workflows/handoff/BOOTSTRAP.md`, updated its canonical references, and performed the required post-edit semantic consistency verification.
 
 ## Immediate next task
 
-Design the operational contents of `.ai/INDEX.md` from the verified five-command routing model, then compare the resulting routing model against the residual core of `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`.
+Continue from the established entry-layer model. If further Iteration 2 work is needed, address only the bounded remaining architecture questions recorded above; do not reopen the completed INDEX/BOOTSTRAP decision without new evidence.
 
 ## Things not to redo
 
