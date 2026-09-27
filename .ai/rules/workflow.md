@@ -85,3 +85,41 @@ Do not allow important decisions to exist only in temporary conversation context
 Prefer explicit, maintainable solutions over clever systems.
 
 AI instructions should help development rather than become development overhead.
+
+## 9. Repository-wide inspection
+
+When a task requires reliable inspection of a substantial repository area, prefer the repository's authoritative tree/contents API and direct file retrieval over repository-wide code-search indexes when the latter are incomplete, stale, or otherwise untrusted.
+
+Use this sequence:
+
+    repository tree
+        ↓
+    identify the relevant root-level directories/files
+        ↓
+    retrieve contents one directory at a time
+        ↓
+    subdivide unusually large directories into meaningful batches
+        ↓
+    analyze the complete retrieved content
+        ↓
+    inspect historical/archive areas separately when they are not part of the active scope
+
+The tree establishes the actual repository structure. Direct file retrieval establishes the actual file contents. Do not infer completeness from a search index that is known or suspected to omit files.
+
+For a semantic sweep of an active infrastructure layer, first retrieve the active root-level areas separately rather than fetching the entire repository in one large batch. This keeps the analysis complete while preventing output truncation and accidental mixing of active and historical material.
+
+For example, an active `.ai/` inspection may be batched as:
+
+    config.yaml
+    architecture/*
+    rules/*
+    skills/*
+    workflows/*
+    handoffs/README.md
+
+Large or history-heavy areas such as archived architecture and historical handoffs should be inspected separately unless they are explicitly part of the current question.
+
+When a required directory is too large for one retrieval, split it by its existing semantic subdirectories rather than arbitrarily truncating or sampling files.
+
+After each batch, record which paths were actually retrieved. A repository-wide conclusion MUST be based on complete coverage of the declared scope, not on successful retrieval of only a subset.
+
