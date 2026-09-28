@@ -75,6 +75,28 @@ The important boundary is:
 
 The `.ai` layer is intended to be reusable across projects. Generic rules, skills, and workflows must not quietly acquire AIP Mirror-specific assumptions, examples, paths, or product semantics.
 
+### 3.1 Project-specific configuration boundary
+
+Project-specific configuration is intentionally concentrated in `.ai/config.yaml` rather than being repeated throughout `.ai/rules/`, `.ai/skills/`, and `.ai/workflows/`.
+
+This is an explicit portability strategy:
+
+```text
+.ai infrastructure
+    = generic rules / skills / workflows
+
+.ai/config.yaml
+    = current project's configurable identity, references, and vocabulary
+```
+
+For AIP Mirror, `config.yaml` contains repository identity, external reference repositories, commit scopes, and project terminology. fileciteturn105file0L2-L2
+
+This is **intentional project-specific configuration ownership**, not configuration leakage. It gives future projects a single configuration locus to replace or regenerate while keeping generic infrastructure portable.
+
+The presence of project-specific state elsewhere in `.ai` (for example handoffs or architecture notes) does not contradict this boundary: those are project state/research artifacts, not generic infrastructure configuration.
+
+Do not move `commit_scopes`, `project_terms`, or similar values out of `config.yaml` merely to make the file look more project-agnostic. The relevant portability question is whether generic rules/skills/workflows remain free of embedded project-specific assumptions.
+
 ## 4. Entry-layer architecture
 
 The current Iteration 2 entry architecture is:
@@ -676,9 +698,50 @@ Important constraint:
 
 A future ENTRY must be a genuinely new semantic layer, not a relabelled bootstrap workflow.
 
-## 18. Independent review findings requiring concrete follow-up
+## 18. Consolidated decision matrix — Grok + Qwen
 
-### 18.1 AGENTS.md implementation gap
+The reviews are now consolidated against current repository evidence. The matrix distinguishes accepted work from questions deliberately left open.
+
+| Finding / question | Evidence / review | Decision | 03BA disposition |
+|---|---|---|---|
+| `INDEX` routing model | Grok + Qwen converge | Accept | **Keep** |
+| `INDEX` `Repository state may change` + `Commit` metadata | Qwen challenge; current INDEX explicitly defines both as routing metadata | Keep for now | **Keep; open architectural question** |
+| Minimum semantic metadata before router becomes owner | Qwen conceptual challenge | Not resolved | **Open** |
+| `Пора выдать bootstrap-инструкцию` as separate command | Both reviews raise semantic question | Keep unchanged | **Open; no merge with migration** |
+| `BOOTSTRAP.md` as ordered workflow | Grok + Qwen converge | Accept | **Keep** |
+| `SUPERSEDED` removal / historical ordering | Qwen suggestion; current filenames already encode chapter sequence | No new lifecycle rule | **No change** |
+| User-facing command phrases duplicated in `lifecycle.md` | Grok + Qwen | Soft dual source | **03BA cleanup candidate** |
+| `.ai/AGENTS.md` effectively empty | Grok + Qwen + current repository state | Real implementation gap | **03BA fix** |
+| `[0-9]{2}[A-Z]{2}` naming | Grok concern; semantic classification shows generic infrastructure convention | Do not treat as project leakage | **Future naming migration** |
+| Future `C027`-style identifiers | User architectural direction | Record, test later | **Future TODO** |
+| INDEX scalability / presentation | Grok + Qwen | Real design concern at ~10–15 commands | **03BA design work** |
+| `ENTRY.md` | Both reviews; future semantic role identified | Do not create now | **Iteration 3 experiment** |
+| `config.yaml` contains project-specific scopes/terms | Qwen | Intentional configuration boundary | **No change** |
+| Project-specific data spread across generic rules/skills/workflows | Architecture objective | Must remain prohibited | **Ongoing consistency rule** |
+| Physical Iteration 2 restructuring | Review checkpoint | Completed | **Do not restart** |
+
+### 18.1 Work that actually enters 03BA
+
+The review does **not** authorize another broad restructuring pass. The bounded 03BA follow-up is:
+
+1. repair `.ai/AGENTS.md` as the compact always-on contract;
+2. perform the targeted `lifecycle.md` command-discovery cleanup, preserving lifecycle semantics and authorization;
+3. redesign the presentation of `INDEX.md` if needed for the expected ~10–15 command surface, without changing its ownership boundary;
+4. run a targeted post-edit semantic consistency sweep after these changes.
+
+The following remain explicitly outside 03BA execution unless new evidence appears:
+
+- changing INDEX metadata semantics;
+- merging bootstrap-instruction generation into migration;
+- changing lifecycle history semantics;
+- changing active chapter identifier format;
+- creating `ENTRY.md`;
+- moving project-specific configuration out of `config.yaml`;
+- restarting physical Iteration 2 restructuring.
+
+## 19. Independent review findings requiring concrete follow-up
+
+### 19.1 AGENTS.md implementation gap
 
 Both reviewers independently identified `.ai/AGENTS.md` as effectively empty while the architecture describes it as the always-on operating contract.
 
@@ -695,25 +758,27 @@ The intended future content should remain compact and should establish only:
 
 Do not let AGENTS grow into another INDEX or workflow.
 
-### 18.2 config.yaml portability boundary
+### 19.2 config.yaml portability boundary — DECIDED
 
 Qwen identified that `.ai/config.yaml` contains project-specific terminology such as commit scopes and project terms.
 
-This is a boundary question rather than an immediate defect. Configuration is allowed to describe the current repository, but the intended project-agnostic `.ai` layer must distinguish:
+Current decision: **this is intentional and correct**.
+
+`.ai/config.yaml` is the single intentional configuration locus for current-project-specific values within the `.ai` infrastructure. Keeping those values there, rather than embedding them across generic rules, skills, and workflows, is precisely what makes the `.ai` layer easier to port to another project.
+
+Therefore:
 
 ```text
-infrastructure semantics
-    ≠
-current project configuration
+rules / skills / workflows
+    = portable infrastructure
+
+config.yaml
+    = project-specific configuration
 ```
 
-Open question:
+Do not move `commit_scopes`, `project_terms`, or configured external references merely because they are project-specific. The portability test is whether the generic infrastructure remains free of embedded project assumptions.
 
-- is project-specific terminology legitimately configuration-owned, or should it move to a project-facing document?
-
-Do not move it without evidence that the current ownership causes a real portability or execution problem.
-
-### 18.3 lifecycle command discovery cleanup
+### 19.3 lifecycle command discovery cleanup
 
 When the next cleanup pass begins, inspect `.ai/rules/handoff/lifecycle.md` specifically for repeated user-facing phrases. Classify each occurrence semantically before editing.
 
@@ -727,11 +792,11 @@ lifecycle.md
     → operation semantics and authorization
 ```
 
-### 18.4 Targeted consistency sweep
+### 19.4 Targeted consistency sweep
 
-The independent review found the active architecture substantially consistent but identified the above implementation gaps. A targeted semantic sweep should be run after any resulting edits rather than treating reviewer text as an automatic rewrite list.
+The independent review found the active architecture substantially consistent but identified the above implementation gaps. A targeted semantic sweep must be run after any resulting edits rather than treating reviewer text as an automatic rewrite list.
 
-## 19. What should NOT be changed based on review
+## 20. What should NOT be changed based on review
 
 Do not currently:
 
@@ -745,10 +810,11 @@ Do not currently:
 - rename BOOTSTRAP.md to ENTRY.md;
 - dissolve BOOTSTRAP into INDEX;
 - move procedures into INDEX;
+- move project-specific configuration out of `config.yaml`;
 - freeze exact command IDs/syntax;
 - restart physical Iteration 2 restructuring.
 
-## 20. Deferred experiments / TODO
+## 21. Deferred experiments / TODO
 
 ### Handoff Content Extraction Test
 
@@ -770,7 +836,7 @@ Prototype migration from current specialization/chapter identifiers such as `03A
 
 Keep exact operation IDs, final command syntax, and hard-MUST commit vocabulary deferred until sufficient evidence exists.
 
-## 21. Migration note
+## 22. Migration note
 
 The current architecture state is represented by this file and the current `.ai` tree. Future chapters must start from current repository state rather than reconstructing 03AU–03BA from conversation history.
 
