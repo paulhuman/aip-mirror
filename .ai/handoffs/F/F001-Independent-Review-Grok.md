@@ -1,31 +1,31 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 06AB — Independent Review (Grok)
+**Conversation:**
+F001 — Independent Review (Grok)
 
-Specialization:
-06 — Independent Review (Grok)
+**Specialization:**
+F
 
-Chapter:
-AB
+**Chapter:**
+001
 
-Previous chapter:
-06AA — Independent Review (Grok)
+**Previous chapter:**
+000
 
-Status:
+**Status:**
 DRAFT
 
 ## Current objective
 
-Continue independent external review of the architecture research frontier owned by specialization 03, focusing on residual questions left by 06AA: the non-empty bootstrap-kernel residual and/or the minimum-information characterisation of capability description versus applicability surface, as directed by the human referee or by the then-current state of 03.
+Continue independent external review of the architecture research frontier owned by specialization C, focusing on residual questions left by F000: the non-empty bootstrap-kernel residual and/or the minimum-information characterisation of capability description versus applicability surface, as directed by the human referee or by the then-current state of 03.
 
 ## Completed
 
-(Nothing yet — this is the initial DRAFT created at bootstrap of 06AB.)
+(Nothing yet — this is the initial DRAFT created at bootstrap of F001.)
 
-Prior chapter 06AA completed:
+Prior chapter F000 completed:
 
-1. Bootstrap of 06AA as first chapter of specialization 06.
+1. Bootstrap of F000 as first chapter of specialization F.
 2. Independent Architectural Reconstruction / Baseline (formed without using Qwen conclusions as premises).
 3. Dependency ↔ Resolution Architectural Stress Test.
 4. Architecture Bottleneck Audit.
@@ -35,11 +35,11 @@ Prior chapter 06AA completed:
 ## Current implementation state
 
 No implementation work is authorized by this review specialization.
-Specialization 03 owns architecture construction.
+Specialization C owns architecture construction.
 Paul (human) remains the final decision-maker.
 Grok is an independent external AI architecture reviewer only.
 
-## Decisions / research findings from prior chapter (06AA)
+## Decisions / research findings from prior chapter (F000)
 
 These remain independent review findings, not Architecture Decisions.
 
@@ -75,7 +75,7 @@ or state must be obtained next.
 5. Interaction of the current MEC/activation model with the still-open Dependency target/consequence and Authority/Precedence questions from earlier research.
 6. Controlled comparison of Grok baseline with Qwen independent review (explicitly deferred until baseline was stable; available for a later chapter if desired).
 
-Current 03 frontier (03AT) is examining the meaning of “minimal” in MEC under the runtime-reasoning model. Align review work with that frontier unless the human referee directs otherwise.
+Current 03 frontier (C019) is examining the meaning of “minimal” in MEC under the runtime-reasoning model. Align review work with that frontier unless the human referee directs otherwise.
 
 ## Current files / relevant references
 
@@ -85,10 +85,10 @@ Current 03 frontier (03AT) is examining the meaning of “minimal” in MEC unde
 
 ### Primary current architecture research
 
-- `docs/handoffs/03AT-Architecture-Research.md` (current 03 frontier at bootstrap of 06AB)
-- `docs/handoffs/03AS-Architecture-Research.md`
-- `docs/architecture/constraint-problem-map-03AS.md`
-- `docs/architecture/minimal-execution-context-03AS.md`
+- `.ai/handoffs/C/C019-Architecture-Research.md` (current 03 frontier at bootstrap of F001)
+- `.ai/handoffs/C/C018-Architecture-Research.md`
+- `docs/architecture/constraint-problem-map-C018.md`
+- `docs/architecture/minimal-execution-context-C018.md`
 
 ### Project rules / skills
 
@@ -124,11 +124,11 @@ Current 03 frontier (03AT) is examining the meaning of “minimal” in MEC unde
 
 ### Confirmed / observed
 
-- 06AA completed the five substantive review tasks listed in its handoff.
-- Current 03 research frontier (03AT) focuses on the meaning of “minimal” in MEC under a runtime-reasoning model.
+- F000 completed the five substantive review tasks listed in its handoff.
+- Current 03 research frontier (C019) focuses on the meaning of “minimal” in MEC under a runtime-reasoning model.
 - Applicability is currently treated in 03 as a runtime reasoning result, not a mandatory persistent knowledge layer.
 - No implementation artefacts were justified by the completed 03 or 06 tests.
-- 06AA handoff is READY_FOR_HANDOFF at the moment of this bootstrap preparation.
+- F000 handoff is READY_FOR_HANDOFF at the moment of this bootstrap preparation.
 
 ### Inferred
 
@@ -145,28 +145,28 @@ Current 03 frontier (03AT) is examining the meaning of “minimal” in MEC unde
 
 ## Last completed task
 
-Bootstrap preparation of 06AB (this DRAFT handoff). Substantive work has not yet begun.
+Bootstrap preparation of F001 (this DRAFT handoff). Substantive work has not yet begun.
 
 ## Immediate next task
 
-1. After the human places this DRAFT handoff and completes the required lifecycle writes (including 06AA READY_FOR_HANDOFF → HANDED_OFF), continue independent review from the current frontier: residual bootstrap-kernel question and/or minimum-information characterisation of capability description vs applicability surface — as directed by the human referee or by the then-current state of 03.
+1. After the human places this DRAFT handoff and completes the required lifecycle writes (including F000 READY_FOR_HANDOFF → HANDED_OFF), continue independent review from the current frontier: residual bootstrap-kernel question and/or minimum-information characterisation of capability description vs applicability surface — as directed by the human referee or by the then-current state of 03.
 2. Do not automatically resume earlier C-series or Dependency formalization unless the current MEC question directly requires it.
 
 ## Things not to redo
 
-- Do not repeat the 06AA Independent Baseline, Dependency↔Resolution stress test, Bottleneck Audit, Post A/B/C review, or Dynamic Context Activation analysis merely for migration.
+- Do not repeat the F000 Independent Baseline, Dependency↔Resolution stress test, Bottleneck Audit, Post A/B/C review, or Dynamic Context Activation analysis merely for migration.
 - Do not re-derive the handoff lifecycle rules.
 - Do not treat Qwen conclusions as starting premises unless a controlled comparison is explicitly requested.
 - Do not invent implementation structure from the semantic findings.
 
 ## Recommended starting context for next chapter (or continuation)
 
-1. This handoff (`docs/handoffs/06AB-Independent-Review-Grok.md`)
-2. `docs/handoffs/06AA-Independent-Review-Grok.md` (after it becomes HANDED_OFF)
+1. This handoff (`.ai/handoffs/F/F001-Independent-Review-Grok.md`)
+2. `.ai/handoffs/F/F000-Independent-Review-Grok.md` (after it becomes HANDED_OFF)
 3. `docs/architecture/independent-review-grok-onboarding.md`
-4. Current 03 handoff (`docs/handoffs/03AT-Architecture-Research.md` or its successor)
-5. `docs/architecture/constraint-problem-map-03AS.md`
-6. `docs/architecture/minimal-execution-context-03AS.md`
+4. Current 03 handoff (`.ai/handoffs/C/C019-Architecture-Research.md` or its successor)
+5. `docs/architecture/constraint-problem-map-C018.md`
+6. `docs/architecture/minimal-execution-context-C018.md`
 7. Applicable `.ai/rules/*` and `.ai/skills/conversation-handoff/*`
 
 ## Research references

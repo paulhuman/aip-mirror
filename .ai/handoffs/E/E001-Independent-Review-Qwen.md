@@ -1,21 +1,19 @@
 # Conversation Handoff
 
 **Conversation:**
-AIP Mirror — 05AB — Independent Review (Qwen)
+E001 — Independent Review (Qwen)
 
 **Specialization:**
-05
+E
 
 **Chapter:**
-AB
+001
 
 **Previous chapter:**
-05AA — Independent Review (Qwen)
+000
 
 **Status:**
 HANDED_OFF
-
----
 
 ## Current objective
 
@@ -29,7 +27,7 @@ Completed comprehensive adversarial research pass on **Minimum Resolution Contex
 
 ### 1. Bootstrap & Setup
 
-- Read 05AA handoff (READY_FOR_HANDOFF), project rules, onboarding guide
+- Read E000 handoff (READY_FOR_HANDOFF), project rules, onboarding guide
 - Confirmed READ-ONLY capability (Branch B)
 - Validated Pragmatic Hybrid Approach for UNRESOLVED modeling (Model A for Core, Model B for Tracer/UI)
 
@@ -146,12 +144,12 @@ All other candidate axes eliminated from internal Resolution Context (moved to r
 
 ### Handoff chain (read in prescribed order)
 
-- `docs/handoffs/03A-Architecture-Research.md`
-- `docs/handoffs/03C-Architecture-Research.md`
-- `docs/handoffs/03D-Architecture-Research.md`
-- `docs/handoffs/03E-Architecture-Research.md`
-- `docs/handoffs/03AF-Architecture-Research.md`
-- `docs/handoffs/05AA-Independent-Review-Qwen.md`
+- earlier architecture-research handoff
+- earlier architecture-research handoff
+- earlier architecture-research handoff
+- earlier architecture-research handoff
+- `.ai/handoffs/C/C005-Architecture-Research.md`
+- `.ai/handoffs/E/E000-Independent-Review-Qwen.md`
 
 ---
 
@@ -255,7 +253,7 @@ Then await architect (ChatGPT) feedback before any AD promotion.
 ## Things not to redo
 
 - Do not redo the 6-phase independent review.
-- Do not re-derive established decisions from 03A/03C/03D/03E/03AF/05AA.
+- Do not re-derive established decisions from earlier architecture-research chapters/C005/E000.
 - Do not re-run the 8-axis elimination pass (results documented above).
 - Do not restart broad OVERRIDE research unless new counterexample requires it.
 - Do not prematurely adopt typed UNRESOLVED as formal AD for the Core execution engine.

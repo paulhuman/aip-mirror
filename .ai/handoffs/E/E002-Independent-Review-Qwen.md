@@ -1,25 +1,23 @@
 # Conversation Handoff
 
 **Conversation:**
-AIP Mirror — 05AC — Independent Review (Qwen)
+E002 — Independent Review (Qwen)
 
 **Specialization:**
-05
+E
 
 **Chapter:**
-AC
+002
 
 **Previous chapter:**
-05AB — Independent Review (Qwen)
+001
 
 **Status:**
 HANDED_OFF
 
----
-
 ## Current objective
 
-Проведение независимого архитектурного ревью для проекта AIP Mirror через cross-model review process с архитектором (ChatGPT, specialization 03).
+Проведение независимого архитектурного ревью для проекта AIP Mirror через cross-model review process с архитектором (ChatGPT, specialization C).
 
 Выполнен полный цикл adversarial research (C-1 через C-10) по онтологическому статусу Resolution, референтной идентификации, минимальному семантическому содержанию result-aspect, и семантике dependency между evaluations.
 
@@ -27,9 +25,9 @@ HANDED_OFF
 
 ## Completed
 
-### 1. Bootstrap & Setup (05AC)
+### 1. Bootstrap & Setup (E002)
 
-- Read 05AB handoff, project rules, onboarding guide
+- Read E001 handoff, project rules, onboarding guide
 - Подтверждён READ-ONLY capability (Branch B)
 - Завершён post-bootstrap consistency verification после ручного коммита пользователем (commit `8f25538`)
 - BOOTSTRAP = COMPLETE
@@ -150,7 +148,7 @@ HANDED_OFF
 
 ## Working decisions (not yet formal ADs)
 
-### Carried from 05AB:
+### Carried from E001:
 
 - **WD-01**: Resolution Context minimal core is `{subject, state}` (definitive cases)
 - **WD-02**: `cause/reason` conditionally necessary (UNRESOLVED only)
@@ -251,14 +249,14 @@ HANDED_OFF
 
 ### Handoff chain
 
-- `docs/handoffs/03A-Architecture-Research.md`
-- `docs/handoffs/03C-Architecture-Research.md`
-- `docs/handoffs/03D-Architecture-Research.md`
-- `docs/handoffs/03E-Architecture-Research.md`
-- `docs/handoffs/03AF-Architecture-Research.md`
-- `docs/handoffs/05AA-Independent-Review-Qwen.md` (SUPERSEDED)
-- `docs/handoffs/05AB-Independent-Review-Qwen.md` (HANDED_OFF)
-- `docs/handoffs/05AC-Independent-Review-Qwen.md` (текущий, → READY_FOR_HANDOFF)
+- earlier architecture-research handoff
+- earlier architecture-research handoff
+- earlier architecture-research handoff
+- earlier architecture-research handoff
+- `.ai/handoffs/C/C005-Architecture-Research.md`
+- `.ai/handoffs/E/E000-Independent-Review-Qwen.md` (SUPERSEDED)
+- `.ai/handoffs/E/E001-Independent-Review-Qwen.md` (HANDED_OFF)
+- `.ai/handoffs/E/E002-Independent-Review-Qwen.md` (текущий, → READY_FOR_HANDOFF)
 
 ### Cross-model review reports (в этом чате):
 
@@ -315,8 +313,8 @@ HANDED_OFF
 
 ### Confirmed / observed
 
-- 8 candidate axes eliminated from Resolution Context (05AB)
-- `{subject, state}` minimum for definitive Resolution Context (05AB)
+- 8 candidate axes eliminated from Resolution Context (E001)
+- `{subject, state}` minimum for definitive Resolution Context (E001)
 - Result-aspect model sufficient without separate entity (C-3, C-4)
 - `{subject, content}` minimum intrinsic content (C-5)
 - State ⊂ content (C-6)
@@ -356,7 +354,7 @@ HANDED_OFF
 
 ---
 
-## Immediate next task (для 05AD)
+## Immediate next task (для E003)
 
 ### Priority 1 — Continuation of C-series:
 
@@ -388,7 +386,7 @@ HANDED_OFF
 ## Things not to redo
 
 - Не повторять 6-phase independent review
-- Не переоткрывать WD-01 through WD-09 (established in 05AB/05AC)
+- Не переоткрывать WD-01 through WD-09 (established in E001/E002)
 - Не ре-тестировать C-1 through C-10 (results documented)
 - Не вводить typed UNRESOLVED, 3-valued logic, fixed-point semantics
 - Не вводить generic dependency/precedence engines
@@ -403,7 +401,7 @@ HANDED_OFF
 
 ## Recommended starting context for next chapter
 
-Старт с этого хэндоффа как baseline. Chapter 05AC завершил полный C-series research arc (C-1 through C-10) по семантике evaluations и dependencies.
+Старт с этого хэндоффа как baseline. Chapter E002 завершил полный C-series research arc (C-1 through C-10) по семантике evaluations и dependencies.
 
 **Ключевые established findings:**
 
@@ -420,4 +418,4 @@ HANDED_OFF
 
 **Capability:** Branch B (READ-ONLY AI) во всех bootstrap/checkpoint/migration procedures.
 
-Работа продолжается с 05AD в том же adversarial, semantic-first режиме.
+Работа продолжается с E003 в том же adversarial, semantic-first режиме.

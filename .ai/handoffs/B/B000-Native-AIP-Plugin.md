@@ -1,23 +1,23 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 02AA — Native AIP Plugin
+**Conversation:**
+B000 — Native AIP Plugin
 
-Specialization:
-02
+**Specialization:**
+B
 
-Chapter:
-AA
+**Chapter:**
+000
 
-Previous chapter:
-N/A — this is the first handoff record for the 02 specialization
+**Previous chapter:**
+N/A
 
-Status:
+**Status:**
 HANDED_OFF
 
 ## Current objective
 
-Establish the durable handoff state for chapter 02AA and migrate the Native AIP Plugin work cleanly to chapter 02AB.
+Establish the durable handoff state for chapter B000 and migrate the Native AIP Plugin work cleanly to chapter B001.
 
 ## Completed
 
@@ -34,7 +34,7 @@ Establish the durable handoff state for chapter 02AA and migrate the Native AIP 
 
 ## Current implementation state
 
-Chapter 02AA is the Native AIP Plugin specialization stream. Native implementation has not yet been completed; this handoff captures the chapter/workflow state established before continuing in 02AB.
+Chapter B000 is the Native AIP Plugin specialization stream. Native implementation has not yet been completed; this handoff captures the chapter/workflow state established before continuing in B001.
 
 The native implementation is intended to use C++ with the Illustrator 2026 AIP SDK. The interactive Mirror tool is the production target. The JSX prototype is a behavioral reference and must not be mechanically translated into C++.
 
@@ -85,14 +85,14 @@ The native implementation is intended to use C++ with the Illustrator 2026 AIP S
 
 ### Confirmed / observed
 
-- The project uses specializations 01 JSX Prototype, 02 Native AIP Plugin, 03 Architecture & Research, and 04 Project Workshop.
+- The project uses specializations A JSX Prototype, B Native AIP Plugin, C Architecture & Research, and D Project Workshop.
 - The 02 specialization is named Native AIP Plugin.
 - The chapter naming convention uses an alphabetical suffix within each specialization.
 - The handoff lifecycle and checkpoint/bootstrap procedures are explicitly defined in repository rules.
 
 ### Inferred
 
-- 02AB should continue from this chapter's Native AIP Plugin scope rather than restart project-wide architectural decisions.
+- B001 should continue from this chapter's Native AIP Plugin scope rather than restart project-wide architectural decisions.
 
 ### Assumed / unverified
 
@@ -108,7 +108,7 @@ Formalized and tested the conversation handoff workflow, including mandatory ini
 
 ## Immediate next task
 
-Initialize chapter 02AB using the static bootstrap procedure.
+Initialize chapter B001 using the static bootstrap procedure.
 
 ## Things not to redo
 
@@ -116,8 +116,8 @@ Initialize chapter 02AB using the static bootstrap procedure.
 - Do not recreate chapter-specific values inside `BOOTSTRAP.md`.
 - Do not treat checkpoint commits as migration commits.
 - Do not require a separate user approval for mandatory handoff bootstrap/checkpoint commits.
-- Do not mark this handoff `HANDED_OFF` from chapter 02AA.
+- Do not mark this handoff `HANDED_OFF` from chapter B000.
 
 ## Recommended starting context for next chapter
 
-Start by reading `.ai/skills/conversation-handoff/BOOTSTRAP.md`, `.ai/rules/conversation-lifecycle.md`, and `.ai/rules/workflow.md`, then read this handoff and inspect the relevant native-plugin/project files and references before beginning implementation. Chapter 02AB must create its own `docs/handoffs/02AB-Native-AIP-Plugin.md` with status `DRAFT` immediately during bootstrap and commit it without asking for permission. After successful bootstrap, 02AB must change this handoff from `READY_FOR_HANDOFF` to `HANDED_OFF` and commit that transition.
+Start by reading `.ai/skills/conversation-handoff/BOOTSTRAP.md`, `.ai/rules/conversation-lifecycle.md`, and `.ai/rules/workflow.md`, then read this handoff and inspect the relevant native-plugin/project files and references before beginning implementation. Chapter B001 must create its own `.ai/handoffs/B/B001-Native-AIP-Plugin.md` with status `DRAFT` immediately during bootstrap and commit it without asking for permission. After successful bootstrap, B001 must change this handoff from `READY_FOR_HANDOFF` to `HANDED_OFF` and commit that transition.

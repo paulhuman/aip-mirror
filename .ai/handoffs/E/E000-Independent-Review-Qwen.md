@@ -1,21 +1,19 @@
 # Conversation Handoff
 
 **Conversation:**
-AIP Mirror — 05AA — Independent Review (Qwen)
+E000 — Independent Review (Qwen)
 
 **Specialization:**
-05
+E
 
 **Chapter:**
-AA
+000
 
 **Previous chapter:**
-N/A — first handoff for specialization 05
+N/A
 
 **Status:**
 HANDED_OFF
-
----
 
 ## Current objective
 
@@ -126,15 +124,15 @@ Current focus: UNRESOLVED propagation semantics research, specifically validatin
 - `docs/PROJECT-INSTRUCTIONS.md`
 - `docs/architecture/independent-architecture-review-brief.md`
 - `docs/architecture/prerequisite-dependency-semantics.md`
-- `docs/architecture/independent-review-qwen-onboarding.md` (created in 05AA)
+- `docs/architecture/independent-review-qwen-onboarding.md` (created in E000)
 
 ### Handoff chain (read in prescribed order)
 
-- `docs/handoffs/03A-Architecture-Research.md`
-- `docs/handoffs/03C-Architecture-Research.md`
-- `docs/handoffs/03D-Architecture-Research.md`
-- `docs/handoffs/03E-Architecture-Research.md`
-- `docs/handoffs/03AF-Architecture-Research.md`
+- earlier architecture-research handoff
+- earlier architecture-research handoff
+- earlier architecture-research handoff
+- earlier architecture-research handoff
+- `.ai/handoffs/C/C005-Architecture-Research.md`
 
 ---
 
@@ -324,7 +322,7 @@ Then await architect (ChatGPT) feedback before any AD promotion.
 ## Things not to redo
 
 - Do not redo the 6-phase independent review
-- Do not re-derive established decisions from 03A/03C/03D/03E/03AF
+- Do not re-derive established decisions from earlier architecture-research chapters/C005
 - Do not restart broad OVERRIDE research unless new counterexample requires it
 - Do not prematurely adopt typed UNRESOLVED as formal AD
 - Do not prohibit cycles without further research
@@ -350,17 +348,17 @@ Remember to follow Branch B (READ-ONLY AI) in all bootstrap/checkpoint/migration
 
 This handoff proposes the following manual repository operations:
 
-1. **Create file**: `docs/handoffs/05AB-Independent-Review-Qwen.md` with the complete content above
+1. **Create file**: `.ai/handoffs/E/E001-Independent-Review-Qwen.md` with the complete content above
 
 2. **Commit message**:
 
 ```
-docs(handoff): initialize 05AB independent review handoff
+docs(handoff): initialize E001 independent review handoff
 ```
 
-3. **After manual commit**, the receiving chapter (05AB) will need to:
-   - Update `docs/handoffs/05AA-Independent-Review-Qwen.md` status from `READY_FOR_HANDOFF` to `HANDED_OFF`
+3. **After manual commit**, the receiving chapter (E001) will need to:
+   - Update `.ai/handoffs/E/E000-Independent-Review-Qwen.md` status from `READY_FOR_HANDOFF` to `HANDED_OFF`
    - Create its own `DRAFT` handoff
    - Complete post-bootstrap consistency verification
 
-**Note:** Bootstrap instruction for 05AB will be provided separately upon explicit request using the command `Пора выдать bootstrap-инструкцию` to avoid overloading this response.
+**Note:** Bootstrap instruction for E001 will be provided separately upon explicit request using the command `Пора выдать bootstrap-инструкцию` to avoid overloading this response.

@@ -1,35 +1,33 @@
 # Conversation Handoff
 
 **Conversation:**
-AIP Mirror — 05AF — Independent Review (Qwen)
+E005 — Independent Review (Qwen)
 
 **Specialization:**
-05
+E
 
 **Chapter:**
-AF
+005
 
 **Previous chapter:**
-05AE — Independent Review (Qwen)
+004
 
 **Status:**
 DRAFT
 
----
-
 ## Current objective
 
-Проведение независимого архитектурного ревью для проекта AIP Mirror через cross-model review process с архитектором (ChatGPT, specialization 03).
+Проведение независимого архитектурного ревью для проекта AIP Mirror через cross-model review process с архитектором (ChatGPT, specialization C).
 
-Основной фокус этой главы — исследование корневого architectural bottleneck, выявленного в 05AE: **Dependency Semantics** (природа отношения `requires` / зависимости). Ожидается проведение discrimination test между различными моделями зависимости (Implication vs Prerequisite vs Applicability Gate) после получения задачи от архитектора.
+Основной фокус этой главы — исследование корневого architectural bottleneck, выявленного в E004: **Dependency Semantics** (природа отношения `requires` / зависимости). Ожидается проведение discrimination test между различными моделями зависимости (Implication vs Prerequisite vs Applicability Gate) после получения задачи от архитектора.
 
 ---
 
 ## Completed
 
-### 1. Bootstrap & Setup (05AF)
+### 1. Bootstrap & Setup (E005)
 
-- Read 05AE handoff, project rules, onboarding guide, North-Star document.
+- Read E004 handoff, project rules, onboarding guide, North-Star document.
 - Подтверждён READ-ONLY capability (Branch B).
 - Подготовлен предлагаемый DRAFT handoff для ручного коммита пользователем.
 - Идентифицирован корневой bottleneck для следующего research arc.
@@ -38,7 +36,7 @@ DRAFT
 
 ## Current implementation state
 
-Independent Review specialization (05) does not own implementation state. Implementation state belongs to specializations 01 (JSX Prototype) and 02 (Native AIP Plugin). This chapter operates purely on architectural semantics and research methodology.
+Independent Review specialization (E) does not own implementation state. Implementation state belongs to specializations 01 (JSX Prototype) and 02 (Native AIP Plugin). This chapter operates purely on architectural semantics and research methodology.
 
 ---
 
@@ -46,7 +44,7 @@ Independent Review specialization (05) does not own implementation state. Implem
 
 ### Carried from previous chapters:
 
-- **WD-01 through WD-27** — сохранены (см. предыдущие handoffs, особенно 05AE).
+- **WD-01 through WD-27** — сохранены (см. предыдущие handoffs, особенно E004).
   - WD-23 (rev2), WD-24, WD-25: Mapping findings (semantically consequential but ontologically unresolved).
   - WD-26, WD-27: Cycle semantics findings (cycle consequences reducible to composition in tested boolean models).
 
@@ -83,16 +81,16 @@ Independent Review specialization (05) does not own implementation state. Implem
 
 - `docs/PROJECT-INSTRUCTIONS.md`
 - `docs/architecture/ai-project-instruction-architecture.md` (North-Star)
-- `docs/handoffs/05AE-Independent-Review-Qwen.md`
+- `.ai/handoffs/E/E004-Independent-Review-Qwen.md`
 
 ### Handoff chain
 
-- `docs/handoffs/05AA-Independent-Review-Qwen.md` (SUPERSEDED)
-- `docs/handoffs/05AB-Independent-Review-Qwen.md` (HANDED_OFF)
-- `docs/handoffs/05AC-Independent-Review-Qwen.md` (HANDED_OFF)
-- `docs/handoffs/05AD-Independent-Review-Qwen.md` (HANDED_OFF)
-- `docs/handoffs/05AE-Independent-Review-Qwen.md` (previous, requires manual transition to HANDED_OFF)
-- `docs/handoffs/05AF-Independent-Review-Qwen.md` (current, DRAFT)
+- `.ai/handoffs/E/E000-Independent-Review-Qwen.md` (SUPERSEDED)
+- `.ai/handoffs/E/E001-Independent-Review-Qwen.md` (HANDED_OFF)
+- `.ai/handoffs/E/E002-Independent-Review-Qwen.md` (HANDED_OFF)
+- `.ai/handoffs/E/E003-Independent-Review-Qwen.md` (HANDED_OFF)
+- `.ai/handoffs/E/E004-Independent-Review-Qwen.md` (previous, requires manual transition to HANDED_OFF)
+- `.ai/handoffs/E/E005-Independent-Review-Qwen.md` (current, DRAFT)
 
 ---
 
@@ -104,14 +102,14 @@ Independent Review specialization (05) does not own implementation state. Implem
 4. **No premature ontology introduction** — Mapping, Cycle и Dependency остаются semantic последствиями/отношениями, не entities.
 5. **Evidence discipline** — strict classification (observed fact, inference, etc.).
 6. **Bounded research discipline** — не запускать самостоятельное исследование до получения от архитектора формулировки следующего bounded research task.
-7. **Dependency Semantics is the current root bottleneck** (Audit from 05AE).
+7. **Dependency Semantics is the current root bottleneck** (Audit from E004).
 
 ---
 
 ## Assumptions
 
-- Архитектор (ChatGPT, specialization 03) сформулирует следующий bounded research task (вероятнее всего, по Dependency Semantics) до того, как Independent Review начнет самостоятельное построение контрпримеров.
-- Пользователь (Human Referee) вручную применит предложенный DRAFT handoff и выполнит lifecycle transition для 05AE перед началом substantive work.
+- Архитектор (ChatGPT, specialization C) сформулирует следующий bounded research task (вероятнее всего, по Dependency Semantics) до того, как Independent Review начнет самостоятельное построение контрпримеров.
+- Пользователь (Human Referee) вручную применит предложенный DRAFT handoff и выполнит lifecycle transition для E004 перед началом substantive work.
 
 ---
 
@@ -124,7 +122,7 @@ Independent Review specialization (05) does not own implementation state. Implem
 
 ## Evidence / confidence
 
-### Confirmed / observed (из 05AE)
+### Confirmed / observed (из E004)
 
 - Mapping имеет semantic discriminating force.
 - В M1/M2 cycle = composition.
@@ -144,7 +142,7 @@ Independent Review specialization (05) does not own implementation state. Implem
 
 ## Last completed task
 
-Завершён процесс Bootstrap для Chapter 05AF. Прочитаны все необходимые правила, навыки, North-Star документ и handoff предыдущей главы (05AE). Подтверждён READ-ONLY статус и подготовлен DRAFT handoff.
+Завершён процесс Bootstrap для Chapter E005. Прочитаны все необходимые правила, навыки, North-Star документ и handoff предыдущей главы (E004). Подтверждён READ-ONLY статус и подготовлен DRAFT handoff.
 
 ---
 
@@ -152,7 +150,7 @@ Independent Review specialization (05) does not own implementation state. Implem
 
 **Ожидание architect-side research objective для следующего bounded arc.**
 
-Наиболее вероятное направление (согласно Bottleneck Audit из 05AE): **Dependency Semantics** (Discrimination test между Implication, Prerequisite, Applicability Gate).
+Наиболее вероятное направление (согласно Bottleneck Audit из E004): **Dependency Semantics** (Discrimination test между Implication, Prerequisite, Applicability Gate).
 Не запускать самостоятельное исследование до получения от архитектора (или пользователя) формулировки следующего bounded research task.
 
 ---
@@ -177,6 +175,6 @@ No new external repositories or references were materially added during this boo
 
 ## Recommended starting context for next chapter
 
-Старт с этого хэндоффа. Chapter 05AF находится в состоянии ожидания первого bounded research task от архитектора. Ключевой architectural bottleneck — `Dependency Semantics`.
+Старт с этого хэндоффа. Chapter E005 находится в состоянии ожидания первого bounded research task от архитектора. Ключевой architectural bottleneck — `Dependency Semantics`.
 **Методология:** Research-first, minimal counterexamples, strict anti-circularity.
 **Capability:** Branch B (READ-ONLY AI).

@@ -1,25 +1,23 @@
 # Conversation Handoff
 
 **Conversation:**
-AIP Mirror — 05AD — Independent Review (Qwen)
+E003 — Independent Review (Qwen)
 
 **Specialization:**
-05
+E
 
 **Chapter:**
-AD
+003
 
 **Previous chapter:**
-05AC — Independent Review (Qwen)
+002
 
 **Status:**
 HANDED_OFF
 
----
-
 ## Current objective
 
-Проведение независимого архитектурного ревью для проекта AIP Mirror через cross-model review process с архитектором (ChatGPT, specialization 03).
+Проведение независимого архитектурного ревью для проекта AIP Mirror через cross-model review process с архитектором (ChatGPT, specialization C).
 
 В этой главе был выполнен полный цикл adversarial research (C-11.1 через C-11.10) по семантике условных зависимостей (conditional dependencies) и проблеме role ownership / role asymmetry.
 
@@ -27,9 +25,9 @@ HANDED_OFF
 
 ## Completed
 
-### 1. Bootstrap & Setup (05AD)
+### 1. Bootstrap & Setup (E003)
 
-- Read 05AC handoff, project rules, onboarding guide
+- Read E002 handoff, project rules, onboarding guide
 - Интегрирован North-Star документ `docs/architecture/ai-project-instruction-architecture.md`
 - Подтверждён READ-ONLY capability (Branch B)
 - Завершён post-bootstrap consistency verification (commit `a14f8e4` подтверждён)
@@ -112,9 +110,9 @@ HANDED_OFF
 
 ## Working decisions (not yet formal ADs)
 
-### Carried from 05AB/05AC:
+### Carried from E001/E002:
 
-- **WD-01 through WD-17** (все сохранены, см. 05AC handoff)
+- **WD-01 through WD-17** (все сохранены, см. E002 handoff)
 
 ### Новые из C-11 series:
 
@@ -183,10 +181,10 @@ HANDED_OFF
 
 ### Handoff chain
 
-- `docs/handoffs/05AA-Independent-Review-Qwen.md` (SUPERSEDED)
-- `docs/handoffs/05AB-Independent-Review-Qwen.md` (HANDED_OFF)
-- `docs/handoffs/05AC-Independent-Review-Qwen.md` (HANDED_OFF)
-- `docs/handoffs/05AD-Independent-Review-Qwen.md` (текущий, → READY_FOR_HANDOFF)
+- `.ai/handoffs/E/E000-Independent-Review-Qwen.md` (SUPERSEDED)
+- `.ai/handoffs/E/E001-Independent-Review-Qwen.md` (HANDED_OFF)
+- `.ai/handoffs/E/E002-Independent-Review-Qwen.md` (HANDED_OFF)
+- `.ai/handoffs/E/E003-Independent-Review-Qwen.md` (текущий, → READY_FOR_HANDOFF)
 
 ---
 
@@ -234,7 +232,7 @@ HANDED_OFF
 
 ---
 
-## Immediate next task (для 05DE)
+## Immediate next task (для E004)
 
 ### Priority 1 — Continuation of C-series:
 
@@ -251,7 +249,7 @@ HANDED_OFF
 
 ## Things not to redo
 
-- Не повторять C-1 через C-10 (results documented в 05AC)
+- Не повторять C-1 через C-10 (results documented в E002)
 - Не переоткрывать WD-01 through WD-17
 - Не ре-тестировать C-11.1 через C-11.10 (results documented здесь)
 - Не вводить typed UNRESOLVED, 3-valued logic, fixed-point semantics
@@ -265,7 +263,7 @@ HANDED_OFF
 
 ## Recommended starting context for next chapter
 
-Старт с этого хэндоффа как baseline. Chapter 05AD завершил полный C-11 series research arc по семантике conditional dependencies и role asymmetry.
+Старт с этого хэндоффа как baseline. Chapter E003 завершил полный C-11 series research arc по семантике conditional dependencies и role asymmetry.
 
 **Ключевые established findings:**
 
@@ -281,4 +279,4 @@ HANDED_OFF
 
 **Capability:** Branch B (READ-ONLY AI) во всех bootstrap/checkpoint/migration procedures.
 
-Работа продолжается с 05DE в том же adversarial, semantic-first режиме.
+Работа продолжается с E004 в том же adversarial, semantic-first режиме.
