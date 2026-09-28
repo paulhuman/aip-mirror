@@ -264,6 +264,8 @@ HANDED_OFF
 
 Lifecycle, operation, and commit remain separate dimensions. This distinction is intentionally preserved for later operation-vocabulary and commit-vocabulary analysis.
 
+Handoff filenames already encode the specialization/chapter identity in their current naming scheme, and the chapter sequence provides the existing chronological ordering mechanism for current handoff discovery. No new `SUPERSEDED`-style lifecycle state or separate historical-status mechanism is implied by its removal.
+
 ## 8. BOOTSTRAP decision in 03BA
 
 03BA compared the new INDEX routing model with the residual semantics of the bootstrap procedure.
@@ -530,7 +532,7 @@ EXECUTION
 
 The current INDEX architecture is intentionally being treated as a reviewable hypothesis rather than as permanently frozen architecture.
 
-Grok and Qwen are to independently review the **current repository state** after rereading the current `.ai` infrastructure. They should not reconstruct previous chapters from conversation history or rely on stale onboarding assumptions.
+Grok and Qwen are independently reviewing the **current repository state** after rereading the current `.ai` infrastructure. They should not reconstruct previous chapters from conversation history or rely on stale onboarding assumptions.
 
 The review should test, in particular:
 
@@ -541,13 +543,114 @@ The review should test, in particular:
 - whether BOOTSTRAP remains independently justified as an ordered workflow;
 - whether the new paths and ownership model are internally consistent;
 - whether the `.ai` layer remains project-agnostic;
-- whether progressive disclosure actually reduces active context rather than moving complexity around.
+- whether progressive disclosure actually reduces active context rather than moving complexity around;
+- whether the current INDEX presentation remains scalable for a small command surface of roughly 10–15 commands.
 
 The reviewers must provide criticism and concrete evidence. They must not modify repository files during the review.
 
 This review is a validation checkpoint for the current entry-layer design, not permission to restart physical Iteration 2 restructuring.
 
-## 17. Remaining open questions
+## 17. Review-derived open questions
+
+The independent review has produced several questions that are intentionally **not resolved yet**.
+
+### 17.1 Minimum semantic metadata in INDEX
+
+Qwen challenged the inclusion of `Repository state may change` and `Commit` metadata on the grounds that routing metadata can drift into shadow ownership.
+
+Current decision: **do not remove these fields yet**.
+
+They provide useful discovery information that would otherwise require opening canonical owners merely to answer basic operational questions. The current architecture explicitly states that these fields are metadata, not authorization and not procedure.
+
+Open architectural question:
+
+> **What is the minimum amount of semantic metadata a router may contain without becoming a canonical owner?**
+
+This question should be tested against future INDEX growth rather than answered by prematurely deleting useful routing information.
+
+### 17.2 `Пора выдать bootstrap-инструкцию`
+
+The independent review also questioned whether:
+
+`Пора выдать bootstrap-инструкцию`
+
+is a genuine user-facing operation/capability or merely an output-producing sub-operation of migration.
+
+Current position: keep the command and its routing unchanged for now.
+
+Questions to resolve later:
+
+- Is bootstrap-instruction generation independently useful outside migration?
+- Should it remain a standalone read-only capability?
+- Does standalone invocation create any lifecycle ambiguity?
+- Is the current naming precise enough to distinguish generation from actual bootstrap execution?
+- Should INDEX describe it as a capability/output operation rather than a handoff operation?
+
+No lifecycle change or commit should be introduced merely to answer these questions.
+
+### 17.3 Soft dual source in `lifecycle.md`
+
+Grok identified a possible **soft dual source** because some user-facing command phrases are repeated in `lifecycle.md` even though INDEX is intended to be the discovery/routing surface.
+
+Current classification: **Moderate cleanup candidate**, not an immediate architectural defect.
+
+Question for later cleanup:
+
+> Should INDEX become the sole discovery surface for user-facing command phrases, while `lifecycle.md` retains only lifecycle semantics, authorization/constraints, and references to the operation without duplicating its command wording?
+
+This should be resolved by semantic ownership analysis, not by mechanically deleting every repeated phrase.
+
+### 17.4 INDEX scalability and presentation
+
+Grok correctly identified a scalability concern: the current table works well for five commands, but its presentation should be reconsidered before the command surface grows significantly.
+
+Current expectation is not dozens of operations; a likely long-term scale is approximately **10–15 user-facing commands**.
+
+Open design question:
+
+> How should INDEX be formatted so that a 10–15 command surface remains immediately scannable, operationally precise, and clearly separated from canonical procedures?
+
+This is primarily a presentation/discovery problem, not evidence that another semantic owner is needed.
+
+### 17.5 `ENTRY.md` vs `BOOTSTRAP.md`
+
+A proposal was raised to rename and move:
+
+`.ai/workflows/handoff/BOOTSTRAP.md`
+
+→ `.ai/ENTRY.md`
+
+The proposal is attractive at first glance because `BOOTSTRAP.md` is involved in bringing a new conversation into the project. However, the current semantic classification argues against treating these names as interchangeable:
+
+- `INDEX.md` is already the entry/routing layer;
+- `BOOTSTRAP.md` is an ordered receiving-chapter bootstrap workflow;
+- `ENTRY.md` would naturally imply a general entry surface, not a bootstrap procedure.
+
+Therefore **do not perform this rename now**.
+
+If a future iteration demonstrates a real need for a root `.ai/ENTRY.md`, it should be designed as a genuinely new semantic layer or thin entry contract, not created by renaming an existing workflow merely for naming aesthetics.
+
+### 17.6 Future chapter/specialization identifier format
+
+The current identifier pattern such as `03AZ` is considered **infrastructure-agnostic**, not AIP Mirror-specific leakage. The same pattern can be used across projects.
+
+However, a future generic format is preferred:
+
+```text
+specialization: [A-Z]
+chapter/chat: [0-9]{3}
+
+example:
+C027
+```
+
+Under this model, the current specialization `03` would become a letter such as `C`, and chapters/chats would run from `C000` through `C999` within that specialization.
+
+This is a **future naming TODO**, not a current Iteration 2 migration target.
+
+When eventually adopted, all affected filename, routing, handoff, bootstrap, and documentation references must be migrated together and followed by the standard post-edit semantic consistency sweep.
+
+## 18. Remaining open questions
 
 Do not silently resolve the following before review/evidence:
 
@@ -558,11 +661,16 @@ Do not silently resolve the following before review/evidence:
 - long-term handoff retention/archive policy;
 - exact long-term `.ai/architecture/` taxonomy;
 - whether any remaining mixed rule files require another decomposition pass;
-- whether future evidence justifies a separate `ENTRY.md` layer.
+- the minimum semantic metadata a router may contain without becoming a canonical owner;
+- the independent status and naming of bootstrap-instruction generation;
+- the soft dual source between INDEX command discovery and lifecycle command wording;
+- the scalable presentation of a roughly 10–15 command INDEX;
+- the future `[A-Z]` specialization + `[0-9]{3}` chapter identifier convention;
+- whether future evidence justifies a separate `.ai/ENTRY.md` layer.
 
 The fate of `.ai/workflows/handoff/BOOTSTRAP.md` is **no longer open in Iteration 2**: 03BA established that it remains a canonical ordered workflow at that path. It should only be reconsidered if independent review produces concrete contradictory evidence.
 
-## 18. Deferred experiments
+## 19. Deferred experiments
 
 ### Handoff Content Extraction Test
 
@@ -572,7 +680,18 @@ Take a real handoff and classify every content unit, then test whether project k
 
 Revisit whether the existing `INDEX.md` is sufficient as the long-term discovery/routing surface or whether a separate entry document has a justified role. Current Iteration 2 position: no `ENTRY.md`.
 
-## 19. Migration note
+### Future Identifier Migration Test
+
+Prototype the future specialization/chapter identifier model independently before changing active handoff filenames:
+
+```text
+current: 03AZ
+future:  C027
+```
+
+Validate readability, chronological discovery, routing, handoff references, and cross-project portability before any migration.
+
+## 20. Migration note
 
 The current architecture state is represented by this file and the current `.ai` tree. Future chapters must start from the current repository state rather than reconstructing 03AU–03BA from conversation history.
 
