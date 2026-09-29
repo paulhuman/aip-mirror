@@ -1,7 +1,6 @@
-# 03AU — AI Infrastructure Restructuring Working Notes
+# AI Infrastructure Restructuring Working Notes
 
-Status: Durable migration context / Iteration 2 — updated after 03BA independent review
-Specialization: 03 — Architecture & Research
+Status: Durable architecture context / Iteration 2 and current entry-layer architecture
 Scope: `.ai` infrastructure, repository entry points, semantic ownership, restructuring, verification
 
 ## 1. Purpose
@@ -89,7 +88,7 @@ This is an explicit portability strategy:
     = current project's configurable identity, references, and vocabulary
 ```
 
-For AIP Mirror, `config.yaml` contains repository identity, external reference repositories, commit scopes, and project terminology. fileciteturn105file0L2-L2
+For AIP Mirror, `config.yaml` contains repository identity, external reference repositories, commit scopes, and project terminology.
 
 This is **intentional project-specific configuration ownership**, not configuration leakage. It gives future projects a single configuration locus to replace or regenerate while keeping generic infrastructure portable.
 
@@ -176,7 +175,7 @@ workflow / execution
 
 ## 5. Current `.ai/INDEX.md` model
 
-03BA implemented `.ai/INDEX.md` as an operational command router and capability-discovery surface.
+The `.ai/INDEX.md` architecture is an operational command router and capability-discovery surface.
 
 Each command entry identifies:
 
@@ -313,7 +312,7 @@ Handoff filenames encode specialization/chapter identity, and the chapter sequen
 
 Qwen's suggestion to make chronological sorting an explicit new canonical lifecycle rule is therefore not accepted as a current architectural change. The existing filename/chapter ordering mechanism is sufficient unless future evidence shows otherwise.
 
-## 8. BOOTSTRAP decision in 03BA
+## 8. BOOTSTRAP architecture decision
 
 BOOTSTRAP retains independent ordered semantics:
 
@@ -522,7 +521,7 @@ continue
 
 A successful edit alone is insufficient evidence of architectural consistency.
 
-## 15. Current status after 03BA
+## 15. Current architecture status
 
 Completed:
 
@@ -552,7 +551,7 @@ EXECUTION
 
 ## 16. Independent architecture review checkpoint
 
-Grok and Qwen independently reviewed the current repository state after rereading the current `.ai` infrastructure. The review was not based on reconstructing 03AU–03BA from conversation history.
+Grok and Qwen independently reviewed the current repository state after rereading the current `.ai` infrastructure. The review was treated as evidence against the repository state, not as a source for reconstructing chapter history.
 
 The core result is strong convergence:
 
@@ -742,7 +741,7 @@ A future ENTRY must be a genuinely new semantic layer, not a relabelled bootstra
 
 The reviews are now consolidated against current repository evidence. The matrix distinguishes accepted work from questions deliberately left open.
 
-| Finding / question | Evidence / review | Decision | 03BA disposition |
+| Finding / question | Evidence / review | Decision | Current disposition |
 |---|---|---|---|
 | `INDEX` routing model | Grok + Qwen converge | Accept | **Keep** |
 | `INDEX` `Repository state may change` + `Commit` metadata | C027 tested their routing value against canonical owners | Remove from routing table | **Removed in C027; semantics remain canonical elsewhere** |
@@ -750,26 +749,26 @@ The reviews are now consolidated against current repository evidence. The matrix
 | `Пора выдать bootstrap-инструкцию` as separate command | Both reviews raise semantic question | Keep unchanged | **Open; no merge with migration** |
 | `BOOTSTRAP.md` as ordered workflow | Grok + Qwen converge | Accept | **Keep** |
 | `SUPERSEDED` removal / historical ordering | Qwen suggestion; current filenames already encode chapter sequence | No new lifecycle rule | **No change** |
-| User-facing command phrases duplicated in `lifecycle.md` | Grok + Qwen | Soft dual source | **03BA cleanup candidate** |
+| User-facing command phrases duplicated in `lifecycle.md` | Grok + Qwen | Soft dual source | **Targeted cleanup candidate** |
 | `.ai/AGENTS.md` effectively empty | Grok + Qwen + current repository state | Real architecture/implementation gap | **Still pending: design and create AGENTS.md** |
 | `[0-9]{2}[A-Z]{2}` naming | Grok concern; semantic classification shows generic infrastructure convention | Do not treat as project leakage | **Future naming migration** |
 | Future `C027`-style identifiers | User architectural direction | Record, test later | **Future TODO** |
-| INDEX scalability / presentation | Grok + Qwen | Real design concern at ~10–15 commands | **03BA design work** |
+| INDEX scalability / presentation | Grok + Qwen | Real design concern at ~10–15 commands | **Completed in C027** |
 | `ENTRY.md` | Both reviews; future semantic role identified | Do not create now | **Iteration 3 experiment** |
 | `config.yaml` contains project-specific scopes/terms | Qwen | Intentional configuration boundary | **No change** |
 | Project-specific data spread across generic rules/skills/workflows | Architecture objective | Must remain prohibited | **Ongoing consistency rule** |
 | Physical Iteration 2 restructuring | Review checkpoint | Completed | **Do not restart** |
 
-### 18.1 Work that actually enters 03BA
+### 18.1 Bounded follow-up work
 
-The review does **not** authorize another broad restructuring pass. The bounded 03BA follow-up is:
+The review did **not** authorize another broad restructuring pass. The bounded follow-up was:
 
-1. repair `.ai/AGENTS.md` as the compact always-on contract;
+1. design and create `.ai/AGENTS.md` as the compact always-on contract;
 2. perform the targeted `lifecycle.md` command-discovery cleanup, preserving lifecycle semantics and authorization;
-3. redesign the presentation of `INDEX.md` if needed for the expected ~10–15 command surface, without changing its ownership boundary;
-4. run a targeted post-edit semantic consistency sweep after these changes.
+3. complete the INDEX presentation/minimum-routing analysis without changing its ownership boundary;
+4. run a targeted post-edit semantic consistency sweep after resulting edits.
 
-The following remain explicitly outside 03BA execution unless new evidence appears:
+The following remain explicitly outside the current architecture scope unless new evidence appears:
 
 - changing INDEX metadata semantics;
 - merging bootstrap-instruction generation into migration;
@@ -870,7 +869,7 @@ Prototype a more compact presentation for approximately 10–15 commands while p
 
 ### Future Identifier Migration Test
 
-Prototype migration from current specialization/chapter identifiers such as `03AZ` to the generic `C027` model before changing active infrastructure.
+Historical chapter-identifier migration is complete; do not preserve the former identifier scheme as an active architecture dependency.
 
 ### Operation / Commit Vocabulary
 
@@ -878,7 +877,7 @@ Keep exact operation IDs, final command syntax, and hard-MUST commit vocabulary 
 
 ## 22. Migration note
 
-The current architecture state is represented by this file and the current `.ai` tree. Future chapters must start from current repository state rather than reconstructing 03AU–03BA from conversation history.
+The current architecture state is represented by this file and the current `.ai` tree. Future chapters must start from current repository state rather than reconstructing earlier architecture chapters from conversation history.
 
 The next architecture/research chapter should treat the independent Grok/Qwen review as evidence against the current model, distinguish accepted findings from open questions, and avoid broad restructuring without evidence.
 
