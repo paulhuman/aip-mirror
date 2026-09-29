@@ -17,7 +17,7 @@ DRAFT
 
 ## Current objective
 
-Design and implement the `.ai/AGENTS.md` entry-layer contract from current repository evidence, then perform a separate targeted semantic cleanup of `docs/PROJECT-INSTRUCTIONS.md` and the handoff lifecycle command-discovery surface.
+Complete the final entry-layer consistency verification after implementing the `.ai/AGENTS.md` contract and the separate cleanup work.
 
 The bounded architecture target is:
 
@@ -42,7 +42,7 @@ AGENTS must remain a compact always-on contract, not a second INDEX, procedure c
 
 ## Immediate next task
 
-Run the final targeted entry-layer consistency sweep, then verify the resulting Git scope and C027 state.
+If this chapter continues, only address a concrete inconsistency revealed by the final sweep. Otherwise prepare the C027 handoff for lifecycle completion.
 
 Completed in this sequence:
 
@@ -257,3 +257,42 @@ The INDEX routing decision is complete. Current work is now split deliberately i
 2. **Cleanup:** correct stale project-instruction references and reduce command-discovery duplication in the lifecycle rule without changing lifecycle semantics.
 
 Do not mix these scopes into a new redesign.
+
+## Final consistency sweep result
+
+The active entry layer is now consistent:
+
+```
+AGENTS
+  ↓
+config + repository
+  ↓
+┌──────────────────────┬────────────────────────┐
+│ AI infrastructure    │ Project work           │
+│ ↓                    │ ↓                      │
+│ INDEX                │ PROJECT-INSTRUCTIONS   │
+│ ↓                    │ ↓                      │
+│ canonical AI owners  │ canonical project      │
+│                      │ sources                │
+└──────────────────────┴────────────────────────┘
+```
+
+Verified:
+
+- `.ai/AGENTS.md` contains only the tested entry contract.
+- `.ai/INDEX.md` uses the current `[A-Z][0-9]{3}` migration placeholder and retains only routing/discovery semantics.
+- `.ai/config.yaml` remains the intentional project-specific configuration locus.
+- `.ai/rules/repository.md` remains canonical for identity, path resolution, boundaries, and write safety.
+- `docs/PROJECT-INSTRUCTIONS.md` uses the current chapter format and canonical bootstrap path.
+- `.ai/rules/handoff/lifecycle.md` retains lifecycle semantics and authorization; checkpoint/migration invocation discovery is routed through INDEX.
+- `.ai/workflows/handoff/BOOTSTRAP.md` remains the canonical ordered bootstrap workflow.
+- durable architecture notes now mark AGENTS and lifecycle cleanup as resolved in C027 rather than pending.
+- no active entry-layer document inspected in the sweep retains the former chapter format or former bootstrap path.
+
+Historical occurrences of old identifiers/paths remain only where the architecture document explicitly records migration history or cleanup evidence; they are not active instructions.
+
+### C027 scope conclusion
+
+The bounded AGENTS architecture question, INDEX minimum-routing question, targeted project-instruction cleanup, lifecycle command-discovery cleanup, and final entry-layer consistency sweep are complete.
+
+No Iteration 2 redesign is justified by the resulting evidence.
