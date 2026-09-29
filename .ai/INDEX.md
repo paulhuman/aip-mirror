@@ -2,14 +2,10 @@
 
 `.ai/INDEX.md` is the operational entry surface for AI-assisted repository work.
 
-It answers:
+It provides two bounded functions:
 
-- which user command or capability is being invoked;
-- what semantic operation that command represents;
-- which canonical owner defines the operation;
-- which owner files must be reread before execution;
-- whether execution may change repository state;
-- whether the operation normally produces a commit.
+- **command routing** — map a user-facing command to the semantic operation and canonical owner needed to execute it;
+- **capability discovery** — locate a canonical capability without reading the entire `.ai/` tree.
 
 INDEX is a router and discovery surface. It is not a rule, skill, or workflow owner.
 
@@ -31,22 +27,24 @@ INDEX MUST NOT reproduce the detailed procedure owned by the target rule, skill,
 
 The following are the currently documented user-facing command phrases. Their exact future command IDs/syntax remain provisional.
 
-| Current command phrase | Semantic operation | Canonical owner | Required reread targets | Repository state may change | Commit |
-|---|---|---|---|---|---|
-| `Пора обновить handoff` | checkpoint current chapter | `.ai/skills/handoff/SKILL.md` | `.ai/rules/handoff/lifecycle.md`; `.ai/skills/handoff/SKILL.md`; current handoff | Yes — checkpoint commit; handoff remains `DRAFT` | Yes — pre-authorized checkpoint commit |
-| `Пора выполнить миграцию в чат XXYY` | migrate current chapter | `.ai/skills/handoff/SKILL.md` + `.ai/rules/handoff/lifecycle.md`; bootstrap procedure for the generated receiving instructions | lifecycle; handoff skill; `.ai/workflows/handoff/BOOTSTRAP.md` | Yes — closing handoff may move `DRAFT → READY_FOR_HANDOFF`; bootstrap instruction is separate | Yes — migration commit |
-| `Пора восстановить handoff` | Lifecycle Recovery | `.ai/rules/handoff/lifecycle.md` | lifecycle; commit policy/skill when a recovery write is required | Yes — bounded recovery only | Yes, if recovery changes |
-| `Пора выполнить handoff lifecycle correction` | historical Lifecycle Correction | `.ai/rules/handoff/lifecycle.md` | lifecycle; commit policy/skill when a correction write is required | Yes — bounded correction only | Yes — explicit correction commit |
-| `Пора выдать bootstrap-инструкцию` | generate bootstrap instruction for the future receiving chapter | `.ai/skills/handoff/SKILL.md` + `.ai/workflows/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow | No lifecycle change | No |
+| Command phrase | Semantic operation | Canonical owner | Read before execution |
+|---|---|---|---|
+| `Пора обновить handoff` | checkpoint current chapter | `.ai/skills/handoff/SKILL.md` | `.ai/rules/handoff/lifecycle.md`; current handoff |
+| `Пора выполнить миграцию в чат XXYY` | migrate current chapter | `.ai/skills/handoff/SKILL.md` + `.ai/rules/handoff/lifecycle.md` | lifecycle; handoff skill; `.ai/workflows/handoff/BOOTSTRAP.md` |
+| `Пора восстановить handoff` | Lifecycle Recovery | `.ai/rules/handoff/lifecycle.md` | lifecycle; commit rule/skill when a recovery write is required |
+| `Пора выполнить handoff lifecycle correction` | historical Lifecycle Correction | `.ai/rules/handoff/lifecycle.md` | lifecycle; commit rule/skill when a correction write is required |
+| `Пора выдать bootstrap-инструкцию` | generate bootstrap instruction for the future receiving chapter | `.ai/skills/handoff/SKILL.md` + `.ai/workflows/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow |
+
+The table records only information needed to recognize and activate the canonical operation. It does not define lifecycle transitions, write authorization, commit construction, or workflow steps.
 
 ### Routing rules
 
 1. Match the user's command to the closest documented semantic operation.
 2. Treat the command phrase as an invocation signal, not as the procedure itself.
-3. Reread every listed canonical owner before executing the operation.
+3. Read the listed canonical owners and activation context before execution.
 4. Follow the canonical owner's procedure; do not substitute INDEX content for it.
-5. If the operation may change repository state, apply the repository write-safety and commit rules owned by the relevant canonical files.
-6. If the command does not match a known operation, do not invent an operation ID or procedure. Inspect the capability map and relevant owners first.
+5. Apply repository write-safety and commit rules from their canonical owners when the operation requires repository mutation.
+6. If the command does not match a known operation, inspect the capability map and relevant canonical owners before inventing any new operation.
 
 ## Capability discovery
 
@@ -78,18 +76,32 @@ INDEX must not become the owner of:
 
 When a routing entry needs more detail, add a pointer to the canonical owner rather than copying the owner's procedure.
 
-## State-change meaning
+## Metadata boundary
 
-`Repository state may change` is a routing warning, not a permission.
+The command surface intentionally stops at:
 
-The `Commit` column is also routing metadata, not commit authorization or commit construction. It tells the operator whether the documented operation normally includes a commit and, where useful, what kind of commit it is. Commit policy and construction remain owned by the canonical commit rule/skill.
+    invocation
+        ↓
+    semantic operation
+        ↓
+    canonical owner
+        ↓
+    activation context
 
-A "Yes" entry means that the operation can mutate repository state when its canonical procedure permits or requires it.
+The activation context identifies which canonical owner files must be reread. It is a routing aid, not a dependency graph and not a copy of the referenced procedures.
 
-A "No" entry means the operation itself is not a repository lifecycle mutation. It does not authorize unrelated writes.
+INDEX does not record:
+
+- repository-state effects;
+- lifecycle outcomes;
+- commit authorization;
+- commit construction;
+- procedural steps.
+
+Those semantics remain owned by the canonical rules, skills, and workflows.
 
 In particular:
 
-- `DRAFT`, `READY_FOR_HANDOFF`, and `HANDED_OFF` are lifecycle states, not operation IDs.
-- An operation and its resulting commit are distinct concepts.
-- Bootstrap-instruction generation does not initialize the receiving chapter and does not change lifecycle state.
+- lifecycle states such as `DRAFT`, `READY_FOR_HANDOFF`, and `HANDED_OFF` are not operation IDs;
+- an operation and any resulting repository change are distinct concepts;
+- bootstrap-instruction generation does not initialize the receiving chapter or change lifecycle state.
