@@ -276,11 +276,11 @@ Established working boundaries:
 
 Primary handoff/history:
 
-- docs/handoffs/C011-Architecture-Research.md
-- docs/handoffs/C010-Architecture-Research.md
-- docs/handoffs/C009-Architecture-Research.md
-- docs/handoffs/C008-Architecture-Research.md
-- docs/handoffs/C007-Architecture-Research.md
+- .ai/handoffs/C011-Architecture-Research.md
+- .ai/handoffs/C010-Architecture-Research.md
+- .ai/handoffs/C009-Architecture-Research.md
+- .ai/handoffs/C008-Architecture-Research.md
+- .ai/handoffs/C007-Architecture-Research.md
 
 Architecture/research:
 
@@ -308,8 +308,8 @@ paulhuman/aip-mirror@main:/
 Primary migration history:
 
 ```
-paulhuman/aip-mirror@main:/docs/handoffs/C010-Architecture-Research.md
-paulhuman/aip-mirror@main:/docs/handoffs/C009-Architecture-Research.md
+paulhuman/aip-mirror@main:/.ai/handoffs/C010-Architecture-Research.md
+paulhuman/aip-mirror@main:/.ai/handoffs/C009-Architecture-Research.md
 ```
 
 Qwen research onboarding:

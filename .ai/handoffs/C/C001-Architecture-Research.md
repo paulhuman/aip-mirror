@@ -23,7 +23,7 @@ C002 was initialized from the complete C001 architecture checkpoint and is now t
 
 ## Handoff state
 
-C001 completed the audit/design pass and transferred the current architecture checkpoint to C002. The substantive context is preserved in `docs/handoffs/C002-Architecture-Research.md`.
+C001 completed the audit/design pass and transferred the current architecture checkpoint to C002. The substantive context is preserved in `.ai/handoffs/C002-Architecture-Research.md`.
 
 ## Completed architecture checkpoint
 

@@ -159,7 +159,7 @@ Checkpoint updates may be repeated throughout the chapter. A checkpoint should b
 
 When the user requests migration to the next chapter, for example:
 
-    Пора выполнить миграцию в чат 02AB
+    Пора выполнить миграцию в следующий chapter
 
 first perform the repository write-capability self-check above.
 

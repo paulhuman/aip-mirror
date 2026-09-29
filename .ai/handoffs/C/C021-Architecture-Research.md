@@ -32,7 +32,7 @@ Bootstrap source context has been read from the canonical repository on `main`, 
 - `.ai/skills/conversation-handoff/SKILL.md`
 - applicable lifecycle, workflow, repository, and handoff-reference rules
 - `docs/PROJECT-INSTRUCTIONS.md`
-- `docs/handoffs/C020-Architecture-Research.md`
+- `.ai/handoffs/C020-Architecture-Research.md`
 - `.ai/architecture/C020_ai-infrastructure-restructuring.md`
 
 The C020 durable research context has been preserved as the primary architectural source for this chapter.
@@ -54,7 +54,7 @@ The current repository still contains the historical/incremental organization. T
 3. Root `references/` remains AIP Mirror-specific.
 4. `.ai/architecture/` is conceptually accepted; exact taxonomy remains open.
 5. Historical AI-infrastructure research is a candidate for `.ai/archive/`.
-6. `docs/handoffs/` is conversation state and is a candidate for `.ai/handoffs/`; this is not yet a physical move.
+6. `.ai/handoffs/` is conversation state and is a candidate for `.ai/handoffs/`; this is not yet a physical move.
 7. `.ai/skills/conversation-handoff/` is a candidate for the shorter `.ai/skills/handoff/` structure.
 8. `.ai/rules/conversation-lifecycle.md` and `.ai/rules/handoff-references.md` are candidates for a `.ai/rules/handoff/` grouping.
 9. `docs/PROJECT-INSTRUCTIONS.md` is mixed and should be decomposed rather than blindly moved or renamed.
@@ -91,15 +91,15 @@ Primary durable research context:
 - `.ai/architecture/C020_ai-infrastructure-restructuring.md`
 
 Current migration handoff:
-- `docs/handoffs/C020-Architecture-Research.md`
-- `docs/handoffs/C021-Architecture-Research.md`
+- `.ai/handoffs/C020-Architecture-Research.md`
+- `.ai/handoffs/C021-Architecture-Research.md`
 
 High-priority inventory sources:
 - `.ai/rules/`
 - `.ai/skills/`
 - `docs/PROJECT-INSTRUCTIONS.md`
 - `docs/architecture/`
-- `docs/handoffs/`
+- `.ai/handoffs/`
 - `README.md`
 - planned `AGENTS.md`
 
@@ -117,7 +117,7 @@ High-priority inventory sources:
 
 ### Handoff
 
-- `paulhuman/aip-mirror@main:/docs/handoffs/C020-Architecture-Research.md`
+- `paulhuman/aip-mirror@main:/.ai/handoffs/C020-Architecture-Research.md`
   - Role: predecessor chapter checkpoint and migration state.
 
 ## Important constraints
@@ -211,7 +211,7 @@ Deferred later-iteration question: whether .ai/INDEX.md is sufficient or a separ
 ## Recommended starting context for next chapter
 
 1. `.ai/architecture/C020_ai-infrastructure-restructuring.md`
-2. `docs/handoffs/C021-Architecture-Research.md`
+2. `.ai/handoffs/C021-Architecture-Research.md`
 3. `docs/PROJECT-INSTRUCTIONS.md`
 4. `.ai/skills/conversation-handoff/BOOTSTRAP.md`
 5. `.ai/skills/conversation-handoff/SKILL.md`

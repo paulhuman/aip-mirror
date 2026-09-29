@@ -36,7 +36,7 @@ For an internal canonical reference, use the configured repository identifier an
 
 For historical or reproducibility-sensitive references, the branch, tag, or commit MUST be explicit, for example:
 
-    <repository>@<commit-sha>:/.ai/handoffs/03/03AK-Architecture-Research.md
+    <repository>@<commit-sha>:/.ai/handoffs/<specialization>/<chapter-id>.md
 
 The bootstrap AI MUST NOT resolve .ai/..., docs/..., or other unqualified repository paths from its current working directory, another repository, an attachment, or conversational context.
 

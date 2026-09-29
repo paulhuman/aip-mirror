@@ -226,10 +226,10 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 
 ### Handoff chain
 
-- `docs/handoffs/C000-Architecture-Research.md`
-- `docs/handoffs/C001-Architecture-Research.md`
-- `docs/handoffs/C002-Architecture-Research.md`
-- `docs/handoffs/C003-Architecture-Research.md`
+- `.ai/handoffs/C000-Architecture-Research.md`
+- `.ai/handoffs/C001-Architecture-Research.md`
+- `.ai/handoffs/C002-Architecture-Research.md`
+- `.ai/handoffs/C003-Architecture-Research.md`
 
 ## Relevant references
 

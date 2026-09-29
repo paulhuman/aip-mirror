@@ -696,9 +696,9 @@ Working invariants carried forward and consolidated by Synthesis-1 and C-1.5-T1:
 
 ### Handoff / lifecycle files read during bootstrap
 
-- `docs/handoffs/C006-Architecture-Research.md`
-- `docs/handoffs/C005-Architecture-Research.md`
-- `docs/handoffs/03E-Architecture-Research.md`
+- `.ai/handoffs/C006-Architecture-Research.md`
+- `.ai/handoffs/C005-Architecture-Research.md`
+- `.ai/handoffs/03E-Architecture-Research.md`
 
 ### Rules / skills read during bootstrap
 
@@ -720,9 +720,9 @@ Working invariants carried forward and consolidated by Synthesis-1 and C-1.5-T1:
 
 - `docs/architecture/independent-review-qwen-onboarding.md` — operational onboarding and role boundary for the Qwen independent-review workflow.
 - `docs/architecture/prerequisite-dependency-semantics.md` — semantic separation and dependency/prerequisite boundaries.
-- `docs/handoffs/C006-Architecture-Research.md` — immediate research checkpoint before U-7 through U-10.
-- `docs/handoffs/C005-Architecture-Research.md` — predecessor same-specialization research inventory.
-- `docs/handoffs/E000-Independent-Review-Qwen.md` — independent-review role boundary and evidence-handling context.
+- `.ai/handoffs/C006-Architecture-Research.md` — immediate research checkpoint before U-7 through U-10.
+- `.ai/handoffs/C005-Architecture-Research.md` — predecessor same-specialization research inventory.
+- `.ai/handoffs/E000-Independent-Review-Qwen.md` — independent-review role boundary and evidence-handling context.
 
 ## Important constraints
 

@@ -726,9 +726,9 @@ Do not formalize this pattern as a reusable skill/workflow yet.
 
 ### Handoffs read during bootstrap
 
-- `docs/handoffs/C005-Architecture-Research.md`
-- `docs/handoffs/03E-Architecture-Research.md`
-- `docs/handoffs/E000-Independent-Review-Qwen.md`
+- `.ai/handoffs/C005-Architecture-Research.md`
+- `.ai/handoffs/03E-Architecture-Research.md`
+- `.ai/handoffs/E000-Independent-Review-Qwen.md`
 
 ### Architecture/research documentation reviewed
 

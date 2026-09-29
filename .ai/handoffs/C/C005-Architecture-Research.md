@@ -455,7 +455,7 @@ Relevant future improvements identified during review:
 4. Preserve evidence discipline and independence from the primary model.
 5. Keep the reviewer focused on counterexamples and semantic pressure rather than taking ownership of architecture decisions.
 
-The first Qwen handoff (`docs/handoffs/E000-Independent-Review-Qwen.md`) is considered structurally strong and sufficiently complete for now. Its `UNRESOLVED is a family of states` wording should be treated as a research hypothesis rather than an established semantic fact; observed distinct causes do not by themselves prove typed semantic state. Its candidate-precedence wording should likewise remain a strong working direction supported by counterexamples, not a formal AD.
+The first Qwen handoff (`.ai/handoffs/E000-Independent-Review-Qwen.md`) is considered structurally strong and sufficiently complete for now. Its `UNRESOLVED is a family of states` wording should be treated as a research hypothesis rather than an established semantic fact; observed distinct causes do not by themselves prove typed semantic state. Its candidate-precedence wording should likewise remain a strong working direction supported by counterexamples, not a formal AD.
 
 Do not rewrite the Qwen onboarding or first handoff merely for these improvements at this stage. They are queued for the next reusable architecture/process pass.
 

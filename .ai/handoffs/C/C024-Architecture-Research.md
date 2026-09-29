@@ -110,7 +110,7 @@ C024 is complete enough to hand off. The receiving chapter should continue from 
 - Do not restart semantic comparison.
 - Do not rebuild the old target tree.
 - Do not repeat completed physical moves.
-- Do not recreate old `docs/handoffs/` paths.
+- Do not recreate old `.ai/handoffs/` paths.
 - Do not restore repository path resolution to `docs/PROJECT-INSTRUCTIONS.md` without new evidence.
 - Do not reintroduce `SUPERSEDED`.
 - Do not introduce `ENTRY.md` without new evidence.

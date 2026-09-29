@@ -291,7 +291,7 @@ The current interpretation is:
 
 - `docs/architecture/` is the natural home for architecture specific to AIP Mirror.
 - `docs/meta/` is a candidate home for project-independent research/architecture concerning mechanisms such as semantic status, intentional acceptance, provenance, source/decision handling, and related cross-project concerns.
-- `docs/handoffs/` is an operational context-transfer mechanism between research chapters, not a semantic ontology or general knowledge hierarchy.
+- `.ai/handoffs/` is an operational context-transfer mechanism between research chapters, not a semantic ontology or general knowledge hierarchy.
 
 The former attempted hierarchy
 
@@ -345,8 +345,8 @@ A possible minimal representation such as `subject + state` remains only a resea
 ### Confirmed / observed
 
 - The canonical repository is `paulhuman/aip-mirror`, branch `main`.
-- The receiving handoff `docs/handoffs/C017-Architecture-Research.md` did not exist before bootstrap.
-- `docs/handoffs/C016-Architecture-Research.md` was `READY_FOR_HANDOFF` at bootstrap.
+- The receiving handoff `.ai/handoffs/C017-Architecture-Research.md` did not exist before bootstrap.
+- `.ai/handoffs/C016-Architecture-Research.md` was `READY_FOR_HANDOFF` at bootstrap.
 - The current lifecycle is DRAFT → READY_FOR_HANDOFF → HANDED_OFF.
 - Intentional project acceptance is an explicit workflow requirement before promoting research/finding to specification.
 - Accepted working semantics are observable in historical project practice.
@@ -465,7 +465,7 @@ Record this as an open design constraint, not as a decision.
 
 ### 4. `.ai/memory/` is currently considered unnecessary
 
-The project owner questions the need for a separate persistent `.ai/memory/` directory if authoritative project knowledge belongs in durable documentation, temporary conversation transfer belongs in `docs/handoffs/`, and action-specific instruction refresh can retrieve relevant `RULE`/`SKILL` snippets.
+The project owner questions the need for a separate persistent `.ai/memory/` directory if authoritative project knowledge belongs in durable documentation, temporary conversation transfer belongs in `.ai/handoffs/`, and action-specific instruction refresh can retrieve relevant `RULE`/`SKILL` snippets.
 
 Current working direction:
 
@@ -504,7 +504,7 @@ The important distinction is:
 
 ### 6. Handoffs are temporary context-transfer buffers
 
-The current working direction is that `docs/handoffs/` is a **temporary context-transfer mechanism**, not permanent project knowledge and not a required source of truth for the finished system.
+The current working direction is that `.ai/handoffs/` is a **temporary context-transfer mechanism**, not permanent project knowledge and not a required source of truth for the finished system.
 
 Conceptually:
 
@@ -608,7 +608,7 @@ Read:
 - `.ai/rules/workflow.md`
 - `.ai/rules/project-architecture.md`
 - `.ai/rules/repository.md`
-- `docs/handoffs/C016-Architecture-Research.md`
+- `.ai/handoffs/C016-Architecture-Research.md`
 - `docs/architecture/ai-project-instruction-architecture.md`
 - `docs/architecture/semantic-source-authority-audit-C015.md`
 - `docs/architecture/intentional-acceptance-audit-C015.md`
@@ -621,8 +621,8 @@ Read:
 
 The historical OVERRIDE lineage referenced by earlier handoffs is now confirmed in the normalized current filenames:
 
-- `docs/handoffs/C003-Architecture-Research.md`
-- `docs/handoffs/C004-Architecture-Research.md`
+- `.ai/handoffs/C003-Architecture-Research.md`
+- `.ai/handoffs/C004-Architecture-Research.md`
 
 These are the post-cleanup filenames corresponding to the historical 03D/03E references; they were inspected directly and must be used in current references.
 

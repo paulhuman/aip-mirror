@@ -188,7 +188,7 @@ The receiving chapter must preserve and use the following reading set:
 - .ai/rules/workflow.md
 - .ai/rules/project-architecture.md
 - .ai/rules/repository.md
-- docs/handoffs/C015-Architecture-Research.md
+- .ai/handoffs/C015-Architecture-Research.md
 
 ### Architecture baseline / acceptance
 - docs/PROJECT-INSTRUCTIONS.md
@@ -207,8 +207,8 @@ The receiving chapter must preserve and use the following reading set:
 
 ### Historical OVERRIDE evidence
 - docs/architecture/c-14-override-semantic-dimension-C015.md
-- docs/handoffs/03D-Architecture-Research.md
-- docs/handoffs/03E-Architecture-Research.md
+- .ai/handoffs/03D-Architecture-Research.md
+- .ai/handoffs/03E-Architecture-Research.md
 
 These references are not a flat authority hierarchy.
 

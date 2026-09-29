@@ -25,7 +25,7 @@ This migration checkpoint preserves the architectural reasoning and audit state 
 
 - Established generic chapter patterns `[A-Z][0-9]{3}`, `[A-Z][0-9]{3}`, `[A-Z][0-9]{3}`, `[A-Z][0-9]{3}`; concrete chapters remain `C000`, `B001`, etc.
 - Established that 03 may detect/report problems in other specializations' handoffs but must not edit them; the owning chapter corrects its own handoff.
-- Agreed that handoffs remain under `docs/handoffs/` and `docs/handoffs/README.md` remains small and self-documenting.
+- Agreed that handoffs remain under `.ai/handoffs/` and `.ai/handoffs/README.md` remains small and self-documenting.
 - Agreed that `.ai/memory/` is for durable accumulated knowledge and is distinct from handoffs.
 - Agreed target `.ai/` concepts: `README.md`, `config.json`, `rules/`, `skills/`, `workflows/`, `references/`, `memory/`.
 - Agreed that `conversation-handoff/BOOTSTRAP.md` is procedurally a workflow and should move from `.ai/skills/` to `.ai/workflows/conversation-handoff/` during the refactor.
@@ -61,10 +61,10 @@ Current relevant files:
 - `.ai/skills/conversation-handoff/SKILL.md`
 - `.ai/skills/deep-understanding/SKILL.md`
 - `docs/PROJECT-INSTRUCTIONS.md`
-- `docs/handoffs/README.md`
-- `docs/handoffs/B000-Native-AIP-Plugin.md`
-- `docs/handoffs/B001-Native-AIP-Plugin.md`
-- `docs/handoffs/C000-Architecture-Research.md`
+- `.ai/handoffs/README.md`
+- `.ai/handoffs/B000-Native-AIP-Plugin.md`
+- `.ai/handoffs/B001-Native-AIP-Plugin.md`
+- `.ai/handoffs/C000-Architecture-Research.md`
 
 Target artifacts not yet created:
 
@@ -76,7 +76,7 @@ Target artifacts not yet created:
 - `.ai/workflows/conversation-handoff/BOOTSTRAP.md`
 - `consistency-pass` capability
 
-`docs/handoffs/B001-Native-AIP-Plugin.md` remains owned by specialization B and must not be edited by 03.
+`.ai/handoffs/B001-Native-AIP-Plugin.md` remains owned by specialization B and must not be edited by 03.
 
 ## Audit checkpoint
 
@@ -91,7 +91,7 @@ The intended system separates:
 - `.ai/workflows/` — ordered procedures and lifecycle workflows.
 - `.ai/references/` — supporting reference material.
 - `.ai/memory/` — durable accumulated lessons/knowledge, not handoff state.
-- `docs/handoffs/` — chapter-specific state snapshots and lifecycle records.
+- `.ai/handoffs/` — chapter-specific state snapshots and lifecycle records.
 - root `README.md` — human-facing project information.
 
 ### Audit findings
@@ -109,7 +109,7 @@ The intended system separates:
 
 ### Decisions already made
 
-- Keep handoffs in `docs/handoffs/`.
+- Keep handoffs in `.ai/handoffs/`.
 - Keep memory separate from handoffs.
 - Use generic chapter notation `[A-Z][0-9]{3}`.
 - 03 may detect/report other handoff problems but cannot edit another specialization's handoff.
@@ -186,10 +186,10 @@ The next chapter should resolve the open decisions above through repository-back
 ### Documentation
 
 - `docs/PROJECT-INSTRUCTIONS.md`
-- `docs/handoffs/README.md`
-- `docs/handoffs/B000-Native-AIP-Plugin.md`
-- `docs/handoffs/B001-Native-AIP-Plugin.md`
-- `docs/handoffs/C000-Architecture-Research.md`
+- `.ai/handoffs/README.md`
+- `.ai/handoffs/B000-Native-AIP-Plugin.md`
+- `.ai/handoffs/B001-Native-AIP-Plugin.md`
+- `.ai/handoffs/C000-Architecture-Research.md`
 
 ### Relevant project areas
 
@@ -207,7 +207,7 @@ The next chapter should resolve the open decisions above through repository-back
 ## Important constraints
 
 - 03 may report another specialization's handoff problem but must not edit that handoff.
-- Handoffs stay in `docs/handoffs/` and remain distinct from memory.
+- Handoffs stay in `.ai/handoffs/` and remain distinct from memory.
 - Do not create a competing project-instructions authority during the refactor.
 - Do not globally replace `should` or `may`.
 - Do not mechanically copy Spectrum Web Components; adapt only justified ideas.
@@ -224,7 +224,7 @@ The next chapter should resolve the open decisions above through repository-back
 - C000 existed as a `DRAFT` checkpoint before this migration preparation.
 - Current lifecycle rules define `[A-Z][0-9]{3}` and statuses `DRAFT`, `READY_FOR_HANDOFF`, `HANDED_OFF`.
 - Current lifecycle rules define both standard user commands.
-- Existing handoffs are under `docs/handoffs/` and `docs/handoffs/README.md` exists.
+- Existing handoffs are under `.ai/handoffs/` and `.ai/handoffs/README.md` exists.
 - Current bootstrap procedure lives under `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
 - Repository rules require full-content write verification for existing files.
 - `docs/PROJECT-INSTRUCTIONS.md` overlaps substantially with the `.ai` system.
@@ -260,7 +260,7 @@ Bootstrap `C001` from this `READY_FOR_HANDOFF` handoff, perform the mandatory re
 ## Things not to redo
 
 - Do not redesign the four-specialization chapter model from scratch.
-- Do not move handoffs out of `docs/handoffs/`.
+- Do not move handoffs out of `.ai/handoffs/`.
 - Do not edit another specialization's handoff from chapter 03.
 - Do not mechanically copy the Spectrum Web Components AI structure.
 - Do not treat the supplied skill guide as project authority.

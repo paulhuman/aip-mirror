@@ -33,7 +33,7 @@ C017 is the direct predecessor and was verified as `READY_FOR_HANDOFF` at bootst
 The current repository model remains:
 
 - `paulhuman/aip-mirror` on `main` is the canonical project repository.
-- `docs/handoffs/` is temporary conversation context transfer.
+- `.ai/handoffs/` is temporary conversation context transfer.
 - Durable project knowledge belongs in authoritative project documentation.
 - specialization C owns architecture, research, cross-workstream decisions, and project-wide architectural consistency.
 
@@ -139,13 +139,13 @@ The bounded map identified concrete drift:
 ### Qwen
 
 - `docs/architecture/independent-review-qwen-onboarding.md`
-- Current observed Qwen handoff: `docs/handoffs/E004-Independent-Review-Qwen.md`.
+- Current observed Qwen handoff: `.ai/handoffs/E004-Independent-Review-Qwen.md`.
 - The older `docs/architecture/independent-review-deepseek-onboarding.md` file is unrelated historical repository content and is not the Qwen onboarding source.
 
 ### Grok
 
 - `docs/architecture/independent-review-grok-onboarding.md`
-- Current observed Grok handoff: `docs/handoffs/F000-Independent-Review-Grok.md`.
+- Current observed Grok handoff: `.ai/handoffs/F000-Independent-Review-Grok.md`.
 
 These remain review inputs, not authority sources. They should be consulted selectively when a bounded research question benefits from independent counterexamples or critique.
 
@@ -419,7 +419,7 @@ Already read during bootstrap:
 - `.ai/rules/workflow.md`
 - `.ai/rules/handoff-references.md`
 - `.ai/skills/commit-message/SKILL.md`
-- `docs/handoffs/C017-Architecture-Research.md`
+- `.ai/handoffs/C017-Architecture-Research.md`
 
 Additional research inputs now inspected selectively:
 
@@ -427,8 +427,8 @@ Additional research inputs now inspected selectively:
 - `docs/architecture/independent-review-qwen-onboarding.md`
 - `docs/architecture/independent-review-grok-onboarding.md`
 - `docs/architecture/independent-review-deepseek-onboarding.md` (historical leftover; not Qwen onboarding)
-- `docs/handoffs/E004-Independent-Review-Qwen.md`
-- `docs/handoffs/F000-Independent-Review-Grok.md`
+- `.ai/handoffs/E004-Independent-Review-Qwen.md`
+- `.ai/handoffs/F000-Independent-Review-Grok.md`
 - `docs/architecture/constraint-problem-map-C018.md`
 - `.ai/rules/conversation-lifecycle.md`
 - `.ai/rules/workflow.md`
@@ -447,7 +447,7 @@ C018 completed the A/B/C Applicability Surface Test, the independent Grok/Qwen b
 
 C018 is finalized as `READY_FOR_HANDOFF` for migration to C019.
 
-The receiving chapter must create its own `docs/handoffs/C019-Architecture-Research.md` as `DRAFT`, then perform the normal post-bootstrap verification and mark this handoff `HANDED_OFF`.
+The receiving chapter must create its own `.ai/handoffs/C019-Architecture-Research.md` as `DRAFT`, then perform the normal post-bootstrap verification and mark this handoff `HANDED_OFF`.
 
 ## Bootstrap note
 

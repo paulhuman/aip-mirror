@@ -67,7 +67,7 @@ Historical Iteration 2 architecture/research artifacts are preserved under `.ai/
 - C023 did not exist before this bootstrap.
 - The repository contains the completed Iteration 2 physical restructuring recorded by C022.
 - Historical architecture research has been moved to `.ai/archive/architecture/`; the active architecture layer now contains only the current restructuring working notes.
-- The first repository-wide sweep found no active `SUPERSEDED`, `bootstrap kernel`, `ENTRY.md`, or old `docs/handoffs/` routing residue requiring repair.
+- The first repository-wide sweep found no active `SUPERSEDED`, `bootstrap kernel`, `ENTRY.md`, or old `.ai/handoffs/` routing residue requiring repair.
 - The sweep did find project-specific leakage in several generic-looking `.ai` rules/skills, plus a deeper ownership question around repository identity in `.ai/rules/repository.md`.
 
 ## Current sweep findings

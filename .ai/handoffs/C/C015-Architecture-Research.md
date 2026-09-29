@@ -286,8 +286,8 @@ The receiving chapter MUST read the following before selecting new substantive r
 
 ### OVERRIDE evidence boundary
 - `docs/architecture/c-14-override-semantic-dimension-C015.md`
-- `docs/handoffs/03D-Architecture-Research.md` — historical accepted OVERRIDE/authority/precedence working semantics; historical evidence only, not automatically current canonical specification.
-- `docs/handoffs/03E-Architecture-Research.md` — inherited accepted working semantics and the transition into dependency research.
+- `.ai/handoffs/03D-Architecture-Research.md` — historical accepted OVERRIDE/authority/precedence working semantics; historical evidence only, not automatically current canonical specification.
+- `.ai/handoffs/03E-Architecture-Research.md` — inherited accepted working semantics and the transition into dependency research.
 
 The receiving chapter MUST treat the above as a reading set, not as a flat authority hierarchy. In particular, distinguish current canonical architecture, bounded research results, historical evidence, and chapter lifecycle state.
 

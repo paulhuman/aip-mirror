@@ -199,7 +199,7 @@ Do not choose among these before analysis.
 Primary architecture/research files:
 - docs/architecture/constraint-problem-map-C018.md
 - docs/architecture/minimal-execution-context-C018.md
-- docs/handoffs/C018-Architecture-Research.md
+- .ai/handoffs/C018-Architecture-Research.md
 - docs/PROJECT-INSTRUCTIONS.md
 
 Applicable AI workflow:
@@ -215,11 +215,11 @@ Applicable AI workflow:
 
 - docs/architecture/constraint-problem-map-C018.md — bounded constraint/problem framing and MEC research boundary.
 - docs/architecture/minimal-execution-context-C018.md — bounded MEC analysis and Applicability Surface Test.
-- docs/handoffs/C018-Architecture-Research.md — authoritative migration checkpoint from C018.
+- .ai/handoffs/C018-Architecture-Research.md — authoritative migration checkpoint from C018.
 - docs/architecture/independent-review-qwen-onboarding.md — Qwen review input, use selectively for counterarguments.
 - docs/architecture/independent-review-grok-onboarding.md — Grok review input, use selectively for counterarguments.
-- docs/handoffs/E004-Independent-Review-Qwen.md — current Qwen review handoff.
-- docs/handoffs/F000-Independent-Review-Grok.md — current Grok review handoff.
+- .ai/handoffs/E004-Independent-Review-Qwen.md — current Qwen review handoff.
+- .ai/handoffs/F000-Independent-Review-Grok.md — current Grok review handoff.
 
 These are evidence/reference inputs; they do not override 03 architectural decisions.
 
@@ -303,7 +303,7 @@ Bootstrap/current research sources to read:
 5. .ai/rules/workflow.md
 6. .ai/rules/repository.md
 7. .ai/rules/handoff-references.md
-8. docs/handoffs/C018-Architecture-Research.md
+8. .ai/handoffs/C018-Architecture-Research.md
 9. docs/architecture/constraint-problem-map-C018.md
 10. docs/architecture/minimal-execution-context-C018.md
 

@@ -150,8 +150,8 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 
 ## Relevant handoff references
 
-- `docs/handoffs/C002-Architecture-Research.md` — previous chapter's OVERRIDE research checkpoint.
-- `docs/handoffs/C003-Architecture-Research.md` — immediate predecessor; contains the detailed C003 authorization/precedence decisions and candidate-level counterexample conclusions.
+- `.ai/handoffs/C002-Architecture-Research.md` — previous chapter's OVERRIDE research checkpoint.
+- `.ai/handoffs/C003-Architecture-Research.md` — immediate predecessor; contains the detailed C003 authorization/precedence decisions and candidate-level counterexample conclusions.
 - `.ai/skills/conversation-handoff/BOOTSTRAP.md` — receiving-chat bootstrap procedure.
 - `.ai/skills/conversation-handoff/SKILL.md` — handoff lifecycle/workflow guidance.
 - `.ai/rules/conversation-lifecycle.md` — chapter lifecycle semantics.

@@ -33,7 +33,7 @@ Read and restore:
 
 - docs/PROJECT-INSTRUCTIONS.md
 - docs/architecture/ai-project-instruction-architecture.md
-- docs/handoffs/C013-Architecture-Research.md
+- .ai/handoffs/C013-Architecture-Research.md
 - applicable conversation-handoff and workflow rules
 - applicable deep-understanding guidance
 
@@ -505,9 +505,9 @@ Do not begin implementation work.
 
 Primary handoff/history:
 
-- docs/handoffs/C013-Architecture-Research.md
-- docs/handoffs/C012-Architecture-Research.md
-- docs/handoffs/C011-Architecture-Research.md
+- .ai/handoffs/C013-Architecture-Research.md
+- .ai/handoffs/C012-Architecture-Research.md
+- .ai/handoffs/C011-Architecture-Research.md
 
 Architecture/research:
 
@@ -535,7 +535,7 @@ Then start with:
 
 1. docs/PROJECT-INSTRUCTIONS.md
 2. docs/architecture/ai-project-instruction-architecture.md
-3. docs/handoffs/C013-Architecture-Research.md
+3. .ai/handoffs/C013-Architecture-Research.md
 4. this handoff
 5. applicable conversation-handoff and workflow rules
 6. applicable deep-understanding guidance

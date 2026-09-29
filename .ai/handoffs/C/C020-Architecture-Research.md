@@ -64,11 +64,11 @@ Historical AI-infrastructure research will likely move into .ai/archive/.
 
 ### Handoffs
 
-docs/handoffs/ is AI conversation state, not AIP Mirror project documentation.
+.ai/handoffs/ is AI conversation state, not AIP Mirror project documentation.
 
 The likely target is:
 
-    docs/handoffs/
+    .ai/handoffs/
         -> .ai/handoffs/
 
 This is a target decision, not yet a physical move.
@@ -288,7 +288,7 @@ Priority:
 2. all .ai/skills/
 3. docs/PROJECT-INSTRUCTIONS.md
 4. all docs/architecture/
-5. all docs/handoffs/
+5. all .ai/handoffs/
 6. README.md
 7. planned AGENTS.md
 

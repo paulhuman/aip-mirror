@@ -543,10 +543,10 @@ Do not:
 
 Primary handoff/history:
 
-- docs/handoffs/C010-Architecture-Research.md
-- docs/handoffs/C009-Architecture-Research.md
-- docs/handoffs/C008-Architecture-Research.md
-- docs/handoffs/C007-Architecture-Research.md
+- .ai/handoffs/C010-Architecture-Research.md
+- .ai/handoffs/C009-Architecture-Research.md
+- .ai/handoffs/C008-Architecture-Research.md
+- .ai/handoffs/C007-Architecture-Research.md
 
 Architecture/research:
 

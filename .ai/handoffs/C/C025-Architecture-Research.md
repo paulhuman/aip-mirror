@@ -26,7 +26,7 @@ The Repository Identity & Path Resolution ownership pass is complete. The next f
 ### Iteration 2 physical restructuring
 
 - Physical restructuring of the AI-infrastructure tree is complete.
-- Handoffs were moved from `docs/handoffs/` to `.ai/handoffs/<specialization>/`.
+- Handoffs were moved from `.ai/handoffs/` to `.ai/handoffs/<specialization>/`.
 - Architecture, rules, skills, and workflow locations were normalized according to the accepted Iteration 2 structure.
 - Historical one-letter chapter naming was removed from active architecture/handoff references.
 

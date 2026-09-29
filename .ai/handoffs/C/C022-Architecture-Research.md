@@ -145,7 +145,7 @@ The following major moves/renames have been completed:
     .ai/skills/handoff-reference-preservation/SKILL.md
         -> .ai/skills/handoff/handoff-reference-preservation/SKILL.md
 
-    docs/handoffs/
+    .ai/handoffs/
         -> .ai/handoffs/<specialization>/
 
 Architecture filenames were simplified by removing historical chapter suffixes/prefixes where they no longer carried semantic meaning.

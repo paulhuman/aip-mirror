@@ -31,7 +31,7 @@ Bootstrap context restored from:
 
 - docs/PROJECT-INSTRUCTIONS.md
 - docs/architecture/ai-project-instruction-architecture.md
-- docs/handoffs/C012-Architecture-Research.md
+- .ai/handoffs/C012-Architecture-Research.md
 - applicable conversation-handoff and workflow rules
 
 C-11.2 through C-11.8 are accepted as research checkpoints.
@@ -182,8 +182,8 @@ Current research boundaries include:
 
 Primary handoff/history:
 
-- docs/handoffs/C012-Architecture-Research.md
-- docs/handoffs/C011-Architecture-Research.md
+- .ai/handoffs/C012-Architecture-Research.md
+- .ai/handoffs/C011-Architecture-Research.md
 
 Architecture/research:
 
@@ -215,7 +215,7 @@ paulhuman/aip-mirror@main:/docs/architecture/ai-project-instruction-architecture
 
 Previous chapter:
 
-paulhuman/aip-mirror@main:/docs/handoffs/C012-Architecture-Research.md
+paulhuman/aip-mirror@main:/.ai/handoffs/C012-Architecture-Research.md
 
 Dependency research:
 
