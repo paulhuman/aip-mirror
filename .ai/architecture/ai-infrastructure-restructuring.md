@@ -184,10 +184,9 @@ Each command entry identifies:
 2. semantic operation;
 3. canonical owner;
 4. required reread targets;
-5. whether repository state may change;
-6. whether the operation normally produces a commit.
+5. activation context / required reread targets.
 
-The `Commit` field is routing metadata only. It does not authorize a commit and does not define commit construction. Commit policy remains owned by the canonical commit rule/skill.
+Repository-state effects, lifecycle outcomes, write authorization, commit policy, commit construction, and procedural steps are not INDEX routing metadata; they remain owned by the canonical rules, skills, and workflows.
 
 Current user-facing handoff commands:
 
@@ -201,7 +200,7 @@ Exact future command IDs and command syntax are intentionally **not frozen**.
 
 ### 5.1 Current routing semantics
 
-| Command | Semantic operation | Canonical owner | Reread | Repository state | Commit |
+| Command | Semantic operation | Canonical owner | Activation context |
 |---|---|---|---|---|---|
 | `Пора обновить handoff` | checkpoint current chapter | handoff skill + lifecycle | lifecycle; handoff skill; current handoff | Yes; lifecycle remains `DRAFT` | Yes — checkpoint commit |
 | `Пора выполнить миграцию в чат XXYY` | migration of current chapter | handoff skill + lifecycle; BOOTSTRAP for generated instruction | lifecycle; handoff skill; BOOTSTRAP | Yes; closing handoff may move `DRAFT → READY_FOR_HANDOFF`; bootstrap instruction is separate | Yes — migration commit |
@@ -605,17 +604,21 @@ The migration also renamed handoff specialization directories to their correspon
 
 ## 17. Review-derived open questions and accepted decisions
 
-### 17.1 Minimum semantic metadata in INDEX — OPEN
+### 17.1 Minimum semantic metadata in INDEX — DECIDED IN C027
 
 Qwen challenged the inclusion of `Repository state may change` and `Commit` metadata because routing metadata could drift into shadow ownership.
 
-Current decision: **do not remove the metadata**.
+C027 decision: **reduce command routing metadata to four fields**: command phrase, semantic operation, canonical owner, and activation context / required reread targets.
 
 The metadata is useful discovery information, and current INDEX wording explicitly states that the `Commit` field does not authorize or construct commits. Canonical commit rules/skills retain ownership.
 
-Open architectural question:
+The tested minimum routing model is:
 
-> **What is the minimum amount of semantic metadata a router may contain without becoming a canonical owner?**
+```text
+command → operation → owner → activation context
+```
+
+`Repository state may change` and `Commit` were useful operator warnings, but were not required for discovery or safe routing and risked adding canonical semantic density to INDEX. Their meanings remain owned elsewhere.
 
 This remains a review/Iteration 3 question. Any future change should be evidence-driven.
 
@@ -742,13 +745,13 @@ The reviews are now consolidated against current repository evidence. The matrix
 | Finding / question | Evidence / review | Decision | 03BA disposition |
 |---|---|---|---|
 | `INDEX` routing model | Grok + Qwen converge | Accept | **Keep** |
-| `INDEX` `Repository state may change` + `Commit` metadata | Qwen challenge; current INDEX explicitly defines both as routing metadata | Keep for now | **Keep; open architectural question** |
+| `INDEX` `Repository state may change` + `Commit` metadata | C027 tested their routing value against canonical owners | Remove from routing table | **Removed in C027; semantics remain canonical elsewhere** |
 | Minimum semantic metadata before router becomes owner | Qwen conceptual challenge | Not resolved | **Open** |
 | `Пора выдать bootstrap-инструкцию` as separate command | Both reviews raise semantic question | Keep unchanged | **Open; no merge with migration** |
 | `BOOTSTRAP.md` as ordered workflow | Grok + Qwen converge | Accept | **Keep** |
 | `SUPERSEDED` removal / historical ordering | Qwen suggestion; current filenames already encode chapter sequence | No new lifecycle rule | **No change** |
 | User-facing command phrases duplicated in `lifecycle.md` | Grok + Qwen | Soft dual source | **03BA cleanup candidate** |
-| `.ai/AGENTS.md` effectively empty | Grok + Qwen + current repository state | Real implementation gap | **03BA fix** |
+| `.ai/AGENTS.md` effectively empty | Grok + Qwen + current repository state | Real architecture/implementation gap | **Still pending: design and create AGENTS.md** |
 | `[0-9]{2}[A-Z]{2}` naming | Grok concern; semantic classification shows generic infrastructure convention | Do not treat as project leakage | **Future naming migration** |
 | Future `C027`-style identifiers | User architectural direction | Record, test later | **Future TODO** |
 | INDEX scalability / presentation | Grok + Qwen | Real design concern at ~10–15 commands | **03BA design work** |
@@ -880,60 +883,128 @@ The current architecture state is represented by this file and the current `.ai`
 The next architecture/research chapter should treat the independent Grok/Qwen review as evidence against the current model, distinguish accepted findings from open questions, and avoid broad restructuring without evidence.
 
 
-## 23. Next Iteration 2 work plan — INDEX presentation and scalability
+## 23. C027 result — INDEX presentation and minimum routing boundary
 
-The next bounded Iteration 2 task is to continue with .ai/INDEX.md. This is a **presentation/scalability pass**, not a change of semantic ownership.
+C027 completed the bounded INDEX presentation/scalability task.
 
-The work is deliberately split into analysis before editing:
+The durable command-routing boundary is:
 
-1. **Inventory the current INDEX surface**
-   - inspect the current command table and capability map;
-   - identify duplicated or visually noisy information;
-   - check whether the current presentation remains usable as the command/capability surface grows toward approximately 10–15 entries.
+```text
+command
+   ↓
+operation
+   ↓
+owner
+   ↓
+activation context
+```
 
-2. **Separate discovery from routing metadata**
-   - distinguish information needed to discover a capability from metadata needed to route an already-recognized operation;
-   - preserve the current semantic boundary: INDEX = routing / capability discovery;
-   - do not move procedural or normative content into INDEX.
+Capability discovery remains a separate compact surface:
 
-3. **Test the minimum semantic metadata question**
-   - evaluate the current metadata set: command phrase, semantic operation, canonical owner, reread targets, repository-state effect, and commit indication;
-   - determine whether any field is unnecessary, or whether a missing field is needed for safe routing;
-   - explicitly test the boundary at which routing metadata would become a shadow canonical owner.
+```text
+capability
+   ↓
+owner
+   ↓
+purpose
+```
 
-4. **Design a scalable presentation**
-   - prototype a compact structure suitable for approximately 10–15 commands/capabilities;
-   - preserve fast human/AI discovery;
-   - avoid turning INDEX into a dependency graph, procedure catalog, or duplicate owner document;
-   - exact command IDs and final command syntax remain unfrozen.
+The command-routing table therefore carries only those four fields. Repository-state effects, lifecycle outcomes, write authorization, commit policy, commit construction, and procedural steps remain canonical concerns outside INDEX.
 
-5. **Validate against canonical owners**
-   - compare any proposed INDEX presentation against the current lifecycle, handoff skill, commit rules/skill, repository rules, and BOOTSTRAP workflow;
-   - verify that INDEX points to owners rather than restating their semantics.
+This is sufficient for the expected approximately 10–15 command/capability surface without introducing a registry, manifest, command-ID schema, or additional filesystem layer. Further scaling pressure should first be addressed through presentation/grouping changes rather than additional semantic metadata.
 
-6. **Implement only after the analysis is settled**
-   - make the smallest justified INDEX change;
-   - perform the standard post-edit semantic consistency sweep;
-   - verify content, diff, and changed-file scope;
-   - commit only the bounded INDEX work.
+### 23.1 AGENTS remains an active architecture task
 
-### Explicit non-goals for this pass
+The C027 INDEX work does not close the AGENTS architecture question.
 
-Do not:
-- create ENTRY.md;
-- change lifecycle semantics;
-- change BOOTSTRAP ownership or ordering;
-- change chapter identifier format;
-- move project-specific configuration out of .ai/config.yaml;
-- reopen the completed physical Iteration 2 restructuring;
-- start the deferred handoff-operation / commit-vocabulary work.
+.ai/AGENTS.md is still to be designed and created as a compact always-on operating contract. Its boundary remains:
 
-### C027 assignment
+```text
+AGENTS
+  ↓
+INDEX
+  ↓
+canonical owners
+```
 
-The receiving chapter **C027 — Architecture & Research** owns the analysis and implementation of this INDEX presentation/scalability pass.
+AGENTS must not become a second INDEX, procedure catalogue, lifecycle rule, or capability owner.
 
-C026 closes after recording this plan and preparing the receiving bootstrap instruction. C026 must not create or modify the C027 handoff.
+## 24. Durable methodology — bounded architecture work
 
-The first substantive C027 task is therefore:
+The current architecture process has demonstrated a reusable method that should remain durable context:
 
-> Analyze the current .ai/INDEX.md presentation and determine the minimum sufficient, scalable router/discovery structure before making any INDEX edits.
+```text
+current evidence
+    ↓
+bounded question
+    ↓
+semantic classification
+    ↓
+explicit decision
+    ↓
+minimal implementation
+    ↓
+consistency sweep
+    ↓
+verification
+```
+
+The key property is **boundedness**: a chapter should answer the smallest architectural question that current repository evidence can resolve, implement only the resulting decision, and avoid reopening settled architecture merely because older notes contain broader TODO lists or alternative proposals.
+
+Classify old material before treating it as work:
+
+- **historical TODO** — recorded for possible future investigation;
+- **active architecture task** — currently assigned to the receiving chapter;
+- **durable decision** — resolved boundary that later chapters should treat as current state unless new evidence invalidates it.
+
+This prevents old review notes from becoming an implicit task queue.
+
+### 24.1 Durable INDEX boundary
+
+The current minimum routing boundary is:
+
+```text
+command → operation → owner → activation context
+```
+
+where command is the user-facing invocation, operation is the requested semantic operation, owner is the canonical rule/skill/workflow, and activation context is the canonical material that must be reread before execution.
+
+INDEX identifies and routes. It does not authorize, define, or execute the operation.
+
+Capability discovery remains distinct:
+
+```text
+capability → owner → purpose
+```
+
+### 24.2 Durable AGENTS boundary
+
+The intended AGENTS role remains a compact always-on operating contract. It should establish only the minimum context needed before command routing, including:
+
+- repository/configuration pointer;
+- AGENTS → INDEX → canonical owners model;
+- INDEX as the routing/discovery surface;
+- canonical owners as semantic/procedural authority;
+- pointer to capability discovery;
+- minimal prohibition against inventing operations or duplicating canonical semantics.
+
+Its detailed content is still an active architecture task and must be designed from current repository evidence before the file is created.
+
+### 24.3 Durable portability boundary
+
+The configuration conclusion remains:
+
+```text
+portable rules / skills / workflows
+        +
+project-specific .ai/config.yaml
+        =
+portable AI infrastructure adapted to a project
+```
+
+Project-specific handoffs and architecture notes remain project state/research artifacts and do not invalidate this configuration boundary.
+
+### 24.4 Applying bounded architecture work
+
+When an old note or external review proposes a change, first classify it as current evidence, already-decided state, open architectural question, or historical/deferred proposal. Only current evidence and genuinely open questions should normally drive the current chapter. A deferred proposal does not become active merely because it remains written down.
+
