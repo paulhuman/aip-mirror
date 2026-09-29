@@ -140,3 +140,91 @@ Use the user-provided C027 bootstrap order as the authoritative starting sequenc
 The durable architectural question is:
 
 > What is the minimum semantic information an INDEX router needs to discover and safely activate the canonical capability while remaining only a router and never becoming a shadow owner?
+
+
+## C027 analysis result — INDEX presentation and metadata boundary
+
+### Current presentation inventory
+
+The pre-edit INDEX had two distinct surfaces:
+
+1. a five-command routing table;
+2. an eight-capability discovery map.
+
+The routing table carried six semantic fields beyond the command itself: operation, owner, reread targets, repository-state effect, and commit indication. The capability map separately provided capability, canonical owner, and purpose.
+
+### Discovery vs routing
+
+The two surfaces serve different questions:
+
+- **Capability discovery:** “Where is the canonical capability for this kind of work?”
+- **Command routing:** “Which canonical operation should this user command activate, and what must be reread before execution?”
+
+The capability map therefore needs only capability → owner → purpose.
+
+The command table needs invocation → semantic operation → canonical owner → activation context.
+
+### Minimum semantic metadata test
+
+The previous \`Repository state may change\` and \`Commit\` columns were useful as operator warnings but were not required to discover or safely route the operation. Their meanings are already canonically defined elsewhere, and retaining their detailed wording creates a soft risk that INDEX becomes a secondary owner for lifecycle/commit semantics.
+
+The minimum useful command-routing boundary is therefore:
+
+    command phrase
+        ↓
+    semantic operation
+        ↓
+    canonical owner
+        ↓
+    activation context / reread targets
+
+\`Required reread targets\` remain useful because they tell the receiving AI what canonical context must be activated before execution. They are treated as routing/activation metadata, not as a dependency graph.
+
+### Scalable presentation decision
+
+The current presentation is better represented by:
+
+- a compact four-column command-routing table;
+- a separate capability-discovery table;
+- a short explicit metadata-boundary statement.
+
+This preserves fast discovery while reducing the width and semantic density of the command table. It does not introduce a registry, manifest, command-ID schema, new filesystem layer, or procedural catalogue.
+
+### INDEX edit
+
+The INDEX was edited only after the above analysis.
+
+The edit:
+
+- removed repository-state and commit-effect columns;
+- retained command phrase, semantic operation, canonical owner, and reread/activation context;
+- explicitly states that INDEX does not define lifecycle outcomes, write authorization, commit construction, or procedures;
+- keeps the existing capability map and owner boundaries;
+- preserves provisional command syntax/IDs.
+
+Verified commit:
+
+\`f32274d6ab251e74f8d4ac712121b2dd135eaa3b\`
+
+Scope verification shows the INDEX commit changed only \`.ai/INDEX.md\`.
+
+## Updated evidence / confidence
+
+### Confirmed / observed
+
+- The pre-edit routing table was semantically denser than necessary for routing.
+- \`Repository state may change\` and \`Commit\` were not required for the minimum routing path.
+- Capability discovery and command routing can remain separate presentations within the same INDEX file.
+- \`Required reread targets\` have a distinct activation value and can remain without turning INDEX into a procedural owner.
+- The edited INDEX was read back successfully.
+- The INDEX edit commit changed only \`.ai/INDEX.md\`.
+
+### Inferred
+
+- The four-field routing boundary should remain usable as the command surface grows toward approximately 10–15 entries because the table avoids embedding operation effects and commit semantics.
+- Further scaling pressure, if it appears, should be addressed through presentation changes before adding new metadata layers.
+
+### Open
+
+- Whether the exact command syntax/IDs should ever be frozen remains intentionally deferred.
+- Whether future capabilities outside the current handoff domain need additional discovery grouping remains open.
