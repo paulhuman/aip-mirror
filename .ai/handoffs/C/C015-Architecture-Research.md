@@ -1,30 +1,30 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03AP — Architecture & Research
+**Conversation:**
+C015 — Architecture & Research
 
-Specialization:
-03 — Architecture & Research
+**Specialization:**
+C
 
-Chapter:
-03AP
+**Chapter:**
+015
 
-Previous chapter:
-03AO — Architecture & Research
+**Previous chapter:**
+014
 
-Status:
+**Status:**
 HANDED_OFF
 
 ## Current objective
 
-Continue specialization 03 architecture research after 03AO.
+Continue specialization C architecture research after C014.
 
 C-12 — Cycle Semantics is CLOSED as a bounded research arc.
 C-11.11 — C-11.15 remain CLOSED as a separate bounded research arc.
 
 ## Migration-specific first task
 
-The FIRST substantive action after bootstrap is to review the completed Grok 06AA Independent Architectural Reconstruction / Baseline response from the immediately preceding conversation context.
+The FIRST substantive action after bootstrap is to review the completed Grok F000 Independent Architectural Reconstruction / Baseline response from the immediately preceding conversation context.
 
 The Grok baseline is an independent external-review artifact. It is NOT an established architectural fact and must not be incorporated automatically.
 
@@ -97,31 +97,31 @@ Do not rank reviewers or declare a winner.
 ## Handoff lifecycle
 
 Previous chapter:
-03AO — HANDED_OFF
+C014 — HANDED_OFF
 
 This receiving handoff is intentionally created as DRAFT during lifecycle recovery/bootstrap.
 
-## Completed 03AP research sequence
+## Completed C015 research sequence
 
 The following research steps are now complete:
 
-1. Grok 06AA Independent Architectural Reconstruction / Baseline review.
-2. 03AP Architectural Bottleneck Audit:
-   docs/architecture/architectural-bottleneck-audit-03AP.md
-3. Qwen 05AE independent bottleneck audit comparison.
-4. Grok 06AA bottleneck audit comparison.
+1. Grok F000 Independent Architectural Reconstruction / Baseline review.
+2. C015 Architectural Bottleneck Audit:
+   docs/architecture/architectural-bottleneck-audit-C015.md
+3. Qwen E004 independent bottleneck audit comparison.
+4. Grok F000 bottleneck audit comparison.
 5. Cross-audit synthesis:
-   docs/architecture/architectural-bottleneck-cross-audit-03AP.md
+   docs/architecture/architectural-bottleneck-cross-audit-C015.md
 6. C-13 bounded semantic discrimination test:
-   docs/architecture/c-13-authority-vs-effective-outcome-03AP.md
+   docs/architecture/c-13-authority-vs-effective-outcome-C015.md
 7. Post-C-13 Architectural Leverage Audit:
-   docs/architecture/post-c-13-architectural-leverage-audit-03AP.md
+   docs/architecture/post-c-13-architectural-leverage-audit-C015.md
 8. C-14 evidence inspection / semantic-dimension discrimination protocol:
-   docs/architecture/c-14-override-semantic-dimension-03AP.md
+   docs/architecture/c-14-override-semantic-dimension-C015.md
 9. Semantic Source & Authority Audit:
-   docs/architecture/semantic-source-authority-audit-03AP.md
+   docs/architecture/semantic-source-authority-audit-C015.md
 10. Intentional Acceptance Audit:
-   docs/architecture/intentional-acceptance-audit-03AP.md
+   docs/architecture/intentional-acceptance-audit-C015.md
 
 ## C-14 result
 
@@ -243,7 +243,7 @@ Do not manufacture a C-14 behavior case.
 
 The Intentional Acceptance Audit is CLOSED:
 
-docs/architecture/intentional-acceptance-audit-03AP.md
+docs/architecture/intentional-acceptance-audit-C015.md
 
 Before selecting a new C-series experiment or introducing any new acceptance mechanism, inspect whether existing project practice already provides a sufficient convention for recognizing:
 - accepted working invariants;
@@ -258,7 +258,7 @@ No implementation authorization is granted.
 
 Human remains the final architecture decision-maker.
 
-## 03AP → 03AQ migration reading set
+## C015 → C016 migration reading set
 
 The receiving chapter MUST read the following before selecting new substantive research:
 
@@ -272,20 +272,20 @@ The receiving chapter MUST read the following before selecting new substantive r
 ### Core architecture / semantic baseline
 - `docs/PROJECT-INSTRUCTIONS.md`
 - `docs/architecture/ai-project-instruction-architecture.md`
-- `docs/architecture/semantic-source-authority-audit-03AP.md`
-- `docs/architecture/intentional-acceptance-audit-03AP.md`
+- `docs/architecture/semantic-source-authority-audit-C015.md`
+- `docs/architecture/intentional-acceptance-audit-C015.md`
 
 ### Dependency / result boundary
 - `docs/architecture/prerequisite-dependency-semantics.md`
-- `docs/architecture/c-13-authority-vs-effective-outcome-03AP.md`
+- `docs/architecture/c-13-authority-vs-effective-outcome-C015.md`
 
 ### Architectural leverage / bottleneck lineage
-- `docs/architecture/architectural-bottleneck-audit-03AP.md`
-- `docs/architecture/architectural-bottleneck-cross-audit-03AP.md`
-- `docs/architecture/post-c-13-architectural-leverage-audit-03AP.md`
+- `docs/architecture/architectural-bottleneck-audit-C015.md`
+- `docs/architecture/architectural-bottleneck-cross-audit-C015.md`
+- `docs/architecture/post-c-13-architectural-leverage-audit-C015.md`
 
 ### OVERRIDE evidence boundary
-- `docs/architecture/c-14-override-semantic-dimension-03AP.md`
+- `docs/architecture/c-14-override-semantic-dimension-C015.md`
 - `docs/handoffs/03D-Architecture-Research.md` — historical accepted OVERRIDE/authority/precedence working semantics; historical evidence only, not automatically current canonical specification.
 - `docs/handoffs/03E-Architecture-Research.md` — inherited accepted working semantics and the transition into dependency research.
 

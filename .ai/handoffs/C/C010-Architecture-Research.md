@@ -1,25 +1,25 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03AK — Architecture & Research
+**Conversation:**
+C010 — Architecture & Research
 
-Specialization:
-03
+**Specialization:**
+C
 
-Chapter:
-AK
+**Chapter:**
+010
 
-Previous chapter:
-AIP Mirror — 03AJ — Architecture & Research
+**Previous chapter:**
+009
 
-Status:
+**Status:**
 HANDED_OFF
 
 ## Migration checkpoint
 
 This chapter is being finalized for migration to:
 
-AIP Mirror — 03AL — Architecture & Research
+AIP Mirror — C011 — Architecture & Research
 
 The repository state must preserve the completed C-1 through C-6 research chain below. The next chapter must continue from this checkpoint rather than reconstructing the research from memory.
 
@@ -543,10 +543,10 @@ Do not:
 
 Primary handoff/history:
 
-- docs/handoffs/03AK-Architecture-Research.md
-- docs/handoffs/03AJ-Architecture-Research.md
-- docs/handoffs/03AI-Architecture-Research.md
-- docs/handoffs/03AH-Architecture-Research.md
+- docs/handoffs/C010-Architecture-Research.md
+- docs/handoffs/C009-Architecture-Research.md
+- docs/handoffs/C008-Architecture-Research.md
+- docs/handoffs/C007-Architecture-Research.md
 
 Architecture/research:
 
@@ -567,9 +567,9 @@ Process/rules:
 
 ### Confirmed / observed
 
-- 03AK is the active closing chapter for this migration.
-- 03AJ was already HANDED_OFF before this migration and is now the predecessor that must be superseded.
-- 03AL does not yet exist.
+- C010 is the active closing chapter for this migration.
+- C009 was already HANDED_OFF before this migration and is now the predecessor that must be superseded.
+- C011 does not yet exist.
 - C-1 through C-4 are completed and architect-reviewed.
 - C-5 is completed with a PARTIALLY DISCRIMINATING characterization.
 - The Qwen statement “The subject is intrinsically required” is explicitly NOT accepted as established.
@@ -591,7 +591,7 @@ Process/rules:
 - Whether a future architectural operation could justify independently addressable Result identity outside the tested cases.
 - Whether the Event/Node/Edge/Proposition distinction will materially affect the eventual Resolution contract.
 
-## Open questions for 03AL
+## Open questions for C011
 
 1. What does Qwen's C-6 report conclude about Content vs State?
 2. Does the architect-side counterargument pass agree, partially agree, or reject that conclusion?
@@ -667,20 +667,20 @@ Only after the C-6 evidence has been adversarially reviewed should the next rese
 At migration finalization:
 
 ```
-03AJ = HANDED_OFF → SUPERSEDED
-03AK = DRAFT → READY_FOR_HANDOFF
-03AL = does not yet exist
+C009 = HANDED_OFF → SUPERSEDED
+C010 = DRAFT → READY_FOR_HANDOFF
+C011 = does not yet exist
 ```
 
-The closing chapter must not create or modify 03AL.
+The closing chapter must not create or modify C011.
 
-The receiving 03AL chapter must later:
+The receiving C011 chapter must later:
 
 1. create its own DRAFT handoff;
 2. verify the previous/receiving lifecycle pair;
-3. transition 03AK READY_FOR_HANDOFF → HANDED_OFF;
+3. transition C010 READY_FOR_HANDOFF → HANDED_OFF;
 4. only then begin substantive work.
 
-This chapter has not performed or claimed the 03AL bootstrap.
+This chapter has not performed or claimed the C011 bootstrap.
 
 Human remains the final architecture decision-maker.

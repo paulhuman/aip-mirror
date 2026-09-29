@@ -1,18 +1,18 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03AO — Architecture & Research
+**Conversation:**
+C014 — Architecture & Research
 
-Specialization:
-03
+**Specialization:**
+C
 
-Chapter:
-AO
+**Chapter:**
+014
 
-Previous chapter:
-AIP Mirror — 03AN — Architecture & Research
+**Previous chapter:**
+013
 
-Status:
+**Status:**
 HANDED_OFF
 
 ## Current objective
@@ -33,11 +33,11 @@ Read and restore:
 
 - docs/PROJECT-INSTRUCTIONS.md
 - docs/architecture/ai-project-instruction-architecture.md
-- docs/handoffs/03AN-Architecture-Research.md
+- docs/handoffs/C013-Architecture-Research.md
 - applicable conversation-handoff and workflow rules
 - applicable deep-understanding guidance
 
-03AN was handed off after C-11.10. Human remains the final architecture decision-maker. Qwen is an independent adversarial reviewer, not an authority source.
+C013 was handed off after C-11.10. Human remains the final architecture decision-maker. Qwen is an independent adversarial reviewer, not an authority source.
 
 ## Established checkpoints
 
@@ -462,24 +462,24 @@ Do not assume:
 
 C-12 — Cycle Semantics, including the composition-vs-independent-consequence discrimination test and architect-side conservative synthesis.
 
-Grok 06AA bootstrap was completed independently. Grok then completed the requested first substantive task: Independent Architectural Reconstruction / Baseline. The full Grok response is intentionally not reproduced here because the source response is retained in the current conversation context for the receiving chapter.
+Grok F000 bootstrap was completed independently. Grok then completed the requested first substantive task: Independent Architectural Reconstruction / Baseline. The full Grok response is intentionally not reproduced here because the source response is retained in the current conversation context for the receiving chapter.
 
 C-11.11 — C-11.15 remains CLOSED as a separate bounded research arc.
 
 ## Handoff lifecycle note
 
-This chapter is now HANDED_OFF to 03AP. The receiving chapter must preserve the migration-specific first action: review the completed Grok 06AA Independent Architectural Reconstruction / Baseline response before selecting the next research arc.
+This chapter is now HANDED_OFF to C015. The receiving chapter must preserve the migration-specific first action: review the completed Grok F000 Independent Architectural Reconstruction / Baseline response before selecting the next research arc.
 
 ## Immediate next task
 
-After initialization of chapter 03AP, the FIRST substantive action is to recover/review the Grok 06AA Independent Architectural Reconstruction / Baseline response that was completed immediately before this migration, and continue the work from that response.
+After initialization of chapter C015, the FIRST substantive action is to recover/review the Grok F000 Independent Architectural Reconstruction / Baseline response that was completed immediately before this migration, and continue the work from that response.
 
 The Grok response itself has not been incorporated into this handoff as architectural fact; it must be reviewed as an independent external-review artifact before any synthesis or research direction is selected.
 
 In parallel, continue the controlled Qwen-vs-Grok experiment: compare the two independent reviewers under the same reviewer contract to identify where their reconstructions, distinctions, assumptions, counterexamples, and research proposals converge or diverge. Do not rank them or declare a winner prematurely; the purpose is to observe substantive model differences and assess the evidence quality of each.
 
 Do not automatically continue with any C-12 boundary question.
-Do not lose the pending Grok baseline review at migration: it is the first required input after 03AP bootstrap.
+Do not lose the pending Grok baseline review at migration: it is the first required input after C015 bootstrap.
 Treat Qwen-vs-Grok parallel testing as an ongoing controlled comparison objective, not as a reason to contaminate either reviewer with the other's conclusions.
 Do not restart C-11.11 — C-11.15.
 Do not promote WD-23 — WD-25 or C-12 findings to AD automatically.
@@ -505,9 +505,9 @@ Do not begin implementation work.
 
 Primary handoff/history:
 
-- docs/handoffs/03AN-Architecture-Research.md
-- docs/handoffs/03AM-Architecture-Research.md
-- docs/handoffs/03AL-Architecture-Research.md
+- docs/handoffs/C013-Architecture-Research.md
+- docs/handoffs/C012-Architecture-Research.md
+- docs/handoffs/C011-Architecture-Research.md
 
 Architecture/research:
 
@@ -529,13 +529,13 @@ Process/rules:
 
 ## Migration-specific starting context for next chapter
 
-**FIRST ACTION AFTER BOOTSTRAP:** review the completed Grok 06AA Independent Architectural Reconstruction / Baseline response from the immediately preceding conversation context. Do not ask the human to repeat it unless the response is genuinely unavailable.
+**FIRST ACTION AFTER BOOTSTRAP:** review the completed Grok F000 Independent Architectural Reconstruction / Baseline response from the immediately preceding conversation context. Do not ask the human to repeat it unless the response is genuinely unavailable.
 
 Then start with:
 
 1. docs/PROJECT-INSTRUCTIONS.md
 2. docs/architecture/ai-project-instruction-architecture.md
-3. docs/handoffs/03AN-Architecture-Research.md
+3. docs/handoffs/C013-Architecture-Research.md
 4. this handoff
 5. applicable conversation-handoff and workflow rules
 6. applicable deep-understanding guidance

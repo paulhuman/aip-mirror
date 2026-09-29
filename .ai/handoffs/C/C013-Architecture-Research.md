@@ -1,23 +1,23 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03AN — Architecture & Research
+**Conversation:**
+C013 — Architecture & Research
 
-Specialization:
-03
+**Specialization:**
+C
 
-Chapter:
-AN
+**Chapter:**
+013
 
-Previous chapter:
-AIP Mirror — 03AM — Architecture & Research
+**Previous chapter:**
+012
 
-Status:
+**Status:**
 HANDED_OFF
 
 ## Current objective
 
-Close the 03AN research line and hand off the verified C-11.10 result to 03AO.
+Close the C013 research line and hand off the verified C-11.10 result to C014.
 
 The next bounded question is:
 
@@ -31,7 +31,7 @@ Bootstrap context restored from:
 
 - docs/PROJECT-INSTRUCTIONS.md
 - docs/architecture/ai-project-instruction-architecture.md
-- docs/handoffs/03AM-Architecture-Research.md
+- docs/handoffs/C012-Architecture-Research.md
 - applicable conversation-handoff and workflow rules
 
 C-11.2 through C-11.8 are accepted as research checkpoints.
@@ -182,8 +182,8 @@ Current research boundaries include:
 
 Primary handoff/history:
 
-- docs/handoffs/03AM-Architecture-Research.md
-- docs/handoffs/03AL-Architecture-Research.md
+- docs/handoffs/C012-Architecture-Research.md
+- docs/handoffs/C011-Architecture-Research.md
 
 Architecture/research:
 
@@ -215,7 +215,7 @@ paulhuman/aip-mirror@main:/docs/architecture/ai-project-instruction-architecture
 
 Previous chapter:
 
-paulhuman/aip-mirror@main:/docs/handoffs/03AM-Architecture-Research.md
+paulhuman/aip-mirror@main:/docs/handoffs/C012-Architecture-Research.md
 
 Dependency research:
 
@@ -258,8 +258,8 @@ Do not begin implementation work.
 
 ### Confirmed / observed
 
-- 03AM was READY_FOR_HANDOFF at bootstrap start.
-- 03AN did not exist before bootstrap.
+- C012 was READY_FOR_HANDOFF at bootstrap start.
+- C013 did not exist before bootstrap.
 - The meta-architecture north-star document was restored before local research state.
 - C-11.2 found multiple semantically equivalent interpretations; B/C/D remained indistinguishable on the tested cases.
 - C-11.3 did not establish ownership of Y.

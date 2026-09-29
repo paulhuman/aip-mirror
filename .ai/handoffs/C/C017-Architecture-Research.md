@@ -1,21 +1,22 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03AR — Architecture & Research
+**Conversation:**
+C017 — Architecture & Research
 
-Specialization:
-03 — Architecture & Research
+**Specialization:**
+C
 
-Chapter:
-03AR
+**Chapter:**
+017
 
-Previous chapter:
-03AQ — Architecture & Research
+**Previous chapter:**
+016
 
-Status: HANDED_OFF
+**Status:**
+HANDED_OFF
 ## Current objective
 
-Continue specialization 03 architecture research from the completed 03AQ handoff, preserving the distinction between semantic acceptance and handoff lifecycle.
+Continue specialization C architecture research from the completed C016 handoff, preserving the distinction between semantic acceptance and handoff lifecycle.
 
 The immediate research task is bounded inspection of existing repository practice around intentional acceptance:
 
@@ -34,7 +35,7 @@ Do not design a new Acceptance mechanism until this inspection establishes that 
 
 ## Completed
 
-03AQ completed lifecycle cleanup and confirmed the current handoff lifecycle:
+C016 completed lifecycle cleanup and confirmed the current handoff lifecycle:
 
 ```
 DRAFT
@@ -46,7 +47,7 @@ HANDED_OFF
 
 `SUPERSEDED` has been removed from the current lifecycle and must not be reintroduced. The current lifecycle is intentionally terminal at `HANDED_OFF`.
 
-03AP/03AQ research carried forward:
+C015/C016 research carried forward:
 
 - C-13 — Authority Standing vs Effective Outcome — CLOSED.
 - C-14 evidence inspection — CLOSED as evidence-blocked; no behavioral OVERRIDE test was executed.
@@ -143,7 +144,7 @@ HANDED_OFF
 inherited state
 ```
 
-03AP audits found no established universal Acceptance entity, approval protocol, Decision registry, or total source hierarchy.
+C015 audits found no established universal Acceptance entity, approval protocol, Decision registry, or total source hierarchy.
 
 The remaining uncertainty is whether existing project conventions already provide sufficient observable recognition of accepted semantic status, especially when that status changes over time.
 
@@ -179,21 +180,21 @@ The repository therefore already contains a practical acceptance signal: **the d
 
 ### Working acceptance is distinct from formal Architecture Decision
 
-Concrete 03AC/03AD practice shows three distinguishable documentation states:
+Concrete C002/C003 practice shows three distinguishable documentation states:
 
 1. **research / hypothesis / validation evidence** — not normative;
 2. **accepted working direction / invariant** — intentionally accepted for current architectural reasoning, but still provisional;
 3. **formal Architecture Decision (`AD-*`)** — explicitly established architecture semantics.
 
-For example, 03AC records inherited `AD-01` through `AD-21` as established architecture decisions, while its newly worked OVERRIDE conclusions are explicitly preserved as a durable checkpoint and are said to require a later Architecture Decision Pass before promotion to formal AD entries.
+For example, C002 records inherited `AD-01` through `AD-21` as established architecture decisions, while its newly worked OVERRIDE conclusions are explicitly preserved as a durable checkpoint and are said to require a later Architecture Decision Pass before promotion to formal AD entries.
 
-03AD then records its OVERRIDE conclusions as **accepted working invariants**, while explicitly stating that candidate-level precedence remains a working model rather than a formal numbered Architecture Decision.
+C003 then records its OVERRIDE conclusions as **accepted working invariants**, while explicitly stating that candidate-level precedence remains a working model rather than a formal numbered Architecture Decision.
 
 This is important evidence that **acceptance does not equal finality**.
 
 ### Human decision remains the actual acceptance act
 
-A later historical 03AF checkpoint makes the process explicit as:
+A later historical C005 checkpoint makes the process explicit as:
 
 ```
 research hypothesis
@@ -215,7 +216,7 @@ The strongest current interpretation is therefore:
 
 ### Handoff inheritance is preservation, not acceptance
 
-03AE provides direct evidence of the preservation mechanism through its section **Inherited accepted decisions / invariants**.
+C004 provides direct evidence of the preservation mechanism through its section **Inherited accepted decisions / invariants**.
 
 The receiving chapter can therefore recognize accepted state because the inherited document explicitly labels the material as accepted/inherited. The handoff lifecycle state itself remains separate.
 
@@ -344,17 +345,17 @@ A possible minimal representation such as `subject + state` remains only a resea
 ### Confirmed / observed
 
 - The canonical repository is `paulhuman/aip-mirror`, branch `main`.
-- The receiving handoff `docs/handoffs/03AR-Architecture-Research.md` did not exist before bootstrap.
-- `docs/handoffs/03AQ-Architecture-Research.md` was `READY_FOR_HANDOFF` at bootstrap.
+- The receiving handoff `docs/handoffs/C017-Architecture-Research.md` did not exist before bootstrap.
+- `docs/handoffs/C016-Architecture-Research.md` was `READY_FOR_HANDOFF` at bootstrap.
 - The current lifecycle is DRAFT → READY_FOR_HANDOFF → HANDED_OFF.
 - Intentional project acceptance is an explicit workflow requirement before promoting research/finding to specification.
 - Accepted working semantics are observable in historical project practice.
 - The repository makes intentional acceptance observable through explicit status-bearing wording such as `accepted working direction`, `accepted working invariants`, `Decisions`, and `Established architecture decisions`.
-- Formal `AD-*` entries are explicitly distinguishable from provisional accepted working semantics in the 03AC/03AD lineage.
+- Formal `AD-*` entries are explicitly distinguishable from provisional accepted working semantics in the C002/C003 lineage.
 - Handoff inheritance explicitly preserves accepted status through wording such as `Inherited accepted decisions / invariants`.
 - The current `docs/` tree has no dedicated `specifications/` directory or universal specification registry.
 - Handoff preserves accepted state but does not itself constitute acceptance.
-- No dedicated Acceptance artifact or universal Decision registry is established by the inspected 03AP audits.
+- No dedicated Acceptance artifact or universal Decision registry is established by the inspected C015 audits.
 - C-13 positively distinguishes authority standing, candidate effect, and effective outcome as dependency-reference surfaces in the bounded model.
 - C-14 did not execute a behavioral OVERRIDE test because current project evidence was insufficient.
 
@@ -383,9 +384,9 @@ These remain inferences.
 
 ## Last completed task
 
-03AQ completed the handoff lifecycle cleanup and left the repository with the current three-state handoff lifecycle. The final architecture lifecycle diagram was corrected, and the exact duplicate sequence `HANDED_OFF HANDED_OFF` was checked and found absent.
+C016 completed the handoff lifecycle cleanup and left the repository with the current three-state handoff lifecycle. The final architecture lifecycle diagram was corrected, and the exact duplicate sequence `HANDED_OFF HANDED_OFF` was checked and found absent.
 
-03AR then completed the first bounded inspection of existing intentional-acceptance practice. The inspection found an existing documentary convention: human/project acceptance is represented durably by explicit semantic-status wording, with a clear distinction between accepted working semantics and formal `AD-*` decisions. No dedicated Acceptance mechanism was introduced.
+C017 then completed the first bounded inspection of existing intentional-acceptance practice. The inspection found an existing documentary convention: human/project acceptance is represented durably by explicit semantic-status wording, with a clear distinction between accepted working semantics and formal `AD-*` decisions. No dedicated Acceptance mechanism was introduced.
 
 ## New constraints — context, command routing, and durable meta knowledge
 
@@ -393,7 +394,7 @@ The project owner has now identified additional constraints that must be incorpo
 
 ### 1. Context accumulation is an observed reliability risk
 
-`03AQ` was the longest chapter in the project and also produced the largest observed concentration of assistant errors. Earlier chapters were approximately 20–25% shorter and showed fewer failures. The observed failures included:
+`C016` was the longest chapter in the project and also produced the largest observed concentration of assistant errors. Earlier chapters were approximately 20–25% shorter and showed fewer failures. The observed failures included:
 
 - incorrect/non-existent repository path recall;
 - stale handoff filenames surviving after renaming;
@@ -586,12 +587,12 @@ Do not repeat merely for migration:
 - C-14 evidence inspection.
 - C-12.
 - C-11.11–C-11.15.
-- the 03AP Semantic Source & Authority Audit.
-- the 03AP Intentional Acceptance Audit.
-- the 03AP Architectural Bottleneck Audit.
-- the 03AP Architectural Bottleneck Cross-Audit.
+- the C015 Semantic Source & Authority Audit.
+- the C015 Intentional Acceptance Audit.
+- the C015 Architectural Bottleneck Audit.
+- the C015 Architectural Bottleneck Cross-Audit.
 - the Post-C-13 Architectural Leverage Audit.
-- the completed 03AQ lifecycle cleanup.
+- the completed C016 lifecycle cleanup.
 
 Do not reintroduce `SUPERSEDED`; it has already been removed from the current lifecycle by project decision.
 
@@ -607,21 +608,21 @@ Read:
 - `.ai/rules/workflow.md`
 - `.ai/rules/project-architecture.md`
 - `.ai/rules/repository.md`
-- `docs/handoffs/03AQ-Architecture-Research.md`
+- `docs/handoffs/C016-Architecture-Research.md`
 - `docs/architecture/ai-project-instruction-architecture.md`
-- `docs/architecture/semantic-source-authority-audit-03AP.md`
-- `docs/architecture/intentional-acceptance-audit-03AP.md`
-- `docs/architecture/architectural-bottleneck-audit-03AP.md`
-- `docs/architecture/architectural-bottleneck-cross-audit-03AP.md`
-- `docs/architecture/post-c-13-architectural-leverage-audit-03AP.md`
+- `docs/architecture/semantic-source-authority-audit-C015.md`
+- `docs/architecture/intentional-acceptance-audit-C015.md`
+- `docs/architecture/architectural-bottleneck-audit-C015.md`
+- `docs/architecture/architectural-bottleneck-cross-audit-C015.md`
+- `docs/architecture/post-c-13-architectural-leverage-audit-C015.md`
 - `docs/architecture/prerequisite-dependency-semantics.md`
-- `docs/architecture/c-13-authority-vs-effective-outcome-03AP.md`
-- `docs/architecture/c-14-override-semantic-dimension-03AP.md`
+- `docs/architecture/c-13-authority-vs-effective-outcome-C015.md`
+- `docs/architecture/c-14-override-semantic-dimension-C015.md`
 
 The historical OVERRIDE lineage referenced by earlier handoffs is now confirmed in the normalized current filenames:
 
-- `docs/handoffs/03AD-Architecture-Research.md`
-- `docs/handoffs/03AE-Architecture-Research.md`
+- `docs/handoffs/C003-Architecture-Research.md`
+- `docs/handoffs/C004-Architecture-Research.md`
 
 These are the post-cleanup filenames corresponding to the historical 03D/03E references; they were inspected directly and must be used in current references.
 

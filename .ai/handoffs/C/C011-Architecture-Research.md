@@ -1,23 +1,23 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03AL — Architecture & Research
+**Conversation:**
+C011 — Architecture & Research
 
-Specialization:
-03
+**Specialization:**
+C
 
-Chapter:
-AL
+**Chapter:**
+011
 
-Previous chapter:
-AIP Mirror — 03AK — Architecture & Research
+**Previous chapter:**
+010
 
-Status:
+**Status:**
 HANDED_OFF
 
 ## Current objective
 
-Complete the bounded semantic dependency research line through C-10 — Dependency Relation vs. Dependency Target, and prepare migration to 03AM. The next chapter must begin with C-11 — Target Sufficiency Counterexample Test.
+Complete the bounded semantic dependency research line through C-10 — Dependency Relation vs. Dependency Target, and prepare migration to C012. The next chapter must begin with C-11 — Target Sufficiency Counterexample Test.
 
 Current working model remains intentionally conservative:
 
@@ -276,11 +276,11 @@ Established working boundaries:
 
 Primary handoff/history:
 
-- docs/handoffs/03AL-Architecture-Research.md
-- docs/handoffs/03AK-Architecture-Research.md
-- docs/handoffs/03AJ-Architecture-Research.md
-- docs/handoffs/03AI-Architecture-Research.md
-- docs/handoffs/03AH-Architecture-Research.md
+- docs/handoffs/C011-Architecture-Research.md
+- docs/handoffs/C010-Architecture-Research.md
+- docs/handoffs/C009-Architecture-Research.md
+- docs/handoffs/C008-Architecture-Research.md
+- docs/handoffs/C007-Architecture-Research.md
 
 Architecture/research:
 
@@ -308,8 +308,8 @@ paulhuman/aip-mirror@main:/
 Primary migration history:
 
 ```
-paulhuman/aip-mirror@main:/docs/handoffs/03AK-Architecture-Research.md
-paulhuman/aip-mirror@main:/docs/handoffs/03AJ-Architecture-Research.md
+paulhuman/aip-mirror@main:/docs/handoffs/C010-Architecture-Research.md
+paulhuman/aip-mirror@main:/docs/handoffs/C009-Architecture-Research.md
 ```
 
 Qwen research onboarding:
@@ -412,7 +412,7 @@ The decisive current synthesis is:
 
 ## Immediate next task
 
-In the receiving chapter 03AM, run:
+In the receiving chapter C012, run:
 
 > C-11 — Target Sufficiency Counterexample Test
 
@@ -483,13 +483,13 @@ Human remains the final architecture decision-maker.
 Bootstrap of the receiving chapter has now completed the normal write-capable lifecycle transition:
 
 ```
-03AK = SUPERSEDED
-03AL = HANDED_OFF
-03AM = DRAFT
+C010 = SUPERSEDED
+C011 = HANDED_OFF
+C012 = DRAFT
 ```
 
-The receiving 03AM chapter created and owns its own DRAFT handoff, then transitioned this handoff from READY_FOR_HANDOFF to HANDED_OFF.
+The receiving C012 chapter created and owns its own DRAFT handoff, then transitioned this handoff from READY_FOR_HANDOFF to HANDED_OFF.
 
-Post-bootstrap consistency verification confirmed the receiving handoff remains DRAFT, identifies 03AL as its previous chapter, and begins with C-11 as its immediate next substantive task.
+Post-bootstrap consistency verification confirmed the receiving handoff remains DRAFT, identifies C011 as its previous chapter, and begins with C-11 as its immediate next substantive task.
 
 Human remains the final architecture decision-maker.

@@ -1,18 +1,18 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03AM — Architecture & Research
+**Conversation:**
+C012 — Architecture & Research
 
-Specialization:
-03
+**Specialization:**
+C
 
-Chapter:
-AM
+**Chapter:**
+012
 
-Previous chapter:
-AIP Mirror — 03AL — Architecture & Research
+**Previous chapter:**
+011
 
-Status:
+**Status:**
 HANDED_OFF
 
 ## Current objective
@@ -147,10 +147,10 @@ Established working boundaries:
 
 Primary handoff/history:
 
-- docs/handoffs/03AM-Architecture-Research.md
-- docs/handoffs/03AL-Architecture-Research.md
-- docs/handoffs/03AK-Architecture-Research.md
-- docs/handoffs/03AJ-Architecture-Research.md
+- docs/handoffs/C012-Architecture-Research.md
+- docs/handoffs/C011-Architecture-Research.md
+- docs/handoffs/C010-Architecture-Research.md
+- docs/handoffs/C009-Architecture-Research.md
 
 Architecture/research:
 
@@ -180,9 +180,9 @@ paulhuman/aip-mirror@main:/
 Primary migration history:
 
 ```
-paulhuman/aip-mirror@main:/docs/handoffs/03AL-Architecture-Research.md
-paulhuman/aip-mirror@main:/docs/handoffs/03AK-Architecture-Research.md
-paulhuman/aip-mirror@main:/docs/handoffs/03AJ-Architecture-Research.md
+paulhuman/aip-mirror@main:/docs/handoffs/C011-Architecture-Research.md
+paulhuman/aip-mirror@main:/docs/handoffs/C010-Architecture-Research.md
+paulhuman/aip-mirror@main:/docs/handoffs/C009-Architecture-Research.md
 ```
 
 Qwen research onboarding:
@@ -246,8 +246,8 @@ Qwen remains an independent adversarial reviewer. The final architectural decisi
 
 ### Confirmed / observed
 
-- 03AL is READY_FOR_HANDOFF at bootstrap start.
-- 03AM did not exist before this bootstrap.
+- C011 is READY_FOR_HANDOFF at bootstrap start.
+- C012 did not exist before this bootstrap.
 - C-10 was completed and architect-reviewed.
 - C-11.1b established that target identity does not, by itself, determine conditional applicability.
 - C-11.2 found multiple semantically equivalent interpretations for ownership of Y; B/C/D remain indistinguishable on the current minimal cases, while A is not required but not universally impossible.
@@ -355,36 +355,36 @@ Human remains the final architecture decision-maker.
 At bootstrap start:
 
 ```
-03AL = READY_FOR_HANDOFF
-03AM = does not yet exist
+C011 = READY_FOR_HANDOFF
+C012 = does not yet exist
 ```
 
 During this write-capable bootstrap:
 
 ```
-03AM = DRAFT
-03AL = HANDED_OFF
+C012 = DRAFT
+C011 = HANDED_OFF
 ```
 
-03AM must remain DRAFT after bootstrap. When 03AM later reaches READY_FOR_HANDOFF, it must apply the required supersession invariant to the older HANDED_OFF 03AL handoff.
+C012 must remain DRAFT after bootstrap. When C012 later reaches READY_FOR_HANDOFF, it must apply the required supersession invariant to the older HANDED_OFF C011 handoff.
 
 ## Bootstrap note
 
-This file was created by 03AM itself as the receiving chapter's initial DRAFT state, as required by the conversation-handoff bootstrap procedure. It has since been advanced to READY_FOR_HANDOFF as part of the migration to 03AN.
+This file was created by C012 itself as the receiving chapter's initial DRAFT state, as required by the conversation-handoff bootstrap procedure. It has since been advanced to READY_FOR_HANDOFF as part of the migration to C013.
 
 ## Migration lifecycle
 
-03AM is now the closing chapter for migration to 03AN.
+C012 is now the closing chapter for migration to C013.
 
 Lifecycle transition performed by this closing chapter:
 
-03AL = HANDED_OFF → SUPERSEDED
-03AM = DRAFT → READY_FOR_HANDOFF
+C011 = HANDED_OFF → SUPERSEDED
+C012 = DRAFT → READY_FOR_HANDOFF
 
-The receiving chapter 03AN must perform READY_FOR_HANDOFF → HANDED_OFF on this handoff during its bootstrap. When 03AN later reaches READY_FOR_HANDOFF, it must apply the required supersession invariant to the older HANDED_OFF 03AM handoff.
+The receiving chapter C013 must perform READY_FOR_HANDOFF → HANDED_OFF on this handoff during its bootstrap. When C013 later reaches READY_FOR_HANDOFF, it must apply the required supersession invariant to the older HANDED_OFF C012 handoff.
 
 ## Migration note
 
-The substantive checkpoint for 03AN is C-11.2. The immediate next task is C-11.3.
+The substantive checkpoint for C013 is C-11.2. The immediate next task is C-11.3.
 
 The north-star meta-architecture document must be restored as bootstrap context before local research state is resumed.
