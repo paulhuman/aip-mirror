@@ -109,7 +109,7 @@ The project uses four complementary specializations:
 - `AIP Mirror — 03 — Architecture & Research`
 - `AIP Mirror — 04 — Project Workshop`
 
-The current Chapter Identifier Format is `[0-9]{2}[A-Z]{2}`. The final two uppercase letters advance through the continuous sequence `AA → AB → ... → AZ → BA → ... → ZZ` with no skipped letters.
+The current Chapter Identifier Format is `[A-Z][0-9]{3}`. The first uppercase letter identifies the specialization and the final three digits identify the chapter number within that specialization. Historical chapter identifiers from the previous scheme are migration history only and must not be used as current identifiers.
 
 
 
