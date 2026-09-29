@@ -59,58 +59,55 @@ Use that rule for the exact identifier format and sequence; this skill only uses
 
 ## Handoff structure
 
-Use this structure unless a project-specific format requires otherwise:
+Use this canonical structure for every handoff:
 
     # Conversation Handoff
 
-    Conversation:
-    <Project> — XXYY — <Specialization>
+    **Conversation:**
+    <chapter> — <short conversation title>
 
-    Specialization:
-    <01 / 02 / 03 / 04>
+    **Specialization:**
+    <A-Z>
 
-    Chapter:
-    <AA / AB / AC / ... / ZZ>
+    **Chapter:**
+    <000-999>
 
-    Previous chapter:
-    <chapter or N/A>
+    **Previous chapter:**
+    <previous chapter number or N/A>
 
-    Status:
+    **Status:**
     DRAFT
 
-    ## Current objective
+Header field rules:
 
-    ## Completed
+- `Conversation` contains the full chapter identifier followed by the short conversation title.
+- Do not include the project name prefix in `Conversation`.
+- `Specialization` contains only the specialization letter.
+- `Chapter` contains only the three-digit chapter number.
+- `Previous chapter` contains only the previous chapter's three-digit number, or `N/A` when this is the first chapter in the specialization.
+- Do not include the specialization letter in the `Chapter` or `Previous chapter` field.
+- Use bold Markdown (`**...:**`) for every header field name exactly as shown above.
+- The full chapter identifier is formed from `Specialization` + `Chapter`; for example, `E` + `001` = `E001`.
+- The handoff filename uses the full chapter identifier: `<chapter>-<short-name>.md`.
 
-    ## Current implementation state
+Example:
 
-    ## Decisions
+    # Conversation Handoff
 
-    ## Open questions
+    **Conversation:**
+    E001 — Independent Review (Qwen)
 
-    ## Current files
+    **Specialization:**
+    E
 
-    ## Relevant references
+    **Chapter:**
+    001
 
-    ## Important constraints
+    **Previous chapter:**
+    000
 
-    ## Evidence / confidence
-
-    ### Confirmed / observed
-
-    ### Inferred
-
-    ### Assumed / unverified
-
-    ### Open
-
-    ## Last completed task
-
-    ## Immediate next task
-
-    ## Things not to redo
-
-    ## Recommended starting context for next chapter
+    **Status:**
+    HANDED_OFF
 
 ## Lifecycle rules
 
