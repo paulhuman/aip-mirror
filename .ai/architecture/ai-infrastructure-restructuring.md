@@ -638,7 +638,7 @@ Questions to resolve later:
 
 Do not change the command or merge it into migration without new evidence.
 
-### 17.3 Soft dual source in lifecycle.md — MODERATE CLEANUP CANDIDATE
+### 17.3 Soft dual source in lifecycle.md — RESOLVED IN C027
 
 Grok and Qwen both identified possible duplication of user-facing command phrases between `INDEX.md` and `.ai/rules/handoff/lifecycle.md`.
 
@@ -652,9 +652,7 @@ lifecycle.md
     = lifecycle semantics, authorization, constraints
 ```
 
-The issue is classified as a **Moderate cleanup candidate**, not an urgent ownership violation.
-
-Future cleanup should prefer a pointer in lifecycle.md to the INDEX command surface while preserving lifecycle semantics and authorization conditions there.
+The C027 cleanup was completed. Checkpoint and migration invocation discovery is routed through INDEX, while lifecycle.md retains operation semantics and authorization. Recovery and correction phrases remain in lifecycle.md because they are explicit authorization tokens for bounded procedures.
 
 ### 17.4 Historical handoffs after removal of SUPERSEDED — DECIDED
 
@@ -736,7 +734,7 @@ The reviews are now consolidated against current repository evidence. The matrix
 | `BOOTSTRAP.md` as ordered workflow | Grok + Qwen converge | Accept | **Keep** |
 | `SUPERSEDED` removal / historical ordering | Qwen suggestion; current filenames already encode chapter sequence | No new lifecycle rule | **No change** |
 | User-facing command phrases duplicated in `lifecycle.md` | Grok + Qwen | Soft dual source | **Targeted cleanup candidate** |
-| `.ai/AGENTS.md` effectively empty | Grok + Qwen + current repository state | Real architecture/implementation gap | **Still pending: design and create AGENTS.md** |
+| `.ai/AGENTS.md` effectively empty | Grok + Qwen + Phase 0/2 entry-path test | Real architecture/implementation gap | **Resolved in C027: minimal entry contract implemented** |
 | Active chapter identifier format `[A-Z][0-9]{3}` | Current infrastructure state | Keep | **Current** |
 | INDEX scalability / presentation | Grok + Qwen | Real design concern at ~10–15 commands | **Completed in C027** |
 | `ENTRY.md` | Both reviews; future semantic role identified | Do not create now | **Iteration 3 experiment** |
@@ -744,14 +742,14 @@ The reviews are now consolidated against current repository evidence. The matrix
 | Project-specific data spread across generic rules/skills/workflows | Architecture objective | Must remain prohibited | **Ongoing consistency rule** |
 | Physical Iteration 2 restructuring | Review checkpoint | Completed | **Do not restart** |
 
-### 18.1 Bounded follow-up work
+### 18.1 Bounded follow-up work — completed in C027
 
-The review did **not** authorize another broad restructuring pass. The bounded follow-up was:
+The review did **not** authorize another broad restructuring pass. The bounded follow-up was completed as follows:
 
 1. design and create `.ai/AGENTS.md` as the compact always-on contract;
 2. perform the targeted `lifecycle.md` command-discovery cleanup, preserving lifecycle semantics and authorization;
 3. complete the INDEX presentation/minimum-routing analysis without changing its ownership boundary;
-4. run a targeted post-edit semantic consistency sweep after resulting edits.
+4. run the targeted post-edit semantic consistency sweep.
 
 The following remain explicitly outside the current architecture scope unless new evidence appears:
 
@@ -765,20 +763,17 @@ The following remain explicitly outside the current architecture scope unless ne
 
 ## 19. Independent review findings requiring concrete follow-up
 
-### 19.1 AGENTS.md implementation gap
+### 19.1 AGENTS.md implementation gap — RESOLVED IN C027
 
-Both reviewers independently identified `.ai/AGENTS.md` as effectively empty while the architecture describes it as the always-on operating contract.
+Both reviewers independently identified `.ai/AGENTS.md` as effectively empty while the architecture described it as the always-on operating contract. C027 validated the minimum contract with a bounded entry-path experiment and implemented it.
 
-This is a real implementation gap, not a reason to redesign the entry architecture.
+The active AGENTS boundary is:
 
-The intended future content should remain compact and should establish only:
-
-- repository identity/configuration pointer;
-- `AGENTS → INDEX → canonical owners` model;
-- `INDEX` as routing surface;
-- canonical owners as execution/semantic authority;
-- pointer to INDEX capability discovery;
-- a minimal reminder not to invent operations.
+- establish the `.ai/` vs `docs/` boundary;
+- establish repository/path context from `.ai/config.yaml` and `.ai/rules/repository.md`;
+- route AI-infrastructure work through INDEX;
+- route project work through `docs/PROJECT-INSTRUCTIONS.md`;
+- reread the canonical owner before execution.
 
 Do not let AGENTS grow into another INDEX or workflow.
 
@@ -802,9 +797,9 @@ config.yaml
 
 Do not move `commit_scopes`, `project_terms`, or configured external references merely because they are project-specific. The portability test is whether the generic infrastructure remains free of embedded project assumptions.
 
-### 19.3 lifecycle command discovery cleanup
+### 19.3 lifecycle command discovery cleanup — RESOLVED IN C027
 
-When the next cleanup pass begins, inspect `.ai/rules/handoff/lifecycle.md` specifically for repeated user-facing phrases. Classify each occurrence semantically before editing.
+C027 classified the repeated user-facing phrases and moved checkpoint/migration invocation discovery to INDEX while preserving lifecycle semantics and authorization in `lifecycle.md`. Recovery/correction phrases remain in the lifecycle rule because they are explicit authorization tokens for bounded recovery/correction procedures.
 
 Target model:
 
@@ -959,18 +954,17 @@ Capability discovery remains distinct:
 capability → owner → purpose
 ```
 
-### 24.2 Durable AGENTS boundary
+### 24.2 Durable AGENTS boundary — IMPLEMENTED IN C027
 
-The intended AGENTS role remains a compact always-on operating contract. It should establish only the minimum context needed before command routing, including:
+The AGENTS role is a compact always-on operating contract. Its active implementation establishes the minimum context needed before command routing:
 
-- repository/configuration pointer;
-- AGENTS → INDEX → canonical owners model;
-- INDEX as the routing/discovery surface;
-- canonical owners as semantic/procedural authority;
-- pointer to capability discovery;
-- minimal prohibition against inventing operations or duplicating canonical semantics.
+- `.ai/` vs `docs/` boundary;
+- repository/path context from `.ai/config.yaml` and `.ai/rules/repository.md`;
+- AI-infrastructure routing through INDEX;
+- project-work routing through `docs/PROJECT-INSTRUCTIONS.md`;
+- reread of the canonical owner before execution.
 
-Its detailed content is still an active architecture task and must be designed from current repository evidence before the file is created.
+Its content must not grow into a second INDEX, procedure catalogue, lifecycle rule, or capability owner.
 
 ### 24.3 Durable portability boundary
 
