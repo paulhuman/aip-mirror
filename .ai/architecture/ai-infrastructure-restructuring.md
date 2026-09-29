@@ -666,31 +666,17 @@ Handoff filenames already encode specialization/chapter identity, and chapter se
 
 Revisit only if actual discovery failures appear.
 
-### 17.5 Chapter identifier format — FUTURE NAMING TODO
+### 17.5 Chapter identifier format — current state
 
-The current `[0-9]{2}[A-Z]{2}` format is **not considered AIP Mirror-specific leakage**. It is an infrastructure naming convention.
-
-The intended future generic convention is:
+The active handoff chapter identifier format is:
 
 ```text
-specialization: [A-Z]
-chapter/chat:   [0-9]{3}
-
-example:
-C027
-
-range:
-C000 … C999
+[A-Z][0-9]{3}
 ```
 
-The rationale is to make specialization one letter and chapter/chat numbering three decimal digits. This is a future naming migration, not an Iteration 2 correction.
+The specialization is encoded by the first letter and the chapter number by three decimal digits. For example, `C027` identifies specialization `C`, chapter `027`.
 
-TODO:
-
-- define the future generic identifier convention;
-- determine how specialization directories and handoff filenames encode it;
-- define migration/compatibility rules from the current `03AZ`-style identifiers;
-- test the convention across all specializations before adopting it.
+This is an active infrastructure convention. Historical identifiers from the previous scheme are migration history only and must not be used as current architectural references.
 
 ### 17.6 INDEX scalability — FUTURE DESIGN QUESTION
 
@@ -745,14 +731,13 @@ The reviews are now consolidated against current repository evidence. The matrix
 |---|---|---|---|
 | `INDEX` routing model | Grok + Qwen converge | Accept | **Keep** |
 | `INDEX` `Repository state may change` + `Commit` metadata | C027 tested their routing value against canonical owners | Remove from routing table | **Removed in C027; semantics remain canonical elsewhere** |
-| Minimum semantic metadata before router becomes owner | Qwen conceptual challenge | Not resolved | **Open** |
+| Minimum semantic metadata before router becomes owner | C027 tested the routing boundary against canonical owners | Four-field boundary established | **Resolved in C027** |
 | `Пора выдать bootstrap-инструкцию` as separate command | Both reviews raise semantic question | Keep unchanged | **Open; no merge with migration** |
 | `BOOTSTRAP.md` as ordered workflow | Grok + Qwen converge | Accept | **Keep** |
 | `SUPERSEDED` removal / historical ordering | Qwen suggestion; current filenames already encode chapter sequence | No new lifecycle rule | **No change** |
 | User-facing command phrases duplicated in `lifecycle.md` | Grok + Qwen | Soft dual source | **Targeted cleanup candidate** |
 | `.ai/AGENTS.md` effectively empty | Grok + Qwen + current repository state | Real architecture/implementation gap | **Still pending: design and create AGENTS.md** |
-| `[0-9]{2}[A-Z]{2}` naming | Grok concern; semantic classification shows generic infrastructure convention | Do not treat as project leakage | **Future naming migration** |
-| Future `C027`-style identifiers | User architectural direction | Record, test later | **Future TODO** |
+| Active chapter identifier format `[A-Z][0-9]{3}` | Current infrastructure state | Keep | **Current** |
 | INDEX scalability / presentation | Grok + Qwen | Real design concern at ~10–15 commands | **Completed in C027** |
 | `ENTRY.md` | Both reviews; future semantic role identified | Do not create now | **Iteration 3 experiment** |
 | `config.yaml` contains project-specific scopes/terms | Qwen | Intentional configuration boundary | **No change** |
