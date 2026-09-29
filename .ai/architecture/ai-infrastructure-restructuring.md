@@ -992,3 +992,96 @@ Project-specific handoffs and architecture notes remain project state/research a
 
 When an old note or external review proposes a change, first classify it as current evidence, already-decided state, open architectural question, or historical/deferred proposal. Only current evidence and genuinely open questions should normally drive the current chapter. A deferred proposal does not become active merely because it remains written down.
 
+
+
+## 25. C027 Phase 2 — entry-path architecture result
+
+C027 tested the minimum AGENTS entry contract against the current repository rather than reconstructing the architecture from earlier chapters.
+
+### 25.1 Phase 0 baseline
+
+The current AGENTS file contained only its heading. A fresh-AI entry-path test therefore failed: the file did not establish where to initialize repository context, how to distinguish AI infrastructure from project work, or where to route the resulting operation.
+
+### 25.2 Phase 2 validated topology
+
+The tested minimal contract passed both bounded entry scenarios.
+
+AI-infrastructure work:
+
+```
+AGENTS
+  ↓
+config.yaml
+  ↓
+repository.md
+  ↓
+INDEX
+  ↓
+canonical owner
+```
+
+Project work:
+
+```
+AGENTS
+  ↓
+config.yaml
+  ↓
+repository.md
+  ↓
+PROJECT-INSTRUCTIONS
+  ↓
+canonical project sources
+```
+
+This establishes that `.ai/config.yaml` and `.ai/rules/repository.md` are genuine initialization-path nodes. They are not optional background context for a fresh AI.
+
+### 25.3 Durable AGENTS boundary
+
+The implementation baseline validated by the experiment is deliberately small:
+
+1. establish the `.ai/` AI-infrastructure vs `docs/` project-knowledge boundary;
+2. establish repository/path context from `.ai/config.yaml` and `.ai/rules/repository.md` before project or `.ai` work;
+3. route AI-infrastructure operations through `.ai/INDEX.md`;
+4. route project work through `docs/PROJECT-INSTRUCTIONS.md`;
+5. reread the canonical rule, skill, workflow, or project source that owns the operation before execution.
+
+The resulting topology is:
+
+```
+                         AGENTS
+                           │
+                  context initialization
+                           │
+             ┌─────────────┴─────────────┐
+             ▼                           ▼
+      AI infrastructure             Project work
+             │                           │
+       config + repository         config + repository
+             │                           │
+           INDEX                PROJECT-INSTRUCTIONS
+             │                           │
+     canonical AI owners       canonical project owners
+```
+
+AGENTS is an always-on entry contract. It is not an INDEX replacement, capability owner, lifecycle rule, commit policy, or procedure catalogue.
+
+### 25.4 Architecture vs cleanup
+
+The Phase 2 experiment exposed two stale references in `docs/PROJECT-INSTRUCTIONS.md`:
+
+- the old chapter identifier model `[0-9]{2}[A-Z]{2}`;
+- the old bootstrap path `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`.
+
+These are consistency defects in the project instruction layer, not evidence that the AGENTS architecture should grow. They are therefore a separate cleanup task.
+
+The lifecycle rule also contains user-facing command phrases that overlap with INDEX discovery. The bounded cleanup question is whether those discovery phrases can be reduced while preserving the lifecycle rule's operation semantics and explicit authorization. This is a cleanup/classification task, not an INDEX redesign.
+
+### 25.5 C027 bounded next sequence
+
+1. implement the tested AGENTS contract;
+2. correct the two stale PROJECT-INSTRUCTIONS references;
+3. classify and perform only the necessary lifecycle command-discovery cleanup;
+4. run a targeted entry-layer consistency sweep.
+
+Do not reopen the completed INDEX minimum-routing decision or restart Iteration 2 restructuring.
