@@ -33,6 +33,34 @@ The bounded target is approximately 10–15 commands/capabilities. INDEX must re
 
 ## Immediate next task
 
+1. Record the Phase 2 AGENTS entry-path result in this handoff and the durable architecture note.
+2. Separately clean up the two stale references exposed by the Phase 2 test in `docs/PROJECT-INSTRUCTIONS.md`:
+   - old chapter format `[0-9]{2}[A-Z]{2}` / `AA → AB → ... → ZZ` → current `[A-Z][0-9]{3}`;
+   - old bootstrap path `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md` → `.ai/workflows/handoff/BOOTSTRAP.md`.
+3. Inspect `.ai/rules/handoff/lifecycle.md` for repeated user-facing command phrases. Preserve lifecycle semantics and authorization; the target boundary is INDEX for invocation discovery and lifecycle.md for operation semantics/authorization.
+4. Implement the tested minimal AGENTS contract in `.ai/AGENTS.md`.
+5. Run a targeted entry-layer consistency sweep.
+
+The completed INDEX presentation analysis is not to be reopened.
+
+### Phase 2 entry-path result
+
+The empty `.ai/AGENTS.md` failed the Phase 0 entry-path test. The tested minimal AGENTS candidate then passed both bounded scenarios:
+
+AI infrastructure:
+
+    AGENTS → config.yaml → repository.md → INDEX → canonical owner
+
+Project work:
+
+    AGENTS → config.yaml → repository.md → PROJECT-INSTRUCTIONS → canonical project sources
+
+The experiment confirms that `.ai/config.yaml` and `.ai/rules/repository.md` are genuine initialization-path nodes. The implementation baseline is the five-point minimal contract tested in Phase 2: establish `.ai` vs `docs` boundaries; initialize repository/path context from config and repository rule; route AI-infrastructure work through INDEX; route project work through PROJECT-INSTRUCTIONS; and reread the canonical owner before execution.
+
+The candidate has not yet been written to AGENTS.
+
+## Immediate next task — original INDEX analysis record
+
 1. Read `.ai/INDEX.md`.
 2. Read `.ai/architecture/ai-infrastructure-restructuring.md`, especially:
    - “Current .ai/INDEX.md model”
@@ -228,3 +256,13 @@ Scope verification shows the INDEX commit changed only \`.ai/INDEX.md\`.
 
 - Whether the exact command syntax/IDs should ever be frozen remains intentionally deferred.
 - Whether future capabilities outside the current handoff domain need additional discovery grouping remains open.
+
+
+## C027 bounded follow-up
+
+The INDEX routing decision is complete. Current work is now split deliberately into two categories:
+
+1. **Architecture:** record and implement the minimal AGENTS entry contract.
+2. **Cleanup:** correct stale project-instruction references and reduce command-discovery duplication in the lifecycle rule without changing lifecycle semantics.
+
+Do not mix these scopes into a new redesign.
