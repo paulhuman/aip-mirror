@@ -566,6 +566,43 @@ The core result is strong convergence:
 
 The reviews also produced actionable questions and findings recorded below.
 
+## 17.9 Handoff chapter identity and header schema
+
+The handoff chapter identity is now project-agnostic and uses:
+
+    [A-Z][0-9]{3}
+
+The first letter identifies the specialization and the three-digit number identifies the chapter within that specialization.
+
+Handoff header formatting is canonicalized separately from the chapter identifier:
+
+    # Conversation Handoff
+
+    **Conversation:**
+    E001 — Independent Review (Qwen)
+
+    **Specialization:**
+    E
+
+    **Chapter:**
+    001
+
+    **Previous chapter:**
+    000
+
+    **Status:**
+    HANDED_OFF
+
+The project name is not repeated in the Conversation field. Chapter and Previous chapter contain only the three-digit chapter number; the specialization letter is carried by the Specialization field and by the full chapter identifier in Conversation, filenames, and cross-references.
+
+The canonical formatting rules are owned by .ai/skills/handoff/SKILL.md; chapter identity and lifecycle naming constraints are owned by .ai/rules/handoff/lifecycle.md.
+
+### Migration history
+
+The repository was migrated from the previous chapter identity scheme to [A-Z][0-9]{3}. This migration intentionally replaces the historical naming convention rather than preserving it as an active infrastructure contract. The conversion mapping is historical context for this migration only and must not be copied into generic rules, skills, workflows, or other active project infrastructure.
+
+The migration also renamed handoff specialization directories to their corresponding specialization letters and renamed existing handoff files to the new chapter identifiers. Git history remains the historical record of the former names.
+
 ## 17. Review-derived open questions and accepted decisions
 
 ### 17.1 Minimum semantic metadata in INDEX — OPEN
