@@ -8,11 +8,11 @@ It must not contain the identity of a specific current or next chapter. Actual c
 
 The bootstrap message supplies:
 
+    PREVIOUS_CHAPTER = <previous chapter>
     CURRENT_CHAPTER = <current chapter>
-    NEXT_CHAPTER = <next chapter>
     SPECIALIZATION = <specialization>
 
-These values are runtime context for the current migration. Do not write them into this template.
+These values are runtime context for the receiving chapter. Do not write them into this template.
 
 ## Canonical repository identity and path resolution
 
@@ -65,7 +65,7 @@ After this self-check:
 
 When a new chapter is initialized, all AI MUST:
 
-1. Confirm the new chapter identity and specialization from the bootstrap message.
+1. Confirm the current chapter identity, previous chapter, and specialization from the bootstrap message.
 2. Read this file.
 3. Read the applicable project rules, especially `.ai/rules/handoff/lifecycle.md`, `.ai/rules/workflow.md`, and `.ai/rules/handoff/references.md`.
 4. Read the previous chapter's handoff under `.ai/handoffs/<specialization>/`.
