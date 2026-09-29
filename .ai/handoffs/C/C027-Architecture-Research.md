@@ -35,20 +35,22 @@ AGENTS must remain a compact always-on contract, not a second INDEX, procedure c
 - Physical Iteration 2 restructuring is complete.
 - Repository Identity & Path Resolution ownership is established.
 - The active chapter identifier format is `[A-Z][0-9]{3}`.
-- `.ai/INDEX.md` currently combines a user-facing command table with a capability-discovery map.
-- Current command-table metadata includes command phrase, semantic operation, canonical owner, required reread targets, repository-state effect, and commit indication.
-- The architecture record explicitly leaves the minimum semantic metadata boundary and scalable INDEX presentation open for this chapter.
-- `.ai/AGENTS.md` currently contains only its heading and is therefore not to be treated as a substantive operating-contract source during this analysis unless the repository state changes later.
+- `.ai/INDEX.md` now uses the four-field routing boundary: command, operation, owner, activation context.
+- Capability discovery remains separate: capability, owner, purpose.
+- The minimum routing analysis is complete; do not reopen it without new evidence.
+- `.ai/AGENTS.md` now contains the tested minimal always-on entry contract.
 
 ## Immediate next task
 
-1. Record the Phase 2 AGENTS entry-path result in this handoff and the durable architecture note.
-2. Separately clean up the two stale references exposed by the Phase 2 test in `docs/PROJECT-INSTRUCTIONS.md`:
-   - old chapter format `[0-9]{2}[A-Z]{2}` / `AA → AB → ... → ZZ` → current `[A-Z][0-9]{3}`;
-   - old bootstrap path `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md` → `.ai/workflows/handoff/BOOTSTRAP.md`.
-3. Inspect `.ai/rules/handoff/lifecycle.md` for repeated user-facing command phrases. Preserve lifecycle semantics and authorization; the target boundary is INDEX for invocation discovery and lifecycle.md for operation semantics/authorization.
-4. Implement the tested minimal AGENTS contract in `.ai/AGENTS.md`.
-5. Run a targeted entry-layer consistency sweep.
+Run the final targeted entry-layer consistency sweep, then verify the resulting Git scope and C027 state.
+
+Completed in this sequence:
+
+1. Recorded the Phase 2 AGENTS result in this handoff and the durable architecture note.
+2. Corrected the stale chapter format and bootstrap path in `docs/PROJECT-INSTRUCTIONS.md`.
+3. Classified lifecycle command duplication: checkpoint/migration invocation discovery belongs to INDEX; lifecycle semantics remain canonical in `lifecycle.md`; recovery/correction phrases remain because they are explicit authorization tokens in the lifecycle procedures.
+4. Implemented the tested minimal AGENTS contract.
+5. Reconciled the durable architecture note with the completed INDEX decision.
 
 The completed INDEX presentation analysis is not to be reopened.
 
@@ -113,13 +115,9 @@ Earlier same-specialization handoff checked during bootstrap:
 
 ## Open questions
 
-- Which current INDEX fields are required for discovery?
-- Which fields are required for safe routing once an operation is identified?
-- Is `Repository state may change` necessary routing metadata, or can it be represented more compactly without becoming a shadow owner?
-- Is `Commit` useful as routing metadata, or does its current wording risk owning commit semantics?
-- Are `Required reread targets` routing metadata or a partial dependency graph, and what is the minimum useful form?
-- Can command discovery and capability discovery share a compact presentation without creating a second registry/manifest layer?
-- What presentation remains immediately usable at approximately 10–15 entries?
+- Does the final entry-layer consistency sweep reveal any remaining stale or contradictory active references?
+- Does the implemented AGENTS contract remain sufficiently small after real use, without growing into a second INDEX?
+- Are any additional lifecycle command-discovery duplicates present beyond the classified checkpoint/migration phrases?
 
 ## Evidence / confidence
 
@@ -127,15 +125,17 @@ Earlier same-specialization handoff checked during bootstrap:
 
 - Repository identity is `paulhuman/aip-mirror`, default branch `main`, from `.ai/config.yaml`.
 - C026 was `READY_FOR_HANDOFF` before this bootstrap.
-- `.ai/INDEX.md` is explicitly defined as a router/discovery surface.
-- The current INDEX metadata set is intentionally preserved pending the minimum-semantic-metadata analysis.
+- `.ai/INDEX.md` is a router/discovery surface with the four-field routing boundary.
 - `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical ordered bootstrap workflow.
 - The lifecycle is `DRAFT → READY_FOR_HANDOFF → HANDED_OFF`.
+- Phase 2 validated the two entry paths and the minimal AGENTS contract.
+- `docs/PROJECT-INSTRUCTIONS.md` now uses the current chapter format and canonical bootstrap path.
+- Lifecycle checkpoint/migration invocation discovery is routed through INDEX; recovery/correction authorization phrases remain in the lifecycle rule.
 
 ### Inferred
 
-- The INDEX presentation can likely be made more compact without introducing a new filesystem layer, but this must be demonstrated by analysis rather than assumed.
-- The minimum semantic boundary may be smaller than the current table, but no field should be removed merely for visual compactness.
+- AGENTS can remain small if it only establishes entry topology and initialization pointers.
+- The project branch should remain separate from the AI-infrastructure command router.
 
 ### Assumed / unverified
 
