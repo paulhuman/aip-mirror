@@ -1,33 +1,33 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03AB — Architecture & Research
+**Conversation:**
+C001 — Architecture & Research
 
-Specialization:
-03
+**Specialization:**
+C
 
-Chapter:
-AB
+**Chapter:**
+001
 
-Previous chapter:
-AIP Mirror — 03AA — Architecture & Research
+**Previous chapter:**
+000
 
-Status:
+**Status:**
 HANDED_OFF
 
 ## Handoff destination
 
-AIP Mirror — 03AC — Architecture & Research
+AIP Mirror — C002 — Architecture & Research
 
-03AC was initialized from the complete 03AB architecture checkpoint and is now the receiving chapter. The repository remains in the legacy/pre-refactor layout; no structural refactor has been executed.
+C002 was initialized from the complete C001 architecture checkpoint and is now the receiving chapter. The repository remains in the legacy/pre-refactor layout; no structural refactor has been executed.
 
 ## Handoff state
 
-03AB completed the audit/design pass and transferred the current architecture checkpoint to 03AC. The substantive context is preserved in `docs/handoffs/03AC-Architecture-Research.md`.
+C001 completed the audit/design pass and transferred the current architecture checkpoint to C002. The substantive context is preserved in `docs/handoffs/C002-Architecture-Research.md`.
 
 ## Completed architecture checkpoint
 
-03AB established AD-01 through AD-21, including:
+C001 established AD-01 through AD-21, including:
 
 - semantic types `RULE / SKILL / WORKFLOW / REFERENCE / MEMORY`, with `EXTENSIONS` separate;
 - RULE/SKILL/WORKFLOW semantic boundaries;
@@ -46,7 +46,7 @@ AIP Mirror — 03AC — Architecture & Research
 - the rule portability test;
 - future repositories as conceptual validation cases only.
 
-## Immediate next work transferred to 03AC
+## Immediate next work transferred to C002
 
 Perform the dedicated **OVERRIDE Architecture Decision Pass** first:
 
@@ -66,7 +66,7 @@ For future repository changes: read current content; preserve unrelated content;
 
 ## Things not to redo
 
-- Do not recreate 03AA decisions from scratch.
+- Do not recreate C000 decisions from scratch.
 - Do not redesign the chapter/handoff model.
 - Do not create `.ai/plugins/`.
 - Do not treat HANDOFF as an optional extension.

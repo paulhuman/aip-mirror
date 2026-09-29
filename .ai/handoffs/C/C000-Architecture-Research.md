@@ -1,29 +1,29 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03AA — Architecture & Research
+**Conversation:**
+C000 — Architecture & Research
 
-Specialization:
-03
+**Specialization:**
+C
 
-Chapter:
-AA
+**Chapter:**
+000
 
-Previous chapter:
-N/A — first handoff for specialization 03
+**Previous chapter:**
+N/A
 
-Status:
+**Status:**
 HANDED_OFF
 
 ## Current objective
 
 Refactor and clarify the project-wide AI-assisted development architecture before substantive native implementation expands. The immediate focus is to turn the existing rules, skills, handoff procedures, and project instructions into a coherent, non-duplicated AI instruction system with explicit applicability, ownership, observability, and lifecycle behavior.
 
-This migration checkpoint preserves the architectural reasoning and audit state accumulated in 03AA so 03AB can continue without reconstructing it from the old conversation.
+This migration checkpoint preserves the architectural reasoning and audit state accumulated in C000 so C001 can continue without reconstructing it from the old conversation.
 
 ## Completed
 
-- Established generic chapter patterns `01[A-Z]{2}`, `02[A-Z]{2}`, `03[A-Z]{2}`, `04[A-Z]{2}`; concrete chapters remain `03AA`, `02AB`, etc.
+- Established generic chapter patterns `[A-Z][0-9]{3}`, `[A-Z][0-9]{3}`, `[A-Z][0-9]{3}`, `[A-Z][0-9]{3}`; concrete chapters remain `C000`, `B001`, etc.
 - Established that 03 may detect/report problems in other specializations' handoffs but must not edit them; the owning chapter corrects its own handoff.
 - Agreed that handoffs remain under `docs/handoffs/` and `docs/handoffs/README.md` remains small and self-documenting.
 - Agreed that `.ai/memory/` is for durable accumulated knowledge and is distinct from handoffs.
@@ -43,7 +43,7 @@ This migration checkpoint preserves the architectural reasoning and audit state 
 - Strengthened lifecycle/workflow wording so mandatory procedures use `must` intentionally and recommendations retain `should` where flexibility is intended.
 - Explicitly decided not to globally replace `should` or `may`; retain them where they intentionally express recommendations, permission, or uncertainty.
 - Confirmed standard checkpoint command: `Пора обновить handoff`.
-- Confirmed standard migration command: `Пора выполнить миграцию в чат [0-9]{2}[A-Z]{2}`.
+- Confirmed standard migration command: `Пора выполнить миграцию в чат [A-Z][0-9]{3}`.
 - New user requirement: whenever AI proposes changing a handoff, AI should explicitly tell the user which of those two commands is appropriate, so the required user action is immediately unambiguous. This should become canonical rule/workflow behavior, not merely a conversational convention.
 
 ## Current implementation state
@@ -62,9 +62,9 @@ Current relevant files:
 - `.ai/skills/deep-understanding/SKILL.md`
 - `docs/PROJECT-INSTRUCTIONS.md`
 - `docs/handoffs/README.md`
-- `docs/handoffs/02AA-Native-AIP-Plugin.md`
-- `docs/handoffs/02AB-Native-AIP-Plugin.md`
-- `docs/handoffs/03AA-Architecture-Research.md`
+- `docs/handoffs/B000-Native-AIP-Plugin.md`
+- `docs/handoffs/B001-Native-AIP-Plugin.md`
+- `docs/handoffs/C000-Architecture-Research.md`
 
 Target artifacts not yet created:
 
@@ -76,7 +76,7 @@ Target artifacts not yet created:
 - `.ai/workflows/conversation-handoff/BOOTSTRAP.md`
 - `consistency-pass` capability
 
-`docs/handoffs/02AB-Native-AIP-Plugin.md` remains owned by specialization 02 and must not be edited by 03.
+`docs/handoffs/B001-Native-AIP-Plugin.md` remains owned by specialization B and must not be edited by 03.
 
 ## Audit checkpoint
 
@@ -111,7 +111,7 @@ The intended system separates:
 
 - Keep handoffs in `docs/handoffs/`.
 - Keep memory separate from handoffs.
-- Use generic chapter notation `[0-9]{2}[A-Z]{2}`.
+- Use generic chapter notation `[A-Z][0-9]{3}`.
 - 03 may detect/report other handoff problems but cannot edit another specialization's handoff.
 - Receiving chapter owns the `READY_FOR_HANDOFF` → `HANDED_OFF` transition.
 - Use explicit applicability categories and retain trigger type as a separate concept.
@@ -124,7 +124,7 @@ The intended system separates:
 - Do not start native implementation merely because this refactor is underway.
 - Do not create a temporary memory/transcript dump for migration; preserve semantic state in handoff.
 
-### Open decisions for 03AB
+### Open decisions for C001
 
 - Exact applicability schema: representation of categories and trigger types while keeping precedence, ownership, obligation, and observability separate.
 - Exact `AGENTS.md` versus `.ai/README.md` boundary.
@@ -154,9 +154,9 @@ Applicability, obligation level, precedence, ownership, and observability are se
 ### Handoff command semantics
 
 - `Пора обновить handoff` — update the current chapter's `DRAFT` checkpoint and remain in the current chapter.
-- `Пора выполнить миграцию в чат [0-9]{2}[A-Z]{2}` — finalize the current handoff for migration and initiate the receiving chapter bootstrap.
+- `Пора выполнить миграцию в чат [A-Z][0-9]{3}` — finalize the current handoff for migration and initiate the receiving chapter bootstrap.
 
-Whenever AI proposes a handoff change, future canonical guidance must make the required user command explicit. If only a checkpoint is needed, tell the user to issue `Пора обновить handoff`. If migration is needed, tell the user to issue `Пора выполнить миграцию в чат [0-9]{2}[A-Z]{2}`, replacing the pattern with the concrete next chapter.
+Whenever AI proposes a handoff change, future canonical guidance must make the required user command explicit. If only a checkpoint is needed, tell the user to issue `Пора обновить handoff`. If migration is needed, tell the user to issue `Пора выполнить миграцию в чат [A-Z][0-9]{3}`, replacing the pattern with the concrete next chapter.
 
 ### AI entry points
 
@@ -187,9 +187,9 @@ The next chapter should resolve the open decisions above through repository-back
 
 - `docs/PROJECT-INSTRUCTIONS.md`
 - `docs/handoffs/README.md`
-- `docs/handoffs/02AA-Native-AIP-Plugin.md`
-- `docs/handoffs/02AB-Native-AIP-Plugin.md`
-- `docs/handoffs/03AA-Architecture-Research.md`
+- `docs/handoffs/B000-Native-AIP-Plugin.md`
+- `docs/handoffs/B001-Native-AIP-Plugin.md`
+- `docs/handoffs/C000-Architecture-Research.md`
 
 ### Relevant project areas
 
@@ -221,14 +221,14 @@ The next chapter should resolve the open decisions above through repository-back
 
 ### Confirmed / observed
 
-- 03AA existed as a `DRAFT` checkpoint before this migration preparation.
-- Current lifecycle rules define `[0-9]{2}[A-Z]{2}` and statuses `DRAFT`, `READY_FOR_HANDOFF`, `HANDED_OFF`.
+- C000 existed as a `DRAFT` checkpoint before this migration preparation.
+- Current lifecycle rules define `[A-Z][0-9]{3}` and statuses `DRAFT`, `READY_FOR_HANDOFF`, `HANDED_OFF`.
 - Current lifecycle rules define both standard user commands.
 - Existing handoffs are under `docs/handoffs/` and `docs/handoffs/README.md` exists.
 - Current bootstrap procedure lives under `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
 - Repository rules require full-content write verification for existing files.
 - `docs/PROJECT-INSTRUCTIONS.md` overlaps substantially with the `.ai` system.
-- `02AB-Native-AIP-Plugin.md` is owned by specialization 02.
+- `B001-Native-AIP-Plugin.md` is owned by specialization B.
 
 ### Inferred
 
@@ -247,15 +247,15 @@ The next chapter should resolve the open decisions above through repository-back
 
 ### Open
 
-- All open decisions listed above remain unresolved until 03AB performs the repository-backed design work.
+- All open decisions listed above remain unresolved until C001 performs the repository-backed design work.
 
 ## Last completed task
 
-Prepared and finalized the 03AA migration checkpoint, consolidating the architecture-refactor state, audit findings, decisions, open design questions, constraints, research inputs, and the new user-command guidance requirement. The handoff is intended to be sufficient for 03AB to continue without reconstructing the architecture discussion from the previous chat.
+Prepared and finalized the C000 migration checkpoint, consolidating the architecture-refactor state, audit findings, decisions, open design questions, constraints, research inputs, and the new user-command guidance requirement. The handoff is intended to be sufficient for C001 to continue without reconstructing the architecture discussion from the previous chat.
 
 ## Immediate next task
 
-Bootstrap `03AB` from this `READY_FOR_HANDOFF` handoff, perform the mandatory receiving-handoff consistency verification, and then continue the pre-change audit by producing the concrete migration map for every existing AI-facing file: `retain`, `rename`, `move`, `split`, `merge`, or `delete`; define canonical content ownership; and identify remaining contradictions or duplicated authority before executing the structural refactor.
+Bootstrap `C001` from this `READY_FOR_HANDOFF` handoff, perform the mandatory receiving-handoff consistency verification, and then continue the pre-change audit by producing the concrete migration map for every existing AI-facing file: `retain`, `rename`, `move`, `split`, `merge`, or `delete`; define canonical content ownership; and identify remaining contradictions or duplicated authority before executing the structural refactor.
 
 ## Things not to redo
 
@@ -270,4 +270,4 @@ Bootstrap `03AB` from this `READY_FOR_HANDOFF` handoff, perform the mandatory re
 
 ## Recommended starting context for next chapter
 
-Start with this committed 03AA handoff, then bootstrap `03AB` using the canonical conversation-handoff procedure. After bootstrap verification, read the applicable lifecycle/workflow/repository/architecture guidance and perform the pre-change audit against the actual repository state. Treat this handoff as a semantic state snapshot, not a transcript. The first substantive deliverable in 03AB should be the concrete AI-facing file migration/ownership map and its rationale; only then should structural file changes begin.
+Start with this committed C000 handoff, then bootstrap `C001` using the canonical conversation-handoff procedure. After bootstrap verification, read the applicable lifecycle/workflow/repository/architecture guidance and perform the pre-change audit against the actual repository state. Treat this handoff as a semantic state snapshot, not a transcript. The first substantive deliverable in C001 should be the concrete AI-facing file migration/ownership map and its rationale; only then should structural file changes begin.

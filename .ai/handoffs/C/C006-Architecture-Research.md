@@ -1,23 +1,23 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03AG — Architecture & Research
+**Conversation:**
+C006 — Architecture & Research
 
-Specialization:
-03
+**Specialization:**
+C
 
-Chapter:
-AG
+**Chapter:**
+006
 
-Previous chapter:
-AIP Mirror — 03AF — Architecture & Research
+**Previous chapter:**
+005
 
-Status:
+**Status:**
 HANDED_OFF
 
 ## Current objective
 
-Continue the project-wide AI-instruction architecture research from 03AF. The immediate semantic focus is **UNRESOLVED propagation semantics**: whether distinct appearances or causes of `UNRESOLVED` require typed semantic subtypes, or can be represented by one semantic state plus orthogonal metadata.
+Continue the project-wide AI-instruction architecture research from C005. The immediate semantic focus is **UNRESOLVED propagation semantics**: whether distinct appearances or causes of `UNRESOLVED` require typed semantic subtypes, or can be represented by one semantic state plus orthogonal metadata.
 
 The competing models are:
 
@@ -37,9 +37,9 @@ reason / source / propagation / conflict / cycle
 
 The comparison is driven by minimal counterexamples. No formal Architecture Decision has been made from this research.
 
-## Completed in 03AG
+## Completed in C006
 
-03AG completed the U-1 through U-6 portion of the Model A vs Model B investigation.
+C006 completed the U-1 through U-6 portion of the Model A vs Model B investigation.
 
 Current result:
 
@@ -726,9 +726,9 @@ Do not formalize this pattern as a reusable skill/workflow yet.
 
 ### Handoffs read during bootstrap
 
-- `docs/handoffs/03AF-Architecture-Research.md`
+- `docs/handoffs/C005-Architecture-Research.md`
 - `docs/handoffs/03E-Architecture-Research.md`
-- `docs/handoffs/05AA-Independent-Review-Qwen.md`
+- `docs/handoffs/E000-Independent-Review-Qwen.md`
 
 ### Architecture/research documentation reviewed
 
@@ -753,14 +753,14 @@ Do not formalize this pattern as a reusable skill/workflow yet.
 
 ### Confirmed / observed
 
-- 03AF was the READY_FOR_HANDOFF source for this receiving chapter.
+- C005 was the READY_FOR_HANDOFF source for this receiving chapter.
 - The prerequisite/dependency chain and cycle counterexample pass was completed before this migration.
 - Ten U-1…U-10 `UNRESOLVED` counterexamples were produced by the independent-review pass.
 - Qwen's typed unresolved taxonomy is a research hypothesis, not a formal Architecture Decision.
 - `UNRESOLVED` must not be equated automatically with `DENIED`.
 - Candidate-level precedence remains a working direction, not a formal AD.
 - The cross-model adversarial research pattern has been exercised in practice and remains a candidate for later project-agnostic extraction.
-- U-1 through U-6 have been explicitly modeled under both Model A and Model B during 03AG.
+- U-1 through U-6 have been explicitly modeled under both Model A and Model B during C006.
 - No U-1 through U-6 case has produced a demonstrated semantic requirement that Model B cannot preserve.
 
 ### Inferred
@@ -791,7 +791,7 @@ Do not formalize this pattern as a reusable skill/workflow yet.
 
 ## Last completed task
 
-03AG completed the U-1 through U-6 portion of the Model A vs Model B research.
+C006 completed the U-1 through U-6 portion of the Model A vs Model B research.
 
 The main result is:
 

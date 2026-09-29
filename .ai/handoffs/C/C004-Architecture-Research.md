@@ -1,29 +1,29 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03AE — Architecture & Research
+**Conversation:**
+C004 — Architecture & Research
 
-Specialization:
-03
+**Specialization:**
+C
 
-Chapter:
-AE
+**Chapter:**
+004
 
-Previous chapter:
-AIP Mirror — 03AD — Architecture & Research
+**Previous chapter:**
+003
 
-Status:
+**Status:**
 HANDED_OFF
 
 ## Supersession
 
-This handoff was superseded when the successor chapter `03AF` reached `READY_FOR_HANDOFF` and was handed off to `03AG`.
+This handoff was superseded when the successor chapter `C005` reached `READY_FOR_HANDOFF` and was handed off to `C006`.
 
 The historical research state below is retained unchanged for traceability.
 
 ## Current objective
 
-Continue the project-wide AI-instruction architecture research from 03AD. The current focus is the semantic boundary between **candidate eligibility**, **prerequisites**, **decision-source dependencies**, **candidate effects**, and **effective outcomes**.
+Continue the project-wide AI-instruction architecture research from C003. The current focus is the semantic boundary between **candidate eligibility**, **prerequisites**, **decision-source dependencies**, **candidate effects**, and **effective outcomes**.
 
 The current working direction is candidate-level precedence: precedence selects a governing policy-bearing candidate only when eligible candidates conflict. Candidate effect is distinct from effective outcome, and architecture should not unnecessarily prescribe eager versus lazy implementation evaluation.
 
@@ -50,7 +50,7 @@ The immediate task is a focused counterexample pass on `prerequisite` and `depen
 
 ## Candidate-level precedence working model
 
-The 03AD counterexample pass strongly supported, but did not yet formally freeze, candidate-level precedence:
+The C003 counterexample pass strongly supported, but did not yet formally freeze, candidate-level precedence:
 
 ```text
 Context
@@ -126,7 +126,7 @@ Do not introduce a general dependency engine merely because the word `dependency
 
 ## Future architecture/process task: revisit conversation handoff
 
-The current handoff mechanism has now exhibited a recurring ownership failure: a closing chapter has created or initialized the receiving chapter's handoff even though the canonical `rules` and `skills` already assign that work to the receiving chapter. This happened in the earlier 03AA → 03AB migration and recurred in 03AD → 03AE.
+The current handoff mechanism has now exhibited a recurring ownership failure: a closing chapter has created or initialized the receiving chapter's handoff even though the canonical `rules` and `skills` already assign that work to the receiving chapter. This happened in the earlier C000 → C001 migration and recurred in C003 → C004.
 
 This is a **future architecture/process task**, not a reason to refactor the workflow during the current research pass.
 
@@ -140,7 +140,7 @@ The future review should determine whether the handoff mechanism, its bootstrap 
 - repository state is used as the authoritative verification point rather than conversational memory;
 - repeated lifecycle/bootstrap failures become detectable earlier and are harder to reproduce.
 
-**Do not implement or structurally refactor this mechanism in 03AE merely because this task is recorded here.** The purpose of this checkpoint is to preserve the issue as durable project knowledge so it is not forgotten when the architecture is later reconsidered.
+**Do not implement or structurally refactor this mechanism in C004 merely because this task is recorded here.** The purpose of this checkpoint is to preserve the issue as durable project knowledge so it is not forgotten when the architecture is later reconsidered.
 
 ## Current implementation state
 
@@ -150,8 +150,8 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 
 ## Relevant handoff references
 
-- `docs/handoffs/03AC-Architecture-Research.md` — previous chapter's OVERRIDE research checkpoint.
-- `docs/handoffs/03AD-Architecture-Research.md` — immediate predecessor; contains the detailed 03AD authorization/precedence decisions and candidate-level counterexample conclusions.
+- `docs/handoffs/C002-Architecture-Research.md` — previous chapter's OVERRIDE research checkpoint.
+- `docs/handoffs/C003-Architecture-Research.md` — immediate predecessor; contains the detailed C003 authorization/precedence decisions and candidate-level counterexample conclusions.
 - `.ai/skills/conversation-handoff/BOOTSTRAP.md` — receiving-chat bootstrap procedure.
 - `.ai/skills/conversation-handoff/SKILL.md` — handoff lifecycle/workflow guidance.
 - `.ai/rules/conversation-lifecycle.md` — chapter lifecycle semantics.
@@ -177,10 +177,10 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 
 ### Confirmed / observed
 
-- 03AD was prepared as `READY_FOR_HANDOFF` to 03AE.
-- 03AD explicitly accepted the candidate-level working direction, eligibility-before-precedence, candidate-effect/effective-outcome distinction, and implementation-order independence.
-- 03AE was initialized as `DRAFT` from that checkpoint.
-- The closing chapter created the receiving chapter's handoff in two observed migrations (03AA → 03AB and 03AD → 03AE), despite the canonical ownership rules forbidding that behavior.
+- C003 was prepared as `READY_FOR_HANDOFF` to C004.
+- C003 explicitly accepted the candidate-level working direction, eligibility-before-precedence, candidate-effect/effective-outcome distinction, and implementation-order independence.
+- C004 was initialized as `DRAFT` from that checkpoint.
+- The closing chapter created the receiving chapter's handoff in two observed migrations (C000 → C001 and C003 → C004), despite the canonical ownership rules forbidding that behavior.
 - The current project rules explicitly state that the closing chapter must not create or modify the receiving chapter's handoff and that only the receiving chapter may create its own initial `DRAFT` handoff.
 
 ### Inferred
@@ -205,8 +205,8 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 
 ## Last completed task
 
-03AD completed the focused candidate-level precedence pass and prepared this handoff. The resulting model distinguishes eligibility, candidate effect, governing candidate, and effective outcome, while leaving prerequisite/dependency semantics open. During the 03AD → 03AE migration, the lifecycle issue was detected and corrected, and the recurring handoff ownership failure was identified as a future architecture/process concern.
+C003 completed the focused candidate-level precedence pass and prepared this handoff. The resulting model distinguishes eligibility, candidate effect, governing candidate, and effective outcome, while leaving prerequisite/dependency semantics open. During the C003 → C004 migration, the lifecycle issue was detected and corrected, and the recurring handoff ownership failure was identified as a future architecture/process concern.
 
 ## Immediate next task
 
-Run the **Prerequisite / Dependency Semantics** counterexample pass in **03AF — Architecture & Research**. Start with context prerequisites versus decision-source prerequisites, then test dependencies involving candidate effects and conflicts, including cyclic cases. Keep the analysis project-agnostic and defer structural changes and implementation schemas until the semantic boundary is stable.
+Run the **Prerequisite / Dependency Semantics** counterexample pass in **C005 — Architecture & Research**. Start with context prerequisites versus decision-source prerequisites, then test dependencies involving candidate effects and conflicts, including cyclic cases. Keep the analysis project-agnostic and defer structural changes and implementation schemas until the semantic boundary is stable.

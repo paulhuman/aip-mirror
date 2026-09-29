@@ -1,18 +1,18 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03AF — Architecture & Research
+**Conversation:**
+C005 — Architecture & Research
 
-Specialization:
-03
+**Specialization:**
+C
 
-Chapter:
-AF
+**Chapter:**
+005
 
-Previous chapter:
-AIP Mirror — 03E — Architecture & Research
+**Previous chapter:**
+004
 
-Status:
+**Status:**
 HANDED_OFF
 
 ## Current objective
@@ -439,7 +439,7 @@ A separate independent-review workflow now exists in the project. Current identi
 
 ```text
 Conversation identity:
-    AIP Mirror — 05AB — Independent Review
+    AIP Mirror — E001 — Independent Review
 
 Reviewer identity:
     Qwen
@@ -455,7 +455,7 @@ Relevant future improvements identified during review:
 4. Preserve evidence discipline and independence from the primary model.
 5. Keep the reviewer focused on counterexamples and semantic pressure rather than taking ownership of architecture decisions.
 
-The first Qwen handoff (`docs/handoffs/05AA-Independent-Review-Qwen.md`) is considered structurally strong and sufficiently complete for now. Its `UNRESOLVED is a family of states` wording should be treated as a research hypothesis rather than an established semantic fact; observed distinct causes do not by themselves prove typed semantic state. Its candidate-precedence wording should likewise remain a strong working direction supported by counterexamples, not a formal AD.
+The first Qwen handoff (`docs/handoffs/E000-Independent-Review-Qwen.md`) is considered structurally strong and sufficiently complete for now. Its `UNRESOLVED is a family of states` wording should be treated as a research hypothesis rather than an established semantic fact; observed distinct causes do not by themselves prove typed semantic state. Its candidate-precedence wording should likewise remain a strong working direction supported by counterexamples, not a formal AD.
 
 Do not rewrite the Qwen onboarding or first handoff merely for these improvements at this stage. They are queued for the next reusable architecture/process pass.
 
@@ -502,10 +502,10 @@ Do not rewrite the Qwen onboarding or first handoff merely for these improvement
 
 ### Confirmed / observed
 
-- 03AF was created as the receiving chapter from 03E and is now being closed as `READY_FOR_HANDOFF`.
+- C005 was created as the receiving chapter from 03E and is now being closed as `READY_FOR_HANDOFF`.
 - 03E explicitly left prerequisite/dependency semantics open.
 - The candidate-level precedence model is a supported working direction, but is not yet a formal numbered Architecture Decision.
-- Current-format chapter identity is `03AF`; `03AA`–`03AE` are not physically used. `03AF` is the first physically created current-format Chapter for specialization 03. Its relationship to 03A–03E is ordinal correspondence only, not identifier identity.
+- Current-format chapter identity is `C005`; `C000`–`C004` are not physically used. `C005` is the first physically created current-format Chapter for specialization C. Its relationship to 03A–03E is ordinal correspondence only, not identifier identity.
 - The chains/cycles counterexample pass was completed for eligibility and effect chains/cycles, including resolved-positive, resolved-negative, and `UNRESOLVED` states.
 - Qwen independently produced ten `UNRESOLVED` counterexamples spanning evidence, authority, operation boundaries, eligibility, candidate effect, effective outcome, dependency consumers, cycles, and OVERRIDE conflict.
 - Qwen's typed unresolved taxonomy is a proposal, not a formal decision.
@@ -539,7 +539,7 @@ Do not rewrite the Qwen onboarding or first handoff merely for these improvement
 
 ## Last completed task
 
-Completed the current 03AF research checkpoint by reviewing Qwen's `UNRESOLVED` propagation counterexamples, separating state vs reason vs propagation/origin, defining the next A/B counterexample experiment, and capturing the reusable adversarial-review pattern plus Qwen onboarding improvements for future architecture work.
+Completed the current C005 research checkpoint by reviewing Qwen's `UNRESOLVED` propagation counterexamples, separating state vs reason vs propagation/origin, defining the next A/B counterexample experiment, and capturing the reusable adversarial-review pattern plus Qwen onboarding improvements for future architecture work.
 
 ## Immediate next task
 
@@ -563,7 +563,7 @@ Only after that checkpoint should the research return to cycle semantics, depend
 - Do not treat Qwen's typed unresolved taxonomy as adopted architecture.
 - Do not treat `UNRESOLVED = DENIED` or fail-closed as a universal rule.
 - Do not prematurely extract the cross-model adversarial pattern into a formal reusable skill/workflow; preserve it as a validated candidate until another architecture pass tests the abstraction.
-- Do not rewrite Qwen's onboarding/05AA handoff solely for the already-identified improvement ideas at this stage.
+- Do not rewrite Qwen's onboarding/E000 handoff solely for the already-identified improvement ideas at this stage.
 
 ## Recommended starting context for next chapter
 
