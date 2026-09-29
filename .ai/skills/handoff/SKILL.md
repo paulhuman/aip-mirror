@@ -201,8 +201,8 @@ This command does **not** initialize the next chapter, does **not** change lifec
 
 The generated instruction must contain the required runtime values for the receiving chapter:
 
+    PREVIOUS_CHAPTER = <previous chapter>
     CURRENT_CHAPTER = <current chapter>
-    NEXT_CHAPTER = <next chapter>
     SPECIALIZATION = <specialization>
 
 The instruction is for a future receiving conversation. It must not be presented as evidence that the receiving chapter has already started.
