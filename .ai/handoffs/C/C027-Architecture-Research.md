@@ -289,11 +289,12 @@ Verified:
 - `.ai/workflows/handoff/BOOTSTRAP.md` remains the canonical ordered bootstrap workflow.
 - durable architecture notes now mark AGENTS and lifecycle cleanup as resolved in C027 rather than pending.
 - no active entry-layer document inspected in the sweep retains the former chapter format or former bootstrap path.
+- `docs/architecture/project-architecture.md` was additionally found to retain the former chapter identifier format during migration preparation; this was corrected in commit `6ffef19d779a6874c21a609ee57f558469131a73` before handoff.
 
 Historical occurrences of old identifiers/paths remain only where the architecture document explicitly records migration history or cleanup evidence; they are not active instructions.
 
 ### C027 scope conclusion
 
-The bounded AGENTS architecture question, INDEX minimum-routing question, targeted project-instruction cleanup, lifecycle command-discovery cleanup, and final entry-layer consistency sweep are complete.
+The bounded AGENTS architecture question, INDEX minimum-routing question, targeted project-instruction cleanup, lifecycle command-discovery cleanup, targeted architecture-document consistency correction, and final entry-layer consistency sweep are complete.
 
 No Iteration 2 redesign is justified by the resulting evidence.
