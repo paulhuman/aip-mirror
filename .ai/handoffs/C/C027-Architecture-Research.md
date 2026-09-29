@@ -13,7 +13,7 @@ C
 026
 
 **Status:**
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
@@ -42,7 +42,7 @@ AGENTS must remain a compact always-on contract, not a second INDEX, procedure c
 
 ## Immediate next task
 
-If this chapter continues, only address a concrete inconsistency revealed by the final sweep. Otherwise prepare the C027 handoff for lifecycle completion.
+The final consistency sweep found no remaining active entry-layer inconsistency. C027 is complete and ready for handoff to C028. The receiving chapter should begin from current repository state and use the bootstrap procedure below; do not reopen settled C027 architecture without new evidence.
 
 Completed in this sequence:
 
@@ -68,7 +68,7 @@ Project work:
 
 The experiment confirms that `.ai/config.yaml` and `.ai/rules/repository.md` are genuine initialization-path nodes. The implementation baseline is the five-point minimal contract tested in Phase 2: establish `.ai` vs `docs` boundaries; initialize repository/path context from config and repository rule; route AI-infrastructure work through INDEX; route project work through PROJECT-INSTRUCTIONS; and reread the canonical owner before execution.
 
-The candidate has not yet been written to AGENTS.
+The tested candidate was implemented in `.ai/AGENTS.md` and verified during the final consistency sweep.
 
 ## Relevant files
 
@@ -247,6 +247,7 @@ Scope verification shows the INDEX commit changed only \`.ai/INDEX.md\`.
 
 - Whether the exact command syntax/IDs should ever be frozen remains intentionally deferred.
 - Whether future capabilities outside the current handoff domain need additional discovery grouping remains open.
+- Future MEC / P-01 / P-02 / P-03 analysis is outside the completed C027 scope and is a likely next architecture question.
 
 
 ## C027 bounded follow-up
