@@ -17,9 +17,18 @@ DRAFT
 
 ## Current objective
 
-Analyze the current `.ai/INDEX.md` presentation and determine the minimum sufficient, scalable router/discovery structure before making any INDEX edits.
+Design and implement the `.ai/AGENTS.md` entry-layer contract from current repository evidence, then perform a separate targeted semantic cleanup of `docs/PROJECT-INSTRUCTIONS.md` and the handoff lifecycle command-discovery surface.
 
-The bounded target is approximately 10–15 commands/capabilities. INDEX must remain a routing and discovery surface; canonical rules, skills, and workflows remain the semantic and procedural owners.
+The bounded architecture target is:
+
+    AGENTS
+      ↓
+    context initialization
+      ↓
+    AI infrastructure → INDEX → canonical owners
+    project work      → PROJECT-INSTRUCTIONS → canonical project sources
+
+AGENTS must remain a compact always-on contract, not a second INDEX, procedure catalogue, lifecycle rule, or capability owner.
 
 ## Starting state
 
@@ -58,24 +67,6 @@ Project work:
 The experiment confirms that `.ai/config.yaml` and `.ai/rules/repository.md` are genuine initialization-path nodes. The implementation baseline is the five-point minimal contract tested in Phase 2: establish `.ai` vs `docs` boundaries; initialize repository/path context from config and repository rule; route AI-infrastructure work through INDEX; route project work through PROJECT-INSTRUCTIONS; and reread the canonical owner before execution.
 
 The candidate has not yet been written to AGENTS.
-
-## Immediate next task — original INDEX analysis record
-
-1. Read `.ai/INDEX.md`.
-2. Read `.ai/architecture/ai-infrastructure-restructuring.md`, especially:
-   - “Current .ai/INDEX.md model”
-   - “Next Iteration 2 work plan — INDEX presentation and scalability”
-3. Read `.ai/AGENTS.md`.
-4. Read `.ai/rules/handoff/lifecycle.md`.
-5. Read `.ai/skills/handoff/SKILL.md`.
-6. Read `.ai/workflows/handoff/BOOTSTRAP.md`.
-7. Inventory current command-routing and capability-discovery presentation.
-8. Separate discovery information from routing metadata.
-9. Test the minimum semantic metadata boundary and identify any shadow-owner semantics.
-10. Design a compact presentation that can scale toward approximately 10–15 entries.
-11. Only after the analysis is settled, decide whether an INDEX edit is justified.
-
-If an INDEX edit is justified, use the repository-standard sequence: read → minimal edit → full write → read-back → semantic consistency sweep → diff/scope verification → commit → result verification.
 
 ## Relevant files
 
