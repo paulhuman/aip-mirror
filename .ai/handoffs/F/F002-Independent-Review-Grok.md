@@ -21,9 +21,10 @@ Continue independent external review work from the coherent state handed off by 
 
 ## Completed
 
-(Bootstrap only — no substantive review work yet.)
-
-1. Bootstrap continuity from F001 (F001 was READY_FOR_HANDOFF; this chapter creates its own DRAFT and will transition F001 to HANDED_OFF).
+1. Bootstrap continuity from F001:
+   - Created `.ai/handoffs/F/F002-Independent-Review-Grok.md` as DRAFT.
+   - Transitioned F001 READY_FOR_HANDOFF → HANDED_OFF.
+   - Post-bootstrap consistency verification passed.
 
 ## Current implementation state
 
@@ -95,7 +96,7 @@ Inherited from F001 (do not re-open closed analyses without new evidence):
 - `.ai/skills/commits/SKILL.md`
 - `.ai/workflows/handoff/BOOTSTRAP.md`
 - `.ai/handoffs/F/F000-Independent-Review-Grok.md` (HANDED_OFF)
-- `.ai/handoffs/F/F001-Independent-Review-Grok.md` (to be HANDED_OFF by this bootstrap)
+- `.ai/handoffs/F/F001-Independent-Review-Grok.md` (HANDED_OFF)
 - `.ai/handoffs/C/C027-Architecture-Research.md` (AGENTS/INDEX frontier on C side)
 
 ### Do not use as active owners
@@ -117,10 +118,11 @@ Inherited from F001 (do not re-open closed analyses without new evidence):
 
 ### Confirmed / observed
 
-- F001 Status was READY_FOR_HANDOFF at bootstrap start.
-- F002 handoff did not exist prior to this bootstrap.
+- F001 Status was READY_FOR_HANDOFF at bootstrap start; now HANDED_OFF.
+- F002 handoff did not exist prior to this bootstrap; now DRAFT.
 - AGENTS.md remains empty (title only).
 - INDEX is functional router after C027 metadata trim.
+- Post-bootstrap consistency verification: passed (F002 DRAFT + Previous=001; F001 HANDED_OFF; consistent pair).
 
 ### Inferred
 
@@ -133,15 +135,15 @@ Inherited from F001 (do not re-open closed analyses without new evidence):
 
 ## Last completed task
 
-Bootstrap of F002 (creation of this DRAFT handoff).
+Bootstrap of F002 complete (DRAFT created, F001 HANDED_OFF, post-bootstrap verification passed).
 
 ## Immediate next task
 
-1. Complete bootstrap: transition F001 READY_FOR_HANDOFF → HANDED_OFF; perform post-bootstrap consistency verification.
-2. Await human direction for substantive review priority:
-   - validate/draft minimal AGENTS.md contract (entry-path experiment); or
-   - align with current C-series frontier (C027+).
-3. Do not redo F000/F001 closed analyses unless new evidence requires it.
+Await human direction for substantive review priority:
+- validate/draft minimal AGENTS.md contract (entry-path experiment); or
+- align with current C-series frontier (C027+).
+
+Do not redo F000/F001 closed analyses unless new evidence requires it.
 
 ## Things not to redo
 
@@ -157,7 +159,7 @@ Bootstrap of F002 (creation of this DRAFT handoff).
 2. `.ai/INDEX.md`, `.ai/AGENTS.md`, `.ai/architecture/ai-infrastructure-restructuring.md`
 3. `.ai/rules/handoff/lifecycle.md`, `.ai/skills/handoff/SKILL.md`, `.ai/workflows/handoff/BOOTSTRAP.md`
 4. `.ai/handoffs/C/C027-Architecture-Research.md` (or successor)
-5. F001 (now HANDED_OFF) and F000 only if historical baseline detail is needed
+5. F001 / F000 only if historical baseline detail is needed
 
 ## Research references
 
