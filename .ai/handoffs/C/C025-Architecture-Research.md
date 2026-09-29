@@ -1,18 +1,18 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03AZ — Architecture & Research
+**Conversation:**
+C025 — Architecture & Research
 
-Specialization:
-03 — Architecture & Research
+**Specialization:**
+C
 
-Chapter:
-03AZ
+**Chapter:**
+025
 
-Previous chapter:
-03AY — Architecture & Research
+**Previous chapter:**
+024
 
-Status:
+**Status:**
 HANDED_OFF
 
 ## Current objective
@@ -95,7 +95,7 @@ Important distinctions are preserved:
 
 ## Current implementation state
 
-The durable architecture file has been updated through 03AZ:
+The durable architecture file has been updated through C025:
 
 `.ai/architecture/ai-infrastructure-restructuring.md`
 
@@ -106,12 +106,12 @@ It now records:
 - the five-command routing table;
 - the decomposition of BOOTSTRAP into canonical-owner content versus residual bootstrap-specific semantics;
 - the current Iteration 2 frontier;
-- the assignment for 03BA.
+- the assignment for C026.
 
 Architecture update commit:
 `5eb27327157e0fa4d7114ef5ce7a85a8329bbad7`
 
-The architecture file's resulting blob was read back and verified to contain the 03AZ completion, entry-layer model, BOOTSTRAP residual-core analysis, and 03BA assignment.
+The architecture file's resulting blob was read back and verified to contain the C025 completion, entry-layer model, BOOTSTRAP residual-core analysis, and C026 assignment.
 
 ## Decisions
 
@@ -198,7 +198,7 @@ Durable architecture context:
 - `.ai/AGENTS.md` and `.ai/INDEX.md` exist.
 - The five handoff-related user-facing command phrases above are present in the current rules/skills/workflow model.
 - BOOTSTRAP's duplicate migration-completion section is removed.
-- The architecture note contains the current 03AZ state and 03BA assignment.
+- The architecture note contains the current C025 state and C026 assignment.
 
 ### Inferred
 
@@ -217,11 +217,11 @@ Durable architecture context:
 
 ## Last completed task
 
-Updated the durable Iteration 2 architecture context through 03AZ, including the completed repository ownership pass, the entry-layer routing model, the BOOTSTRAP residual-core analysis, and the next-chapter assignment.
+Updated the durable Iteration 2 architecture context through C025, including the completed repository ownership pass, the entry-layer routing model, the BOOTSTRAP residual-core analysis, and the next-chapter assignment.
 
 ## Immediate next task
 
-**03BA — Architecture & Research: design `.ai/INDEX.md`.**
+**C026 — Architecture & Research: design `.ai/INDEX.md`.**
 
 Start with the existing minimal `.ai/INDEX.md` and the command-routing table in the architecture note.
 
@@ -242,7 +242,7 @@ Do not broaden the task into physical restructuring or the handoff-operation/com
 ## Things not to redo
 
 - Do not repeat physical Iteration 2 restructuring.
-- Do not reconstruct 03AU/03AV/03AW/03AX/03AY from chat history.
+- Do not reconstruct C020/C021/C022/C023/C024 from chat history.
 - Do not redo the Repository Identity & Path Resolution ownership sweep without new evidence.
 - Do not recreate `.ai/AGENTS.md`.
 - Do not create `ENTRY.md`.
@@ -257,7 +257,7 @@ Read, in this order:
 1. `.ai/AGENTS.md`
 2. `.ai/INDEX.md`
 3. `.ai/architecture/ai-infrastructure-restructuring.md`
-4. this handoff: `.ai/handoffs/03/03AZ-Architecture-Research.md`
+4. this handoff: `.ai/handoffs/C/C025-Architecture-Research.md`
 5. `.ai/rules/handoff/lifecycle.md`
 6. `.ai/skills/handoff/SKILL.md`
 7. `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`

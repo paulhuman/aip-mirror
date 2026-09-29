@@ -1,18 +1,18 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03BA — Architecture & Research
+**Conversation:**
+C026 — Architecture & Research
 
-Specialization:
-03 — Architecture & Research
+**Specialization:**
+C
 
-Chapter:
-03BA
+**Chapter:**
+026
 
-Previous chapter:
-03AZ — Architecture & Research
+**Previous chapter:**
+025
 
-Status:
+**Status:**
 DRAFT
 
 ## Current objective
@@ -23,14 +23,14 @@ Continue Iteration 2 from the current repository state by completing the entry-l
 
 Bootstrap established the receiving chapter from the current repository state rather than reconstructing earlier chapters from conversation history.
 
-The previous handoff, 03AZ, was received in `READY_FOR_HANDOFF` state and was transitioned to `HANDED_OFF` under the normal receiving-chapter lifecycle.
+The previous handoff, C025, was received in `READY_FOR_HANDOFF` state and was transitioned to `HANDED_OFF` under the normal receiving-chapter lifecycle.
 
 Post-bootstrap consistency verification confirmed:
-- 03BA is `DRAFT`;
-- 03BA identifies 03AZ as its previous chapter;
-- 03AZ is `HANDED_OFF`;
-- 03AY, the earlier same-specialization predecessor, is also `HANDED_OFF`;
-- the 03AZ → 03BA lifecycle pair is coherent.
+- C026 is `DRAFT`;
+- C026 identifies C025 as its previous chapter;
+- C025 is `HANDED_OFF`;
+- C024, the earlier same-specialization predecessor, is also `HANDED_OFF`;
+- the C025 → C026 lifecycle pair is coherent.
 
 ## Current implementation state
 
@@ -43,8 +43,8 @@ Post-bootstrap consistency verification confirmed:
   - `.ai/rules/repository.md` owns repository interpretation, path resolution, boundaries, taxonomy/hygiene, durable repository knowledge, and write safety.
 - `.ai/AGENTS.md` exists as the AI operating-contract surface and is currently minimal.
 - `.ai/INDEX.md` contains the operational command-routing and capability-discovery model.
-- `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical ordered bootstrap workflow after the 03BA path decision.
-- The durable architecture note records the verified 03AZ routing model and 03BA assignment.
+- `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical ordered bootstrap workflow after the C026 path decision.
+- The durable architecture note records the verified C025 routing model and C026 assignment.
 
 ## Decisions
 
@@ -111,7 +111,7 @@ Canonical infrastructure owners:
 
 Handoff state:
 
-- `.ai/handoffs/03/03AZ-Architecture-Research.md`
+- `.ai/handoffs/C/C025-Architecture-Research.md`
 
 ## Relevant references
 
@@ -120,7 +120,7 @@ No external research reference is required for the current entry-layer design. T
 ## Important constraints
 
 - Start from current repository state.
-- Do not reconstruct 03AU/03AV/03AW/03AX/03AY from chat history.
+- Do not reconstruct C020/C021/C022/C023/C024 from chat history.
 - Do not repeat physical Iteration 2 restructuring.
 - Do not reopen Repository Identity & Path Resolution without new evidence.
 - Do not create `ENTRY.md`.
@@ -134,19 +134,19 @@ No external research reference is required for the current entry-layer design. T
 
 ### Confirmed / observed
 
-- The 03BA bootstrap lifecycle pair is verified: 03BA is `DRAFT`, 03AZ is `HANDED_OFF`, and 03AY is `HANDED_OFF`.
+- The C026 bootstrap lifecycle pair is verified: C026 is `DRAFT`, C025 is `HANDED_OFF`, and C024 is `HANDED_OFF`.
 - `.ai/INDEX.md` now contains the command-routing and capability-discovery model.
 - `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical bootstrap workflow path.
 - The old `.ai/workflows/handoff/BOOTSTRAP.md` path has been removed.
 - The affected active files were read back after the path change and checked for stale references.
 - Repository identity is `paulhuman/aip-mirror`, default branch `main`.
-- 03AZ is `READY_FOR_HANDOFF` at bootstrap start.
-- 03AY is already `HANDED_OFF`.
+- C025 is `READY_FOR_HANDOFF` at bootstrap start.
+- C024 is already `HANDED_OFF`.
 - The five handoff-related command phrases above are documented in the active infrastructure.
 - `.ai/INDEX.md` currently contains only its title.
 - `.ai/AGENTS.md` currently contains only its title.
 - BOOTSTRAP has already had duplicated migration-completion material removed.
-- The durable architecture note records BOOTSTRAP as unresolved and assigns the INDEX/residual-core comparison to 03BA.
+- The durable architecture note records BOOTSTRAP as unresolved and assigns the INDEX/residual-core comparison to C026.
 
 ### Inferred
 

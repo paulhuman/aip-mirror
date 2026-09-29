@@ -1,25 +1,25 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03AY — Architecture & Research
+**Conversation:**
+C024 — Architecture & Research
 
-Specialization:
-03 — Architecture & Research
+**Specialization:**
+C
 
-Chapter:
-03AY
+**Chapter:**
+024
 
-Previous chapter:
-03AX — Architecture & Research
+**Previous chapter:**
+023
 
-Status:
+**Status:**
 HANDED_OFF
 
 ## Starting objective
 
 Continue Iteration 2 from the current repository state after the first repository-wide consistency sweep.
 
-The immediate task is to inspect and repair the bounded set of project-specific leakage and ownership inconsistencies identified by 03AX. Do not return to semantic-comparison or target-tree planning.
+The immediate task is to inspect and repair the bounded set of project-specific leakage and ownership inconsistencies identified by C023. Do not return to semantic-comparison or target-tree planning.
 
 ## Durable context
 
@@ -49,16 +49,16 @@ After every MOVE, RENAME, DECOMPOSE, or canonical-owner change:
 6. commit;
 7. verify the resulting repository state.
 
-## 03AX sweep results
+## C023 sweep results
 
-The 03AX repair frontier has been worked through in 03AY.
+The C023 repair frontier has been worked through in C024.
 
 Completed:
 - genericized the active repository, workflow, commit, deep-understanding, and handoff infrastructure where project-specific leakage was confirmed;
 - separated project repository identity/configuration into `.ai/config.yaml`;
 - preserved repository path-resolution and safety mechanics in `.ai/rules/repository.md`;
 - centralized Chapter Identifier Format ownership in `.ai/rules/handoff/lifecycle.md`;
-- repaired stale operational references exposed by the 03AU–03AY consistency pass;
+- repaired stale operational references exposed by the C020–C024 consistency pass;
 - reduced independent-review onboarding to the current reusable workflow surface;
 - verified remaining checked historical matches are legitimate migration history rather than active operational references.
 
@@ -102,11 +102,11 @@ No further recovery work remains in this TODO.
 
 ## Migration boundary
 
-03AY is complete enough to hand off. The receiving chapter should continue from the repository state represented by this handoff and the durable architecture notes; it should not create a future chapter handoff as part of bootstrap.
+C024 is complete enough to hand off. The receiving chapter should continue from the repository state represented by this handoff and the durable architecture notes; it should not create a future chapter handoff as part of bootstrap.
 
 ## Things not to redo
 
-- Do not reconstruct 03AU/03AV/03AW from conversation history.
+- Do not reconstruct C020/C021/C022 from conversation history.
 - Do not restart semantic comparison.
 - Do not rebuild the old target tree.
 - Do not repeat completed physical moves.

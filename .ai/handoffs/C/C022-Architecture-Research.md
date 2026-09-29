@@ -1,23 +1,23 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03AW — Architecture & Research
+**Conversation:**
+C022 — Architecture & Research
 
-Specialization:
-03 — Architecture & Research
+**Specialization:**
+C
 
-Chapter:
-03AW
+**Chapter:**
+022
 
-Previous chapter:
-03AV — Architecture & Research
+**Previous chapter:**
+021
 
-Status:
+**Status:**
 HANDED_OFF
 
 ## Bootstrap state
 
-03AW was received from the canonical repository state and continued the Iteration 2 restructuring.
+C022 was received from the canonical repository state and continued the Iteration 2 restructuring.
 
 The repository has now moved beyond the original pre-physical-restructuring plan.
 
@@ -34,7 +34,7 @@ Important current sources:
 - .ai/skills/deep-understanding/SKILL.md
 - .ai/skills/handoff/SKILL.md
 - .ai/workflows/handoff-bootstrap/BOOTSTRAP.md
-- relevant .ai/handoffs/03/ handoff history.
+- relevant .ai/handoffs/C/ handoff history.
 
 Do not reconstruct the current state from older chat history. The architecture files above were updated specifically to preserve the migration decisions that matter.
 
@@ -294,7 +294,7 @@ Therefore:
 
 This is now durable Iteration 2 knowledge.
 
-## Architecture files updated in 03AW
+## Architecture files updated in C022
 
 The following files were explicitly updated to preserve this discovery and remove stale planning:
 
@@ -380,24 +380,24 @@ Do not restart the old semantic-comparison stage.
 
 ## Migration status
 
-03AW is READY_FOR_HANDOFF.
+C022 is READY_FOR_HANDOFF.
 
 The receiving chapter should be:
 
-03AX — Architecture & Research
+C023 — Architecture & Research
 
 The receiving bootstrap should:
-- read this handoff from .ai/handoffs/03/;
+- read this handoff from .ai/handoffs/C/;
 - read the updated three architecture files;
 - read the current repository rules/lifecycle/workflow as needed;
-- verify that 03AW is READY_FOR_HANDOFF;
-- transition 03AW to HANDED_OFF;
-- create 03AX as DRAFT;
-- continue from the current repository state rather than reconstructing 03AU/03AV history.
+- verify that C022 is READY_FOR_HANDOFF;
+- transition C022 to HANDED_OFF;
+- create C023 as DRAFT;
+- continue from the current repository state rather than reconstructing C020/C021 history.
 
 ## Things not to redo
 
-- Do not reconstruct the old 03AU reasoning from chat history.
+- Do not reconstruct the old C020 reasoning from chat history.
 - Do not restart MEC theory.
 - Do not redo the blind Grok/Qwen reviews.
 - Do not treat the original v2 target tree as an unexecuted plan.
@@ -412,7 +412,7 @@ The receiving bootstrap should:
 ## Verification expectation
 
 Before considering the migration complete, verify:
-- 03AW status is READY_FOR_HANDOFF;
+- C022 status is READY_FOR_HANDOFF;
 - the updated architecture files are present at their current .ai/ paths;
 - the stale lifecycle path-resolution dependency has been removed;
 - the new repository path-resolution ownership is present;

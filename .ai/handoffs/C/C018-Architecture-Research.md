@@ -1,30 +1,45 @@
-# 03AS — Architecture & Research
+# Conversation Handoff
+
+**Conversation:**
+C018 — Architecture & Research
+
+**Specialization:**
+C
+
+**Chapter:**
+018
+
+**Previous chapter:**
+017
+
+**Status:**
+HANDED_OFF
 
 ## Chapter identity
 
-- **Chapter:** 03AS
+- **Chapter:** C018
 - **Specialization:** 03 — Architecture & Research
-- **Previous chapter:** 03AR — Architecture & Research
+- **Previous chapter:** C017 — Architecture & Research
 - **Status:** HANDED_OFF
 
 ## Starting objective
 
-Continue the architecture/research work from 03AR while preserving established context. The remaining project constraints have now been supplied and consolidated. The next task is to reduce the highest-leverage architectural uncertainty before selecting implementation structure.
+Continue the architecture/research work from C017 while preserving established context. The remaining project constraints have now been supplied and consolidated. The next task is to reduce the highest-leverage architectural uncertainty before selecting implementation structure.
 
 ## Bootstrap state
 
-03AR is the direct predecessor and was verified as `READY_FOR_HANDOFF` at bootstrap.
+C017 is the direct predecessor and was verified as `READY_FOR_HANDOFF` at bootstrap.
 
 The current repository model remains:
 
 - `paulhuman/aip-mirror` on `main` is the canonical project repository.
 - `docs/handoffs/` is temporary conversation context transfer.
 - Durable project knowledge belongs in authoritative project documentation.
-- Specialization 03 owns architecture, research, cross-workstream decisions, and project-wide architectural consistency.
+- specialization C owns architecture, research, cross-workstream decisions, and project-wide architectural consistency.
 
 ## Current research context
 
-03AR completed the bounded inspection of intentional-acceptance practice. No dedicated Acceptance entity or universal acceptance mechanism was introduced.
+C017 completed the bounded inspection of intentional-acceptance practice. No dedicated Acceptance entity or universal acceptance mechanism was introduced.
 
 The historical semantic-trace direction remains paused.
 
@@ -42,7 +57,7 @@ The new owner constraints are now explicit:
 
 The bounded map is recorded in:
 
-`docs/architecture/constraint-problem-map-03AS.md`
+`docs/architecture/constraint-problem-map-C018.md`
 
 The map separates owner constraints from architectural problems and deliberately avoids choosing a registry, router, manifest, memory store, command syntax, or filesystem structure.
 
@@ -124,13 +139,13 @@ The bounded map identified concrete drift:
 ### Qwen
 
 - `docs/architecture/independent-review-qwen-onboarding.md`
-- Current observed Qwen handoff: `docs/handoffs/05AE-Independent-Review-Qwen.md`.
+- Current observed Qwen handoff: `docs/handoffs/E004-Independent-Review-Qwen.md`.
 - The older `docs/architecture/independent-review-deepseek-onboarding.md` file is unrelated historical repository content and is not the Qwen onboarding source.
 
 ### Grok
 
 - `docs/architecture/independent-review-grok-onboarding.md`
-- Current observed Grok handoff: `docs/handoffs/06AA-Independent-Review-Grok.md`.
+- Current observed Grok handoff: `docs/handoffs/F000-Independent-Review-Grok.md`.
 
 These remain review inputs, not authority sources. They should be consulted selectively when a bounded research question benefits from independent counterexamples or critique.
 
@@ -139,9 +154,9 @@ These remain review inputs, not authority sources. They should be consulted sele
 ### Confirmed / observed
 
 - Canonical repository/branch: `paulhuman/aip-mirror` / `main`.
-- 03AR was `READY_FOR_HANDOFF` at bootstrap.
+- C017 was `READY_FOR_HANDOFF` at bootstrap.
 - Current lifecycle: `DRAFT → READY_FOR_HANDOFF → HANDED_OFF`.
-- 03AR intentional-acceptance inspection is complete.
+- C017 intentional-acceptance inspection is complete.
 - No dedicated Acceptance mechanism was introduced.
 - The owner has supplied the remaining compactness / execution-context / project-agnosticity constraints.
 - The bounded Constraint → Problem Map has been created and read back successfully.
@@ -362,7 +377,7 @@ The resulting open question is therefore not "where is the applicability artefac
 
 > How does this reasoning-oriented model change the definition and boundary of Minimal Execution Context?
 
-## Immediate next task for 03AT
+## Immediate next task for C019
 
 Examine the consequences of the runtime-reasoning model for:
 
@@ -379,17 +394,17 @@ Do not add another generic bounded case merely to generate more examples.
 
 Do not repeat merely for migration:
 
-- the 03AR intentional-acceptance inspection;
+- the C017 intentional-acceptance inspection;
 - C-13;
 - C-14;
 - C-12;
 - C-11.11–C-11.15;
-- the 03AP Semantic Source & Authority Audit;
-- the 03AP Intentional Acceptance Audit;
-- the 03AP Architectural Bottleneck Audit;
-- the 03AP Architectural Bottleneck Cross-Audit;
+- the C015 Semantic Source & Authority Audit;
+- the C015 Intentional Acceptance Audit;
+- the C015 Architectural Bottleneck Audit;
+- the C015 Architectural Bottleneck Cross-Audit;
 - the Post-C-13 Architectural Leverage Audit;
-- the completed 03AQ lifecycle cleanup.
+- the completed C016 lifecycle cleanup.
 
 Do not reintroduce `SUPERSEDED` into the current lifecycle.
 
@@ -404,7 +419,7 @@ Already read during bootstrap:
 - `.ai/rules/workflow.md`
 - `.ai/rules/handoff-references.md`
 - `.ai/skills/commit-message/SKILL.md`
-- `docs/handoffs/03AR-Architecture-Research.md`
+- `docs/handoffs/C017-Architecture-Research.md`
 
 Additional research inputs now inspected selectively:
 
@@ -412,9 +427,9 @@ Additional research inputs now inspected selectively:
 - `docs/architecture/independent-review-qwen-onboarding.md`
 - `docs/architecture/independent-review-grok-onboarding.md`
 - `docs/architecture/independent-review-deepseek-onboarding.md` (historical leftover; not Qwen onboarding)
-- `docs/handoffs/05AE-Independent-Review-Qwen.md`
-- `docs/handoffs/06AA-Independent-Review-Grok.md`
-- `docs/architecture/constraint-problem-map-03AS.md`
+- `docs/handoffs/E004-Independent-Review-Qwen.md`
+- `docs/handoffs/F000-Independent-Review-Grok.md`
+- `docs/architecture/constraint-problem-map-C018.md`
 - `.ai/rules/conversation-lifecycle.md`
 - `.ai/rules/workflow.md`
 - `.ai/rules/repository.md`
@@ -426,13 +441,13 @@ Further architecture documents should be read selectively according to the bound
 
 ## Last completed task
 
-03AS completed the A/B/C Applicability Surface Test, the independent Grok/Qwen boundary review, and the bounded follow-up test of applicability as runtime reasoning. The current research position is that applicability is best treated as a reasoning result that may be refined after obtaining additional knowledge, with observed post-execution state feeding reasoning again for normal, correction, or recovery paths. The next chapter should now examine what this does to MEC and P-01/P-02/P-03.
+C018 completed the A/B/C Applicability Surface Test, the independent Grok/Qwen boundary review, and the bounded follow-up test of applicability as runtime reasoning. The current research position is that applicability is best treated as a reasoning result that may be refined after obtaining additional knowledge, with observed post-execution state feeding reasoning again for normal, correction, or recovery paths. The next chapter should now examine what this does to MEC and P-01/P-02/P-03.
 
 ## Migration note
 
-03AS is finalized as `READY_FOR_HANDOFF` for migration to 03AT.
+C018 is finalized as `READY_FOR_HANDOFF` for migration to C019.
 
-The receiving chapter must create its own `docs/handoffs/03AT-Architecture-Research.md` as `DRAFT`, then perform the normal post-bootstrap verification and mark this handoff `HANDED_OFF`.
+The receiving chapter must create its own `docs/handoffs/C019-Architecture-Research.md` as `DRAFT`, then perform the normal post-bootstrap verification and mark this handoff `HANDED_OFF`.
 
 ## Bootstrap note
 

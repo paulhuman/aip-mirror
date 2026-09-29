@@ -1,18 +1,18 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03AV — Architecture & Research
+**Conversation:**
+C021 — Architecture & Research
 
-Specialization:
-03 — Architecture & Research
+**Specialization:**
+C
 
-Chapter:
-03AV
+**Chapter:**
+021
 
-Previous chapter:
-03AU — Architecture & Research
+**Previous chapter:**
+020
 
-Status:
+**Status:**
 HANDED_OFF
 
 ## Current objective
@@ -32,12 +32,12 @@ Bootstrap source context has been read from the canonical repository on `main`, 
 - `.ai/skills/conversation-handoff/SKILL.md`
 - applicable lifecycle, workflow, repository, and handoff-reference rules
 - `docs/PROJECT-INSTRUCTIONS.md`
-- `docs/handoffs/03AU-Architecture-Research.md`
-- `.ai/architecture/03AU_ai-infrastructure-restructuring.md`
+- `docs/handoffs/C020-Architecture-Research.md`
+- `.ai/architecture/C020_ai-infrastructure-restructuring.md`
 
-The 03AU durable research context has been preserved as the primary architectural source for this chapter.
+The C020 durable research context has been preserved as the primary architectural source for this chapter.
 
-The 03AU → 03AV lifecycle bootstrap was completed by a write-capable AI.
+The C020 → C021 lifecycle bootstrap was completed by a write-capable AI.
 
 The local inventory/classification and two independent blind semantic reviews (Grok and Qwen) have now been completed. No target tree was shown to the independent reviewers.
 
@@ -63,13 +63,13 @@ The current repository still contains the historical/incremental organization. T
 12. `docs/architecture/ai-project-instruction-architecture.md` is AI-infrastructure material and belongs conceptually under `.ai/architecture/`.
 13. Independent-review onboarding documents are candidates for `.ai/workflows/independent-review/`.
 14. No physical move, rename, merge, split, or deletion is authorized merely by the target-tree sketches.
-15. New chapter-produced documents use the working `03AV_document-name.md` filename-prefix convention, pending formalization after inventory/review.
+15. New chapter-produced documents use the working `C021_document-name.md` filename-prefix convention, pending formalization after inventory/review.
 16. Do not use “bootstrap kernel” as an architecture term. Where historically needed, use “non-empty initial active context”.
 17. Handoff lifecycle, handoff operations, and handoff commits are distinct semantic dimensions.
 18. The handoffs README is navigation/orientation material, not a lifecycle event or canonical lifecycle rule.
 19. BOOTSTRAP is WORKFLOW material and should be evaluated for placement under .ai/workflows/.
 20. The current .ai/handoffs/ model with README.md plus numbered specialization directories 01–06 remains the working choice for now.
-21. A separate TODO file is not yet required; the expanding TODO remains in the 03AU architecture working document for now.
+21. A separate TODO file is not yet required; the expanding TODO remains in the C020 architecture working document for now.
 
 ## Open questions
 
@@ -88,11 +88,11 @@ Do not silently resolve:
 ## Current files
 
 Primary durable research context:
-- `.ai/architecture/03AU_ai-infrastructure-restructuring.md`
+- `.ai/architecture/C020_ai-infrastructure-restructuring.md`
 
 Current migration handoff:
-- `docs/handoffs/03AU-Architecture-Research.md`
-- `docs/handoffs/03AV-Architecture-Research.md`
+- `docs/handoffs/C020-Architecture-Research.md`
+- `docs/handoffs/C021-Architecture-Research.md`
 
 High-priority inventory sources:
 - `.ai/rules/`
@@ -112,12 +112,12 @@ High-priority inventory sources:
 
 ### Primary durable research context
 
-- `paulhuman/aip-mirror@main:/.ai/architecture/03AU_ai-infrastructure-restructuring.md`
-  - Role: main preserved 03AU research context for the AI-infrastructure restructuring.
+- `paulhuman/aip-mirror@main:/.ai/architecture/C020_ai-infrastructure-restructuring.md`
+  - Role: main preserved C020 research context for the AI-infrastructure restructuring.
 
 ### Handoff
 
-- `paulhuman/aip-mirror@main:/docs/handoffs/03AU-Architecture-Research.md`
+- `paulhuman/aip-mirror@main:/docs/handoffs/C020-Architecture-Research.md`
   - Role: predecessor chapter checkpoint and migration state.
 
 ## Important constraints
@@ -140,9 +140,9 @@ High-priority inventory sources:
 
 ### Confirmed / observed
 
-- 03AU marked the local inventory/classification as the immediate next task.
-- `.ai/architecture/03AU_ai-infrastructure-restructuring.md` is the main durable 03AU research context.
-- No physical restructuring was performed in 03AU.
+- C020 marked the local inventory/classification as the immediate next task.
+- `.ai/architecture/C020_ai-infrastructure-restructuring.md` is the main durable C020 research context.
+- No physical restructuring was performed in C020.
 - The `.ai/` versus `docs/` boundary is an accepted working decision.
 - The current repository is `paulhuman/aip-mirror` on `main`.
 
@@ -165,7 +165,7 @@ All unresolved architecture/taxonomy questions listed above remain open until th
 
 ## Last completed task
 
-Completed the local inventory/classification and obtained independent blind semantic reviews from Grok and Qwen. Updated the durable 03AU restructuring notes with the resulting consensus and the newly identified handoff semantic model.
+Completed the local inventory/classification and obtained independent blind semantic reviews from Grok and Qwen. Updated the durable C020 restructuring notes with the resulting consensus and the newly identified handoff semantic model.
 
 ## Immediate next task
 
@@ -201,7 +201,7 @@ Deferred later-iteration question: whether .ai/INDEX.md is sufficient or a separ
 
 ## Things not to redo
 
-- Do not reconstruct the 03AU architectural reasoning from conversation history.
+- Do not reconstruct the C020 architectural reasoning from conversation history.
 - Do not restart MEC theory.
 - Do not re-derive the `.ai/` versus `docs/` boundary unless new evidence contradicts it.
 - Do not physically move or delete files merely because a target location has been proposed.
@@ -210,8 +210,8 @@ Deferred later-iteration question: whether .ai/INDEX.md is sufficient or a separ
 
 ## Recommended starting context for next chapter
 
-1. `.ai/architecture/03AU_ai-infrastructure-restructuring.md`
-2. `docs/handoffs/03AV-Architecture-Research.md`
+1. `.ai/architecture/C020_ai-infrastructure-restructuring.md`
+2. `docs/handoffs/C021-Architecture-Research.md`
 3. `docs/PROJECT-INSTRUCTIONS.md`
 4. `.ai/skills/conversation-handoff/BOOTSTRAP.md`
 5. `.ai/skills/conversation-handoff/SKILL.md`
@@ -221,4 +221,4 @@ Deferred later-iteration question: whether .ai/INDEX.md is sufficient or a separ
 9. `.ai/rules/handoff-references.md`
 10. `docs/architecture/ai-project-instruction-architecture.md`
 
-The durable 03AU architecture working file is the primary preserved research context. The next chapter should continue from repository state rather than from conversational reconstruction.
+The durable C020 architecture working file is the primary preserved research context. The next chapter should continue from repository state rather than from conversational reconstruction.

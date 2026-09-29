@@ -1,23 +1,23 @@
 # Conversation Handoff
 
-Conversation:
-AIP Mirror — 03AT — Architecture & Research
+**Conversation:**
+C019 — Architecture & Research
 
-Specialization:
-03 — Architecture & Research
+**Specialization:**
+C
 
-Chapter:
-03AT
+**Chapter:**
+019
 
-Previous chapter:
-03AS — Architecture & Research
+**Previous chapter:**
+018
 
-Status:
+**Status:**
 HANDED_OFF
 
 ## Current objective
 
-Continue the architecture/research work from 03AS.
+Continue the architecture/research work from C018.
 
 The immediate research question is:
 
@@ -29,7 +29,7 @@ This remains semantic/operational research, not implementation design.
 
 ## Completed
 
-03AS completed:
+C018 completed:
 
 1. A/B/C Applicability Surface Test, distinguishing capability discovery, applicability determination, execution, and current state without proving separate physical artefacts.
 2. Independent Grok/Qwen review of that boundary.
@@ -64,7 +64,7 @@ Current research findings, not final Architecture Decisions:
 - The earlier distinction between capability discovery, applicability, and execution remains useful as a functional distinction, not as proof of three persistent artefacts or a mandatory pipeline.
 - Minimal execution context is action-relative and must not be equated with minimum text or a universal instruction package.
 
-## 03AT bounded experiment results
+## C019 bounded experiment results
 
 ### Dynamic Context Activation
 
@@ -161,7 +161,7 @@ The experiments do not justify introducing the following as mandatory semantic a
 
 Detailed findings are recorded in:
 
-- docs/architecture/mec-dynamic-context-03AT.md
+- docs/architecture/mec-dynamic-context-C019.md
 
 ## Open questions
 
@@ -197,9 +197,9 @@ Do not choose among these before analysis.
 ## Current files
 
 Primary architecture/research files:
-- docs/architecture/constraint-problem-map-03AS.md
-- docs/architecture/minimal-execution-context-03AS.md
-- docs/handoffs/03AS-Architecture-Research.md
+- docs/architecture/constraint-problem-map-C018.md
+- docs/architecture/minimal-execution-context-C018.md
+- docs/handoffs/C018-Architecture-Research.md
 - docs/PROJECT-INSTRUCTIONS.md
 
 Applicable AI workflow:
@@ -213,13 +213,13 @@ Applicable AI workflow:
 
 ## Relevant references
 
-- docs/architecture/constraint-problem-map-03AS.md — bounded constraint/problem framing and MEC research boundary.
-- docs/architecture/minimal-execution-context-03AS.md — bounded MEC analysis and Applicability Surface Test.
-- docs/handoffs/03AS-Architecture-Research.md — authoritative migration checkpoint from 03AS.
+- docs/architecture/constraint-problem-map-C018.md — bounded constraint/problem framing and MEC research boundary.
+- docs/architecture/minimal-execution-context-C018.md — bounded MEC analysis and Applicability Surface Test.
+- docs/handoffs/C018-Architecture-Research.md — authoritative migration checkpoint from C018.
 - docs/architecture/independent-review-qwen-onboarding.md — Qwen review input, use selectively for counterarguments.
 - docs/architecture/independent-review-grok-onboarding.md — Grok review input, use selectively for counterarguments.
-- docs/handoffs/05AE-Independent-Review-Qwen.md — current Qwen review handoff.
-- docs/handoffs/06AA-Independent-Review-Grok.md — current Grok review handoff.
+- docs/handoffs/E004-Independent-Review-Qwen.md — current Qwen review handoff.
+- docs/handoffs/F000-Independent-Review-Grok.md — current Grok review handoff.
 
 These are evidence/reference inputs; they do not override 03 architectural decisions.
 
@@ -241,8 +241,8 @@ These are evidence/reference inputs; they do not override 03 architectural decis
 ### Confirmed / observed
 
 - Repository: paulhuman/aip-mirror, branch main.
-- Previous handoff 03AS was READY_FOR_HANDOFF at bootstrap.
-- 03AS completed the Applicability Surface Test and the runtime-reasoning applicability follow-up.
+- Previous handoff C018 was READY_FOR_HANDOFF at bootstrap.
+- C018 completed the Applicability Surface Test and the runtime-reasoning applicability follow-up.
 - Applicability was not established as a separate persistent knowledge layer.
 - Applicability may require additional knowledge and may be refined iteratively.
 - Observed post-execution state feeds reasoning again.
@@ -270,11 +270,11 @@ These are evidence/reference inputs; they do not override 03 architectural decis
 
 ## Last completed task
 
-03AS completed the bounded test of applicability as a runtime reasoning result and handed off the resulting research frontier.
+C018 completed the bounded test of applicability as a runtime reasoning result and handed off the resulting research frontier.
 
 ## Immediate next task
 
-Receiving chapter 03AU should bootstrap from this handoff and continue from the reduced dynamic-context model.
+Receiving chapter C020 should bootstrap from this handoff and continue from the reduced dynamic-context model.
 
 The runtime-reasoning consequences for MEC/P-01/P-02/P-03 and the bootstrap-kernel hypothesis have now been bounded. Do not reintroduce bootstrap kernel as an architectural entity.
 
@@ -285,7 +285,7 @@ Do not begin with implementation structure.
 ## Things not to redo
 
 Do not repeat:
-- the 03AS A/B/C Applicability Surface Test;
+- the C018 A/B/C Applicability Surface Test;
 - the Grok/Qwen review of that test;
 - the bounded applicability-as-runtime-reasoning follow-up;
 - earlier 03A-series semantic-trace work;
@@ -303,10 +303,10 @@ Bootstrap/current research sources to read:
 5. .ai/rules/workflow.md
 6. .ai/rules/repository.md
 7. .ai/rules/handoff-references.md
-8. docs/handoffs/03AS-Architecture-Research.md
-9. docs/architecture/constraint-problem-map-03AS.md
-10. docs/architecture/minimal-execution-context-03AS.md
+8. docs/handoffs/C018-Architecture-Research.md
+9. docs/architecture/constraint-problem-map-C018.md
+10. docs/architecture/minimal-execution-context-C018.md
 
 Then inspect Qwen/Grok references only where an independent counterexample materially helps the MEC question.
 
-This handoff is the live 03AT checkpoint.
+This handoff is the live C019 checkpoint.
