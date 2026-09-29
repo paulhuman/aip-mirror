@@ -878,3 +878,62 @@ Keep exact operation IDs, final command syntax, and hard-MUST commit vocabulary 
 The current architecture state is represented by this file and the current `.ai` tree. Future chapters must start from current repository state rather than reconstructing 03AU–03BA from conversation history.
 
 The next architecture/research chapter should treat the independent Grok/Qwen review as evidence against the current model, distinguish accepted findings from open questions, and avoid broad restructuring without evidence.
+
+
+## 23. Next Iteration 2 work plan — INDEX presentation and scalability
+
+The next bounded Iteration 2 task is to continue with .ai/INDEX.md. This is a **presentation/scalability pass**, not a change of semantic ownership.
+
+The work is deliberately split into analysis before editing:
+
+1. **Inventory the current INDEX surface**
+   - inspect the current command table and capability map;
+   - identify duplicated or visually noisy information;
+   - check whether the current presentation remains usable as the command/capability surface grows toward approximately 10–15 entries.
+
+2. **Separate discovery from routing metadata**
+   - distinguish information needed to discover a capability from metadata needed to route an already-recognized operation;
+   - preserve the current semantic boundary: INDEX = routing / capability discovery;
+   - do not move procedural or normative content into INDEX.
+
+3. **Test the minimum semantic metadata question**
+   - evaluate the current metadata set: command phrase, semantic operation, canonical owner, reread targets, repository-state effect, and commit indication;
+   - determine whether any field is unnecessary, or whether a missing field is needed for safe routing;
+   - explicitly test the boundary at which routing metadata would become a shadow canonical owner.
+
+4. **Design a scalable presentation**
+   - prototype a compact structure suitable for approximately 10–15 commands/capabilities;
+   - preserve fast human/AI discovery;
+   - avoid turning INDEX into a dependency graph, procedure catalog, or duplicate owner document;
+   - exact command IDs and final command syntax remain unfrozen.
+
+5. **Validate against canonical owners**
+   - compare any proposed INDEX presentation against the current lifecycle, handoff skill, commit rules/skill, repository rules, and BOOTSTRAP workflow;
+   - verify that INDEX points to owners rather than restating their semantics.
+
+6. **Implement only after the analysis is settled**
+   - make the smallest justified INDEX change;
+   - perform the standard post-edit semantic consistency sweep;
+   - verify content, diff, and changed-file scope;
+   - commit only the bounded INDEX work.
+
+### Explicit non-goals for this pass
+
+Do not:
+- create ENTRY.md;
+- change lifecycle semantics;
+- change BOOTSTRAP ownership or ordering;
+- change chapter identifier format;
+- move project-specific configuration out of .ai/config.yaml;
+- reopen the completed physical Iteration 2 restructuring;
+- start the deferred handoff-operation / commit-vocabulary work.
+
+### C027 assignment
+
+The receiving chapter **C027 — Architecture & Research** owns the analysis and implementation of this INDEX presentation/scalability pass.
+
+C026 closes after recording this plan and preparing the receiving bootstrap instruction. C026 must not create or modify the C027 handoff.
+
+The first substantive C027 task is therefore:
+
+> Analyze the current .ai/INDEX.md presentation and determine the minimum sufficient, scalable router/discovery structure before making any INDEX edits.

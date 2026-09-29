@@ -13,179 +13,153 @@ C
 025
 
 **Status:**
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
-Continue Iteration 2 from the current repository state by completing the entry-layer command-routing design and validating the canonical bootstrap workflow boundary.
+Continue Iteration 2 from the current repository state, then close C026 cleanly and delegate the next bounded architecture task to C027: the presentation/scalability analysis of .ai/INDEX.md.
 
 ## Completed
 
-Bootstrap established the receiving chapter from the current repository state rather than reconstructing earlier chapters from conversation history.
-
-The previous handoff, C025, was received in `READY_FOR_HANDOFF` state and was transitioned to `HANDED_OFF` under the normal receiving-chapter lifecycle.
-
-Post-bootstrap consistency verification confirmed:
-- C026 is `DRAFT`;
-- C026 identifies C025 as its previous chapter;
-- C025 is `HANDED_OFF`;
-- C024, the earlier same-specialization predecessor, is also `HANDED_OFF`;
-- the C025 → C026 lifecycle pair is coherent.
-
-## Current implementation state
-
-- Physical Iteration 2 restructuring is complete.
-- `.ai/INDEX.md` has been implemented as the operational command router and capability-discovery surface.
-- `.ai/workflows/handoff/BOOTSTRAP.md` is now the canonical bootstrap workflow path.
-- The old `.ai/workflows/handoff/BOOTSTRAP.md` path has been removed.
-- Repository Identity & Path Resolution ownership is already established:
-  - `.ai/config.yaml` owns repository identity/configuration facts.
-  - `.ai/rules/repository.md` owns repository interpretation, path resolution, boundaries, taxonomy/hygiene, durable repository knowledge, and write safety.
-- `.ai/AGENTS.md` exists as the AI operating-contract surface and is currently minimal.
-- `.ai/INDEX.md` contains the operational command-routing and capability-discovery model.
-- `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical ordered bootstrap workflow after the C026 path decision.
-- The durable architecture note records the verified C025 routing model and C026 assignment.
+- Physical Iteration 2 restructuring is complete and is not to be repeated.
+- The active handoff tree uses the current [A-Z][0-9]{3} chapter format.
+- The current .ai/INDEX.md model is established as an operational command router and capability-discovery surface.
+- The current INDEX metadata model has been preserved rather than removed:
+  - current user-facing command phrase;
+  - semantic operation;
+  - canonical owner;
+  - required reread targets;
+  - repository-state effect;
+  - commit indication.
+- The distinction between INDEX routing metadata and canonical ownership is established.
+- .ai/workflows/handoff/BOOTSTRAP.md remains the canonical ordered receiving-chapter bootstrap workflow.
+- .ai/AGENTS.md, lifecycle cleanup, and the future ENTRY.md question remain separate bounded Iteration 2 work items; they are not reopened by this migration.
+- The previous naming migration and active-content consistency sweep are complete.
 
 ## Decisions
 
-The entry-layer model is now implemented as:
+The entry-layer model remains:
 
-    user command
-        ↓
-    .ai/INDEX.md
-        ↓
-    operation identification
-        ↓
-    reread canonical owner files
-        ↓
-    execute owning rule / skill / workflow
+    AGENTS
+      ↓
+    INDEX command surface
+      ↓
+    canonical capability / owner
+      ↓
+    execution
 
-`.ai/INDEX.md` must remain a routing/discovery surface, not a new canonical owner.
+INDEX must remain a router/discovery surface, not a canonical rule, skill, or workflow owner.
 
-The five currently known user-facing handoff commands are:
+The next work is specifically a **presentation/scalability pass** over INDEX. It must first analyze the current surface before editing it.
 
-1. `Пора обновить handoff`
-2. `Пора выполнить миграцию в чат XXYY`
-3. `Пора восстановить handoff`
-4. `Пора выполнить handoff lifecycle correction`
-5. `Пора выдать bootstrap-инструкцию`
+The exact command IDs and final command syntax remain intentionally provisional.
 
-Exact new command IDs/syntax remain intentionally provisional.
-
-Each command entry should be able to identify:
-- command syntax;
-- semantic operation;
-- canonical owner;
-- required reread targets;
-- whether repository state may change.
-
-Do not create `ENTRY.md`.
+No ENTRY.md is to be created in this pass.
 
 ## Open questions
 
-- What exact command-entry/operation identifier convention should remain provisional?
-- Whether additional user-facing command surfaces exist elsewhere in the active `.ai/` tree beyond the five currently documented.
-- Complete handoff operation vocabulary and operation-to-commit mapping.
-- Long-term handoff retention/archive policy.
-- Exact long-term `.ai/architecture/` taxonomy.
-- Whether any remaining mixed rule files require another decomposition pass.
+- What presentation structure keeps INDEX usable as the command/capability surface grows toward approximately 10–15 entries?
+- Which current metadata fields are truly necessary for safe routing and discovery?
+- Does the current metadata set contain any field that risks becoming shadow ownership?
+- Is any additional metadata needed without turning INDEX into a procedural layer?
+- Where is the minimum boundary between discovery information and routing information?
 
 ## Current files
 
 Primary entry-layer scope:
 
-- `.ai/INDEX.md`
-- `.ai/AGENTS.md`
-- `.ai/architecture/ai-infrastructure-restructuring.md`
+- .ai/INDEX.md
+- .ai/AGENTS.md
+- .ai/architecture/ai-infrastructure-restructuring.md
 
-Canonical infrastructure owners:
+Canonical owners to validate against as needed:
 
-- `.ai/config.yaml`
-- `.ai/rules/repository.md`
-- `.ai/rules/handoff/lifecycle.md`
-- `.ai/rules/handoff/references.md`
-- `.ai/rules/commits.md`
-- `.ai/skills/handoff/SKILL.md`
-- `.ai/skills/commits/SKILL.md`
-- `.ai/workflows/handoff/BOOTSTRAP.md`
+- .ai/config.yaml
+- .ai/rules/repository.md
+- .ai/rules/handoff/lifecycle.md
+- .ai/rules/handoff/references.md
+- .ai/rules/commits.md
+- .ai/skills/handoff/SKILL.md
+- .ai/skills/commits/SKILL.md
+- .ai/workflows/handoff/BOOTSTRAP.md
 
-Handoff state:
+Previous handoff:
 
-- `.ai/handoffs/C/C025-Architecture-Research.md`
+- .ai/handoffs/C/C025-Architecture-Research.md
 
-## Relevant references
+## Immediate next task
 
-No external research reference is required for the current entry-layer design. The work is based on the current repository's canonical infrastructure and durable architecture record.
+**C027 owns the next substantive task:**
+
+1. Read the current .ai/INDEX.md.
+2. Inventory its command-routing and capability-discovery presentation.
+3. Analyze the discovery/routing split and the minimum semantic metadata boundary.
+4. Design a compact scalable presentation for approximately 10–15 entries.
+5. Only then decide whether INDEX requires an edit.
+6. If editing is justified, perform the standard read → minimal edit → full write → read-back → semantic consistency sweep → diff/scope verification → commit → result verification sequence.
+
+The durable architecture plan is recorded in .ai/architecture/ai-infrastructure-restructuring.md under “Next Iteration 2 work plan — INDEX presentation and scalability”.
 
 ## Important constraints
 
 - Start from current repository state.
-- Do not reconstruct C020/C021/C022/C023/C024 from chat history.
+- Do not reconstruct earlier architecture chapters from chat history.
 - Do not repeat physical Iteration 2 restructuring.
-- Do not reopen Repository Identity & Path Resolution without new evidence.
-- Do not create `ENTRY.md`.
-- Do not duplicate lifecycle, handoff, commit, repository, or workflow procedures in INDEX.
-- Do not start the handoff-operation / commit-vocabulary TODO.
-- Do not delete BOOTSTRAP before comparing its residual core with the completed INDEX model.
-- After any ownership/path change, perform the required post-edit semantic consistency sweep.
+- Do not create or modify the C027 handoff from C026.
+- Do not create ENTRY.md.
+- Do not duplicate canonical lifecycle, handoff, commit, repository, or workflow procedures in INDEX.
+- Do not change lifecycle semantics.
+- Do not change BOOTSTRAP ownership or ordering.
+- Do not change the current chapter identifier format.
+- Do not move project-specific configuration out of .ai/config.yaml.
+- Do not start the deferred handoff-operation / commit-vocabulary TODO.
+- Exact command IDs and final command syntax remain provisional.
 - Distinguish confirmed facts from inference and assumptions.
 
 ## Evidence / confidence
 
 ### Confirmed / observed
 
-- The C026 bootstrap lifecycle pair is verified: C026 is `DRAFT`, C025 is `HANDED_OFF`, and C024 is `HANDED_OFF`.
-- `.ai/INDEX.md` now contains the command-routing and capability-discovery model.
-- `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical bootstrap workflow path.
-- The old `.ai/workflows/handoff/BOOTSTRAP.md` path has been removed.
-- The affected active files were read back after the path change and checked for stale references.
-- Repository identity is `paulhuman/aip-mirror`, default branch `main`.
-- C025 is `READY_FOR_HANDOFF` at bootstrap start.
-- C024 is already `HANDED_OFF`.
-- The five handoff-related command phrases above are documented in the active infrastructure.
-- `.ai/INDEX.md` currently contains only its title.
-- `.ai/AGENTS.md` currently contains only its title.
-- BOOTSTRAP has already had duplicated migration-completion material removed.
-- The durable architecture note records BOOTSTRAP as unresolved and assigns the INDEX/residual-core comparison to C026.
+- C026 is the closing chapter and this handoff is now READY_FOR_HANDOFF.
+- C025 is the previous chapter and was already established as the preceding handoff.
+- .ai/INDEX.md contains the current routing/discovery model described above.
+- .ai/workflows/handoff/BOOTSTRAP.md is the canonical bootstrap workflow.
+- The physical Iteration 2 restructuring is complete.
+- The active naming format is [A-Z][0-9]{3}.
+- The architecture note now records the C027 INDEX work plan.
 
 ### Inferred
 
-- The next useful abstraction boundary is the entry-layer command router.
-- INDEX can provide command routing and capability discovery without owning detailed execution semantics.
+- The next useful bounded architecture step is the INDEX presentation/scalability analysis.
+- The current metadata may be sufficient, but this must be tested rather than assumed.
 
 ### Assumed / unverified
 
-- Whether additional user-facing command surfaces exist elsewhere in the active `.ai/` tree beyond the five currently documented.
-
-### Open
-
-- Exact command-entry/operation identifier convention.
-- Complete handoff operation vocabulary and operation-to-commit mapping.
-- Long-term handoff retention/archive policy.
-- Exact long-term `.ai/architecture/` taxonomy.
+- The final scalable presentation structure has not yet been selected.
+- The final minimum semantic metadata set has not yet been frozen.
 
 ## Last completed task
 
-Implemented the first operational `.ai/INDEX.md` command-routing model, compared it against the residual BOOTSTRAP core, retained BOOTSTRAP as an independent ordered workflow, renamed it to `.ai/workflows/handoff/BOOTSTRAP.md`, updated its canonical references, and performed the required post-edit semantic consistency verification.
-
-## Immediate next task
-
-Continue from the established entry-layer model. If further Iteration 2 work is needed, address only the bounded remaining architecture questions recorded above; do not reopen the completed INDEX/BOOTSTRAP decision without new evidence.
+Recorded the next bounded INDEX presentation/scalability work plan in the durable architecture note and prepared C026 for migration.
 
 ## Things not to redo
 
-- Do not reconstruct prior chapters from chat history.
-- Do not repeat physical Iteration 2 restructuring.
-- Do not redo the Repository Identity & Path Resolution ownership pass without new evidence.
-- Do not create `ENTRY.md`.
-- Do not duplicate canonical procedures in INDEX.
-- Do not delete BOOTSTRAP before residual-core comparison.
-- Do not begin the handoff-operation / commit-vocabulary TODO.
+- Physical Iteration 2 restructuring.
+- Repository Identity & Path Resolution ownership pass.
+- The decision to retain BOOTSTRAP as an independent ordered workflow.
+- The decision not to create ENTRY.md during Iteration 2.
+- The decision to preserve INDEX routing metadata pending the minimum-semantic-metadata analysis.
+- Naming migration already completed.
 
-## Recommended starting context for next chapter
+## Recommended starting context for C027
 
-Read the current `.ai/INDEX.md`, `.ai/AGENTS.md`, and `.ai/architecture/ai-infrastructure-restructuring.md` first. Then use the canonical lifecycle/handoff/commit owners and BOOTSTRAP only as needed to validate routing targets and residual workflow semantics.
+Read, in this order:
 
-The durable architectural question is:
+1. .ai/INDEX.md
+2. .ai/architecture/ai-infrastructure-restructuring.md — specifically the current INDEX model and the “Next Iteration 2 work plan — INDEX presentation and scalability” section
+3. .ai/AGENTS.md
+4. .ai/rules/handoff/lifecycle.md
+5. .ai/skills/handoff/SKILL.md
+6. .ai/workflows/handoff/BOOTSTRAP.md
 
-> How should the entry layer route a user command to the canonical capability without becoming another owner?
+Then inspect additional canonical owners only where the INDEX analysis requires them.
