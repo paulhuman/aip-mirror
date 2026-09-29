@@ -30,7 +30,7 @@ The following are the currently documented user-facing command phrases. Their ex
 | Command phrase | Semantic operation | Canonical owner | Read before execution |
 |---|---|---|---|
 | `Пора обновить handoff` | checkpoint current chapter | `.ai/skills/handoff/SKILL.md` | `.ai/rules/handoff/lifecycle.md`; current handoff |
-| `Пора выполнить миграцию в чат XXYY` | migrate current chapter | `.ai/skills/handoff/SKILL.md` + `.ai/rules/handoff/lifecycle.md` | lifecycle; handoff skill; `.ai/workflows/handoff/BOOTSTRAP.md` |
+| `Пора выполнить миграцию в чат [A-Z][0-9]{3}` | migrate current chapter | `.ai/skills/handoff/SKILL.md` + `.ai/rules/handoff/lifecycle.md` | lifecycle; handoff skill; `.ai/workflows/handoff/BOOTSTRAP.md` |
 | `Пора восстановить handoff` | Lifecycle Recovery | `.ai/rules/handoff/lifecycle.md` | lifecycle; commit rule/skill when a recovery write is required |
 | `Пора выполнить handoff lifecycle correction` | historical Lifecycle Correction | `.ai/rules/handoff/lifecycle.md` | lifecycle; commit rule/skill when a correction write is required |
 | `Пора выдать bootstrap-инструкцию` | generate bootstrap instruction for the future receiving chapter | `.ai/skills/handoff/SKILL.md` + `.ai/workflows/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow |
