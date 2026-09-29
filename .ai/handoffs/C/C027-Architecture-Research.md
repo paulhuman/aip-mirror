@@ -13,7 +13,7 @@ C
 026
 
 **Status:**
-READY_FOR_HANDOFF
+HANDED_OFF
 
 ## Current objective
 
