@@ -13,7 +13,7 @@ E
 004
 
 **Status:**
-DRAFT
+HANDED_OFF
 
 ## Current objective
 
