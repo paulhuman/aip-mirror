@@ -17,13 +17,13 @@ Workstreams are organizational boundaries, not permanent ownership of all knowle
 Each workstream may span multiple conversation chapters. Chapter identifiers use:
 
 ```text
-[0-9]{2}[A-Z]{2}
+[A-Z][0-9]{3}
 ```
 
-The two-letter suffix advances continuously:
+The chapter number advances within the specialization letter, using three digits:
 
 ```text
-AA → AB → ... → AZ → BA → ... → ZZ
+A000 → A001 → ... → A999
 ```
 
 Conversation lifecycle, chapter transitions, and handoff state are defined by:
@@ -36,7 +36,7 @@ The handoff procedure is defined by:
 
 The bootstrap procedure is defined by:
 
-`.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`
+`.ai/workflows/handoff/BOOTSTRAP.md`
 
 Do not duplicate those procedures here.
 
