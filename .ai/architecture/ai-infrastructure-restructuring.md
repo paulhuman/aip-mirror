@@ -609,7 +609,7 @@ Qwen challenged the inclusion of `Repository state may change` and `Commit` meta
 
 C027 decision: **reduce command routing metadata to four fields**: command phrase, semantic operation, canonical owner, and activation context / required reread targets.
 
-The metadata is useful discovery information, and current INDEX wording explicitly states that the `Commit` field does not authorize or construct commits. Canonical commit rules/skills retain ownership.
+The four-field model is the current routing boundary. Canonical commit rules/skills retain ownership of commit semantics and construction.
 
 The tested minimum routing model is:
 
@@ -619,7 +619,7 @@ command → operation → owner → activation context
 
 `Repository state may change` and `Commit` were useful operator warnings, but were not required for discovery or safe routing and risked adding canonical semantic density to INDEX. Their meanings remain owned elsewhere.
 
-This remains a review/Iteration 3 question. Any future change should be evidence-driven.
+This is a durable C027 decision. Any future change would require new evidence and an explicitly bounded architecture question.
 
 ### 17.2 `Пора выдать bootstrap-инструкцию` — OPEN
 
@@ -824,8 +824,6 @@ The independent review found the active architecture substantially consistent bu
 
 Do not currently:
 
-- remove `Commit` metadata from INDEX;
-- remove repository-state metadata from INDEX;
 - merge bootstrap-instruction generation into migration;
 - reintroduce `SUPERSEDED`;
 - add a new historical lifecycle state;
