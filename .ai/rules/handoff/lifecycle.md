@@ -30,34 +30,21 @@ The repository handoff state must therefore outlive the conversation that create
 
 ## 2. Chapter naming
 
-Each specialization uses a numeric identity followed by a two-letter chapter suffix.
+Each specialization uses a letter identity followed by a three-digit chapter number.
 
 The current Chapter Identifier Format is:
 
-    [0-9]{2}[A-Z]{2}
+    [A-Z][0-9]{3}
 
-The first two digits identify the specialization. The final two uppercase letters identify the chapter using a continuous base-26 alphabetical sequence:
+The first uppercase letter identifies the specialization. The final three digits identify the chapter within that specialization.
 
-    AA → AB → ... → AZ → BA → BB → ... → BZ → CA → ... → ZZ
+The chapter number is written with leading zeroes when necessary:
 
-No letters are skipped.
-
-The sequence is positional and mathematical:
-
-    AA = chapter ordinal 1
-    AB = chapter ordinal 2
-    AC = chapter ordinal 3
-    ...
-    AE = chapter ordinal 5
-    AF = chapter ordinal 6
-    ...
-    ZZ = chapter ordinal 676
-
-The ordinal position of a chapter must not be confused with the identity of its identifier.
+    000, 001, 002, ...
 
 ## 3. Current chapters
 
-Project-wide rules use the current two-letter Chapter Identifier Format rather than hard-coding a single set of current chapter letters.
+Project-wide rules use the current Chapter Identifier Format rather than hard-coding a single set of current chapter letters.
 
 The concrete current chapter is determined by the active conversation and its corresponding handoff document.
 
@@ -100,7 +87,7 @@ Checkpoint commits are not migration commits. They preserve working state while 
 
 The standard user migration command is:
 
-    Пора выполнить миграцию в чат [0-9]{2}[A-Z]{2}
+    Пора выполнить миграцию в чат [A-Z][0-9]{3}
 
 This command explicitly requests migration to the specified receiving chapter. When it is used, follow the migration procedure in the `.ai/skills/handoff/SKILL.md` and the rules below.
 
@@ -136,12 +123,12 @@ Use one file per chapter:
 
     .ai/handoffs/<specialization>/<chapter>-<short-name>.md
 
-For current-format chapters, the chapter identifier uses `[0-9]{2}[A-Z]{2}`. Examples:
+For current-format chapters, the chapter identifier uses `[A-Z][0-9]{3}`. The specialization directory uses the same specialization letter. Examples:
 
-    .ai/handoffs/01/01AA-Example.md
-    .ai/handoffs/02/02AB-Example.md
-    .ai/handoffs/03/03AF-Example.md
-    .ai/handoffs/04/04AA-Example.md
+    .ai/handoffs/A/A000-Example.md
+    .ai/handoffs/B/B001-Example.md
+    .ai/handoffs/C/C002-Example.md
+    .ai/handoffs/D/D003-Example.md
 
 
 When a chapter has completed handoff, retain its handoff as historical project state.
