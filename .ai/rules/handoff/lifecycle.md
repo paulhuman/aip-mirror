@@ -77,19 +77,13 @@ Prefer project documentation for durable knowledge and handoff documents for con
 
 A `DRAFT` handoff is the live checkpoint document for the current chapter. It may be updated repeatedly as meaningful state accumulates.
 
-The standard user command is:
-
-    Пора обновить handoff
-
-When this command is used, update the current handoff, keep `DRAFT`, verify the result, and create a checkpoint commit. Handoff checkpoint commits are pre-authorized by this project workflow and do not require a separate approval step.
+The checkpoint operation updates the current handoff, keeps `DRAFT`, verifies the result, and creates a checkpoint commit. Handoff checkpoint commits are pre-authorized by this project workflow and do not require a separate approval step.
 
 Checkpoint commits are not migration commits. They preserve working state while the chapter remains active.
 
-The standard user migration command is:
+The migration operation explicitly requests migration to the specified receiving chapter. When invoked, follow the migration procedure in the `.ai/skills/handoff/SKILL.md` and the rules below.
 
-    Пора выполнить миграцию в чат [A-Z][0-9]{3}
-
-This command explicitly requests migration to the specified receiving chapter. When it is used, follow the migration procedure in the `.ai/skills/handoff/SKILL.md` and the rules below.
+The exact user-facing invocation for these operations is defined and routed by `.ai/INDEX.md`; this rule remains the canonical owner of their lifecycle semantics and authorization.
 
 The temporary recovery command is:
 
