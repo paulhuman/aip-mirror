@@ -10,7 +10,7 @@ C
 031
 
 **Previous chapter:**
-C030 — Architecture & Research
+030 — Architecture & Research
 
 **Status:**
 HANDED_OFF
