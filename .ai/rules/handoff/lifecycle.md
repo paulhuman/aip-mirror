@@ -26,7 +26,7 @@ A chapter may need to continue in a new conversation because of:
 - the need for a clean new conversation context;
 - the need to preserve durable project state independently of the health or availability of the old conversation.
 
-The repository handoff state must therefore outlive the conversation that created it. No old conversation or specialization is required to remain available in order for a later chapter to reconstruct or correct canonical handoff state.
+The repository handoff state MUST therefore outlive the conversation that created it. No old conversation or specialization is required to remain available in order for a later chapter to reconstruct or correct canonical handoff state.
 
 ## 2. Chapter naming
 
@@ -89,13 +89,13 @@ The temporary recovery command is:
 
     Пора восстановить handoff
 
-This command is valid only inside a blocked receiving-chapter bootstrap whose cause has been identified as a pre-existing lifecycle violation. It is an explicit user authorization for the bounded `Lifecycle Recovery` procedure below. It is not a general-purpose handoff repair command and must not be interpreted outside that recovery context.
+This command is valid only inside a blocked receiving-chapter bootstrap whose cause has been identified as a pre-existing lifecycle violation. It is an explicit user authorization for the bounded `Lifecycle Recovery` procedure below. It is not a general-purpose handoff repair command and MUST NOT be interpreted outside that recovery context.
 
 The lifecycle correction command is:
 
     Пора выполнить handoff lifecycle correction
 
-This command is valid only after an active chapter has detected and reported an already-existing historical handoff lifecycle inconsistency, established that the correction is bounded and unambiguous under these rules, and identified itself as capable of performing the correction. It is an explicit user authorization for the bounded `Lifecycle Correction` procedure below. It is not a normal lifecycle transition and must not be interpreted as a general-purpose repository repair command.
+This command is valid only after an active chapter has detected and reported an already-existing historical handoff lifecycle inconsistency, established that the correction is bounded and unambiguous under these rules, and identified itself as capable of performing the correction. It is an explicit user authorization for the bounded `Lifecycle Correction` procedure below. It is not a normal lifecycle transition and MUST NOT be interpreted as a general-purpose repository repair command.
 
 ## 6. Handoff trigger
 
@@ -145,12 +145,12 @@ Include, where applicable:
 - unresolved risks;
 - last completed task;
 - immediate next task;
-- things that must not be redone;
+- things that MUST NOT be redone;
 - recommended starting context for the next chapter.
 
 ## 9. Evidence and confidence
 
-Handoff documents must distinguish:
+Handoff documents MUST distinguish:
 
 - Confirmed / observed
 - Inferred
@@ -161,7 +161,7 @@ A handoff MUST NOT silently promote an inference or assumption into a confirmed 
 
 ## 10. Handoff status
 
-Every handoff must contain an explicit lifecycle status:
+Every handoff MUST contain an explicit lifecycle status:
 
 - `DRAFT` — live checkpoint state for the current chapter
 - `READY_FOR_HANDOFF` — safe starting point for the next chapter
@@ -249,11 +249,11 @@ Recovery is permitted only when **all** of the following conditions are true:
 
 If any condition is false, **RECOVERY MUST NOT be performed**.
 
-The recovery command is valid only in this blocked receiving-chapter recovery context. It must not be treated as a general-purpose request to repair handoffs or lifecycle state.
+The recovery command is valid only in this blocked receiving-chapter recovery context. It MUST NOT be treated as a general-purpose request to repair handoffs or lifecycle state.
 
 #### Recovery invariants
 
-`RECOVERY` is not a new ordinary lifecycle transition. It is a controlled recovery procedure that may make only the minimum repository changes necessary to restore canonical bootstrap preconditions for the current receiving chapter.
+`RECOVERY` is not a new ordinary lifecycle transition. It is a controlled recovery procedure that MAY make only the minimum repository changes necessary to restore canonical bootstrap preconditions for the current receiving chapter.
 
 `RECOVERY`:
 
@@ -283,8 +283,8 @@ After explicit user authorization, the receiving chapter MUST:
 3. If the observed state has changed or the recovery scope is no longer unambiguous, stop and report the new inconsistency.
 4. Adopt and normalize its own pre-existing receiving handoff as the canonical `DRAFT` handoff rather than pretending that it was newly created during bootstrap.
 5. Preserve valid existing checkpoint and architectural context while making only the minimum corrections required by the canonical handoff structure.
-6. Inspect the previous handoff's current status and do not repeat any transition that has already occurred.
-7. If the previous handoff already has the required terminal `HANDED_OFF` state, accept that existing state when it is otherwise correct; do not create a redundant lifecycle transition.
+6. Inspect the previous handoff's current status and DO NOT repeat any transition that has already occurred.
+7. If the previous handoff already has the required terminal `HANDED_OFF` state, accept that existing state when it is otherwise correct; DO NOT create a redundant lifecycle transition.
 8. Make only the minimum repository changes necessary for the recovery.
 9. Verify each changed file, the diff, and the changed-file scope before committing.
 10. Create only the recovery commit(s) required by the actual changes, using the project's commit rules and clearly identifying the commit as lifecycle recovery.
@@ -322,9 +322,9 @@ The correction command is not a normal lifecycle transition and is not interchan
 
 The current active chapter/specialization that discovers the violation and can determine and execute the bounded correction under the canonical lifecycle rules owns the correction.
 
-The chapter that originally caused or failed to perform the historical transition does not automatically retain correction ownership. An old conversation is not required for correction and must not be treated as a prerequisite.
+The chapter that originally caused or failed to perform the historical transition does not automatically retain correction ownership. An old conversation is not required for correction and MUST NOT be treated as a prerequisite.
 
-Detection does not grant permission. The detecting chapter must first report:
+Detection does not grant permission. The detecting chapter MUST first report:
 
 - the historical violation;
 - the canonical state that should exist;
@@ -358,7 +358,7 @@ A correction restores the repository's current canonical state; it does not rewr
 
 #### Correction procedure
 
-After explicit user authorization, the active correcting chapter must:
+After explicit user authorization, the active correcting chapter MUST:
 
 1. Re-check the current repository state and relevant Git history.
 2. Confirm that the reported violation still exists and that the correction remains within the previously reported scope.
@@ -382,7 +382,7 @@ This is mandatory for every new chapter and is part of chapter initialization.
 
 The initial `DRAFT` handoff creation and its bootstrap commit are pre-authorized parts of the handoff procedure. They MUST be completed immediately rather than waiting for a separate approval step.
 
-The initial `DRAFT` may be incomplete. At minimum it must identify the new chapter, specialization, previous chapter, starting objective, and starting state established during bootstrap.
+The initial `DRAFT` may be incomplete. At minimum it MUST identify the new chapter, specialization, previous chapter, starting objective, and starting state established during bootstrap.
 
 For a chapter created from a previous handoff, the receiving chapter MUST read:
 
@@ -395,7 +395,7 @@ After successfully starting from the previous handoff, the receiving chapter MUS
 
 ### Post-bootstrap consistency verification
 
-The receiving chapter MUST NOT declare bootstrap complete immediately after writing the previous handoff's `HANDED_OFF` transition. Before considering bootstrap complete, it must verify the resulting state as a coherent lifecycle chain, not only an immediate pair.
+The receiving chapter MUST NOT declare bootstrap complete immediately after writing the previous handoff's `HANDED_OFF` transition. Before considering bootstrap complete, it MUST verify the resulting state as a coherent lifecycle chain, not only an immediate pair.
 
 At minimum, the receiving chapter MUST:
 
@@ -412,7 +412,7 @@ At minimum, the receiving chapter MUST:
 
 A bootstrap is therefore complete only after the lifecycle state and the post-bootstrap consistency verification succeed.
 
-The receiving chapter owns correction of its own handoff when this verification detects stale or contradictory bootstrap state. A different specialization may detect and report such an inconsistency, but MUST NOT edit the receiving chapter's handoff on its behalf.
+The receiving chapter owns correction of its own handoff when this verification detects stale or contradictory bootstrap state. A different specialization MAY detect and report such an inconsistency, but MUST NOT edit the receiving chapter's handoff on its behalf.
 
 The new chapter MUST NOT assume that every detail from the previous chat remains available.
 
@@ -422,9 +422,9 @@ Every lifecycle transition MUST be represented by a Git commit.
 
 Initial creation of a new chapter's `DRAFT` handoff and subsequent `DRAFT` updates are also Git-traceable checkpoint commits. They are not migration commits.
 
-A lifecycle transition may be combined with logically related handoff content changes in one coherent commit.
+A lifecycle transition MAY be combined with logically related handoff content changes in one coherent commit.
 
-Lifecycle Recovery commits are also Git-traceable. They MUST record only the actual recovery changes performed and must not rewrite or erase the historical commits that caused the violation.
+Lifecycle Recovery commits are also Git-traceable. They MUST record only the actual recovery changes performed and MUST NOT rewrite or erase the historical commits that caused the violation.
 
 Lifecycle Correction commits are also Git-traceable. They MUST record the later correction without rewriting or erasing the historical commits that caused the violation. A correction commit is an audit record of the correction, not a replacement for the missed historical transition.
 
