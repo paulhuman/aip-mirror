@@ -161,9 +161,33 @@ A targeted consistency sweep across AGENTS, INDEX, ACTIVATE, handoff skill, BOOT
 
 The earlier empty commit `dda218bcd9604b8506154dafda42dc3ab4f7428a` changed no files; it is retained as repository history and is not treated as evidence of a content change.
 
+## Bootstrap invocation normalization result
+
+C033 investigated whether `AGENTS.md` alone is sufficient as the architectural entry point for a new chat, and whether runtime bootstrap inputs need a standardized transport contract.
+
+Result: `AGENTS.md` remains the sole architectural entry point. No `ENTRY.md` or separate template file is justified. The existing `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical owner of the chat-initialization workflow and now also owns its canonical invocation format.
+
+The normalized runtime contract is:
+
+    PREVIOUS_CHAPTER = 032
+    CURRENT_CHAPTER = 033
+    SPECIALIZATION = C
+
+Chapter number values contain only the three-digit numeric component. The specialization letter is carried separately and MUST NOT be included in `PREVIOUS_CHAPTER` or `CURRENT_CHAPTER`.
+
+The handoff skill is the producer of this bootstrap message; BOOTSTRAP is the consumer. Lifecycle semantics remain owned by `.ai/rules/handoff/lifecycle.md`.
+
+This resolves the concrete representation ambiguity exposed by the recent C031/C032 header corrections without changing lifecycle semantics or adding a new architectural layer.
+
+The implementation commits are:
+
+- `2d0400b8d18863a6815ec651710b406419636a02` — `docs(bootstrap): define canonical invocation format`
+- `a096de354d5ff63a7eee73f87e2c2932a0e6dc2a` — `fix(handoff): normalize bootstrap runtime inputs`
+- `c280b15cd8ae04a88a1f28be588c8462151efea8` — `docs(architecture): define bootstrap input normalization`
+
 ## Immediate next task
 
-ACTIVATE and chat initialization are now bounded enough to close this investigation. The next task is to identify the next concrete architecture question from current repository evidence; do not create another ACTIVATE experiment or introduce `ENTRY.md` without a new bounded need.
+ACTIVATE/chat initialization and the runtime-input normalization question are now bounded enough to close this investigation. The next task is to identify the next concrete architecture question from current repository evidence; do not create another ACTIVATE experiment or introduce `ENTRY.md` without a new bounded need.
 
 ## Things not to redo
 
