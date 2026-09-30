@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 018
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Continue the architecture/research work from C018.
@@ -188,6 +185,7 @@ Identify the boundary between execution-critical knowledge that must be active n
 What exactly does "minimal" quantify?
 
 Possible interpretations to test:
+
 - minimum statically selected context;
 - minimum context sufficient at a particular reasoning moment;
 - another formulation that better captures dynamic knowledge acquisition.
@@ -197,12 +195,14 @@ Do not choose among these before analysis.
 ## Current files
 
 Primary architecture/research files:
+
 - docs/architecture/constraint-problem-map-C018.md
 - docs/architecture/minimal-execution-context-C018.md
 - .ai/handoffs/C018-Architecture-Research.md
 - docs/PROJECT-INSTRUCTIONS.md
 
 Applicable AI workflow:
+
 - .ai/skills/conversation-handoff/BOOTSTRAP.md
 - .ai/skills/conversation-handoff/SKILL.md
 - .ai/skills/commit-message/SKILL.md
@@ -285,6 +285,7 @@ Do not begin with implementation structure.
 ## Things not to redo
 
 Do not repeat:
+
 - the C018 A/B/C Applicability Surface Test;
 - the Grok/Qwen review of that test;
 - the bounded applicability-as-runtime-reasoning follow-up;
@@ -296,6 +297,7 @@ Use the existing research findings as starting premises unless the current MEC q
 ## Recommended starting context for next chapter
 
 Bootstrap/current research sources to read:
+
 1. docs/PROJECT-INSTRUCTIONS.md
 2. .ai/skills/conversation-handoff/BOOTSTRAP.md
 3. .ai/skills/conversation-handoff/SKILL.md

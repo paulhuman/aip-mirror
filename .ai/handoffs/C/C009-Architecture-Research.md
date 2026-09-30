@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 008
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Continue **C-1 — Minimum Resolution Context** by testing candidate context elements one at a time.

@@ -12,9 +12,6 @@ B
 **Previous chapter:**
 000
 
-**Status:**
-DRAFT
-
 ## Current objective
 
 Continue the Native AIP Plugin specialization from the validated handoff state of chapter B000, without restarting the established project workflow or handoff system.

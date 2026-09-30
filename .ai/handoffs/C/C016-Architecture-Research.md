@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 015
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Continue specialization C architecture research after the completed C015 semantic-source/authority and intentional-acceptance audits.
@@ -182,6 +179,7 @@ No implementation authorization.
 The receiving chapter must preserve and use the following reading set:
 
 ### Lifecycle / workflow
+
 - .ai/skills/conversation-handoff/BOOTSTRAP.md
 - .ai/rules/conversation-lifecycle.md
 - .ai/rules/handoff-references.md
@@ -191,21 +189,25 @@ The receiving chapter must preserve and use the following reading set:
 - .ai/handoffs/C015-Architecture-Research.md
 
 ### Architecture baseline / acceptance
+
 - docs/PROJECT-INSTRUCTIONS.md
 - docs/architecture/ai-project-instruction-architecture.md
 - docs/architecture/semantic-source-authority-audit-C015.md
 - docs/architecture/intentional-acceptance-audit-C015.md
 
 ### Dependency / result lineage
+
 - docs/architecture/prerequisite-dependency-semantics.md
 - docs/architecture/c-13-authority-vs-effective-outcome-C015.md
 
 ### Bottleneck / leverage lineage
+
 - docs/architecture/architectural-bottleneck-audit-C015.md
 - docs/architecture/architectural-bottleneck-cross-audit-C015.md
 - docs/architecture/post-c-13-architectural-leverage-audit-C015.md
 
 ### Historical OVERRIDE evidence
+
 - docs/architecture/c-14-override-semantic-dimension-C015.md
 - .ai/handoffs/03D-Architecture-Research.md
 - .ai/handoffs/03E-Architecture-Research.md

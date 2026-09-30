@@ -12,9 +12,6 @@ F
 **Previous chapter:**
 000
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Complete independent external review work accumulated in F001 (bootstrap-kernel falsification, P-02 bootstrap vs routing experiment, Iteration 2 entry-layer review, AGENTS.md responsibility research) and hand off a coherent state for F002.

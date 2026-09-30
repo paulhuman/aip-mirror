@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 014
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Continue specialization C architecture research after C014.
@@ -29,6 +26,7 @@ The FIRST substantive action after bootstrap is to review the completed Grok F00
 The Grok baseline is an independent external-review artifact. It is NOT an established architectural fact and must not be incorporated automatically.
 
 The review must distinguish:
+
 - OBSERVED FACT
 - INFERENCE
 - ASSUMPTION
@@ -50,6 +48,7 @@ C-11.11 — C-11.15 CLOSED.
 ## Preserved research distinctions
 
 Preserve, without promoting them automatically to semantic primitives:
+
 - representation ≠ interpretation context
 - state ≠ consequence
 - candidate effect ≠ effective outcome
@@ -59,6 +58,7 @@ Preserve, without promoting them automatically to semantic primitives:
 ## Constraints
 
 Do not introduce without separate evidence:
+
 - typed UNRESOLVED
 - three-valued logic
 - fixed-point semantics
@@ -85,6 +85,7 @@ No implementation authorization is granted by this research chapter.
 Qwen and Grok are independent external reviewers under a common reviewer contract.
 
 The ongoing comparison objective is to identify substantive differences in:
+
 - reconstruction
 - assumptions
 - distinctions
@@ -121,18 +122,20 @@ The following research steps are now complete:
 9. Semantic Source & Authority Audit:
    docs/architecture/semantic-source-authority-audit-C015.md
 10. Intentional Acceptance Audit:
-   docs/architecture/intentional-acceptance-audit-C015.md
+    docs/architecture/intentional-acceptance-audit-C015.md
 
 ## C-14 result
 
 C-14 behavioral execution was **not performed** because the current repository does not contain sufficiently explicit OVERRIDE semantics from which to instantiate a non-circular test.
 
 The repository does establish:
+
 - authority ≠ precedence;
 - precedence can affect effective outcome without changing authority standing or the losing candidate effect;
 - temporary OVERRIDE is an unresolved semantic branch.
 
 It does not establish whether OVERRIDE changes:
+
 - authority;
 - precedence;
 - applicability;
@@ -149,7 +152,7 @@ The C-14 protocol remains available for execution if authoritative project evide
 
 C-13 remains the strongest positive discrimination:
 
-~~~text
+```text
 dependency on B
     ≠
 dependency on B's authority standing
@@ -157,15 +160,15 @@ dependency on B's authority standing
 dependency on B's candidate effect
     ≠
 dependency on B's effective outcome
-~~~
+```
 
 C-14 adds an evidence-boundary result:
 
-~~~text
+```text
 authority ≠ precedence
         │
         └── OVERRIDE semantics = unresolved / evidence-insufficient
-~~~
+```
 
 This is a research result, not an Architecture Decision.
 
@@ -174,6 +177,7 @@ This is a research result, not an Architecture Decision.
 The audit found that the project already distinguishes source roles and, more importantly, explicitly separates evidence/research from project specification.
 
 Established by the inspected rules and architecture:
+
 - References are evidence/source material and do not automatically acquire authority over project rules.
 - TRACE is not an authority source.
 - Memory is not automatically an instruction.
@@ -185,7 +189,7 @@ The audit also found substantial historical OVERRIDE reasoning in the superseded
 
 The resulting working boundary is:
 
-~~~text
+```text
 source / observation / reference
             ↓
           evidence
@@ -195,7 +199,7 @@ source / observation / reference
   intentional project acceptance
             ↓
      project semantics
-~~~
+```
 
 No total source hierarchy was established, and no claim/provenance ontology was introduced.
 
@@ -206,6 +210,7 @@ The C-14 evidence boundary is therefore preserved and refined: historical OVERRI
 The audit inspected the existing rules, architecture, handoff lifecycle, and historical 03D/03E practice to determine whether intentional acceptance already has a project-level mechanism.
 
 Established:
+
 - intentional acceptance is explicitly required before promotion of a finding to specification;
 - human/project decision authority is explicitly retained;
 - historical 03D/03E handoffs demonstrate accepted working semantics in practice;
@@ -217,7 +222,7 @@ Established:
 
 The resulting working model is:
 
-~~~text
+```text
 research / finding
         ↓
 human/project acceptance
@@ -227,7 +232,7 @@ accepted working direction / invariant
 continued testing and refinement
         ↓
 stable specification / architecture decision
-~~~
+```
 
 with migration acting as a preservation path rather than the acceptance act itself.
 
@@ -246,6 +251,7 @@ The Intentional Acceptance Audit is CLOSED:
 docs/architecture/intentional-acceptance-audit-C015.md
 
 Before selecting a new C-series experiment or introducing any new acceptance mechanism, inspect whether existing project practice already provides a sufficient convention for recognizing:
+
 - accepted working invariants;
 - formal architecture decisions;
 - specifications;
@@ -263,6 +269,7 @@ Human remains the final architecture decision-maker.
 The receiving chapter MUST read the following before selecting new substantive research:
 
 ### Bootstrap / lifecycle
+
 - `.ai/skills/conversation-handoff/BOOTSTRAP.md`
 - `.ai/rules/conversation-lifecycle.md`
 - `.ai/rules/handoff-references.md`
@@ -270,21 +277,25 @@ The receiving chapter MUST read the following before selecting new substantive r
 - `.ai/rules/project-architecture.md`
 
 ### Core architecture / semantic baseline
+
 - `docs/PROJECT-INSTRUCTIONS.md`
 - `docs/architecture/ai-project-instruction-architecture.md`
 - `docs/architecture/semantic-source-authority-audit-C015.md`
 - `docs/architecture/intentional-acceptance-audit-C015.md`
 
 ### Dependency / result boundary
+
 - `docs/architecture/prerequisite-dependency-semantics.md`
 - `docs/architecture/c-13-authority-vs-effective-outcome-C015.md`
 
 ### Architectural leverage / bottleneck lineage
+
 - `docs/architecture/architectural-bottleneck-audit-C015.md`
 - `docs/architecture/architectural-bottleneck-cross-audit-C015.md`
 - `docs/architecture/post-c-13-architectural-leverage-audit-C015.md`
 
 ### OVERRIDE evidence boundary
+
 - `docs/architecture/c-14-override-semantic-dimension-C015.md`
 - `.ai/handoffs/03D-Architecture-Research.md` — historical accepted OVERRIDE/authority/precedence working semantics; historical evidence only, not automatically current canonical specification.
 - `.ai/handoffs/03E-Architecture-Research.md` — inherited accepted working semantics and the transition into dependency research.

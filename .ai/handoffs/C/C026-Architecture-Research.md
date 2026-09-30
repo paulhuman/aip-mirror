@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 025
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Continue Iteration 2 from the current repository state, then close C026 cleanly and delegate the next bounded architecture task to C027: the presentation/scalability analysis of .ai/INDEX.md.

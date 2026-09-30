@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 002
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Continue the project-wide AI-instruction architecture research from C002. The current focus is the **OVERRIDE Architecture Decision Pass**, now concentrated on authorization boundaries, precedence semantics, and the boundary between eligibility, candidate semantics, and effective outcome. Structural refactoring remains deferred until the relevant semantics are sufficiently stable.

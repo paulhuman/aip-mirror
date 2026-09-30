@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 027
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Complete the bounded normative-language consistency work identified after the C027 entry-layer architecture work, establish the project's normative-language rule, normalize active normative/procedural wording without changing semantic ownership, and leave the repository ready for the next Architecture & Research chapter.

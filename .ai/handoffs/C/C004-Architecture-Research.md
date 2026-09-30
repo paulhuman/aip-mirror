@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 003
 
-**Status:**
-HANDED_OFF
-
 ## Supersession
 
 This handoff was superseded when the successor chapter `C005` reached `READY_FOR_HANDOFF` and was handed off to `C006`.

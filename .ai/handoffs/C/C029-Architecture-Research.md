@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 028
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Continue Architecture & Research from the verified C028 repository state.

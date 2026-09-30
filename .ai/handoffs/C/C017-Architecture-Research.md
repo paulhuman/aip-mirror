@@ -12,8 +12,6 @@ C
 **Previous chapter:**
 016
 
-**Status:**
-HANDED_OFF
 ## Current objective
 
 Continue specialization C architecture research from the completed C016 handoff, preserving the distinction between semantic acceptance and handoff lifecycle.
@@ -238,14 +236,14 @@ Therefore no separate repository-level specification acceptance mechanism was ob
 
 A later chapter can distinguish at least these cases from repository text alone when the author has used the established conventions:
 
-| Repository wording/state | Observable semantic status |
-| --- | --- |
-| research / hypothesis / open question | not accepted |
-| validation evidence / counterexample result | evidence, not acceptance by itself |
-| explicit `accepted working direction/invariant` | intentionally accepted, still provisional |
-| explicit `AD-*` / established architecture decision | formalized architecture decision |
-| `Inherited accepted decisions / invariants` | accepted status preserved through migration |
-| `HANDED_OFF` alone | lifecycle state only; no semantic promotion |
+| Repository wording/state                            | Observable semantic status                  |
+| --------------------------------------------------- | ------------------------------------------- |
+| research / hypothesis / open question               | not accepted                                |
+| validation evidence / counterexample result         | evidence, not acceptance by itself          |
+| explicit `accepted working direction/invariant`     | intentionally accepted, still provisional   |
+| explicit `AD-*` / established architecture decision | formalized architecture decision            |
+| `Inherited accepted decisions / invariants`         | accepted status preserved through migration |
+| `HANDED_OFF` alone                                  | lifecycle state only; no semantic promotion |
 
 What remains **not mechanically encoded** is the identity of the particular human decision event itself, beyond the explicit durable statement that the project has accepted the proposition.
 
@@ -272,6 +270,7 @@ The remaining gap is not "there is no acceptance mechanism". The gap is:
 > The repository convention is semantic and documentary rather than mechanically typed: a later chapter must recognize explicit status-bearing wording and distinguish it from ordinary discussion, without relying on conversational memory.
 
 This is an **observed repository limitation**, not yet a justification for introducing a new semantic entity.
+
 ## Meta-layer boundary — current working direction
 
 A separate architectural boundary has now been identified between the project/domain architecture and the project-independent system used to reason about and evolve project architecture.

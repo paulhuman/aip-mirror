@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 026
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Complete the final entry-layer consistency verification after implementing the `.ai/AGENTS.md` contract and the separate cleanup work.
@@ -160,7 +157,6 @@ The durable architectural question is:
 
 > What is the minimum semantic information an INDEX router needs to discover and safely activate the canonical capability while remaining only a router and never becoming a shadow owner?
 
-
 ## C027 analysis result — INDEX presentation and metadata boundary
 
 ### Current presentation inventory
@@ -248,7 +244,6 @@ Scope verification shows the INDEX commit changed only \`.ai/INDEX.md\`.
 - Whether the exact command syntax/IDs should ever be frozen remains intentionally deferred.
 - Whether future capabilities outside the current handoff domain need additional discovery grouping remains open.
 - Future MEC / P-01 / P-02 / P-03 analysis is outside the completed C027 scope and is a likely next architecture question.
-
 
 ## C027 bounded follow-up
 

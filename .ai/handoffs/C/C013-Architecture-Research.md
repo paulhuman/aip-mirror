@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 012
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Close the C013 research line and hand off the verified C-11.10 result to C014.

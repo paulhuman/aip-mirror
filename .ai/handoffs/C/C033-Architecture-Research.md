@@ -12,7 +12,6 @@ C
 **Previous chapter:**
 032
 
-
 ## Starting objective
 
 Continue the bounded Architecture & Research work from C032 after an emergency conversation transition caused by loss of the previous chat context.

@@ -12,9 +12,6 @@ F
 **Previous chapter:**
 N/A
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Complete independent external review of the current architecture research frontier (MEC, applicability, dynamic context activation) and hand off a coherent state for F001.

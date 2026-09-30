@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 005
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Continue the project-wide AI-instruction architecture research from C005. The immediate semantic focus is **UNRESOLVED propagation semantics**: whether distinct appearances or causes of `UNRESOLVED` require typed semantic subtypes, or can be represented by one semantic state plus orthogonal metadata.

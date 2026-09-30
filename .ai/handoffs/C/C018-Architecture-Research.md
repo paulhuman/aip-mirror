@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 017
 
-**Status:**
-HANDED_OFF
-
 ## Chapter identity
 
 - **Chapter:** C018
@@ -229,16 +226,19 @@ Cases A/B/C compared:
 The test established a useful separation:
 
 ### Capability discovery
+
 **Question:** What capabilities are available, and where can their execution knowledge be found?
 
 A compact capability surface can potentially answer this without becoming a router or semantic interpreter.
 
 ### Applicability determination
+
 **Question:** What applies now, and which execution path is active?
 
 This depends on a small applicability surface plus current project state. Conditional execution knowledge can remain dormant until its applicability condition is met.
 
 ### Execution
+
 **Question:** How is the action performed correctly?
 
 This still requires the applicable execution knowledge and the fresh project state needed by the action.
@@ -250,23 +250,23 @@ The resulting bounded model is:
         +-----------------------+
         |                       |
         v                       v
-CAPABILITY DISCOVERY      APPLICABILITY
-        |                       |
-compact capability        local applicability
-   surface                    surface
-        |                       |
-        +-----------+-----------+
-                    |
-                    v
-            EXECUTION KNOWLEDGE
-                    |
-                    + CURRENT STATE
-                    |
-                    v
-                   MEC
-                    |
-                    v
-                EXECUTION
+
+CAPABILITY DISCOVERY APPLICABILITY
+| |
+compact capability local applicability
+surface surface
+| |
++-----------+-----------+
+|
+v
+EXECUTION KNOWLEDGE
+| + CURRENT STATE
+|
+v
+MEC
+|
+v
+EXECUTION
 
 The arrows represent knowledge availability/reasoning flow, not a mandatory programmatic pipeline.
 

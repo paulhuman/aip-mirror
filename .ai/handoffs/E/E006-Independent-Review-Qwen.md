@@ -12,9 +12,6 @@ E
 **Previous chapter:**
 005
 
-**Status:**
-DRAFT
-
 ## Current objective
 
 Проведение независимого архитектурного ревью для проекта AIP Mirror через cross-model review process с архитектором (ChatGPT, specialization C).

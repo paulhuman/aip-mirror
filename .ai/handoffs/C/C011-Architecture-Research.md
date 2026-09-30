@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 010
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Complete the bounded semantic dependency research line through C-10 — Dependency Relation vs. Dependency Target, and prepare migration to C012. The next chapter must begin with C-11 — Target Sufficiency Counterexample Test.

@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 022
 
-**Status:**
-HANDED_OFF
-
 ## Starting objective
 
 Continue Iteration 2 from the current repository state after physical restructuring.

@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 011
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Continue the bounded dependency-semantics research line after C-11.2 and conduct C-11.3 — Rule/Relation/Context Discrimination Test.

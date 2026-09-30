@@ -12,9 +12,6 @@ F
 **Previous chapter:**
 001
 
-**Status:**
-DRAFT
-
 ## Current objective
 
 Continue independent external review work from the coherent state handed off by F001. Priority candidates identified by F001: validate/draft minimal AGENTS.md contract (entry-path experiment) or align with current C-series frontier (C027+).
@@ -140,6 +137,7 @@ Bootstrap of F002 complete (DRAFT created, F001 HANDED_OFF, post-bootstrap verif
 ## Immediate next task
 
 Await human direction for substantive review priority:
+
 - validate/draft minimal AGENTS.md contract (entry-path experiment); or
 - align with current C-series frontier (C027+).
 

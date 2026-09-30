@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 024
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Continue Iteration 2 of the AI-infrastructure restructuring by completing the semantic-ownership work around the repository entry layer.

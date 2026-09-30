@@ -55,8 +55,8 @@ creates substantial bookkeeping overhead and Git-history noise without preservin
 - Handoff commits are AI-infrastructure bookkeeping and should be visually distinguishable from project documentation commits.
 - The desired normal handoff commit vocabulary is intentionally short:
 
-    ai-docs(handoff): create C033
-    ai-docs(handoff): update C033
+  ai-docs(handoff): create C033
+  ai-docs(handoff): update C033
 
 - Normal handoff commit messages MUST NOT append conversation titles, task descriptions, rationale, milestone summaries, or other explanatory suffixes.
 

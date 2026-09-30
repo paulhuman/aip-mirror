@@ -12,7 +12,6 @@ C
 **Previous chapter:**
 030
 
-
 ## Current objective
 
 Continue Architecture & Research from the verified C030 repository state.
@@ -105,7 +104,6 @@ Do not implement a new activation component until this comparison establishes th
 - `.ai/architecture/ai-infrastructure-restructuring.md`
 - `.ai/handoffs/C/C030-Architecture-Research.md`
 - `docs/PROJECT-INSTRUCTIONS.md`
-
 
 ## C031 completion
 

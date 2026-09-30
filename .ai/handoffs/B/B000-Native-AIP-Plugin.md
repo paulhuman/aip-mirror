@@ -12,9 +12,6 @@ B
 **Previous chapter:**
 N/A
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Establish the durable handoff state for chapter B000 and migrate the Native AIP Plugin work cleanly to chapter B001.

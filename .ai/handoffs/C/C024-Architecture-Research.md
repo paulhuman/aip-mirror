@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 023
 
-**Status:**
-HANDED_OFF
-
 ## Starting objective
 
 Continue Iteration 2 from the current repository state after the first repository-wide consistency sweep.
@@ -54,6 +51,7 @@ After every MOVE, RENAME, DECOMPOSE, or canonical-owner change:
 The C023 repair frontier has been worked through in C024.
 
 Completed:
+
 - genericized the active repository, workflow, commit, deep-understanding, and handoff infrastructure where project-specific leakage was confirmed;
 - separated project repository identity/configuration into `.ai/config.yaml`;
 - preserved repository path-resolution and safety mechanics in `.ai/rules/repository.md`;
@@ -86,12 +84,12 @@ Resolve this deliberately before editing `.ai/rules/repository.md`.
 6. Run a second repository-wide consistency sweep.
 7. Only after the repaired repository is internally coherent, review `AGENTS.md` and `.ai/INDEX.md` entry surfaces.
 
-
 ## External repository reference recovery — completed
 
 The external repository references recovered from the 03 handoff lineage have been recorded in `.ai/config.yaml` under `references.repositories`, with their documented roles.
 
 Recovered research/reference repositories include:
+
 - `paulhuman/adobe-illustrator-2026-sdk`
 - `paulhuman/spectrum-web-components`
 - `paulhuman/codex`

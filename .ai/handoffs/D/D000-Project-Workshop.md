@@ -12,9 +12,6 @@ D
 **Previous chapter:**
 N/A
 
-**Status:**
-DRAFT
-
 ## Current objective
 
 Establish D000 as the practical Project Workshop for AIP Mirror and maintain a synchronized working context for developer tooling, repository mechanics, Codex, IDE/toolchain work, and related practical development questions.

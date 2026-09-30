@@ -12,7 +12,6 @@ C
 **Previous chapter:**
 031
 
-
 ## Starting objective
 
 Continue the bounded architecture work on ACTIVATE after C031 established and implemented the smallest reusable activation capability. Determine where that capability can be integrated into one real existing operation with the smallest useful change, without duplicating routing, lifecycle, repository, commit, or project semantics.

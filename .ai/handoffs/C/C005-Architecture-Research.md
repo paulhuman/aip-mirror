@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 004
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Continue the project-wide AI-instruction architecture research from 03E. The current semantic focus is the boundary between **prerequisites**, **dependencies**, **candidate eligibility**, **candidate effects**, **candidate-level precedence**, and especially the propagation semantics of `UNRESOLVED`.

@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 019
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Continue Iteration 2 of the practical AI project-instruction infrastructure.
@@ -34,6 +31,7 @@ The .ai directory should be reusable when the repository is adapted to another p
 Project-specific material must not be embedded in supposedly generic .ai files.
 
 When .ai is migrated to another project:
+
 - reusable infrastructure remains;
 - current project handoffs can be removed/cleared;
 - archive can be cleared or selectively retained;
@@ -44,6 +42,7 @@ This explains why several current .ai files are now recognized as misclassified:
 ### docs is project knowledge
 
 docs/ contains AIP Mirror-specific:
+
 - architecture;
 - implementation/design;
 - Illustrator/FreeHand research;
@@ -201,6 +200,7 @@ For C020:
     C020_document-name.md
 
 Reason:
+
 - chapter identity is immediately visible;
 - files sort naturally by chapter;
 - provenance is visible without a suffix;
@@ -274,6 +274,7 @@ For every relevant existing document, classify:
     ARCHIVE
 
 Record:
+
 - current path;
 - primary subject;
 - type;
@@ -304,6 +305,7 @@ Then:
 ## Open questions
 
 Do not silently resolve:
+
 - exact .ai/architecture taxonomy;
 - exact architecture filenames;
 - exact rules/skills/workflows taxonomy;

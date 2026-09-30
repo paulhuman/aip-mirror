@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 013
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Continue the bounded dependency-semantics research line after the completed C-12 cycle-semantics discrimination arc.

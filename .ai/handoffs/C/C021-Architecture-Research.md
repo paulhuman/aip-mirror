@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 020
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Continue Iteration 2 of the practical AI project-instruction infrastructure.
@@ -28,6 +25,7 @@ The central working boundary is:
 ## Completed
 
 Bootstrap source context has been read from the canonical repository on `main`, including:
+
 - `.ai/skills/conversation-handoff/BOOTSTRAP.md`
 - `.ai/skills/conversation-handoff/SKILL.md`
 - applicable lifecycle, workflow, repository, and handoff-reference rules
@@ -74,6 +72,7 @@ The current repository still contains the historical/incremental organization. T
 ## Open questions
 
 Do not silently resolve:
+
 - exact `.ai/architecture/` taxonomy;
 - exact architecture filenames;
 - exact `.ai/rules/`, `.ai/skills/`, and `.ai/workflows/` taxonomy;
@@ -88,13 +87,16 @@ Do not silently resolve:
 ## Current files
 
 Primary durable research context:
+
 - `.ai/architecture/C020_ai-infrastructure-restructuring.md`
 
 Current migration handoff:
+
 - `.ai/handoffs/C020-Architecture-Research.md`
 - `.ai/handoffs/C021-Architecture-Research.md`
 
 High-priority inventory sources:
+
 - `.ai/rules/`
 - `.ai/skills/`
 - `docs/PROJECT-INSTRUCTIONS.md`

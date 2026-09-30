@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 029
 
-**Status:**
-HANDED_OFF
-
 ## Current objective
 
 Continue Architecture & Research from the verified C029 repository state.
@@ -152,6 +149,7 @@ The next bounded test must check whether the three primitives are sufficient to 
 5. mandatory canonical-owner reread before repository mutation.
 
 For each case, distinguish:
+
 - what context is supplied by the user/bootstrap;
 - what must be discovered from the repository;
 - what must actually be reread/activated;

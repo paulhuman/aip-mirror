@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 009
 
-**Status:**
-HANDED_OFF
-
 ## Migration checkpoint
 
 This chapter is being finalized for migration to:

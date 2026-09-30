@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 001
 
-**Status:**
-HANDED_OFF
-
 ## Starting objective
 
 Continue the project-wide AI-instruction architecture work from C001. The immediate task was the dedicated **OVERRIDE Architecture Decision Pass**, followed by formalization of precedence/override, applicability/activation, and TRACE semantics. Structural refactoring was explicitly deferred until these semantics became sufficiently stable.

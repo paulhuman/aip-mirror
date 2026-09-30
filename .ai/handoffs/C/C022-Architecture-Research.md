@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 021
 
-**Status:**
-HANDED_OFF
-
 ## Bootstrap state
 
 C022 was received from the canonical repository state and continued the Iteration 2 restructuring.
@@ -22,6 +19,7 @@ C022 was received from the canonical repository state and continued the Iteratio
 The repository has now moved beyond the original pre-physical-restructuring plan.
 
 Important current sources:
+
 - docs/PROJECT-INSTRUCTIONS.md
 - .ai/config.yaml
 - .ai/architecture/ai-infrastructure-restructuring.md
@@ -85,6 +83,7 @@ This remains the central Iteration 2 boundary.
 A workstream is a project work area represented by one or more separate AI conversations.
 
 It is NOT:
+
 - an autonomous agent;
 - a service;
 - a process that can communicate with another workstream directly.
@@ -157,6 +156,7 @@ Architecture filenames were simplified by removing historical chapter suffixes/p
 .ai/rules/workflow.md was reduced to generic AI workflow principles.
 
 Commit policy now has canonical owners:
+
 - .ai/rules/commits.md
 - .ai/skills/commits/SKILL.md
 
@@ -165,6 +165,7 @@ Do not recreate detailed commit policy inside workflow.md.
 ### repository
 
 .ai/rules/repository.md is the canonical owner for:
+
 - repository identity;
 - external repository boundaries;
 - repository path resolution;
@@ -197,6 +198,7 @@ Canonical write sequence:
 docs/PROJECT-INSTRUCTIONS.md is now a thin AIP Mirror project-specific instruction layer.
 
 It retains:
+
 - project orientation;
 - project operating model;
 - native implementation target;
@@ -253,6 +255,7 @@ Required procedure:
         VERIFY RESULT
 
 Minimum search targets:
+
 - old paths;
 - old filenames;
 - old canonical-owner references;
@@ -340,6 +343,7 @@ Before the next physical change:
 ## Remaining open questions
 
 Do not silently resolve:
+
 - exact .ai/INDEX.md contents;
 - exact AGENTS.md contents;
 - whether a distinct ENTRY.md is ever justified;
@@ -387,6 +391,7 @@ The receiving chapter should be:
 C023 — Architecture & Research
 
 The receiving bootstrap should:
+
 - read this handoff from .ai/handoffs/C/;
 - read the updated three architecture files;
 - read the current repository rules/lifecycle/workflow as needed;
@@ -412,10 +417,10 @@ The receiving bootstrap should:
 ## Verification expectation
 
 Before considering the migration complete, verify:
+
 - C022 status is READY_FOR_HANDOFF;
 - the updated architecture files are present at their current .ai/ paths;
 - the stale lifecycle path-resolution dependency has been removed;
 - the new repository path-resolution ownership is present;
 - the consistency procedure is preserved in the architecture record;
 - changed-file scope contains only the intended migration-context updates.
-

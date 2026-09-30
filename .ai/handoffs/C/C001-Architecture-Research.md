@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 000
 
-**Status:**
-HANDED_OFF
-
 ## Handoff destination
 
 AIP Mirror — C002 — Architecture & Research
