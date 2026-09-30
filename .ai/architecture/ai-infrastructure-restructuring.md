@@ -341,13 +341,13 @@ repository initialization
     ↓
 capability detection
     ↓
-shared bootstrap steps
+ACTIVATE required canonical owners
     ↓
-write/read-only branch
+shared initialization steps
     ↓
-receiving handoff initialization
+first-chapter or receiving-chapter branch
     ↓
-lifecycle handling
+lifecycle handling when applicable
     ↓
 post-bootstrap consistency verification
 ```
@@ -575,12 +575,9 @@ Current entry-layer model:
 
 ```text
 AGENTS
-  ↓
-INDEX COMMAND SURFACE
-  ↓
-CANONICAL CAPABILITY / OWNER
-  ↓
-EXECUTION
+  ├─ new conversation → BOOTSTRAP → ACTIVATE → chapter initialization
+  │
+  └─ ordinary operation → INDEX → ACTIVATE → canonical owner → execution
 ```
 
 ## 16. Independent architecture review checkpoint
