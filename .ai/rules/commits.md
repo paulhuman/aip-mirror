@@ -4,7 +4,7 @@ These rules define the project's general policy for creating and verifying Git c
 
 ## 1. Authorization
 
-AI-assisted development changes should not be committed automatically unless:
+AI-assisted development changes SHOULD NOT be committed automatically unless:
 
 - the user explicitly requests the commit; or
 - the change is an explicit part of an established automated workflow.
