@@ -90,7 +90,7 @@ ACTIVATE implementation
              (tested and intentionally rejected)
 ```
 
-The stale architecture note is documentation drift, not a new semantic contradiction between the current canonical owners.
+The stale architecture note was documentation drift, not a new semantic contradiction between the current canonical owners. C033 resolved it by establishing the reusable chat-initialization boundary below.
 
 ## Previous chapter
 
@@ -139,12 +139,31 @@ C032 is the verified source of the completed ACTIVATE integration work and is th
 - A targeted consistency sweep should confirm that no other current documentation contradicts the validated ACTIVATE integration state.
 - After that sweep, identify the next concrete architecture question only from current repository evidence.
 
+## Result of current bounded question
+
+C033 tested the question:
+
+> Does a new reusable chat-initialization procedure need to exist, and can the existing BOOTSTRAP workflow own it without becoming a universal entry router?
+
+Result: **yes, and BOOTSTRAP can own it without introducing `ENTRY.md`.**
+
+The repository now treats `.ai/workflows/handoff/BOOTSTRAP.md` as the reusable new-conversation chapter-initialization workflow. It covers both receiving chapters and first chapters with `PREVIOUS_CHAPTER = N/A`. BOOTSTRAP explicitly invokes ACTIVATE after repository identity/path resolution and uses ACTIVATE to establish the canonical operational context required for initialization. BOOTSTRAP remains an ordered workflow and does not become a general command router, registry, or universal entry layer.
+
+Implemented and verified changes:
+
+- `12560a16e4791298b75423cbe41c2c31bc8b4b4e` — extended BOOTSTRAP to own reusable chat initialization and first-chapter input.
+- `24d159ca990bfb112cb688cd8fb8c560ccb6d6d3` — documented the new entry-layer boundary and replaced the stale ACTIVATE integration statement in the durable architecture note.
+- `3a1b9da9b9bdea3425a63bcd07ded365626f80df` — aligned the handoff skill's generated bootstrap input with `PREVIOUS_CHAPTER = N/A` for first chapters.
+- `8f2c83b3457303e148341c072e881eb0f380fc17` — reconciled the durable BOOTSTRAP architecture description and current entry-layer model.
+- `b15180ec75b4dab41628a4f5c950374d6afbdcca` — exposed BOOTSTRAP as the canonical new-chat initialization workflow from AGENTS.
+
+A targeted consistency sweep across AGENTS, INDEX, ACTIVATE, handoff skill, BOOTSTRAP, lifecycle, and the durable architecture note found no remaining current contradiction in the new boundary. Historical C030/C031 notes retain their original historical results and are not treated as current architecture statements.
+
+The earlier empty commit `dda218bcd9604b8506154dafda42dc3ab4f7428a` changed no files; it is retained as repository history and is not treated as evidence of a content change.
+
 ## Immediate next task
 
-1. Make the minimal correction to the stale ACTIVATE integration statement in `.ai/architecture/ai-infrastructure-restructuring.md`.
-2. Read back the corrected file and inspect the diff/scope.
-3. Run a targeted consistency sweep across the current ACTIVATE-related canonical owners and durable architecture note.
-4. If no contradiction remains, record that ACTIVATE is closed as a bounded investigation and move to the next concrete architecture question rather than creating more ACTIVATE experiments.
+ACTIVATE and chat initialization are now bounded enough to close this investigation. The next task is to identify the next concrete architecture question from current repository evidence; do not create another ACTIVATE experiment or introduce `ENTRY.md` without a new bounded need.
 
 ## Things not to redo
 
