@@ -598,7 +598,6 @@ The reviews also produced actionable questions and findings recorded below.
 ## 17.8 Normative-language architecture and verification — C028/C029
 
 C028 established a dedicated normative-language rule and completed a bounded consistency cleanup across the active AI infrastructure and project documentation.
-
 The canonical rule is:
 
     .ai/rules/normative-language.md
@@ -1198,7 +1197,6 @@ The Phase 2 experiment exposed two stale references in `docs/PROJECT-INSTRUCTION
 These are consistency defects in the project instruction layer, not evidence that the AGENTS architecture should grow. They are therefore a separate cleanup task.
 
 The lifecycle rule also contains user-facing command phrases that overlap with INDEX discovery. The bounded cleanup question is whether those discovery phrases can be reduced while preserving the lifecycle rule's operation semantics and explicit authorization. This is a cleanup/classification task, not an INDEX redesign.
-
 ### 25.5 C027 bounded next sequence
 
 1. implement the tested AGENTS contract;
@@ -1529,3 +1527,225 @@ The real C032 → C033 example is now represented canonically as:
     SPECIALIZATION = C
 
 This closes the bounded normalization question without changing lifecycle state-machine semantics.
+
+## 27. C034 — Handoff model simplification
+
+C034 established a deliberate reduction of handoff cognitive and Git-history overhead.
+
+The previous handoff architecture treated each handoff as a lifecycle-controlled object with three persistent states:
+
+    DRAFT
+      ↓
+    READY_FOR_HANDOFF
+      ↓
+    HANDED_OFF
+
+This model is now rejected as unnecessary infrastructure.
+
+### 27.1 Handoff is a persistent context snapshot
+
+A handoff is now defined as:
+
+> **a persistent conversation-context snapshot for a chapter**
+
+It is not a lifecycle-controlled transfer object.
+
+The repository already provides the durable chronology needed to identify chapter progression:
+
+- the handoff filename identifies specialization and chapter;
+- the Conversation, Specialization, Chapter, and Previous chapter fields identify the chapter context;
+- Git history records when the file was created and updated;
+- the receiving chapter explicitly reads the predecessor handoff during initialization.
+
+No additional Status field is required to represent whether a handoff is "draft", "ready", or "handed off".
+
+The handoff schema therefore MUST NOT contain a lifecycle status field or any replacement state such as DRAFT, READY_FOR_HANDOFF, HANDED_OFF, or SUPERSEDED.
+
+SUPERSEDED was already rejected as an active lifecycle state; this decision removes the remaining lifecycle-state model entirely.
+
+### 27.2 Receiving-chapter creation is retained
+
+The removal of lifecycle status does NOT remove the most useful bootstrap invariant:
+
+> **The receiving chapter creates its own handoff at the beginning of the new conversation.**
+
+The initialization model remains:
+
+    new conversation
+        ↓
+    establish repository + chapter context
+        ↓
+    read predecessor handoff when applicable
+        ↓
+    create current chapter handoff
+        ↓
+    commit initial handoff
+        ↓
+    substantive work
+
+For a first chapter of a specialization, the predecessor remains N/A.
+
+The receiving chapter owns its own handoff because that file is a snapshot of the receiving conversation's working context. The previous chapter MUST NOT create the receiving chapter's handoff in advance.
+
+### 27.3 No closing transition is required
+
+There is no longer a "closing" handoff state transition.
+
+A current chapter MAY update its handoff whenever meaningful durable context accumulates. An update is a normal handoff-content operation, not a lifecycle transition.
+
+In particular, the current chapter does not need to perform a special DRAFT → READY_FOR_HANDOFF operation before a new conversation can start.
+
+This is intentional. Conversation termination is not a reliable event: a chat can hit a context limit, browser/session instability, or another interruption before the AI has an opportunity to perform a final housekeeping step. The handoff must remain useful even when the previous conversation ends abruptly.
+
+Therefore:
+
+> **Handoff freshness is maintained by meaningful updates, not by a required closing ceremony.**
+
+### 27.4 No receiving transition is required
+
+The receiving chapter also MUST NOT modify the predecessor handoff merely to mark that it has been consumed.
+
+There is no READY_FOR_HANDOFF → HANDED_OFF operation.
+
+Reading the predecessor handoff is sufficient. The fact that a new chapter has been initialized is represented by the existence of the new chapter's own handoff and by repository/Git history.
+
+This removes an entire class of unnecessary mutations and commits.
+
+### 27.5 Consequences for bootstrap
+
+BOOTSTRAP remains the canonical new-conversation chapter initialization workflow.
+
+Its relevant handoff behavior becomes:
+
+1. establish repository and chapter context;
+2. ACTIVATE required canonical owners;
+3. read the predecessor handoff when PREVIOUS_CHAPTER is not N/A;
+4. create the receiving chapter's own handoff;
+5. commit the initial handoff;
+6. verify the new handoff;
+7. begin substantive work.
+
+BOOTSTRAP MUST NOT contain lifecycle-state transitions for handoffs because there are no such states.
+
+The existing BOOTSTRAP/runtime-input normalization remains valid:
+
+    PREVIOUS_CHAPTER = <three-digit previous chapter number or N/A>
+    CURRENT_CHAPTER = <three-digit current chapter number>
+    SPECIALIZATION = <single uppercase specialization letter>
+
+This decision changes handoff state semantics, not chapter identity or bootstrap invocation semantics.
+
+### 27.6 Consequences for handoff skill and INDEX
+
+.ai/skills/handoff/SKILL.md remains the canonical owner of handoff structure and handoff operations, but its operation set becomes smaller.
+
+The current checkpoint, migration, recovery, and lifecycle correction machinery MUST be re-evaluated during the implementation phase because much of it exists solely to maintain the removed state machine.
+
+.ai/INDEX.md MUST likewise be simplified so that it does not route obsolete lifecycle-state operations.
+
+This architecture decision does not itself perform that migration. The next implementation pass MUST update the canonical owners and then run a repository-wide semantic consistency sweep for stale lifecycle terminology and procedures.
+
+### 27.7 Handoff commit vocabulary
+
+Handoff commits are infrastructure byproducts and MUST be visually distinguishable from project documentation commits.
+
+The canonical short handoff commit forms are:
+
+    ai-docs(handoff): create C033
+    ai-docs(handoff): update C033
+
+The message MUST remain this short for normal handoff creation/update commits.
+
+Do NOT append conversation titles, task descriptions, rationale, milestone summaries, or other explanatory text to normal handoff commit messages.
+
+Examples:
+
+    ai-docs(handoff): create C034
+    ai-docs(handoff): update C034
+
+The ai-docs(handoff) scope identifies .ai/handoffs/ infrastructure. It prevents ordinary docs(...) history from mixing project documentation work with AI-context bookkeeping.
+
+The broader ai-* namespace is a local repository convention for commits whose primary subject is .ai/ infrastructure. It is intentionally not presented as a replacement for Conventional Commits. Its purpose is semantic visibility in this project's history.
+
+Project documentation remains under the normal project-facing vocabulary, for example:
+
+    docs(plugin): document native AIP architecture
+    docs(prototype): document Mirror behavior
+
+The exact set of future ai-* types beyond ai-docs remains open unless a concrete need establishes them. The handoff create/update forms above are the currently fixed convention.
+
+### 27.8 Git-history objective
+
+This simplification is explicitly motivated by repository-history quality.
+
+The previous model generated multiple commits whose sole purpose was changing handoff lifecycle metadata. Those commits added little durable project information while increasing:
+
+- Git history noise;
+- cognitive load during repository archaeology;
+- opportunities for state-transition mistakes;
+- bootstrap failure modes;
+- pressure to perform end-of-chat housekeeping;
+- the amount of AI infrastructure that must be remembered and activated.
+
+The target history is instead:
+
+    ai-docs(handoff): create C034
+    ai-docs(handoff): update C034
+    ai-docs(architecture): ...
+    docs(plugin): ...
+    feat(plugin): ...
+    fix(plugin): ...
+
+The distinction makes .ai infrastructure visible without pretending that handoff bookkeeping is project documentation.
+
+### 27.9 Migration boundary
+
+This is an architectural decision, not yet the full migration.
+
+The following existing files are expected to require coordinated changes:
+
+- .ai/rules/handoff/lifecycle.md
+- .ai/skills/handoff/SKILL.md
+- .ai/workflows/handoff/BOOTSTRAP.md
+- .ai/INDEX.md
+- existing .ai/handoffs/*/*.md
+
+The migration MUST:
+
+1. remove Status from active handoff files;
+2. remove obsolete lifecycle-state procedures and commands;
+3. preserve receiving-chapter handoff creation;
+4. preserve chapter identity and bootstrap runtime-input normalization;
+5. preserve meaningful handoff content and historical context;
+6. normalize handoff commit messages to the short ai-docs(handoff): create/update <chapter> convention;
+7. run a semantic consistency sweep for stale DRAFT, READY_FOR_HANDOFF, HANDED_OFF, recovery, correction, and related lifecycle terminology;
+8. verify that no new state-machine mechanism has been introduced as a replacement.
+
+Historical Git commits MUST NOT be rewritten. The simplification changes the active model from this point forward; old lifecycle commits remain historical evidence of the former architecture.
+
+### 27.10 Architectural intent
+
+The purpose is not merely to delete three strings.
+
+The intended model is:
+
+    Conversation chapter
+            │
+            │ produces / updates
+            ▼
+    Handoff context snapshot
+            │
+            │ consumed by
+            ▼
+    Next conversation
+
+rather than:
+
+    Handoff
+      ├── DRAFT
+      ├── READY_FOR_HANDOFF
+      └── HANDED_OFF
+
+The architecture is therefore optimized for the actual environment in which it operates: finite AI conversations whose termination can be abrupt, with Git serving as durable project memory.
+
+The system should preserve useful context, not create bookkeeping work merely to prove that context was transferred.
