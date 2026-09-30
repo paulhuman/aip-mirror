@@ -13,7 +13,7 @@ C
 028
 
 **Status:**
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
