@@ -8,9 +8,11 @@ A chat is a finite working context. The repository is the durable project record
 
 Use the current Chapter Identifier Format defined canonically by `.ai/rules/handoff/lifecycle.md`.
 
-Handoff filenames use:
+Handoff filenames use the resolved `SHORT_NAME` in filename-safe form:
 
     <chapter>-<short-name>.md
+
+The `<short-name>` filename component is derived from `SHORT_NAME`; it is not a separate conversation-title value.
 
 The README provides naming orientation only; it does not redefine the chapter identifier format or sequence.
 
