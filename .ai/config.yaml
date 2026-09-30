@@ -24,6 +24,20 @@ references:
       repository: paulhuman/agent.md
       role: Fork used as a research reference for agent instruction-file conventions, instruction hierarchy, and durable repository guidance
 
+specializations:
+  A:
+    short_name: JSX Prototype
+  B:
+    short_name: Native AIP Plugin
+  C:
+    short_name: Architecture & Research
+  D:
+    short_name: Project Workshop
+  E:
+    short_name: Independent Review (Qwen)
+  F:
+    short_name: Independent Review (Grok)
+
 terminology:
   commit_scopes:
     - mirror
