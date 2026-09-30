@@ -24,7 +24,7 @@ For non-trivial work, prefer:
         ↓
     document
 
-Not every task requires every stage, but significant architectural or behavioral work should follow this order.
+Not every task requires every stage, but significant architectural or behavioral work SHOULD follow this order.
 
 ## 2. Research before major implementation
 
@@ -49,7 +49,7 @@ Promote a finding to specification only when the project has intentionally accep
 
 ## 4. Prefer small, reviewable changes
 
-Changes should be incremental and understandable.
+Changes SHOULD be incremental and understandable.
 
 For significant features:
 
@@ -67,7 +67,7 @@ For significant features:
 
 When practical, test at the lowest appropriate level.
 
-A pure mathematical transformation should not require launching the host application if it can be tested independently.
+A pure mathematical transformation SHOULD NOT require launching the host application if it can be tested independently.
 
 ## 6. Commits
 
@@ -84,7 +84,7 @@ Do not allow important decisions to exist only in temporary conversation context
 
 Prefer explicit, maintainable solutions over clever systems.
 
-AI instructions should help development rather than become development overhead.
+AI instructions SHOULD help development rather than become development overhead.
 
 ## 9. Repository-wide inspection
 
@@ -117,7 +117,7 @@ For example, an active `.ai/` inspection may be batched as:
     workflows/*
     handoffs/README.md
 
-Large or history-heavy areas such as archived architecture and historical handoffs should be inspected separately unless they are explicitly part of the current question.
+Large or history-heavy areas such as archived architecture and historical handoffs SHOULD be inspected separately unless they are explicitly part of the current question.
 
 When a required directory is too large for one retrieval, split it by its existing semantic subdirectories rather than arbitrarily truncating or sampling files.
 
