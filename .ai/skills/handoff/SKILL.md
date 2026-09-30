@@ -201,9 +201,11 @@ This command does **not** initialize the next chapter, does **not** change lifec
 
 The generated instruction MUST contain the required runtime values for the receiving chapter:
 
-    PREVIOUS_CHAPTER = <previous chapter>
+    PREVIOUS_CHAPTER = <previous chapter or N/A>
     CURRENT_CHAPTER = <current chapter>
     SPECIALIZATION = <specialization>
+
+For the first chapter of a specialization, `PREVIOUS_CHAPTER` MUST be `N/A` and the receiving chapter follows the first-chapter branch of `.ai/workflows/handoff/BOOTSTRAP.md`.
 
 The instruction is for a future receiving conversation. It MUST NOT be presented as evidence that the receiving chapter has already started.
 
