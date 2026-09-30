@@ -8,9 +8,9 @@ The JSX prototype exists to discover, test, and validate behavior.
 
 It is an executable reference implementation.
 
-Do not assume that the JSX architecture should be directly translated into the native plugin architecture.
+DO NOT assume that the JSX architecture should be directly translated into the native plugin architecture.
 
-The native implementation should be designed from the validated behavior and specifications.
+The native implementation SHOULD be designed from the validated behavior and specifications.
 
 ## 2. Native implementation is C++ + Illustrator AIP
 
@@ -20,15 +20,15 @@ The Illustrator SDK is the canonical API reference.
 
 ## 3. Keep core logic independent from Illustrator where practical
 
-Project-owned geometry, reflection, transformation, and behavioral logic should remain as independent from Illustrator-specific SDK types as reasonably possible.
+Project-owned geometry, reflection, transformation, and behavioral logic SHOULD remain as independent from Illustrator-specific SDK types as reasonably possible.
 
 Illustrator-specific integration belongs at the plugin boundary.
 
 ## 4. Geometry is a first-class subsystem
 
-Reflection and transformation mathematics should be treated as project-owned logic.
+Reflection and transformation mathematics SHOULD be treated as project-owned logic.
 
-Geometry code should be deterministic, independently testable, documented, and usable without a running Illustrator instance where practical.
+Geometry code SHOULD be deterministic, independently testable, documented, and usable without a running Illustrator instance where practical.
 
 ## 5. Behavior precedes implementation
 
@@ -42,7 +42,7 @@ When reproducing FreeHand MX or other reference behavior:
         ↓
     implementation
 
-Do not silently turn an observed behavior into an undocumented architectural assumption.
+DO NOT silently turn an observed behavior into an undocumented architectural assumption.
 
 ## 6. Separate research from specification
 
@@ -56,13 +56,13 @@ Keep these concerns distinct.
 
 ## 7. Prefer incremental native implementation
 
-The native plugin should initially prioritize plugin lifecycle, Illustrator integration, interactive mouse handling, mirror-axis interaction, live preview, geometry, path/object handling, undo/cancel behavior, and basic tool functionality.
+The native plugin SHOULD initially prioritize plugin lifecycle, Illustrator integration, interactive mouse handling, mirror-axis interaction, live preview, geometry, path/object handling, undo/cancel behavior, and basic tool functionality.
 
 UI polish and advanced presentation should not unnecessarily block the core interactive engine.
 
 ## 8. Do not introduce web technology without a requirement
 
-CEP, UXP, embedded browser technology, or a custom web/native bridge must not be introduced merely because a web-based UI is available.
+CEP, UXP, embedded browser technology, or a custom web/native bridge MUST NOT be introduced merely because a web-based UI is available.
 
 AIP Mirror can have a native C++/ADM implementation without CEP or UXP.
 
@@ -74,11 +74,11 @@ The project aims to reproduce an interactive mirror workflow rather than merely 
 
 The desired behavior includes an interactively positioned mirror axis, live reflected preview, flexible source-side behavior, and the ability to draw across the mirror axis when appropriate.
 
-Exact behavior must be validated experimentally and documented before being considered final.
+Exact behavior MUST be validated experimentally and documented before being considered final.
 
 ## 10. Avoid premature abstraction
 
-Do not create abstractions solely because they might become useful later.
+DO NOT create abstractions solely because they might become useful later.
 
 Introduce abstractions when a real duplication exists, a boundary is technically meaningful, testing benefits from the abstraction, or the architecture requires it.
 
@@ -98,7 +98,7 @@ Where practical, maintain separate testing levels:
 - mirror behavior tests
 - Illustrator integration tests
 
-Do not require Illustrator to test mathematical operations that can be tested independently.
+DO NOT require Illustrator to test mathematical operations that can be tested independently.
 
 ## 13. Preserve the conversation specialization boundaries
 
@@ -109,14 +109,14 @@ The project uses four complementary specializations:
 - `AIP Mirror — 03 — Architecture & Research`
 - `AIP Mirror — 04 — Project Workshop`
 
-The current Chapter Identifier Format is `[A-Z][0-9]{3}`. The first uppercase letter identifies the specialization and the final three digits identify the chapter number within that specialization. Historical chapter identifiers from the previous scheme are migration history only and must not be used as current identifiers.
+The current Chapter Identifier Format is `[A-Z][0-9]{3}`. The first uppercase letter identifies the specialization and the final three digits identify the chapter number within that specialization. Historical chapter identifiers from the previous scheme are migration history only and MUST NOT be used as current identifiers.
 
 
 
 
 The roles are complementary, not competing.
 
-Architecture decisions that affect multiple areas should be documented in the repository so they are not dependent on conversation history alone.
+Architecture decisions that affect multiple areas SHOULD be documented in the repository so they are not dependent on conversation history alone.
 
 ## 14. Project Workshop is support, not a competing implementation stream
 

@@ -12,7 +12,7 @@ The project uses multiple complementary workstreams. Here, a **workstream** is s
 
 The user coordinates work between conversations and AI services. Cross-workstream communication therefore happens through the user and through durable repository files when the user asks an AI conversation to read or update them.
 
-Workstreams are organizational boundaries, not permanent ownership of all knowledge they produce. Additional workstreams may exist as the project grows. Do not assume that a particular numeric specialization permanently owns a kind of project knowledge.
+Workstreams are organizational boundaries, not permanent ownership of all knowledge they produce. Additional workstreams MAY exist as the project grows. Do not assume that a particular numeric specialization permanently owns a kind of project knowledge.
 
 Each workstream may span multiple conversation chapters. Chapter identifiers use:
 
@@ -38,7 +38,7 @@ The bootstrap procedure is defined by:
 
 `.ai/workflows/handoff/BOOTSTRAP.md`
 
-Do not duplicate those procedures here.
+DO NOT duplicate those procedures here.
 
 ## 3. Project operating model
 
@@ -58,7 +58,7 @@ native design
 C++ / AIP implementation
 ```
 
-The JSX prototype is an executable behavioral reference, not the production architecture. Native implementation should be designed from validated behavior and project specifications rather than by mechanically translating JSX.
+The JSX prototype is an executable behavioral reference, not the production architecture. Native implementation SHOULD be designed from validated behavior and project specifications rather than by mechanically translating JSX.
 
 For substantial unfamiliar work, use the `deep-understanding` skill and record durable findings in the appropriate project documentation.
 
@@ -66,7 +66,7 @@ For substantial unfamiliar work, use the `deep-understanding` skill and record d
 
 The production plugin is native C++ using the Illustrator AIP SDK.
 
-The initial native milestone should prioritize:
+The initial native milestone SHOULD prioritize:
 
 1. Illustrator integration;
 2. interactive mouse handling;
@@ -90,7 +90,7 @@ docs/architecture/project-architecture.md
 
 The project is intended to reproduce an interactive mirror workflow, not merely provide a static reflection command.
 
-Research and validation should establish behavior for:
+Research and validation SHOULD establish behavior for:
 
 - mirror-axis placement and manipulation;
 - source-side behavior;
@@ -103,22 +103,22 @@ Research and validation should establish behavior for:
 - coordinates and snapping;
 - visual feedback.
 
-The tool must not assume that the source is always on the left. The current intended interaction also allows drawing past/across the mirror axis where appropriate.
+The tool MUST NOT assume that the source is always on the left. The current intended interaction also allows drawing past/across the mirror axis where appropriate.
 
-These are project behavioral requirements to validate against the FreeHand target and the JSX prototype; unresolved behavior must not be silently treated as final.
+These are project behavioral requirements to validate against the FreeHand target and the JSX prototype; unresolved behavior MUST NOT be silently treated as final.
 
 ## 6. Cross-workstream coordination
 
 Use these principles when work crosses boundaries:
 
 1. Workstreams are organizational boundaries, not permanent ownership of all knowledge they produce.
-2. Results produced by one workstream may become inputs to another.
+2. Results produced by one workstream MAY become inputs to another.
 3. Canonical project knowledge belongs to its semantic owner, not to the workstream that happened to discover it.
-4. Cross-workstream continuity must use durable repository knowledge rather than conversation history alone.
+4. Cross-workstream continuity MUST use durable repository knowledge rather than conversation history alone.
 
-An architectural finding discovered in any workstream belongs in the appropriate project architecture/research document when it becomes durable. Do not route all architecture through a permanently privileged workstream merely because it was discovered there.
+An architectural finding discovered in any workstream belongs in the appropriate project architecture/research document when it becomes durable. DO NOT route all architecture through a permanently privileged workstream merely because it was discovered there.
 
-If a workstream detects a lifecycle or handoff inconsistency belonging to another workstream, it cannot notify that workstream directly. The finding must be carried through the user or recorded in a repository file for the other conversation to read. The other workstream remains responsible for correcting its own handoff.
+If a workstream detects a lifecycle or handoff inconsistency belonging to another workstream, it cannot notify that workstream directly. The finding MUST be carried through the user or recorded in a repository file for the other conversation to read. The other workstream MUST remain responsible for correcting its own handoff.
 
 ## 7. Canonical project-source routing
 
@@ -136,11 +136,11 @@ Repository identity is defined by `.ai/config.yaml`.
 
 Repository boundaries, repository taxonomy, path resolution, and write safety are defined by `.ai/rules/repository.md`. Commit policy is defined by `.ai/rules/commits.md` and `.ai/skills/commits/SKILL.md`.
 
-Do not reproduce those rules here.
+DO NOT reproduce those rules here.
 
 The canonical Adobe Illustrator SDK remains external to this repository. Its repository and reference role are recorded in `.ai/config.yaml`.
 
-Use that external SDK reference when needed; do not copy the complete SDK into `aip-mirror`.
+Use that external SDK reference when needed; DO NOT copy the complete SDK into `aip-mirror`.
 
 ## 8. Scope of this document
 

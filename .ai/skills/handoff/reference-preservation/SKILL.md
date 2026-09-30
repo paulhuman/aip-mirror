@@ -11,7 +11,7 @@ Use this skill when preparing or reviewing a conversation handoff to determine w
 
 Preserve continuity without turning handoffs into internet transcript dumps.
 
-A handoff should carry forward the **material research reference points** needed to understand, validate, or continue the work represented by the handoff.
+A handoff SHOULD carry forward the **material research reference points** needed to understand, validate, or continue the work represented by the handoff.
 
 ## Material reference test
 
@@ -23,7 +23,7 @@ A reference is material when losing it would materially increase the risk that t
 - lose a known external implementation, specification, repository, document, or other meaningful evidence;
 - incorrectly infer why a source was relevant.
 
-Do not preserve every URL that was opened during research. Incidental browsing and temporary exploration do not belong in the handoff unless they became materially relevant.
+DO NOT preserve every URL that was opened during research. Incidental browsing and temporary exploration do not belong in the handoff unless they became materially relevant.
 
 ## Required metadata
 
@@ -47,7 +47,7 @@ Recommended format:
   - URL: <canonical URL>
 ```
 
-The Role should be short but specific enough that a future chapter will not need the original conversation to remember why the reference was collected.
+The Role SHOULD be short but specific enough that a future chapter will not need the original conversation to remember why the reference was collected.
 
 ## Reference authority
 

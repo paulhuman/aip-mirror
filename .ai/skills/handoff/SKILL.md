@@ -23,11 +23,11 @@ Use this skill when:
 - the current conversation is becoming very long or technically dense;
 - important working state exists only in the conversation.
 
-Do not create a handoff for every ordinary message.
+DO NOT create a handoff for every ordinary message.
 
 ## Important limitation
 
-Do not claim to know an exact remaining context percentage or exact number of remaining messages.
+DO NOT claim to know an exact remaining context percentage or exact number of remaining messages.
 
 Use qualitative contextual-risk assessment instead.
 
@@ -39,9 +39,9 @@ Before any handoff operation that could modify the repository, the AI MUST deter
 - **READ-ONLY AI** — the AI can inspect repository contents but cannot create/update repository files or create commits.
 - **UNCERTAIN** — if write capability cannot be reliably established, treat the AI as READ-ONLY AI.
 
-Follow exactly one capability branch in the relevant handoff procedure. A WRITE-CAPABLE AI must ignore READ-ONLY instructions; a READ-ONLY AI must ignore repository-write instructions.
+Follow exactly one capability branch in the relevant handoff procedure. A WRITE-CAPABLE AI MUST ignore READ-ONLY instructions; a READ-ONLY AI MUST ignore repository-write instructions.
 
-An AI must never claim a repository operation or lifecycle transition occurred unless it actually performed and verified it.
+An AI MUST NOT claim a repository operation or lifecycle transition occurred unless it actually performed and verified it.
 
 ## Output location
 
@@ -81,11 +81,11 @@ Use this canonical structure for every handoff:
 Header field rules:
 
 - `Conversation` contains the full chapter identifier followed by the short conversation title.
-- Do not include the project name prefix in `Conversation`.
+- DO NOT include the project name prefix in `Conversation`.
 - `Specialization` contains only the specialization letter.
 - `Chapter` contains only the three-digit chapter number.
 - `Previous chapter` contains only the previous chapter's three-digit number, or `N/A` when this is the first chapter in the specialization.
-- Do not include the specialization letter in the `Chapter` or `Previous chapter` field.
+- DO NOT include the specialization letter in the `Chapter` or `Previous chapter` field.
 - Use bold Markdown (`**...:**`) for every header field name exactly as shown above.
 - The full chapter identifier is formed from `Specialization` + `Chapter`; for example, `E` + `001` = `E001`.
 - The handoff filename uses the full chapter identifier: `<chapter>-<short-name>.md`.
@@ -125,7 +125,7 @@ This skill provides the handoff capability and structure; it does not duplicate 
 
 A handoff in `DRAFT` is a live checkpoint document for the current chapter.
 
-The user may request a checkpoint update with:
+The user MAY request a checkpoint update with:
 
     Пора обновить handoff
 
@@ -133,7 +133,7 @@ When this command is used:
 
 ### WRITE-CAPABLE AI
 
-A WRITE-CAPABLE AI must:
+A WRITE-CAPABLE AI MUST:
 
 1. create the handoff if it does not yet exist;
 2. update it with the current chapter state;
@@ -143,7 +143,7 @@ A WRITE-CAPABLE AI must:
 
 ### READ-ONLY AI
 
-A READ-ONLY AI must:
+A READ-ONLY AI MUST:
 
 1. not create, update, or commit any repository file;
 2. prepare the complete proposed handoff with status `DRAFT`;
@@ -153,7 +153,7 @@ A READ-ONLY AI must:
 
 Checkpoint commits are not migrations. They are ordinary, auditable `DRAFT` checkpoint commits that preserve the current working state.
 
-Checkpoint updates may be repeated throughout the chapter. A checkpoint should be created when meaningful state has accumulated, not after every ordinary message.
+Checkpoint updates MAY be repeated throughout the chapter. A checkpoint SHOULD be created when meaningful state has accumulated, not after every ordinary message.
 
 ## Migration
 
@@ -165,33 +165,33 @@ first perform the repository write-capability self-check above.
 
 ### WRITE-CAPABLE AI migration branch
 
-A WRITE-CAPABLE AI must finish the current work, update the current handoff, and move it from `DRAFT` to `READY_FOR_HANDOFF` only when the next chapter can continue without guessing.
+A WRITE-CAPABLE AI MUST finish the current work, update the current handoff, and move it from `DRAFT` to `READY_FOR_HANDOFF` only when the next chapter can continue without guessing.
 
-The current chapter owns this transition and must commit it.
+The current chapter owns this transition and MUST commit it.
 
 After that, generate the standard bootstrap instruction for the receiving chapter using `.ai/workflows/handoff/BOOTSTRAP.md`.
 
-Do not mark the handoff `HANDED_OFF` in the closing chapter.
+DO NOT mark the handoff `HANDED_OFF` in the closing chapter.
 
 ### READ-ONLY AI migration branch
 
-A READ-ONLY AI must not modify or commit the repository.
+A READ-ONLY AI MUST NOT modify or commit the repository.
 
-Instead, it must prepare the complete current handoff as it should exist for migration, including `DRAFT` → `READY_FOR_HANDOFF` only as the **proposed manual repository state** when that transition is appropriate. It must return the entire proposed handoff file content to the user and provide the exact commit message for the manual handoff update.
+Instead, it MUST prepare the complete current handoff as it should exist for migration, including `DRAFT` → `READY_FOR_HANDOFF` only as the **proposed manual repository state** when that transition is appropriate. It must return the entire proposed handoff file content to the user and provide the exact commit message for the manual handoff update.
 
-A READ-ONLY AI must not claim that the handoff was changed to `READY_FOR_HANDOFF` or that any commit occurred.
+A READ-ONLY AI MUST NOT claim that the handoff was changed to `READY_FOR_HANDOFF` or that any commit occurred.
 
-A READ-ONLY AI must not append the separate bootstrap instruction to this long handoff response. If the user needs the missing bootstrap instruction, use the explicit `Пора выдать bootstrap-инструкцию` command separately.
+A READ-ONLY AI MUST NOT append the separate bootstrap instruction to this long handoff response. If the user needs the missing bootstrap instruction, use the explicit `Пора выдать bootstrap-инструкцию` command separately.
 
-A READ-ONLY AI may identify the lifecycle transition(s) that the user must apply manually, but must not represent those transitions as completed.
+A READ-ONLY AI MAY identify the lifecycle transition(s) that the user must apply manually, but MUST NOT represent those transitions as completed.
 
 ### Common migration rule
 
-No migration branch may mark the handoff `HANDED_OFF` in the closing chapter.
+No migration branch MAY mark the handoff `HANDED_OFF` in the closing chapter.
 
 ### Bootstrap instruction recovery command
 
-The standard migration workflow must generate the bootstrap instruction for the future receiving chapter. If the AI completed or discussed the migration but forgot to provide that instruction, the user may explicitly issue:
+The standard migration workflow MUST generate the bootstrap instruction for the future receiving chapter. If the AI completed or discussed the migration but forgot to provide that instruction, the user may explicitly issue:
 
     Пора выдать bootstrap-инструкцию
 
@@ -207,7 +207,7 @@ The generated instruction must contain the required runtime values for the recei
 
 The instruction is for a future receiving conversation. It must not be presented as evidence that the receiving chapter has already started.
 
-This command may be used both by WRITE-CAPABLE and READ-ONLY AI. A READ-ONLY AI must generate only the bootstrap instruction requested by this command and must not claim that the receiving chapter was initialized or that any repository lifecycle operation occurred.
+This command MAY be used both by WRITE-CAPABLE and READ-ONLY AI. A READ-ONLY AI MUST generate only the bootstrap instruction requested by this command and MUST NOT claim that the receiving chapter was initialized or that any repository lifecycle operation occurred.
 
 ## Writing rules
 
@@ -225,11 +225,11 @@ Record decisions and their rationale when that rationale matters to future work.
 
 Record unresolved questions rather than inventing answers.
 
-Do not hide uncertainty.
+DO NOT hide uncertainty.
 
-Do not copy the entire conversation into the handoff.
+DO NOT copy the entire conversation into the handoff.
 
-Do not duplicate stable project documentation unnecessarily.
+DO NOT duplicate stable project documentation unnecessarily.
 
 ## Project knowledge versus conversation state
 

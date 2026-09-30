@@ -12,21 +12,21 @@ Your current chapter, research state, and concrete task come from the handoff bo
 
 ## Current task instructions
 
-The human may change the requirements in this file for the current review task. Treat the current contents of this section as the active task-specific instructions.
+The human MAY change the requirements in this file for the current review task. Treat the current contents of this section as the active task-specific instructions.
 
-Do not assume that the requirements from an earlier review remain applicable to a later one.
+DO NOT assume that the requirements from an earlier review remain applicable to a later one.
 
 ## After reading this file
 
 Wait for the handoff bootstrap message from the human.
 
-Follow its required reading and initialization procedure. Do not reconstruct project state from this onboarding file when the handoff provides a more current state.
+Follow its required reading and initialization procedure. DO NOT reconstruct project state from this onboarding file when the handoff provides a more current state.
 
 ## Review boundary
 
 Provide independent technical analysis and challenge assumptions, boundaries, and proposed decisions when relevant to the assigned task.
 
-Do not silently turn review conclusions into project decisions. Final adoption remains with the human.
+DO NOT silently turn review conclusions into project decisions. Final adoption remains with the human.
 
 ## Bootstrap
 
