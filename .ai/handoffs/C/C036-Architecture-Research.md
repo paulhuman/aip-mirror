@@ -14,7 +14,7 @@ C
 
 ## Starting objective
 
-Continue the bounded Architecture & Research work after the C035 semantic consistency sweep. The current concrete question is the command-surface syntax: whether `>>` is a suitable stable command prefix and whether the minimal grammar `>>operation [arguments...]` is sufficient.
+Continue the bounded Architecture & Research work after the C035 semantic consistency sweep. The command-surface syntax question has been resolved: `>>` is accepted as the stable command prefix, with minimal grammar `>>operation [arguments...]`. The next bounded question concerns the semantics of `>>bootstrap` before active command references are migrated.
 
 ## Starting state
 
@@ -34,7 +34,7 @@ Current examples:
     >>migrate C036
     >>bootstrap
 
-The syntax decision is intentionally being separated from the later reference migration. INDEX and the architecture record MUST NOT be changed merely to record the syntax until the syntax decision itself is bounded and verified.
+The syntax decision is now bounded and verified. Active reference migration remains a separate controlled change. INDEX and the architecture record have not yet been changed.
 
 ## Confirmed / observed
 
@@ -61,13 +61,13 @@ The syntax decision is intentionally being separated from the later reference mi
 - `.ai/architecture/ai-infrastructure-restructuring.md` still contains historical command/lifecycle descriptions and must not be treated as the active semantic owner for those old mechanisms.
 - The active handoff model is a persistent conversation-context snapshot with no lifecycle state or transfer transition.
 
-## Command-syntax decision in progress
+## Command-syntax decision
 
-The bounded architectural question is:
+The bounded architectural question was:
 
 > Does `>>` work as a stable command prefix for the `.ai` command surface, with minimal grammar `>>operation [arguments...]`?
 
-The current working answer is affirmative:
+Confirmed answer: yes.
 
     Command prefix:
         >>
@@ -77,7 +77,7 @@ The current working answer is affirmative:
 
 The intended boundary is that `>>` defines only command syntax. It does not own operation semantics, routing procedure, lifecycle semantics, repository mutation, authorization, or commit construction.
 
-No repository files have yet been changed for this syntax decision.
+No active command-reference files have yet been changed for this syntax decision.
 
 ## Relevant canonical owners
 
@@ -106,15 +106,19 @@ No repository files have yet been changed for this syntax decision.
 
 ## Immediate next task
 
-Finish the bounded command-syntax decision for `>>` and `>>operation [arguments...]`.
+Resolve the bounded semantic question for `>>bootstrap` before editing active command references.
 
-If the decision remains affirmative, inventory the existing command references and classify them before editing:
+The current distinction under examination is:
 
-1. active references that should migrate to the new syntax;
-2. historical references that should remain unchanged;
-3. ambiguous references requiring separate judgment.
+    >>bootstrap
+        = command-surface invocation
 
-Do not modify `.ai/INDEX.md` or `.ai/architecture/ai-infrastructure-restructuring.md` until that inventory and classification establish exactly which references are active versus historical.
+    .ai/workflows/handoff/BOOTSTRAP.md
+        = canonical new-conversation initialization workflow
+
+The question is whether the existing command meaning — generation of a bootstrap instruction for a future receiving chapter — remains sufficiently clear under the new syntax, or whether the command name needs a narrower semantic definition.
+
+After that question is settled, proceed with the already completed command-reference inventory and migrate only the classified active references. Historical architecture-record references remain unchanged unless a separate current-semantic reason is established.
 
 ## Important constraints
 
@@ -144,19 +148,31 @@ Do not modify `.ai/INDEX.md` or `.ai/architecture/ai-infrastructure-restructurin
 
 - C036 is the receiving chapter.
 - C035 is the predecessor.
-- `>>` is the user's selected command prefix after bounded exploration.
-- The proposed minimal grammar is `>>operation [arguments...]`.
-- No command-syntax repository migration has yet been performed.
+- `>>` is the user's selected and accepted command prefix.
+- The minimal grammar is `>>operation [arguments...]`.
+- The active command mapping has been semantically checked:
+  
+      Пора обновить handoff
+          → >>handoff
+
+      Пора выполнить миграцию в чат [A-Z][0-9]{3}
+          → >>migrate <chapter>
+
+      Пора выдать bootstrap-инструкцию
+          → >>bootstrap
+
+- `>>handoff` has now been test-driven by the user as the current handoff checkpoint command.
+- No active command-reference migration has yet been performed.
 
 ### Inferred
 
 - The three current examples `>>handoff`, `>>migrate C036`, and `>>bootstrap` are intended as semantic-operation examples rather than a frozen complete command registry.
+- `>>bootstrap` likely remains the command name, but its exact command-side meaning should be stated explicitly enough to avoid confusing invocation with execution of the BOOTSTRAP workflow.
 
 ### Open
 
-- Whether any additional grammar constraints are needed beyond `>>operation [arguments...]`.
-- Which existing command references are active and should migrate.
-- Which old command references are historical and should remain.
+- Whether `>>bootstrap` is semantically clear enough as the command for generating a bootstrap instruction, given that `BOOTSTRAP.md` is also the canonical initialization workflow.
+- The already completed active/historical command-reference classification.
 - Whether the final syntax decision should be recorded in the architecture record, and if so, the minimal appropriate location and wording.
 
 ## Recommended starting context
