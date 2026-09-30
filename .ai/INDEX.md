@@ -31,8 +31,6 @@ The following are the currently documented user-facing command phrases. Their ex
 |---|---|---|---|
 | `Пора обновить handoff` | checkpoint current chapter | `.ai/skills/handoff/SKILL.md` | `.ai/rules/handoff/lifecycle.md`; current handoff |
 | `Пора выполнить миграцию в чат [A-Z][0-9]{3}` | migrate current chapter | `.ai/skills/handoff/SKILL.md` + `.ai/rules/handoff/lifecycle.md` | lifecycle; handoff skill; `.ai/workflows/handoff/BOOTSTRAP.md` |
-| `Пора восстановить handoff` | Lifecycle Recovery | `.ai/rules/handoff/lifecycle.md` | lifecycle; commit rule/skill when a recovery write is required |
-| `Пора выполнить handoff lifecycle correction` | historical Lifecycle Correction | `.ai/rules/handoff/lifecycle.md` | lifecycle; commit rule/skill when a correction write is required |
 | `Пора выдать bootstrap-инструкцию` | generate bootstrap instruction for the future receiving chapter | `.ai/skills/handoff/SKILL.md` + `.ai/workflows/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow |
 
 The table records only information needed to recognize and activate the canonical operation. It does not define lifecycle transitions, write authorization, commit construction, or workflow steps.
@@ -55,7 +53,7 @@ Use this map to find the canonical capability without reading the entire `.ai/` 
 | Repository identity, path resolution, repository boundaries, write safety | `.ai/rules/repository.md` | canonical repository semantics and mutation safety |
 | General workflow principles | `.ai/rules/workflow.md` | general AI development workflow constraints |
 | Normative language | `.ai/rules/normative-language.md` | canonical normative and procedural language conventions |
-| Handoff lifecycle | `.ai/rules/handoff/lifecycle.md` | lifecycle states, transitions, Recovery, Correction |
+| Conversation continuity | `.ai/rules/handoff/lifecycle.md` | chapter naming, handoff continuity, and context preservation |
 | Handoff reference preservation | `.ai/rules/handoff/references.md` | material research references that survive handoff |
 | Commit policy | `.ai/rules/commits.md` | commit policy and project commit vocabulary |
 | Handoff capability | `.ai/skills/handoff/SKILL.md` | checkpoint and migration capability |
@@ -68,7 +66,7 @@ INDEX may identify and route to an owner.
 
 INDEX MUST NOT become the owner of:
 
-- lifecycle semantics;
+- handoff continuity semantics;
 - handoff procedures;
 - commit policy or commit construction;
 - repository path-resolution rules;
@@ -94,7 +92,7 @@ The activation context identifies which canonical owner files MUST be reread. It
 INDEX does not record:
 
 - repository-state effects;
-- lifecycle outcomes;
+- repository-state effects;
 - commit authorization;
 - commit construction;
 - procedural steps.

@@ -75,8 +75,6 @@ Use this canonical structure for every handoff:
     **Previous chapter:**
     <previous chapter number or N/A>
 
-    **Status:**
-    DRAFT
 
 Header field rules:
 
@@ -109,12 +107,6 @@ Example:
     **Status:**
     HANDED_OFF
 
-## Lifecycle rules
-
-Handoff lifecycle state, transition ownership, Lifecycle Recovery, and Lifecycle Correction are canonically defined by `.ai/rules/handoff/lifecycle.md`.
-
-This skill does not redefine those lifecycle rules. When a handoff operation depends on lifecycle state or transition ownership, follow the canonical lifecycle rule and use the operational procedures in this skill and `.ai/workflows/handoff/BOOTSTRAP.md` to execute and verify the action.
-
 ## New chapter initialization
 
 New chapter initialization is operationally defined by `.ai/workflows/handoff/BOOTSTRAP.md`.
@@ -123,107 +115,29 @@ This skill provides the handoff capability and structure; it does not duplicate 
 
 ## Checkpoint updates
 
-A handoff in `DRAFT` is a live checkpoint document for the current chapter.
-
-The user MAY request a checkpoint update with:
+The user MAY request a checkpoint with:
 
     Пора обновить handoff
 
-When this command is used:
+A WRITE-CAPABLE AI MUST create the handoff if absent, update it with current durable state, preserve the canonical header, verify content and scope, and commit the checkpoint. A READ-ONLY AI MUST prepare the complete proposed handoff and exact manual commit message without claiming repository writes.
 
-### WRITE-CAPABLE AI
-
-A WRITE-CAPABLE AI MUST:
-
-1. create the handoff if it does not yet exist;
-2. update it with the current chapter state;
-3. keep its status as `DRAFT`;
-4. verify the resulting content and scope;
-5. commit the checkpoint without asking for separate user permission.
-
-### READ-ONLY AI
-
-A READ-ONLY AI MUST:
-
-1. not create, update, or commit any repository file;
-2. prepare the complete proposed handoff with status `DRAFT`;
-3. return the entire handoff file content to the user;
-4. provide the exact manual checkpoint commit message;
-5. not claim that the checkpoint was written or committed.
-
-Checkpoint commits are not migrations. They are ordinary, auditable `DRAFT` checkpoint commits that preserve the current working state.
-
-Checkpoint updates MAY be repeated throughout the chapter. A checkpoint SHOULD be created when meaningful state has accumulated, not after every ordinary message.
+Checkpoint updates MAY be repeated when meaningful state accumulates.
 
 ## Migration
 
-When the user requests migration to the next chapter, for example:
+When the user requests migration to another chapter, a WRITE-CAPABLE AI MUST update the current handoff, verify content and scope, commit the handoff update, and generate the standard bootstrap instruction.
 
-    Пора выполнить миграцию в следующий chapter
+The current handoff is not marked as transferred or closed. The previous handoff MUST NOT be modified merely to record that it has been consumed.
 
-first perform the repository write-capability self-check above.
+A READ-ONLY AI MUST prepare the proposed handoff and manual commit message without modifying the repository.
 
-### WRITE-CAPABLE AI migration branch
+## Bootstrap instruction
 
-A WRITE-CAPABLE AI MUST finish the current work, update the current handoff, and move it from `DRAFT` to `READY_FOR_HANDOFF` only when the next chapter can continue without guessing.
-
-The current chapter owns this transition and MUST commit it.
-
-After that, generate the standard bootstrap instruction for the receiving chapter using `.ai/workflows/handoff/BOOTSTRAP.md`.
-
-DO NOT mark the handoff `HANDED_OFF` in the closing chapter.
-
-### READ-ONLY AI migration branch
-
-A READ-ONLY AI MUST NOT modify or commit the repository.
-
-Instead, it MUST prepare the complete current handoff as it should exist for migration, including `DRAFT` → `READY_FOR_HANDOFF` only as the **proposed manual repository state** when that transition is appropriate. It MUST return the entire proposed handoff file content to the user and provide the exact commit message for the manual handoff update.
-
-A READ-ONLY AI MUST NOT claim that the handoff was changed to `READY_FOR_HANDOFF` or that any commit occurred.
-
-A READ-ONLY AI MUST NOT append the separate bootstrap instruction to this long handoff response. If the user needs the missing bootstrap instruction, use the explicit `Пора выдать bootstrap-инструкцию` command separately.
-
-A READ-ONLY AI MAY identify the lifecycle transition(s) that the user must apply manually, but MUST NOT represent those transitions as completed.
-
-### Common migration rule
-
-No migration branch MAY mark the handoff `HANDED_OFF` in the closing chapter.
-
-### Bootstrap instruction recovery command
-
-The standard migration workflow MUST generate the bootstrap instruction for the future receiving chapter. If the AI completed or discussed the migration but forgot to provide that instruction, the user MAY explicitly issue:
+The standard migration workflow generates the bootstrap instruction. If it was omitted, the user MAY say:
 
     Пора выдать bootstrap-инструкцию
 
-Treat this as a direct request to generate the missing bootstrap instruction for the receiving chapter using `.ai/workflows/handoff/BOOTSTRAP.md`.
-
-This command does **not** initialize the next chapter, does **not** change lifecycle state, and does **not** authorize repository writes by itself.
-
-The generated instruction MUST use the canonical invocation format defined by `.ai/workflows/handoff/BOOTSTRAP.md` and contain the required runtime values for the receiving chapter:
-
-    PREVIOUS_CHAPTER = <three-digit previous chapter number or N/A>
-    CURRENT_CHAPTER = <three-digit current chapter number>
-    SPECIALIZATION = <single uppercase specialization letter>
-
-The handoff skill is the producer of this bootstrap message. It MUST emit `CURRENT_CHAPTER` and `PREVIOUS_CHAPTER` as numeric chapter components only; the specialization letter MUST NOT be included in either value. For example:
-
-    PREVIOUS_CHAPTER = 032
-    CURRENT_CHAPTER = 033
-    SPECIALIZATION = C
-
-The producer MUST NOT emit:
-
-    PREVIOUS_CHAPTER = C032
-    CURRENT_CHAPTER = C033
-    SPECIALIZATION = C
-
-The full chapter identifier is derived by BOOTSTRAP from `SPECIALIZATION` plus `CURRENT_CHAPTER`; the predecessor identifier is derived from `SPECIALIZATION` plus `PREVIOUS_CHAPTER` when applicable. `PREVIOUS_CHAPTER = N/A` remains mandatory for the first chapter of a specialization.
-
-For the first chapter of a specialization, `PREVIOUS_CHAPTER` MUST be `N/A` and the receiving chapter follows the first-chapter branch of `.ai/workflows/handoff/BOOTSTRAP.md`.
-
-The instruction is for a future receiving conversation. It MUST NOT be presented as evidence that the receiving chapter has already started.
-
-This command MAY be used both by WRITE-CAPABLE and READ-ONLY AI. A READ-ONLY AI MUST generate only the bootstrap instruction requested by this command and MUST NOT claim that the receiving chapter was initialized or that any repository lifecycle operation occurred.
+The instruction is for a future receiving conversation and MUST NOT be presented as evidence that the receiving chapter has already started.
 
 ## Writing rules
 

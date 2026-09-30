@@ -12,8 +12,6 @@ C
 **Previous chapter:**
 032
 
-**Status:**
-HANDED_OFF
 
 ## Starting objective
 

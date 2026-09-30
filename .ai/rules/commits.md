@@ -4,12 +4,9 @@ These rules define the project's general policy for creating and verifying Git c
 
 ## 1. Authorization
 
-AI-assisted development changes SHOULD NOT be committed automatically unless:
+AI-assisted development changes SHOULD NOT be committed automatically unless the user explicitly requests the commit or the change is an explicit part of an established automated workflow.
 
-- the user explicitly requests the commit; or
-- the change is an explicit part of an established automated workflow.
-
-Handoff lifecycle commits that are explicitly pre-authorized by the handoff rules are governed by those rules.
+Initial handoff creation, checkpoint updates, and migration handoff updates are pre-authorized parts of the handoff workflow when that workflow explicitly calls for them.
 
 ## 2. Coherent commits
 
@@ -41,16 +38,12 @@ Choosing a commit message does not authorize or create a commit.
 
 ## 5. Handoff commits
 
-Handoff lifecycle commits follow the canonical handoff rules in `.ai/rules/handoff/lifecycle.md`.
+Normal handoff creation and update commits use the short ai-docs(handoff) convention:
 
-The handoff lifecycle rules define:
+    ai-docs(handoff): create C034
+    ai-docs(handoff): update C034
 
-- which lifecycle changes require Git commits;
-- which chapter owns each transition;
-- which handoff commits are pre-authorized;
-- recovery and correction commit requirements.
-
-DO NOT duplicate those lifecycle rules here.
+Do not append conversation titles, task descriptions, rationale, milestone summaries, or other explanatory suffixes.
 
 ## 6. Repository integrity
 

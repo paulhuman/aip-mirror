@@ -13,39 +13,22 @@ Use Conventional Commit-style messages:
 
 ## Commit types
 
-Use the type that best describes the primary purpose of the commit.
+Use the type that best describes the primary purpose of the change. Standard project types include feat, fix, refactor, test, docs, chore, build, and perf.
 
-### feat
+## AI-infrastructure commit namespace
 
-A new capability or user-visible behavior.
+This repository uses a local ai-* namespace to make .ai/ infrastructure visible in Git history.
 
-### fix
+For normal handoff creation and update operations, use exactly:
 
-A correction to existing behavior.
+    ai-docs(handoff): create C034
+    ai-docs(handoff): update C034
 
-### refactor
+Keep these messages short. Do not append conversation titles, task descriptions, rationale, milestone summaries, or other explanatory suffixes.
 
-A structural change that does not intentionally change behavior.
+For other .ai/ infrastructure changes, use the ai-* form that most clearly identifies the operation when a dedicated form is useful. Do not invent a larger taxonomy without a concrete need.
 
-### test
-
-Adding or changing tests without a primary production-code change.
-
-### docs
-
-Documentation-only changes.
-
-### chore
-
-Repository maintenance, tooling, configuration, or project infrastructure.
-
-### build
-
-Build-system or dependency changes.
-
-### perf
-
-A performance improvement.
+Project documentation remains under normal docs(...) vocabulary.
 
 ## Scope
 

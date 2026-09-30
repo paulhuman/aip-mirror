@@ -12,8 +12,6 @@ C
 **Previous chapter:**
 030
 
-**Status:**
-HANDED_OFF
 
 ## Current objective
 

@@ -139,61 +139,33 @@ After this self-check:
 
 ## Required procedure
 
-### Shared bootstrap steps — all AI
+### Shared steps
 
-When a new chapter is initialized, all AI MUST:
-
-1. Confirm the current chapter identity, previous chapter, and specialization from the bootstrap message.
+1. Confirm current chapter identity, previous chapter, and specialization from the bootstrap message.
 2. Read this file.
-3. Read the applicable project rules, especially `.ai/rules/handoff/lifecycle.md`, `.ai/rules/workflow.md`, and `.ai/rules/handoff/references.md`.
-4. Read `.ai/skills/activation/SKILL.md` and invoke ACTIVATE for `conversation initialization` with the required canonical owners defined above.
-5. If `PREVIOUS_CHAPTER` is not `N/A`, read the previous chapter's handoff under `.ai/handoffs/<specialization>/`.
-6. If a previous handoff exists, inspect the current implementation files and references identified by that handoff.
-7. Confirm that the new chapter can continue from the recorded state without guessing; for a first chapter, confirm that the initial objective and project context are sufficient to begin.
-
-### Branch selection
-
-If `PREVIOUS_CHAPTER = N/A`, use the **FIRST CHAPTER** branch. Otherwise use the **RECEIVING CHAPTER** branch below.
+3. Read .ai/rules/workflow.md, .ai/rules/handoff/references.md, and the handoff skill.
+4. Read .ai/skills/activation/SKILL.md and invoke ACTIVATE.
+5. If PREVIOUS_CHAPTER is not N/A, read the predecessor handoff.
+6. Inspect implementation files and references identified by the predecessor handoff when applicable.
+7. Confirm that the new chapter can continue from the recorded state without guessing.
 
 ### Branch A — WRITE-CAPABLE AI
 
-**A WRITE-CAPABLE AI MUST read and execute this branch and MUST ignore Branch B.**
+A WRITE-CAPABLE AI MUST:
+1. create the new chapter handoff if it does not already exist;
+2. commit that initial handoff;
+3. perform post-bootstrap consistency verification;
+4. only then begin substantive work.
 
-7. Immediately create the new chapter's handoff under `.ai/handoffs/<specialization>/` with status `DRAFT` **if it does not already exist**.
-8. Commit that initial `DRAFT` handoff as part of bootstrap; this is a pre-authorized procedural commit and does not require a separate approval step **when normal initial creation is applicable**.
-9. For a receiving chapter, update the previous chapter's handoff from `READY_FOR_HANDOFF` to `HANDED_OFF`. For a first chapter, there is no predecessor transition.
-10. For a receiving chapter, commit that lifecycle transition. For a first chapter, proceed directly to verification.
-11. Perform the mandatory post-bootstrap consistency verification described below.
-12. Only after bootstrap is complete, proceed with new implementation or other chapter work.
-
-If the receiving handoff already exists when bootstrap begins, DO NOT recreate it or pretend that normal initial creation occurred. Determine whether the existing state represents a qualifying pre-existing lifecycle violation. If so, bootstrap MUST be treated as blocked and the receiving chapter MUST wait for explicit user authorization before performing Lifecycle Recovery.
+If the receiving handoff already exists, DO NOT recreate or blindly overwrite it. Read it, preserve valid context, and verify its header. If incomplete, update it as the receiving chapter's existing context snapshot and verify it before continuing.
 
 ### Branch B — READ-ONLY AI
 
-**A READ-ONLY AI MUST read and execute this branch and MUST ignore Branch A.**
-
-7. DO NOT create, update, or commit any repository file.
-8. If the receiving handoff already exists, DO NOT overwrite or normalize it.
-9. Prepare the complete proposed new-chapter handoff with status `DRAFT`, using the standard handoff structure and all information that can be verified from the repository and current conversation.
-10. Return the **entire handoff file content** to the user as plain Markdown so the user can place it in `.ai/handoffs/<specialization>/` manually.
-11. Provide the exact commit message that should be used for the manual initial-DRAFT commit.
-12. DO NOT provide the separate bootstrap instruction for the next chat in the same response. A read-only AI MUST keep its response focused on the complete handoff file and its manual commit message so that constrained interfaces are not unnecessarily burdened by a second long artifact.
-13. DO NOT claim `DRAFT` creation, `HANDED_OFF`, a commit, post-bootstrap verification, or `BOOTSTRAP = COMPLETE` because those repository operations were not performed by the AI.
-14. The user is responsible for applying the supplied handoff file and completing the required repository lifecycle writes manually before treating bootstrap as complete.
-
-For a READ-ONLY AI, the supplied handoff is a proposed repository state, not evidence that the repository already contains that state.
-
-If the previous handoff is `READY_FOR_HANDOFF`, the READ-ONLY AI may state that the manual bootstrap must subsequently perform the corresponding `READY_FOR_HANDOFF` → `HANDED_OFF` lifecycle update, but it MUST NOT present that transition as completed. For a first chapter, no predecessor lifecycle transition is required.
-
-If the receiving handoff already exists and indicates a qualifying pre-existing lifecycle violation, the READ-ONLY AI MUST report the blocked condition and MUST NOT attempt Lifecycle Recovery.
-
-If the new chapter is the first chapter of a specialization, there is no previous handoff to mark `HANDED_OFF`.
-
-For a WRITE-CAPABLE AI, the first chapter of a specialization still requires immediate creation and commit of the new chapter's `DRAFT` handoff, followed by the applicable post-bootstrap consistency verification.
-
-For a READ-ONLY AI, the first chapter case follows Branch B: prepare and return the complete proposed `DRAFT` handoff and its manual initial-DRAFT commit message, without performing repository writes.
-
-If the receiving handoff already exists when bootstrap begins, no AI MAY recreate it or pretend that normal initial creation occurred. Determine whether the existing state represents a qualifying pre-existing lifecycle violation. A WRITE-CAPABLE AI MUST block and wait for explicit user authorization before performing Lifecycle Recovery. A READ-ONLY AI MUST report the blocked condition and MUST NOT attempt Lifecycle Recovery.
+A READ-ONLY AI MUST:
+1. not create, update, or commit repository files;
+2. prepare the complete proposed new-chapter handoff;
+3. return the entire handoff content and exact manual initial-handoff commit message;
+4. not claim bootstrap writes or verification were completed.
 
 ## Why handoffs exist
 
@@ -211,41 +183,24 @@ A chapter may need to continue in a new conversation because of:
 
 The repository handoff state MUST therefore outlive the conversation that created it. No old conversation or specialization is required to remain available in order for a later chapter to reconstruct or correct canonical handoff state.
 
-## Lifecycle exceptions
-
-Lifecycle Recovery and Lifecycle Correction are governed canonically by `.ai/rules/handoff/lifecycle.md`.
-
-If bootstrap detects a qualifying pre-existing lifecycle violation, follow the canonical lifecycle rule for the applicable recovery or correction procedure. Do not duplicate those lifecycle rules in this bootstrap workflow.
-
 ## Post-bootstrap consistency verification
 
-Bootstrap is not complete merely because the receiving handoff was created and the previous handoff was transitioned to `HANDED_OFF`.
+Before substantive work, the receiving chapter MUST:
+1. read back its own handoff after creation or update;
+2. confirm Conversation, Specialization, Chapter, and Previous chapter identify the receiving chapter correctly;
+3. confirm Immediate next task describes the first real task after bootstrap;
+4. if a predecessor exists, confirm the predecessor handoff was read successfully;
+5. verify that the current handoff contains sufficient starting context to continue without guessing.
 
-Before beginning substantive chapter work, the receiving chapter MUST verify the resulting lifecycle state as a coherent chain, not only an immediate pair:
+If a check fails, bootstrap is incomplete. Correct only the current receiving handoff within normal ownership; otherwise stop and report the inconsistency.
 
-1. Read back the receiving chapter's own handoff after normal creation or authorized recovery.
-2. Confirm that its own handoff still has `Status: DRAFT`.
-3. Confirm that its `Previous chapter` identifies the handoff from which it actually started.
-4. Confirm that its `Immediate next task` describes the first real task after bootstrap, not an action already completed as part of bootstrap or recovery.
-5. If a previous handoff exists, read it back after the normal `READY_FOR_HANDOFF` → `HANDED_OFF` transition or authorized recovery.
-6. Confirm that the previous handoff is now `HANDED_OFF`.
-7. Confirm that the previous and receiving handoffs form a consistent lifecycle pair.
-8. Inspect the relevant earlier handoff for the same specialization when one exists.
-9. If a predecessor handoff is `HANDED_OFF` even though the current receiving handoff has already replaced it, treat that as a lifecycle-chain inconsistency and stop/report rather than silently repairing it.
-10. If any check fails, treat bootstrap as incomplete. Correct only the receiving chapter's own handoff when the correction is within normal ownership or explicitly authorized recovery scope; otherwise stop and report the inconsistency.
-
-The receiving chapter owns correction of its own handoff. Another specialization may detect and report an inconsistency, but MUST NOT edit the receiving chapter's handoff on its behalf.
-
-Recovery completion is not itself bootstrap completion and does not by itself authorize substantive work.
-
-## Initial DRAFT handoff
+## Initial handoff
 
 The initial handoff MUST use the standard handoff structure from the `.ai/skills/handoff/SKILL.md` unless a project-specific format requires otherwise and MUST contain, at minimum:
 
 - conversation/chapter identity;
 - specialization;
 - previous chapter;
-- `Status: DRAFT`;
 - starting objective;
 - known starting implementation state;
 - relevant files and references;
@@ -256,13 +211,19 @@ The initial handoff MUST use the standard handoff structure from the `.ai/skills
 
 The initial handoff is intentionally a live checkpoint document. It MAY be incomplete at bootstrap and MUST be updated during the chapter as meaningful state accumulates.
 
-## Checkpoint command
+## Checkpoint
 
 During the chapter, the user MAY say:
 
     Пора обновить handoff
 
-Treat this as a direct request to update the current handoff while keeping `Status: DRAFT`, verify it, and commit the checkpoint as part of the established handoff workflow.
+Treat this as a direct request to update the current handoff with meaningful durable state, verify it, and commit the update.
 
-These commits are **checkpoint commits**, not migration commits.
+## Commit convention
 
+Normal handoff creation and update commits MUST use these short forms:
+
+    ai-docs(handoff): create C034
+    ai-docs(handoff): update C034
+
+Do not append conversation titles, task descriptions, rationale, milestone summaries, or other explanatory suffixes to normal handoff commit messages.
