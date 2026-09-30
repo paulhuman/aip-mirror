@@ -536,6 +536,10 @@ Completed:
 - retention of BOOTSTRAP as an independent ordered workflow;
 - BOOTSTRAP move to `.ai/workflows/handoff/BOOTSTRAP.md`;
 - active path/reference consistency sweep after the BOOTSTRAP move.
+- normative-language rule established as the canonical owner;
+- bounded normative-language cleanup across the declared active scope;
+- semantic review of cleanup false positives and preservation of legitimate ordinary-language uses;
+- C029 final verification sequence defined: RULE self-test, negative lexical sweep, semantic spot-check, discoverability check, and final consistency verdict.
 
 Current entry-layer model:
 
@@ -563,6 +567,93 @@ The core result is strong convergence:
 - exact command IDs/syntax SHOULD remain unfrozen.
 
 The reviews also produced actionable questions and findings recorded below.
+
+## 17.8 Normative-language architecture and verification — C028/C029
+
+C028 established a dedicated normative-language rule and completed a bounded consistency cleanup across the active AI infrastructure and project documentation.
+
+The canonical rule is:
+
+    .ai/rules/normative-language.md
+
+Its purpose is to define one consistent distinction between:
+
+- BCP 14 normative keywords: MUST, MUST NOT, SHOULD, SHOULD NOT, MAY;
+- local procedural vocabulary: DO, DO NOT;
+- ordinary English uses of must, should, may, and do not;
+- ambiguous occurrences requiring semantic inspection.
+
+The rule also establishes MUST NOT as the canonical normative prohibition form and rejects alternate normative forms such as SHALL, REQUIRED, RECOMMENDED, OPTIONAL, MUST NEVER, and MAY NOT for active normative wording.
+
+### Completed work
+
+C028 completed the following bounded work:
+
+1. defined the normative-language model and its semantic classification;
+2. added .ai/rules/normative-language.md as the canonical owner;
+3. inventoried normative-language occurrences across the defined active scope;
+4. performed a targeted semantic cleanup rather than blind capitalization;
+5. normalized applicable normative and procedural wording;
+6. explicitly preserved lowercase ordinary English, historical material, research conclusions, questions, and descriptive prose where they are not normative;
+7. verified that .ai/archive/** and conversation-specific handoffs outside the declared scope were not mechanically rewritten.
+
+The cleanup deliberately treated lexical matches as evidence for review rather than as automatic rewrite targets. In particular, false positives such as descriptive uses of must were reverted during semantic review.
+
+### C029 verification plan
+
+C029 now treats the normative-language rule as complete in substance but subject to a final bounded verification pass.
+
+The verification sequence is:
+
+```text
+Phase 1
+RULE self-test
+    ↓
+Phase 2
+negative lexical sweep
+    ↓
+Phase 3
+semantic spot-check of remaining lowercase forms
+    ↓
+Phase 4
+discoverability / canonical-owner check
+    ↓
+Phase 5
+final consistency verdict
+```
+
+The phases have distinct purposes:
+
+- **Phase 1 — RULE self-test:** verify that the rule is internally consistent, uses its own vocabulary correctly, and does not introduce contradictory or alternative normative forms.
+- **Phase 2 — negative lexical sweep:** search the active scope for alternate normative vocabulary, prohibition variants, contractions, and Markdown-emphasis forms that could indicate inconsistent syntax. Matches are inventory items, not automatic defects.
+- **Phase 3 — semantic spot-check:** inspect remaining lowercase must, should, may, and do not, concentrating first on high-density rule, workflow, skill, and architecture files. The test asks whether each occurrence carries current normative/procedural force or is ordinary English, historical, research, descriptive, or ambiguous text.
+- **Phase 4 — discoverability / canonical-owner check:** verify that the new rule is discoverable from the current AI entry architecture without duplicating its semantics into AGENTS.md or INDEX.md. The canonical-owner boundary remains: INDEX routes/discovers; the rule defines normative-language semantics.
+- **Phase 5 — final consistency verdict:** record whether the verification found actionable defects. Only confirmed defects justify another repository edit; a zero-defect result is a valid completion state.
+
+This verification is intentionally bounded. It MUST NOT become a second repo-wide capitalization campaign. Remaining lowercase words are not defects merely because they match the vocabulary; they require semantic evidence before change.
+
+The expected completion criterion is therefore **semantic consistency and discoverability**, not zero lexical matches.
+
+### Architectural relationship
+
+The normative-language rule participates in the existing ownership model:
+
+```text
+AGENTS
+  ↓
+INDEX / capability discovery
+  ↓
+canonical rule / skill / workflow
+  ↓
+execution
+
+normative-language.md
+  = canonical constraint on normative expression
+```
+
+It does not replace repository rules, lifecycle rules, skills, or workflows, and those owners remain responsible for their own domain semantics.
+
+Future normative-language changes SHOULD begin with evidence from actual repository usage rather than speculative vocabulary expansion.
 
 ## 17.9 Handoff chapter identity and header schema
 
