@@ -233,25 +233,65 @@ No new external research references were introduced during bootstrap. The materi
 - How `SHORT_NAME` is resolved when creating a receiving chapter's handoff.
 - Exact active command-reference changes in INDEX/SKILL/BOOTSTRAP after semantic boundaries are resolved.
 
+## C037 checkpoint
+
+C037 resolved the SHORT_NAME configuration boundary.
+
+The six current specialization mappings are now recorded in `.ai/config.yaml`:
+
+```yaml
+specializations:
+  A:
+    short_name: JSX Prototype
+  B:
+    short_name: Native AIP Plugin
+  C:
+    short_name: Architecture & Research
+  D:
+    short_name: Project Workshop
+  E:
+    short_name: Independent Review (Qwen)
+  F:
+    short_name: Independent Review (Grok)
+```
+
+The canonical BOOTSTRAP runtime contract remains three inputs:
+
+```
+PREVIOUS_CHAPTER
+CURRENT_CHAPTER
+SPECIALIZATION
+```
+
+SHORT_NAME is optional supplied context. When omitted, the receiving workflow should resolve it from configured specialization vocabulary.
+
+Generated bootstrap instructions SHOULD expose the resolved SHORT_NAME explicitly, for example:
+
+```
+PREVIOUS_CHAPTER = 037
+CURRENT_CHAPTER = 038
+SPECIALIZATION = C
+SHORT_NAME = Architecture & Research
+```
+
+Manual bootstrap templates SHOULD expose SHORT_NAME as an explicit value for copy/paste, while this does not make it a fourth required canonical runtime input.
+
+C037 also confirmed that no command registry, universal router, command-ID layer, subcommand hierarchy, or lifecycle mechanism follows from this configuration decision.
+
+The full durable record is section 29 of `.ai/architecture/ai-infrastructure-restructuring.md`.
+
 ## Immediate next task
 
-Resolve the semantic operation set before performing active command-reference migration.
+1. Update `.ai/workflows/handoff/BOOTSTRAP.md` to document supplied SHORT_NAME with configuration fallback.
+2. Verify `.ai/rules/handoff/lifecycle.md` and `.ai/skills/handoff/SKILL.md` against that contract and update only stale semantics.
+3. Define the exact generated bootstrap-message format and its data source.
+4. Decide the standalone bootstrap-instruction generation operation name.
+5. Re-evaluate whether first-chapter initialization needs `init`, `new`, or no dedicated command.
+6. Determine whether interrupted migration needs a separate recovery command or is fully handled by receiving-chapter BOOTSTRAP.
+7. Validate the two planned manual bootstrap templates against the canonical BOOTSTRAP contract.
+8. Only then migrate active command references in `.ai/INDEX.md` and `.ai/skills/handoff/SKILL.md`, followed by a semantic consistency sweep.
 
-Start by comparing these operations as distinct concepts:
-
-```
-migration
-bootstrap-instruction generation
-receiving-chapter initialization
-first-chapter initialization
-interrupted-migration recovery
-```
-
-Then determine the minimum command surface needed to expose them without introducing a router hierarchy or duplicating BOOTSTRAP semantics.
-
-In parallel, resolve the `SHORT_NAME` input/derivation contract against the current BOOTSTRAP workflow and handoff filename convention.
-
-Only after these questions are stable should C037 update the active command references in `.ai/INDEX.md`, `.ai/skills/handoff/SKILL.md`, and/or `.ai/workflows/handoff/BOOTSTRAP.md`.
+Do not reopen the accepted `>>` syntax decision.
 
 ## Recommended starting context
 
