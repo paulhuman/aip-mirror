@@ -70,6 +70,30 @@ The smallest useful integration point was `.ai/INDEX.md`: its routing rule now e
 
 This gives the first concrete evidence that ACTIVATE can sit between operation routing and canonical-owner execution without introducing a second procedural owner.
 
+## C032 bootstrap integration check — result
+
+The second bounded check considered whether ACTIVATE should also be invoked directly inside `.ai/workflows/handoff/BOOTSTRAP.md`.
+
+Result: **no direct ACTIVATE integration is needed at this point.** BOOTSTRAP is itself the canonical owner of the ordered bootstrap procedure, and its existing shared steps already require rereading the applicable canonical owners before execution. Adding a second explicit ACTIVATE call inside BOOTSTRAP would duplicate that reread/activation semantics rather than provide a new capability boundary.
+
+There is also an important ordering constraint: BOOTSTRAP must establish repository identity from `.ai/config.yaml` and read `.ai/rules/repository.md` before resolving the remaining repository-controlled paths. A generic ACTIVATE call placed earlier would not fit that canonical ordering; placing it afterward would add another layer over steps BOOTSTRAP already owns.
+
+Therefore the current integration boundary remains:
+
+    user command / entry point
+        ↓
+    INDEX (when routed through the command surface)
+        ↓
+    ACTIVATE
+        ↓
+    canonical owner
+        ↓
+    operation
+
+For direct bootstrap entry, BOOTSTRAP remains the canonical owner and performs its own required owner rereads. No BOOTSTRAP mutation is justified by this experiment.
+
+This preserves the distinction between **activation as a reusable capability** and **bootstrap as an ordered workflow** without forcing every canonical workflow to wrap its own internal reads in ACTIVATE.
+
 ## Previous chapter
 
 C031 — Architecture & Research.
@@ -115,14 +139,9 @@ C031 is the verified source of the completed activation owner-boundary experimen
 
 ## Immediate next task
 
-Run the next bounded integration check only if needed to validate the boundary exposed by the first result. The current concrete candidate is the new-chapter bootstrap path, because BOOTSTRAP is an existing canonical workflow with its own ordered owner semantics.
+Run the next bounded integration check only if needed to validate the boundary exposed by the first result. Determine the next bounded question only if a concrete integration gap remains. The current result does not justify changing BOOTSTRAP.
 
-For that check:
-
-1. identify the exact canonical owners required by BOOTSTRAP;
-2. determine whether INDEX-level activation is sufficient for bootstrap or whether BOOTSTRAP itself needs a direct ACTIVATE invocation;
-3. make the smallest change only if the real operation demonstrates a gap;
-4. verify that BOOTSTRAP remains the owner of bootstrap ordering and lifecycle interaction.
+If another operation is tested, use the same boundary test: identify its canonical owner set, apply ACTIVATE before execution, and change only the smallest existing routing/owner surface required by observed behavior.
 
 Do not broaden the experiment into a general entry-layer redesign.
 
