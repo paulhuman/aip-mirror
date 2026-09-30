@@ -13,143 +13,120 @@ C
 027
 
 **Status:**
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
-Investigate the next bounded architecture question:
+Complete the bounded normative-language consistency work identified after the C027 entry-layer architecture work, establish the project's normative-language rule, normalize active normative/procedural wording without changing semantic ownership, and leave the repository ready for the next Architecture & Research chapter.
 
-> What does “minimal” in Minimum Execution Context (MEC) actually mean after the entry/routing architecture work completed in C027?
+## Completed work
 
-The investigation should examine MEC together with P-01, P-02, and P-03, using the current repository as the source of truth rather than reconstructing the model from historical conversation context.
+### Normative-language model
 
-## Starting state
+Established and applied the project convention:
 
-C027 is the completed closing chapter for the preceding architecture sequence.
+- BCP 14 normative keywords: `MUST`, `MUST NOT`, `SHOULD`, `SHOULD NOT`, `MAY`.
+- Procedural vocabulary: `DO`, `DO NOT`.
+- `DO / DO NOT` are local procedural vocabulary, not BCP 14 keywords.
+- Lowercase `must`, `should`, and `may` remain ordinary English when they do not express normative meaning.
+- Normative prohibition is expressed as `MUST NOT`; `MUST NEVER` is not a project keyword.
+- Markdown emphasis is not an alternative normative syntax.
+- Blind search-and-replace is not an acceptable normalization method.
 
-The current entry/routing topology is:
+The semantic classification used four categories:
 
-    AGENTS
-      ↓
-    config.yaml + repository.md
-      ↓
-    ┌──────────────────────┬────────────────────────┐
-    │ AI infrastructure    │ Project work           │
-    │ ↓                    │ ↓                      │
-    │ INDEX                │ PROJECT-INSTRUCTIONS   │
-    │ ↓                    │ ↓                      │
-    │ canonical AI owners  │ canonical project      │
-    │                      │ sources                │
-    └──────────────────────┴────────────────────────┘
+- NORMATIVE
+- PROCEDURAL
+- ORDINARY_ENGLISH
+- AMBIGUOUS
 
-C027 established and verified:
+### Normative-language RULE
 
-- the current chapter identifier format `[A-Z][0-9]{3}`;
-- repository identity/path initialization through `.ai/config.yaml` and `.ai/rules/repository.md`;
-- `.ai/AGENTS.md` as a compact always-on entry contract;
-- `.ai/INDEX.md` as a routing/discovery surface, not a semantic owner;
-- the current command-routing boundary:
-  `command → operation → owner → activation context`;
-- separate capability discovery:
-  `capability → owner → purpose`;
-- retention of `.ai/workflows/handoff/BOOTSTRAP.md` as the ordered bootstrap workflow;
-- completion of the targeted entry-layer consistency cleanup.
+Created:
 
-Do not restart Iteration 2 restructuring or reopen the settled INDEX minimum-routing decision without new evidence.
+`.ai/rules/normative-language.md`
 
-## Immediate next task
+The RULE defines scope, BCP 14 vocabulary, procedural vocabulary, case/emphasis handling, ordinary English, the semantic test, prohibition wording, and relationship to other project rules.
 
-Study the relationship between:
+The RULE itself was self-reviewed for consistency.
 
-- Minimum Execution Context (MEC);
-- P-01;
-- P-02;
-- P-03;
-- the now-established AGENTS / INDEX / canonical-owner entry path.
+### Targeted cleanup and consistency sweep
 
-The central question is whether the earlier meaning of “minimal” in MEC still holds after the entry/routing model has been clarified.
+Applied the convention to the active scoped documentation and infrastructure files.
 
-Begin by locating and reading the current repository documents that define or discuss MEC and P-01/P-02/P-03. Treat historical architecture material as research evidence only; do not treat old TODOs or proposals as active tasks unless the current repository state establishes them as such.
+Scope:
 
-## Required research discipline
+- all active `.ai/**`, excluding `.ai/archive/**`;
+- `.ai/handoffs/README.md`;
+- all `docs/**`;
+- other handoff files were excluded.
 
-Use the current repository state as the source of truth.
+The cleanup deliberately preserved lowercase ordinary English, questions, and historical/research narrative where the words were not normative.
 
-For the MEC investigation:
+Alternative normative forms and Markdown-emphasis variants were checked and removed where they expressed normative meaning.
 
-1. identify the current MEC/P-01/P-02/P-03 sources;
-2. distinguish confirmed/observed facts, inferences, assumptions, and open questions;
-3. compare the semantic role of MEC with entry initialization, routing, and canonical-owner activation;
-4. determine whether “minimal” refers to token volume, semantic sufficiency, activation sufficiency, persistence, or another property;
-5. avoid prematurely changing `.ai` files;
-6. document a durable architectural conclusion only after the model is sufficiently established and reviewed.
+## Current repository state
 
-## Relevant current files
+The repository now contains the normative-language RULE and the corresponding targeted cleanup.
 
-Entry/infrastructure:
+The cleanup is intentionally bounded. It does not reopen the completed AGENTS/INDEX architecture work, BOOTSTRAP ownership, or other previously settled architecture decisions.
 
-- `.ai/AGENTS.md`
-- `.ai/INDEX.md`
-- `.ai/config.yaml`
-- `.ai/rules/repository.md`
-- `.ai/rules/workflow.md`
-- `.ai/rules/handoff/lifecycle.md`
-- `.ai/skills/handoff/SKILL.md`
-- `.ai/workflows/handoff/BOOTSTRAP.md`
-- `.ai/architecture/ai-infrastructure-restructuring.md`
+## Important decisions
 
-Project entry/architecture:
-
-- `docs/PROJECT-INSTRUCTIONS.md`
-- `docs/architecture/project-architecture.md`
-
-The architecture directory must be inspected before substantive MEC work. Its current active file is `project-architecture.md`; additional files should be treated according to the actual current repository tree rather than assumed from historical conversations.
-
-## Decisions and constraints
-
-- Current repository state outranks old conversation memory.
-- Do not begin another `.ai` refactoring pass merely because older documents contain deferred architecture questions.
-- Do not recreate a removed `ENTRY.md` layer.
-- Do not change BOOTSTRAP ownership or ordering.
-- Do not change the current chapter identifier format.
-- Do not freeze exact command IDs or final command syntax.
-- Preserve the distinction between entry contract, routing surface, canonical semantic owners, and ordered bootstrap.
-- Treat C027’s INDEX and AGENTS results as current architecture unless new evidence directly challenges them.
+- Current repository state remains the source of truth.
+- Normative capitalization is semantic, not lexical.
+- `MUST NOT` is the canonical prohibition form.
+- `DO NOT` is retained for procedural instructions.
+- Ordinary lowercase English remains valid.
+- Historical/research material is not mechanically rewritten into normative language.
+- Do not treat remaining lowercase occurrences as cleanup defects without semantic review.
 
 ## Evidence / confidence
 
 ### Confirmed / observed
 
-- C027 completed the bounded entry-layer architecture and cleanup sequence.
-- C027 handoff is `READY_FOR_HANDOFF`.
-- The previous C026 handoff is already `HANDED_OFF`.
-- The current repository contains the implemented AGENTS/INDEX entry topology.
-- The current lifecycle is `DRAFT → READY_FOR_HANDOFF → HANDED_OFF`.
+- C027's entry/routing architecture remains the current baseline.
+- The normative-language RULE exists in the repository.
+- The targeted cleanup was reviewed by scope and semantic classification.
+- `.ai/archive/**` was not included in the cleanup scope.
+- Handoff files other than `.ai/handoffs/README.md` were not included in the cleanup scope.
+- The final repository state was read back after the cleanup commits.
 
 ### Inferred
 
-- The clarified entry/routing topology may change the semantic interpretation of MEC’s “minimal” requirement.
-- MEC may need to be evaluated as semantic sufficiency rather than simply as a smallest possible set of files/tokens.
+- The normative-language convention is sufficiently stable to serve as the canonical project rule for future documentation edits.
+- Remaining lowercase occurrences should generally be treated as ordinary English or context-dependent material unless semantic review shows otherwise.
 
 ### Open
 
-- The exact current relationship among MEC, P-01, P-02, and P-03.
-- Whether MEC should be defined in terms of initialization, activation, persistence, or semantic sufficiency.
-- Whether any existing MEC terminology remains useful unchanged after the C027 entry/routing result.
-- Whether the MEC analysis will require any repository changes at all.
+- Whether future architecture work reveals additional normative-language edge cases requiring a small RULE refinement.
+- The next bounded Architecture & Research question after this documentation consistency work.
 
 ## Things not to redo
 
-- Physical Iteration 2 restructuring.
-- Repository Identity & Path Resolution ownership work.
-- The completed INDEX minimum-routing analysis.
-- The completed AGENTS entry-contract implementation.
-- The completed PROJECT-INSTRUCTIONS and lifecycle discovery cleanup.
+- C027 entry-layer restructuring.
+- The AGENTS entry-contract decision.
+- The INDEX minimum-routing decision.
 - The decision not to create `ENTRY.md`.
-- The decision to retain BOOTSTRAP as an ordered workflow.
+- BOOTSTRAP ownership and ordering.
+- The current chapter identifier format.
+- The completed normative-language inventory/classification/cleanup unless new evidence directly requires it.
+- Do not mechanically capitalize every remaining lowercase `must`, `should`, or `may`.
+
+## Immediate next task
+
+C029 should begin from the current repository state and choose the next bounded Architecture & Research task. The normative-language cleanup itself is complete; do not reopen it without new evidence.
 
 ## Recommended starting context
 
-Read the current MEC/P-01/P-02/P-03 material from `docs/architecture/` and the durable architecture note first. Then build the semantic model against the current AGENTS → config/repository → INDEX or PROJECT-INSTRUCTIONS → canonical-owner topology.
+Read the current entry-layer and architecture material as needed, especially:
 
-The receiving chapter should answer the bounded question before proposing any implementation change.
+- `.ai/AGENTS.md`
+- `.ai/INDEX.md`
+- `.ai/rules/handoff/lifecycle.md`
+- `.ai/rules/normative-language.md`
+- `.ai/architecture/ai-infrastructure-restructuring.md`
+- `docs/PROJECT-INSTRUCTIONS.md`
+- `docs/architecture/project-architecture.md`
+
+Use the current repository as the source of truth rather than reconstructing C028 from conversation history.
