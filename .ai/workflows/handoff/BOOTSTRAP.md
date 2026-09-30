@@ -1,6 +1,8 @@
 # Conversation handoff bootstrap
 
-This file is a static procedural template for initializing a new conversation chapter.
+This file is the reusable procedural workflow for initializing a new conversation chapter.
+
+It covers both receiving a chapter from a previous handoff and starting the first chapter of a specialization. It is a workflow owner, not a universal command router or entry registry.
 
 It MUST NOT contain the identity of a specific current or next chapter. Actual chapter values are supplied by the bootstrap message that invokes this procedure.
 
@@ -8,7 +10,7 @@ It MUST NOT contain the identity of a specific current or next chapter. Actual c
 
 The bootstrap message supplies:
 
-    PREVIOUS_CHAPTER = <previous chapter>
+    PREVIOUS_CHAPTER = <previous chapter or N/A>
     CURRENT_CHAPTER = <current chapter>
     SPECIALIZATION = <specialization>
 
@@ -16,7 +18,7 @@ These values are runtime context for the receiving chapter. DO NOT write them in
 
 `CURRENT_CHAPTER` always means the receiving chapter that is executing this bootstrap procedure.
 
-`PREVIOUS_CHAPTER` means the predecessor chapter whose handoff is being received.
+`PREVIOUS_CHAPTER` means the predecessor chapter whose handoff is being received. For the first chapter of a specialization, use `N/A`.
 
 The bootstrap procedure MUST NOT reinterpret these values as the chapter that authored the bootstrap message or as a `NEXT_CHAPTER` transition.
 
@@ -54,6 +56,40 @@ The bootstrap AI MUST NOT resolve .ai/..., docs/..., or other unqualified reposi
 
 If a referenced repository-relative path cannot be resolved from the configured repository identity, bootstrap MUST stop and report the unresolved reference rather than guessing.
 
+## Chat-initialization boundary
+
+This workflow is the reusable chat-initialization procedure for a new chapter. The initialization boundary is:
+
+    new conversation
+        ↓
+    establish repository + chapter context
+        ↓
+    ACTIVATE required canonical owners
+        ↓
+    execute the applicable bootstrap branch
+        ↓
+    substantive chapter work
+
+The workflow has two initialization cases:
+
+- **RECEIVING CHAPTER** — `PREVIOUS_CHAPTER` identifies an existing predecessor handoff;
+- **FIRST CHAPTER** — `PREVIOUS_CHAPTER = N/A`, so there is no predecessor handoff to receive or transition.
+
+This workflow does not route ordinary user commands, define command IDs, maintain a registry, or replace `.ai/INDEX.md`. Its responsibility begins when a new chapter is being initialized and ends when the chapter has passed bootstrap verification.
+
+### ACTIVATE at chat initialization
+
+After repository identity and path resolution are established, the AI MUST read `.ai/skills/activation/SKILL.md` and invoke ACTIVATE for the `conversation initialization` operation using the required canonical owners for the applicable branch. At minimum, the initialization owner set is:
+
+- `.ai/rules/workflow.md`;
+- `.ai/rules/handoff/lifecycle.md`;
+- `.ai/skills/handoff/SKILL.md`;
+- this BOOTSTRAP workflow.
+
+For a receiving chapter, the previous handoff is additional initialization context and MUST be read as required by the receiving branch. For a first chapter, no predecessor handoff is required.
+
+ACTIVATE establishes current canonical operational context; it does not execute bootstrap, perform lifecycle transitions, create commits, or replace this workflow.
+
 ## Repository write-capability self-check
 
 Before executing the repository-mutating parts of bootstrap, the AI MUST determine which capability branch applies:
@@ -78,9 +114,14 @@ When a new chapter is initialized, all AI MUST:
 1. Confirm the current chapter identity, previous chapter, and specialization from the bootstrap message.
 2. Read this file.
 3. Read the applicable project rules, especially `.ai/rules/handoff/lifecycle.md`, `.ai/rules/workflow.md`, and `.ai/rules/handoff/references.md`.
-4. Read the previous chapter's handoff under `.ai/handoffs/<specialization>/`.
-5. Inspect the current implementation files and references identified by that handoff.
-6. Confirm that the new chapter can continue from the recorded state without guessing.
+4. Read `.ai/skills/activation/SKILL.md` and invoke ACTIVATE for `conversation initialization` with the required canonical owners defined above.
+5. If `PREVIOUS_CHAPTER` is not `N/A`, read the previous chapter's handoff under `.ai/handoffs/<specialization>/`.
+6. If a previous handoff exists, inspect the current implementation files and references identified by that handoff.
+7. Confirm that the new chapter can continue from the recorded state without guessing; for a first chapter, confirm that the initial objective and project context are sufficient to begin.
+
+### Branch selection
+
+If `PREVIOUS_CHAPTER = N/A`, use the **FIRST CHAPTER** branch. Otherwise use the **RECEIVING CHAPTER** branch below.
 
 ### Branch A — WRITE-CAPABLE AI
 
@@ -88,8 +129,8 @@ When a new chapter is initialized, all AI MUST:
 
 7. Immediately create the new chapter's handoff under `.ai/handoffs/<specialization>/` with status `DRAFT` **if it does not already exist**.
 8. Commit that initial `DRAFT` handoff as part of bootstrap; this is a pre-authorized procedural commit and does not require a separate approval step **when normal initial creation is applicable**.
-9. Update the previous chapter's handoff from `READY_FOR_HANDOFF` to `HANDED_OFF`.
-10. Commit that lifecycle transition.
+9. For a receiving chapter, update the previous chapter's handoff from `READY_FOR_HANDOFF` to `HANDED_OFF`. For a first chapter, there is no predecessor transition.
+10. For a receiving chapter, commit that lifecycle transition. For a first chapter, proceed directly to verification.
 11. Perform the mandatory post-bootstrap consistency verification described below.
 12. Only after bootstrap is complete, proceed with new implementation or other chapter work.
 
@@ -101,7 +142,7 @@ If the receiving handoff already exists when bootstrap begins, DO NOT recreate i
 
 7. DO NOT create, update, or commit any repository file.
 8. If the receiving handoff already exists, DO NOT overwrite or normalize it.
-9. Prepare the complete proposed receiving handoff with status `DRAFT`, using the standard handoff structure and all information that can be verified from the repository and current conversation.
+9. Prepare the complete proposed new-chapter handoff with status `DRAFT`, using the standard handoff structure and all information that can be verified from the repository and current conversation.
 10. Return the **entire handoff file content** to the user as plain Markdown so the user can place it in `.ai/handoffs/<specialization>/` manually.
 11. Provide the exact commit message that should be used for the manual initial-DRAFT commit.
 12. DO NOT provide the separate bootstrap instruction for the next chat in the same response. A read-only AI MUST keep its response focused on the complete handoff file and its manual commit message so that constrained interfaces are not unnecessarily burdened by a second long artifact.
@@ -110,7 +151,7 @@ If the receiving handoff already exists when bootstrap begins, DO NOT recreate i
 
 For a READ-ONLY AI, the supplied handoff is a proposed repository state, not evidence that the repository already contains that state.
 
-If the previous handoff is `READY_FOR_HANDOFF`, the READ-ONLY AI may state that the manual bootstrap must subsequently perform the corresponding `READY_FOR_HANDOFF` → `HANDED_OFF` lifecycle update, but it MUST NOT present that transition as completed.
+If the previous handoff is `READY_FOR_HANDOFF`, the READ-ONLY AI may state that the manual bootstrap must subsequently perform the corresponding `READY_FOR_HANDOFF` → `HANDED_OFF` lifecycle update, but it MUST NOT present that transition as completed. For a first chapter, no predecessor lifecycle transition is required.
 
 If the receiving handoff already exists and indicates a qualifying pre-existing lifecycle violation, the READ-ONLY AI MUST report the blocked condition and MUST NOT attempt Lifecycle Recovery.
 
