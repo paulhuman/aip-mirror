@@ -1749,3 +1749,74 @@ rather than:
 The architecture is therefore optimized for the actual environment in which it operates: finite AI conversations whose termination can be abrupt, with Git serving as durable project memory.
 
 The system should preserve useful context, not create bookkeeping work merely to prove that context was transferred.
+
+## 27.11 C034 continuation plan — semantic consistency sweep
+
+The next bounded task after the handoff-state migration is a semantic consistency sweep. The purpose is to verify that the simplified handoff model is not merely implemented mechanically, but is also expressed consistently across the active canonical .ai infrastructure.
+
+The sweep MUST distinguish between:
+
+1. **active canonical semantics** — stale lifecycle-state behavior here must be removed; and
+2. **historical architecture record** — historical descriptions of the former model are valid durable evidence and MUST NOT be erased merely because the model changed.
+
+The inspection target is the active canonical .ai infrastructure, especially:
+
+    .ai/rules/
+    .ai/skills/
+    .ai/workflows/
+    .ai/INDEX.md
+
+The sweep should look for stale references to:
+
+    DRAFT
+    READY_FOR_HANDOFF
+    HANDED_OFF
+    SUPERSEDED
+    Status:
+    Lifecycle Recovery
+    Lifecycle Correction
+
+It should also identify prose that still implies an active transfer/closure state machine even when the old state names are absent.
+
+The handoff continuity rule has one small normative-language correction to make:
+
+    A current chapter SHOULD update its own handoff whenever meaningful durable context accumulates.
+
+SHOULD is intentional. Meaningful durable context should normally be checkpointed, but the simplified model must not turn handoff maintenance back into a rigid end-of-conversation ceremony.
+
+The canonical handoff skill also contains a stale example from the former schema. The example MUST remain structurally useful while removing the obsolete Status field:
+
+    # Conversation Handoff
+
+    **Conversation:**
+    E001 — Independent Review (Qwen)
+
+    **Specialization:**
+    E
+
+    **Chapter:**
+    001
+
+    **Previous chapter:**
+    000
+
+The architecture record itself must then be checked against the resulting canonical files. It should not merely describe the intended model while the active rules, skill, workflow, or routing still express a different one.
+
+The intended bounded sequence is:
+
+    semantic consistency sweep
+        ↓
+    MAY → SHOULD in handoff continuity
+        ↓
+    remove stale Status example from handoff skill
+        ↓
+    verify architecture record matches active semantics
+        ↓
+    final verification
+        ↓
+    inspect whether any concrete architectural contradiction remains
+
+Do not invent a new infrastructure layer during this sweep. In particular, do not introduce a registry, manifest, dependency graph, command-ID system, universal router, or replacement lifecycle state machine unless a concrete contradiction demonstrates that one is necessary.
+
+Only after final verification should the project decide whether any specific architectural contradiction remains. The absence of such a contradiction is itself a valid result; no follow-up architecture mechanism should be created merely to produce another task.
+
