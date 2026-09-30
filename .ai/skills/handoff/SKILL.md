@@ -199,11 +199,25 @@ Treat this as a direct request to generate the missing bootstrap instruction for
 
 This command does **not** initialize the next chapter, does **not** change lifecycle state, and does **not** authorize repository writes by itself.
 
-The generated instruction MUST contain the required runtime values for the receiving chapter:
+The generated instruction MUST use the canonical invocation format defined by `.ai/workflows/handoff/BOOTSTRAP.md` and contain the required runtime values for the receiving chapter:
 
-    PREVIOUS_CHAPTER = <previous chapter or N/A>
-    CURRENT_CHAPTER = <current chapter>
-    SPECIALIZATION = <specialization>
+    PREVIOUS_CHAPTER = <three-digit previous chapter number or N/A>
+    CURRENT_CHAPTER = <three-digit current chapter number>
+    SPECIALIZATION = <single uppercase specialization letter>
+
+The handoff skill is the producer of this bootstrap message. It MUST emit `CURRENT_CHAPTER` and `PREVIOUS_CHAPTER` as numeric chapter components only; the specialization letter MUST NOT be included in either value. For example:
+
+    PREVIOUS_CHAPTER = 032
+    CURRENT_CHAPTER = 033
+    SPECIALIZATION = C
+
+The producer MUST NOT emit:
+
+    PREVIOUS_CHAPTER = C032
+    CURRENT_CHAPTER = C033
+    SPECIALIZATION = C
+
+The full chapter identifier is derived by BOOTSTRAP from `SPECIALIZATION` plus `CURRENT_CHAPTER`; the predecessor identifier is derived from `SPECIALIZATION` plus `PREVIOUS_CHAPTER` when applicable. `PREVIOUS_CHAPTER = N/A` remains mandatory for the first chapter of a specialization.
 
 For the first chapter of a specialization, `PREVIOUS_CHAPTER` MUST be `N/A` and the receiving chapter follows the first-chapter branch of `.ai/workflows/handoff/BOOTSTRAP.md`.
 
