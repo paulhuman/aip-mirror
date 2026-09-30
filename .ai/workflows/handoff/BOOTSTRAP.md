@@ -83,7 +83,7 @@ When a new chapter is initialized, all AI MUST:
 11. Perform the mandatory post-bootstrap consistency verification described below.
 12. Only after bootstrap is complete, proceed with new implementation or other chapter work.
 
-If the receiving handoff already exists when bootstrap begins, DO NOT recreate it or pretend that normal initial creation occurred. Determine whether the existing state represents a qualifying pre-existing lifecycle violation. If so, bootstrap must be treated as blocked and the receiving chapter must wait for explicit user authorization before performing Lifecycle Recovery.
+If the receiving handoff already exists when bootstrap begins, DO NOT recreate it or pretend that normal initial creation occurred. Determine whether the existing state represents a qualifying pre-existing lifecycle violation. If so, bootstrap MUST be treated as blocked and the receiving chapter MUST wait for explicit user authorization before performing Lifecycle Recovery.
 
 ### Branch B — READ-ONLY AI
 
@@ -102,7 +102,7 @@ For a READ-ONLY AI, the supplied handoff is a proposed repository state, not evi
 
 If the previous handoff is `READY_FOR_HANDOFF`, the READ-ONLY AI may state that the manual bootstrap must subsequently perform the corresponding `READY_FOR_HANDOFF` → `HANDED_OFF` lifecycle update, but it MUST NOT present that transition as completed.
 
-If the receiving handoff already exists and indicates a qualifying pre-existing lifecycle violation, the READ-ONLY AI must report the blocked condition and MUST NOT attempt Lifecycle Recovery.
+If the receiving handoff already exists and indicates a qualifying pre-existing lifecycle violation, the READ-ONLY AI MUST report the blocked condition and MUST NOT attempt Lifecycle Recovery.
 
 If the new chapter is the first chapter of a specialization, there is no previous handoff to mark `HANDED_OFF`.
 
@@ -157,7 +157,7 @@ Recovery completion is not itself bootstrap completion and does not by itself au
 
 ## Initial DRAFT handoff
 
-The initial handoff must use the standard handoff structure from the `.ai/skills/handoff/SKILL.md` unless a project-specific format requires otherwise and must contain, at minimum:
+The initial handoff MUST use the standard handoff structure from the `.ai/skills/handoff/SKILL.md` unless a project-specific format requires otherwise and MUST contain, at minimum:
 
 - conversation/chapter identity;
 - specialization;
@@ -171,7 +171,7 @@ The initial handoff must use the standard handoff structure from the `.ai/skills
 - immediate next task;
 - recommended starting context.
 
-The initial handoff is intentionally a live checkpoint document. It may be incomplete at bootstrap and must be updated during the chapter as meaningful state accumulates.
+The initial handoff is intentionally a live checkpoint document. It MAY be incomplete at bootstrap and MUST be updated during the chapter as meaningful state accumulates.
 
 ## Checkpoint command
 
