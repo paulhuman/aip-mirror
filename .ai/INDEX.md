@@ -54,6 +54,7 @@ Use this map to find the canonical capability without reading the entire `.ai/` 
 |---|---|---|
 | Repository identity, path resolution, repository boundaries, write safety | `.ai/rules/repository.md` | canonical repository semantics and mutation safety |
 | General workflow principles | `.ai/rules/workflow.md` | general AI development workflow constraints |
+| Normative language | `.ai/rules/normative-language.md` | canonical normative and procedural language conventions |
 | Handoff lifecycle | `.ai/rules/handoff/lifecycle.md` | lifecycle states, transitions, Recovery, Correction |
 | Handoff reference preservation | `.ai/rules/handoff/references.md` | material research references that survive handoff |
 | Commit policy | `.ai/rules/commits.md` | commit policy and project commit vocabulary |
