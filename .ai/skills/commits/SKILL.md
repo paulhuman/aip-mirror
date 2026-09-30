@@ -53,7 +53,7 @@ Use a short scope when it improves clarity.
 
 Project-specific scopes are defined in `.ai/config.yaml` under `terminology.commit_scopes`.
 
-Generic scopes may also be used when appropriate, for example:
+Generic scopes MAY also be used when appropriate, for example:
 
 - architecture
 - repository
@@ -62,11 +62,11 @@ Generic scopes may also be used when appropriate, for example:
 - docs
 - handoff
 
-Do not force a scope when none is useful.
+DO NOT force a scope when none is useful.
 
 ## Style rules
 
-Commit messages should:
+Commit messages SHOULD:
 
 - use imperative wording;
 - be concise;
@@ -84,7 +84,7 @@ Describe the primary purpose of the commit, not every changed file.
 
 If a commit changes several files as part of one coherent feature, use one message describing the feature.
 
-If unrelated changes are present, recommend splitting them into separate commits.
+If unrelated changes are present, SHOULD split them into separate commits.
 
 For handoff work, describe the primary handoff action.
 
@@ -94,11 +94,11 @@ For lifecycle recovery or correction, clearly identify the action as recovery or
 
 Provide 1–3 candidate messages when useful.
 
-The first option should be the default candidate.
+The first option SHOULD be the default candidate.
 
 If the distinction between options matters, briefly explain why.
 
-Do not create or perform the commit merely because a commit message was requested.
+DO NOT create or perform the commit merely because a commit message was requested.
 
 Creating a commit and choosing its message are separate actions.
 
