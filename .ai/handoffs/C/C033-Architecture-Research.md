@@ -13,7 +13,7 @@ C
 032
 
 **Status:**
-READY_FOR_HANDOFF
+HANDED_OFF
 
 ## Starting objective
 
