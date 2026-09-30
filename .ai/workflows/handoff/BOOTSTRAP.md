@@ -26,6 +26,38 @@ A handoff-producing chapter prepares its own handoff for the next chapter; a rec
 
 `NEXT_CHAPTER` is not a bootstrap input and MUST NOT be used as a substitute for `CURRENT_CHAPTER`.
 
+### Canonical invocation format
+
+The bootstrap message is the transport boundary for these runtime inputs. Its format is canonical and MUST be used when invoking this workflow:
+
+    PREVIOUS_CHAPTER = <three-digit previous chapter number or N/A>
+    CURRENT_CHAPTER = <three-digit current chapter number>
+    SPECIALIZATION = <single uppercase specialization letter>
+
+The chapter number values MUST NOT include the specialization letter.
+
+Use:
+
+    CURRENT_CHAPTER = 033
+
+not:
+
+    CURRENT_CHAPTER = C033
+
+Likewise, use:
+
+    PREVIOUS_CHAPTER = 032
+
+not:
+
+    PREVIOUS_CHAPTER = C032
+
+`CURRENT_CHAPTER` and `PREVIOUS_CHAPTER` therefore carry only the numeric chapter component. The specialization is carried separately by `SPECIALIZATION`.
+
+The full chapter identifier is derived from these values as `SPECIALIZATION` + `CURRENT_CHAPTER` (for example, `C` + `033` = `C033`). The predecessor handoff path is derived from `SPECIALIZATION` + `PREVIOUS_CHAPTER` when `PREVIOUS_CHAPTER` is not `N/A`.
+
+A bootstrap message that supplies a chapter number with the specialization letter included is malformed and MUST be corrected before bootstrap proceeds.
+
 ## Canonical repository identity and path resolution
 
 Bootstrap uses the repository that contains this bootstrap procedure as the canonical project repository.
