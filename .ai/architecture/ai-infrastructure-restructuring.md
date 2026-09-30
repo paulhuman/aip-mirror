@@ -1487,3 +1487,45 @@ chapter initialization
 This is a concrete integration justified by the initialization boundary rather than a speculative second routing layer.
 
 No `ENTRY.md`, registry, manifest, dependency graph, command-ID layer, or universal router is justified by this result.
+
+### 26.11 Bootstrap runtime-input normalization — completed
+
+C033 identified a concrete transport-boundary defect: the canonical handoff schema correctly separates `Specialization` from the numeric `Chapter` and `Previous chapter` fields, but the bootstrap runtime-input contract did not explicitly define the representation of those values.
+
+This allowed a bootstrap message to carry a full chapter identifier such as `C033` where BOOTSTRAP expected the numeric chapter component `033`. The recent C031/C032 header corrections provided direct evidence of the same representation ambiguity at the handoff boundary.
+
+The bounded result is:
+
+```text
+handoff lifecycle identity
+        ↓
+Specialization + numeric chapter component
+        ↓
+BOOTSTRAP invocation format
+        ↓
+chapter context
+```
+
+The existing BOOTSTRAP workflow is the canonical owner of the invocation format. Its runtime contract is:
+
+    PREVIOUS_CHAPTER = <three-digit previous chapter number or N/A>
+    CURRENT_CHAPTER = <three-digit current chapter number>
+    SPECIALIZATION = <single uppercase specialization letter>
+
+Chapter number values MUST NOT include the specialization letter. For example:
+
+    PREVIOUS_CHAPTER = 032
+    CURRENT_CHAPTER = 033
+    SPECIALIZATION = C
+
+The handoff skill is the producer of this invocation and MUST emit the same normalized representation. BOOTSTRAP is the consumer and derives full chapter identifiers from the separate specialization and numeric chapter values.
+
+This is a contract clarification, not a new architectural layer. No new entry file, template file, router, registry, or identity owner is required. Lifecycle semantics remain owned by `.ai/rules/handoff/lifecycle.md`; handoff structure and bootstrap-message generation remain owned by `.ai/skills/handoff/SKILL.md`; chat initialization and its invocation format remain owned by BOOTSTRAP.
+
+The real C032 → C033 example is now represented canonically as:
+
+    PREVIOUS_CHAPTER = 032
+    CURRENT_CHAPTER = 033
+    SPECIALIZATION = C
+
+This closes the bounded normalization question without changing lifecycle state-machine semantics.
