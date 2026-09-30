@@ -13,7 +13,7 @@ C
 C031
 
 **Status:**
-DRAFT
+READY_FOR_HANDOFF
 
 ## Starting objective
 
