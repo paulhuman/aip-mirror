@@ -14,6 +14,16 @@ The bootstrap message supplies:
 
 These values are runtime context for the receiving chapter. DO NOT write them into this template.
 
+`CURRENT_CHAPTER` always means the receiving chapter that is executing this bootstrap procedure.
+
+`PREVIOUS_CHAPTER` means the predecessor chapter whose handoff is being received.
+
+The bootstrap procedure MUST NOT reinterpret these values as the chapter that authored the bootstrap message or as a `NEXT_CHAPTER` transition.
+
+A handoff-producing chapter prepares its own handoff for the next chapter; a receiving chapter executes bootstrap with itself as `CURRENT_CHAPTER` and the predecessor as `PREVIOUS_CHAPTER`.
+
+`NEXT_CHAPTER` is not a bootstrap input and MUST NOT be used as a substitute for `CURRENT_CHAPTER`.
+
 ## Canonical repository identity and path resolution
 
 Bootstrap uses the repository that contains this bootstrap procedure as the canonical project repository.
