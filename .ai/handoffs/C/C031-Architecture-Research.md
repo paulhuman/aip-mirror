@@ -13,7 +13,7 @@ C
 C030 — Architecture & Research
 
 **Status:**
-DRAFT
+READY_FOR_HANDOFF
 
 ## Current objective
 
@@ -107,3 +107,35 @@ Do not implement a new activation component until this comparison establishes th
 - `.ai/architecture/ai-infrastructure-restructuring.md`
 - `.ai/handoffs/C/C030-Architecture-Research.md`
 - `docs/PROJECT-INSTRUCTIONS.md`
+
+
+## C031 completion
+
+The bounded owner-boundary experiment is complete.
+
+Confirmed result:
+
+- one reusable ACTIVATE procedure covers handoff bootstrap, new-specialization entry, ordinary continuation, REFRESH, and pre-mutation activation;
+- activation input is operation + required canonical owners + optional mode/context;
+- ACTIVATE rereads the current repository versions of those owners and establishes the active operational context;
+- ACTIVATE does not own lifecycle, repository, project, mutation, commit, or verification semantics;
+- REFRESH reuses ACTIVATE rather than defining a second capability;
+- TRACE remains optional observability evidence rather than persistent schema;
+- handoff continuity and activation context are distinct concerns;
+- the first implementation exists at .ai/skills/activation/SKILL.md.
+
+The activation skill was created and verified in commit:
+
+    028ec2254d31a985149edcd1e7c32a79385e352e
+    feat(architecture): add activation skill
+
+The durable architecture notes were updated in commit:
+
+    7047eb0a43b515025ed6b6b42e7340a59e6e2769
+    docs(architecture): record activation experiment
+
+The activation skill is intentionally not yet wired into INDEX.md or BOOTSTRAP. The next chapter should test the smallest useful integration point against one real existing operation before changing shared routing/workflow infrastructure.
+
+## Migration readiness
+
+C031 is ready for handoff. The receiving chapter C032 should begin by bootstrapping normally, then perform the next bounded integration test rather than repeating the completed owner-boundary experiment.
