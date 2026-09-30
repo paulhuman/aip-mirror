@@ -1181,3 +1181,123 @@ The lifecycle rule also contains user-facing command phrases that overlap with I
 4. run a targeted entry-layer consistency sweep.
 
 DO NOT reopen the completed INDEX minimum-routing decision or restart Iteration 2 restructuring.
+
+
+## 26. C030 — Activation, Refresh, and TRACE research
+
+C030 tested the boundary between **discoverability** and **activation** using observable repository behavior.
+
+### 26.1 T1/T2/T3 result
+
+The bounded tests established:
+
+    DISCOVER
+        ↓
+    canonical owner found
+        ↓
+    ACTIVATE / reread
+        ↓
+    EXECUTE
+
+Discovery passed for:
+
+- repository write-safety owner discovery through AGENTS/INDEX;
+- INDEX-routed handoff operation discovery;
+- semantic-owner routing from docs/PROJECT-INSTRUCTIONS.md to canonical project architecture.
+
+Activation is a separate concern. C030 reproduced an actual failure in which the canonical repository rule was known/discoverable but was not reread before a mutation. This is directly observable from repository behavior and does not require claims about hidden model reasoning.
+
+The existing AGENTS contract already states that the canonical owner MUST be reread before execution. Therefore the gap is not absence of a rule; it is lack of a reliable, user-visible activation mechanism that makes the required reread observable and easier to audit.
+
+### 26.2 Archive reconciliation
+
+Archived architecture research confirms that this question has prior evidence rather than being entirely new:
+
+- .ai/archive/architecture/mec-dynamic-context.md models activation as a dynamic transition between available knowledge and active context and does not establish a mandatory routing layer, registry, manifest, capability-ID system, or permanent bootstrap kernel.
+- .ai/archive/architecture/minimal-execution-context.md identifies concrete minimum execution-context cases for handoff bootstrap and safe repository modification and distinguishes ordinary context from conditional escalation context.
+- .ai/archive/architecture/ai-project-instruction-architecture.md records AGENTS → INDEX → rules/skills/workflows, compact bootstrap/re-read, and deliberate rereading of critical instructions at meaningful checkpoints and before high-risk operations.
+- .ai/archive/architecture/architectural-bottleneck-audit.md records progressive activation as a meta-architectural constraint: activate additional semantic machinery only when needed.
+
+The archive supports progressive activation/re-read as a durable research direction, but does not establish a new semantic ENTRY, registry, router, or universal metadata layer.
+
+### 26.3 Minimal working model
+
+C030 now uses three provisional primitives for testing:
+
+    ACTIVATE
+        ↓
+    REFRESH
+        ↓
+    TRACE
+
+They are deliberately functional terms, not yet canonical semantic entities:
+
+- ACTIVATE — establish the context required for the current operation, including actual reread of canonical owners;
+- REFRESH — deliberately repeat activation during a long conversation or before a high-risk operation;
+- TRACE — expose the observable activation, execution, and verification steps to the user in a compact terminal-like log.
+
+TRACE is specifically an **observability mechanism**, not a transcript of hidden reasoning and not a semantic owner of the rules it reports.
+
+A provisional activation trace can look like:
+
+    [TRACE]
+    READ  ✓ .ai/AGENTS.md
+    READ  ✓ .ai/INDEX.md
+    ROUTE → repository write safety
+    READ  ✓ .ai/rules/repository.md
+    READ  ✓ .ai/rules/commits.md
+    READ  ✓ .ai/skills/commits/SKILL.md
+    READY → mutation
+
+Post-mutation TRACE can report read-back, content verification, diff/scope verification, commit, and result verification.
+
+### 26.4 Coverage experiment
+
+| Case | ACTIVATE | REFRESH | TRACE | Current gap |
+|---|---|---|---|---|
+| New chapter from handoff | Partially covered by BOOTSTRAP | Not a normal bootstrap step | Not standardized | Bootstrap initializes repository/lifecycle context, but does not expose a general activation trace |
+| New specialization | Not covered by a general activation template | Not applicable initially | Not standardized | No reusable general entry/activation template exists for a specialization without a predecessor handoff |
+| Ordinary continuation | Partially covered by AGENTS/INDEX + operation-specific reread | User can request reread, but no standard refresh operation | Not standardized | Activation is required but not externally visible as a repeatable protocol |
+| Mid-conversation refresh | Historical guidance says to reread critical instructions at meaningful checkpoints | No explicit refresh command/template | Not standardized | Manual intent exists, but no compact reusable refresh invocation is defined |
+| Before repository mutation | Canonical repository rule requires reread | Can be manually reactivated | Not standardized | C030 demonstrated that required reread can be skipped even when discoverable |
+
+### 26.5 Bounded architectural conclusion
+
+The current evidence justifies a **small activation interface**, but does not justify a new semantic router/registry or a new ENTRY.md yet.
+
+The smallest currently supported model is:
+
+    activation template / bootstrap input
+                ↓
+            ACTIVATE
+                ↓
+             TRACE
+                ↓
+            operation
+                ↓
+            VERIFY
+
+    long conversation / risk boundary
+                ↓
+             REFRESH
+                ↓
+            ACTIVATE
+
+The activation interface should remain separate from canonical semantic ownership:
+
+- existing rules continue to define what MUST be reread and what execution/verification requires;
+- the activation mechanism identifies and activates that context;
+- TRACE reports what actually happened;
+- REFRESH reuses the same activation path instead of creating a second set of rules.
+
+At this point there is enough evidence to investigate a **general activation template plus a refresh invocation and TRACE convention** as the next minimal implementation candidate. There is not enough evidence to create ENTRY.md, a registry, manifest, capability-ID system, or a new universal routing layer.
+
+### 26.6 Next bounded question
+
+Before implementing the activation interface, test its semantic owner boundary:
+
+> Can one small reusable activation procedure cover handoff bootstrap, new-specialization entry, ordinary continuation, refresh, and pre-mutation activation without duplicating lifecycle, repository, commit, or project semantics?
+
+If yes, the next implementation can remain small and compositional. If no, the failing cases should identify the exact additional owner or workflow required.
+
+C030 should not turn this research result into a broad .ai redesign without that final owner-boundary test.
