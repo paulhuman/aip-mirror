@@ -1348,4 +1348,84 @@ Therefore the next bounded test MUST compare a real handoff's current `Recommend
 Do not change the handoff reference rule or activation architecture from this hypothesis alone. First test it against C029/C030 and at least one other real handoff. The goal is to determine whether handoff references can become a compact record of **where the work and durable context live**, while ACTIVATE/REFRESH independently provides the canonical operational context.
 
 This test is specifically intended to prevent a false positive in which a receiving chapter appears to have activated the infrastructure simply because its handoff supplied a large list of canonical files.
+### 26.8 C031 activation owner-boundary experiment — completed
 
+C031 tested the bounded question from C030 against five concrete cases:
+
+1. handoff bootstrap;
+2. new-specialization entry;
+3. ordinary continuation;
+4. explicit REFRESH;
+5. pre-mutation activation.
+
+The experiment established one reusable semantic core:
+
+    Activation Context
+        ├── operation
+        ├── required canonical owners
+        └── optional mode/context
+
+    ACTIVATE
+        ↓
+    reread required canonical owners
+        ↓
+    ACTIVATED
+
+The same procedure is sufficient across all five cases when the caller supplies the operation-specific owner set. The cases differ in which owners are required and in what operation follows activation; they do not require different activation semantics.
+
+The resulting ownership boundary is:
+
+```text
+INDEX / caller
+    ↓
+ACTIVATE
+    ↓
+canonical owner
+    ↓
+operation
+```
+
+Therefore:
+
+- INDEX remains routing/discovery and identifies what should be activated;
+- ACTIVATE establishes the current canonical operational context;
+- canonical rules, skills, and workflows retain semantic ownership and execution;
+- REFRESH is an invocation mode that reuses ACTIVATE;
+- TRACE is optional observable evidence of activation, not persistent schema or repository state.
+
+C031 also validated the boundary between handoff continuity and activation context. A handoff may identify material current-work and durable-context files, while canonical infrastructure required for the current operation is activated independently. A handoff Recommended starting context therefore MUST NOT be treated as proof that activation occurred.
+
+### 26.9 Activation skill — first implementation
+
+The bounded experiment justified one new reusable capability:
+
+    .ai/skills/activation/SKILL.md
+
+Its contract is intentionally small:
+
+- input: operation + required canonical owners + optional invocation context;
+- procedure: reread the current repository version of each required owner;
+- output: ACTIVATED;
+- optional TRACE for observability;
+- no lifecycle, repository, project, mutation, commit, or verification ownership.
+
+The first implementation was committed as:
+
+    028ec2254d31a985149edcd1e7c32a79385e352e
+    feat(architecture): add activation skill
+
+The file was read back after creation and the commit diff was verified as a single new file with 69 added lines.
+
+This implementation is intentionally not yet wired into INDEX.md or BOOTSTRAP. The bounded validation first establishes the semantic capability; integration into existing routing/workflows remains a separate question and MUST be justified by a concrete execution path rather than added speculatively.
+
+### 26.10 Current bounded next question
+
+The next question is no longer whether a reusable activation semantic exists. That is sufficiently established.
+
+The next bounded test is:
+
+> Where can ACTIVATE be integrated into the existing entry/routing and workflow paths with the smallest useful change, without duplicating routing, lifecycle, repository, commit, or project semantics?
+
+The first integration candidate SHOULD be one real existing operation (preferably a small handoff command) before considering changes to INDEX.md, BOOTSTRAP, or other shared infrastructure.
+
+No new registry, manifest, dependency graph, command-ID layer, ENTRY.md, or universal router is justified by the current evidence.
