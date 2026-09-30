@@ -982,6 +982,17 @@ Historical chapter-identifier migration is complete; DO NOT preserve the former 
 
 Keep exact operation IDs, final command syntax, and hard-MUST commit vocabulary deferred until sufficient evidence exists.
 
+### Manual Bootstrap Template Test
+
+Provide a dedicated Markdown file with two copy/paste bootstrap templates:
+
+1. **First-chat initialization** — for starting a completely new specialization/chat when no predecessor chapter exists;
+2. **Interrupted-chat recovery** — for continuing when migration was not completed, or migration completed but the bootstrap instruction was not emitted.
+
+The templates MUST expose the required runtime values as explicit placeholders so the user can copy a template into a new chat and manually substitute the values without requiring a dedicated `init` or `new` command.
+
+The template design SHOULD be validated against the canonical `.ai/workflows/handoff/BOOTSTRAP.md` contract before becoming active infrastructure.
+
 ## 22. Migration note
 
 The current architecture state is represented by this file and the current `.ai` tree. Future chapters MUST start from current repository state rather than reconstructing earlier architecture chapters from conversation history.
