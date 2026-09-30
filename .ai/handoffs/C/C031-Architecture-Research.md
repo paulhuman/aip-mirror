@@ -1,0 +1,109 @@
+# Conversation Handoff
+
+**Conversation:**
+C031 — Architecture & Research
+
+**Specialization:**
+C
+
+**Chapter:**
+031
+
+**Previous chapter:**
+C030 — Architecture & Research
+
+**Status:**
+DRAFT
+
+## Current objective
+
+Continue Architecture & Research from the verified C030 repository state.
+
+C031 is the receiving chapter for C030. This handoff is the live checkpoint for the current conversation and will be updated as meaningful state accumulates.
+
+## Starting state
+
+C030 completed the first bounded activation / TRACE research pass.
+
+The durable C030 result is that the repository already has a workable discovery path through AGENTS → INDEX → canonical owners, but discovery does not itself guarantee that the canonical owner is actually reread before execution. C030 therefore framed ACTIVATE, REFRESH, and TRACE as provisional research primitives and deliberately avoided introducing ENTRY.md, a registry, manifest, router, command schema, or other new infrastructure without a bounded test demonstrating a need.
+
+C030's final bounded question is whether one small reusable activation procedure can cover handoff bootstrap, new-specialization entry, ordinary continuation, refresh, and pre-mutation activation without duplicating lifecycle, repository, commit, or project semantics.
+
+## Previous chapter
+
+C030 — Architecture & Research.
+
+Its handoff is the verified source of the current research state and is transitioned to `HANDED_OFF` as part of C031 bootstrap.
+
+## Important constraints
+
+- Preserve the established AGENTS / INDEX / canonical-owner architecture.
+- Do not recreate `ENTRY.md`.
+- Do not reopen settled entry-layer decisions without new evidence.
+- Preserve BOOTSTRAP ownership and lifecycle ordering.
+- Work from observable repository behavior, not speculation about hidden model reasoning.
+- Treat ACTIVATE, REFRESH, and TRACE as provisional research vocabulary until a bounded test establishes a durable semantic owner.
+- Do not introduce a router, registry, manifest, command schema, or additional filesystem layer unless a bounded test demonstrates a concrete need.
+- Distinguish handoff continuity from generic activation context; do not turn handoffs into generic activation checklists.
+- Use current repository state as the source of truth.
+
+## Evidence / confidence
+
+### Confirmed / observed
+
+- The current chapter identifier format is `[A-Z][0-9]{3}`.
+- C030's handoff is `DRAFT` and contains the activation / TRACE research state.
+- `.ai/INDEX.md` routes handoff operations to canonical lifecycle, skill, and bootstrap owners.
+- `.ai/rules/handoff/lifecycle.md` defines ACTIVATE-related research context indirectly through bootstrap/lifecycle ownership and explicitly distinguishes Lifecycle Recovery and Lifecycle Correction from normal transitions.
+- C030 recorded an observable discovery-versus-activation boundary in `.ai/architecture/ai-infrastructure-restructuring.md`.
+- The next bounded question is an owner-boundary test for a small reusable activation procedure.
+
+### Inferred
+
+- A small activation interface may be compositional if it only activates canonical owners identified by existing routing and workflow semantics.
+- The handoff itself may need to preserve material continuity while activation independently establishes operational context.
+
+### Open
+
+- Whether one reusable activation procedure can cover all five tested entry/refresh cases without duplicating semantic ownership.
+- What minimum activation inputs are actually required for each case.
+- Whether TRACE belongs as a reusable observability convention or requires any stronger canonical definition.
+- Whether the handoff's current `Recommended starting context` contains activation material that should instead be supplied by the activation mechanism.
+
+## Immediate next task
+
+Run the bounded owner-boundary experiment from C030:
+
+1. Test handoff bootstrap.
+2. Test new-specialization entry.
+3. Test ordinary continuation.
+4. Test explicit mid-conversation refresh.
+5. Test pre-mutation activation.
+
+For each case, identify only the activation input, canonical owners that must actually be reread, and observable TRACE that can be emitted. Then compare those cases against the current handoff `Recommended starting context` and classify entries as handoff continuity, activation context, both, or incidental/redundant.
+
+Do not implement a new activation component until this comparison establishes that the same small procedure is semantically sufficient.
+
+## Things not to redo
+
+- C027 entry-layer restructuring.
+- The AGENTS entry-contract decision.
+- The INDEX minimum-routing decision.
+- The decision not to create `ENTRY.md`.
+- BOOTSTRAP ownership and ordering.
+- The current chapter identifier format.
+- The completed normative-language cleanup.
+- The C030 discovery-versus-activation observation.
+- The C030 archive reconciliation already recorded in `.ai/architecture/ai-infrastructure-restructuring.md`.
+
+## Recommended starting context
+
+- `.ai/AGENTS.md`
+- `.ai/INDEX.md`
+- `.ai/rules/repository.md`
+- `.ai/rules/handoff/lifecycle.md`
+- `.ai/skills/handoff/SKILL.md`
+- `.ai/workflows/handoff/BOOTSTRAP.md`
+- `.ai/architecture/ai-infrastructure-restructuring.md`
+- `.ai/handoffs/C/C030-Architecture-Research.md`
+- `docs/PROJECT-INSTRUCTIONS.md`
