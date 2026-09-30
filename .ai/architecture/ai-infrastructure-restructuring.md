@@ -1820,3 +1820,164 @@ Do not invent a new infrastructure layer during this sweep. In particular, do no
 
 Only after final verification should the project decide whether any specific architectural contradiction remains. The absence of such a contradiction is itself a valid result; no follow-up architecture mechanism should be created merely to produce another task.
 
+
+
+## 28. C036 — Command-surface semantics and migration composition
+
+C036 introduced a concrete operational observation about the command surface and chat continuity.
+
+The user explicitly reported that the separate command:
+
+    Пора выдать bootstrap-инструкцию
+
+was introduced because the migration command:
+
+    Пора выполнить миграцию в чат XXYY
+
+was sometimes executed without the AI actually emitting the required bootstrap instruction at the end.
+
+This is not merely a wording preference. It identifies a reliability boundary in the migration procedure:
+
+> **Generating the bootstrap instruction is a required terminal step of migration, not an optional follow-up.**
+
+The intended migration flow is therefore:
+
+    >>migrate <chapter>
+        ↓
+    update current handoff
+        ↓
+    verify handoff content and scope
+        ↓
+    commit handoff update
+        ↓
+    invoke bootstrap-instruction generation
+        ↓
+    emit bootstrap instruction for the receiving chapter
+
+The separate bootstrap-instruction operation remains useful because it is independently callable when a previous migration was interrupted or its final instruction was omitted. However, normal migration MUST invoke that operation as part of its own completion procedure rather than merely mentioning it as a possible next action.
+
+### 28.1 Command versus workflow
+
+The distinction between the command surface and the canonical workflow remains explicit:
+
+    command
+        = user-facing invocation of an operation
+
+    .ai/workflows/handoff/BOOTSTRAP.md
+        = canonical ordered workflow for initializing a new conversation chapter
+
+The existence of BOOTSTRAP.md does not require the command surface to expose a command named "bootstrap". Conversely, a command that generates a bootstrap instruction does not itself execute the receiving chapter's BOOTSTRAP workflow.
+
+This distinction is important because the word "bootstrap" currently refers to two related but different things:
+
+1. the generated instruction that tells a future conversation how to initialize; and
+2. the receiving conversation's canonical initialization workflow.
+
+The command surface should name the first operation precisely enough that it is not mistaken for execution of the second.
+
+### 28.2 Migration and bootstrap-instruction generation are compositional
+
+The current architecture supports a small compositional relationship rather than a command-router hierarchy:
+
+    >>migrate <chapter>
+        ↓
+    migration operation
+        ↓
+    bootstrap-instruction generation
+
+The second operation is a reusable terminal operation of migration. It is not a subcommand syntax, command registry, or universal router.
+
+Therefore this does NOT imply a syntax such as:
+
+    >>migrate bootstrap <chapter>
+    >>bootstrap migrate <chapter>
+
+and does not justify introducing flags, subcommands, command IDs, or a command orchestration layer.
+
+The migration procedure owns the fact that bootstrap-instruction generation must occur at its end; the canonical owner of bootstrap-instruction generation retains the details of how that instruction is constructed.
+
+### 28.3 "init" versus "new" remains intentionally unresolved
+
+C036 also exposed a second semantic distinction that must remain explicit before command names are finalized.
+
+A new conversation can represent at least two different situations:
+
+**Continuation / receiving chapter**
+
+    PREVIOUS_CHAPTER = 036
+    CURRENT_CHAPTER  = 037
+    SPECIALIZATION   = C
+
+This continues an existing chapter sequence.
+
+**First chapter of a new specialization stream**
+
+    PREVIOUS_CHAPTER = N/A
+    CURRENT_CHAPTER  = 000
+    SPECIALIZATION   = C
+    SHORT_NAME       = Architecture & Research
+
+This starts a new chapter sequence.
+
+The command surface may eventually need a dedicated operation for the second case, but the name is deliberately not decided in C036. In particular, "init" and "new" remain candidates rather than accepted architecture.
+
+No new command should be introduced merely to resolve the naming question. The distinction must first be defined semantically and then named.
+
+### 28.4 Abrupt chat termination and recovery
+
+C036 also recorded an operational failure mode that matters to command semantics: a conversation can terminate because of contextual limits or other interruption before the migration procedure reaches its final bootstrap-instruction step.
+
+The architecture therefore MUST NOT assume that the previous conversation always completed migration cleanly.
+
+A receiving conversation may instead need to continue from repository state when the predecessor ended before emitting migration/bootstrap instructions. This is a continuation/recovery condition, not evidence that the predecessor's intended operation completed.
+
+The current architectural question is therefore bounded to:
+
+    normal migration
+        = explicit migration + mandatory bootstrap-instruction generation
+
+    interrupted migration
+        = receiving conversation recovers/continues from durable repository state
+
+    first chapter
+        = initializes a new specialization stream
+
+Whether interrupted migration requires a separate user-facing command or is fully handled by the existing BOOTSTRAP initialization workflow remains open. No recovery command is introduced by this record.
+
+### 28.5 Short-name as chapter initialization data
+
+The existing handoff naming convention is:
+
+    <chapter>-<short-name>.md
+
+C036 confirmed that the short conversation name is therefore operational input when a new chapter handoff is created. For the current specialization:
+
+    SPECIALIZATION = C
+    SHORT_NAME = Architecture & Research
+
+The current BOOTSTRAP runtime contract explicitly defines PREVIOUS_CHAPTER, CURRENT_CHAPTER, and SPECIALIZATION, but does not currently list SHORT_NAME as a bootstrap input.
+
+This is a concrete contract question to inspect before changing the bootstrap command surface. The next bounded analysis SHOULD determine whether SHORT_NAME is:
+
+- derived from canonical handoff/reference configuration;
+- supplied as an explicit bootstrap input; or
+- otherwise resolved by the receiving workflow.
+
+No new runtime field is introduced by this architecture record alone.
+
+### 28.6 C036 decision boundary
+
+Confirmed in C036:
+
+- ">>" is the stable command prefix.
+- ">>operation [arguments...]" is the minimal command grammar.
+- ">>handoff" represents the current handoff checkpoint operation.
+- ">>migrate <chapter>" represents migration to the specified receiving chapter.
+- Bootstrap-instruction generation is a required final step of normal migration.
+- The bootstrap-instruction operation remains independently callable when needed.
+- The command that generates a bootstrap instruction MUST NOT be conflated with execution of the receiving chapter's BOOTSTRAP workflow.
+- "init" versus "new" remains unresolved.
+- Interrupted migration/recovery remains an open semantic question.
+- No command registry, subcommand hierarchy, flag layer, or universal router is justified by these observations.
+
+The next architecture work SHOULD first resolve the semantic operation set and naming boundary, then update INDEX/SKILL/BOOTSTRAP only after the command meanings are stable.
