@@ -106,19 +106,18 @@ No active command-reference files have yet been changed for this syntax decision
 
 ## Immediate next task
 
-Resolve the bounded semantic question for `>>bootstrap` before editing active command references.
+C037 must continue the bounded command-semantics analysis recorded in architecture section 28.
 
-The current distinction under examination is:
+First, resolve the semantic operation boundary for:
 
-    >>bootstrap
-        = command-surface invocation
+- normal migration;
+- mandatory bootstrap-instruction generation at the end of migration;
+- interrupted migration/recovery after abrupt chat termination;
+- first-chapter initialization of a new specialization stream.
 
-    .ai/workflows/handoff/BOOTSTRAP.md
-        = canonical new-conversation initialization workflow
+The names `init` versus `new` remain unresolved. Do not edit INDEX/SKILL/BOOTSTRAP command references until the operation set and naming boundary are stable.
 
-The question is whether the existing command meaning — generation of a bootstrap instruction for a future receiving chapter — remains sufficiently clear under the new syntax, or whether the command name needs a narrower semantic definition.
-
-After that question is settled, proceed with the already completed command-reference inventory and migrate only the classified active references. Historical architecture-record references remain unchanged unless a separate current-semantic reason is established.
+A concrete contract question also remains open: SHORT_NAME is required by the handoff filename convention but is not currently listed as a BOOTSTRAP runtime input. Determine how the receiving workflow should resolve it before introducing or changing a command for first-chapter initialization.
 
 ## Important constraints
 
@@ -159,21 +158,28 @@ After that question is settled, proceed with the already completed command-refer
           → >>migrate <chapter>
 
       Пора выдать bootstrap-инструкцию
-          → >>bootstrap
+          → command name remains open for semantic refinement
 
 - `>>handoff` has now been test-driven by the user as the current handoff checkpoint command.
+- `>>migrate <chapter>` MUST end by invoking the bootstrap-instruction generation operation; this requirement is now recorded in architecture section 28.
+- The bootstrap-instruction operation remains independently useful when migration was interrupted or its final instruction was omitted.
+- `init` versus `new` remains unresolved for first-chapter initialization.
+- Interrupted migration/recovery remains an open semantic question.
+- The architecture record was updated and committed in c657d241304300fbb94847a4562431450f43fff6.
 - No active command-reference migration has yet been performed.
 
 ### Inferred
 
-- The three current examples `>>handoff`, `>>migrate C036`, and `>>bootstrap` are intended as semantic-operation examples rather than a frozen complete command registry.
-- `>>bootstrap` likely remains the command name, but its exact command-side meaning should be stated explicitly enough to avoid confusing invocation with execution of the BOOTSTRAP workflow.
+- The command that generates a bootstrap instruction should remain a separate callable operation even though normal migration invokes it as its terminal step.
+- The migration procedure and bootstrap-instruction generation are compositional operations, not a reason to introduce command subcommands or a universal command router.
 
 ### Open
 
-- Whether `>>bootstrap` is semantically clear enough as the command for generating a bootstrap instruction, given that `BOOTSTRAP.md` is also the canonical initialization workflow.
-- The already completed active/historical command-reference classification.
-- Whether the final syntax decision should be recorded in the architecture record, and if so, the minimal appropriate location and wording.
+- The final command name for the standalone bootstrap-instruction generation operation.
+- Whether first-chapter initialization needs a dedicated command, and if so whether `init` or `new` best describes that operation.
+- Whether interrupted migration/recovery is a separate user-facing operation or is handled entirely by BOOTSTRAP initialization from durable repository state.
+- How SHORT_NAME is resolved at bootstrap time.
+- The active command-reference migration remains pending until these semantic boundaries are resolved.
 
 ## Recommended starting context
 
@@ -185,3 +191,33 @@ Read:
     .ai/rules/handoff/lifecycle.md
 
 Then continue with the bounded syntax decision and command-reference inventory. Do not start a broad .ai refactor.
+
+
+## Migration checkpoint for C037
+
+C036 is being migrated to C037.
+
+The durable architecture observation from this chapter is recorded in:
+
+    .ai/architecture/ai-infrastructure-restructuring.md
+    section 28 — C036 — Command-surface semantics and migration composition
+
+The key reliability finding is:
+
+    >>migrate <chapter>
+        ↓
+    update current handoff
+        ↓
+    verify + commit
+        ↓
+    mandatory bootstrap-instruction generation
+        ↓
+    emit receiving-chapter bootstrap instruction
+
+The separate bootstrap-instruction operation exists because migration previously could omit its final instruction. Therefore normal migration MUST invoke that operation at the end, while the operation remains independently callable for interrupted or incomplete migration.
+
+The naming question for that standalone operation is still open. The previous shorthand `>>bootstrap` is no longer treated as a settled semantic decision because "bootstrap" also names the canonical receiving-chapter workflow.
+
+The first-chapter initialization command is also unresolved between `init` and `new`. Interrupted migration/recovery is an additional open boundary and MUST NOT be conflated with first-chapter initialization.
+
+C037 should continue from these durable decisions rather than reopening the `>>` syntax decision.
