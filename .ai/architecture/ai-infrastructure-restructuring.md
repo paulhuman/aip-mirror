@@ -1312,3 +1312,40 @@ Before implementing the activation interface, test its semantic owner boundary:
 If yes, the next implementation can remain small and compositional. If no, the failing cases should identify the exact additional owner or workflow required.
 
 C030 should not turn this research result into a broad .ai redesign without that final owner-boundary test.
+
+### 26.7 Handoff content versus activation context — TODO
+
+C030 identified a second boundary that must be tested before implementing the activation interface: **handoff content is not the same thing as generic activation context**.
+
+The current C029 handoff contains a broad `Recommended starting context` list:
+
+    .ai/AGENTS.md
+    .ai/INDEX.md
+    .ai/rules/repository.md
+    .ai/rules/workflow.md
+    .ai/rules/handoff/lifecycle.md
+    .ai/rules/normative-language.md
+    .ai/architecture/ai-infrastructure-restructuring.md
+    docs/PROJECT-INSTRUCTIONS.md
+    docs/architecture/project-architecture.md
+
+This may be duplicating activation rather than preserving the actual continuity of the work. The bounded hypothesis to test is:
+
+> A handoff should preserve the files in which the current chapter's work was actually performed and the durable context required to understand or continue that work; it should not serve as a generic re-activation checklist for the receiving AI.
+
+The distinction is important for two reasons:
+
+1. **Handoff continuity** should tell the receiving chapter where the material state of the previous work lives — the handoff itself plus the current working/durable files that contain the research, findings, decisions, or other material context.
+2. **Activation** should independently establish and reread the canonical infrastructure required for the current operation. It should not be possible to mistake a large handoff reading list for evidence that the activation mechanism works correctly.
+
+Therefore the next bounded test MUST compare a real handoff's current `Recommended starting context` against the files actually touched or materially relied upon by that chapter. Classify each entry as:
+
+- **handoff continuity** — material current-work or durable-context reference that belongs in the handoff;
+- **activation context** — canonical infrastructure that should be activated by the general activation mechanism rather than carried as a generic handoff checklist;
+- **both** — genuinely needed in both contexts, with different reasons;
+- **incidental / redundant** — not required for either purpose.
+
+Do not change the handoff reference rule or activation architecture from this hypothesis alone. First test it against C029/C030 and at least one other real handoff. The goal is to determine whether handoff references can become a compact record of **where the work and durable context live**, while ACTIVATE/REFRESH independently provides the canonical operational context.
+
+This test is specifically intended to prevent a false positive in which a receiving chapter appears to have activated the infrastructure simply because its handoff supplied a large list of canonical files.
+
