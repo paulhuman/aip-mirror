@@ -542,6 +542,17 @@ Completed:
 - C029 final verification sequence defined: RULE self-test, negative lexical sweep, semantic spot-check, discoverability check, and final consistency verdict.
 - C029 normative-language verification completed successfully, including targeted normalization of confirmed remaining normative/procedural lowercase forms and INDEX discoverability.
 
+Status reconciliation — C030
+
+A review of older architecture notes found that the historical C027 bounded next sequence is now complete in the repository state:
+
+1. AGENTS contract implementation — complete.
+2. The two stale docs/PROJECT-INSTRUCTIONS.md references — corrected and verified absent.
+3. Lifecycle command-discovery classification/cleanup — completed; lifecycle remains the semantic owner while INDEX provides routing.
+4. Targeted entry-layer consistency sweep — completed by subsequent restructuring and verification work.
+
+These were previously left as a historical "next sequence" in section 25.5. They are now historical completed work rather than active TODOs. No additional C027 implementation work is implied.
+
 Current entry-layer model:
 
 ```text
