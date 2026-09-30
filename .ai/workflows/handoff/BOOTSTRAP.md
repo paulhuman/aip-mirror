@@ -22,6 +22,34 @@ These values are runtime context for the receiving chapter. DO NOT write them in
 
 The bootstrap procedure MUST NOT reinterpret these values as the chapter that authored the bootstrap message or as a `NEXT_CHAPTER` transition.
 
+### Supplied `SHORT_NAME` context
+
+The bootstrap message MAY also supply:
+
+    SHORT_NAME = <short conversation name>
+
+`SHORT_NAME` is supplied context, not a fourth canonical bootstrap runtime input.
+
+When `SHORT_NAME` is supplied, the bootstrap procedure MUST use the supplied value for the receiving handoff filename and conversation title unless the supplied value is malformed or otherwise unusable.
+
+When `SHORT_NAME` is omitted, the bootstrap procedure MUST resolve it from the specialization vocabulary in `.ai/config.yaml`:
+
+    SPECIALIZATION → specializations.<SPECIALIZATION>.short_name
+
+For example:
+
+    SPECIALIZATION = C
+    SHORT_NAME = Architecture & Research
+
+If a supplied `SHORT_NAME` is present, configuration lookup is a fallback and MUST NOT replace the supplied value merely because a configured value also exists.
+
+If `SHORT_NAME` is neither supplied nor resolvable from configured specialization vocabulary, bootstrap MUST stop and report the unresolved short name rather than guessing one.
+
+The resolved `SHORT_NAME` is used as conversation context and for the canonical handoff filename:
+
+    .ai/handoffs/<specialization>/<chapter>-<short-name>.md
+
+
 A handoff-producing chapter prepares its own handoff for the next chapter; a receiving chapter executes bootstrap with itself as `CURRENT_CHAPTER` and the predecessor as `PREVIOUS_CHAPTER`.
 
 `NEXT_CHAPTER` is not a bootstrap input and MUST NOT be used as a substitute for `CURRENT_CHAPTER`.
