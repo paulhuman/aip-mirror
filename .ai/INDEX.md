@@ -41,7 +41,7 @@ The table records only information needed to recognize and activate the canonica
 
 1. Match the user's command to the closest documented semantic operation.
 2. Treat the command phrase as an invocation signal, not as the procedure itself.
-3. Read the listed canonical owners and activation context before execution.
+3. Invoke ACTIVATE with the operation and listed canonical owners, rereading those owners before execution.
 4. Follow the canonical owner's procedure; DO NOT substitute INDEX content for it.
 5. Apply repository write-safety and commit rules from their canonical owners when the operation requires repository mutation.
 6. If the command does not match a known operation, inspect the capability map and relevant canonical owners before inventing any new operation.
