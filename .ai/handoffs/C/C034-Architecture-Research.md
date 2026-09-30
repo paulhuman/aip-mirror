@@ -12,37 +12,36 @@ C
 **Previous chapter:**
 033
 
-**Status:**
-DRAFT
-
 ## Starting objective
 
-Continue the bounded Architecture & Research work from C033. C033 closed the bootstrap runtime-input normalization question. The immediate starting point for C034 is to investigate the remaining concrete handoff-header inconsistency identified during bootstrap analysis: the canonical `Previous chapter` field is intended to contain only the three-digit chapter number, but the historical C031 handoff still contains `030 — Architecture & Research`.
+Continue the bounded Architecture & Research work from C033. C033 closed the bootstrap runtime-input normalization question and C034 first corrected the historical C031 handoff header defect. The current bounded objective is to substantially simplify the handoff model by removing lifecycle status bookkeeping while preserving receiving-chapter handoff creation and durable context continuity.
 
 ## Starting state
 
-C033 established and verified the canonical bootstrap runtime-input format:
+C034 verified that the canonical handoff-header rule already requires the Previous chapter field to contain only the three-digit chapter number. No additional canonical rule gap was found. The historical C031 defect was corrected from:
 
-```
-PREVIOUS_CHAPTER = 032
-CURRENT_CHAPTER = 033
-SPECIALIZATION = C
-```
+    Previous chapter:
+    030 — Architecture & Research
 
-The current canonical handoff header schema in `.ai/skills/handoff/SKILL.md` states that `Previous chapter` contains only the previous chapter's three-digit number or `N/A`.
+to:
 
-During pre-bootstrap inspection, C033 was found in `DRAFT` although it was the predecessor for this receiving chapter. The user explicitly authorized the bounded Lifecycle Recovery command. Recovery changed only C033:
+    Previous chapter:
+    030
 
-```
-DRAFT → READY_FOR_HANDOFF
-```
+The correction was committed as:
 
-Recovery commit:
+    aec5211f7c2346d93471bb17f0e03b8e9c9ae5ba
+    fix(handoff): normalize C031 previous chapter
 
-    f0c72e661dc443c18f1439f636da590565c916f4
-    fix(handoff): recover C033 lifecycle state
+The current handoff architecture was then reviewed from a broader operational perspective. The three-state lifecycle:
 
-No Git history was rewritten. The original violating state remains represented by its historical commits.
+    DRAFT
+      ↓
+    READY_FOR_HANDOFF
+      ↓
+    HANDED_OFF
+
+creates substantial bookkeeping overhead and Git-history noise without preserving information that cannot already be represented by the handoff file, chapter identity, and Git history.
 
 ## Confirmed / observed
 
@@ -50,39 +49,114 @@ No Git history was rewritten. The original violating state remains represented b
 - Current chapter: C034.
 - Previous chapter: C033.
 - Specialization: C.
-- C033 is now `READY_FOR_HANDOFF`.
-- This C034 handoff is the receiving chapter's initial `DRAFT`.
-- The canonical `Previous chapter` header field rule in `.ai/skills/handoff/SKILL.md` requires digits only.
-- C031 currently contains a historical header value of `030 — Architecture & Research`, which does not conform to that rule.
-- Lifecycle Recovery was explicitly authorized and completed before this receiving chapter created its own handoff.
+- The receiving chapter creates its own handoff at the beginning of a new conversation. This invariant is retained.
+- Handoff status transitions are the source of a large class of unnecessary lifecycle-only mutations and commits.
+- Conversation termination may be abrupt because of context limits, browser/session instability, or other interruption; a required final status transition is therefore operationally fragile.
+- Handoff commits are AI-infrastructure bookkeeping and should be visually distinguishable from project documentation commits.
+- The desired normal handoff commit vocabulary is intentionally short:
 
-## Inferred
+    ai-docs(handoff): create C033
+    ai-docs(handoff): update C033
 
-- The remaining C031 header defect is likely a gap between the canonical handoff-header schema and the procedure or historical correction path that produced the file.
-- The defect should be investigated at the canonical owner/source-of-generation level before making another isolated manual correction.
+- Normal handoff commit messages MUST NOT append conversation titles, task descriptions, rationale, milestone summaries, or other explanatory suffixes.
 
-## Open
+## Architectural decision
 
-- Identify every canonical handoff rule/procedure that defines or generates the `Previous chapter` header field.
-- Determine why a title suffix such as `— Architecture & Research` can persist despite the current header rule.
-- Correct the canonical rule if a real ambiguity exists.
-- Then correct the directly affected historical handoff(s) within an explicitly bounded scope, preserving Git history.
-- Do not introduce a new architecture layer for this issue.
+C034 adopts the following target model:
+
+> **A handoff is a persistent conversation-context snapshot for a chapter, not a lifecycle-controlled transfer object.**
+
+The active handoff schema MUST NOT contain a Status field.
+
+The following lifecycle states are removed from the active architecture:
+
+    DRAFT
+    READY_FOR_HANDOFF
+    HANDED_OFF
+
+No replacement state machine is introduced.
+
+The receiving chapter still creates its own handoff at initialization:
+
+    new conversation
+        ↓
+    establish repository + chapter context
+        ↓
+    read predecessor handoff when applicable
+        ↓
+    create current chapter handoff
+        ↓
+    commit initial handoff
+        ↓
+    substantive work
+
+A current chapter may update its handoff whenever meaningful durable context accumulates. There is no required closing transition before the conversation ends.
+
+The receiving chapter reads the predecessor handoff but does not modify it merely to mark it as consumed. There is no receiving transition equivalent to READY_FOR_HANDOFF → HANDED_OFF.
+
+Chapter identity and bootstrap runtime-input normalization remain unchanged:
+
+    PREVIOUS_CHAPTER = <three-digit previous chapter number or N/A>
+    CURRENT_CHAPTER = <three-digit current chapter number>
+    SPECIALIZATION = <single uppercase specialization letter>
+
+## Consequences
+
+The canonical handoff skill, BOOTSTRAP workflow, INDEX routing, and existing handoff files now require a coordinated migration.
+
+The migration must:
+
+1. remove Status from active handoff files;
+2. remove lifecycle-state procedures and commands that exist solely to maintain the removed state machine;
+3. preserve receiving-chapter creation of its own handoff;
+4. preserve chapter identity and bootstrap invocation normalization;
+5. preserve meaningful handoff content and historical context;
+6. use the short `ai-docs(handoff): create/update <chapter>` commit convention;
+7. perform a repository-wide semantic consistency sweep for stale lifecycle terminology;
+8. avoid introducing a replacement state machine.
+
+The existing lifecycle recovery/correction machinery is expected to become obsolete if its only purpose is repairing the removed status model. This must be established by the implementation pass rather than assumed without inspection.
+
+Historical Git commits MUST NOT be rewritten. Existing lifecycle commits remain historical evidence of the former architecture.
+
+## Handoff commit convention
+
+For normal handoff creation and content updates, use exactly these forms:
+
+    ai-docs(handoff): create C034
+    ai-docs(handoff): update C034
+
+Keep these messages short. The handoff commit itself is the durable Git trace; the handoff file contains the useful context.
+
+The local `ai-docs` namespace is an intentional repository convention for `.ai/` infrastructure. It is not presented as a replacement for Conventional Commits.
+
+Project documentation remains under the normal project-facing `docs(...)` vocabulary.
 
 ## Important constraints
 
 - Preserve the established AGENTS → INDEX → ACTIVATE → canonical-owner architecture.
 - Treat `.ai/skills/handoff/SKILL.md` as the canonical owner of handoff structure unless repository evidence identifies a more specific owner.
-- Treat `.ai/rules/handoff/lifecycle.md` as the canonical owner of lifecycle semantics.
-- Do not conflate full chapter identifiers such as `C030` with the numeric chapter component `030`.
-- Do not put conversation titles into the `Previous chapter` field.
-- Any historical lifecycle correction requires its own explicit authorization; do not infer authorization from the current bootstrap.
-- Preserve historical commits and use the repository write-safety procedure for every existing-file mutation.
-- Do not repeat completed ACTIVATE experiments or introduce `ENTRY.md` without a new bounded need.
+- BOOTSTRAP remains the canonical ordered new-conversation chapter initialization workflow.
+- Do not reintroduce a lifecycle status field under another name.
+- Do not create a new handoff state machine merely to replace the removed one.
+- Do not remove the receiving chapter's responsibility to create its own handoff.
+- Do not conflate full chapter identifiers such as C034 with the numeric chapter component 034.
+- Preserve historical Git commits; this is an active-architecture migration, not history rewriting.
+- Use the repository write-safety procedure for every existing-file mutation.
 
 ## Immediate next task
 
-Inspect the canonical handoff-header generation/format rules and the affected C031/C032 handoffs to determine the exact source of the `Previous chapter: 030 — Architecture & Research` defect before making any further mutation.
+Migrate the canonical handoff architecture to the new snapshot model in a bounded sequence:
+
+1. inspect and update `.ai/rules/handoff/lifecycle.md`;
+2. inspect and update `.ai/skills/handoff/SKILL.md`;
+3. inspect and update `.ai/workflows/handoff/BOOTSTRAP.md`;
+4. inspect and update `.ai/INDEX.md`;
+5. remove Status from active handoff files;
+6. run a repository-wide semantic consistency sweep for obsolete lifecycle terminology and procedures;
+7. verify Git diff/scope and the resulting simplified handoff workflow.
+
+The migration should be performed as a small number of coherent commits rather than one commit per former lifecycle transition.
 
 ## Recommended starting context
 
@@ -90,11 +164,10 @@ Inspect the canonical handoff-header generation/format rules and the affected C0
 - `.ai/INDEX.md`
 - `.ai/rules/repository.md`
 - `.ai/rules/workflow.md`
-- `.ai/rules/handoff/lifecycle.md`
 - `.ai/skills/activation/SKILL.md`
 - `.ai/skills/handoff/SKILL.md`
 - `.ai/skills/commits/SKILL.md`
 - `.ai/workflows/handoff/BOOTSTRAP.md`
+- `.ai/rules/handoff/lifecycle.md`
+- `.ai/architecture/ai-infrastructure-restructuring.md`
 - `.ai/handoffs/C/C033-Architecture-Research.md`
-- `.ai/handoffs/C/C032-Architecture-Research.md`
-- `.ai/handoffs/C/C031-Architecture-Research.md`
