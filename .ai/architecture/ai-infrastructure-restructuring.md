@@ -1992,3 +1992,119 @@ Confirmed in C036:
 - No command registry, subcommand hierarchy, flag layer, or universal router is justified by these observations.
 
 The next architecture work SHOULD first resolve the semantic operation set and naming boundary, then update INDEX/SKILL/BOOTSTRAP only after the command meanings are stable.
+
+
+## 29. C037 — SHORT_NAME resolution and specialization vocabulary
+
+C037 resolved the SHORT_NAME question at the configuration and bootstrap-contract boundary.
+
+### 29.1 Specialization vocabulary is configuration
+
+The specialization-to-short-name mapping is now recorded in .ai/config.yaml:
+
+    specializations:
+      A:
+        short_name: JSX Prototype
+      B:
+        short_name: Native AIP Plugin
+      C:
+        short_name: Architecture & Research
+      D:
+        short_name: Project Workshop
+      E:
+        short_name: Independent Review (Qwen)
+      F:
+        short_name: Independent Review (Grok)
+
+This mapping is project configuration/vocabulary, not a new command registry or routing layer.
+
+Its purpose is to provide a single canonical lookup for the stable short name associated with each specialization. Generic handoff rules and workflows may resolve the short name from this vocabulary without embedding the AIP Mirror specialization names directly.
+
+### 29.2 Canonical bootstrap inputs remain three values
+
+The canonical BOOTSTRAP runtime contract remains:
+
+    PREVIOUS_CHAPTER
+    CURRENT_CHAPTER
+    SPECIALIZATION
+
+SHORT_NAME does not become a required fourth canonical runtime input merely because it appears in generated or manually prepared bootstrap messages.
+
+Instead, the receiving workflow uses this resolution rule:
+
+    supplied SHORT_NAME
+        ↓ if omitted
+    configured specialization vocabulary
+        ↓
+    resolved SHORT_NAME
+
+This preserves the minimal three-value runtime contract while allowing explicit context to be supplied when useful.
+
+### 29.3 Generated bootstrap messages may expose resolved SHORT_NAME
+
+A generated bootstrap instruction SHOULD include the resolved short name as explicit context:
+
+    PREVIOUS_CHAPTER = 037
+    CURRENT_CHAPTER = 038
+    SPECIALIZATION = C
+    SHORT_NAME = Architecture & Research
+
+The four-line message is therefore self-contained for human inspection and copy/paste, while only the first three values remain canonical BOOTSTRAP runtime inputs.
+
+The receiving workflow MAY use the supplied SHORT_NAME directly when valid and SHOULD resolve it from .ai/config.yaml when the value is omitted.
+
+The generated value is contextual data, not a new command argument or command-routing mechanism.
+
+### 29.4 Manual bootstrap templates
+
+Manual bootstrap templates SHOULD expose all practical context values explicitly, including:
+
+    PREVIOUS_CHAPTER
+    CURRENT_CHAPTER
+    SPECIALIZATION
+    SHORT_NAME
+
+The user can substitute these values manually before pasting the template into a new conversation.
+
+This does not change the canonical BOOTSTRAP runtime-input contract. The template is a human-facing convenience and recovery mechanism; BOOTSTRAP remains the semantic owner of chapter initialization.
+
+Two dedicated template cases remain planned:
+
+1. first-chat initialization when no predecessor chapter exists;
+2. interrupted-chat recovery when migration was not completed or its final bootstrap instruction was not emitted.
+
+### 29.5 Next implementation sequence
+
+The next bounded implementation sequence is:
+
+1. Update .ai/workflows/handoff/BOOTSTRAP.md to document SHORT_NAME as optional supplied context with configuration fallback.
+2. Verify .ai/rules/handoff/lifecycle.md and .ai/skills/handoff/SKILL.md remain consistent with that contract; update only where stale semantics are found.
+3. Define the exact generated bootstrap-message format and its data source.
+4. Update the active command references in .ai/INDEX.md and .ai/skills/handoff/SKILL.md only after command semantics are stable.
+5. Decide whether the standalone bootstrap-instruction generation operation needs a user-facing command name.
+6. Re-evaluate whether first-chapter initialization needs a dedicated init/new operation at all.
+7. Determine whether interrupted migration needs a separate recovery command or is fully handled by receiving-chapter BOOTSTRAP from durable repository state.
+8. Validate the two manual bootstrap templates against the canonical BOOTSTRAP contract.
+9. Perform a semantic consistency sweep and only then update historical architecture references where an active reference is genuinely stale.
+
+### 29.6 C037 decision boundary
+
+Confirmed:
+
+- .ai/config.yaml is an appropriate canonical source for stable specialization vocabulary.
+- The six current specialization mappings are now recorded there.
+- Canonical BOOTSTRAP runtime inputs remain PREVIOUS_CHAPTER, CURRENT_CHAPTER, and SPECIALIZATION.
+- SHORT_NAME can be supplied as contextual data without becoming a fourth required runtime input.
+- When SHORT_NAME is omitted, the receiving workflow should resolve it from configured specialization vocabulary.
+- Generated bootstrap messages SHOULD expose the resolved SHORT_NAME for self-contained human-readable context.
+- Manual bootstrap templates MAY expose SHORT_NAME explicitly for copy/paste.
+- No command registry, universal router, command-ID layer, subcommand hierarchy, or new lifecycle mechanism follows from this decision.
+
+Still open:
+
+- exact BOOTSTRAP wording and implementation of the supplied/fallback SHORT_NAME contract;
+- exact generated bootstrap-message format;
+- standalone bootstrap-instruction generation command name;
+- whether first-chapter initialization needs init, new, or no dedicated command;
+- whether interrupted migration needs a separate recovery command;
+- exact active command-reference migration after these semantic questions are settled.
