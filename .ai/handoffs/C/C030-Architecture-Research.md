@@ -70,44 +70,101 @@ Its handoff has been prepared as `READY_FOR_HANDOFF` during this self-migration 
 - Whether the tests reveal any missing routing/discoverability mechanism.
 - Whether the current architecture needs any change at all.
 
+## Bounded activation experiment — C030
+
+The first T1/T2/T3 pass produced a useful distinction:
+
+- **Discovery:** INDEX and project-source routing can locate the canonical owner without prior path knowledge.
+- **Activation:** finding the owner does not guarantee that the owner is actually reread before execution.
+
+T1 exposed the concrete failure mode: a repository mutation was attempted without rereading `.ai/rules/repository.md`, even though AGENTS, INDEX, and the architecture explicitly required that reread. The resulting failure is observable and does not require any inference about hidden model reasoning.
+
+The project therefore has evidence for a boundary between:
+
+    canonical owner found
+        ↓
+    canonical owner actually activated / reread
+        ↓
+    operation
+
+The current architecture solves the first transition but does not provide an observable activation trace for the second.
+
+## TRACE / activation research
+
+The user identified an older desired mechanism: small terminal/console-like mini-logs showing which infrastructure files were actually read and which canonical operation was activated. This is intended as **observability of activation**, not a new semantic owner and not exposure of hidden reasoning.
+
+A useful provisional trace shape is:
+
+    [TRACE]
+    READ  ✓ .ai/AGENTS.md
+    READ  ✓ .ai/INDEX.md
+    ROUTE → repository write safety
+    READ  ✓ .ai/rules/repository.md
+    READ  ✓ .ai/rules/commits.md
+    READ  ✓ .ai/skills/commits/SKILL.md
+    READY → mutation
+
+Post-operation tracing can similarly expose read-back, content verification, diff/scope verification, commit, and result verification.
+
+This is a research hypothesis, not yet a repository architecture decision.
+
+## Prior archive evidence recovered
+
+The following archived architecture material is directly relevant:
+
+- `.ai/archive/architecture/mec-dynamic-context.md` treats activation as a dynamic transition between available knowledge and active context, and explicitly rejects a mandatory routing layer, registry, manifest, capability-ID system, or permanent bootstrap kernel as established semantic entities.
+- `.ai/archive/architecture/minimal-execution-context.md` contains bounded cases for handoff bootstrap and safe repository modification. It distinguishes required execution context from conditional/escalation context and notes that ordinary bootstrap should not activate all recovery/correction material.
+- `.ai/archive/architecture/ai-project-instruction-architecture.md` records the earlier entry-layer model `AGENTS → INDEX → rules/skills/workflows`, a compact bootstrap/re-read practice, and guidance to reread critical instructions at meaningful checkpoints and before high-risk repository operations.
+- `.ai/archive/architecture/architectural-bottleneck-audit.md` records progressive activation as a meta-architectural constraint: activate additional semantic machinery only when needed.
+
+The archive therefore confirms that activation/re-read and progressive activation were already investigated, but it does not by itself justify creating a new `ENTRY`, registry, router, or universal metadata layer.
+
+## Current bounded research question
+
+Investigate the smallest externally observable activation mechanism that can bridge:
+
+    DISCOVER
+        ↓
+    ACTIVATE / REREAD
+        ↓
+    TRACE
+        ↓
+    EXECUTE
+        ↓
+    VERIFY
+
+The working primitives are currently:
+
+- **ACTIVATE** — establish the context required for the current operation, including actual reread of canonical owners;
+- **REFRESH** — deliberately repeat activation during a long conversation or before a high-risk operation;
+- **TRACE** — report the observable activation/execution/verification steps to the user.
+
+These names are research vocabulary, not yet canonical architecture terms.
+
+## Coverage questions
+
+The next bounded test must check whether the three primitives are sufficient to cover:
+
+1. a new chapter received through handoff;
+2. initialization of a completely new specialization;
+3. ordinary continuation work after the initial bootstrap;
+4. deliberate reactivation in the middle of a long conversation;
+5. mandatory canonical-owner reread before repository mutation.
+
+For each case, distinguish:
+- what context is supplied by the user/bootstrap;
+- what must be discovered from the repository;
+- what must actually be reread/activated;
+- what TRACE can make observable;
+- where a manual user trigger is still required.
+
 ## Immediate next task
 
-Run the bounded progressive-disclosure tests:
+Run the activation coverage experiment above before creating or changing any new architecture component. Compare the smallest workable forms of:
 
-1. **T1 — repository write-safety owner discovery:** start from the normal entry context and determine whether the canonical repository write-safety rule can be found without prior knowledge of its path.
-2. **T2 — INDEX-routed handoff operation:** start from the normal entry context and determine whether a handoff operation leads to the required lifecycle/skill/workflow sources without the answer being pre-known.
-3. **T3 — cross-workstream project knowledge:** start from the normal entry context and `docs/PROJECT-INSTRUCTIONS.md`, then follow semantic-owner routing to the canonical project architecture source without a special privileged workstream router.
+- handoff bootstrap instruction;
+- general activation template for a new specialization;
+- explicit refresh command or direct reference to an activation template;
+- mini TRACE output.
 
-For each test record only:
-- starting context;
-- sources actually required;
-- whether discovery succeeded;
-- the exact gap, if any.
-
-Do not infer hidden model internals from the result.
-
-## Things not to redo
-
-- C027 entry-layer restructuring.
-- The AGENTS entry-contract decision.
-- The INDEX minimum-routing decision.
-- The decision not to create `ENTRY.md`.
-- BOOTSTRAP ownership and ordering.
-- The current chapter identifier format.
-- The completed normative-language inventory/classification/cleanup unless new evidence directly requires it.
-- Do not mechanically capitalize remaining lowercase `must`, `should`, or `may`.
-- Do not convert the historical/deferred MEC discussion into a formal architecture object merely by naming it.
-
-## Recommended starting context
-
-- `.ai/AGENTS.md`
-- `.ai/INDEX.md`
-- `.ai/rules/repository.md`
-- `.ai/rules/workflow.md`
-- `.ai/rules/handoff/lifecycle.md`
-- `.ai/rules/normative-language.md`
-- `.ai/skills/handoff/SKILL.md`
-- `.ai/workflows/handoff/BOOTSTRAP.md`
-- `.ai/architecture/ai-infrastructure-restructuring.md`
-- `docs/PROJECT-INSTRUCTIONS.md`
-- `docs/architecture/project-architecture.md`
+Do not create `ENTRY.md`, a new workflow, registry/router, or command schema until the bounded cases demonstrate a concrete semantic or operational need.
