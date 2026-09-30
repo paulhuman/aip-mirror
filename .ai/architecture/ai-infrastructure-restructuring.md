@@ -1591,7 +1591,7 @@ The receiving chapter owns its own handoff because that file is a snapshot of th
 
 There is no longer a "closing" handoff state transition.
 
-A current chapter MAY update its handoff whenever meaningful durable context accumulates. An update is a normal handoff-content operation, not a lifecycle transition.
+A current chapter SHOULD update its handoff whenever meaningful durable context accumulates. An update is a normal handoff-content operation, not a lifecycle transition.
 
 In particular, the current chapter does not need to perform a special DRAFT → READY_FOR_HANDOFF operation before a new conversation can start.
 

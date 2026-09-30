@@ -59,7 +59,7 @@ The previous chapter MUST NOT create the receiving chapter handoff in advance.
 
 The receiving chapter reads the predecessor handoff when one exists. Reading the predecessor does not require modifying it.
 
-A current chapter MAY update its own handoff whenever meaningful durable context accumulates.
+A current chapter SHOULD update its own handoff whenever meaningful durable context accumulates.
 
 There is no required final handoff operation before a conversation ends. Conversation termination may be abrupt.
 
