@@ -84,7 +84,7 @@ Describe the primary purpose of the commit, not every changed file.
 
 If a commit changes several files as part of one coherent feature, use one message describing the feature.
 
-If unrelated changes are present, SHOULD split them into separate commits.
+If unrelated changes are present, the AI SHOULD recommend splitting them into separate commits.
 
 For handoff work, describe the primary handoff action.
 
