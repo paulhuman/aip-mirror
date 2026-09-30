@@ -64,12 +64,13 @@ Its handoff is expected to be transitioned to `HANDED_OFF` as part of this self-
 
 ### Open
 
-- The next bounded Architecture & Research question for C029.
-- Whether current architecture material contains a sufficiently mature deferred question to investigate next.
+- Whether the progressive-disclosure / Minimum Sufficient Execution Context question can be resolved by simple observable repository tests rather than abstract analysis.
+- What minimum repository context is actually required to perform concrete operations correctly.
+- Whether any discoverability gap appears in those tests; do not introduce a new router/registry/manifest layer without evidence.
 
 ## Immediate next task
 
-After self-migration lifecycle verification, inspect the current architecture entry points and durable architecture notes and identify the next bounded Architecture & Research question before proposing repository changes.
+Run the bounded progressive-disclosure tests against observable repository behavior. Start with simple concrete operations rather than model-internal reasoning: (1) repository write-safety owner discovery, (2) INDEX-routed handoff operation discovery, and (3) cross-workstream project-knowledge routing. Record only the context actually required by each test. Treat MEC as a working question, not an established architecture object. Do not make repository changes until the tests produce a concrete architectural decision.
 
 ## Recommended starting context
 
