@@ -70,29 +70,47 @@ The smallest useful integration point was `.ai/INDEX.md`: its routing rule now e
 
 This gives the first concrete evidence that ACTIVATE can sit between operation routing and canonical-owner execution without introducing a second procedural owner.
 
-## C032 bootstrap integration check — result
+## C032 integration experiment — second result
 
-The second bounded check considered whether ACTIVATE should also be invoked directly inside `.ai/workflows/handoff/BOOTSTRAP.md`.
+The second real operation tested was:
 
-Result: **no direct ACTIVATE integration is needed at this point.** BOOTSTRAP is itself the canonical owner of the ordered bootstrap procedure, and its existing shared steps already require rereading the applicable canonical owners before execution. Adding a second explicit ACTIVATE call inside BOOTSTRAP would duplicate that reread/activation semantics rather than provide a new capability boundary.
+    Пора выдать bootstrap-инструкцию
 
-There is also an important ordering constraint: BOOTSTRAP must establish repository identity from `.ai/config.yaml` and read `.ai/rules/repository.md` before resolving the remaining repository-controlled paths. A generic ACTIVATE call placed earlier would not fit that canonical ordering; placing it afterward would add another layer over steps BOOTSTRAP already owns.
+The required canonical owner set was:
 
-Therefore the current integration boundary remains:
+- `.ai/skills/handoff/SKILL.md`
+- `.ai/workflows/handoff/BOOTSTRAP.md`
 
-    user command / entry point
-        ↓
-    INDEX (when routed through the command surface)
-        ↓
-    ACTIVATE
-        ↓
-    canonical owner
-        ↓
-    operation
+ACTIVATE was applied at the routing boundary by rereading those current repository versions before execution. The operation then used the established handoff capability and bootstrap workflow to generate the bootstrap instruction for the future receiving chapter.
 
-For direct bootstrap entry, BOOTSTRAP remains the canonical owner and performs its own required owner rereads. No BOOTSTRAP mutation is justified by this experiment.
+For the current C032 chapter, the generated runtime values are:
 
-This preserves the distinction between **activation as a reusable capability** and **bootstrap as an ordered workflow** without forcing every canonical workflow to wrap its own internal reads in ACTIVATE.
+    PREVIOUS_CHAPTER = C032
+    CURRENT_CHAPTER = C033
+    SPECIALIZATION = C
+
+The test confirmed that neither canonical owner needed to be modified to know about ACTIVATE. The handoff skill did not need an internal ACTIVATE step, and BOOTSTRAP remained unchanged. This provides a second concrete example of ACTIVATE functioning as a compositional routing boundary rather than as a requirement that every canonical workflow wrap its own procedure in ACTIVATE.
+
+The operation also confirmed the existing semantic boundary: bootstrap-instruction generation does not initialize C033, change lifecycle state, or create a receiving handoff.
+
+## Result after two integration checks
+
+Two materially different existing operations now exercise the routing-level ACTIVATE boundary:
+
+1. `Пора обновить handoff` — owner set: handoff skill, lifecycle rule, current handoff.
+2. `Пора выдать bootstrap-инструкцию` — owner set: handoff skill, BOOTSTRAP workflow.
+
+Both completed without requiring changes to the canonical operation owners. The current evidence therefore supports keeping ACTIVATE as a small reusable capability invoked after operation routing and before canonical-owner execution.
+
+No concrete integration gap or architectural contradiction was exposed by these checks.
+
+The previously open questions are narrowed as follows:
+
+- Direct ACTIVATE integration inside BOOTSTRAP is not justified by current evidence; BOOTSTRAP remains unchanged.
+- A second existing operation did not expose a limitation in routing-level ACTIVATE integration.
+- The ACTIVATE contract did not require refinement after these two real uses.
+
+Further experimentation should be driven by a concrete operation that exposes a new boundary condition, not by a goal of testing ACTIVATE more times.
 
 ## Previous chapter
 
@@ -124,26 +142,25 @@ C031 is the verified source of the completed activation owner-boundary experimen
 - Activation skill commit: 028ec2254d31a985149edcd1e7c32a79385e352e.
 - Architecture notes were updated with the C031 result: 7047eb0a43b515025ed6b6b42e7340a59e6e2769.
 - The activation skill is now explicitly invoked by INDEX routing before execution; BOOTSTRAP remains unchanged.
-- The next bounded question is an integration test against one real existing operation.
+- A second real operation, bootstrap-instruction generation, also passed the routing-level ACTIVATE boundary without owner changes.
+- Two distinct operation types now provide concrete integration evidence.
 
 ### Inferred
 
-- A small integration may be possible by having an existing operation invoke ACTIVATE after its routing/owner set is known and before execution.
-- The first useful integration candidate is likely a small handoff operation, but this must be tested rather than assumed.
+- ACTIVATE can serve as a routing-level compositional boundary for multiple existing operations without requiring canonical owners to contain ACTIVATE-specific procedure text.
 
 ### Open
 
-- Whether BOOTSTRAP should invoke ACTIVATE directly, indirectly through an owning capability, or remain unchanged until a concrete bootstrap case proves the need.
-- Whether another existing operation exposes a limitation in the routing-level integration.
-- Whether the current activation contract needs any refinement after real operational use.
+- No concrete ACTIVATE integration gap is currently identified.
+- Further changes should wait for a new bounded case that exposes a specific boundary condition.
 
 ## Immediate next task
 
-Run the next bounded integration check only if needed to validate the boundary exposed by the first result. Determine the next bounded question only if a concrete integration gap remains. The current result does not justify changing BOOTSTRAP.
+No additional ACTIVATE integration test is currently required. The two bounded operation checks did not expose a concrete integration gap or architectural contradiction.
 
-If another operation is tested, use the same boundary test: identify its canonical owner set, apply ACTIVATE before execution, and change only the smallest existing routing/owner surface required by observed behavior.
+Before any further ACTIVATE change, require a new real operation or boundary condition that demonstrates a specific need. If such a case appears, identify its canonical owner set, apply ACTIVATE before execution, and change only the smallest existing routing/owner surface required by observed behavior.
 
-Do not broaden the experiment into a general entry-layer redesign.
+Do not broaden the experiment into a general entry-layer redesign. The next work may instead consolidate the validated result and move to the next concrete architecture question.
 
 ## Things not to redo
 
