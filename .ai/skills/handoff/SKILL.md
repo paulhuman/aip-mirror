@@ -64,7 +64,7 @@ Use this canonical structure for every handoff:
     # Conversation Handoff
 
     **Conversation:**
-    <chapter> — <short conversation title>
+    <chapter> — <SHORT_NAME>
 
     **Specialization:**
     <A-Z>
@@ -78,7 +78,8 @@ Use this canonical structure for every handoff:
 
 Header field rules:
 
-- `Conversation` contains the full chapter identifier followed by the short conversation title.
+- `SHORT_NAME` is the canonical short conversation title.
+- `Conversation` contains the full chapter identifier followed by `SHORT_NAME`.
 - DO NOT include the project name prefix in `Conversation`.
 - `Specialization` contains only the specialization letter.
 - `Chapter` contains only the three-digit chapter number.
