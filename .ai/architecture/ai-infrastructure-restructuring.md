@@ -120,7 +120,7 @@ README.md
     = ordered procedures
 ```
 
-Operational routing:
+Operational routing for an already-initialized conversation:
 
 ```text
 user command
@@ -129,49 +129,67 @@ user command
     ↓
 operation identification
     ↓
-reread canonical owner files
+ACTIVATE
     ↓
-execute owning rule / skill / workflow
+canonical owner
+    ↓
+operation
+```
+
+New conversation initialization is a separate workflow boundary:
+
+```text
+new conversation
+    ↓
+.ai/workflows/handoff/BOOTSTRAP.md
+    ↓
+ACTIVATE
+    ↓
+chapter initialization
+    ↓
+substantive work
 ```
 
 Architectural boundary:
 
-> **INDEX identifies and routes; canonical owners define and execute.**
+> **INDEX identifies and routes ordinary operations; BOOTSTRAP initializes new chapters; ACTIVATE establishes the current canonical operational context; canonical owners define and execute their operations.**
 
 `INDEX.md` MUST NOT become a second lifecycle rule, handoff skill, commit skill, bootstrap workflow, repository rule, or general workflow document.
 
 No `ENTRY.md` exists in Iteration 2.
 
-### 4.1 Future ENTRY concept — intentionally deferred
+### 4.1 Chat initialization without ENTRY.md
 
-A future `ENTRY.md` may be justified if evidence shows that the repository needs a distinct **AI entry/initialization layer** above command routing.
+The current evidence supports a reusable chat-initialization procedure, but not a separate `ENTRY.md`.
 
-If introduced, its semantic role should be different from both `INDEX.md` and `BOOTSTRAP.md`:
+`.ai/workflows/handoff/BOOTSTRAP.md` is the canonical workflow owner for initializing a new conversation chapter. It covers both:
 
-```text
-.ai/ENTRY.md
-    = how a new AI enters and activates the infrastructure
+- receiving a chapter from a predecessor handoff; and
+- starting the first chapter of a specialization with `PREVIOUS_CHAPTER = N/A`.
 
-.ai/INDEX.md
-    = how an already-entered AI routes a user command
+This does **not** make BOOTSTRAP a universal entry router. It is invoked specifically when a new chapter is being initialized and does not route ordinary user commands, define command IDs, or replace INDEX.
 
-.ai/workflows/handoff/BOOTSTRAP.md
-    = how a receiving chapter is initialized as an ordered workflow
-```
-
-Potential future layering:
+The resulting separation is:
 
 ```text
-ENTRY
-  ↓
+new conversation
+    ↓
+BOOTSTRAP
+    ↓
+ACTIVATE
+    ↓
+chapter initialization
+
+already-initialized conversation
+    ↓
 INDEX
-  ↓
-canonical owner
-  ↓
-workflow / execution
+    ↓
+ACTIVATE
+    ↓
+operation
 ```
 
-`ENTRY.md` MUST NOT be created merely by renaming `BOOTSTRAP.md`. BOOTSTRAP has irreducible receiving-chapter initialization semantics and remains a workflow. A future ENTRY would be a genuinely new semantic layer and MUST earn its existence through evidence.
+No `ENTRY.md` is justified by this boundary. A separate ENTRY would require evidence of a distinct semantic responsibility that BOOTSTRAP cannot own without becoming overloaded.
 
 ## 5. Current `.ai/INDEX.md` model
 
@@ -284,7 +302,7 @@ Bootstrap-instruction generation does not itself change lifecycle state or commi
     → commit policy
 
 .ai/workflows/handoff/BOOTSTRAP.md
-    → ordered receiving-chapter bootstrap procedure
+    → reusable new-conversation chapter initialization workflow, including receiving-chapter handoff bootstrap
 
 .ai/INDEX.md
     → routing and capability discovery only
@@ -1416,16 +1434,59 @@ The first implementation was committed as:
 
 The file was read back after creation and the commit diff was verified as a single new file with 69 added lines.
 
-This implementation is intentionally not yet wired into INDEX.md or BOOTSTRAP. The bounded validation first establishes the semantic capability; integration into existing routing/workflows remains a separate question and MUST be justified by a concrete execution path rather than added speculatively.
+ACTIVATE was subsequently integrated at the INDEX routing boundary and validated against two real operations in C032. Direct ACTIVATE integration inside BOOTSTRAP was initially rejected because the earlier BOOTSTRAP scope was limited to receiving-chapter bootstrap and already owned ordered rereads. C033 then identified a concrete broader initialization need: the same new-conversation initialization boundary also applies to a first chapter, where no predecessor handoff exists.
 
-### 26.10 Current bounded next question
+### 26.10 Chat initialization owner-boundary result
 
-The next question is no longer whether a reusable activation semantic exists. That is sufficiently established.
+The bounded question was:
 
-The next bounded test is:
+> Does a new reusable chat-initialization procedure need to exist, and can the existing BOOTSTRAP workflow own it without becoming a universal entry router?
 
-> Where can ACTIVATE be integrated into the existing entry/routing and workflow paths with the smallest useful change, without duplicating routing, lifecycle, repository, commit, or project semantics?
+The result is **yes, without introducing a new ENTRY.md**.
 
-The first integration candidate SHOULD be one real existing operation (preferably a small handoff command) before considering changes to INDEX.md, BOOTSTRAP, or other shared infrastructure.
+The existing BOOTSTRAP workflow is the appropriate owner because its existing subject is chapter initialization. Its scope is expanded from only receiving a predecessor handoff to initializing a new chapter in either of two cases:
 
-No new registry, manifest, dependency graph, command-ID layer, ENTRY.md, or universal router is justified by the current evidence.
+1. receiving chapter — `PREVIOUS_CHAPTER` identifies a predecessor handoff;
+2. first chapter — `PREVIOUS_CHAPTER = N/A`.
+
+The reusable initialization sequence is:
+
+```text
+new conversation
+    ↓
+establish repository + chapter context
+    ↓
+ACTIVATE required canonical owners
+    ↓
+execute applicable BOOTSTRAP branch
+    ↓
+bootstrap verification
+    ↓
+substantive chapter work
+```
+
+BOOTSTRAP remains an ordered workflow, not a router. It does not replace INDEX, define command IDs, maintain a registry, or absorb lifecycle/repository/commit semantics from their canonical owners.
+
+ACTIVATE is now intentionally used at both boundaries:
+
+```text
+INDEX / caller
+    ↓
+ACTIVATE
+    ↓
+canonical owner
+    ↓
+operation
+
+new conversation
+    ↓
+BOOTSTRAP
+    ↓
+ACTIVATE
+    ↓
+chapter initialization
+```
+
+This is a concrete integration justified by the initialization boundary rather than a speculative second routing layer.
+
+No `ENTRY.md`, registry, manifest, dependency graph, command-ID layer, or universal router is justified by this result.
