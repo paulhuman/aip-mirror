@@ -30,10 +30,10 @@ The following are the currently documented user-facing command phrases. Their ex
 | Command phrase | Semantic operation | Canonical owner | Read before execution |
 |---|---|---|---|
 | `Пора обновить handoff` | checkpoint current chapter | `.ai/skills/handoff/SKILL.md` | `.ai/rules/handoff/lifecycle.md`; current handoff |
-| `Пора выполнить миграцию в чат [A-Z][0-9]{3}` | migrate current chapter | `.ai/skills/handoff/SKILL.md` + `.ai/rules/handoff/lifecycle.md` | lifecycle; handoff skill; `.ai/workflows/handoff/BOOTSTRAP.md` |
+| `Пора выполнить миграцию в чат [A-Z][0-9]{3}` | migrate current chapter | `.ai/skills/handoff/SKILL.md` + `.ai/workflows/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow; current handoff |
 | `Пора выдать bootstrap-инструкцию` | generate bootstrap instruction for the future receiving chapter | `.ai/skills/handoff/SKILL.md` + `.ai/workflows/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow |
 
-The table records only information needed to recognize and activate the canonical operation. It does not define lifecycle transitions, write authorization, commit construction, or workflow steps.
+The table records only information needed to recognize and activate the canonical operation. It does not define write authorization, commit construction, or workflow steps.
 
 ### Routing rules
 
@@ -101,6 +101,5 @@ Those semantics remain owned by the canonical rules, skills, and workflows.
 
 In particular:
 
-- lifecycle states such as `DRAFT`, `READY_FOR_HANDOFF`, and `HANDED_OFF` are not operation IDs;
 - an operation and any resulting repository change are distinct concepts;
-- bootstrap-instruction generation does not initialize the receiving chapter or change lifecycle state.
+- bootstrap-instruction generation does not initialize the receiving chapter or change the current conversation identity.

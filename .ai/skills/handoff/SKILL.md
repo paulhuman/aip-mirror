@@ -104,8 +104,6 @@ Example:
     **Previous chapter:**
     000
 
-    **Status:**
-    HANDED_OFF
 
 ## New chapter initialization
 
@@ -173,23 +171,21 @@ Use the handoff for temporary or chapter-specific state such as:
 - what the next chapter SHOULD do first;
 - which conversation-specific assumptions still need validation.
 
-## Before marking READY_FOR_HANDOFF
+## Handoff completeness
 
-Verify that the handoff answers:
+Before a handoff is updated for migration or as a significant checkpoint, verify that it answers:
 
 1. What were we trying to accomplish?
 2. What is already complete?
-3. What is the current state of the implementation?
+3. What is the current implementation state?
 4. What decisions were made?
 5. What remains unresolved?
 6. Where are the relevant files?
 7. What should happen next?
 8. Which statements are confirmed versus uncertain?
 
-Only mark the handoff `READY_FOR_HANDOFF` when the next chapter can reasonably continue without guessing and the previous same-specialization handoff, when applicable, is already verified as `HANDED_OFF`.
-
 ## Receiving a handoff
 
 Receiving-chapter bootstrap is operationally defined by `.ai/workflows/handoff/BOOTSTRAP.md`.
 
-This skill does not duplicate the bootstrap branches, Lifecycle Recovery, Lifecycle Correction, or post-bootstrap verification procedure. After bootstrap, use this skill for the ongoing handoff capability and checkpoint/migration operations.
+This skill does not duplicate the bootstrap procedure or post-bootstrap verification. After bootstrap, use this skill for the ongoing handoff capability and checkpoint/migration operations.
