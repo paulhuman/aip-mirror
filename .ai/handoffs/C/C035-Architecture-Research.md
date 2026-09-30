@@ -62,24 +62,35 @@ That plan is intentionally bounded and distinguishes active canonical semantics 
 - `.ai/skills/commits/SKILL.md` — commit-message construction.
 - `.ai/architecture/ai-infrastructure-restructuring.md` — durable architectural record.
 
-## Immediate next task
+## Completed work
 
-Perform the semantic consistency sweep described in the C034 architecture record.
+The semantic consistency sweep is complete.
 
-Specifically:
+- The declared active canonical `.ai` scope was inspected for stale handoff lifecycle-state semantics.
+- No active stale use of DRAFT, READY_FOR_HANDOFF, HANDED_OFF, SUPERSEDED, Status, or equivalent lifecycle-transition semantics was found in the active canonical rules, skills, workflows, or INDEX.
+- The former lifecycle terms remain only in the historical portions of `.ai/architecture/ai-infrastructure-restructuring.md`; those descriptions are intentionally preserved as historical record and are not active semantics.
+- `.ai/rules/handoff/lifecycle.md` was updated from MAY to SHOULD for the recommendation that a current chapter update its own handoff when meaningful durable context accumulates.
+- `.ai/architecture/ai-infrastructure-restructuring.md` was aligned with the same SHOULD wording.
+- `.ai/skills/handoff/SKILL.md` required no change because the stale Status example was already absent.
+- `.ai/workflows/handoff/BOOTSTRAP.md` and `.ai/INDEX.md` remain semantically aligned with the simplified handoff model and required no change.
+- Final content and changed-scope verification confirmed exactly two intended file changes in the sweep.
 
-1. inspect the active canonical .ai rules, skills, workflows, and INDEX for stale lifecycle-state semantics;
-2. distinguish active stale behavior from valid historical descriptions in the architecture record;
-3. change the handoff continuity wording from MAY to SHOULD:
+The result was committed as:
 
-       A current chapter SHOULD update its own handoff whenever meaningful durable context accumulates.
+    091936856eef175f31c0b1cace6411972c808785
+    ai-refactor(handoff): align continuity recommendation
 
-4. remove the stale Status field from the example in `.ai/skills/handoff/SKILL.md`;
-5. verify that the architecture record matches the resulting active canonical semantics;
-6. perform final content and changed-scope verification;
-7. only then determine whether any concrete architectural contradiction remains.
+## Current architectural assessment
 
-The sweep MUST NOT introduce a replacement lifecycle state machine, registry, manifest, dependency graph, command-ID system, universal router, or other new infrastructure merely to create another task.
+No concrete active architectural contradiction was found after the sweep.
+
+The simplified handoff model is now expressed consistently across the active canonical infrastructure. Historical lifecycle descriptions remain as durable architecture history and should not be removed merely to make the current model look cleaner.
+
+No replacement lifecycle mechanism, registry, manifest, dependency graph, command-ID system, universal router, or other infrastructure is justified by the current evidence.
+
+## Next step
+
+Perform a final bounded assessment of the Architecture & Research work. If no concrete architectural question or contradiction emerges from that assessment, C035 can end without inventing another infrastructure task. Do not create a receiving-chapter handoff in advance.
 
 ## Important constraints
 
@@ -92,7 +103,7 @@ The sweep MUST NOT introduce a replacement lifecycle state machine, registry, ma
 - Use repository write-safety for every existing-file mutation.
 - Keep the next investigation bounded; do not create infrastructure without a concrete demonstrated need.
 
-## Recommended starting context
+## Recommended context for continuation
 
 Read:
 
@@ -102,4 +113,4 @@ Read:
     .ai/workflows/handoff/BOOTSTRAP.md
     .ai/INDEX.md
 
-Then perform the semantic sweep over the declared active canonical scope before making the two known small corrections (MAY → SHOULD and the stale Status example), so the corrections are made with complete current context.
+Then continue only if a concrete architectural question remains. Otherwise, preserve the current architecture and close the chapter without manufacturing additional work.
