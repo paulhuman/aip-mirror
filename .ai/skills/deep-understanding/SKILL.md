@@ -32,7 +32,7 @@ Use this skill when:
 - the task involves a new subsystem
 - the relevant code or API is not already well understood
 - reverse engineering is required
-- behavior MUST be reproduced from another application
+- behavior must be reproduced from another application
 - an architectural decision depends on technical evidence
 - the user explicitly asks for deep research or detailed understanding
 - implementation based on an incorrect assumption could cause significant rework
@@ -88,7 +88,7 @@ Record:
 - relevant APIs
 - external behavior being reproduced
 - known constraints
-- questions that MUST be answered
+- questions that must be answered
 
 Avoid researching unrelated parts of the project.
 

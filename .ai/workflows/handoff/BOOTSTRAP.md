@@ -83,18 +83,18 @@ When a new chapter is initialized, all AI MUST:
 11. Perform the mandatory post-bootstrap consistency verification described below.
 12. Only after bootstrap is complete, proceed with new implementation or other chapter work.
 
-If the receiving handoff already exists when bootstrap begins, do **not** recreate it or pretend that normal initial creation occurred. Determine whether the existing state represents a qualifying pre-existing lifecycle violation. If so, bootstrap must be treated as blocked and the receiving chapter must wait for explicit user authorization before performing Lifecycle Recovery.
+If the receiving handoff already exists when bootstrap begins, DO NOT recreate it or pretend that normal initial creation occurred. Determine whether the existing state represents a qualifying pre-existing lifecycle violation. If so, bootstrap must be treated as blocked and the receiving chapter must wait for explicit user authorization before performing Lifecycle Recovery.
 
 ### Branch B — READ-ONLY AI
 
 **A READ-ONLY AI MUST read and execute this branch and MUST ignore Branch A.**
 
-7. Do **not** create, update, or commit any repository file.
-8. If the receiving handoff already exists, do **not** overwrite or normalize it.
+7. DO NOT create, update, or commit any repository file.
+8. If the receiving handoff already exists, DO NOT overwrite or normalize it.
 9. Prepare the complete proposed receiving handoff with status `DRAFT`, using the standard handoff structure and all information that can be verified from the repository and current conversation.
 10. Return the **entire handoff file content** to the user as plain Markdown so the user can place it in `.ai/handoffs/<specialization>/` manually.
 11. Provide the exact commit message that should be used for the manual initial-DRAFT commit.
-12. Do **not** provide the separate bootstrap instruction for the next chat in the same response. A read-only AI MUST keep its response focused on the complete handoff file and its manual commit message so that constrained interfaces are not unnecessarily burdened by a second long artifact.
+12. DO NOT provide the separate bootstrap instruction for the next chat in the same response. A read-only AI MUST keep its response focused on the complete handoff file and its manual commit message so that constrained interfaces are not unnecessarily burdened by a second long artifact.
 13. DO NOT claim `DRAFT` creation, `HANDED_OFF`, a commit, post-bootstrap verification, or `BOOTSTRAP = COMPLETE` because those repository operations were not performed by the AI.
 14. The user is responsible for applying the supplied handoff file and completing the required repository lifecycle writes manually before treating bootstrap as complete.
 

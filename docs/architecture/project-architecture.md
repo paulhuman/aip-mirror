@@ -58,7 +58,7 @@ Keep these concerns distinct.
 
 The native plugin SHOULD initially prioritize plugin lifecycle, Illustrator integration, interactive mouse handling, mirror-axis interaction, live preview, geometry, path/object handling, undo/cancel behavior, and basic tool functionality.
 
-UI polish and advanced presentation should not unnecessarily block the core interactive engine.
+UI polish and advanced presentation SHOULD NOT unnecessarily block the core interactive engine.
 
 ## 8. Do not introduce web technology without a requirement
 
