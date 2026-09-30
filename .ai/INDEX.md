@@ -65,7 +65,7 @@ Use this map to find the canonical capability without reading the entire `.ai/` 
 
 INDEX may identify and route to an owner.
 
-INDEX must not become the owner of:
+INDEX MUST NOT become the owner of:
 
 - lifecycle semantics;
 - handoff procedures;
@@ -88,7 +88,7 @@ The command surface intentionally stops at:
         ↓
     activation context
 
-The activation context identifies which canonical owner files must be reread. It is a routing aid, not a dependency graph and not a copy of the referenced procedures.
+The activation context identifies which canonical owner files MUST be reread. It is a routing aid, not a dependency graph and not a copy of the referenced procedures.
 
 INDEX does not record:
 
