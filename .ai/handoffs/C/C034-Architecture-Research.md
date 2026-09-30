@@ -146,28 +146,25 @@ Project documentation remains under the normal project-facing `docs(...)` vocabu
 
 ## Immediate next task
 
-Migrate the canonical handoff architecture to the new snapshot model in a bounded sequence:
+The handoff lifecycle-state migration has now been implemented and verified.
 
-1. inspect and update `.ai/rules/handoff/lifecycle.md`;
-2. inspect and update `.ai/skills/handoff/SKILL.md`;
-3. inspect and update `.ai/workflows/handoff/BOOTSTRAP.md`;
-4. inspect and update `.ai/INDEX.md`;
-5. remove Status from active handoff files;
-6. run a repository-wide semantic consistency sweep for obsolete lifecycle terminology and procedures;
-7. verify Git diff/scope and the resulting simplified handoff workflow.
+Completed migration:
 
-The migration should be performed as a small number of coherent commits rather than one commit per former lifecycle transition.
+1. replaced the old lifecycle-state rule with lightweight conversation continuity rules;
+2. removed lifecycle-state procedures, Recovery, Correction, and transition routing from the active handoff workflow;
+3. preserved receiving-chapter creation of its own handoff;
+4. preserved bootstrap runtime-input normalization;
+5. removed Status from the active C031–C034 handoff chain;
+6. established the short ai-docs(handoff): create/update <chapter> convention;
+7. updated commit policy/skill guidance so .ai infrastructure is distinguishable from project docs;
+8. preserved historical Git commits without rewriting history.
 
-## Recommended starting context
+Migration commits:
 
-- `.ai/AGENTS.md`
-- `.ai/INDEX.md`
-- `.ai/rules/repository.md`
-- `.ai/rules/workflow.md`
-- `.ai/skills/activation/SKILL.md`
-- `.ai/skills/handoff/SKILL.md`
-- `.ai/skills/commits/SKILL.md`
-- `.ai/workflows/handoff/BOOTSTRAP.md`
-- `.ai/rules/handoff/lifecycle.md`
-- `.ai/architecture/ai-infrastructure-restructuring.md`
-- `.ai/handoffs/C/C033-Architecture-Research.md`
+    dc73dd67f697c5107823b5090be23a1ff07783f6
+    ai-refactor(handoff): remove lifecycle state machine
+
+    0fcc20fbe4291da801fc9eceb55b45fe822920db
+    ai-refactor(handoff): normalize active handoffs
+
+The next bounded task is to perform a semantic consistency sweep over the active .ai infrastructure and confirm that no stale lifecycle-state references remain in canonical rules, skills, workflows, or routing.
