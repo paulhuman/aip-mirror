@@ -123,6 +123,34 @@ Normal migration MUST invoke bootstrap-instruction generation as its terminal st
 - Do not create the next receiving-chapter handoff in advance.
 - Do not silently treat `SHORT_NAME` as a fourth required canonical runtime input.
 
+## C038 checkpoint
+
+The first bounded implementation step is complete.
+
+### BOOTSTRAP contract
+
+Updated `.ai/workflows/handoff/BOOTSTRAP.md` to formalize:
+
+- supplied `SHORT_NAME` as optional contextual input;
+- canonical runtime inputs remaining limited to `PREVIOUS_CHAPTER`, `CURRENT_CHAPTER`, and `SPECIALIZATION`;
+- resolution priority: supplied `SHORT_NAME` → configured specialization vocabulary;
+- fallback lookup: `specializations.<SPECIALIZATION>.short_name` in `.ai/config.yaml`;
+- bootstrap failure when neither a supplied nor configured `SHORT_NAME` is usable;
+- use of the resolved `SHORT_NAME` for the receiving handoff filename and conversation title.
+
+Commit: `1efd2d2c585a5b750884158b8f48fcc05d4b9885`.
+
+### Canonical-owner consistency check
+
+Read the current versions of:
+
+- `.ai/rules/handoff/lifecycle.md`
+- `.ai/skills/handoff/SKILL.md`
+
+No stale `SHORT_NAME` semantics were found that require changes at this stage. Both continue to delegate chapter initialization to BOOTSTRAP and use the established handoff filename/header model.
+
+The next bounded question remains the exact generated bootstrap-message format and its authoritative data source. Do not yet migrate active command references.
+
 ## Confirmed versus uncertain
 
 ### Confirmed
