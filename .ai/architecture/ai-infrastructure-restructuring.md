@@ -138,7 +138,7 @@ Architectural boundary:
 
 > **INDEX identifies and routes; canonical owners define and execute.**
 
-`INDEX.md` must not become a second lifecycle rule, handoff skill, commit skill, bootstrap workflow, repository rule, or general workflow document.
+`INDEX.md` MUST NOT become a second lifecycle rule, handoff skill, commit skill, bootstrap workflow, repository rule, or general workflow document.
 
 No `ENTRY.md` exists in Iteration 2.
 
@@ -171,7 +171,7 @@ canonical owner
 workflow / execution
 ```
 
-`ENTRY.md` MUST NOT be created merely by renaming `BOOTSTRAP.md`. BOOTSTRAP has irreducible receiving-chapter initialization semantics and remains a workflow. A future ENTRY would be a genuinely new semantic layer and must earn its existence through evidence.
+`ENTRY.md` MUST NOT be created merely by renaming `BOOTSTRAP.md`. BOOTSTRAP has irreducible receiving-chapter initialization semantics and remains a workflow. A future ENTRY would be a genuinely new semantic layer and MUST earn its existence through evidence.
 
 ## 5. Current `.ai/INDEX.md` model
 
@@ -469,7 +469,7 @@ rule
 
 The goal is not merely fewer files. The goal is a repository whose surviving instructions agree, so that a new conversation does not have to reconstruct architecture from stale or contradictory context.
 
-INDEX must provide enough routing metadata to activate the correct canonical capability, but MUST NOT become a dependency graph or duplicate procedural layer.
+INDEX MUST provide enough routing metadata to activate the correct canonical capability, but MUST NOT become a dependency graph or duplicate procedural layer.
 
 ## 13. Current dependency direction
 
