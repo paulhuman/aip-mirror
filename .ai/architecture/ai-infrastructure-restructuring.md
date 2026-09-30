@@ -540,6 +540,7 @@ Completed:
 - bounded normative-language cleanup across the declared active scope;
 - semantic review of cleanup false positives and preservation of legitimate ordinary-language uses;
 - C029 final verification sequence defined: RULE self-test, negative lexical sweep, semantic spot-check, discoverability check, and final consistency verdict.
+- C029 normative-language verification completed successfully, including targeted normalization of confirmed remaining normative/procedural lowercase forms and INDEX discoverability.
 
 Current entry-layer model:
 
@@ -633,6 +634,18 @@ The phases have distinct purposes:
 This verification is intentionally bounded. It MUST NOT become a second repo-wide capitalization campaign. Remaining lowercase words are not defects merely because they match the vocabulary; they require semantic evidence before change.
 
 The expected completion criterion is therefore **semantic consistency and discoverability**, not zero lexical matches.
+
+### Verification result — C029
+
+The bounded verification completed with the following result:
+
+- **Phase 1 — RULE self-test:** PASS. The rule is internally consistent with its own vocabulary and explicitly distinguishes normative, procedural, ordinary-English, and ambiguous uses.
+- **Phase 2 — negative lexical sweep:** PASS. No unintended active use of SHALL, REQUIRED, RECOMMENDED, OPTIONAL, MUST NEVER, MAY NOT, contractions, or Markdown-emphasis variants was found. Intentional mentions remain only where the rule or this architecture note documents prohibited alternatives.
+- **Phase 3 — semantic spot-check:** PASS after targeted normalization. Confirmed normative/procedural lowercase occurrences were normalized in the affected active infrastructure files. Remaining lowercase matches are documented ordinary-English, descriptive, historical/research, or terminology uses and were not mechanically changed.
+- **Phase 4 — discoverability check:** PASS. The canonical rule is now exposed in the INDEX capability map without duplicating its semantics into AGENTS or INDEX routing logic.
+- **Phase 5 — final consistency verdict:** PASS. The normative-language work is complete for the current bounded scope. No further capitalization sweep is justified without new evidence.
+
+The final lexical criterion is semantic rather than numeric: lowercase matches are acceptable when they are not normative/procedural occurrences. This follows the project rule and the BCP 14 capitalization distinction clarified by RFC 8174. citeturn2view0
 
 ### Architectural relationship
 
