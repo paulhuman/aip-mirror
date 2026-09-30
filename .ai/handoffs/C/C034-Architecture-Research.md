@@ -146,25 +146,30 @@ Project documentation remains under the normal project-facing `docs(...)` vocabu
 
 ## Immediate next task
 
-The handoff lifecycle-state migration has now been implemented and verified.
+Migrate the work to C035 and continue with the bounded semantic consistency sweep over the active .ai infrastructure.
 
-Completed migration:
+The C034 continuation plan has been recorded in:
 
-1. replaced the old lifecycle-state rule with lightweight conversation continuity rules;
-2. removed lifecycle-state procedures, Recovery, Correction, and transition routing from the active handoff workflow;
-3. preserved receiving-chapter creation of its own handoff;
-4. preserved bootstrap runtime-input normalization;
-5. removed Status from the active C031–C034 handoff chain;
-6. established the short ai-docs(handoff): create/update <chapter> convention;
-7. updated commit policy/skill guidance so .ai infrastructure is distinguishable from project docs;
-8. preserved historical Git commits without rewriting history.
+    .ai/architecture/ai-infrastructure-restructuring.md
 
-Migration commits:
+The next chapter MUST:
 
-    dc73dd67f697c5107823b5090be23a1ff07783f6
-    ai-refactor(handoff): remove lifecycle state machine
+1. inspect active canonical .ai rules, skills, workflows, and INDEX for stale lifecycle-state semantics;
+2. distinguish active stale behavior from valid historical descriptions in the architecture record;
+3. change the handoff continuity wording from MAY to SHOULD:
+   
+       A current chapter SHOULD update its own handoff whenever meaningful durable context accumulates.
 
-    0fcc20fbe4291da801fc9eceb55b45fe822920db
-    ai-refactor(handoff): normalize active handoffs
+4. remove the stale Status field from the example in .ai/skills/handoff/SKILL.md;
+5. verify that the architecture record matches the resulting active canonical semantics;
+6. perform final content/scope verification;
+7. only then determine whether any concrete architectural contradiction remains.
 
-The next bounded task is to perform a semantic consistency sweep over the active .ai infrastructure and confirm that no stale lifecycle-state references remain in canonical rules, skills, workflows, or routing.
+The sweep MUST NOT introduce a replacement lifecycle state machine or a new infrastructure layer merely to create another task.
+
+The mass removal of legacy Status fields from remaining handoffs was completed manually by the user in:
+
+    3985ac491462effe68cc5e1fd93485a08ec9c821
+    ai-refactor(handoff): remove legacy status fields
+
+C034's continuation plan is therefore the next bounded piece of work, not another handoff-lifecycle migration.
