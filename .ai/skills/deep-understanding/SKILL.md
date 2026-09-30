@@ -5,7 +5,7 @@ description: Require a thorough study of the relevant codebase, SDK material, do
 
 # Deep understanding
 
-Every meaningful non-trivial task must begin with a deliberate study of the relevant material before planning or implementation.
+Every meaningful non-trivial task MUST begin with a deliberate study of the relevant material before planning or implementation.
 
 The goal is not to produce an immediate solution. The goal is to establish a reliable understanding of the system first.
 
@@ -20,9 +20,9 @@ The relevant material may include:
 - existing prototype code
 - unfamiliar parts of the codebase
 
-Findings must be written into a persistent markdown document, not kept only in the conversation.
+Findings MUST be written into a persistent markdown document, not kept only in the conversation.
 
-The research document is the user's review surface. The user must have an opportunity to verify the understanding, correct mistakes, and resolve important assumptions before implementation proceeds.
+The research document is the user's review surface. The user MUST have an opportunity to verify the understanding, correct mistakes, and resolve important assumptions before implementation proceeds.
 
 ## When to use
 
@@ -32,14 +32,14 @@ Use this skill when:
 - the task involves a new subsystem
 - the relevant code or API is not already well understood
 - reverse engineering is required
-- behavior must be reproduced from another application
+- behavior MUST be reproduced from another application
 - an architectural decision depends on technical evidence
 - the user explicitly asks for deep research or detailed understanding
 - implementation based on an incorrect assumption could cause significant rework
 
 ## When not to use
 
-Do not use this skill for trivial, self-contained work such as:
+DO NOT use this skill for trivial, self-contained work such as:
 
 - a one-line fix
 - a simple typo
@@ -51,7 +51,7 @@ If the relevant implementation and behavior are already explicitly documented an
 
 ## Core principle
 
-Do not form a technical hypothesis before gathering the available evidence.
+DO NOT form a technical hypothesis before gathering the available evidence.
 
 Treat assumptions as technical debt.
 
@@ -88,7 +88,7 @@ Record:
 - relevant APIs
 - external behavior being reproduced
 - known constraints
-- questions that must be answered
+- questions that MUST be answered
 
 Avoid researching unrelated parts of the project.
 
@@ -111,7 +111,7 @@ Study the relevant material thoroughly enough to understand:
 
 For SDK or external repository investigations, inspect the repositories declared in `.ai/config.yaml` when their configured Role makes them relevant to the current research.
 
-Do not duplicate external reference repositories into the project repository unless there is a specific project requirement to do so.
+DO NOT duplicate external reference repositories into the project repository unless there is a specific project requirement to do so.
 
 ### 3. Record evidence
 
@@ -141,7 +141,7 @@ A technical choice describing how the specification is currently implemented.
 
 Something that remains unresolved and requires further investigation or experimentation.
 
-Do not present assumptions or inferences as established facts.
+DO NOT present assumptions or inferences as established facts.
 
 ### 4. Write the research document
 
@@ -181,7 +181,7 @@ Present the resulting understanding to the user and allow them to:
 - reject assumptions
 - request additional investigation
 
-Do not silently proceed from an uncertain understanding into a major implementation.
+DO NOT silently proceed from an uncertain understanding into a major implementation.
 
 ### 6. Convert validated findings into specification
 
@@ -191,11 +191,11 @@ Research documents describe what was discovered.
 
 Specification documents describe what the project should do.
 
-Do not mix the two unnecessarily.
+DO NOT mix the two unnecessarily.
 
 ### 7. Implement only after validation
 
-Implementation should follow validated understanding and specification.
+Implementation SHOULD follow validated understanding and specification.
 
 For a prototype-based workflow:
 
@@ -205,7 +205,7 @@ For a native implementation workflow:
 
     research → specification → native design → implementation
 
-Do not treat prototype source code as something that should simply be translated line-by-line into another implementation language or architecture.
+DO NOT treat prototype source code as something that should simply be translated line-by-line into another implementation language or architecture.
 
 ## Research quality
 
@@ -223,7 +223,7 @@ Avoid producing research that merely restates source code without explaining beh
 
 ## Stop condition
 
-Do not continue researching indefinitely.
+DO NOT continue researching indefinitely.
 
 Stop when:
 

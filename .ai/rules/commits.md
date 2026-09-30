@@ -13,12 +13,12 @@ Handoff lifecycle commits that are explicitly pre-authorized by the handoff rule
 
 ## 2. Coherent commits
 
-A commit should represent one logical change.
+A commit SHOULD represent one logical change.
 
-- Do not commit unrelated changes together.
+- DO NOT commit unrelated changes together.
 - Keep the changed-file scope intentional.
 - Split unrelated work when it can reasonably be separated.
-- A commit message should describe the primary purpose of the commit, not every changed file.
+- A commit message SHOULD describe the primary purpose of the commit, not every changed file.
 
 ## 3. Verification before commit
 
@@ -50,7 +50,7 @@ The handoff lifecycle rules define:
 - which handoff commits are pre-authorized;
 - recovery and correction commit requirements.
 
-Do not duplicate those lifecycle rules here.
+DO NOT duplicate those lifecycle rules here.
 
 ## 6. Repository integrity
 

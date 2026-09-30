@@ -10,7 +10,7 @@ A chat conversation is working context, not the durable memory of the project.
 
 The repository is the durable project memory.
 
-Do not rely on a long conversation remaining fully available forever. Important discoveries, decisions, specifications, implementation state, and handoff state must be captured in repository files.
+DO NOT rely on a long conversation remaining fully available forever. Important discoveries, decisions, specifications, implementation state, and handoff state MUST be captured in repository files.
 
 ### Why handoffs exist
 
@@ -63,13 +63,13 @@ Instead, monitor for contextual risk, including:
 - signs that context may no longer be safely retained;
 - increasing risk of reconstructing details from incomplete context.
 
-When contextual risk becomes significant, the AI must warn the user before continuing a large task and recommend creating a handoff checkpoint.
+When contextual risk becomes significant, the AI MUST warn the user before continuing a large task and recommend creating a handoff checkpoint.
 
-Do not wait until context has already been lost.
+DO NOT wait until context has already been lost.
 
 ## 5. Normal checkpoints
 
-Important state should be documented during long-running work when a meaningful milestone is reached.
+Important state SHOULD be documented during long-running work when a meaningful milestone is reached.
 
 A checkpoint does not need to be created after every message.
 
@@ -129,7 +129,7 @@ When a chapter has completed handoff, retain its handoff as historical project s
 
 ## 8. Handoff is a state snapshot, not a casual summary
 
-A handoff must record enough information for the next chapter to continue without guessing.
+A handoff MUST record enough information for the next chapter to continue without guessing.
 
 Include, where applicable:
 
@@ -157,7 +157,7 @@ Handoff documents must distinguish:
 - Assumed / unverified
 - Open
 
-A handoff must never silently promote an inference or assumption into a confirmed project fact.
+A handoff MUST NOT silently promote an inference or assumption into a confirmed project fact.
 
 ## 10. Handoff status
 
@@ -182,7 +182,7 @@ Only these forward transitions are valid:
 - `DRAFT` → `READY_FOR_HANDOFF`
 - `READY_FOR_HANDOFF` → `HANDED_OFF`
 
-Do not skip states.
+DO NOT skip states.
 
 
 ### Transition ownership
@@ -192,7 +192,7 @@ The responsibility for each transition is explicit:
 - The current chapter owns `DRAFT` → `READY_FOR_HANDOFF`.
 - The receiving chapter owns `READY_FOR_HANDOFF` → `HANDED_OFF`.
 
-The previous chapter must not mark its own handoff `HANDED_OFF` merely because it has finished writing or delivering it.
+The previous chapter MUST NOT mark its own handoff `HANDED_OFF` merely because it has finished writing or delivering it.
 
 ### Non-negotiable handoff ownership invariants
 
@@ -276,7 +276,7 @@ For example, if the previous handoff is already `HANDED_OFF` because of a pre-ex
 
 #### Recovery procedure
 
-After explicit user authorization, the receiving chapter must:
+After explicit user authorization, the receiving chapter MUST:
 
 1. Re-check the repository state and relevant Git history before changing anything.
 2. Confirm that the originally detected violation still matches the pre-existing recovery scenario.
@@ -333,7 +333,7 @@ Detection does not grant permission. The detecting chapter must first report:
 - the exact bounded repository scope;
 - how historical traceability will be preserved.
 
-It must then wait for the explicit user correction command.
+It MUST then wait for the explicit user correction command.
 
 #### Correction invariants
 
@@ -376,28 +376,28 @@ After explicit user authorization, the active correcting chapter must:
 
 ## 11. Starting a new chapter
 
-A new chapter must immediately create its own handoff file with status `DRAFT`.
+A new chapter MUST immediately create its own handoff file with status `DRAFT`.
 
 This is mandatory for every new chapter and is part of chapter initialization.
 
-The initial `DRAFT` handoff creation and its bootstrap commit are pre-authorized parts of the handoff procedure. They must be completed immediately rather than waiting for a separate approval step.
+The initial `DRAFT` handoff creation and its bootstrap commit are pre-authorized parts of the handoff procedure. They MUST be completed immediately rather than waiting for a separate approval step.
 
 The initial `DRAFT` may be incomplete. At minimum it must identify the new chapter, specialization, previous chapter, starting objective, and starting state established during bootstrap.
 
-For a chapter created from a previous handoff, the receiving chapter must read:
+For a chapter created from a previous handoff, the receiving chapter MUST read:
 
 1. `.ai/workflows/handoff/BOOTSTRAP.md`;
 2. the applicable project rules;
 3. the previous chapter's handoff;
 4. any files identified as current implementation state.
 
-After successfully starting from the previous handoff, the receiving chapter must update that previous handoff from `READY_FOR_HANDOFF` to `HANDED_OFF` and commit that transition, **unless a previously authorized Lifecycle Recovery procedure has explicitly established that the required terminal state already exists and must not be repeated**.
+After successfully starting from the previous handoff, the receiving chapter MUST update that previous handoff from `READY_FOR_HANDOFF` to `HANDED_OFF` and commit that transition, **unless a previously authorized Lifecycle Recovery procedure has explicitly established that the required terminal state already exists and MUST NOT be repeated**.
 
 ### Post-bootstrap consistency verification
 
-The receiving chapter must not declare bootstrap complete immediately after writing the previous handoff's `HANDED_OFF` transition. Before considering bootstrap complete, it must verify the resulting state as a coherent lifecycle chain, not only an immediate pair.
+The receiving chapter MUST NOT declare bootstrap complete immediately after writing the previous handoff's `HANDED_OFF` transition. Before considering bootstrap complete, it must verify the resulting state as a coherent lifecycle chain, not only an immediate pair.
 
-At minimum, the receiving chapter must:
+At minimum, the receiving chapter MUST:
 
 1. read back its own handoff after creation or recovery;
 2. confirm that its own handoff still has `Status: DRAFT`;
@@ -412,23 +412,23 @@ At minimum, the receiving chapter must:
 
 A bootstrap is therefore complete only after the lifecycle state and the post-bootstrap consistency verification succeed.
 
-The receiving chapter owns correction of its own handoff when this verification detects stale or contradictory bootstrap state. A different specialization may detect and report such an inconsistency, but must not edit the receiving chapter's handoff on its behalf.
+The receiving chapter owns correction of its own handoff when this verification detects stale or contradictory bootstrap state. A different specialization may detect and report such an inconsistency, but MUST NOT edit the receiving chapter's handoff on its behalf.
 
-The new chapter must not assume that every detail from the previous chat remains available.
+The new chapter MUST NOT assume that every detail from the previous chat remains available.
 
 ## 12. Handoff lifecycle and Git traceability
 
-Every lifecycle transition must be represented by a Git commit.
+Every lifecycle transition MUST be represented by a Git commit.
 
 Initial creation of a new chapter's `DRAFT` handoff and subsequent `DRAFT` updates are also Git-traceable checkpoint commits. They are not migration commits.
 
 A lifecycle transition may be combined with logically related handoff content changes in one coherent commit.
 
-Lifecycle Recovery commits are also Git-traceable. They must record only the actual recovery changes performed and must not rewrite or erase the historical commits that caused the violation.
+Lifecycle Recovery commits are also Git-traceable. They MUST record only the actual recovery changes performed and must not rewrite or erase the historical commits that caused the violation.
 
-Lifecycle Correction commits are also Git-traceable. They must record the later correction without rewriting or erasing the historical commits that caused the violation. A correction commit is an audit record of the correction, not a replacement for the missed historical transition.
+Lifecycle Correction commits are also Git-traceable. They MUST record the later correction without rewriting or erasing the historical commits that caused the violation. A correction commit is an audit record of the correction, not a replacement for the missed historical transition.
 
-The repository history should therefore make the workflow auditable:
+The repository history SHOULD therefore make the workflow auditable:
 
     new chapter starts → DRAFT handoff created
     checkpoint → DRAFT handoff updated/committed
@@ -445,13 +445,13 @@ Project knowledge belongs in normal project documentation.
 
 Conversation-specific migration state belongs in `.ai/handoffs/`.
 
-Do not turn handoffs into a second, competing documentation system.
+DO NOT turn handoffs into a second, competing documentation system.
 
 ## 14. User control
 
-Do not silently migrate a conversation or create a new chapter without telling the user.
+DO NOT silently migrate a conversation or create a new chapter without telling the user.
 
-When contextual risk makes a handoff advisable, the AI must warn the user and should recommend creating a handoff checkpoint. The user decides when the next chapter is started unless the user has explicitly delegated that decision.
+When contextual risk makes a handoff advisable, the AI MUST warn the user and SHOULD recommend creating a handoff checkpoint. The user decides when the next chapter is started unless the user has explicitly delegated that decision.
 
 Handoff bootstrap and checkpoint actions that are explicitly defined as pre-authorized by these rules are not subject to an additional approval step.
 

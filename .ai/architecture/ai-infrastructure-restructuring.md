@@ -31,7 +31,7 @@ Semantic kinds:
 - README = orientation/navigation;
 - PROJECT DOC = AIP Mirror-specific knowledge.
 
-Do not create a file merely because a semantic unit can be named. A new file needs a stable subject, an owner, independent usefulness, and enough coherence to justify its existence.
+DO NOT create a file merely because a semantic unit can be named. A new file needs a stable subject, an owner, independent usefulness, and enough coherence to justify its existence.
 
 ## 3. Accepted infrastructure boundary
 
@@ -72,7 +72,7 @@ The important boundary is:
 - `docs/` = AIP Mirror project knowledge;
 - root `references/` = AIP Mirror-specific reference material.
 
-The `.ai` layer is intended to be reusable across projects. Generic rules, skills, and workflows must not quietly acquire AIP Mirror-specific assumptions, examples, paths, or product semantics.
+The `.ai` layer is intended to be reusable across projects. Generic rules, skills, and workflows MUST NOT quietly acquire AIP Mirror-specific assumptions, examples, paths, or product semantics.
 
 ### 3.1 Project-specific configuration boundary
 
@@ -94,7 +94,7 @@ This is **intentional project-specific configuration ownership**, not configurat
 
 The presence of project-specific state elsewhere in `.ai` (for example handoffs or architecture notes) does not contradict this boundary: those are project state/research artifacts, not generic infrastructure configuration.
 
-Do not move `commit_scopes`, `project_terms`, or similar values out of `config.yaml` merely to make the file look more project-agnostic. The relevant portability question is whether generic rules/skills/workflows remain free of embedded project-specific assumptions.
+DO NOT move `commit_scopes`, `project_terms`, or similar values out of `config.yaml` merely to make the file look more project-agnostic. The relevant portability question is whether generic rules/skills/workflows remain free of embedded project-specific assumptions.
 
 ## 4. Entry-layer architecture
 
@@ -171,7 +171,7 @@ canonical owner
 workflow / execution
 ```
 
-`ENTRY.md` must **not** be created merely by renaming `BOOTSTRAP.md`. BOOTSTRAP has irreducible receiving-chapter initialization semantics and remains a workflow. A future ENTRY would be a genuinely new semantic layer and must earn its existence through evidence.
+`ENTRY.md` MUST NOT be created merely by renaming `BOOTSTRAP.md`. BOOTSTRAP has irreducible receiving-chapter initialization semantics and remains a workflow. A future ENTRY would be a genuinely new semantic layer and must earn its existence through evidence.
 
 ## 5. Current `.ai/INDEX.md` model
 
@@ -249,7 +249,7 @@ The receiving chapter later performs:
 READY_FOR_HANDOFF → HANDED_OFF
 ```
 
-Migration must not be represented as completing the receiving chapter's lifecycle.
+Migration MUST NOT be represented as completing the receiving chapter's lifecycle.
 
 Recovery and Correction remain distinct exceptional operations. They are not collapsed into a generic `fix` command.
 
@@ -439,7 +439,7 @@ verify result
 
 Minimum search targets include old paths, old owner references, moved filenames, duplicated normative wording, removed lifecycle concepts, obsolete identifiers, stale bootstrap instructions, and stale links/routing.
 
-A textual match is not automatically an ownership violation. Each hit must be classified as active, historical, archival, descriptive, or genuinely stale.
+A textual match is not automatically an ownership violation. Each hit MUST be classified as active, historical, archival, descriptive, or genuinely stale.
 
 ## 12. Progressive disclosure / Minimum Sufficient Execution Context
 
@@ -469,7 +469,7 @@ rule
 
 The goal is not merely fewer files. The goal is a repository whose surviving instructions agree, so that a new conversation does not have to reconstruct architecture from stale or contradictory context.
 
-INDEX must provide enough routing metadata to activate the correct canonical capability, but must not become a dependency graph or duplicate procedural layer.
+INDEX must provide enough routing metadata to activate the correct canonical capability, but MUST NOT become a dependency graph or duplicate procedural layer.
 
 ## 13. Current dependency direction
 
@@ -560,7 +560,7 @@ The core result is strong convergence:
 - operation / state / commit separation is correct;
 - BOOTSTRAP remains an independently justified ordered workflow;
 - `ENTRY.md` is not currently needed;
-- exact command IDs/syntax should remain unfrozen.
+- exact command IDs/syntax SHOULD remain unfrozen.
 
 The reviews also produced actionable questions and findings recorded below.
 
@@ -597,7 +597,7 @@ The canonical formatting rules are owned by .ai/skills/handoff/SKILL.md; chapter
 
 ### Migration history
 
-The repository was migrated from the previous chapter identity scheme to [A-Z][0-9]{3}. This migration intentionally replaces the historical naming convention rather than preserving it as an active infrastructure contract. The conversion mapping is historical context for this migration only and must not be copied into generic rules, skills, workflows, or other active project infrastructure.
+The repository was migrated from the previous chapter identity scheme to [A-Z][0-9]{3}. This migration intentionally replaces the historical naming convention rather than preserving it as an active infrastructure contract. The conversion mapping is historical context for this migration only and MUST NOT be copied into generic rules, skills, workflows, or other active project infrastructure.
 
 The migration also renamed handoff specialization directories to their corresponding specialization letters and renamed existing handoff files to the new chapter identifiers. Git history remains the historical record of the former names.
 
@@ -636,7 +636,7 @@ Questions to resolve later:
 - If it remains, should it be explicitly defined as a preview/generation operation whose validity depends on an already completed migration?
 - Should INDEX distinguish migration operations from chapter-initialization workflows more visibly?
 
-Do not change the command or merge it into migration without new evidence.
+DO NOT change the command or merge it into migration without new evidence.
 
 ### 17.3 Soft dual source in lifecycle.md — RESOLVED IN C027
 
@@ -674,7 +674,7 @@ The active handoff chapter identifier format is:
 
 The specialization is encoded by the first letter and the chapter number by three decimal digits. For example, `C027` identifies specialization `C`, chapter `027`.
 
-This is an active infrastructure convention. Historical identifiers from the previous scheme are migration history only and must not be used as current architectural references.
+This is an active infrastructure convention. Historical identifiers from the previous scheme are migration history only and MUST NOT be used as current architectural references.
 
 ### 17.6 INDEX scalability — FUTURE DESIGN QUESTION
 
@@ -719,7 +719,7 @@ Important constraint:
 
 > **Do not rename or move BOOTSTRAP.md to ENTRY.md.**
 
-A future ENTRY must be a genuinely new semantic layer, not a relabelled bootstrap workflow.
+A future ENTRY MUST be a genuinely new semantic layer, not a relabelled bootstrap workflow.
 
 ## 18. Consolidated decision matrix — Grok + Qwen
 
@@ -739,7 +739,7 @@ The reviews are now consolidated against current repository evidence. The matrix
 | INDEX scalability / presentation | Grok + Qwen | Real design concern at ~10–15 commands | **Completed in C027** |
 | `ENTRY.md` | Both reviews; future semantic role identified | Do not create now | **Iteration 3 experiment** |
 | `config.yaml` contains project-specific scopes/terms | Qwen | Intentional configuration boundary | **No change** |
-| Project-specific data spread across generic rules/skills/workflows | Architecture objective | Must remain prohibited | **Ongoing consistency rule** |
+| Project-specific data spread across generic rules/skills/workflows | Architecture objective | MUST remain prohibited | **Ongoing consistency rule** |
 | Physical Iteration 2 restructuring | Review checkpoint | Completed | **Do not restart** |
 
 ### 18.1 Bounded follow-up work — completed in C027
@@ -775,7 +775,7 @@ The active AGENTS boundary is:
 - route project work through `docs/PROJECT-INSTRUCTIONS.md`;
 - reread the canonical owner before execution.
 
-Do not let AGENTS grow into another INDEX or workflow.
+DO NOT let AGENTS grow into another INDEX or workflow.
 
 ### 19.2 config.yaml portability boundary — DECIDED
 
@@ -795,7 +795,7 @@ config.yaml
     = project-specific configuration
 ```
 
-Do not move `commit_scopes`, `project_terms`, or configured external references merely because they are project-specific. The portability test is whether the generic infrastructure remains free of embedded project assumptions.
+DO NOT move `commit_scopes`, `project_terms`, or configured external references merely because they are project-specific. The portability test is whether the generic infrastructure remains free of embedded project assumptions.
 
 ### 19.3 lifecycle command discovery cleanup — RESOLVED IN C027
 
@@ -813,11 +813,11 @@ lifecycle.md
 
 ### 19.4 Targeted consistency sweep
 
-The independent review found the active architecture substantially consistent but identified the above implementation gaps. A targeted semantic sweep must be run after any resulting edits rather than treating reviewer text as an automatic rewrite list.
+The independent review found the active architecture substantially consistent but identified the above implementation gaps. A targeted semantic sweep MUST be run after any resulting edits rather than treating reviewer text as an automatic rewrite list.
 
 ## 20. What should NOT be changed based on review
 
-Do not currently:
+DO NOT currently:
 
 - merge bootstrap-instruction generation into migration;
 - reintroduce `SUPERSEDED`;
@@ -847,7 +847,7 @@ Prototype a more compact presentation for approximately 10–15 commands while p
 
 ### Future Identifier Migration Test
 
-Historical chapter-identifier migration is complete; do not preserve the former identifier scheme as an active architecture dependency.
+Historical chapter-identifier migration is complete; DO NOT preserve the former identifier scheme as an active architecture dependency.
 
 ### Operation / Commit Vocabulary
 
@@ -855,7 +855,7 @@ Keep exact operation IDs, final command syntax, and hard-MUST commit vocabulary 
 
 ## 22. Migration note
 
-The current architecture state is represented by this file and the current `.ai` tree. Future chapters must start from current repository state rather than reconstructing earlier architecture chapters from conversation history.
+The current architecture state is represented by this file and the current `.ai` tree. Future chapters MUST start from current repository state rather than reconstructing earlier architecture chapters from conversation history.
 
 The next architecture/research chapter should treat the independent Grok/Qwen review as evidence against the current model, distinguish accepted findings from open questions, and avoid broad restructuring without evidence.
 
@@ -888,7 +888,7 @@ purpose
 
 The command-routing table therefore carries only those four fields. Repository-state effects, lifecycle outcomes, write authorization, commit policy, commit construction, and procedural steps remain canonical concerns outside INDEX.
 
-This is sufficient for the expected approximately 10–15 command/capability surface without introducing a registry, manifest, command-ID schema, or additional filesystem layer. Further scaling pressure should first be addressed through presentation/grouping changes rather than additional semantic metadata.
+This is sufficient for the expected approximately 10–15 command/capability surface without introducing a registry, manifest, command-ID schema, or additional filesystem layer. Further scaling pressure SHOULD first be addressed through presentation/grouping changes rather than additional semantic metadata.
 
 ### 23.1 AGENTS remains an active architecture task
 
@@ -904,7 +904,7 @@ INDEX
 canonical owners
 ```
 
-AGENTS must not become a second INDEX, procedure catalogue, lifecycle rule, or capability owner.
+AGENTS MUST NOT become a second INDEX, procedure catalogue, lifecycle rule, or capability owner.
 
 ## 24. Durable methodology — bounded architecture work
 
@@ -964,7 +964,7 @@ The AGENTS role is a compact always-on operating contract. Its active implementa
 - project-work routing through `docs/PROJECT-INSTRUCTIONS.md`;
 - reread of the canonical owner before execution.
 
-Its content must not grow into a second INDEX, procedure catalogue, lifecycle rule, or capability owner.
+Its content MUST NOT grow into a second INDEX, procedure catalogue, lifecycle rule, or capability owner.
 
 ### 24.3 Durable portability boundary
 
@@ -982,7 +982,7 @@ Project-specific handoffs and architecture notes remain project state/research a
 
 ### 24.4 Applying bounded architecture work
 
-When an old note or external review proposes a change, first classify it as current evidence, already-decided state, open architectural question, or historical/deferred proposal. Only current evidence and genuinely open questions should normally drive the current chapter. A deferred proposal does not become active merely because it remains written down.
+When an old note or external review proposes a change, first classify it as current evidence, already-decided state, open architectural question, or historical/deferred proposal. Only current evidence and genuinely open questions SHOULD normally drive the current chapter. A deferred proposal does not become active merely because it remains written down.
 
 
 
@@ -1076,4 +1076,4 @@ The lifecycle rule also contains user-facing command phrases that overlap with I
 3. classify and perform only the necessary lifecycle command-discovery cleanup;
 4. run a targeted entry-layer consistency sweep.
 
-Do not reopen the completed INDEX minimum-routing decision or restart Iteration 2 restructuring.
+DO NOT reopen the completed INDEX minimum-routing decision or restart Iteration 2 restructuring.

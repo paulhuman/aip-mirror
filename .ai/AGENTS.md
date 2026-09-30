@@ -1,7 +1,7 @@
 # AI agent instructions
 
 1. Treat `.ai/` as the AI working infrastructure and `docs/` as project
-   knowledge. Do not infer repository or project conventions from memory.
+   knowledge. DO NOT infer repository or project conventions from memory.
 
 2. Before performing project or `.ai` work, establish repository and path
    context from `.ai/config.yaml` and `.ai/rules/repository.md`.

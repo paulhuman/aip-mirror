@@ -28,6 +28,6 @@ It is not a replacement for normal project documentation.
 
 ## Required distinction
 
-Handoffs must distinguish confirmed observations from inferences, assumptions, and open questions.
+Handoffs MUST distinguish confirmed observations from inferences, assumptions, and open questions.
 
 See `.ai/skills/handoff/SKILL.md` and `.ai/rules/handoff/lifecycle.md` for the workflow and format.
