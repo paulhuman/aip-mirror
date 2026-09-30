@@ -45,7 +45,8 @@ If a supplied `SHORT_NAME` is present, configuration lookup is a fallback and MU
 
 If `SHORT_NAME` is neither supplied nor resolvable from configured specialization vocabulary, bootstrap MUST stop and report the unresolved short name rather than guessing one.
 
-The resolved `SHORT_NAME` is used as conversation context and for the canonical handoff filename:
+The resolved `SHORT_NAME` is the canonical short conversation title.
+It is used for the `Conversation` field and for the canonical handoff filename:
 
     .ai/handoffs/<specialization>/<chapter>-<short-name>.md
 
