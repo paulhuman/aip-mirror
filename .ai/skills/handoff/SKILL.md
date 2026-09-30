@@ -177,7 +177,7 @@ DO NOT mark the handoff `HANDED_OFF` in the closing chapter.
 
 A READ-ONLY AI MUST NOT modify or commit the repository.
 
-Instead, it MUST prepare the complete current handoff as it should exist for migration, including `DRAFT` → `READY_FOR_HANDOFF` only as the **proposed manual repository state** when that transition is appropriate. It must return the entire proposed handoff file content to the user and provide the exact commit message for the manual handoff update.
+Instead, it MUST prepare the complete current handoff as it should exist for migration, including `DRAFT` → `READY_FOR_HANDOFF` only as the **proposed manual repository state** when that transition is appropriate. It MUST return the entire proposed handoff file content to the user and provide the exact commit message for the manual handoff update.
 
 A READ-ONLY AI MUST NOT claim that the handoff was changed to `READY_FOR_HANDOFF` or that any commit occurred.
 
@@ -191,7 +191,7 @@ No migration branch MAY mark the handoff `HANDED_OFF` in the closing chapter.
 
 ### Bootstrap instruction recovery command
 
-The standard migration workflow MUST generate the bootstrap instruction for the future receiving chapter. If the AI completed or discussed the migration but forgot to provide that instruction, the user may explicitly issue:
+The standard migration workflow MUST generate the bootstrap instruction for the future receiving chapter. If the AI completed or discussed the migration but forgot to provide that instruction, the user MAY explicitly issue:
 
     Пора выдать bootstrap-инструкцию
 
@@ -199,13 +199,13 @@ Treat this as a direct request to generate the missing bootstrap instruction for
 
 This command does **not** initialize the next chapter, does **not** change lifecycle state, and does **not** authorize repository writes by itself.
 
-The generated instruction must contain the required runtime values for the receiving chapter:
+The generated instruction MUST contain the required runtime values for the receiving chapter:
 
     PREVIOUS_CHAPTER = <previous chapter>
     CURRENT_CHAPTER = <current chapter>
     SPECIALIZATION = <specialization>
 
-The instruction is for a future receiving conversation. It must not be presented as evidence that the receiving chapter has already started.
+The instruction is for a future receiving conversation. It MUST NOT be presented as evidence that the receiving chapter has already started.
 
 This command MAY be used both by WRITE-CAPABLE and READ-ONLY AI. A READ-ONLY AI MUST generate only the bootstrap instruction requested by this command and MUST NOT claim that the receiving chapter was initialized or that any repository lifecycle operation occurred.
 
@@ -240,7 +240,7 @@ Use the handoff for temporary or chapter-specific state such as:
 - what was being investigated;
 - what was just changed;
 - what remains unfinished;
-- what the next chapter should do first;
+- what the next chapter SHOULD do first;
 - which conversation-specific assumptions still need validation.
 
 ## Before marking READY_FOR_HANDOFF
