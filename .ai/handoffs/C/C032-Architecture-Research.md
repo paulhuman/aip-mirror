@@ -52,6 +52,24 @@ ACTIVATE does not own lifecycle, repository, project, mutation, commit, or verif
 
 C031 also established that handoff continuity and activation context are distinct. A handoff should preserve material current-work and durable-context references; activation independently establishes the canonical operational context required for the current operation.
 
+## C032 integration experiment — first result
+
+The first real operation tested was:
+
+    Пора обновить handoff
+
+The required canonical owner set was:
+
+- `.ai/skills/handoff/SKILL.md`
+- `.ai/rules/handoff/lifecycle.md`
+- the current handoff under `.ai/handoffs/C/`
+
+ACTIVATE was invoked for that operation by rereading those current repository versions before execution. The resulting operational context was then used to perform the checkpoint update.
+
+The smallest useful integration point was `.ai/INDEX.md`: its routing rule now explicitly requires the caller to invoke ACTIVATE with the operation and the listed canonical owners before execution. This is one routing-level sentence; INDEX still does not own activation procedure, lifecycle semantics, repository semantics, or handoff procedure.
+
+This gives the first concrete evidence that ACTIVATE can sit between operation routing and canonical-owner execution without introducing a second procedural owner.
+
 ## Previous chapter
 
 C031 — Architecture & Research.
@@ -81,7 +99,7 @@ C031 is the verified source of the completed activation owner-boundary experimen
 - .ai/skills/activation/SKILL.md exists and was read back after creation.
 - Activation skill commit: 028ec2254d31a985149edcd1e7c32a79385e352e.
 - Architecture notes were updated with the C031 result: 7047eb0a43b515025ed6b6b42e7340a59e6e2769.
-- The activation skill is not yet wired into INDEX.md or BOOTSTRAP.
+- The activation skill is now explicitly invoked by INDEX routing before execution; BOOTSTRAP remains unchanged.
 - The next bounded question is an integration test against one real existing operation.
 
 ### Inferred
@@ -91,27 +109,20 @@ C031 is the verified source of the completed activation owner-boundary experimen
 
 ### Open
 
-- Which existing operation provides the cleanest first integration point.
-- Whether INDEX needs any minimal discoverability change to point to the activation skill, or whether the owning skill/workflow can invoke it without INDEX changes.
-- Whether BOOTSTRAP should invoke ACTIVATE directly, indirectly through an owning capability, or remain unchanged until a concrete integration case proves the need.
+- Whether BOOTSTRAP should invoke ACTIVATE directly, indirectly through an owning capability, or remain unchanged until a concrete bootstrap case proves the need.
+- Whether another existing operation exposes a limitation in the routing-level integration.
 - Whether the current activation contract needs any refinement after real operational use.
 
 ## Immediate next task
 
-Run one bounded real-operation integration test.
+Run the next bounded integration check only if needed to validate the boundary exposed by the first result. The current concrete candidate is the new-chapter bootstrap path, because BOOTSTRAP is an existing canonical workflow with its own ordered owner semantics.
 
-Preferred starting point:
+For that check:
 
-    Пора обновить handoff
-
-For that operation:
-
-1. reread the current INDEX routing entry and canonical handoff/lifecycle owners;
-2. identify the exact owner set required before execution;
-3. invoke the activation procedure conceptually or through the new skill;
-4. determine the smallest integration change needed to make the activation explicit and reusable;
-5. verify that the change does not duplicate routing, lifecycle, repository, commit, or project semantics;
-6. only then consider whether INDEX.md or BOOTSTRAP.md needs a minimal update.
+1. identify the exact canonical owners required by BOOTSTRAP;
+2. determine whether INDEX-level activation is sufficient for bootstrap or whether BOOTSTRAP itself needs a direct ACTIVATE invocation;
+3. make the smallest change only if the real operation demonstrates a gap;
+4. verify that BOOTSTRAP remains the owner of bootstrap ordering and lifecycle interaction.
 
 Do not broaden the experiment into a general entry-layer redesign.
 
