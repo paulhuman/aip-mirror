@@ -68,8 +68,8 @@ The canonical generated form is:
 
     Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
 
-    PREVIOUS_CHAPTER = <three-digit previous chapter number or N/A>
-    CURRENT_CHAPTER = <three-digit current chapter number>
+    PREVIOUS_CHAPTER = <four-digit previous chapter number or N/A>
+    CURRENT_CHAPTER = <four-digit current chapter number>
     SPECIALIZATION = <single uppercase specialization letter>
     SHORT_NAME = <resolved short conversation name>
 
@@ -77,8 +77,8 @@ For this project, the generated repository locator is constructed from `project.
 
 The standard generated transport contains the repository locator instruction above, followed by:
 
-    PREVIOUS_CHAPTER = <three-digit previous chapter number or N/A>
-    CURRENT_CHAPTER = <three-digit current chapter number>
+    PREVIOUS_CHAPTER = <four-digit previous chapter number or N/A>
+    CURRENT_CHAPTER = <four-digit current chapter number>
     SPECIALIZATION = <single uppercase specialization letter>
     SHORT_NAME = <resolved short conversation name>
 
@@ -94,23 +94,23 @@ The chapter number values MUST NOT include the specialization letter.
 
 Use:
 
-    CURRENT_CHAPTER = 033
+    CURRENT_CHAPTER = 0033
 
 not:
 
-    CURRENT_CHAPTER = C033
+    CURRENT_CHAPTER = C0033
 
 Likewise, use:
 
-    PREVIOUS_CHAPTER = 032
+    PREVIOUS_CHAPTER = 0032
 
 not:
 
-    PREVIOUS_CHAPTER = C032
+    PREVIOUS_CHAPTER = C0032
 
 `CURRENT_CHAPTER` and `PREVIOUS_CHAPTER` therefore carry only the numeric chapter component. The specialization is carried separately by `SPECIALIZATION`.
 
-The full chapter identifier is derived from these values as `SPECIALIZATION` + `CURRENT_CHAPTER` (for example, `C` + `033` = `C033`). The predecessor handoff path is derived from `SPECIALIZATION` + `PREVIOUS_CHAPTER` when `PREVIOUS_CHAPTER` is not `N/A`.
+The full chapter identifier is derived from these values as `SPECIALIZATION` + `CURRENT_CHAPTER` (for example, `C` + `033` = `C0033`). The predecessor handoff path is derived from `SPECIALIZATION` + `PREVIOUS_CHAPTER` when `PREVIOUS_CHAPTER` is not `N/A`.
 
 A bootstrap message that supplies a chapter number with the specialization letter included is malformed and MUST be corrected before bootstrap proceeds.
 
@@ -302,7 +302,7 @@ Treat this as a direct request to update the current handoff with meaningful dur
 
 Normal handoff creation and update commits MUST use these short forms:
 
-    ai-docs(handoff): create C034
-    ai-docs(handoff): update C034
+    ai-docs(handoff): create C0034
+    ai-docs(handoff): update C0034
 
 Do not append conversation titles, task descriptions, rationale, milestone summaries, or other explanatory suffixes to normal handoff commit messages.

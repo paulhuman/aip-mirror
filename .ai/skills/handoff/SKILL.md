@@ -81,11 +81,11 @@ Header field rules:
 - `Conversation` contains the full chapter identifier followed by `SHORT_NAME`.
 - DO NOT include the project name prefix in `Conversation`.
 - `Specialization` contains only the specialization letter.
-- `Chapter` contains only the three-digit chapter number.
-- `Previous chapter` contains only the previous chapter's three-digit number, or `N/A` when this is the first chapter in the specialization.
+- `Chapter` contains only the four-digit chapter number.
+- `Previous chapter` contains only the previous chapter's four-digit number, or `N/A` when this is the first chapter in the specialization.
 - DO NOT include the specialization letter in the `Chapter` or `Previous chapter` field.
 - Use bold Markdown (`**...:**`) for every header field name exactly as shown above.
-- The full chapter identifier is formed from `Specialization` + `Chapter`; for example, `E` + `001` = `E001`.
+- The full chapter identifier is formed from `Specialization` + `Chapter`; for example, `E` + `001` = `E0001`.
   Chapter numbering is one-based: the first chapter is `001`, and `000` MUST NOT be used as a chapter number.
 - The handoff filename uses the full chapter identifier: `<chapter>-<short-name>.md`.
 
@@ -94,7 +94,7 @@ Example:
     # Conversation Handoff
 
     **Conversation:**
-    E001 — Independent Review (Qwen)
+    E0001 — Independent Review (Qwen)
 
     **Specialization:**
     E
@@ -173,7 +173,7 @@ Manual bootstrap transport MAY be used when starting the first chapter directly 
     Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
 
     PREVIOUS_CHAPTER = N/A
-    CURRENT_CHAPTER = <three-digit chapter>
+    CURRENT_CHAPTER = <four-digit chapter>
     SPECIALIZATION = <single uppercase specialization letter>
     SHORT_NAME = <short conversation name>
 
@@ -184,8 +184,8 @@ Manual bootstrap transport MAY be used when starting the first chapter directly 
 
     Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
 
-    PREVIOUS_CHAPTER = <three-digit previous chapter>
-    CURRENT_CHAPTER = <three-digit current chapter>
+    PREVIOUS_CHAPTER = <four-digit previous chapter>
+    CURRENT_CHAPTER = <four-digit current chapter>
     SPECIALIZATION = <single uppercase specialization letter>
     SHORT_NAME = <short conversation name>
 

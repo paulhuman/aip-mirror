@@ -17,13 +17,13 @@ Workstreams are organizational boundaries, not permanent ownership of all knowle
 Each workstream may span multiple conversation chapters. Chapter identifiers use:
 
 ```text
-[A-Z][0-9]{3}
+[A-Z][0-9]{4}
 ```
 
-The chapter number advances within the specialization letter, using three digits, starting at `001`:
+The chapter number advances within the specialization letter, using four digits, starting at `001`:
 
 ```text
-A001 → A002 → ... → A999
+A0001 → A0002 → ... → A0999
 ```
 
 Conversation lifecycle, chapter transitions, and handoff state are defined by:
