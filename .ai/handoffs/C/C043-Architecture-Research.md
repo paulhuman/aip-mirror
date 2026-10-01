@@ -50,8 +50,8 @@ The immediate subject is how a user can request `ACTIVATE`, `REFRESH`, and `TRAC
 - `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical new-chapter initialization workflow.
 - The predecessor handoff `.ai/handoffs/C/C042-Architecture-Research.md` was read successfully.
 - `.ai/architecture/README.md` confirms that architecture notes are durable context, not active execution owners.
-- `.ai/architecture/ai-infrastructure-restructuring.md` section 34 records the C042 TODO for the manual activation interface.
-- `.ai/INDEX.md` currently lists Activation in the capability map but does not introduce a command layer for it.
+- `.ai/architecture/ai-infrastructure-restructuring.md` sections 34–35 record the resolved manual activation interface and FAQ convention.
+- `.ai/INDEX.md` currently lists Activation in the capability map and does not need to introduce a command layer for manual ACTIVATE, REFRESH, or TRACE.
 - The repository does not already contain a C043 handoff; this chapter is creating its own receiving handoff as required by BOOTSTRAP.
 - The AI has working repository write and commit capability through the GitHub repository tools; the WRITE-CAPABLE bootstrap branch applies.
 
@@ -116,7 +116,7 @@ The immediate subject is how a user can request `ACTIVATE`, `REFRESH`, and `TRAC
 
 ### Inferred
 
-- Natural-language requests can likely map directly to the existing activation semantics without requiring a new command syntax, but the exact wording and observable behavior remain to be established by the investigation.
+- The consistency check should remain bounded to ownership and discoverability; no new semantic layer is indicated by the current architecture.
 
 ### Assumed / unverified
 
