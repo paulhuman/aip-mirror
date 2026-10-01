@@ -1,20 +1,20 @@
 # Conversation Handoff
 
 **Conversation:**
-C028 — Architecture & Research
+C029 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-028
+029
 
 **Previous chapter:**
-027
+028
 
 ## Current objective
 
-Complete the bounded normative-language consistency work identified after the C027 entry-layer architecture work, establish the project's normative-language rule, normalize active normative/procedural wording without changing semantic ownership, and leave the repository ready for the next Architecture & Research chapter.
+Complete the bounded normative-language consistency work identified after the C028 entry-layer architecture work, establish the project's normative-language rule, normalize active normative/procedural wording without changing semantic ownership, and leave the repository ready for the next Architecture & Research chapter.
 
 ## Completed work
 
@@ -82,7 +82,7 @@ The cleanup is intentionally bounded. It does not reopen the completed AGENTS/IN
 
 ### Confirmed / observed
 
-- C027's entry/routing architecture remains the current baseline.
+- C028's entry/routing architecture remains the current baseline.
 - The normative-language RULE exists in the repository.
 - The targeted cleanup was reviewed by scope and semantic classification.
 - `.ai/archive/**` was not included in the cleanup scope.
@@ -101,7 +101,7 @@ The cleanup is intentionally bounded. It does not reopen the completed AGENTS/IN
 
 ## Things not to redo
 
-- C027 entry-layer restructuring.
+- C028 entry-layer restructuring.
 - The AGENTS entry-contract decision.
 - The INDEX minimum-routing decision.
 - The decision not to create `ENTRY.md`.
@@ -112,7 +112,7 @@ The cleanup is intentionally bounded. It does not reopen the completed AGENTS/IN
 
 ## Immediate next task
 
-C029 should begin from the current repository state and choose the next bounded Architecture & Research task. The normative-language cleanup itself is complete; do not reopen it without new evidence.
+C030 should begin from the current repository state and choose the next bounded Architecture & Research task. The normative-language cleanup itself is complete; do not reopen it without new evidence.
 
 ## Recommended starting context
 
@@ -126,4 +126,4 @@ Read the current entry-layer and architecture material as needed, especially:
 - `docs/PROJECT-INSTRUCTIONS.md`
 - `docs/architecture/project-architecture.md`
 
-Use the current repository as the source of truth rather than reconstructing C028 from conversation history.
+Use the current repository as the source of truth rather than reconstructing C029 from conversation history.
