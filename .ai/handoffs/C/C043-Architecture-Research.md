@@ -36,7 +36,7 @@ The immediate subject is how a user can request `ACTIVATE`, `REFRESH`, and `TRAC
 
 ## Confirmed / observed
 
-- `.ai/config.yaml` identifies `paulhuman/aip-mirror`, `main), and `C → Architecture & Research`.
+- `.ai/config.yaml` identifies `paulhuman/aip-mirror`, `main`, and `C → Architecture & Research`.
 - `.ai/rules/repository.md` owns repository identity/path resolution and repository write safety.
 - `.ai/rules/workflow.md` owns general workflow principles and repository inspection guidance.
 - `.ai/rules/handoff/lifecycle.md` owns chapter continuity semantics.
