@@ -20,6 +20,16 @@ They are the **large durable-memory layer** for `.ai` architecture work:
 
 An architecture file may contain the reasoning and history behind a decision while the active semantic owner remains elsewhere in `.ai`.
 
+## Architecture FAQ and usage notes
+
+The `.ai/architecture/faq/` directory contains small, human-oriented explanations of how the `.ai` infrastructure is used in practice.
+
+These files are durable orientation material, not canonical semantic owners. They MAY answer practical “how does this work?” questions in more detail than an active rule or skill should.
+
+Prefer separate files for separate questions rather than accumulating unrelated answers in one large document.
+
+When a practical explanation describes an active semantic rule, skill, or workflow, the canonical owner remains authoritative. FAQ material SHOULD explain or illustrate that owner rather than redefine it.
+
 ## Ownership boundary
 
 Architecture notes are **not active execution owners**.
