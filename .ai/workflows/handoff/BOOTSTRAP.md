@@ -221,7 +221,8 @@ After this self-check:
 4. Read this file.
 5. Read .ai/rules/workflow.md, .ai/rules/handoff/references.md, and the handoff skill.
 6. Read .ai/skills/activation/SKILL.md and invoke ACTIVATE.
-7. If PREVIOUS_CHAPTER is not N/A, read the predecessor handoff.
+7. During bootstrap initialization, make the activation TRACE visible. The TRACE MUST identify the bootstrap operation, list the canonical owners actually reread for ACTIVATE, and report `status: ACTIVATED`. If an additional `OPERATION READS` section is presented, it MUST contain only additional repository files actually read during bootstrap and MUST NOT duplicate ACTIVATE owners.
+8. If PREVIOUS_CHAPTER is not N/A, read the predecessor handoff.
 8. Inspect implementation files and references identified by the predecessor handoff when applicable.
 9. Confirm that the new chapter can continue from the recorded state without guessing.
 
