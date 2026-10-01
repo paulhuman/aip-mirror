@@ -140,3 +140,31 @@ The implementation was verified by reading back the changed files and inspecting
 4. `.ai/workflows/handoff/BOOTSTRAP.md` — canonical chapter initialization and mandatory bootstrap TRACE visibility.
 5. `.ai/INDEX.md` — current command/capability surface.
 6. `.ai/rules/handoff/lifecycle.md` — chapter continuity constraints.
+
+
+## Migration checkpoint — C043
+
+### Completed in C042
+
+- Resolved the OPERATION READS operation-boundary question and recorded the active semantics in .ai/skills/activation/SKILL.md.
+- Recorded the durable operation-boundary decision in .ai/architecture/ai-infrastructure-restructuring.md, section 33.3.
+- Created .ai/architecture/README.md to document the purpose and ownership boundary of the architecture directory.
+- Added the architecture README to .ai/INDEX.md under Structural references.
+- Added a future TODO to the architecture record for understanding manual natural-language invocation of ACTIVATE, REFRESH, and TRACE without introducing new command syntax.
+- Verified that these changes do not make .ai/architecture/ an active execution owner.
+
+### Next task for C043
+
+Investigate the manual user-facing interface to .ai/skills/activation/SKILL.md:
+
+- explain ACTIVATE, REFRESH, and TRACE in practical terms;
+- determine how the user can request each function directly in natural language when no dedicated command exists;
+- determine what reread and observable output should result from such a request;
+- keep the solution compatible with the existing activation semantics and avoid inventing a new command layer unless evidence requires it.
+
+### Migration target
+
+- PREVIOUS_CHAPTER = 042
+- CURRENT_CHAPTER = 043
+- SPECIALIZATION = C
+- SHORT_NAME = Architecture & Research
