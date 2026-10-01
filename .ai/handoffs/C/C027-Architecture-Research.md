@@ -1,16 +1,16 @@
 # Conversation Handoff
 
 **Conversation:**
-C027 — Architecture & Research
+C028 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-027
+028
 
 **Previous chapter:**
-026
+027
 
 ## Current objective
 
@@ -39,7 +39,7 @@ AGENTS must remain a compact always-on contract, not a second INDEX, procedure c
 
 ## Immediate next task
 
-The final consistency sweep found no remaining active entry-layer inconsistency. C027 is complete and ready for handoff to C028. The receiving chapter should begin from current repository state and use the bootstrap procedure below; do not reopen settled C027 architecture without new evidence.
+The final consistency sweep found no remaining active entry-layer inconsistency. C028 is complete and ready for handoff to C029. The receiving chapter should begin from current repository state and use the bootstrap procedure below; do not reopen settled C028 architecture without new evidence.
 
 Completed in this sequence:
 
@@ -89,11 +89,11 @@ Canonical owners for validation:
 
 Previous handoff:
 
-- `.ai/handoffs/C/C026-Architecture-Research.md`
+- `.ai/handoffs/C/C027-Architecture-Research.md`
 
 Earlier same-specialization handoff checked during bootstrap:
 
-- `.ai/handoffs/C/C025-Architecture-Research.md`
+- `.ai/handoffs/C/C026-Architecture-Research.md`
 
 ## Decisions and constraints
 
@@ -121,7 +121,7 @@ Earlier same-specialization handoff checked during bootstrap:
 ### Confirmed / observed
 
 - Repository identity is `paulhuman/aip-mirror`, default branch `main`, from `.ai/config.yaml`.
-- C026 was `READY_FOR_HANDOFF` before this bootstrap.
+- C027 was `READY_FOR_HANDOFF` before this bootstrap.
 - `.ai/INDEX.md` is a router/discovery surface with the four-field routing boundary.
 - `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical ordered bootstrap workflow.
 - The lifecycle is `DRAFT → READY_FOR_HANDOFF → HANDED_OFF`.
@@ -151,13 +151,13 @@ Earlier same-specialization handoff checked during bootstrap:
 
 ## Recommended starting context
 
-Use the user-provided C027 bootstrap order as the authoritative starting sequence. Start with the current INDEX and architecture note, then validate against AGENTS, lifecycle, handoff skill, and BOOTSTRAP before consulting additional owners as needed.
+Use the user-provided C028 bootstrap order as the authoritative starting sequence. Start with the current INDEX and architecture note, then validate against AGENTS, lifecycle, handoff skill, and BOOTSTRAP before consulting additional owners as needed.
 
 The durable architectural question is:
 
 > What is the minimum semantic information an INDEX router needs to discover and safely activate the canonical capability while remaining only a router and never becoming a shadow owner?
 
-## C027 analysis result — INDEX presentation and metadata boundary
+## C028 analysis result — INDEX presentation and metadata boundary
 
 ### Current presentation inventory
 
@@ -243,9 +243,9 @@ Scope verification shows the INDEX commit changed only \`.ai/INDEX.md\`.
 
 - Whether the exact command syntax/IDs should ever be frozen remains intentionally deferred.
 - Whether future capabilities outside the current handoff domain need additional discovery grouping remains open.
-- Future MEC / P-01 / P-02 / P-03 analysis is outside the completed C027 scope and is a likely next architecture question.
+- Future MEC / P-01 / P-02 / P-03 analysis is outside the completed C028 scope and is a likely next architecture question.
 
-## C027 bounded follow-up
+## C028 bounded follow-up
 
 The INDEX routing decision is complete. Current work is now split deliberately into two categories:
 
@@ -282,13 +282,13 @@ Verified:
 - `docs/PROJECT-INSTRUCTIONS.md` uses the current chapter format and canonical bootstrap path.
 - `.ai/rules/handoff/lifecycle.md` retains lifecycle semantics and authorization; checkpoint/migration invocation discovery is routed through INDEX.
 - `.ai/workflows/handoff/BOOTSTRAP.md` remains the canonical ordered bootstrap workflow.
-- durable architecture notes now mark AGENTS and lifecycle cleanup as resolved in C027 rather than pending.
+- durable architecture notes now mark AGENTS and lifecycle cleanup as resolved in C028 rather than pending.
 - no active entry-layer document inspected in the sweep retains the former chapter format or former bootstrap path.
 - `docs/architecture/project-architecture.md` was additionally found to retain the former chapter identifier format during migration preparation; this was corrected in commit `6ffef19d779a6874c21a609ee57f558469131a73` before handoff.
 
 Historical occurrences of old identifiers/paths remain only where the architecture document explicitly records migration history or cleanup evidence; they are not active instructions.
 
-### C027 scope conclusion
+### C028 scope conclusion
 
 The bounded AGENTS architecture question, INDEX minimum-routing question, targeted project-instruction cleanup, lifecycle command-discovery cleanup, targeted architecture-document consistency correction, and final entry-layer consistency sweep are complete.
 
