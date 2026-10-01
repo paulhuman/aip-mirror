@@ -1,20 +1,20 @@
 # Conversation Handoff
 
 **Conversation:**
-C042 — Architecture & Research
+C043 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-042
+043
 
 **Previous chapter:**
-041
+042
 
 ## Starting objective
 
-Continue the bounded Architecture & Research investigation from C041. The immediate subject is the remaining operation-boundary question for `OPERATION READS`: determine where an operation ends, especially for repository reads that occur after the substantive result has been produced but before the assistant finishes the user-facing response.
+Continue the bounded Architecture & Research investigation from C042. The immediate subject is the remaining operation-boundary question for `OPERATION READS`: determine where an operation ends, especially for repository reads that occur after the substantive result has been produced but before the assistant finishes the user-facing response.
 
 The goal is to keep TRACE observable and useful without introducing tracing lifecycle events, additional read categories, telemetry, or other machinery.
 
@@ -22,8 +22,8 @@ The goal is to keep TRACE observable and useful without introducing tracing life
 
 - Repository: `paulhuman/aip-mirror`.
 - Canonical branch: `main`.
-- Current chapter: C042.
-- Previous chapter: C041.
+- Current chapter: C043.
+- Previous chapter: C042.
 - Specialization: C.
 - Resolved short name: `Architecture & Research`.
 - Canonical bootstrap runtime contract remains `PREVIOUS_CHAPTER`, `CURRENT_CHAPTER`, `SPECIALIZATION`.
@@ -32,7 +32,7 @@ The goal is to keep TRACE observable and useful without introducing tracing life
 - `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical new-chapter initialization workflow.
 - `.ai/skills/activation/SKILL.md` defines ACTIVATE as rereading required canonical owners.
 - TRACE is an observable presentation of activation evidence, not a separate capability or execution layer.
-- C041 established the two-layer observation model: ACTIVATE owners plus unique additional `OPERATION READS`.
+- C042 established the two-layer observation model: ACTIVATE owners plus unique additional `OPERATION READS`.
 
 ## Confirmed / observed
 
@@ -45,13 +45,13 @@ The goal is to keep TRACE observable and useful without introducing tracing life
 - `.ai/skills/activation/SKILL.md` defines ACTIVATE and optional TRACE presentation.
 - `.ai/skills/handoff/SKILL.md` owns handoff structure and handoff operations.
 - `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical initialization workflow.
-- Predecessor handoff `.ai/handoffs/C/C041-Architecture-Research.md` was read successfully.
-- Active architecture record `.ai/architecture/ai-infrastructure-restructuring.md`, sections 32–33, was read as the implementation/research context identified by C041.
+- Predecessor handoff `.ai/handoffs/C/C042-Architecture-Research.md` was read successfully.
+- Active architecture record `.ai/architecture/ai-infrastructure-restructuring.md`, sections 32–33, was read as the implementation/research context identified by C042.
 - `.ai/INDEX.md` was read as the active command/capability surface.
 - ACTIVATE for conversation initialization reread these canonical owners: `.ai/rules/workflow.md`, `.ai/rules/handoff/lifecycle.md`, `.ai/skills/handoff/SKILL.md`, and `.ai/workflows/handoff/BOOTSTRAP.md`.
 - No additional external research reference is materially required for bootstrap.
 
-### C041 decisions carried forward
+### C042 decisions carried forward
 
 - `ACTIVATE` shows canonical owners actually reread.
 - `OPERATION READS` shows the unique repository files actually read during the operation, excluding files already presented as ACTIVATE owners.
@@ -80,7 +80,7 @@ The goal is to keep TRACE observable and useful without introducing tracing life
 - `.ai/skills/handoff/SKILL.md`
 - `.ai/workflows/handoff/BOOTSTRAP.md`
 - `.ai/architecture/ai-infrastructure-restructuring.md`, sections 32–33
-- `.ai/handoffs/C/C041-Architecture-Research.md`
+- `.ai/handoffs/C/C042-Architecture-Research.md`
 
 ## Important constraints
 
@@ -100,10 +100,10 @@ The goal is to keep TRACE observable and useful without introducing tracing life
 
 ### Confirmed
 
-- C042 is the receiving chapter for C041.
+- C043 is the receiving chapter for C042.
 - `C → Architecture & Research` is configured in `.ai/config.yaml`.
-- C041's ACTIVATE / OPERATION READS model is recorded in the durable architecture record.
-- The current chapter can continue from durable repository state without reconstructing C041 from conversation history.
+- C042's ACTIVATE / OPERATION READS model is recorded in the durable architecture record.
+- The current chapter can continue from durable repository state without reconstructing C042 from conversation history.
 
 ### Resolved decision
 
@@ -120,7 +120,7 @@ The goal is to keep TRACE observable and useful without introducing tracing life
 
 ### Open
 
-- None within the bounded C042 operation-boundary question.
+- None within the bounded C043 operation-boundary question.
 
 ## Completed implementation
 
@@ -135,16 +135,16 @@ The implementation was verified by reading back the changed files and inspecting
 ## Recommended starting context
 
 1. `.ai/architecture/ai-infrastructure-restructuring.md` — sections 32–33, current TRACE and OPERATION READS model.
-2. `.ai/handoffs/C/C041-Architecture-Research.md` — predecessor reasoning and exact remaining question.
+2. `.ai/handoffs/C/C042-Architecture-Research.md` — predecessor reasoning and exact remaining question.
 3. `.ai/skills/activation/SKILL.md` — ACTIVATE semantics and TRACE observability boundary.
 4. `.ai/workflows/handoff/BOOTSTRAP.md` — canonical chapter initialization and mandatory bootstrap TRACE visibility.
 5. `.ai/INDEX.md` — current command/capability surface.
 6. `.ai/rules/handoff/lifecycle.md` — chapter continuity constraints.
 
 
-## Migration checkpoint — C043
+## Migration checkpoint — C044
 
-### Completed in C042
+### Completed in C043
 
 - Resolved the OPERATION READS operation-boundary question and recorded the active semantics in .ai/skills/activation/SKILL.md.
 - Recorded the durable operation-boundary decision in .ai/architecture/ai-infrastructure-restructuring.md, section 33.3.
@@ -153,7 +153,7 @@ The implementation was verified by reading back the changed files and inspecting
 - Added a future TODO to the architecture record for understanding manual natural-language invocation of ACTIVATE, REFRESH, and TRACE without introducing new command syntax.
 - Verified that these changes do not make .ai/architecture/ an active execution owner.
 
-### Next task for C043
+### Next task for C044
 
 Investigate the manual user-facing interface to .ai/skills/activation/SKILL.md:
 
