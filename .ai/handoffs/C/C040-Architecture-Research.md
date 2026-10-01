@@ -38,7 +38,7 @@ Recover from the interrupted C039 → C040 migration and continue the Architectu
   >>generate-bootstrap <chapter>
   ```
 - C039 confirmed that first-chapter initialization does not need a dedicated `>>init` or `>>new` operation.
-- C039 confirmed that interrupted migration does not need a dedicated `>>recover` operation; recovery is handled by the canonical BOOTSTRAP workflow and durable repository state.
+- C039 confirmed that interrupted migration is handled by the canonical BOOTSTRAP workflow and durable repository state; no separate recovery operation is part of the active command surface.
 - C039 validated the two manual bootstrap transport templates.
 - C039 completed the bounded semantic consistency sweep and found no additional active infrastructure changes required by that scope.
 - C039's latest repository checkpoint added the `Structural references` section to `.ai/INDEX.md`, pointing to `.ai/handoffs/README.md` as structural documentation and explicitly not a runtime activation owner.
@@ -73,7 +73,7 @@ Recover from the interrupted C039 → C040 migration and continue the Architectu
 - Generated bootstrap transport and execution of the receiving chapter's BOOTSTRAP workflow are separate concerns.
 - First-chapter initialization uses BOOTSTRAP's FIRST CHAPTER branch with `PREVIOUS_CHAPTER = N/A`; no dedicated initialization command is required.
 - Interrupted migration is a bootstrap/recovery condition, not a separate lifecycle operation.
-- Manual bootstrap recovery wording is transport context only and does not create a new command or lifecycle state.
+- Manual bootstrap interruption wording is transport context only and does not create a new command or lifecycle state.
 - Historical unresolved command wording remains historical evidence and MUST NOT be treated as active command semantics merely because it appears in older architecture records or handoffs.
 
 ## Relevant files and references
@@ -130,7 +130,7 @@ No additional external research reference was identified as materially required 
 
 ## C040 checkpoint
 
-Semantic consistency sweep completed. INDEX now exposes the activation capability. The next bounded question is operational TRACE design.
+Semantic consistency sweep completed. INDEX now exposes the activation capability. Obsolete negative references were removed from active handoff/bootstrap documentation. The next bounded question is operational TRACE design.
 
 ## Immediate next task
 
