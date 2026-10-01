@@ -2697,3 +2697,19 @@ Therefore:
 If work that was thought to be complete is later found to require another read or verification step, the operation boundary extends to include that work.
 
 This boundary is intentionally semantic. It does not introduce lifecycle events, additional read categories, telemetry, or other tracing machinery.
+
+## 34. Future TODO — manual activation interface
+
+C042 left a practical usability question for the activation skill to investigate:
+
+> How can a user manually request the functions described by `.ai/skills/activation/SKILL.md` when there is no dedicated user-facing command for them?
+
+The future investigation SHOULD explain, in plain language:
+
+- what `ACTIVATE` means when requested manually;
+- what `REFRESH` means, how it relates to `ACTIVATE`, and when a user would request it;
+- what `TRACE` means and when a user would request it;
+- how the user can ask for these functions directly in natural language without inventing new command syntax;
+- what the AI should actually reread and what observable output the user should expect.
+
+This is a usability/interface question, not a reason to introduce new command IDs or a new command layer. The investigation SHOULD first determine the simplest natural-language invocation that follows the existing activation semantics.

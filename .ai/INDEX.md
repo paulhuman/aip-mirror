@@ -64,6 +64,7 @@ Use this map to find the canonical capability without reading the entire `.ai/` 
 ## Structural references
 
 - `.ai/handoffs/README.md` — handoff tree structure and orientation. Read when inspecting or navigating the handoff structure; it is not a runtime activation owner.
+- `.ai/architecture/README.md` — architecture tree structure and orientation. Read when inspecting or navigating durable architecture context; it is not a runtime activation owner.
 
 ## Owner boundary
 
