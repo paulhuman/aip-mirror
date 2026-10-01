@@ -768,22 +768,13 @@ command → operation → owner → activation context
 
 This is a durable C0027 decision. Any future change would require new evidence and an explicitly bounded architecture question.
 
-### 17.2 `Пора выдать bootstrap-инструкцию` — OPEN
+### 17.2 `Пора выдать bootstrap-инструкцию` — RESOLVED IN C0039
 
 The independent reviews raised a legitimate semantic question about the fifth command.
 
 One interpretation is that bootstrap-instruction generation is a standalone, non-mutating capability. Another is that it is naturally the terminal output of migration and should not exist as a separately routable operation.
 
-Current decision: **keep the command unchanged for now**.
-
-Questions to resolve later:
-
-- Is bootstrap-instruction generation a genuine independent capability or merely a migration output?
-- Should it remain a user-facing command if it is read-only?
-- If it remains, should it be explicitly defined as a preview/generation operation whose validity depends on an already completed migration?
-- Should INDEX distinguish migration operations from chapter-initialization workflows more visibly?
-
-DO NOT change the command or merge it into migration without new evidence.
+Resolved in C0039. The standalone operation is explicitly defined as `>>generate-bootstrap <chapter>`: a non-mutating transport-generation capability that can generate or regenerate bootstrap transport without repeating migration. It does not execute BOOTSTRAP, initialize the receiving chapter, change lifecycle state, or create repository state.
 
 ### 17.3 Soft dual source in lifecycle.md — RESOLVED IN C0027
 
@@ -877,7 +868,7 @@ The reviews are now consolidated against current repository evidence. The matrix
 | `INDEX` routing model                                              | Grok + Qwen converge                                               | Accept                                 | **Keep**                                                  |
 | `INDEX` `Repository state may change` + `Commit` metadata          | C0027 tested their routing value against canonical owners           | Remove from routing table              | **Removed in C0027; semantics remain canonical elsewhere** |
 | Minimum semantic metadata before router becomes owner              | C0027 tested the routing boundary against canonical owners          | Four-field boundary established        | **Resolved in C0027**                                      |
-| `Пора выдать bootstrap-инструкцию` as separate command             | Both reviews raise semantic question                               | Keep unchanged                         | **Open; no merge with migration**                         |
+| `Пора выдать bootstrap-инструкцию` as separate command             | C0039 resolved the semantic boundary and accepted standalone generation | Keep as separate operation             | **Resolved in C0039**                                     |
 | `BOOTSTRAP.md` as ordered workflow                                 | Grok + Qwen converge                                               | Accept                                 | **Keep**                                                  |
 | `SUPERSEDED` removal / historical ordering                         | Qwen suggestion; current filenames already encode chapter sequence | No new lifecycle rule                  | **No change**                                             |
 | User-facing command phrases duplicated in `lifecycle.md`           | Grok + Qwen                                                        | Soft dual source                       | **Targeted cleanup candidate**                            |
@@ -988,28 +979,21 @@ Take a real handoff and classify every content unit, then test whether project k
 
 Test whether a genuinely distinct `ENTRY.md` layer is justified. The candidate role is new-AI infrastructure activation, not bootstrap workflow execution.
 
-### INDEX Presentation Test
+### INDEX Presentation Test — RESOLVED IN C0027
 
-Prototype a more compact presentation for approximately 10–15 commands while preserving routing metadata and avoiding procedural content.
+The compact INDEX presentation and minimum routing boundary were tested and accepted. Routing metadata remains in INDEX without moving procedural content into the router.
 
-### Future Identifier Migration Test
+### Future Identifier Migration Test — RESOLVED
 
-Historical chapter-identifier migration is complete; DO NOT preserve the former identifier scheme as an active architecture dependency.
+Historical chapter-identifier migration is complete. The active chapter format is `[A-Z][0-9]{4}` and the former identifier scheme is no longer an active architecture dependency.
 
-### Operation / Commit Vocabulary
+### Operation / Commit Vocabulary — RESOLVED IN C0039 / CURRENT COMMIT SKILL
 
-Keep exact operation IDs, final command syntax, and hard-MUST commit vocabulary deferred until sufficient evidence exists.
+The active operation surface is fixed as `>>handoff`, `>>migrate <chapter>`, and `>>generate-bootstrap <chapter>`. Handoff commit-message forms are canonically defined by `.ai/skills/commits/SKILL.md`; no additional command-ID or commit-vocabulary layer is required.
 
-### Manual Bootstrap Template Test
+### Manual Bootstrap Template Test — RESOLVED IN C0039
 
-Provide a dedicated Markdown file with two copy/paste bootstrap templates:
-
-1. **First-chat initialization** — for starting a completely new specialization/chat when no predecessor chapter exists;
-2. **Interrupted-chat recovery** — for continuing when migration was not completed, or migration completed but the bootstrap instruction was not emitted.
-
-The templates MUST expose the required runtime values as explicit placeholders so the user can copy a template into a new chat and manually substitute the values without requiring a dedicated `init` or `new` command.
-
-The template design SHOULD be validated against the canonical `.ai/workflows/handoff/BOOTSTRAP.md` contract before becoming active infrastructure.
+The two manual bootstrap transport templates were accepted and incorporated into the bootstrap transport surface: first-chapter initialization and interrupted-migration recovery. Both use the canonical BOOTSTRAP contract, expose the runtime values explicitly, and do not introduce `>>init`, `>>new`, or a separate recovery operation.
 
 ### Operational TRACE Completeness Test
 
