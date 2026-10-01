@@ -146,9 +146,25 @@ C0048 completed the first bounded comparison against C0047, C0046, and C0045.
 
 The durable experiment result is recorded in .ai/architecture/ai-infrastructure-restructuring.md.
 
+## Final C0048 architecture test results
+
+### Operational TRACE Completeness Test — RESOLVED
+
+The repository already required visible TRACE during bootstrap initialization, but the requirement was not explicit in the BOOTSTRAP procedure. C0048 reproduced the gap: ACTIVATE was performed during bootstrap without presenting the required TRACE.
+
+The canonical workflow was corrected so bootstrap now explicitly requires visible TRACE after ACTIVATE, with the bootstrap operation, actual ACTIVATE owners, and ACTIVATED status. Additional OPERATION READS remain limited to actual additional reads.
+
+No tracing subsystem or new activation layer was introduced.
+
+### Iteration 3 ENTRY.md Test — RESOLVED
+
+A final zero-context test was performed conceptually from .ai/AGENTS.md alone: a new AI can follow AGENTS to repository/path resolution, INDEX capability routing, or BOOTSTRAP when new-chapter initialization is requested. A separate ENTRY.md is therefore not needed.
+
+ENTRY.md will not be created.
+
 ## Immediate next task
 
-Continue with the next still-open bounded Architecture & Research question. The Operational TRACE Completeness Test remains open; the Iteration 3 ENTRY.md question remains deferred.
+Continue with the next genuinely open Architecture & Research question, if any.
 
 Start with C0047 and C0046, then include at least one additional real C-specialization handoff. Compare each handoff's `Recommended starting context` with the files actually touched or materially relied upon by that chapter, using the repository state and handoff contents as evidence rather than reconstructing missing chat history.
 
