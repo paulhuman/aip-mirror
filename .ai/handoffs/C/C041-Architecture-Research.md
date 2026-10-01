@@ -1,32 +1,32 @@
 # Conversation Handoff
 
 **Conversation:**
-C041 — Architecture & Research
+C042 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-041
+042
 
 **Previous chapter:**
-040
+041
 
 ## Starting objective
 
-Continue the bounded Architecture & Research investigation from C040. The immediate subject is the operational TRACE visibility policy: determine which operation classes should show TRACE automatically, only on explicit request, or when activation is blocked/incomplete.
+Continue the bounded Architecture & Research investigation from C041. The immediate subject is the operational TRACE visibility policy: determine which operation classes should show TRACE automatically, only on explicit request, or when activation is blocked/incomplete.
 
 ## Known starting implementation state
 
 - Repository: `paulhuman/aip-mirror`.
 - Canonical branch: `main`.
-- Current chapter: C041.
-- Previous chapter: C040.
+- Current chapter: C042.
+- Previous chapter: C041.
 - Specialization: C.
 - Resolved short name: `Architecture & Research`.
 - Canonical bootstrap runtime contract remains `PREVIOUS_CHAPTER`, `CURRENT_CHAPTER`, `SPECIALIZATION`.
 - Active command surface remains `>>handoff`, `>>migrate <chapter>`, and `>>generate-bootstrap <chapter>`.
-- C040 established the current operational TRACE model in `.ai/architecture/ai-infrastructure-restructuring.md` section 32.
+- C041 established the current operational TRACE model in `.ai/architecture/ai-infrastructure-restructuring.md` section 32.
 - TRACE is a temporary human-readable presentation of the fact that ACTIVATE was executed; it is not a separate capability.
 - TRACE is event-driven rather than always-on.
 - Bootstrap is an explicit visibility exception: TRACE MUST be visible during new-conversation initialization and SHOULD list the canonical owner files actually reread.
@@ -43,7 +43,7 @@ Continue the bounded Architecture & Research investigation from C040. The immedi
 - `.ai/skills/activation/SKILL.md` defines ACTIVATE as rereading required canonical owners.
 - `.ai/skills/handoff/SKILL.md` owns handoff structure and handoff capability.
 - `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical new-chapter initialization workflow.
-- Predecessor handoff `.ai/handoffs/C/C040-Architecture-Research.md` was read successfully.
+- Predecessor handoff `.ai/handoffs/C/C041-Architecture-Research.md` was read successfully.
 - Active architecture record section 32 was read as the implementation/research context identified by the predecessor.
 - ACTIVATE for conversation initialization reread: `.ai/rules/workflow.md`, `.ai/rules/handoff/lifecycle.md`, `.ai/skills/handoff/SKILL.md`, and `.ai/workflows/handoff/BOOTSTRAP.md`.
 - No additional external research reference was identified as materially required for bootstrap.
@@ -82,7 +82,7 @@ Continue the bounded Architecture & Research investigation from C040. The immedi
 - `.ai/workflows/handoff/BOOTSTRAP.md`
 - `.ai/architecture/ai-infrastructure-restructuring.md`
 - `.ai/handoffs/README.md`
-- `.ai/handoffs/C/C040-Architecture-Research.md`
+- `.ai/handoffs/C/C041-Architecture-Research.md`
 
 ## Important constraints
 
@@ -101,10 +101,10 @@ Continue the bounded Architecture & Research investigation from C040. The immedi
 
 ### Confirmed
 
-- C041 is the receiving chapter for C040.
+- C042 is the receiving chapter for C041.
 - `C → Architecture & Research` is configured in `.ai/config.yaml`.
-- C040's TRACE model and bounded next question are recorded in the repository.
-- The current chapter can continue from durable repository state without reconstructing C040 from conversation history.
+- C041's TRACE model and bounded next question are recorded in the repository.
+- The current chapter can continue from durable repository state without reconstructing C041 from conversation history.
 
 ### Inferred
 
@@ -138,9 +138,9 @@ Start from the operation classes already present in the active architecture and 
 5. `.ai/skills/handoff/SKILL.md` — current handoff/migration operation surface.
 6. `.ai/rules/handoff/lifecycle.md` — continuity constraints.
 
-### C041 TRACE scope decision
+### C042 TRACE scope decision
 
-C041 accepted the minimal two-layer observation model:
+C042 accepted the minimal two-layer observation model:
 
 - `ACTIVATE` shows canonical owners actually reread.
 - `OPERATION READS` shows unique repository files actually read during the operation, excluding files already shown as `ACTIVATE` owners.
@@ -155,7 +155,7 @@ C041 accepted the minimal two-layer observation model:
 
 The durable architecture record is `.ai/architecture/ai-infrastructure-restructuring.md`, section 33.
 
-### C041 remaining open question
+### C042 remaining open question
 
 The only remaining bounded question is the operation boundary:
 
