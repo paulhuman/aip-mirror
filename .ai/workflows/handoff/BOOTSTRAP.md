@@ -53,8 +53,6 @@ For generated migration transport, the value MUST already be resolved from the s
 
 A handoff-producing chapter prepares its own handoff for the next chapter; a receiving chapter executes bootstrap with itself as `CURRENT_CHAPTER` and the predecessor as `PREVIOUS_CHAPTER`.
 
-`NEXT_CHAPTER` is not a bootstrap input and MUST NOT be used as a substitute for `CURRENT_CHAPTER`.
-
 ### Canonical invocation format
 
 The bootstrap message is the transport boundary for the initialization context. A generated migration instruction and the future manual templates MUST explicitly identify themselves as instructions to initialize a new conversation chapter, MUST contain an explicit repository locator, and MUST direct the receiving AI to follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6.
