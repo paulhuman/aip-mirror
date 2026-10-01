@@ -1,40 +1,40 @@
 # Conversation Handoff
 
 **Conversation:**
-C029 — Architecture & Research
+C030 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-029
+030
 
 **Previous chapter:**
-028
+029
 
 ## Current objective
 
-Continue Architecture & Research from the verified C028 repository state.
+Continue Architecture & Research from the verified C029 repository state.
 
-C029 is the receiving chapter for C028. This handoff is the live checkpoint for the current conversation and will be updated as meaningful state accumulates.
+C030 is the receiving chapter for C029. This handoff is the live checkpoint for the current conversation and will be updated as meaningful state accumulates.
 
 ## Starting state
 
-C028 completed the bounded normative-language consistency work:
+C029 completed the bounded normative-language consistency work:
 
 - established `.ai/rules/normative-language.md`;
 - applied the semantic distinction between BCP 14 normative vocabulary and local procedural `DO / DO NOT`;
 - completed targeted cleanup and consistency verification;
 - preserved ordinary lowercase English, historical/research narrative, and ambiguous cases where they are not normative;
-- prepared its handoff for transition to C029.
+- prepared its handoff for transition to C030.
 
-The current repository state, not the historical C028 conversation, is the source of truth.
+The current repository state, not the historical C029 conversation, is the source of truth.
 
 ## Previous chapter
 
-C028 — Architecture & Research.
+C029 — Architecture & Research.
 
-Its handoff is expected to be transitioned to `HANDED_OFF` as part of this self-migration after this C029 handoff is created.
+Its handoff is expected to be transitioned to `HANDED_OFF` as part of this self-migration after this C030 handoff is created.
 
 ## Important constraints
 
@@ -50,10 +50,10 @@ Its handoff is expected to be transitioned to `HANDED_OFF` as part of this self-
 
 ### Confirmed / observed
 
-- C028's handoff was reconstructed from the verified repository state and prepared for handoff.
+- C029's handoff was reconstructed from the verified repository state and prepared for handoff.
 - The normative-language RULE exists in the repository.
 - The targeted cleanup and consistency work has been committed and verified.
-- C029 is the current active Architecture & Research conversation.
+- C030 is the current active Architecture & Research conversation.
 
 ### Inferred
 
