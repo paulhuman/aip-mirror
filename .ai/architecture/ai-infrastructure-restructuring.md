@@ -2626,3 +2626,63 @@ Likely candidate classes to test in C041 include:
 6. activation blocked or incomplete.
 
 No automatic visibility policy beyond the bootstrap exception is frozen by this record.
+
+
+## 33. C041 — ACTIVATE and OPERATION READS
+
+C041 refined the TRACE model without introducing a tracing subsystem. The accepted direction keeps two simple observable layers:
+
+    ACTIVATE
+        = canonical owners actually reread
+
+    OPERATION READS
+        = unique repository files actually read during the operation,
+          excluding files already presented as ACTIVATE owners
+
+The relationship is:
+
+    ACTIVATE owners ⊆ OPERATION READS
+
+For human-readable presentation, files MUST NOT be duplicated between the two sections. If an ACTIVATE owner was actually read, it is represented by the ACTIVATE section rather than repeated under OPERATION READS.
+
+### 33.1 OPERATION READS scope
+
+`OPERATION READS` is intentionally simple. It answers:
+
+> **What repository files did the AI actually read while carrying out this operation?**
+
+All actual repository reads belonging to the operation count, including reads that occur before ACTIVATE, during ACTIVATE, after ACTIVATE, or during later operation work. The chronological position of a read is not itself important to the human-readable observation.
+
+Pre-activation repository reads therefore belong to `OPERATION READS` when they are part of the operation. ACTIVATE is not treated as the beginning of the operation; it establishes canonical operational context within an already-started operation.
+
+Discovery/search does not count as a read unless the file content was actually retrieved/read.
+
+Repeated reads of the same repository file are represented once. The current model records the unique set of repository paths actually read, not an event-by-event read history.
+
+If an operation stops early or fails, `OPERATION READS` contains the repository files actually read before it stopped. No separate failure/read-history mechanism is introduced.
+
+The current scope deliberately does NOT introduce separate `VERIFICATION READS`, `WRITE`, `READ-BACK`, or `VERIFY` categories. A read-back, when it occurs, is simply an actual repository read and may appear once in `OPERATION READS`.
+
+### 33.2 TRACE presentation
+
+The conceptual presentation may therefore contain:
+
+    TRACE
+      operation: <operation>
+
+      ACTIVATE
+        owners:
+          <canonical owners actually reread>
+        status: <ACTIVATED | BLOCKED | INCOMPLETE>
+
+      OPERATION READS
+        files:
+          <additional unique repository files actually read>
+
+`OPERATION READS` is shown when useful for observing the operation and on explicit request. New-conversation bootstrap is a mandatory visibility case.
+
+The final operation-boundary question remains open:
+
+> **Where does an operation end, particularly for repository reads that occur after the substantive result has been produced but before the assistant finishes the user-facing response?**
+
+This question SHOULD be resolved with the same minimum-cognitive-load principle. Do not introduce lifecycle events, read categories, telemetry, or other tracing machinery merely to answer it.
