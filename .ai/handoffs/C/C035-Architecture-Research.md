@@ -1,24 +1,24 @@
 # Conversation Handoff
 
 **Conversation:**
-C035 — Architecture & Research
+C036 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-035
+036
 
 **Previous chapter:**
-034
+035
 
 ## Starting objective
 
-Continue the bounded Architecture & Research work from C034. The handoff lifecycle-state migration is complete. C035 begins the semantic consistency sweep that verifies the simplified handoff model is expressed consistently across the active canonical .ai infrastructure.
+Continue the bounded Architecture & Research work from C035. The handoff lifecycle-state migration is complete. C036 begins the semantic consistency sweep that verifies the simplified handoff model is expressed consistently across the active canonical .ai infrastructure.
 
 ## Starting state
 
-C034 established the target handoff model:
+C035 established the target handoff model:
 
 > A handoff is a persistent conversation-context snapshot for a chapter, not a lifecycle-controlled transfer object.
 
@@ -29,7 +29,7 @@ The user manually removed legacy Status fields from the remaining handoff files 
     3985ac491462effe68cc5e1fd93485a08ec9c821
     ai-refactor(handoff): remove legacy status fields
 
-C034 then recorded the next work plan in:
+C035 then recorded the next work plan in:
 
     .ai/architecture/ai-infrastructure-restructuring.md
 
@@ -38,16 +38,16 @@ That plan is intentionally bounded and distinguishes active canonical semantics 
 ## Confirmed / observed
 
 - Repository: `paulhuman/aip-mirror`, branch `main`.
-- Current chapter: C035.
-- Previous chapter: C034.
+- Current chapter: C036.
+- Previous chapter: C035.
 - Specialization: C.
 - Handoff is a persistent context snapshot, not a lifecycle-controlled transfer object.
 - The receiving chapter creates its own handoff at initialization.
 - Historical Git commits are preserved; history is not rewritten.
 - Normal handoff commits use:
   
-      ai-docs(handoff): create C035
-      ai-docs(handoff): update C035
+      ai-docs(handoff): create C036
+      ai-docs(handoff): update C036
 
 - The active canonical infrastructure was already migrated away from the old handoff state machine, but the next bounded sweep must verify that no stale semantics remain.
 - The architecture record intentionally preserves historical descriptions of the former lifecycle model and those historical descriptions must not be mistaken for active rules.
@@ -90,7 +90,7 @@ No replacement lifecycle mechanism, registry, manifest, dependency graph, comman
 
 ## Next step
 
-Perform a final bounded assessment of the Architecture & Research work. If no concrete architectural question or contradiction emerges from that assessment, C035 can end without inventing another infrastructure task. Do not create a receiving-chapter handoff in advance.
+Perform a final bounded assessment of the Architecture & Research work. If no concrete architectural question or contradiction emerges from that assessment, C036 can end without inventing another infrastructure task. Do not create a receiving-chapter handoff in advance.
 
 ## Important constraints
 
@@ -99,7 +99,7 @@ Perform a final bounded assessment of the Architecture & Research work. If no co
 - BOOTSTRAP remains the canonical ordered new-conversation initialization workflow.
 - Do not reintroduce Status or an equivalent lifecycle state under another name.
 - Do not erase historical architecture-record evidence merely because the active model changed.
-- Do not conflate full chapter identifiers such as C035 with numeric chapter component 035.
+- Do not conflate full chapter identifiers such as C036 with numeric chapter component 035.
 - Use repository write-safety for every existing-file mutation.
 - Keep the next investigation bounded; do not create infrastructure without a concrete demonstrated need.
 
