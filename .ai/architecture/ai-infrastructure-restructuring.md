@@ -1012,9 +1012,25 @@ For C0047–C0045, the recommended lists are dominated by the first three catego
 
 The current evidence therefore supports keeping `Recommended starting context` as a compact continuity-oriented retrieval guide. It SHOULD NOT be treated as an exact read/touch manifest, and no change to `.ai/rules/handoff/references.md` or `.ai/skills/activation/SKILL.md` is justified by this experiment alone.
 
-### Iteration 3 Entry-Layer Test
+### Iteration 3 Entry-Layer Test — C0048 FINAL RESULT
 
-Test whether a genuinely distinct `ENTRY.md` layer is justified. The candidate role is new-AI infrastructure activation, not bootstrap workflow execution.
+C0048 performed the requested final zero-context test conceptually: assume a completely new AI has no conversation memory and receives only the repository locator plus .ai/AGENTS.md.
+
+The test confirms that a separate ENTRY.md is not needed.
+
+The existing entry contract is sufficient:
+
+1. AGENTS establishes the always-on AI infrastructure contract.
+2. AGENTS item 2 directs repository/path establishment through .ai/config.yaml and .ai/rules/repository.md.
+3. AGENTS item 3 directs AI-infrastructure work to .ai/INDEX.md as the operational router and capability map.
+4. AGENTS item 6 identifies the canonical BOOTSTRAP workflow when new-chapter initialization is actually requested.
+5. BOOTSTRAP then defines the ordered initialization procedure and canonical owner reads.
+
+A zero-context AI therefore does not need ENTRY.md to discover where to go. It needs the repository and the user's requested operation; the existing AGENTS entry contract determines the next canonical source.
+
+This test also confirms an important boundary: AGENTS alone is not expected to contain the full semantics of every operation. It is an entry contract that routes the AI to canonical owners. That separation is intentional and does not constitute an ENTRY-layer gap.
+
+The Iteration 3 ENTRY.md question is therefore **RESOLVED: do not create ENTRY.md**. The existing AGENTS → INDEX / canonical owner routing and AGENTS → BOOTSTRAP initialization path remain the active entry architecture.
 
 ### INDEX Presentation Test — RESOLVED IN C0027
 
