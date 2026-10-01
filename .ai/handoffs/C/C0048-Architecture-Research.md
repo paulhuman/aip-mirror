@@ -134,9 +134,21 @@ The bootstrap task is to establish C0048 from the canonical BOOTSTRAP procedure,
 - Keep the Operational TRACE Completeness/visibility question bounded and separate unless the extraction experiment provides concrete evidence connecting the two.
 - Keep the Iteration 3 `ENTRY.md` question deferred unless new evidence establishes a distinct semantic responsibility that current AGENTS/INDEX/BOOTSTRAP cannot own.
 
+## Handoff Content Extraction Test — result
+
+C0048 completed the first bounded comparison against C0047, C0046, and C0045.
+
+- Recommended starting context behaves as a continuity-oriented retrieval guide, not as an exact manifest of files touched by a chapter.
+- C0047's list was broader than the final checkpoint's changed file, while still providing useful continuity and canonical operational context.
+- C0046's list identified the principal canonical owners and predecessor checkpoint, although the migration necessarily touched additional implementation targets discovered through those owners.
+- C0045's list describes the intended recovery surface; repository evidence does not show that every listed file was modified by C0045 itself because the substantive migration was completed in C0046.
+- The test found no evidence requiring a new handoff schema, an activation dependency registry, or changes to .ai/rules/handoff/references.md or .ai/skills/activation/SKILL.md.
+
+The durable experiment result is recorded in .ai/architecture/ai-infrastructure-restructuring.md.
+
 ## Immediate next task
 
-Run the Handoff Content Extraction Test against real handoffs and record the result as a bounded architecture/research experiment.
+Continue with the next still-open bounded Architecture & Research question. The Operational TRACE Completeness Test remains open; the Iteration 3 ENTRY.md question remains deferred.
 
 Start with C0047 and C0046, then include at least one additional real C-specialization handoff. Compare each handoff's `Recommended starting context` with the files actually touched or materially relied upon by that chapter, using the repository state and handoff contents as evidence rather than reconstructing missing chat history.
 
