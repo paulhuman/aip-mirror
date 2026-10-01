@@ -131,8 +131,8 @@ Do not infer missing C0046 chat state when the repository does not record it.
 
 ## Handoff verification
 
-- Conversation, Specialization, Chapter, and Previous chapter identify C0047 correctly.
-- The predecessor C0046 handoff was read successfully.
-- The handoff records the repository, branch, specialization, short name, and current infrastructure state.
-- The handoff distinguishes confirmed observations, inferences, assumptions, and open work.
-- The immediate next task is explicitly limited to identifying and continuing the next recorded Architecture & Research task rather than guessing interrupted chat state.
+- C0047 is the active chapter checkpoint.
+- The chapter header uses the four-digit identifier format.
+- The current repository uses the four-digit chapter identifier format [A-Z][0-9]{4}.
+- The handoff operation was activated from the current canonical handoff, lifecycle, repository, and commit owners.
+- The current handoff is being updated as a checkpoint for the present chapter.
