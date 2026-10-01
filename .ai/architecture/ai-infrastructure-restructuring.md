@@ -1032,9 +1032,27 @@ The active operation surface is fixed as `>>handoff`, `>>migrate <chapter>`, and
 
 The two manual bootstrap transport templates were accepted and incorporated into the bootstrap transport surface: first-chapter initialization and interrupted-migration recovery. Both use the canonical BOOTSTRAP contract, expose the runtime values explicitly, and do not introduce `>>init`, `>>new`, or a separate recovery operation.
 
-### Operational TRACE Completeness Test
+### Operational TRACE Completeness Test — C0048 RESULT
 
-Current TRACE does not fully reflect the observable operation: it lists canonical owners actually reread, but the operation may also read additional repository files. TRACE SHOULD eventually show all files actually read during the operation, while continuing to distinguish actual reads from discovery/search.
+C0048 confirmed a concrete bootstrap visibility gap.
+
+The architecture decision already states that:
+
+> **During bootstrap initialization, TRACE MUST be visible.**
+
+The activation skill defines the observable TRACE shape, but the bootstrap workflow previously required ACTIVATE without explicitly requiring the visible TRACE presentation. In C0048, ACTIVATE was performed during bootstrap, but the TRACE was not shown. This is an implementation-level procedure gap, not a reason to change activation semantics.
+
+The bounded correction is now in .ai/workflows/handoff/BOOTSTRAP.md:
+
+- bootstrap explicitly requires visible TRACE after ACTIVATE;
+- the TRACE MUST identify the bootstrap operation;
+- it MUST list the canonical owners actually reread for ACTIVATE;
+- it MUST report status: ACTIVATED;
+- optional OPERATION READS remains limited to additional files actually read and MUST NOT duplicate ACTIVATE owners.
+
+No tracing subsystem, registry, persistent trace schema, or new activation capability is introduced.
+
+The operational TRACE question is therefore **RESOLVED for the current architecture**. Future work MAY test presentation quality, but the required bootstrap visibility and current completeness boundary are now explicit in the canonical workflow.
 
 ## 22. Migration note
 
