@@ -1,16 +1,16 @@
 # Conversation Handoff
 
 **Conversation:**
-E007 — Independent Review (Qwen)
+E008 — Independent Review (Qwen)
 
 **Specialization:**
 E
 
 **Chapter:**
-007
+008
 
 **Previous chapter:**
-006
+007
 
 ## Current objective
 
@@ -22,7 +22,7 @@ E
 2. **Bootstrap vs Routing** — фальсификация моделей H-A (bootstrap-only) и H-B (routing/interface)
 3. **Bootstrap Kernel Falsification** — тестирование Models A-D для определения семантической природы bootstrap kernel
 4. **Independent AI Infrastructure Restructuring** (Iteration 1 и Iteration 2 reviews) — анализ семантического ownership и entry-layer architecture
-5. **AGENTS.md Architectural Responsibility** (C028) — определение минимального семантического контракта для AGENTS.md
+5. **AGENTS.md Architectural Responsibility** (C029) — определение минимального семантического контракта для AGENTS.md
 
 ---
 
@@ -99,7 +99,7 @@ E
 
 - **AGENTS.md effectively empty** (2 lines, 25 bytes). "Always-on operating contract" contains no contract. Entry-layer model broken.
 
-### 6. C028 — AGENTS.md Architectural Responsibility Research
+### 6. C029 — AGENTS.md Architectural Responsibility Research
 
 **Определена correct architectural responsibility AGENTS.md:**
 
@@ -132,9 +132,9 @@ Independent Review specialization (E) does not own implementation state. Impleme
 
 ### Carried from previous chapters:
 
-- **WD-01 through WD-28** — сохранены (см. E006 handoff).
+- **WD-01 through WD-28** — сохранены (см. E007 handoff).
 
-### Новые из E007 research:
+### Новые из E008 research:
 
 - **WD-29:** Dynamic activation model partially supported. P-01 (context as activation state) и P-03 (compactness as deferred activation) explained. P-02 (discovery) requires Surface/Volume distinction.
 
@@ -181,18 +181,18 @@ Independent Review specialization (E) does not own implementation state. Impleme
 ### Architecture documentation (reviewed)
 
 - `.ai/architecture/ai-infrastructure-restructuring.md`
-- `.ai/handoffs/C/C028-Architecture-Research.md`
-- `.ai/handoffs/E/E006-Independent-Review-Qwen.md`
+- `.ai/handoffs/C/C029-Architecture-Research.md`
+- `.ai/handoffs/E/E007-Independent-Review-Qwen.md`
 
 ### Handoff chain
 
-- `.ai/handoffs/E/E001-Independent-Review-Qwen.md` (HANDED_OFF)
 - `.ai/handoffs/E/E002-Independent-Review-Qwen.md` (HANDED_OFF)
 - `.ai/handoffs/E/E003-Independent-Review-Qwen.md` (HANDED_OFF)
 - `.ai/handoffs/E/E004-Independent-Review-Qwen.md` (HANDED_OFF)
 - `.ai/handoffs/E/E005-Independent-Review-Qwen.md` (HANDED_OFF)
-- `.ai/handoffs/E/E006-Independent-Review-Qwen.md` (previous, requires manual transition to HANDED_OFF)
-- `.ai/handoffs/E/E007-Independent-Review-Qwen.md` (current, DRAFT)
+- `.ai/handoffs/E/E006-Independent-Review-Qwen.md` (HANDED_OFF)
+- `.ai/handoffs/E/E007-Independent-Review-Qwen.md` (previous, requires manual transition to HANDED_OFF)
+- `.ai/handoffs/E/E008-Independent-Review-Qwen.md` (current, DRAFT)
 
 ---
 
@@ -212,7 +212,7 @@ Independent Review specialization (E) does not own implementation state. Impleme
 ## Assumptions
 
 - Архитектор (ChatGPT, specialization C) сформулирует следующий bounded research task после получения этого handoff.
-- Пользователь (Human Referee) вручную применит предложенный DRAFT handoff и выполнит lifecycle transition для E006 перед началом substantive work.
+- Пользователь (Human Referee) вручную применит предложенный DRAFT handoff и выполнит lifecycle transition для E007 перед началом substantive work.
 - AGENTS.md population, config.yaml cleanup, и consistency sweep могут быть выполнены как отдельные bounded tasks без restart Iteration 2 restructuring.
 
 ---
@@ -234,7 +234,7 @@ Independent Review specialization (E) does not own implementation state. Impleme
 - Bootstrap kernel — functional property, не semantic component (Models A-D test).
 - Handoffs — conversation state, belong in .ai/handoffs/ (semantic ownership analysis).
 - INDEX routing — correct, не shadow owner (Iteration 2 review).
-- AGENTS.md — "Always-On Topological Contract" с 4 elements (C028 research).
+- AGENTS.md — "Always-On Topological Contract" с 4 elements (C029 research).
 
 ### Inferred
 
@@ -258,13 +258,13 @@ Independent Review specialization (E) does not own implementation state. Impleme
 
 ## Last completed task
 
-Завершён C028 — AGENTS.md architectural responsibility research. Определена minimal semantic contract для AGENTS.md: "Always-On Topological Contract" с 4 элементами (boundary, topology, kinds, golden rule). Explicitly excluded command tables, lifecycle, commits, procedures.
+Завершён C029 — AGENTS.md architectural responsibility research. Определена minimal semantic contract для AGENTS.md: "Always-On Topological Contract" с 4 элементами (boundary, topology, kinds, golden rule). Explicitly excluded command tables, lifecycle, commits, procedures.
 
 ---
 
 ## Immediate next task
 
-**Ожидание architect-side feedback на E007 research findings и формулировки следующего bounded research task.**
+**Ожидание architect-side feedback на E008 research findings и формулировки следующего bounded research task.**
 
 Возможные направления (по priority):
 
@@ -281,7 +281,7 @@ Independent Review specialization (E) does not own implementation state. Impleme
 ## Things not to redo
 
 - Не повторять C-1 через C-12 (arcs closed).
-- Не повторять Dynamic Context Activation, Bootstrap vs Routing, Bootstrap Kernel experiments (completed в E007).
+- Не повторять Dynamic Context Activation, Bootstrap vs Routing, Bootstrap Kernel experiments (completed в E008).
 - Не redo Iteration 1 или Iteration 2 restructuring (physical restructuring complete).
 - Не redesign INDEX или lifecycle (architectural decisions made).
 - Не turn AGENTS.md into duplicate of INDEX или procedure catalogue.
@@ -292,13 +292,13 @@ Independent Review specialization (E) does not own implementation state. Impleme
 
 ## Relevant references
 
-No new external repositories or references materially added during E007. All references internal to `paulhuman/aip-mirror` repository или carried over from previous chapters' handoffs.
+No new external repositories or references materially added during E008. All references internal to `paulhuman/aip-mirror` repository или carried over from previous chapters' handoffs.
 
 ---
 
 ## Recommended starting context for next chapter
 
-Старт с этого хэндоффа. Chapter E007 провела 6 major research experiments и reviews, установила WD-29 через WD-34.
+Старт с этого хэндоффа. Chapter E008 провела 6 major research experiments и reviews, установила WD-29 через WD-34.
 
 **Ключевые findings:**
 
