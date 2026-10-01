@@ -20,8 +20,6 @@ These values are runtime context for the receiving chapter. DO NOT write them in
 
 `PREVIOUS_CHAPTER` means the predecessor chapter whose handoff is being received. For the first chapter of a specialization, use `N/A`.
 
-The bootstrap procedure MUST NOT reinterpret these values as the chapter that authored the bootstrap message or as a `NEXT_CHAPTER` transition.
-
 ### Supplied `SHORT_NAME` context
 
 The bootstrap message MAY also supply:
