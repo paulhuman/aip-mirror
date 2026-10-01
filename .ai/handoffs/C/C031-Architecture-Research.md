@@ -1,36 +1,36 @@
 # Conversation Handoff
 
 **Conversation:**
-C031 — Architecture & Research
+C032 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-031
+032
 
 **Previous chapter:**
-030
+031
 
 ## Current objective
 
-Continue Architecture & Research from the verified C030 repository state.
+Continue Architecture & Research from the verified C031 repository state.
 
-C031 is the receiving chapter for C030. This handoff is the live checkpoint for the current conversation and will be updated as meaningful state accumulates.
+C032 is the receiving chapter for C031. This handoff is the live checkpoint for the current conversation and will be updated as meaningful state accumulates.
 
 ## Starting state
 
-C030 completed the first bounded activation / TRACE research pass.
+C031 completed the first bounded activation / TRACE research pass.
 
-The durable C030 result is that the repository already has a workable discovery path through AGENTS → INDEX → canonical owners, but discovery does not itself guarantee that the canonical owner is actually reread before execution. C030 therefore framed ACTIVATE, REFRESH, and TRACE as provisional research primitives and deliberately avoided introducing ENTRY.md, a registry, manifest, router, command schema, or other new infrastructure without a bounded test demonstrating a need.
+The durable C031 result is that the repository already has a workable discovery path through AGENTS → INDEX → canonical owners, but discovery does not itself guarantee that the canonical owner is actually reread before execution. C031 therefore framed ACTIVATE, REFRESH, and TRACE as provisional research primitives and deliberately avoided introducing ENTRY.md, a registry, manifest, router, command schema, or other new infrastructure without a bounded test demonstrating a need.
 
-C030's final bounded question is whether one small reusable activation procedure can cover handoff bootstrap, new-specialization entry, ordinary continuation, refresh, and pre-mutation activation without duplicating lifecycle, repository, commit, or project semantics.
+C031's final bounded question is whether one small reusable activation procedure can cover handoff bootstrap, new-specialization entry, ordinary continuation, refresh, and pre-mutation activation without duplicating lifecycle, repository, commit, or project semantics.
 
 ## Previous chapter
 
-C030 — Architecture & Research.
+C031 — Architecture & Research.
 
-Its handoff is the verified source of the current research state and is transitioned to `HANDED_OFF` as part of C031 bootstrap.
+Its handoff is the verified source of the current research state and is transitioned to `HANDED_OFF` as part of C032 bootstrap.
 
 ## Important constraints
 
@@ -49,10 +49,10 @@ Its handoff is the verified source of the current research state and is transiti
 ### Confirmed / observed
 
 - The current chapter identifier format is `[A-Z][0-9]{3}`.
-- C030's handoff is `DRAFT` and contains the activation / TRACE research state.
+- C031's handoff is `DRAFT` and contains the activation / TRACE research state.
 - `.ai/INDEX.md` routes handoff operations to canonical lifecycle, skill, and bootstrap owners.
 - `.ai/rules/handoff/lifecycle.md` defines ACTIVATE-related research context indirectly through bootstrap/lifecycle ownership and explicitly distinguishes Lifecycle Recovery and Lifecycle Correction from normal transitions.
-- C030 recorded an observable discovery-versus-activation boundary in `.ai/architecture/ai-infrastructure-restructuring.md`.
+- C031 recorded an observable discovery-versus-activation boundary in `.ai/architecture/ai-infrastructure-restructuring.md`.
 - The next bounded question is an owner-boundary test for a small reusable activation procedure.
 
 ### Inferred
@@ -69,7 +69,7 @@ Its handoff is the verified source of the current research state and is transiti
 
 ## Immediate next task
 
-Run the bounded owner-boundary experiment from C030:
+Run the bounded owner-boundary experiment from C031:
 
 1. Test handoff bootstrap.
 2. Test new-specialization entry.
@@ -83,15 +83,15 @@ Do not implement a new activation component until this comparison establishes th
 
 ## Things not to redo
 
-- C027 entry-layer restructuring.
+- C028 entry-layer restructuring.
 - The AGENTS entry-contract decision.
 - The INDEX minimum-routing decision.
 - The decision not to create `ENTRY.md`.
 - BOOTSTRAP ownership and ordering.
 - The current chapter identifier format.
 - The completed normative-language cleanup.
-- The C030 discovery-versus-activation observation.
-- The C030 archive reconciliation already recorded in `.ai/architecture/ai-infrastructure-restructuring.md`.
+- The C031 discovery-versus-activation observation.
+- The C031 archive reconciliation already recorded in `.ai/architecture/ai-infrastructure-restructuring.md`.
 
 ## Recommended starting context
 
@@ -102,10 +102,10 @@ Do not implement a new activation component until this comparison establishes th
 - `.ai/skills/handoff/SKILL.md`
 - `.ai/workflows/handoff/BOOTSTRAP.md`
 - `.ai/architecture/ai-infrastructure-restructuring.md`
-- `.ai/handoffs/C/C030-Architecture-Research.md`
+- `.ai/handoffs/C/C031-Architecture-Research.md`
 - `docs/PROJECT-INSTRUCTIONS.md`
 
-## C031 completion
+## C032 completion
 
 The bounded owner-boundary experiment is complete.
 
@@ -134,4 +134,4 @@ The activation skill is intentionally not yet wired into INDEX.md or BOOTSTRAP. 
 
 ## Migration readiness
 
-C031 is ready for handoff. The receiving chapter C032 should begin by bootstrapping normally, then perform the next bounded integration test rather than repeating the completed owner-boundary experiment.
+C032 is ready for handoff. The receiving chapter C033 should begin by bootstrapping normally, then perform the next bounded integration test rather than repeating the completed owner-boundary experiment.
