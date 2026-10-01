@@ -149,3 +149,66 @@ Do not prematurely turn TRACE into a persistent schema or dependency registry. D
 5. `.ai/rules/handoff/lifecycle.md` — continuity constraints.
 
 Bootstrap recovery is complete only after this handoff is read back and its header, immediate next task, predecessor context, and starting state are verified.
+
+
+## C040 TRACE research checkpoint
+
+The bounded TRACE research is recorded in `.ai/architecture/ai-infrastructure-restructuring.md` section 32.
+
+Accepted conclusions:
+
+- Operational TRACE is a temporary human-readable presentation of the fact that ACTIVATE was executed.
+- TRACE is not a separate capability.
+- TRACE is event-driven, not always-on.
+- TRACE is hidden by default unless the operation is diagnostically significant or the user explicitly requests it.
+- New-conversation bootstrap is an explicit exception: TRACE MUST be visible during bootstrap initialization.
+- Bootstrap TRACE MUST show the canonical owner files actually reread so the initialization is auditable.
+- Minimal TRACE shape:
+  ```
+  TRACE
+    operation: <operation>
+    owners: <canonical owners actually reread>
+    status: <ACTIVATED | BLOCKED | INCOMPLETE>
+  ```
+- TRACE presents observable execution facts; it does not expose hidden reasoning.
+- TRACE is not persistent state, schema, registry, dependency graph, command layer, lifecycle mechanism, or separate capability.
+- TRACE MUST distinguish actual rereads from discovery/search.
+- The complete operation-by-operation visibility matrix is intentionally NOT frozen yet.
+
+### C040 → C041 bounded research question
+
+Continue with exactly this question:
+
+> **In which operations should TRACE be visible automatically, on request only, or never by default?**
+
+Keep the decision simple and event-driven. Test the operation classes identified in the architecture record without introducing a configurable tracing subsystem.
+
+### Relevant architectural diagram
+
+```text
+ACTIVATE
+    ↓
+activation result
+    ↓
+TRACE (optional presentation)
+
+bootstrap
+    ↓
+establish repository
+    ↓
+read required canonical owners
+    ↓
+ACTIVATE
+    ↓
+VISIBLE TRACE
+    ↓
+chapter initialization
+```
+
+### C040 migration state
+
+- Architecture record updated and committed as `481f5f13e54fd9f4fe2ab516177ea5baa9acf050`.
+- The current C040 handoff remains the durable source for migration context.
+- The receiving C041 bootstrap MUST use the explicit repository locator already established by C040:
+  `https://github.com/paulhuman/aip-mirror`.
+- The next chapter is C041, specialization C, short name `Architecture & Research`.
