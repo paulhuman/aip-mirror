@@ -134,7 +134,11 @@ Semantic consistency sweep completed. INDEX now exposes the activation capabilit
 
 ## Immediate next task
 
-Read the current architecture record's latest active section and identify the next bounded Architecture & Research question that follows C039's completed work. Do not reopen the already resolved bootstrap/command semantics unless a current repository inconsistency provides concrete evidence.
+Evaluate the bounded TRACE question now that the semantic consistency sweep is complete:
+
+> How exactly should operational TRACE for the .ai infrastructure be shaped so that it is useful for observation and debugging without becoming permanent noise?
+
+Do not prematurely turn TRACE into a persistent schema or dependency registry. Do not reopen the already resolved bootstrap/command semantics unless new concrete evidence appears.
 
 ## Recommended starting context
 
