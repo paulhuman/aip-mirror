@@ -1,20 +1,20 @@
 # Conversation Handoff
 
 **Conversation:**
-C026 — Architecture & Research
+C027 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-026
+027
 
 **Previous chapter:**
-025
+026
 
 ## Current objective
 
-Continue Iteration 2 from the current repository state, then close C026 cleanly and delegate the next bounded architecture task to C027: the presentation/scalability analysis of .ai/INDEX.md.
+Continue Iteration 2 from the current repository state, then close C027 cleanly and delegate the next bounded architecture task to C028: the presentation/scalability analysis of .ai/INDEX.md.
 
 ## Completed
 
@@ -82,11 +82,11 @@ Canonical owners to validate against as needed:
 
 Previous handoff:
 
-- .ai/handoffs/C/C025-Architecture-Research.md
+- .ai/handoffs/C/C026-Architecture-Research.md
 
 ## Immediate next task
 
-**C027 owns the next substantive task:**
+**C028 owns the next substantive task:**
 
 1. Read the current .ai/INDEX.md.
 2. Inventory its command-routing and capability-discovery presentation.
@@ -102,7 +102,7 @@ The durable architecture plan is recorded in .ai/architecture/ai-infrastructure-
 - Start from current repository state.
 - Do not reconstruct earlier architecture chapters from chat history.
 - Do not repeat physical Iteration 2 restructuring.
-- Do not create or modify the C027 handoff from C026.
+- Do not create or modify the C028 handoff from C027.
 - Do not create ENTRY.md.
 - Do not duplicate canonical lifecycle, handoff, commit, repository, or workflow procedures in INDEX.
 - Do not change lifecycle semantics.
@@ -117,13 +117,13 @@ The durable architecture plan is recorded in .ai/architecture/ai-infrastructure-
 
 ### Confirmed / observed
 
-- C026 is the closing chapter and this handoff is now READY_FOR_HANDOFF.
-- C025 is the previous chapter and was already established as the preceding handoff.
+- C027 is the closing chapter and this handoff is now READY_FOR_HANDOFF.
+- C026 is the previous chapter and was already established as the preceding handoff.
 - .ai/INDEX.md contains the current routing/discovery model described above.
 - .ai/workflows/handoff/BOOTSTRAP.md is the canonical bootstrap workflow.
 - The physical Iteration 2 restructuring is complete.
 - The active naming format is [A-Z][0-9]{3}.
-- The architecture note now records the C027 INDEX work plan.
+- The architecture note now records the C028 INDEX work plan.
 
 ### Inferred
 
@@ -137,7 +137,7 @@ The durable architecture plan is recorded in .ai/architecture/ai-infrastructure-
 
 ## Last completed task
 
-Recorded the next bounded INDEX presentation/scalability work plan in the durable architecture note and prepared C026 for migration.
+Recorded the next bounded INDEX presentation/scalability work plan in the durable architecture note and prepared C027 for migration.
 
 ## Things not to redo
 
@@ -148,7 +148,7 @@ Recorded the next bounded INDEX presentation/scalability work plan in the durabl
 - The decision to preserve INDEX routing metadata pending the minimum-semantic-metadata analysis.
 - Naming migration already completed.
 
-## Recommended starting context for C027
+## Recommended starting context for C028
 
 Read, in this order:
 
