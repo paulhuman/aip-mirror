@@ -1,30 +1,30 @@
 # Conversation Handoff
 
 **Conversation:**
-E006 — Independent Review (Qwen)
+E007 — Independent Review (Qwen)
 
 **Specialization:**
 E
 
 **Chapter:**
-006
+007
 
 **Previous chapter:**
-005
+006
 
 ## Current objective
 
 Проведение независимого архитектурного ревью для проекта AIP Mirror через cross-model review process с архитектором (ChatGPT, specialization C).
 
-Основной фокус этой главы — исследование корневого architectural bottleneck, выявленного в E005: **Dependency Semantics** (природа отношения `requires` / зависимости). Ожидается проведение discrimination test между различными моделями зависимости (Implication vs Prerequisite vs Applicability Gate) после получения задачи от архитектора.
+Основной фокус этой главы — исследование корневого architectural bottleneck, выявленного в E006: **Dependency Semantics** (природа отношения `requires` / зависимости). Ожидается проведение discrimination test между различными моделями зависимости (Implication vs Prerequisite vs Applicability Gate) после получения задачи от архитектора.
 
 ---
 
 ## Completed
 
-### 1. Bootstrap & Setup (E006)
+### 1. Bootstrap & Setup (E007)
 
-- Read E005 handoff, project rules, onboarding guide, North-Star document.
+- Read E006 handoff, project rules, onboarding guide, North-Star document.
 - Подтверждён READ-ONLY capability (Branch B).
 - Подготовлен предлагаемый DRAFT handoff для ручного коммита пользователем.
 - Идентифицирован корневой bottleneck для следующего research arc.
@@ -41,7 +41,7 @@ Independent Review specialization (E) does not own implementation state. Impleme
 
 ### Carried from previous chapters:
 
-- **WD-01 through WD-27** — сохранены (см. предыдущие handoffs, особенно E005).
+- **WD-01 through WD-27** — сохранены (см. предыдущие handoffs, особенно E006).
   - WD-23 (rev2), WD-24, WD-25: Mapping findings (semantically consequential but ontologically unresolved).
   - WD-26, WD-27: Cycle semantics findings (cycle consequences reducible to composition in tested boolean models).
 
@@ -78,16 +78,16 @@ Independent Review specialization (E) does not own implementation state. Impleme
 
 - `docs/PROJECT-INSTRUCTIONS.md`
 - `docs/architecture/ai-project-instruction-architecture.md` (North-Star)
-- `.ai/handoffs/E/E005-Independent-Review-Qwen.md`
+- `.ai/handoffs/E/E006-Independent-Review-Qwen.md`
 
 ### Handoff chain
 
-- `.ai/handoffs/E/E001-Independent-Review-Qwen.md` (SUPERSEDED)
-- `.ai/handoffs/E/E002-Independent-Review-Qwen.md` (HANDED_OFF)
+- `.ai/handoffs/E/E002-Independent-Review-Qwen.md` (SUPERSEDED)
 - `.ai/handoffs/E/E003-Independent-Review-Qwen.md` (HANDED_OFF)
 - `.ai/handoffs/E/E004-Independent-Review-Qwen.md` (HANDED_OFF)
-- `.ai/handoffs/E/E005-Independent-Review-Qwen.md` (previous, requires manual transition to HANDED_OFF)
-- `.ai/handoffs/E/E006-Independent-Review-Qwen.md` (current, DRAFT)
+- `.ai/handoffs/E/E005-Independent-Review-Qwen.md` (HANDED_OFF)
+- `.ai/handoffs/E/E006-Independent-Review-Qwen.md` (previous, requires manual transition to HANDED_OFF)
+- `.ai/handoffs/E/E007-Independent-Review-Qwen.md` (current, DRAFT)
 
 ---
 
@@ -99,14 +99,14 @@ Independent Review specialization (E) does not own implementation state. Impleme
 4. **No premature ontology introduction** — Mapping, Cycle и Dependency остаются semantic последствиями/отношениями, не entities.
 5. **Evidence discipline** — strict classification (observed fact, inference, etc.).
 6. **Bounded research discipline** — не запускать самостоятельное исследование до получения от архитектора формулировки следующего bounded research task.
-7. **Dependency Semantics is the current root bottleneck** (Audit from E005).
+7. **Dependency Semantics is the current root bottleneck** (Audit from E006).
 
 ---
 
 ## Assumptions
 
 - Архитектор (ChatGPT, specialization C) сформулирует следующий bounded research task (вероятнее всего, по Dependency Semantics) до того, как Independent Review начнет самостоятельное построение контрпримеров.
-- Пользователь (Human Referee) вручную применит предложенный DRAFT handoff и выполнит lifecycle transition для E005 перед началом substantive work.
+- Пользователь (Human Referee) вручную применит предложенный DRAFT handoff и выполнит lifecycle transition для E006 перед началом substantive work.
 
 ---
 
@@ -119,7 +119,7 @@ Independent Review specialization (E) does not own implementation state. Impleme
 
 ## Evidence / confidence
 
-### Confirmed / observed (из E005)
+### Confirmed / observed (из E006)
 
 - Mapping имеет semantic discriminating force.
 - В M1/M2 cycle = composition.
@@ -139,7 +139,7 @@ Independent Review specialization (E) does not own implementation state. Impleme
 
 ## Last completed task
 
-Завершён процесс Bootstrap для Chapter E006. Прочитаны все необходимые правила, навыки, North-Star документ и handoff предыдущей главы (E005). Подтверждён READ-ONLY статус и подготовлен DRAFT handoff.
+Завершён процесс Bootstrap для Chapter E007. Прочитаны все необходимые правила, навыки, North-Star документ и handoff предыдущей главы (E006). Подтверждён READ-ONLY статус и подготовлен DRAFT handoff.
 
 ---
 
@@ -147,7 +147,7 @@ Independent Review specialization (E) does not own implementation state. Impleme
 
 **Ожидание architect-side research objective для следующего bounded arc.**
 
-Наиболее вероятное направление (согласно Bottleneck Audit из E005): **Dependency Semantics** (Discrimination test между Implication, Prerequisite, Applicability Gate).
+Наиболее вероятное направление (согласно Bottleneck Audit из E006): **Dependency Semantics** (Discrimination test между Implication, Prerequisite, Applicability Gate).
 Не запускать самостоятельное исследование до получения от архитектора (или пользователя) формулировки следующего bounded research task.
 
 ---
@@ -172,6 +172,6 @@ No new external repositories or references were materially added during this boo
 
 ## Recommended starting context for next chapter
 
-Старт с этого хэндоффа. Chapter E006 находится в состоянии ожидания первого bounded research task от архитектора. Ключевой architectural bottleneck — `Dependency Semantics`.
+Старт с этого хэндоффа. Chapter E007 находится в состоянии ожидания первого bounded research task от архитектора. Ключевой architectural bottleneck — `Dependency Semantics`.
 **Методология:** Research-first, minimal counterexamples, strict anti-circularity.
 **Capability:** Branch B (READ-ONLY AI).
