@@ -1,22 +1,22 @@
 # Conversation Handoff
 
 **Conversation:**
-C010 — Architecture & Research
+C011 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-010
+011
 
 **Previous chapter:**
-009
+010
 
 ## Migration checkpoint
 
 This chapter is being finalized for migration to:
 
-AIP Mirror — C011 — Architecture & Research
+AIP Mirror — C012 — Architecture & Research
 
 The repository state must preserve the completed C-1 through C-6 research chain below. The next chapter must continue from this checkpoint rather than reconstructing the research from memory.
 
@@ -540,10 +540,10 @@ Do not:
 
 Primary handoff/history:
 
+- .ai/handoffs/C011-Architecture-Research.md
 - .ai/handoffs/C010-Architecture-Research.md
 - .ai/handoffs/C009-Architecture-Research.md
 - .ai/handoffs/C008-Architecture-Research.md
-- .ai/handoffs/C007-Architecture-Research.md
 
 Architecture/research:
 
@@ -564,9 +564,9 @@ Process/rules:
 
 ### Confirmed / observed
 
-- C010 is the active closing chapter for this migration.
-- C009 was already HANDED_OFF before this migration and is now the predecessor that must be superseded.
-- C011 does not yet exist.
+- C011 is the active closing chapter for this migration.
+- C010 was already HANDED_OFF before this migration and is now the predecessor that must be superseded.
+- C012 does not yet exist.
 - C-1 through C-4 are completed and architect-reviewed.
 - C-5 is completed with a PARTIALLY DISCRIMINATING characterization.
 - The Qwen statement “The subject is intrinsically required” is explicitly NOT accepted as established.
@@ -588,7 +588,7 @@ Process/rules:
 - Whether a future architectural operation could justify independently addressable Result identity outside the tested cases.
 - Whether the Event/Node/Edge/Proposition distinction will materially affect the eventual Resolution contract.
 
-## Open questions for C011
+## Open questions for C012
 
 1. What does Qwen's C-6 report conclude about Content vs State?
 2. Does the architect-side counterargument pass agree, partially agree, or reject that conclusion?
@@ -664,20 +664,20 @@ Only after the C-6 evidence has been adversarially reviewed should the next rese
 At migration finalization:
 
 ```
-C009 = HANDED_OFF → SUPERSEDED
-C010 = DRAFT → READY_FOR_HANDOFF
-C011 = does not yet exist
+C010 = HANDED_OFF → SUPERSEDED
+C011 = DRAFT → READY_FOR_HANDOFF
+C012 = does not yet exist
 ```
 
-The closing chapter must not create or modify C011.
+The closing chapter must not create or modify C012.
 
-The receiving C011 chapter must later:
+The receiving C012 chapter must later:
 
 1. create its own DRAFT handoff;
 2. verify the previous/receiving lifecycle pair;
-3. transition C010 READY_FOR_HANDOFF → HANDED_OFF;
+3. transition C011 READY_FOR_HANDOFF → HANDED_OFF;
 4. only then begin substantive work.
 
-This chapter has not performed or claimed the C011 bootstrap.
+This chapter has not performed or claimed the C012 bootstrap.
 
 Human remains the final architecture decision-maker.
