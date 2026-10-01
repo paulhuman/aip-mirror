@@ -127,6 +127,11 @@ No additional external research reference was identified as materially required 
 
 - The next concrete Architecture & Research question is not specified by the recovery request itself. It SHOULD be selected from the current architecture record after bootstrap verification rather than guessed from older chapter TODOs.
 
+
+## C040 checkpoint
+
+Semantic consistency sweep completed. INDEX now exposes the activation capability. The next bounded question is operational TRACE design.
+
 ## Immediate next task
 
 Read the current architecture record's latest active section and identify the next bounded Architecture & Research question that follows C039's completed work. Do not reopen the already resolved bootstrap/command semantics unless a current repository inconsistency provides concrete evidence.
