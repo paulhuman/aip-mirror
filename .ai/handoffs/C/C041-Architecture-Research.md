@@ -137,3 +137,32 @@ Start from the operation classes already present in the active architecture and 
 4. `.ai/skills/activation/SKILL.md` — ACTIVATE semantics and optional TRACE presentation.
 5. `.ai/skills/handoff/SKILL.md` — current handoff/migration operation surface.
 6. `.ai/rules/handoff/lifecycle.md` — continuity constraints.
+
+### C041 TRACE scope decision
+
+C041 accepted the minimal two-layer observation model:
+
+- `ACTIVATE` shows canonical owners actually reread.
+- `OPERATION READS` shows unique repository files actually read during the operation, excluding files already shown as `ACTIVATE` owners.
+- Therefore `ACTIVATE owners ⊆ OPERATION READS`, with no duplicate paths in the human-readable presentation.
+- All pre-activation reads that belong to the operation count. ACTIVATE does not define the start of the operation.
+- Reads after ACTIVATE also count when they belong to the operation.
+- Discovery/search is not a read unless repository content was actually retrieved.
+- Repeated reads of the same repository file are shown once.
+- If an operation stops early or fails, show only the repository files actually read before it stopped.
+- No separate `VERIFICATION READS`, `WRITE`, `READ-BACK`, or `VERIFY` categories are introduced. A read-back is simply an actual read and may appear once.
+- `OPERATION READS` is shown when useful for observing the operation and on explicit request; bootstrap is a mandatory visibility case.
+
+The durable architecture record is `.ai/architecture/ai-infrastructure-restructuring.md`, section 33.
+
+### C041 remaining open question
+
+The only remaining bounded question is the operation boundary:
+
+> Where does an operation end, particularly for repository reads that occur after the substantive result has been produced but before the assistant finishes the user-facing response?
+
+Resolve this with minimum cognitive load. Do not introduce tracing lifecycle events, additional read categories, telemetry, or other machinery merely to answer it.
+
+## Immediate next task
+
+Continue the bounded operation-boundary question for `OPERATION READS`. Keep the model simple: the goal is to know what repository files were actually read during the operation, not to reconstruct read order or hidden execution history.
