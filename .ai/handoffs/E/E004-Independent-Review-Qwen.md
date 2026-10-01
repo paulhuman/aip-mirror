@@ -1,16 +1,16 @@
 # Conversation Handoff
 
 **Conversation:**
-E005 — Independent Review (Qwen)
+E006 — Independent Review (Qwen)
 
 **Specialization:**
 E
 
 **Chapter:**
-005
+006
 
 **Previous chapter:**
-004
+005
 
 ## Current objective
 
@@ -27,11 +27,11 @@ E
 
 ## Completed
 
-### 1. Bootstrap & Setup (E005)
+### 1. Bootstrap & Setup (E006)
 
-- Read E004 handoff, project rules, onboarding guide, North-Star document.
+- Read E005 handoff, project rules, onboarding guide, North-Star document.
 - Подтверждён READ-ONLY capability (Branch B).
-- Пользователем вручную скорректирована идентификация с ошибочной E005 на корректную E005.
+- Пользователем вручную скорректирована идентификация с ошибочной E006 на корректную E006.
 
 ### 2. C-11 Mapping Arc Closure (C-11.11 — C-11.15)
 
@@ -112,17 +112,17 @@ E
 
 - `docs/PROJECT-INSTRUCTIONS.md`
 - `docs/architecture/ai-project-instruction-architecture.md` (North-Star)
-- `docs/architecture/constraint-problem-map-C019.md`
-- `docs/architecture/minimal-execution-context-C019.md`
-- `.ai/handoffs/C/C019-Architecture-Research.md`
+- `docs/architecture/constraint-problem-map-C020.md`
+- `docs/architecture/minimal-execution-context-C020.md`
+- `.ai/handoffs/C/C020-Architecture-Research.md`
 
 ### Handoff chain
 
-- `.ai/handoffs/E/E001-Independent-Review-Qwen.md` (SUPERSEDED)
-- `.ai/handoffs/E/E002-Independent-Review-Qwen.md` (HANDED_OFF)
+- `.ai/handoffs/E/E002-Independent-Review-Qwen.md` (SUPERSEDED)
 - `.ai/handoffs/E/E003-Independent-Review-Qwen.md` (HANDED_OFF)
-- `.ai/handoffs/E/E004-Independent-Review-Qwen.md` (HANDED_OFF → to be SUPERSEDED)
-- `.ai/handoffs/E/E005-Independent-Review-Qwen.md` (текущий, READY_FOR_HANDOFF)
+- `.ai/handoffs/E/E004-Independent-Review-Qwen.md` (HANDED_OFF)
+- `.ai/handoffs/E/E005-Independent-Review-Qwen.md` (HANDED_OFF → to be SUPERSEDED)
+- `.ai/handoffs/E/E006-Independent-Review-Qwen.md` (текущий, READY_FOR_HANDOFF)
 
 ---
 
@@ -190,7 +190,7 @@ E
 
 ## Recommended starting context for next chapter
 
-Старт с этого хэндоффа. Chapter E005 закрыла два крупных semantic arc (C-11 Mapping, C-12 Cycles), провела Bottleneck Audit и Independent Review MEC.
+Старт с этого хэндоффа. Chapter E006 закрыла два крупных semantic arc (C-11 Mapping, C-12 Cycles), провела Bottleneck Audit и Independent Review MEC.
 
 **Ключевой architectural bottleneck:** `Dependency Semantics`. Все текущие выводы о графах зависимостей ограничены тестовыми булевыми моделями.
 **Методология:** Research-first, minimal counterexamples, strict anti-circularity.
