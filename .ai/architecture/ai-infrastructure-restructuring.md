@@ -971,9 +971,46 @@ DO NOT currently:
 
 ## 21. Deferred experiments / TODO
 
-### Handoff Content Extraction Test
+### Handoff Content Extraction Test — C0048 RESULT
 
-Take a real handoff and classify every content unit, then test whether project knowledge can be moved to canonical project documentation while leaving a bounded conversation-state artifact.
+C0048 ran the first bounded extraction test against the real C0047, C0046, and C0045 handoffs.
+
+The test compared each handoff's `Recommended starting context` with repository evidence from the chapter handoff itself and the commits that record the chapter's durable work. It did not attempt to reconstruct missing chat history.
+
+#### C0047
+
+- **Observed durable work:** the latest substantive C0047 checkpoint is the architecture-note status reconciliation committed in `c009fb2672a6f74a84d712362c94b7904e0630e6`, touching `.ai/architecture/ai-infrastructure-restructuring.md`.
+- **Recommended context:** predecessor handoff, architecture note, handoff/activation owners, BOOTSTRAP, INDEX, and handoff README.
+- **Result:** the list is broader than the files changed by the final checkpoint, but most entries are still continuity or canonical operational context. The architecture note is the direct substantive work location; the handoff and canonical owners explain how to continue safely.
+
+#### C0046
+
+- **Observed durable work:** the one-based handoff migration touched the handoff tree plus `.ai/architecture/ai-infrastructure-restructuring.md`, `.ai/rules/handoff/lifecycle.md`, `.ai/skills/handoff/SKILL.md`, `.ai/workflows/handoff/BOOTSTRAP.md`, and `docs/PROJECT-INSTRUCTIONS.md`. The repository-context example was also corrected in `.ai/rules/workflow.md`.
+- **Recommended context:** lifecycle, handoff skill, BOOTSTRAP, workflow, AGENTS, INDEX, handoff README, config, and C0045.
+- **Result:** the list correctly identifies the principal canonical owners and predecessor checkpoint, but it does not enumerate every touched file. That is acceptable for a starting-context list: several touched files were implementation targets discovered through those owners rather than prerequisites for understanding the chapter.
+
+#### C0045
+
+- **Observed durable work:** its handoff records an interrupted migration, but repository evidence shows that the substantive migration was subsequently completed in C0046. The C0045 handoff itself was the durable artifact of that interrupted state.
+- **Recommended context:** lifecycle, handoff skill, BOOTSTRAP, workflow, AGENTS, INDEX, handoff README, config, and C0044.
+- **Result:** this context accurately represents the intended recovery surface. It should not be interpreted as evidence that all listed files were actually modified by C0045.
+
+#### Extraction result
+
+The experiment supports a useful distinction:
+
+`Recommended starting context` is a **continuity-oriented retrieval set**, not a manifest of files touched by the chapter.
+
+The entries fall into four practical categories:
+
+1. **Handoff continuity** — predecessor/current handoff and handoff-tree orientation.
+2. **Activation context** — canonical owners required to establish the current operational context.
+3. **Both** — files that simultaneously explain the chapter state and define active semantics needed to continue it.
+4. **Incidental/redundant** — files that may be useful but are not necessary for reconstructing the bounded continuation context.
+
+For C0047–C0045, the recommended lists are dominated by the first three categories. The test found no evidence that they should be replaced by a changed handoff schema or by an activation dependency registry.
+
+The current evidence therefore supports keeping `Recommended starting context` as a compact continuity-oriented retrieval guide. It SHOULD NOT be treated as an exact read/touch manifest, and no change to `.ai/rules/handoff/references.md` or `.ai/skills/activation/SKILL.md` is justified by this experiment alone.
 
 ### Iteration 3 Entry-Layer Test
 
