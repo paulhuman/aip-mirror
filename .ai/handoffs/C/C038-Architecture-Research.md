@@ -1,20 +1,20 @@
 # Conversation Handoff
 
 **Conversation:**
-C038 — Architecture & Research
+C039 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-038
+039
 
 **Previous chapter:**
-037
+038
 
 ## Starting objective
 
-Continue the bounded Architecture & Research work from C037 by formalizing the `SHORT_NAME` contract in the canonical BOOTSTRAP workflow and then resolving the remaining semantic questions around generated bootstrap instructions, first-chapter initialization, and interrupted migration before changing active command references.
+Continue the bounded Architecture & Research work from C038 by formalizing the `SHORT_NAME` contract in the canonical BOOTSTRAP workflow and then resolving the remaining semantic questions around generated bootstrap instructions, first-chapter initialization, and interrupted migration before changing active command references.
 
 Do not reopen the accepted `>>` syntax decision.
 
@@ -22,8 +22,8 @@ Do not reopen the accepted `>>` syntax decision.
 
 - Repository: `paulhuman/aip-mirror`.
 - Canonical branch: `main`.
-- Current chapter: C038.
-- Previous chapter: C037.
+- Current chapter: C039.
+- Previous chapter: C038.
 - Specialization: C.
 - Resolved short name: `Architecture & Research`.
 - Bootstrap runtime inputs supplied for this chapter:
@@ -47,18 +47,18 @@ SPECIALIZATION
 
 ## Confirmed / observed
 
-- C037 resolved `SHORT_NAME` at the configuration and bootstrap-contract boundary.
+- C038 resolved `SHORT_NAME` at the configuration and bootstrap-contract boundary.
 - `.ai/config.yaml` contains the specialization vocabulary, including `C → Architecture & Research`.
 - `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical ordered receiving/first-chapter initialization workflow.
 - `.ai/rules/handoff/lifecycle.md` defines handoffs as durable conversation-context snapshots without lifecycle status transitions.
 - `.ai/skills/handoff/SKILL.md` owns handoff capability and structure.
 - `.ai/rules/repository.md` owns repository identity/path resolution and repository write safety.
 - `.ai/skills/activation/SKILL.md` defines ACTIVATE as rereading the required canonical owners.
-- C037 predecessor handoff was read successfully.
-- This C038 handoff is being created by a WRITE-CAPABLE AI during bootstrap.
+- C038 predecessor handoff was read successfully.
+- This C039 handoff is being created by a WRITE-CAPABLE AI during bootstrap.
 - The active architecture record is `.ai/architecture/ai-infrastructure-restructuring.md`, especially section 29.
 
-## C037 decisions carried forward
+## C038 decisions carried forward
 
 ### SHORT_NAME
 
@@ -109,7 +109,7 @@ Normal migration MUST invoke bootstrap-instruction generation as its terminal st
 - `.ai/INDEX.md`
 - `.ai/architecture/ai-infrastructure-restructuring.md`
 - `.ai/handoffs/README.md`
-- `.ai/handoffs/C/C037-Architecture-Research.md`
+- `.ai/handoffs/C/C038-Architecture-Research.md`
 
 ## Important constraints
 
@@ -123,7 +123,7 @@ Normal migration MUST invoke bootstrap-instruction generation as its terminal st
 - Do not create the next receiving-chapter handoff in advance.
 - Do not silently treat `SHORT_NAME` as a fourth required canonical runtime input.
 
-## C038 checkpoint
+## C039 checkpoint
 
 The first bounded implementation step is complete.
 
@@ -155,8 +155,8 @@ The next bounded question remains the exact generated bootstrap-message format a
 
 ### Confirmed
 
-- C038 is the current chapter being migrated to C039.
-- C037 was the predecessor.
+- C039 is the current chapter being migrated to C040.
+- C038 was the predecessor.
 - `C → Architecture & Research` is configured in `.ai/config.yaml`.
 - The canonical BOOTSTRAP runtime contract remains `PREVIOUS_CHAPTER`, `CURRENT_CHAPTER`, and `SPECIALIZATION`.
 - `SHORT_NAME` is contextual data: supplied when available, otherwise resolved from specialization vocabulary.
@@ -188,9 +188,9 @@ The next bounded question remains the exact generated bootstrap-message format a
 - Validation and placement of the two manual bootstrap templates.
 - Exact active command-reference changes in `.ai/INDEX.md` and `.ai/skills/handoff/SKILL.md`.
 
-## C038 final checkpoint
+## C039 final checkpoint
 
-The bounded C038 investigation is complete enough for migration to C039.
+The bounded C039 investigation is complete enough for migration to C040.
 
 ### Repository changes completed
 
@@ -207,7 +207,7 @@ The bounded C038 investigation is complete enough for migration to C039.
    - recorded the AGENTS/BOOTSTRAP responsibility boundary;
    - recorded missing-input stop behavior;
    - recorded the four-line generated transport and source hierarchy;
-   - recorded the C039 bounded follow-up sequence.
+   - recorded the C040 bounded follow-up sequence.
 
 Architecture commit:
 `a9c561b0010329c6bed81445e9cef44d50107064`
@@ -215,7 +215,7 @@ Architecture commit:
 BOOTSTRAP commit:
 `01e1a532df72ecf956400c770e95a2959dbe1c60`
 
-### Migration transport for C039
+### Migration transport for C040
 
 The terminal bootstrap instruction for the receiving chapter is:
 
@@ -230,9 +230,9 @@ SHORT_NAME = Architecture & Research
 
 The receiving AI MUST treat the first paragraph as the initialization trigger/context and the four following lines as bootstrap transport values.
 
-### C039 first bounded task
+### C040 first bounded task
 
-After bootstrap, C039 SHOULD:
+After bootstrap, C040 SHOULD:
 
 1. verify the AGENTS → BOOTSTRAP entry boundary and missing-input behavior;
 2. verify the generated four-line transport against BOOTSTRAP;
@@ -256,7 +256,7 @@ Read:
 5. `.ai/skills/handoff/SKILL.md`
 6. `.ai/INDEX.md`
 
-Then verify the C039 bootstrap path before changing active command references.
+Then verify the C040 bootstrap path before changing active command references.
 
 ## Recommended starting context
 
