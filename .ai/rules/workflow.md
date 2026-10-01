@@ -116,6 +116,7 @@ For example, an active `.ai/` inspection may be batched as:
     skills/*
     workflows/*
     handoffs/README.md
+    ../docs/PROJECT-INSTRUCTIONS.md
 
 Large or history-heavy areas such as archived architecture and historical handoffs SHOULD be inspected separately unless they are explicitly part of the current question.
 
