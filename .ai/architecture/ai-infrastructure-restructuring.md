@@ -733,7 +733,7 @@ Handoff header formatting is canonicalized separately from the chapter identifie
     001
 
     **Previous chapter:**
-    000
+    N/A
 
     **Status:**
     HANDED_OFF
@@ -1817,7 +1817,7 @@ The handoff continuity rule has one small normative-language correction to make:
 
 SHOULD is intentional. Meaningful durable context should normally be checkpointed, but the simplified model must not turn handoff maintenance back into a rigid end-of-conversation ceremony.
 
-The canonical handoff skill also contains a stale example from the former schema. The example MUST remain structurally useful while removing the obsolete Status field:
+The canonical handoff skill also contains a stale example from the former schema. The example MUST remain structurally useful while using the active one-based first-chapter semantics:
 
     # Conversation Handoff
 
@@ -1831,7 +1831,7 @@ The canonical handoff skill also contains a stale example from the former schema
     001
 
     **Previous chapter:**
-    000
+    N/A
 
 The architecture record itself must then be checked against the resulting canonical files. It should not merely describe the intended model while the active rules, skill, workflow, or routing still express a different one.
 
