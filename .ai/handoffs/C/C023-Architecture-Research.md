@@ -1,16 +1,16 @@
 # Conversation Handoff
 
 **Conversation:**
-C023 — Architecture & Research
+C024 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-023
+024
 
 **Previous chapter:**
-022
+023
 
 ## Starting objective
 
@@ -22,7 +22,7 @@ Do not restart the earlier semantic-comparison or target-tree planning stage.
 
 ## Known starting implementation state
 
-C022 completed the current physical restructuring pass and documented the mandatory post-edit consistency-sweep procedure.
+C023 completed the current physical restructuring pass and documented the mandatory post-edit consistency-sweep procedure.
 
 The current architectural boundary remains:
 
@@ -60,9 +60,9 @@ Historical Iteration 2 architecture/research artifacts are preserved under `.ai/
 
 ## Confirmed / observed
 
-- C022 was READY_FOR_HANDOFF at bootstrap start.
-- C023 did not exist before this bootstrap.
-- The repository contains the completed Iteration 2 physical restructuring recorded by C022.
+- C023 was READY_FOR_HANDOFF at bootstrap start.
+- C024 did not exist before this bootstrap.
+- The repository contains the completed Iteration 2 physical restructuring recorded by C023.
 - Historical architecture research has been moved to `.ai/archive/architecture/`; the active architecture layer now contains only the current restructuring working notes.
 - The first repository-wide sweep found no active `SUPERSEDED`, `bootstrap kernel`, `ENTRY.md`, or old `.ai/handoffs/` routing residue requiring repair.
 - The sweep did find project-specific leakage in several generic-looking `.ai` rules/skills, plus a deeper ownership question around repository identity in `.ai/rules/repository.md`.
@@ -82,7 +82,7 @@ The bounded sweep findings and repair history are preserved in this handoff and 
 
 ## Recovered handoff-operation context
 
-Important information recovered during C023 and preserved for the next continuation:
+Important information recovered during C024 and preserved for the next continuation:
 
 - Keep the three semantic dimensions distinct: **HANDOFF LIFECYCLE = state**, **HANDOFF OPERATION = action**, **HANDOFF COMMIT = durable Git record**.
 - Do not derive the operation vocabulary directly from lifecycle transitions. An operation may leave lifecycle state unchanged.
@@ -103,7 +103,7 @@ Important information recovered during C023 and preserved for the next continuat
 
 ## Things not to redo
 
-- Do not reconstruct C020/C021/C022 from conversation history.
+- Do not reconstruct C021/C022/C023 from conversation history.
 - Do not restart semantic comparison.
 - Do not rebuild the old target tree as a future plan.
 - Do not repeat already completed physical moves.
@@ -115,4 +115,4 @@ Important information recovered during C023 and preserved for the next continuat
 
 ## Migration note
 
-C023 has completed its bounded consistency-sweep pass and has been handed off. The repository now contains a durable sweep report and a new C024 draft. Continue from those artifacts rather than reconstructing this analysis from chat history.
+C024 has completed its bounded consistency-sweep pass and has been handed off. The repository now contains a durable sweep report and a new C025 draft. Continue from those artifacts rather than reconstructing this analysis from chat history.
