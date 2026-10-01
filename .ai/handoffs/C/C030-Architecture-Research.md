@@ -1,34 +1,34 @@
 # Conversation Handoff
 
 **Conversation:**
-C030 — Architecture & Research
+C031 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-030
+031
 
 **Previous chapter:**
-029
+030
 
 ## Current objective
 
-Continue Architecture & Research from the verified C029 repository state.
+Continue Architecture & Research from the verified C030 repository state.
 
-C030 is the receiving chapter for C029. This handoff is the live checkpoint for the current conversation and will be updated as meaningful state accumulates.
+C031 is the receiving chapter for C030. This handoff is the live checkpoint for the current conversation and will be updated as meaningful state accumulates.
 
 ## Starting state
 
-C029 completed the bounded normative-language verification work and then began the next architecture question: progressive disclosure / Minimum Sufficient Execution Context (MEC).
+C030 completed the bounded normative-language verification work and then began the next architecture question: progressive disclosure / Minimum Sufficient Execution Context (MEC).
 
-The important correction made at the end of C029 was methodological: do not treat MEC as a pre-existing internal model architecture, and do not attempt to reason about the AI's hidden thinking process. Test only observable repository behavior: what context must actually be discovered to perform a concrete task correctly.
+The important correction made at the end of C030 was methodological: do not treat MEC as a pre-existing internal model architecture, and do not attempt to reason about the AI's hidden thinking process. Test only observable repository behavior: what context must actually be discovered to perform a concrete task correctly.
 
 ## Previous chapter
 
-C029 — Architecture & Research.
+C030 — Architecture & Research.
 
-Its handoff has been prepared as `READY_FOR_HANDOFF` during this self-migration and is expected to be transitioned to `HANDED_OFF` after this C030 handoff is created and verified.
+Its handoff has been prepared as `READY_FOR_HANDOFF` during this self-migration and is expected to be transitioned to `HANDED_OFF` after this C031 handoff is created and verified.
 
 ## Important constraints
 
@@ -48,13 +48,13 @@ Its handoff has been prepared as `READY_FOR_HANDOFF` during this self-migration 
 
 ### Confirmed / observed
 
-- C028's normative-language work is complete and its handoff is `HANDED_OFF`.
-- C029's normative-language verification was recorded in `.ai/architecture/ai-infrastructure-restructuring.md`.
+- C029's normative-language work is complete and its handoff is `HANDED_OFF`.
+- C030's normative-language verification was recorded in `.ai/architecture/ai-infrastructure-restructuring.md`.
 - The current architecture model distinguishes AGENTS, INDEX, canonical rules/skills/workflows, and project-source routing.
 - `docs/PROJECT-INSTRUCTIONS.md` explicitly defines workstreams as organizational boundaries rather than permanent knowledge ownership.
 - `docs/PROJECT-INSTRUCTIONS.md` routes canonical project knowledge to its semantic owner and requires cross-workstream continuity through durable repository knowledge.
 - No formal repository definition of `MEC`, `P-01`, `P-02`, or `P-03` was found; those labels are not established repository specifications.
-- C029's final active research direction was to replace abstract MEC speculation with simple observable tests.
+- C030's final active research direction was to replace abstract MEC speculation with simple observable tests.
 
 ### Inferred
 
@@ -67,7 +67,7 @@ Its handoff has been prepared as `READY_FOR_HANDOFF` during this self-migration 
 - Whether the tests reveal any missing routing/discoverability mechanism.
 - Whether the current architecture needs any change at all.
 
-## Bounded activation experiment — C030
+## Bounded activation experiment — C031
 
 The first T1/T2/T3 pass produced a useful distinction:
 
