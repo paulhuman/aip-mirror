@@ -46,7 +46,9 @@ If a supplied `SHORT_NAME` is present, configuration lookup is a fallback and MU
 If `SHORT_NAME` is neither supplied nor resolvable from configured specialization vocabulary, bootstrap MUST stop and report the unresolved short name rather than guessing one.
 
 The resolved `SHORT_NAME` is the canonical short conversation title.
-It is used for the `Conversation` field and for the canonical handoff filename:
+It is used for the `Conversation` field and for the canonical handoff filename.
+
+For generated migration transport, the value MUST already be resolved from the specialization vocabulary. The receiving AI MUST NOT require the user to repeat specialization or short-name context.
 
     .ai/handoffs/<specialization>/<chapter>-<short-name>.md
 
@@ -57,11 +59,22 @@ A handoff-producing chapter prepares its own handoff for the next chapter; a rec
 
 ### Canonical invocation format
 
-The bootstrap message is the transport boundary for these runtime inputs. Its format is canonical and MUST be used when invoking this workflow:
+The bootstrap message is the transport boundary for the initialization context. A generated migration instruction and the future manual templates MUST explicitly identify themselves as instructions to initialize a new conversation chapter and MUST direct the receiving AI to follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6.
+
+The standard generated transport format is exactly:
 
     PREVIOUS_CHAPTER = <three-digit previous chapter number or N/A>
     CURRENT_CHAPTER = <three-digit current chapter number>
     SPECIALIZATION = <single uppercase specialization letter>
+    SHORT_NAME = <resolved short conversation name>
+
+The canonical BOOTSTRAP runtime contract remains three inputs:
+
+    PREVIOUS_CHAPTER
+    CURRENT_CHAPTER
+    SPECIALIZATION
+
+`SHORT_NAME` is contextual data, not a fourth canonical runtime input. Generated migration instructions MUST include the already-resolved `SHORT_NAME`. A manual bootstrap message MAY supply it explicitly; when omitted, the supplied/fallback resolution rules above apply.
 
 The chapter number values MUST NOT include the specialization letter.
 
@@ -119,17 +132,33 @@ If a referenced repository-relative path cannot be resolved from the configured 
 
 ## Chat-initialization boundary
 
-This workflow is the reusable chat-initialization procedure for a new chapter. The initialization boundary is:
+This workflow is the reusable chat-initialization procedure for a new chapter.
+
+The workflow is entered through the `.ai/AGENTS.md` entry contract when AGENTS item 6 identifies new conversation chapter initialization as the requested operation. BOOTSTRAP does not call, re-enter, or redefine AGENTS.
+
+The presence of AGENTS item 6 alone MUST NOT trigger chapter initialization. A normal new conversation MAY read AGENTS and continue ordinary work without entering this workflow.
+
+The initialization boundary is:
 
     new conversation
         ↓
-    establish repository + chapter context
+    .ai/AGENTS.md
         ↓
-    ACTIVATE required canonical owners
-        ↓
-    execute the applicable bootstrap branch
-        ↓
-    substantive chapter work
+    new-chapter initialization requested?
+        ├─ NO  → ordinary work
+        └─ YES → AGENTS item 6
+                   ↓
+              this BOOTSTRAP workflow
+                   ↓
+              validate bootstrap context
+                   ↓
+              ACTIVATE required canonical owners
+                   ↓
+              execute the applicable bootstrap branch
+                   ↓
+              substantive chapter work
+
+If new-chapter initialization is requested but the required bootstrap runtime values are absent or malformed, this workflow MUST stop before repository mutation and report the missing or malformed values. It MUST NOT guess, infer, or silently substitute chapter values.
 
 The workflow has two initialization cases:
 
@@ -170,13 +199,15 @@ After this self-check:
 
 ### Shared steps
 
-1. Confirm current chapter identity, previous chapter, and specialization from the bootstrap message.
-2. Read this file.
-3. Read .ai/rules/workflow.md, .ai/rules/handoff/references.md, and the handoff skill.
-4. Read .ai/skills/activation/SKILL.md and invoke ACTIVATE.
-5. If PREVIOUS_CHAPTER is not N/A, read the predecessor handoff.
-6. Inspect implementation files and references identified by the predecessor handoff when applicable.
-7. Confirm that the new chapter can continue from the recorded state without guessing.
+1. Validate that new-chapter initialization was actually requested through the AGENTS item 6 entry path.
+2. Confirm current chapter identity, previous chapter, specialization, and supplied contextual `SHORT_NAME` from the bootstrap message.
+3. If any canonical runtime input is missing or malformed, STOP before repository mutation and report exactly what is missing or malformed.
+4. Read this file.
+5. Read .ai/rules/workflow.md, .ai/rules/handoff/references.md, and the handoff skill.
+6. Read .ai/skills/activation/SKILL.md and invoke ACTIVATE.
+7. If PREVIOUS_CHAPTER is not N/A, read the predecessor handoff.
+8. Inspect implementation files and references identified by the predecessor handoff when applicable.
+9. Confirm that the new chapter can continue from the recorded state without guessing.
 
 ### Branch A — WRITE-CAPABLE AI
 
