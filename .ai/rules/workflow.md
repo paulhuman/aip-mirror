@@ -108,15 +108,15 @@ The tree establishes the actual repository structure. Direct file retrieval esta
 
 For a semantic sweep of an active infrastructure layer, first retrieve the active root-level areas separately rather than fetching the entire repository in one large batch. This keeps the analysis complete while preventing output truncation and accidental mixing of active and historical material.
 
-For example, an active `.ai/` inspection may be batched as:
+For example, an active repository-context inspection may be batched as:
 
-    config.yaml
-    architecture/*
-    rules/*
-    skills/*
-    workflows/*
-    handoffs/README.md
-    ../docs/PROJECT-INSTRUCTIONS.md
+    .ai/config.yaml
+    .ai/architecture/*
+    .ai/rules/*
+    .ai/skills/*
+    .ai/workflows/*
+    .ai/handoffs/README.md
+    docs/PROJECT-INSTRUCTIONS.md
 
 Large or history-heavy areas such as archived architecture and historical handoffs SHOULD be inspected separately unless they are explicitly part of the current question.
 
