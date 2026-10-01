@@ -1,20 +1,20 @@
 # Conversation Handoff
 
 **Conversation:**
-C043 — Architecture & Research
+C044 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-043
+044
 
 **Previous chapter:**
-042
+043
 
 ## Starting objective
 
-Continue the Architecture & Research investigation from C042 by resolving the practical user-facing interface for the activation capability.
+Continue the Architecture & Research investigation from C043 by resolving the practical user-facing interface for the activation capability.
 
 The immediate subject is how a user can request `ACTIVATE`, `REFRESH`, and `TRACE` directly in natural language when there are no dedicated commands for these functions.
 
@@ -22,8 +22,8 @@ The immediate subject is how a user can request `ACTIVATE`, `REFRESH`, and `TRAC
 
 - Repository: `paulhuman/aip-mirror`.
 - Canonical branch: `main`.
-- Current chapter: C043.
-- Previous chapter: C042.
+- Current chapter: C044.
+- Previous chapter: C043.
 - Specialization: C.
 - Resolved short name: `Architecture & Research`.
 - Canonical bootstrap runtime contract remains `PREVIOUS_CHAPTER`, `CURRENT_CHAPTER`, `SPECIALIZATION`.
@@ -31,12 +31,12 @@ The immediate subject is how a user can request `ACTIVATE`, `REFRESH`, and `TRAC
 - `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical new-conversation initialization workflow.
 - `.ai/skills/activation/SKILL.md` is the canonical owner of ACTIVATE, REFRESH, and TRACE semantics.
 - `.ai/INDEX.md` is the routing and capability-discovery surface; it currently exposes Activation as a capability but does not define dedicated user commands for ACTIVATE, REFRESH, or TRACE.
-- C042 resolved the operation boundary for `OPERATION READS` and recorded it in the activation skill and architecture record.
-- C043 resolved the manual activation interface: ACTIVATE, REFRESH, and TRACE are directly requestable in natural language without a new command layer.
-- C043 added `.ai/architecture/faq/manual-activation.md` as the durable human-oriented usage explanation; the FAQ is not a semantic owner.
-- C043 updated `.ai/skills/activation/SKILL.md` with the manual invocation section.
-- C043 updated `.ai/architecture/README.md` with the FAQ ownership/orientation boundary.
-- C043 replaced the former manual-activation TODO in `.ai/architecture/ai-infrastructure-restructuring.md` with the resolved architecture decision and added the FAQ convention.
+- C043 resolved the operation boundary for `OPERATION READS` and recorded it in the activation skill and architecture record.
+- C044 resolved the manual activation interface: ACTIVATE, REFRESH, and TRACE are directly requestable in natural language without a new command layer.
+- C044 added `.ai/architecture/faq/manual-activation.md` as the durable human-oriented usage explanation; the FAQ is not a semantic owner.
+- C044 updated `.ai/skills/activation/SKILL.md` with the manual invocation section.
+- C044 updated `.ai/architecture/README.md` with the FAQ ownership/orientation boundary.
+- C044 replaced the former manual-activation TODO in `.ai/architecture/ai-infrastructure-restructuring.md` with the resolved architecture decision and added the FAQ convention.
 
 ## Confirmed / observed
 
@@ -48,14 +48,14 @@ The immediate subject is how a user can request `ACTIVATE`, `REFRESH`, and `TRAC
 - `.ai/skills/activation/SKILL.md` defines ACTIVATE as rereading required canonical owners, REFRESH as re-invoking ACTIVATE, and TRACE as an optional observable presentation of activation evidence.
 - `.ai/skills/handoff/SKILL.md` owns handoff structure and handoff operations.
 - `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical new-chapter initialization workflow.
-- The predecessor handoff `.ai/handoffs/C/C042-Architecture-Research.md` was read successfully.
+- The predecessor handoff `.ai/handoffs/C/C043-Architecture-Research.md` was read successfully.
 - `.ai/architecture/README.md` confirms that architecture notes are durable context, not active execution owners.
 - `.ai/architecture/ai-infrastructure-restructuring.md` sections 34–35 record the resolved manual activation interface and FAQ convention.
 - `.ai/INDEX.md` currently lists Activation in the capability map and does not need to introduce a command layer for manual ACTIVATE, REFRESH, or TRACE.
-- The repository does not already contain a C043 handoff; this chapter is creating its own receiving handoff as required by BOOTSTRAP.
+- The repository does not already contain a C044 handoff; this chapter is creating its own receiving handoff as required by BOOTSTRAP.
 - The AI has working repository write and commit capability through the GitHub repository tools; the WRITE-CAPABLE bootstrap branch applies.
 
-## C042 decisions carried forward
+## C043 decisions carried forward
 
 - ACTIVATE is a capability, not a user-facing command requirement.
 - REFRESH is an invocation mode of ACTIVATE, not a separate capability.
@@ -80,7 +80,7 @@ The immediate subject is how a user can request `ACTIVATE`, `REFRESH`, and `TRAC
 - `.ai/architecture/README.md`
 - `.ai/architecture/ai-infrastructure-restructuring.md`, sections 32–35
 - `.ai/architecture/faq/manual-activation.md`
-- `.ai/handoffs/C/C042-Architecture-Research.md`
+- `.ai/handoffs/C/C043-Architecture-Research.md`
 
 ## Important constraints
 
@@ -94,7 +94,7 @@ The immediate subject is how a user can request `ACTIVATE`, `REFRESH`, and `TRAC
 - Do not modify the predecessor handoff merely because it was consumed.
 - Keep the investigation bounded to the manual activation interface unless evidence requires a related architectural correction.
 
-## C043 completed work
+## C044 completed work
 
 ### Confirmed
 
@@ -102,17 +102,17 @@ The immediate subject is how a user can request `ACTIVATE`, `REFRESH`, and `TRAC
 - ACTIVATE and REFRESH remain execution behavior owned by `.ai/skills/activation/SKILL.md`; TRACE remains observable presentation.
 - `.ai/architecture/faq/` is an explanation/orientation area, not a new semantic layer.
 - The architecture record now treats the manual activation interface as resolved rather than an open TODO.
-- The four C043 documentation changes were written and read back successfully.
+- The four C044 documentation changes were written and read back successfully.
 
 ## Confirmed versus inferred versus assumed
 
 ### Confirmed
 
-- C043 is the receiving chapter for C042.
+- C044 is the receiving chapter for C043.
 - The supplied bootstrap context is valid: `PREVIOUS_CHAPTER = 042`, `CURRENT_CHAPTER = 043`, `SPECIALIZATION = C`, `SHORT_NAME = Architecture & Research`.
 - The predecessor handoff identifies the manual activation interface as the immediate next task.
 - The relevant active owners and architecture record are present and readable.
-- No C043 handoff existed before this bootstrap.
+- No C044 handoff existed before this bootstrap.
 
 ### Inferred
 
@@ -124,11 +124,11 @@ The immediate subject is how a user can request `ACTIVATE`, `REFRESH`, and `TRAC
 
 ### Open
 
-- No unresolved architecture question remains from the C043 manual activation interface investigation.
+- No unresolved architecture question remains from the C044 manual activation interface investigation.
 
 ## Immediate next task
 
-No additional bounded C043 architecture work is identified. If C043 continues, work SHOULD begin only from a newly identified question rather than reopening the resolved manual activation interface.
+No additional bounded C044 architecture work is identified. If C044 continues, work SHOULD begin only from a newly identified question rather than reopening the resolved manual activation interface.
 
 ## Recommended starting context
 
@@ -138,11 +138,11 @@ No additional bounded C043 architecture work is identified. If C043 continues, w
 4. `.ai/architecture/faq/manual-activation.md` — practical manual activation usage.
 5. `.ai/INDEX.md` — capability-discovery and command-routing boundary.
 6. `.ai/rules/workflow.md` — workflow and inspection constraints.
-7. `.ai/handoffs/C/C042-Architecture-Research.md` — predecessor reasoning and migration checkpoint.
+7. `.ai/handoffs/C/C043-Architecture-Research.md` — predecessor reasoning and migration checkpoint.
 
-## Migration checkpoint to C044
+## Migration checkpoint to C045
 
-C043 is complete for its current bounded architecture investigation.
+C044 is complete for its current bounded architecture investigation.
 
 The consistency check confirmed:
 - `.ai/architecture/faq/` does not create a competing semantic ownership layer;
@@ -150,7 +150,7 @@ The consistency check confirmed:
 - `.ai/INDEX.md` does not need a separate FAQ capability/discovery entry;
 - the manual activation interface remains resolved as natural-language invocation of ACTIVATE, REFRESH, and TRACE.
 
-C044 SHOULD begin from a newly identified Architecture & Research question and MUST NOT reopen the resolved manual activation interface unless new evidence requires it.
+C045 SHOULD begin from a newly identified Architecture & Research question and MUST NOT reopen the resolved manual activation interface unless new evidence requires it.
 
-The receiving C044 chapter MUST create its own handoff during bootstrap. C043 does not create or modify the C044 handoff in advance.
+The receiving C045 chapter MUST create its own handoff during bootstrap. C044 does not create or modify the C045 handoff in advance.
 
