@@ -14,139 +14,204 @@ C
 
 ## Current objective
 
-Continue the project-wide AI-instruction architecture research from C005. The immediate semantic focus is **UNRESOLVED propagation semantics**: whether distinct appearances or causes of `UNRESOLVED` require typed semantic subtypes, or can be represented by one semantic state plus orthogonal metadata.
+Continue the project-wide AI-instruction architecture research from 03E. The current semantic focus is the boundary between **prerequisites**, **dependencies**, **candidate eligibility**, **candidate effects**, **candidate-level precedence**, and especially the propagation semantics of `UNRESOLVED`.
 
-The competing models are:
+The immediate research question became:
 
-```text
-MODEL A — Typed semantic UNRESOLVED
-TRUE / FALSE / UNRESOLVED{types}
-```
+> Does `UNRESOLVED` need typed semantic subtypes, or is a single semantic state plus orthogonal reason/origin/provenance metadata sufficient?
 
-and:
+This question must be answered by counterexamples before any formal Architecture Decision is created.
 
-```text
-MODEL B — Untyped semantic state + orthogonal metadata
-TRUE / FALSE / UNRESOLVED
-+
-reason / source / propagation / conflict / cycle
-```
+## Completed
 
-The comparison is driven by minimal counterexamples. No formal Architecture Decision has been made from this research.
-
-## Completed in C006
-
-C006 completed the U-1 through U-6 portion of the Model A vs Model B investigation.
-
-Current result:
+Bootstrap established this chapter from the 03E handoff. The 03E working model remained the starting point:
 
 ```text
-U-1 → Model B survives preliminarily
-U-2 → Model B survives preliminarily
-U-3 → Model B survives preliminarily
-U-4 → Model B survives preliminarily
-U-5 → Model B survives preliminarily
-U-6 → Model B survives preliminarily, but pressure increases
+eligibility
+  → conflict detection
+  → explicit precedence
+  → governing candidate
+  → candidate effect
+  → effective outcome
 ```
 
-No winner has been declared.
-
-The main refinement during this work was recognition that `UNRESOLVED` must be associated with an explicit **subject**:
+The prerequisite/dependency counterexample pass was extended through chains and cycles. The resulting working separation is:
 
 ```text
-authorization standing = AUTHORIZED
-eligibility(D)         = UNRESOLVED
-effect(E)              = UNRESOLVED
-effective outcome      = UNRESOLVED
+1. Relationship structure
+2. Semantic resolution
+3. Execution strategy
 ```
 
-The current exploratory representation is:
+Dependency relationships describe semantic structure; semantic resolution determines what those relationships mean and what result follows; execution strategy is an implementation concern and must not create semantic meaning through incidental ordering.
+
+The chain/cycle pass established the following working observations:
+
+- An acyclic dependency chain can be resolved from an independent source when the relevant consumer semantics are defined.
+- A dependency predicate being `FALSE` does not by itself imply a particular consumer result such as `DENIED`; the consequence is defined by consumer semantics.
+- `UNRESOLVED` at a dependency target does not automatically define the consumer result; propagation semantics remain a separate semantic question.
+- A cycle is a recursive relationship structure, not automatically an error and not automatically `UNRESOLVED`.
+- A cycle may admit self-consistent states, but the existence of a fixed point does not itself specify a rule that selects it.
+- Incidental execution order cannot resolve a semantic cycle.
+- If cyclic dependencies are to be supported, explicit cycle-resolution/termination semantics would be required. Whether Core needs such semantics remains open.
+
+Candidate-level precedence was also tested against dependency targets. The working distinction remains:
 
 ```text
-Resolution
-├── subject
-├── state
-│   ├── TRUE
-│   ├── FALSE
-│   └── UNRESOLVED
-├── cause
-├── origin / propagation
-├── source / provenance
-└── dependency / conflict relation or context
+dependency target
+        ≠
+consumer role
+        ≠
+precedence
 ```
 
-This is a research model, not a formal schema or Architecture Decision.
-
-## Durable semantic separation
-
-The research currently keeps these dimensions distinct:
-
-```text
-semantic state
-    ≠
-reason / cause
-    ≠
-origin / propagation mechanism
-    ≠
-source / provenance
-    ≠
-consumer consequence
-```
-
-For example:
-
-```text
-state  = UNRESOLVED
-cause  = conflict
-origin = direct
-source = conflict resolver
-```
-
-does not itself specify what the consumer must do.
-
-Likewise:
-
-```text
-cause  = dependency
-origin = propagated
-```
-
-answers different questions: `dependency` describes why the current resolution cannot be established; `propagated` describes how unresolvedness reached the current subject.
-
-`PROPAGATED` is therefore currently treated as an origin/mechanism candidate, not as a peer semantic subtype.
+Precedence may change a dependency result when the dependency explicitly targets a semantic result that precedence changes (for example, an effective outcome), while a dependency targeting a candidate effect or authority standing can remain unchanged. Precedence does not become a generic dependency resolver.
 
 ## Current implementation state
 
 The repository remains in the legacy/pre-refactor AI-instruction layout. No structural architecture refactor has been executed.
 
-No generic dependency engine, precedence engine, authorization engine, candidate evaluator, or TRACE subsystem has been implemented as part of this research.
-
-The current work is research/specification analysis only.
+No implementation of a generic dependency engine, precedence engine, authorization engine, candidate evaluator, or TRACE subsystem has been started as part of this research pass.
 
 ## Decisions / working invariants carried forward
 
-The following are durable working constraints from earlier research; not every item is a formal AD:
-
-- Explicit Authorization remains the baseline for OVERRIDE semantics; declaration is not authorization and TRACE is not authority.
-- Authorization is bounded; delegation cannot expand the source grant.
-- Target-specific authorization remains a Core semantic primitive; target-class authorization remains outside Core pending a dedicated decision.
-- Candidate-level precedence is a working direction, not a formal Architecture Decision.
+- OVERRIDE uses Explicit Authorization as the baseline; declaration is not authorization and TRACE is not authority.
+- Authorization is bounded; delegation requires explicit authorization and cannot expand the source grant.
+- Target-specific authorization is the Core semantic primitive; target-class authorization remains outside Core pending a separate architecture decision.
+- Core consumes externally established authority and does not define the mechanism for constructing/verifying authority chains.
+- `AUTHORIZED / DENIED / UNRESOLVED` at external authority establishment remain distinct from Core current-operation results such as `EFFECTIVE / DENIED / UNRESOLVED`.
+- Specificity and authority do not independently create precedence; they may participate only through explicit precedence policy.
 - Precedence acts only on already eligible candidates and cannot bypass or create eligibility or authority.
 - Hidden precedence from path depth, discovery order, filename order, timestamps, IDs, or incidental processing order is prohibited.
+- If applicable resolution rules do not produce a unique deterministic result within the defined resolution boundary, the result is `UNRESOLVED`.
+- Conflict resolution does not mutate authorization standing.
 - Candidate effect and effective outcome are distinct semantic concepts.
-- Dependency target, consumer role, and precedence are separate dimensions.
-- `Relationship structure → semantic resolution → execution strategy` remains the working decomposition.
-- `Dependency` is not a generic Core semantic category or universal execution engine.
-- `UNRESOLVED` is a semantic state, but its internal representation and propagation semantics remain undecided.
-- `UNRESOLVED` must not be treated as automatically equivalent to `DENIED`.
-- Consumer consequence is a separate semantic rule and is not determined merely by the presence of `UNRESOLVED`.
-- Incidental execution order must not resolve a semantic cycle.
-- External authority states such as `AUTHORIZED / DENIED / UNRESOLVED` remain distinct from Core operation outcomes such as `EFFECTIVE / DENIED / UNRESOLVED`.
-- The burden of proof for semantic subtypes is a demonstrated downstream semantic requirement, not merely the existence of diagnostically different causes.
+- Execution order is not semantic order by default; architecture should not prescribe eager versus lazy evaluation without a semantic reason.
+- `Dependency` is intentionally not yet a generic Core semantic category.
+- `UNRESOLVED` is a semantic state, but its internal representation and propagation semantics are not yet decided.
+- `UNRESOLVED` must not be treated as automatically equivalent to `DENIED`; consumer consequence is a separate semantic rule.
 
-## UNRESOLVED propagation baseline
+## Prerequisite / dependency semantic boundary
 
-Qwen's proposed taxonomy is retained only as a research hypothesis:
+The research now uses the following working model:
+
+```text
+DEPENDENCY TARGET
+    authority standing
+    candidate-level result / candidate effect
+    effective decision result
+
+        ×
+
+CONSUMER ROLE
+    eligibility-related requirement
+    effect/effective-outcome evaluation
+```
+
+This is a working semantic model, not yet a formal Architecture Decision. Not every combination is assumed to be valid.
+
+A **decision-source relationship** is not assumed to be an eligibility prerequisite merely because it references another decision source. The relationship references a semantic result/property of the source; the **consumer role** determines where and how that referenced result is used.
+
+A dependency may connect two decision/pipeline instances without becoming a universal pipeline stage.
+
+Do not claim as established fact that:
+
+```text
+decision-source prerequisite → may affect eligibility
+```
+
+That remains only a hypothesis. The safer current statement is:
+
+```text
+decision-source relationship
+    → references semantic result/property of B
+    → consumer role UNKNOWN until tested
+```
+
+## Chain and cycle semantics — current working conclusions
+
+### Chain
+
+For a chain such as:
+
+```text
+A → B → C
+```
+
+what propagates is not simply `C result → B result → A result`. The semantic structure is better represented as:
+
+```text
+C semantic result
+     ↓
+relationship predicate
+     ↓
+B consumer semantics
+     ↓
+B semantic result
+     ↓
+relationship predicate
+     ↓
+A consumer semantics
+```
+
+The exact consumer consequence of `TRUE`, `FALSE`, or `UNRESOLVED` remains relationship/consumer-specific.
+
+### Cycle
+
+For a cycle such as:
+
+```text
+A → B → A
+```
+
+there is no independent semantic source inside the cycle. The cycle therefore requires explicit semantics if it is to be resolved.
+
+Working rule:
+
+```text
+cycle
+  ≠ automatically invalid
+  ≠ automatically UNRESOLVED
+  → requires explicit resolution/termination semantics if supported
+```
+
+Execution order must not be used as an implicit cycle-breaking mechanism.
+
+### Precedence interaction
+
+If a dependency targets `B.effective_outcome`, precedence may change the dependency result by changing B's effective outcome. If it targets `B.candidate_effect`, precedence may leave that target unchanged even when B loses precedence. Therefore dependency target must remain distinct from both consumer role and precedence.
+
+## Completed chains/cycles counterexample pass
+
+The following four cases were tested with resolved-positive, resolved-negative, and `UNRESOLVED` states:
+
+1. **Eligibility chain** — `A eligibility → B → C`.
+2. **Eligibility cycle** — `A eligibility → B eligibility → A eligibility`.
+3. **Effect chain** — `A.effect → B.effective_outcome → C.effective_outcome`.
+4. **Effect cycle** — `A.effect → B.effective_outcome → A.effective_outcome`.
+
+The pass did not justify introducing a generic dependency engine or a universal propagation mechanism.
+
+## UNRESOLVED propagation research
+
+An independent-review pass by Qwen produced ten counterexamples for different appearances of `UNRESOLVED`:
+
+1. **U-1 — Predicate / missing data**
+2. **U-2 — Authority standing / missing or ambiguous authority evidence**
+3. **U-3 — Core operation / operation-boundary mismatch**
+4. **U-4 — Candidate eligibility / propagated predicate unresolved**
+5. **U-5 — Candidate effect / propagated dependency target unresolved**
+6. **U-6 — Effective outcome / unresolved conflict**
+7. **U-7 — Dependency predicate / propagated effective-outcome unresolved**
+8. **U-8 — Dependency consumer consequence / authority unresolved plus consumer role**
+9. **U-9 — Cycle detection / structural circularity**
+10. **U-10 — Multiple valid OVERRIDEs / unresolved conflict**
+
+These cases demonstrate that `UNRESOLVED` can arise in materially different semantic situations, but they do **not yet prove** that those situations must be represented as semantic subtypes.
+
+### Qwen's candidate taxonomy — research hypothesis only
+
+Qwen proposed:
 
 ```text
 UNRESOLVED
@@ -165,368 +230,76 @@ UNRESOLVED
     └── from_authority_with_consumer_role
 ```
 
-The taxonomy is **not adopted**.
+This taxonomy is **not adopted**. It is a research alternative to be tested against a simpler representation.
 
-The key concern is dimensional conflation: `PROPAGATED` appears to describe origin/mechanism rather than a cause at the same level as conflict or insufficient evidence.
-
-A plain three-valued semantic state may be sufficient even if a plain three-valued logic is insufficient to encode causal, provenance, dependency, or conflict information.
-
-## U-1 — Predicate / Condition Evaluation
-
-Case:
+The most important critique is that `PROPAGATED` appears to describe an **origin/mechanism** rather than a semantic cause at the same conceptual level as conflict, cycle, or insufficient evidence. More generally, different dimensions may have been mixed together:
 
 ```text
-Candidate A:
-  condition: context.region == "EU"
-  effect: ALLOW
-
-Context:
-  region: not available / not set
+semantic state
+cause / reason
+origin / propagation mechanism
+source / provenance
+consumer consequence
 ```
 
-The predicate is unresolved because context data is unavailable.
+### Current research alternative
 
-Model A:
+The preferred next experiment compares two models:
 
 ```text
-subject = predicate(context.region == "EU")
-state   = UNRESOLVED_MISSING_CONTEXT_DATA
+MODEL A — Typed semantic UNRESOLVED
+
+TRUE / FALSE / UNRESOLVED{types}
 ```
 
-Model B:
+versus:
 
 ```text
-subject = predicate(context.region == "EU")
-state   = UNRESOLVED
-cause   = missing_context_data
-origin  = direct
-source  = context
-```
+MODEL B — Untyped semantic state + orthogonal metadata
 
-No semantic information is lost.
-
-U-1a tested two consumers of the same unresolved result: one needs to decide whether the rule can be applied; another needs to explain why resolution failed. Model B can provide the state for execution and metadata for explanation.
-
-U-1b/U-1c tested different causes and different consumer consequences, including temporary DENY versus blocked-pending-resolution. Different consumer behavior does not itself prove a typed semantic state because an explicit consumer rule can interpret structured metadata.
-
-**Conclusion: Model B survives U-1 through U-1c preliminarily.**
-
-## U-2 — Authority Standing
-
-Case:
-
-```text
-Candidate B:
-  requires authorization from an external authority mechanism
-
-External authority mechanism:
-  cannot determine whether B is authorized
-  (record missing / corrupted / ambiguous)
-```
-
-What is unresolved is authorization standing.
-
-Model A:
-
-```text
-subject = authorization(B)
-state   = UNRESOLVED_AUTHORITY
-```
-
-Model B:
-
-```text
-subject = authorization(B)
-state   = UNRESOLVED
-cause   = missing_authority_evidence
-origin  = direct
-source  = external_authority_mechanism
-```
-
-The distinction from U-1 is preserved in metadata. Authority evidence is not the same category as generic context data, even though both can produce `UNRESOLVED`.
-
-A strict fail-closed consequence remains a consumer rule, not proof of a distinct semantic state.
-
-**Conclusion: U-2 does not counter Model B.**
-
-## U-3 — Core Current-Operation Result
-
-Case:
-
-```text
-Candidate C:
-  authorization: AUTHORIZED
-  applicability: applicable
-  activation: active
-
-But:
-  current operation context cannot be fully evaluated
-  (e.g. operation parameters are incomplete)
-```
-
-The separation is:
-
-```text
-authorization standing = determined
-applicability           = determined
-activation              = active
-operation result        = unresolved
-```
-
-Model A:
-
-```text
-subject = operation(C)
-state   = UNRESOLVED_OPERATION_BOUNDARY
-```
-
-Model B:
-
-```text
-subject = operation(C)
-state   = UNRESOLVED
-cause   = operation_boundary_mismatch
-origin  = direct
-source  = core_operation_evaluator
-```
-
-No semantic information is lost.
-
-U-3 produced the key question:
-
-> `UNRESOLVED` относится к чему?
-
-The emerging answer is that explicit subject identification may be more important than adding semantic state types.
-
-**Conclusion: U-3 → Model B survives preliminarily.**
-
-## U-4 — Candidate Eligibility
-
-Case:
-
-```text
-Candidate D:
-  applicability: applicable
-  activation: active
-  authority: AUTHORIZED
-  condition: context.mode == SAFE
-
-But:
-  context.mode is UNRESOLVED
-```
-
-The unresolved predicate propagates into eligibility:
-
-```text
-applicability ──→ TRUE
-activation    ──→ TRUE
-authority     ──→ AUTHORIZED
-condition     ──→ UNRESOLVED
-                         ↓
-                    eligibility
-                         ↓
-                    UNRESOLVED
-```
-
-Model A could use:
-
-```text
-subject = eligibility(D)
-state   = UNRESOLVED_PROPAGATED_FROM_PREDICATE
-```
-
-Model B:
-
-```text
-subject = eligibility(D)
-state   = UNRESOLVED
-cause   = unavailable_context_data
-origin  = propagated
-source  = predicate(context.mode == SAFE)
-```
-
-The constituent evaluation can remain explicit:
-
-```text
-eligibility(D)
-├── applicability = TRUE
-├── activation    = TRUE
-├── authority     = AUTHORIZED
-└── condition     = UNRESOLVED
-```
-
-Removing `origin=propagated` does not change the semantic result. Removing `subject=eligibility(D)` does.
-
-This indicates that `PROPAGATED` currently behaves as origin/propagation metadata, while subject identifies the semantic object being resolved.
-
-**Conclusion: U-4 does not require a new semantic subtype.**
-
-## U-5 — Candidate Effect
-
-Case:
-
-```text
-Candidate E:
-  eligible: YES
-  effect: TRANSFORM(X) only if F.effective_outcome == ALLOW
-
-Candidate F:
-  effective_outcome: UNRESOLVED
-```
-
-The unresolved subject is E's effect:
-
-```text
-effect(E)
-    └── depends_on → effective_outcome(F)
-```
-
-Model A could use:
-
-```text
-subject = effect(E)
-state   = UNRESOLVED_DEPENDENCY
-```
-
-Model B:
-
-```text
-subject = effect(E)
-state   = UNRESOLVED
-cause   = dependency
-origin  = propagated
-source  = effective_outcome(F)
-```
-
-Removal tests:
-
-```text
-remove origin=propagated
-→ effect(E) = UNRESOLVED still means the same thing
-
-remove cause=dependency
-→ semantic result remains UNRESOLVED, but explanation is lost
-
-remove subject=effect(E)
-→ the semantic target is no longer identified
-```
-
-U-5 therefore strengthens the need to represent relationships between resolutions, but does not prove that dependency must be a semantic subtype.
-
-This does **not** justify a generic dependency engine.
-
-**Conclusion: U-5 → Model B survives preliminarily.**
-
-## U-6 — Effective Outcome / Conflict Without Resolution
-
-Case:
-
-```text
-Candidate G:
-  eligible: YES
-  candidate_effect: ALLOW
-
-Candidate H:
-  eligible: YES
-  candidate_effect: DENY
-
-No applicable precedence rule resolves the conflict.
-```
-
-The unresolved subject is `effective_outcome`.
-
-A useful representation is:
-
-```text
-resolution
-├── subject = effective_outcome
-├── state   = UNRESOLVED
-├── cause   = conflict
-└── conflict_set
-    ├── G → ALLOW
-    └── H → DENY
-```
-
-with context:
-
-```text
-competing_candidates = [G, H]
-applicable_precedence = none
-```
-
-Model A:
-
-```text
-subject = effective_outcome
-state   = UNRESOLVED_CONFLICT
-```
-
-Model B:
-
-```text
-subject = effective_outcome
-state   = UNRESOLVED
-cause   = conflict
-```
-
-plus the structured conflict context.
-
-U-6 is stronger pressure because it is not simply missing knowledge:
-
-```text
-U-1: insufficient knowledge
-U-6: known competing results with no governing resolution rule
-```
-
-Consumer consequences may therefore differ:
-
-```text
-missing evidence → obtain evidence / wait / fail closed
-conflict          → resolve competing candidates / require explicit rule
-```
-
-But this still does not prove that conflict must be part of semantic state.
-
-The hidden-subtype test is:
-
-> If every consumer must interpret `cause=conflict` as a fixed semantic discriminator in the same way it would interpret `UNRESOLVED_CONFLICT`, Model B may be functionally equivalent to Model A under another name.
-
-If `cause` remains structured resolution context that consumers consult only when the relevant workflow requires it, `UNRESOLVED` can remain the common semantic state.
-
-**Conclusion: U-6 → Model B survives preliminarily, but pressure increases.**
-
-## U-1…U-6 synthesis
-
-| Case | Unresolved subject     | Main cause/context                   | Origin     | Current result                   |
-| ---- | ---------------------- | ------------------------------------ | ---------- | -------------------------------- |
-| U-1  | predicate              | missing context data                 | direct     | Model B survives                 |
-| U-2  | authorization standing | missing/ambiguous authority evidence | direct     | Model B survives                 |
-| U-3  | operation result       | operation-boundary mismatch          | direct     | Model B survives                 |
-| U-4  | eligibility            | unresolved predicate                 | propagated | Model B survives                 |
-| U-5  | candidate effect       | dependency target unresolved         | propagated | Model B survives                 |
-| U-6  | effective outcome      | conflict / no resolving precedence   | direct     | Model B survives, under pressure |
-
-This is evidence inventory, not a winner declaration.
-
-The emerging pattern is:
-
-```text
-subject
+TRUE / FALSE / UNRESOLVED
 +
-state
-+
-orthogonal metadata / relations
+reason / source / propagation / conflict / cycle
 ```
 
-appears capable of representing all six cases without additional semantic truth values.
+The same U-1…U-10 counterexamples should be run through both models. The question is whether Model B preserves the semantic expressiveness needed by the examples. If it does, typed semantic subtypes may be unnecessary complexity. If it does not, the missing semantic distinction should be identified precisely rather than inferred from the existence of different causes.
 
-The sharper research question is now:
+### Important semantic distinctions
 
-> Is there any downstream semantic rule whose correctness depends on one of these distinctions being part of the semantic state itself, rather than being available as explicit structured metadata or context?
+- `UNRESOLVED` is a state, not automatically a reason.
+- A reason/cause is not automatically a state subtype.
+- Propagation may describe mechanism/origin rather than semantic state.
+- Provenance records where a result came from; provenance does not automatically determine semantic meaning.
+- `dependency predicate = UNRESOLVED` does not automatically imply `consumer = DENIED`.
+- Consumer consequence must remain a separate semantic rule.
+- Plain three-valued semantic state may still be sufficient even if plain three-valued **logic** is insufficient to represent causal/provenance distinctions.
+
+Do not adopt the stronger claim "simple three-valued logic is insufficient" without specifying which semantic requirement is missing. The currently supported statement is narrower: a simple three-valued result value alone does not encode all causal/provenance information demonstrated by the counterexamples.
+
+### Candidate propagation rules — not adopted
+
+Qwen proposed, as hypotheses:
+
+- insufficient evidence → unresolved consumers, with consumer consequence determined by role;
+- unresolved conflict → unresolved dependencies, with consumer consequence determined by role;
+- structural cycle → participants unresolved / architectural error / fail-closed;
+- propagated unresolved → inherits source type, with bounded propagation depth.
+
+None of these are formal rules. In particular, **fail-closed is not adopted as the universal consequence of `UNRESOLVED`**.
+
+### Edge cases retained for future testing
+
+- Mixed unresolved causes/types in one resolution context.
+- Nested unresolved information inside a precedence rule.
+- Cycle plus propagation overlap.
+- Multiple unresolved dependencies contributing to one consumer.
+- Whether a consumer needs the semantic state only, or also needs reason/origin/provenance to determine its consequence.
 
 ## Candidate-level precedence status
 
-The working pipeline remains:
+Candidate-level precedence remains a working direction, not yet a formal Architecture Decision.
+
+The current working model is:
 
 ```text
 Context
@@ -541,100 +314,68 @@ Candidate evaluation
 Eligible candidates
   ↓
 Conflict detection
-  ↓
-Applicable explicit precedence rules
-  ↓
-Unique deterministic result?
-  ├─ YES → governing candidate → candidate effect → effective outcome
-  └─ NO  → UNRESOLVED
+  ├─ No conflict
+  │    → no governing-candidate selection required
+  │    → effective result from applicable candidate semantics
+  │
+  └─ Conflict
+       ↓
+   Applicable explicit precedence rules
+       ↓
+   Unique deterministic result?
+       ├─ YES → governing candidate
+       │          ↓
+       │       candidate effect / effect evaluation
+       │          ↓
+       │       effective outcome
+       │
+       └─ NO → UNRESOLVED
 ```
 
-This remains a working model, not a formal AD.
+The precise semantics of "no conflict" versus "governing candidate" and the effect of dependencies crossing this boundary remain open.
 
-Precedence must not be inferred from path depth, discovery order, filename order, timestamps, IDs, or incidental processing order.
+Precedence only acts on already eligible candidates. It cannot create or bypass eligibility or authority.
 
-## Dependency / propagation model
+A dependency may reference a result produced within or around this process, but its presence does not by itself redefine the pipeline or grant precedence permission to bypass eligibility.
 
-Current exploratory representation:
+## OVERRIDE research status relevant to UNRESOLVED
+
+The established OVERRIDE boundary remains:
 
 ```text
-Resolution
-├── subject
-├── state
-│   ├── TRUE
-│   ├── FALSE
-│   └── UNRESOLVED
-├── cause
-├── origin / propagation
-├── source / provenance
-└── relation / context
+OVERRIDE declaration
+    ≠ authorization
+
+authorization
+    ≠ effective application
+
+TRACE
+    ≠ authority
 ```
 
-Examples:
+External authority establishment currently has states:
 
 ```text
-predicate(P)
-  = UNRESOLVED
-  cause = missing_context_data
-  origin = direct
-
-eligibility(D)
-  = UNRESOLVED
-  cause = unavailable_context_data
-  origin = propagated
-  source = predicate(P)
-
-effect(E)
-  = UNRESOLVED
-  cause = dependency
-  origin = propagated
-  source = effective_outcome(F)
-
-effective_outcome
-  = UNRESOLVED
-  cause = conflict
-  context = {G → ALLOW, H → DENY}
+AUTHORIZED / DENIED / UNRESOLVED
 ```
 
-This is not a generic dependency graph engine. It is a semantic research model.
-
-## Hidden-subtype test
-
-For each metadata dimension:
+Core operation results remain conceptually separate, for example:
 
 ```text
-cause
-origin
-source
-dependency
-conflict context
-cycle context
-consumer role
+EFFECTIVE / DENIED / UNRESOLVED
 ```
 
-ask:
+A dependency on authority standing can therefore remain satisfied even when the dependent source's effective outcome is `DENY`. Conversely, a dependency on effective outcome can become `UNRESOLVED` or change because of precedence without changing the authority standing.
 
-1. Is the distinction required to identify what is semantically true/false/unresolved?
-2. Or does it explain why/how/from where the result was obtained?
-3. Or is it needed only by a consumer workflow?
-4. Can it be represented explicitly without changing the semantic state?
-5. If every consumer must branch on it as an invariant semantic category, has it become a typed state in practice?
-
-The danger pattern is:
-
-```text
-if UNRESOLVED.cause == X → semantic behavior X
-if UNRESOLVED.cause == Y → semantic behavior Y
-if UNRESOLVED.cause == Z → semantic behavior Z
-```
-
-If this becomes a universal semantic contract, Model B may merely be renaming Model A.
-
-Different diagnostics or workflows alone are not sufficient evidence.
+Temporary OVERRIDE remains a real semantic gap requiring later research into existence, validity, standing, activation, expiration, and historical/audit semantics. Do not solve it implicitly through `UNRESOLVED` taxonomy.
 
 ## Independent cross-model research pattern
 
-The Qwen collaboration demonstrated a reusable project-agnostic adversarial research pattern that is **not yet a formal Architecture Decision**:
+The collaboration with Qwen has now demonstrated a potentially reusable **project-agnostic adversarial research pattern**, distinct from any particular model or project.
+
+The intended abstraction is not "ChatGPT vs Qwen" and not "second AI as second architecture". The reviewer supplies **adversarial pressure** against a proposed model while the human remains the final referee.
+
+Working pattern:
 
 ```text
 ARCHITECT / PRIMARY MODEL
@@ -656,233 +397,243 @@ HUMAN DECISION
 ARCHITECTURE DECISION
 ```
 
-The reviewer supplies adversarial pressure and counterexamples, not competing architecture ownership. A valid outcome is that the current model survives.
-
-Human remains the final referee.
-
-Keep:
+Reviewer role:
 
 ```text
-specialization identity
-    ≠
-model identity
+Primary:
+    "Вот модель."
+
+Reviewer:
+    "Вот минимальный случай, где она может сломаться."
+
+Primary:
+    "Вот почему этот случай не ломает модель / вот изменение."
+
+Reviewer:
+    "Согласен / вот ещё контрпример."
+
+Human:
+    "Теперь решение."
 ```
 
-`05 — Independent Review` should remain a function; Qwen is only the current implementation/instance.
+This pattern is **not yet a formal project architecture decision**. It should later be extracted into the reusable architecture/process layer as a project-agnostic `SKILL`/`WORKFLOW` candidate after additional use validates that abstraction.
 
-Do not formalize this pattern as a reusable skill/workflow yet.
+The pattern should explicitly preserve these principles:
+
+- Reviewer is not a second authority or second architecture owner.
+- Reviewer is an adversarial pressure / counterexample function.
+- Reviewer may confirm that the current model survives; it must not be incentivized to invent defects merely to produce output.
+- Human remains the final referee and decision-maker.
+- Model identity and specialization identity are separate concerns.
+- The same reviewer specialization can be implemented by different models.
+- Evidence must distinguish observed fact, inference, assumption, hypothesis, working decision, formal Architecture Decision, implementation detail, and open question.
+
+Future extraction should be project-agnostic and should not hard-code Qwen into the specialization definition.
+
+## Independent Review specialization / Qwen onboarding findings
+
+A separate independent-review workflow now exists in the project. Current identity:
+
+```text
+Conversation identity:
+    AIP Mirror — E002 — Independent Review
+
+Reviewer identity:
+    Qwen
+```
+
+The Qwen onboarding document is an **operational onboarding document**, not merely a historical summary. Its structure is useful and should be preserved as a model for reviewer onboarding.
+
+Relevant future improvements identified during review:
+
+1. Separate **specialization identity** from **model identity**. `05 — Independent Review` should describe the function; Qwen is one implementation/instance.
+2. Make the distinction between **research hypothesis**, **working decision**, and **formal Architecture Decision** explicit.
+3. Explicitly state that a valid review outcome may be that the model survives the adversarial pass; the reviewer should not be biased toward finding a defect.
+4. Preserve evidence discipline and independence from the primary model.
+5. Keep the reviewer focused on counterexamples and semantic pressure rather than taking ownership of architecture decisions.
+
+The first Qwen handoff (`.ai/handoffs/E001-Independent-Review-Qwen.md`) is considered structurally strong and sufficiently complete for now. Its `UNRESOLVED is a family of states` wording should be treated as a research hypothesis rather than an established semantic fact; observed distinct causes do not by themselves prove typed semantic state. Its candidate-precedence wording should likewise remain a strong working direction supported by counterexamples, not a formal AD.
+
+Do not rewrite the Qwen onboarding or first handoff merely for these improvements at this stage. They are queued for the next reusable architecture/process pass.
 
 ## Open questions
 
 ### UNRESOLVED
 
-- Is one semantic state `UNRESOLVED` sufficient when reason/origin/provenance are orthogonal?
-- Does any U-1…U-10 case require a typed semantic unresolved state rather than metadata?
-- Which information is actually consumed downstream: state, reason, origin, provenance, or a combination?
-- Is `PROPAGATED` a state, reason, origin, or mechanism?
+- Is one semantic state `UNRESOLVED` sufficient if reason/origin/provenance are orthogonal?
+- Does any counterexample require typed semantic unresolved states rather than metadata?
+- Which information is semantically consumed by a downstream rule: state, reason, origin, provenance, or some combination?
+- Is `PROPAGATED` a state, a reason, an origin, or a mechanism?
 - Does propagation depth have semantic meaning or only diagnostic value?
 - How should mixed unresolved causes be represented?
-- What happens when unresolved information participates in a precedence rule?
-- What happens when cycle and propagation overlap?
-- Can a consumer convert `UNRESOLVED` to `DENIED`, `ALLOW`, or another result, and under what explicit rule?
-- Does nested `UNRESOLVED` introduce a semantic distinction that metadata cannot preserve?
-- Can conflict context remain orthogonal without becoming an implicit typed state?
+- What should happen when an unresolved dependency participates in a precedence rule?
+- What happens when a cycle and propagated unresolved state overlap?
+- Can a consumer legitimately convert `UNRESOLVED` into `DENIED`, `ALLOW`, or another result, and under what explicit rule?
 
-### Dependency / cycles
+### Prerequisite / dependency
 
+- Which prerequisites are context predicates/conditions and therefore part of eligibility?
+- Which prerequisites are decision-source relationships?
 - Which combinations of dependency target and consumer role should Core permit?
-- Whether dependency relationships can themselves conflict.
+- Whether a dependency may be evaluated without making eligibility equivalent to hidden full candidate/effect evaluation.
+- Whether candidate effects may contain dependencies that do not affect eligibility.
+- Whether dependency relationships themselves can conflict and, if so, whether they require precedence or a separate resolution boundary.
+- Whether dependency graphs have semantic ordering, implementation ordering, or both.
 - Whether cycles should be supported at all in Core semantics.
-- If supported, what explicit resolution/termination semantics should apply.
-- Whether cycle detection is structural context, a cause of unresolved resolution, or both in different contexts.
+- If cycles are supported, what explicit resolution/termination semantics should apply.
+- Whether a governing candidate can depend on a candidate that loses precedence, and what semantic consequences follow for different dependency targets.
 
 ### Candidate-level precedence
 
-- Formalize only after unresolved propagation and dependency semantics stabilize.
+- Formalize candidate-level precedence only after prerequisite/dependency and unresolved propagation semantics are sufficiently tested.
 - Determine whether multiple candidates can support the same effective result without requiring a governing winner.
-- Determine exact conflict-resolution boundaries.
-- Determine whether unresolved conflict context is sufficient or whether any semantic rule requires typed conflict state.
+- Determine exact conflict-resolution boundaries and the meaning of `MULTIPLE SUPPORT` if that concept is retained.
 
 ### OVERRIDE / authority
 
 - Temporary OVERRIDE lifecycle: existence, validity, standing, activation, expiration, and history.
-- Clarify authority-level vocabulary only through a dedicated evidence-driven pass.
-
-## Current files
-
-### Rules / skills read during bootstrap
-
-- `.ai/rules/conversation-lifecycle.md`
-- `.ai/rules/workflow.md`
-- `.ai/rules/project-architecture.md`
-- `.ai/rules/repository.md`
-- `.ai/skills/conversation-handoff/BOOTSTRAP.md`
-- `.ai/skills/conversation-handoff/SKILL.md`
-- `.ai/skills/deep-understanding/SKILL.md`
-- `.ai/skills/commit-message/SKILL.md`
-
-### Handoffs read during bootstrap
-
-- `.ai/handoffs/C005-Architecture-Research.md`
-- `.ai/handoffs/03E-Architecture-Research.md`
-- `.ai/handoffs/E000-Independent-Review-Qwen.md`
-
-### Architecture/research documentation reviewed
-
-- `docs/architecture/prerequisite-dependency-semantics.md`
-
-## Important constraints
-
-- Do not begin a broad new research program; continue directly from this checkpoint.
-- Do not repeat the completed prerequisite/dependency chain/cycle pass without new evidence.
-- Do not treat Qwen's typed taxonomy as adopted architecture.
-- Do not treat `UNRESOLVED = DENIED` or fail-closed as a universal rule.
-- Do not introduce a generic dependency engine.
-- Do not turn candidate-level precedence into a formal AD before the semantic boundary is sufficiently tested.
-- Keep semantic state, reason/cause, origin/propagation, provenance, and consumer consequence distinct.
-- Do not infer that different causes require different semantic states merely because they are diagnostically different.
-- The burden of proof for Model A is a downstream semantic requirement that Model B cannot express correctly.
-- Keep the recurring handoff ownership issue separate from the current semantic research.
-- Do not modify the Qwen onboarding merely for already-identified future improvements.
-- Preserve repository write-safety for any future existing-file modification: read current content, make minimal change, write complete content, read back, verify content and diff/scope, then commit and verify the resulting ref.
+- Clarify the role of any `authority level` vocabulary: external authority establishment, Core semantics, or another explicit purpose.
+- Keep authority establishment separate from Core consumption unless a concrete counterexample requires a different boundary.
 
 ## Evidence / confidence
 
 ### Confirmed / observed
 
-- C005 was the READY_FOR_HANDOFF source for this receiving chapter.
-- The prerequisite/dependency chain and cycle counterexample pass was completed before this migration.
-- Ten U-1…U-10 `UNRESOLVED` counterexamples were produced by the independent-review pass.
-- Qwen's typed unresolved taxonomy is a research hypothesis, not a formal Architecture Decision.
-- `UNRESOLVED` must not be equated automatically with `DENIED`.
-- Candidate-level precedence remains a working direction, not a formal AD.
-- The cross-model adversarial research pattern has been exercised in practice and remains a candidate for later project-agnostic extraction.
-- U-1 through U-6 have been explicitly modeled under both Model A and Model B during C006.
-- No U-1 through U-6 case has produced a demonstrated semantic requirement that Model B cannot preserve.
+- C006 was created as the receiving chapter from 03E and is now being closed as `READY_FOR_HANDOFF`.
+- 03E explicitly left prerequisite/dependency semantics open.
+- The candidate-level precedence model is a supported working direction, but is not yet a formal numbered Architecture Decision.
+- Current-format chapter identity is `C006`; `C001`–`C005` are not physically used. `C006` is the first physically created current-format Chapter for specialization C. Its relationship to 03A–03E is ordinal correspondence only, not identifier identity.
+- The chains/cycles counterexample pass was completed for eligibility and effect chains/cycles, including resolved-positive, resolved-negative, and `UNRESOLVED` states.
+- Qwen independently produced ten `UNRESOLVED` counterexamples spanning evidence, authority, operation boundaries, eligibility, candidate effect, effective outcome, dependency consumers, cycles, and OVERRIDE conflict.
+- Qwen's typed unresolved taxonomy is a proposal, not a formal decision.
+- The cross-model adversarial-review pattern has been exercised in practice and is a candidate for later reusable project-agnostic extraction.
+- Qwen's first independent-review handoff is structurally complete enough for continued use without immediate rewrite.
 
 ### Inferred
 
-- The state/reason/origin/provenance/consumer-consequence separation may provide a cleaner semantic model than the proposed typed taxonomy.
-- Model B may preserve the semantic expressiveness of the U-1…U-10 cases while reducing semantic coupling, but this must be demonstrated rather than assumed.
-- `PROPAGATED` is likely an origin/mechanism dimension rather than a semantic subtype.
-- Explicit `subject` may be more important than additional semantic state types for distinguishing unresolved resolutions.
-- Conflict is a particularly strong stress case because it can occur with complete information and no missing evidence.
+- The distinction between semantic state, reason, propagation/origin, provenance, and consumer consequence may be more fundamental than the proposed unresolved subtype taxonomy.
+- A single semantic `UNRESOLVED` plus orthogonal metadata may be able to represent the observed cases with less semantic coupling; this requires counterexample testing.
+- `PROPAGATED` is likely better modeled as an origin/mechanism dimension than as a peer semantic subtype, but this remains an inference.
+- The independent-review pattern is likely reusable beyond AIP Mirror because its function is model-agnostic and project-agnostic, but this has not yet been formalized.
 
 ### Assumed / unverified
 
-- Exact consumer consequences for unresolved dependency predicates.
-- Whether any U-1…U-10 case requires a typed semantic state.
-- Whether metadata can preserve every distinction that a typed state would expose to consumers.
-- Whether cycles require a dedicated semantic result beyond the existing unresolved state.
-- Whether propagation depth has semantic meaning.
-- Whether conflict context can remain orthogonal without becoming a hidden semantic subtype.
+- Exact semantics of `UNRESOLVED` dependency predicates and consumer consequences remain unverified.
+- Whether typed unresolved states are semantically necessary remains unverified.
+- Whether cycles should be supported in Core remains unverified.
+- Exact dependency graph semantics remain unverified.
+- Exact effect of dependencies on candidate-level precedence remains unverified.
+- The reusable adversarial-review pattern may need additional validation before becoming a formal reusable skill/workflow.
 
 ### Open
 
-- U-7…U-10 Model A vs Model B comparison.
-- Nested and mixed unresolved cases.
-- Dependency/cycle semantics.
+- `UNRESOLVED` state/reason/origin/provenance semantics.
+- Prerequisite/dependency semantics.
+- Dependency graph and cycle semantics.
 - Candidate-level precedence formalization.
 - Temporary OVERRIDE lifecycle.
-- Future project-agnostic extraction of the adversarial-review pattern.
+- Reusable cross-model adversarial research pattern.
 
 ## Last completed task
 
-C006 completed the U-1 through U-6 portion of the Model A vs Model B research.
-
-The main result is:
-
-```text
-U-1 → Model B survives preliminarily
-U-2 → Model B survives preliminarily
-U-3 → Model B survives preliminarily
-U-4 → Model B survives preliminarily
-U-5 → Model B survives preliminarily
-U-6 → Model B survives preliminarily, but with increased pressure
-```
-
-No winner has been declared.
-
-The research refined the model by explicitly separating:
-
-```text
-subject
-state
-cause
-origin / propagation
-source / provenance
-consumer consequence
-```
-
-and by treating dependency/propagation as relationships or metadata unless evidence proves they are semantic state dimensions.
+Completed the current C006 research checkpoint by reviewing Qwen's `UNRESOLVED` propagation counterexamples, separating state vs reason vs propagation/origin, defining the next A/B counterexample experiment, and capturing the reusable adversarial-review pattern plus Qwen onboarding improvements for future architecture work.
 
 ## Immediate next task
 
-Continue with **U-7 — Dependency Predicate / propagated effective-outcome unresolved** using the exact Qwen case supplied by the next researcher.
+In the receiving chapter, continue the **UNRESOLVED propagation semantics** experiment:
 
-Do not invent or reconstruct the U-7 case from memory.
+1. Take U-1…U-10.
+2. Model each case using **Model A: typed semantic `UNRESOLVED`**.
+3. Model the same cases using **Model B: semantic `UNRESOLVED` + orthogonal reason/origin/provenance metadata**.
+4. Compare whether any semantic distinction is lost under Model B.
+5. If a distinction is lost, identify exactly which consumer rule requires it.
+6. Do not create an Architecture Decision until the counterexample evidence demonstrates a stable semantic boundary.
 
-For U-7:
-
-1. Capture the exact case before analysis.
-2. Identify the subject of the unresolved resolution.
-3. Encode it under Model A.
-4. Encode it under Model B.
-5. Identify any information that Model B loses.
-6. If information is lost, determine whether it is semantic state, cause, origin, provenance, dependency relation, or consumer consequence.
-7. Apply the hidden-subtype test.
-8. Do not declare a winner unless the counterexample actually discriminates the models.
-
-After U-7, continue sequentially only as evidence and the handoff state require.
+Only after that checkpoint should the research return to cycle semantics, dependency graph semantics, or candidate-level precedence formalization as appropriate.
 
 ## Things not to redo
 
-- Do not restart broad OVERRIDE research.
-- Do not repeat the completed chain/cycle counterexample pass without new evidence.
-- Do not re-derive established authorization boundaries from earlier chapters.
-- Do not treat Qwen's taxonomy as adopted.
-- Do not treat fail-closed as the universal consequence of `UNRESOLVED`.
-- Do not introduce a generic dependency engine.
-- Do not prematurely formalize candidate-level precedence.
-- Do not extract the adversarial-review pattern into a formal reusable skill/workflow yet.
-- Do not rewrite the Qwen onboarding solely for already-identified improvements.
-- Do not redesign the handoff mechanism as part of this semantic research task.
+- Do not restart broad OVERRIDE research unless a new counterexample requires it.
+- Do not re-derive established authorization boundary decisions from 03D/03E unless new evidence directly challenges them.
+- Do not redesign the handoff mechanism as part of this semantic research task; the recurring handoff ownership problem remains a separate future architecture/process task.
+- Do not repeat the completed chains/cycles counterexample pass unless new evidence directly challenges its conclusions.
+- Do not treat Qwen's typed unresolved taxonomy as adopted architecture.
+- Do not treat `UNRESOLVED = DENIED` or fail-closed as a universal rule.
+- Do not prematurely extract the cross-model adversarial pattern into a formal reusable skill/workflow; preserve it as a validated candidate until another architecture pass tests the abstraction.
+- Do not rewrite Qwen's onboarding/E001 handoff solely for the already-identified improvement ideas at this stage.
 
 ## Recommended starting context for next chapter
 
-Begin with:
+Start from these three layers of distinction:
 
 ```text
 SEMANTIC STATE
-    TRUE / FALSE / UNRESOLVED
-
-SUBJECT
-    what is being resolved
+    TRUE / FALSE / UNRESOLVED / ...
 
 REASON / CAUSE
-    why resolution is unavailable
+    missing evidence / conflict / cycle / ...
 
-ORIGIN / PROPAGATION
-    where/how unresolvedness entered the result
-
-PROVENANCE
-    which source/result supplied the information
-
-RELATION / CONTEXT
-    dependency, conflict set, cycle context, etc.
-
-CONSUMER CONSEQUENCE
-    what the consuming rule does with the result
+ORIGIN / PROPAGATION / PROVENANCE
+    direct / propagated / source reference / ...
 ```
 
-Then use the exact U-7 case supplied by the researcher.
+Keep **consumer consequence** separate from all three.
 
-The primary discriminator remains:
+Then run the same U-1…U-10 cases through:
 
-> Can the consumer's **correct semantic behavior** differ between two instances that both expose `UNRESOLVED`, while the difference is preserved by explicit orthogonal metadata/context?
+```text
+Model A
+    typed semantic UNRESOLVED
 
-If yes, Model B remains viable for that case.
+vs
 
-If no, identify the precise semantic distinction that must become part of the state itself.
+Model B
+    semantic UNRESOLVED
+    + orthogonal metadata
+```
 
-Keep the burden of proof on adding semantic types, and keep the human as final decision-maker for any eventual architecture decision.
+The burden of proof is on the richer model: do not add semantic subtypes unless a concrete consumer rule cannot be expressed correctly without them.
+
+Preserve the established baseline:
+
+```text
+Relationship structure
+        ↓
+Semantic resolution
+        ↓
+Execution strategy
+```
+
+and:
+
+```text
+dependency target
+        ×
+consumer role
+```
+
+with precedence remaining an explicit, separate mechanism.
+
+Remember the reusable cross-model pattern as a future process candidate:
+
+```text
+ARCHITECT / PRIMARY MODEL
+        ↓
+RESEARCH HYPOTHESIS
+        ↓
+INDEPENDENT REVIEWER
+        ↓
+COUNTEREXAMPLES
+        ↓
+PRIMARY MODEL RESPONSE
+        ↓
+REVIEWER REFINEMENT
+        ↓
+EVIDENCE SYNTHESIS
+        ↓
+HUMAN DECISION
+        ↓
+ARCHITECTURE DECISION
+```
+
+The human remains the referee; the reviewer applies adversarial pressure, not competing architectural authority.

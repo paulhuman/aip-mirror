@@ -14,27 +14,26 @@ C
 
 ## Starting objective
 
-Continue the bounded Architecture & Research work after the C035 semantic consistency sweep. The command-surface syntax question has been resolved: `>>` is accepted as the stable command prefix, with minimal grammar `>>operation [arguments...]`. The next bounded question concerns the semantics of `>>bootstrap` before active command references are migrated.
+Continue the bounded Architecture & Research work from C035. The handoff lifecycle-state migration is complete. C036 begins the semantic consistency sweep that verifies the simplified handoff model is expressed consistently across the active canonical .ai infrastructure.
 
 ## Starting state
 
-C035 completed the semantic consistency sweep for the simplified handoff model. The active canonical .ai infrastructure no longer uses the former handoff lifecycle state machine. The architecture record intentionally retains historical descriptions of the former model.
+C035 established the target handoff model:
 
-The current command surface in `.ai/INDEX.md` still uses the older natural-language command phrases. No command-syntax migration has been performed yet.
+> A handoff is a persistent conversation-context snapshot for a chapter, not a lifecycle-controlled transfer object.
 
-During the end of C035, the user selected `>>` as the preferred command prefix after bounded comparison with alternatives.
+The active handoff architecture no longer uses Status, DRAFT, READY_FOR_HANDOFF, HANDED_OFF, or SUPERSEDED as lifecycle states. Receiving-chapter creation remains part of bootstrap. No closing or receiving transition is required.
 
-Proposed command form:
+The user manually removed legacy Status fields from the remaining handoff files in:
 
-    >>operation [arguments...]
+    3985ac491462effe68cc5e1fd93485a08ec9c821
+    ai-refactor(handoff): remove legacy status fields
 
-Current examples:
+C035 then recorded the next work plan in:
 
-    >>handoff
-    >>migrate C036
-    >>bootstrap
+    .ai/architecture/ai-infrastructure-restructuring.md
 
-The syntax decision is now bounded and verified. Active reference migration remains a separate controlled change. INDEX and the architecture record have not yet been changed.
+That plan is intentionally bounded and distinguishes active canonical semantics from historical architecture-record text.
 
 ## Confirmed / observed
 
@@ -42,182 +41,76 @@ The syntax decision is now bounded and verified. Active reference migration rema
 - Current chapter: C036.
 - Previous chapter: C035.
 - Specialization: C.
-- Bootstrap runtime inputs were supplied as:
+- Handoff is a persistent context snapshot, not a lifecycle-controlled transfer object.
+- The receiving chapter creates its own handoff at initialization.
+- Historical Git commits are preserved; history is not rewritten.
+- Normal handoff commits use:
   
-      PREVIOUS_CHAPTER = 035
-      CURRENT_CHAPTER = 036
-      SPECIALIZATION = C
+      ai-docs(handoff): create C036
+      ai-docs(handoff): update C036
 
-- `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical chat-initialization workflow.
-- `.ai/rules/repository.md` is the canonical owner of repository identity/path resolution and write safety.
-- `.ai/skills/activation/SKILL.md` defines ACTIVATE as rereading required canonical owners; it does not execute operations or mutate the repository.
-- The C035 handoff exists and was read successfully as the predecessor handoff.
-- C035's semantic consistency sweep was committed in `091936856eef175f31c0b1cace6411972c808785`.
-- C035's own handoff was updated in `ae881735385642b71be9257b973641fa5131518e`.
-- The receiving C036 handoff did not exist before this bootstrap and is being created by C036.
-- No C036 handoff was created in advance by C035.
-- `.ai/INDEX.md` currently documents three active natural-language handoff commands: checkpoint, migration, and bootstrap-instruction generation.
-- `.ai/INDEX.md` explicitly says future command IDs/syntax are provisional.
-- `.ai/architecture/ai-infrastructure-restructuring.md` still contains historical command/lifecycle descriptions and must not be treated as the active semantic owner for those old mechanisms.
-- The active handoff model is a persistent conversation-context snapshot with no lifecycle state or transfer transition.
-
-## Command-syntax decision
-
-The bounded architectural question was:
-
-> Does `>>` work as a stable command prefix for the `.ai` command surface, with minimal grammar `>>operation [arguments...]`?
-
-Confirmed answer: yes.
-
-    Command prefix:
-        >>
-
-    Command grammar:
-        >>operation [arguments...]
-
-The intended boundary is that `>>` defines only command syntax. It does not own operation semantics, routing procedure, lifecycle semantics, repository mutation, authorization, or commit construction.
-
-No active command-reference files have yet been changed for this syntax decision.
+- The active canonical infrastructure was already migrated away from the old handoff state machine, but the next bounded sweep must verify that no stale semantics remain.
+- The architecture record intentionally preserves historical descriptions of the former lifecycle model and those historical descriptions must not be mistaken for active rules.
 
 ## Relevant canonical owners
 
-- `.ai/AGENTS.md` — always-on AI operating contract.
-- `.ai/config.yaml` — repository identity and project configuration.
-- `.ai/rules/repository.md` — repository identity/path resolution and write safety.
-- `.ai/rules/workflow.md` — general workflow principles.
 - `.ai/rules/handoff/lifecycle.md` — conversation continuity and handoff semantics.
-- `.ai/rules/handoff/references.md` — material handoff research references.
-- `.ai/skills/activation/SKILL.md` — activation context.
-- `.ai/skills/handoff/SKILL.md` — handoff capability and structure.
-- `.ai/workflows/handoff/BOOTSTRAP.md` — new-chapter initialization workflow.
-- `.ai/INDEX.md` — active command routing and capability discovery.
-- `.ai/architecture/ai-infrastructure-restructuring.md` — durable architecture/research record.
+- `.ai/skills/handoff/SKILL.md` — handoff structure and operations.
+- `.ai/workflows/handoff/BOOTSTRAP.md` — ordered new-chapter bootstrap.
+- `.ai/INDEX.md` — routing and capability discovery.
+- `.ai/rules/commits.md` — commit policy.
+- `.ai/skills/commits/SKILL.md` — commit-message construction.
+- `.ai/architecture/ai-infrastructure-restructuring.md` — durable architectural record.
 
-## Completed bootstrap work
+## Completed work
 
-- Established repository identity from `.ai/config.yaml`.
-- Read `.ai/rules/repository.md` first among repository-controlled rules after configuration, as required by BOOTSTRAP.
-- Read the BOOTSTRAP workflow and applicable handoff/workflow/activation owners.
-- Invoked ACTIVATE conceptually for conversation initialization using the required canonical owner set.
-- Read predecessor handoff C035.
-- Confirmed the predecessor context is sufficient to continue without guessing.
-- Created this C036 receiving handoff.
-- The initial handoff creation is the only repository mutation performed by bootstrap.
+The semantic consistency sweep is complete.
 
-## Immediate next task
+- The declared active canonical `.ai` scope was inspected for stale handoff lifecycle-state semantics.
+- No active stale use of DRAFT, READY_FOR_HANDOFF, HANDED_OFF, SUPERSEDED, Status, or equivalent lifecycle-transition semantics was found in the active canonical rules, skills, workflows, or INDEX.
+- The former lifecycle terms remain only in the historical portions of `.ai/architecture/ai-infrastructure-restructuring.md`; those descriptions are intentionally preserved as historical record and are not active semantics.
+- `.ai/rules/handoff/lifecycle.md` was updated from MAY to SHOULD for the recommendation that a current chapter update its own handoff when meaningful durable context accumulates.
+- `.ai/architecture/ai-infrastructure-restructuring.md` was aligned with the same SHOULD wording.
+- `.ai/skills/handoff/SKILL.md` required no change because the stale Status example was already absent.
+- `.ai/workflows/handoff/BOOTSTRAP.md` and `.ai/INDEX.md` remain semantically aligned with the simplified handoff model and required no change.
+- Final content and changed-scope verification confirmed exactly two intended file changes in the sweep.
 
-C037 must continue the bounded command-semantics analysis recorded in architecture section 28.
+The result was committed as:
 
-First, resolve the semantic operation boundary for:
+    091936856eef175f31c0b1cace6411972c808785
+    ai-refactor(handoff): align continuity recommendation
 
-- normal migration;
-- mandatory bootstrap-instruction generation at the end of migration;
-- interrupted migration/recovery after abrupt chat termination;
-- first-chapter initialization of a new specialization stream.
+## Current architectural assessment
 
-The names `init` versus `new` remain unresolved. Do not edit INDEX/SKILL/BOOTSTRAP command references until the operation set and naming boundary are stable.
+No concrete active architectural contradiction was found after the sweep.
 
-A concrete contract question also remains open: SHORT_NAME is required by the handoff filename convention but is not currently listed as a BOOTSTRAP runtime input. Determine how the receiving workflow should resolve it before introducing or changing a command for first-chapter initialization.
+The simplified handoff model is now expressed consistently across the active canonical infrastructure. Historical lifecycle descriptions remain as durable architecture history and should not be removed merely to make the current model look cleaner.
+
+No replacement lifecycle mechanism, registry, manifest, dependency graph, command-ID system, universal router, or other infrastructure is justified by the current evidence.
+
+## Next step
+
+Perform a final bounded assessment of the Architecture & Research work. If no concrete architectural question or contradiction emerges from that assessment, C036 can end without inventing another infrastructure task. Do not create a receiving-chapter handoff in advance.
 
 ## Important constraints
 
 - Preserve the AGENTS → INDEX → ACTIVATE → canonical-owner architecture.
-- BOOTSTRAP remains the canonical new-conversation initialization workflow.
-- Do not introduce ENTRY.md, a registry, manifest, dependency graph, command-ID layer, universal router, or replacement lifecycle mechanism without concrete evidence.
-- Treat `>>` as syntax only unless a later architectural decision explicitly establishes more semantics.
-- Do not blindly replace old command phrases inside historical architecture-record text.
-- Historical architecture evidence must remain distinguishable from active semantics.
-- Use repository write safety for every existing-file mutation:
-  
-      READ CURRENT FILE
-      → minimal change
-      → WRITE COMPLETE FILE
-      → READ BACK
-      → VERIFY CONTENT
-      → INSPECT DIFF
-      → VERIFY SCOPE
-      → COMMIT
-      → VERIFY RESULT
+- Treat `.ai/skills/handoff/SKILL.md` as the canonical owner of handoff structure unless repository evidence identifies a more specific owner.
+- BOOTSTRAP remains the canonical ordered new-conversation initialization workflow.
+- Do not reintroduce Status or an equivalent lifecycle state under another name.
+- Do not erase historical architecture-record evidence merely because the active model changed.
+- Do not conflate full chapter identifiers such as C036 with numeric chapter component 035.
+- Use repository write-safety for every existing-file mutation.
+- Keep the next investigation bounded; do not create infrastructure without a concrete demonstrated need.
 
-- Do not create the next receiving-chapter handoff in advance.
-
-## Confirmed versus uncertain
-
-### Confirmed
-
-- C036 is the receiving chapter.
-- C035 is the predecessor.
-- `>>` is the user's selected and accepted command prefix.
-- The minimal grammar is `>>operation [arguments...]`.
-- The active command mapping has been semantically checked:
-  
-      Пора обновить handoff
-          → >>handoff
-
-      Пора выполнить миграцию в чат [A-Z][0-9]{3}
-          → >>migrate <chapter>
-
-      Пора выдать bootstrap-инструкцию
-          → command name remains open for semantic refinement
-
-- `>>handoff` has now been test-driven by the user as the current handoff checkpoint command.
-- `>>migrate <chapter>` MUST end by invoking the bootstrap-instruction generation operation; this requirement is now recorded in architecture section 28.
-- The bootstrap-instruction operation remains independently useful when migration was interrupted or its final instruction was omitted.
-- `init` versus `new` remains unresolved for first-chapter initialization.
-- Interrupted migration/recovery remains an open semantic question.
-- The architecture record was updated and committed in c657d241304300fbb94847a4562431450f43fff6.
-- No active command-reference migration has yet been performed.
-
-### Inferred
-
-- The command that generates a bootstrap instruction should remain a separate callable operation even though normal migration invokes it as its terminal step.
-- The migration procedure and bootstrap-instruction generation are compositional operations, not a reason to introduce command subcommands or a universal command router.
-
-### Open
-
-- The final command name for the standalone bootstrap-instruction generation operation.
-- Whether first-chapter initialization needs a dedicated command, and if so whether `init` or `new` best describes that operation.
-- Whether interrupted migration/recovery is a separate user-facing operation or is handled entirely by BOOTSTRAP initialization from durable repository state.
-- How SHORT_NAME is resolved at bootstrap time.
-- The active command-reference migration remains pending until these semantic boundaries are resolved.
-
-## Recommended starting context
+## Recommended context for continuation
 
 Read:
 
-    .ai/INDEX.md
     .ai/architecture/ai-infrastructure-restructuring.md
-    .ai/skills/handoff/SKILL.md
     .ai/rules/handoff/lifecycle.md
+    .ai/skills/handoff/SKILL.md
+    .ai/workflows/handoff/BOOTSTRAP.md
+    .ai/INDEX.md
 
-Then continue with the bounded syntax decision and command-reference inventory. Do not start a broad .ai refactor.
-
-
-## Migration checkpoint for C037
-
-C036 is being migrated to C037.
-
-The durable architecture observation from this chapter is recorded in:
-
-    .ai/architecture/ai-infrastructure-restructuring.md
-    section 28 — C036 — Command-surface semantics and migration composition
-
-The key reliability finding is:
-
-    >>migrate <chapter>
-        ↓
-    update current handoff
-        ↓
-    verify + commit
-        ↓
-    mandatory bootstrap-instruction generation
-        ↓
-    emit receiving-chapter bootstrap instruction
-
-The separate bootstrap-instruction operation exists because migration previously could omit its final instruction. Therefore normal migration MUST invoke that operation at the end, while the operation remains independently callable for interrupted or incomplete migration.
-
-The naming question for that standalone operation is still open. The previous shorthand `>>bootstrap` is no longer treated as a settled semantic decision because "bootstrap" also names the canonical receiving-chapter workflow.
-
-The first-chapter initialization command is also unresolved between `init` and `new`. Interrupted migration/recovery is an additional open boundary and MUST NOT be conflated with first-chapter initialization.
-
-C037 should continue from these durable decisions rather than reopening the `>>` syntax decision.
+Then continue only if a concrete architectural question remains. Otherwise, preserve the current architecture and close the chapter without manufacturing additional work.

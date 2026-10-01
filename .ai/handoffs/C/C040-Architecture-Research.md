@@ -14,9 +14,11 @@ C
 
 ## Starting objective
 
-Recover from the interrupted C039 → C040 migration and continue the Architecture & Research work from the durable repository state. Treat C039's completed bounded work as the starting point and do not reopen already accepted command, bootstrap, or entry-layer decisions.
+Continue the bounded Architecture & Research work from C039 by resolving the remaining semantic questions around bootstrap-instruction generation, first-chapter initialization, interrupted migration, and the two manual bootstrap templates. Only after those semantics are stable should active command references be migrated.
 
-## Known starting implementation state
+Do not reopen the accepted `>>` command prefix or the established `>>operation [arguments...]` grammar.
+
+## Starting state
 
 - Repository: `paulhuman/aip-mirror`.
 - Canonical branch: `main`.
@@ -24,62 +26,105 @@ Recover from the interrupted C039 → C040 migration and continue the Architectu
 - Previous chapter: C039.
 - Specialization: C.
 - Resolved short name: `Architecture & Research`.
-- The canonical bootstrap runtime contract remains:
+- Bootstrap runtime values supplied for this chapter:
+
   ```
-  PREVIOUS_CHAPTER
-  CURRENT_CHAPTER
-  SPECIALIZATION
+  PREVIOUS_CHAPTER = 038
+  CURRENT_CHAPTER = 039
+  SPECIALIZATION = C
+  SHORT_NAME = Architecture & Research
   ```
-- `SHORT_NAME` is contextual data resolved from supplied bootstrap context or `.ai/config.yaml` specialization vocabulary.
-- C039 stabilized the active command surface as:
-  ```
-  >>handoff
-  >>migrate <chapter>
-  >>generate-bootstrap <chapter>
-  ```
-- C039 confirmed that first-chapter initialization does not need a dedicated `>>init` or `>>new` operation.
-- C039 confirmed that interrupted migration is handled by the canonical BOOTSTRAP workflow and durable repository state; no separate recovery operation is part of the active command surface.
-- C039 validated the two manual bootstrap transport templates.
-- C039 completed the bounded semantic consistency sweep and found no additional active infrastructure changes required by that scope.
-- C039's latest repository checkpoint added the `Structural references` section to `.ai/INDEX.md`, pointing to `.ai/handoffs/README.md` as structural documentation and explicitly not a runtime activation owner.
-- That INDEX change was committed as `3e7009eb8be23f10372ffb8abe3786cab308b350` with message `ai-docs(index): add handoff structural reference`.
+
+The canonical BOOTSTRAP runtime contract remains three inputs:
+
+```
+PREVIOUS_CHAPTER
+CURRENT_CHAPTER
+SPECIALIZATION
+```
+
+`SHORT_NAME` is supplied contextual data. When omitted, BOOTSTRAP resolves it through the specialization vocabulary in `.ai/config.yaml`.
 
 ## Confirmed / observed
 
-- `.ai/AGENTS.md` item 6 routes requested new-chapter initialization to `.ai/workflows/handoff/BOOTSTRAP.md`.
-- BOOTSTRAP is the canonical ordered initialization workflow.
-- AGENTS determines when BOOTSTRAP is used; BOOTSTRAP determines how initialization is performed.
+- C039 resolved the AGENTS → BOOTSTRAP entry boundary.
+- `.ai/AGENTS.md` item 6 explicitly routes new conversation chapter initialization to `.ai/workflows/handoff/BOOTSTRAP.md`.
+- BOOTSTRAP is the canonical ordered workflow for receiving a chapter or starting the first chapter of a specialization.
 - BOOTSTRAP MUST NOT call, re-enter, or redefine AGENTS.
 - Reading AGENTS alone MUST NOT trigger chapter initialization.
-- `.ai/config.yaml` defines `C → Architecture & Research`.
+- An explicit initialization request with missing or malformed runtime values MUST stop before repository mutation and report the missing/malformed values.
+- The generated bootstrap transport is explicitly identified as a new-chapter initialization instruction and directs the receiving AI through AGENTS item 6.
+- Generated transport contains exactly four lines: PREVIOUS_CHAPTER, CURRENT_CHAPTER, SPECIALIZATION, and resolved SHORT_NAME.
+- SHORT_NAME is not a fourth canonical BOOTSTRAP runtime input.
+- `.ai/config.yaml` is the canonical specialization vocabulary and contains `C → Architecture & Research`.
+- `.ai/rules/handoff/lifecycle.md` defines handoffs as durable chapter context without lifecycle status transitions.
+- `.ai/skills/handoff/SKILL.md` owns handoff capability and structure.
 - `.ai/rules/repository.md` owns repository identity/path resolution and repository write safety.
-- `.ai/rules/workflow.md` owns general workflow and repository-wide inspection principles.
-- `.ai/rules/handoff/lifecycle.md` owns chapter continuity semantics.
-- `.ai/rules/handoff/references.md` owns preservation of material research references.
-- `.ai/skills/activation/SKILL.md` defines ACTIVATE as rereading required canonical owners.
-- `.ai/skills/handoff/SKILL.md` owns handoff structure and handoff capability.
-- `.ai/INDEX.md` is the operational routing and capability-discovery surface, not a procedure owner.
-- The predecessor handoff `.ai/handoffs/C/C039-Architecture-Research.md` was read successfully during this bootstrap.
-- The C038 handoff and current architecture record were inspected as supporting context.
-- No C040 handoff existed before this recovery bootstrap.
+- `.ai/skills/activation/SKILL.md` defines ACTIVATE as rereading required canonical owners; the required initialization owners were reread for this bootstrap.
+- C039 predecessor handoff was read successfully.
+- No C040 handoff existed before this bootstrap.
+- The current architecture record is `.ai/architecture/ai-infrastructure-restructuring.md`, with C039 conclusions recorded in section 23 and the C040 follow-up sequence recorded in the latest sections.
+- The active command surface in `.ai/INDEX.md` now documents the stabilized `>>handoff`, `>>migrate <chapter>`, and `>>generate-bootstrap <chapter>` operations.
 
-## Confirmed decisions carried forward
+## C039 decisions carried forward
 
-- `>>` is the stable command prefix and MUST NOT be reopened without new evidence.
-- The active handoff command is `>>handoff`.
-- The migration command is `>>migrate <chapter>`.
-- The standalone bootstrap-transport operation is `>>generate-bootstrap <chapter>`.
-- Normal migration generates the bootstrap transport as its terminal step.
-- Generated bootstrap transport and execution of the receiving chapter's BOOTSTRAP workflow are separate concerns.
-- First-chapter initialization uses BOOTSTRAP's FIRST CHAPTER branch with `PREVIOUS_CHAPTER = N/A`; no dedicated initialization command is required.
-- Interrupted migration is a bootstrap/recovery condition, not a separate lifecycle operation.
-- Manual bootstrap interruption wording is transport context only and does not create a new command or lifecycle state.
-- Historical unresolved command wording remains historical evidence and MUST NOT be treated as active command semantics merely because it appears in older architecture records or handoffs.
+### Entry-layer boundary
 
-## Relevant files and references
+```
+new conversation
+    ↓
+.ai/AGENTS.md
+    ↓
+new-chapter initialization requested?
+    ├─ NO  → ordinary work
+    └─ YES → AGENTS item 6
+               ↓
+        .ai/workflows/handoff/BOOTSTRAP.md
+               ↓
+        validate inputs
+               ↓
+        ACTIVATE canonical owners
+               ↓
+        initialize chapter
+```
 
-- `.ai/AGENTS.md`
+### Bootstrap transport
+
+The standard generated transport for C039 → C040 was:
+
+```
+PREVIOUS_CHAPTER = 038
+CURRENT_CHAPTER = 039
+SPECIALIZATION = C
+SHORT_NAME = Architecture & Research
+```
+
+The receiving chapter is now executing that transport through the canonical initialization workflow.
+
+### Command syntax
+
+The stable command prefix remains:
+
+```
+>>
+>>operation [arguments...]
+```
+
+Known accepted semantic operations include:
+
+```
+>>handoff
+>>migrate <chapter>
+```
+
+This syntax decision MUST NOT be reopened merely because active command references still use historical `Пора...` wording.
+
+Normal migration MUST generate the bootstrap transport as its terminal step. Standalone bootstrap-instruction generation remains a separate semantic operation that can be invoked when the terminal transport was omitted or needs to be regenerated.
+
+## Relevant canonical owners and references
+
 - `.ai/config.yaml`
+- `.ai/AGENTS.md`
 - `.ai/INDEX.md`
 - `.ai/rules/repository.md`
 - `.ai/rules/workflow.md`
@@ -89,126 +134,79 @@ Recover from the interrupted C039 → C040 migration and continue the Architectu
 - `.ai/skills/handoff/SKILL.md`
 - `.ai/workflows/handoff/BOOTSTRAP.md`
 - `.ai/architecture/ai-infrastructure-restructuring.md`
-- `.ai/handoffs/README.md`
 - `.ai/handoffs/C/C039-Architecture-Research.md`
 
-No additional external research reference was identified as materially required for bootstrap recovery.
+No additional external research reference was identified by C039 as materially required for the immediate continuation.
 
 ## Important constraints
 
 - Preserve the `.ai/AGENTS.md` → `.ai/INDEX.md` → ACTIVATE → canonical-owner architecture.
 - Keep BOOTSTRAP as the canonical new-conversation initialization workflow.
-- Do not introduce a command registry, universal router, command-ID layer, subcommand hierarchy, flag layer, dependency graph, dedicated recovery operation, or replacement lifecycle mechanism without concrete evidence.
-- Do not reopen stabilized `>>` command syntax or C039 bootstrap semantics without new evidence.
+- Do not introduce a command registry, universal router, command-ID layer, subcommand hierarchy, flag layer, dependency graph, or replacement lifecycle mechanism without concrete evidence.
+- Do not migrate active command references until their semantics are stable.
 - Distinguish active semantics from historical architecture evidence.
-- For existing-file mutation, follow repository write safety: read current content, make the minimal intended change, write the complete file, read back, verify content, inspect diff, verify scope, commit, and verify the result.
-- Do not modify the predecessor handoff merely because it was consumed.
-- Do not create another future receiving-chapter handoff in advance.
-- Keep this chapter bounded; do not broaden recovery into a general AI-infrastructure refactor.
+- Preserve the distinction between generated bootstrap instructions and execution of the receiving chapter's BOOTSTRAP workflow.
+- For every existing-file mutation, follow repository write safety: read current content, make the minimal intended change, write the complete file, read back, verify content, inspect diff, verify scope, commit, and verify the result.
+- Do not create a future receiving-chapter handoff in advance.
+- Do not silently treat SHORT_NAME as a fourth required canonical runtime input.
+- Do not broaden this chapter into a general AI-infrastructure refactor.
 
-## Confirmed versus inferred versus assumed
+## C040 completed bounded work
+
+1. Verified the AGENTS → BOOTSTRAP entry boundary and missing-input behavior against the current canonical files.
+2. Verified the generated four-line bootstrap transport against the current BOOTSTRAP contract.
+3. Accepted `>>generate-bootstrap <chapter>` as the standalone bootstrap-instruction generation operation.
+4. Confirmed that first-chapter initialization does not need a dedicated `>>init` or `>>new` operation.
+5. Confirmed that interrupted migration does not need a dedicated `>>recover` operation.
+6. Designed and validated Template A and Template B as manual bootstrap transport.
+7. Migrated active command references in `.ai/INDEX.md` and `.ai/skills/handoff/SKILL.md`.
+8. Completed the semantic consistency sweep and corrected the stale current-handoff checkpoint wording found during the sweep.
+9. Confirmed that no additional infrastructure is required.
+
+## Semantic consistency sweep result
+
+- Active command references are consistent across INDEX and the handoff skill.
+- AGENTS item 6 and BOOTSTRAP remain the canonical initialization boundary and workflow.
+- Historical C037–C039 records retain their historical unresolved wording intentionally; they are not active command definitions.
+- No additional stale active reference requiring correction was identified.
+
+## Confirmed versus uncertain
 
 ### Confirmed
 
 - C040 is the receiving chapter for C039.
 - `C → Architecture & Research` is configured in `.ai/config.yaml`.
-- C039's active command and bootstrap decisions are recorded in the repository.
-- The current handoff can continue from durable repository state without reconstructing C039 from conversation history.
+- The canonical BOOTSTRAP runtime contract is PREVIOUS_CHAPTER, CURRENT_CHAPTER, SPECIALIZATION.
+- SHORT_NAME is contextual data resolved from supplied context or specialization vocabulary.
+- AGENTS item 6 is the explicit entry path for requested new-chapter initialization.
+- BOOTSTRAP owns the ordered initialization procedure.
+- Generated bootstrap transport is a four-line context payload and not a second procedure.
+- `>>` is the stable command prefix and MUST NOT be reopened.
+- `>>migrate <chapter>` is the intended migration invocation shape.
+- Normal migration MUST generate bootstrap transport as its terminal step.
+- Active command-reference migration is complete for the stabilized command surface.
 
-### Inferred
+### Confirmed decisions
 
-- The interrupted migration affected conversation transport rather than requiring correction of the durable C039 repository state, because C039's checkpoint and active infrastructure changes are present in the repository.
+- The standalone bootstrap-instruction operation is `>>generate-bootstrap <chapter>`.
+- First-chapter initialization does not need a dedicated `>>init` or `>>new` operation; BOOTSTRAP's FIRST CHAPTER branch is sufficient.
+- Interrupted migration does not need a dedicated `>>recover` operation; recovery remains a manual bootstrap transport condition handled by BOOTSTRAP and durable repository state.
+- Template A is the first-chapter manual bootstrap template.
+- Template B is the interrupted-migration recovery manual bootstrap template.
+- If SHORT_NAME is omitted from a manual template, BOOTSTRAP resolves it from .ai/config.yaml through the specialization vocabulary.
+- Generated migration transport MUST include the already-resolved SHORT_NAME.
+- The active command surface is stabilized as `>>handoff`, `>>migrate <chapter>`, and `>>generate-bootstrap <chapter>`.
+- The semantic consistency sweep found no stale active references requiring further correction.
+- Historical C037–C039 unresolved wording remains historical record and is intentionally preserved.
 
-### Assumed / unverified
+## Latest checkpoint
 
-- None currently required for bootstrap completion.
-
-### Open
-
-- The next concrete Architecture & Research question is not specified by the recovery request itself. It SHOULD be selected from the current architecture record after bootstrap verification rather than guessed from older chapter TODOs.
-
-
-## C040 checkpoint
-
-Semantic consistency sweep completed. INDEX now exposes the activation capability. Obsolete negative references were removed from active handoff/bootstrap documentation. The next bounded question is operational TRACE design.
+- Executed `>>handoff` after completing the bounded INDEX discoverability follow-up.
+- Added a single `Structural references` section to `.ai/INDEX.md` pointing to `.ai/handoffs/README.md` as structural documentation, explicitly not a runtime activation owner.
+- The INDEX change was committed as `3e7009eb8be23f10372ffb8abe3786cab308b350` with message `ai-docs(index): add handoff structural reference`.
+- Read back the updated INDEX and verified the intended section is present without unrelated content changes.
+- The handoff README remains unchanged; its role is now explicitly discoverable from INDEX while its structural/documentation role remains separate from runtime activation.
 
 ## Immediate next task
 
-Evaluate the bounded TRACE question now that the semantic consistency sweep is complete:
-
-> How exactly should operational TRACE for the .ai infrastructure be shaped so that it is useful for observation and debugging without becoming permanent noise?
-
-Do not prematurely turn TRACE into a persistent schema or dependency registry. Do not reopen the already resolved bootstrap/command semantics unless new concrete evidence appears.
-
-## Recommended starting context
-
-1. `.ai/architecture/ai-infrastructure-restructuring.md` — latest active architecture state.
-2. `.ai/INDEX.md` — current active command/capability surface.
-3. `.ai/workflows/handoff/BOOTSTRAP.md` — canonical initialization semantics.
-4. `.ai/skills/handoff/SKILL.md` — handoff capability and current operation surface.
-5. `.ai/rules/handoff/lifecycle.md` — continuity constraints.
-
-Bootstrap recovery is complete only after this handoff is read back and its header, immediate next task, predecessor context, and starting state are verified.
-
-
-## C040 TRACE research checkpoint
-
-The bounded TRACE research is recorded in `.ai/architecture/ai-infrastructure-restructuring.md` section 32.
-
-Accepted conclusions:
-
-- Operational TRACE is a temporary human-readable presentation of the fact that ACTIVATE was executed.
-- TRACE is not a separate capability.
-- TRACE is event-driven, not always-on.
-- TRACE is hidden by default unless the operation is diagnostically significant or the user explicitly requests it.
-- New-conversation bootstrap is an explicit exception: TRACE MUST be visible during bootstrap initialization.
-- Bootstrap TRACE MUST show the canonical owner files actually reread so the initialization is auditable.
-- Minimal TRACE shape:
-  ```
-  TRACE
-    operation: <operation>
-    owners: <canonical owners actually reread>
-    status: <ACTIVATED | BLOCKED | INCOMPLETE>
-  ```
-- TRACE presents observable execution facts; it does not expose hidden reasoning.
-- TRACE is not persistent state, schema, registry, dependency graph, command layer, lifecycle mechanism, or separate capability.
-- TRACE MUST distinguish actual rereads from discovery/search.
-- The complete operation-by-operation visibility matrix is intentionally NOT frozen yet.
-
-### C040 → C041 bounded research question
-
-Continue with exactly this question:
-
-> **In which operations should TRACE be visible automatically, on request only, or never by default?**
-
-Keep the decision simple and event-driven. Test the operation classes identified in the architecture record without introducing a configurable tracing subsystem.
-
-### Relevant architectural diagram
-
-```text
-ACTIVATE
-    ↓
-activation result
-    ↓
-TRACE (optional presentation)
-
-bootstrap
-    ↓
-establish repository
-    ↓
-read required canonical owners
-    ↓
-ACTIVATE
-    ↓
-VISIBLE TRACE
-    ↓
-chapter initialization
-```
-
-### C040 migration state
-
-- Architecture record updated and committed as `481f5f13e54fd9f4fe2ab516177ea5baa9acf050`.
-- The current C040 handoff remains the durable source for migration context.
-- The receiving C041 bootstrap MUST use the explicit repository locator already established by C040:
-  `https://github.com/paulhuman/aip-mirror`.
-- The next chapter is C041, specialization C, short name `Architecture & Research`.
+Continue with the next concrete Architecture & Research question. No additional INDEX, AGENTS, or handoff-README changes are currently implied by this checkpoint.

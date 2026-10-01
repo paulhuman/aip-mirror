@@ -143,7 +143,7 @@ A valid counterexample had to show that changing only provenance requires a **di
 
 #### C-1.5-T1 independent-review result
 
-Qwen E001 returned:
+Qwen E002 returned:
 
 ```text
 B — No counterexample found
@@ -251,7 +251,7 @@ The burden of proof was **independent semantic necessity**, not caching, logging
 
 #### C-1.6-T1 independent-review result
 
-Qwen E001 returned:
+Qwen E002 returned:
 
 ```text
 B — no independent semantic necessity demonstrated
@@ -548,7 +548,7 @@ Otherwise, the next productive step is architecture design work around **context
 
 This handoff has been updated with Synthesis-1, the C-1.4 research checkpoint, and the completed C-1.5-T1 provenance adversarial pass. No Architecture Decision has been recorded.
 
-The chapter is now `READY_FOR_HANDOFF` for migration to **AIP Mirror — C008 — Architecture & Research**. The research remains provisional and no final Architecture Decision has been made.
+The chapter is now `READY_FOR_HANDOFF` for migration to **AIP Mirror — C009 — Architecture & Research**. The research remains provisional and no final Architecture Decision has been made.
 
 ### C-1.6-T2 — `dependency relation`
 
@@ -562,7 +562,7 @@ semantic necessity of information
 necessity to store that information inside Resolution Context
 ```
 
-Qwen E001 returned:
+Qwen E002 returned:
 
 ```
 B — no independent semantic necessity demonstrated
@@ -691,8 +691,8 @@ Working invariants carried forward and consolidated by Synthesis-1 and C-1.5-T1:
 
 ### Handoff / lifecycle files read during bootstrap
 
+- `.ai/handoffs/C007-Architecture-Research.md`
 - `.ai/handoffs/C006-Architecture-Research.md`
-- `.ai/handoffs/C005-Architecture-Research.md`
 - `.ai/handoffs/03E-Architecture-Research.md`
 
 ### Rules / skills read during bootstrap
@@ -715,9 +715,9 @@ Working invariants carried forward and consolidated by Synthesis-1 and C-1.5-T1:
 
 - `docs/architecture/independent-review-qwen-onboarding.md` — operational onboarding and role boundary for the Qwen independent-review workflow.
 - `docs/architecture/prerequisite-dependency-semantics.md` — semantic separation and dependency/prerequisite boundaries.
-- `.ai/handoffs/C006-Architecture-Research.md` — immediate research checkpoint before U-7 through U-10.
-- `.ai/handoffs/C005-Architecture-Research.md` — predecessor same-specialization research inventory.
-- `.ai/handoffs/E000-Independent-Review-Qwen.md` — independent-review role boundary and evidence-handling context.
+- `.ai/handoffs/C007-Architecture-Research.md` — immediate research checkpoint before U-7 through U-10.
+- `.ai/handoffs/C006-Architecture-Research.md` — predecessor same-specialization research inventory.
+- `.ai/handoffs/E001-Independent-Review-Qwen.md` — independent-review role boundary and evidence-handling context.
 
 ## Important constraints
 
@@ -773,15 +773,13 @@ Working invariants carried forward and consolidated by Synthesis-1 and C-1.5-T1:
 
 ## Last completed task
 
-**C-1.6-T4 — `consumer role`**.
+**C-1.6-T2 — `dependency relation`**.
 
-Result: no independent semantic necessity was demonstrated for `consumer role` as an internal Resolution Context axis. It is currently classified as evaluation-context information / consumer-policy input, with possible relationship-level ownership between Resolution and Consumer remaining unresolved.
-
-C-1.6-T5 has been commissioned; its Qwen response is pending.
+Result: no independent semantic necessity was demonstrated for `dependency relation` as an internal Resolution Context axis. It is currently classified as semantically necessary relationship information / graph-edge semantics rather than an intrinsic Resolution field.
 
 ## Immediate next task
 
-Continue **C-1.6 — remaining-context minimality** with **C-1.6-T5 — `applicability / applicability condition`**.
+Continue **C-1.6 — remaining-context minimality** with **C-1.6-T3 — `dependency target`**.
 
 Current provisional candidate set:
 
@@ -854,201 +852,6 @@ Primary discriminator for future adversarial tests:
 
 If yes, identify the missing intrinsic semantic distinction and test whether that distinction genuinely belongs in state rather than context/rules. If no, Model B remains viable for that case, while the architecture still must solve context preservation and rule/policy organization.
 
-### C-1.6-T3 — `dependency target`
-
-C-1.6-T3 tested whether `dependency target` has independent semantic necessity as an internal Resolution Context attribute, or whether its semantics belong to the relationship between Resolution instances.
-
-Qwen returned:
-
-```
-B — no independent semantic necessity demonstrated
-(as an internal Resolution Context attribute)
-```
-
-No minimal counterexample was found in which changing only `dependency target` required different downstream semantic behavior that could not be expressed through the relation, target Resolution semantics, or consumer policy.
-
-Working classification:
-
-```
-dependency target
-→ semantically necessary relationship information
-→ relationship-level / graph-edge semantics
-→ not an independent internal Resolution Context axis
-```
-
-Important qualification:
-
-```
-semantic necessity of relationship information
-≠
-necessity to store it inside Resolution
-```
-
-The result does not establish a final graph architecture and does not prove that target information can never be denormalized for implementation reasons. It establishes only that independent semantic ownership inside the source Resolution was not demonstrated.
-
-### C-1.6-T3 semantic ownership refinement
-
-A useful distinction emerged during review:
-
-```
-target identity
-≠
-independent Resolution property
-```
-
-but:
-
-```
-target identity
-=
-semantically significant parameter of the Relation
-```
-
-For example:
-
-```
-A ──depends_on──▶ B
-```
-
-and:
-
-```
-A ──depends_on──▶ C
-```
-
-are different relations even when source and relation type are otherwise equal. The difference belongs to relationship semantics, not to an intrinsic target field of the source Resolution.
-
-This remains a provisional semantic classification, not an Architecture Decision.
-
-### C-1.6-T4 — `consumer role`
-
-C-1.6-T4 tested whether `consumer role` has independent semantic necessity as an internal Resolution Context axis, or whether it belongs to evaluation/consumer context.
-
-Qwen returned:
-
-```
-B — no independent semantic necessity demonstrated
-(as an internal Resolution Context axis)
-```
-
-No minimal counterexample was found.
-
-The strongest attacks were the same-Resolution/different-consumer and multi-consumer cases. A single Resolution can be evaluated by multiple consumers with different roles without changing the Resolution's own semantic state. Therefore a single intrinsic `consumer role` field creates an ownership ambiguity.
-
-Working classification:
-
-```
-consumer role
-→ evaluation-context information
-→ consumer-policy input
-→ possibly relationship-level semantics between Resolution and Consumer
-```
-
-The exact ownership boundary between Consumer, Evaluation Context, and a possible Consumer-Resolution Relation remains unresolved. The test does NOT establish that `consumer role` must be implemented as a graph edge.
-
-### C-1.6-T4 semantic boundary
-
-T4 reinforces:
-
-```
-Resolution semantics
-    ≠
-evaluation context
-    ≠
-consumer policy
-    ≠
-consumer consequence
-```
-
-A useful provisional model is:
-
-```
-Resolution
-    │
-    ▼
-Evaluation Context
-    ├── consumer
-    ├── role
-    └── policy
-    │
-    ▼
-consumer consequence
-    │
-    ▼
-effective outcome
-```
-
-This is a research model only and does not establish a final implementation architecture.
-
-### C-1.6-T5 — `applicability / applicability condition`
-
-T5 has been commissioned as the next adversarial test. The Qwen response is pending.
-
-Research question:
-
-> Is `applicability condition` independently necessary semantic information belonging to the Resolution itself, or can applicability be represented as evaluation context, consumer policy, relationship semantics, eligibility logic, authority/authorization logic, external-context predicates, or another semantic level without loss of meaning?
-
-The test must distinguish:
-
-```
-applicability
-eligibility
-authority
-authorization
-consumer role
-consumer policy
-```
-
-and search specifically for the smallest counterexample showing semantic information loss if applicability condition is not an intrinsic Resolution Context axis.
-
-Required attack areas:
-
-- applicability vs eligibility;
-- applicability vs consumer role;
-- applicability vs consumer policy;
-- external context;
-- conditional applicability;
-- subject-specific applicability;
-- temporal applicability;
-- applicability vs authority/authorization;
-- applicability vs eligibility pipeline position;
-- reconstructability;
-- multi-consumer / multi-subject applicability;
-- definition-level ownership.
-
-No result has been adopted yet. No Architecture Decision has been made.
-
-### C-1.6 interim candidate map after T4
-
-Current provisional semantic map:
-
-```
-Resolution Context
-├── subject
-├── state
-├── cause / reason
-└── conflict / cycle context
-
-Relation Context / relationship semantics
-├── source
-├── target
-├── relation_type
-└── ...
-
-Evaluation / Consumer Context
-├── consumer
-├── consumer role
-├── policy
-└── ...
-
-Derived consumer result
-└── consumer consequence
-```
-
-This map is intentionally provisional. It does not establish that every remaining Resolution Context element is independently necessary, nor that every relationship must be implemented as a graph edge.
-
-The current research question is increasingly about semantic ownership and minimumity rather than simply collecting fields.
-
 ## C-1 research checkpoint
 
 ```text
@@ -1061,7 +864,7 @@ STATUS
 
 C-1.5 — provenance
 STATUS
-- No semantic-necessity counterexample found by Qwen E001.
+- No semantic-necessity counterexample found by Qwen E002.
 - Tested source-sensitive, consumer-policy, and dependency-reconstruction attacks.
 - Rejected counterexamples either collapsed into other fields or required new policies not currently defined.
 - provenance is not currently demonstrated as an independent Context axis.
@@ -1069,7 +872,7 @@ STATUS
 
 C-1.6-T1 — consumer consequence
 STATUS
-- No semantic-necessity counterexample found by Qwen E001.
+- No semantic-necessity counterexample found by Qwen E002.
 - Eligibility, candidate effect, effective outcome, authority/precedence, consumer-role, and definition-level derivation attacks were tested.
 - consumer consequence is currently classified as a derived semantic result / consumer-policy output.
 - It is not currently demonstrated as an independent Resolution Context axis.
@@ -1084,7 +887,7 @@ INTERIM SYNTHESIS
 
 C-1.6-T2 — dependency relation
 STATUS
-- No semantic-necessity counterexample found by Qwen E001 for dependency relation as an internal Resolution Context axis.
+- No semantic-necessity counterexample found by Qwen E002 for dependency relation as an internal Resolution Context axis.
 - dependency relation is currently classified as relationship / graph-edge semantics.
 - This does not mean dependency relation is semantically unnecessary; it means its semantic necessity belongs to the relationship between Resolution instances rather than to the internal state/context of one Resolution.
 - dependency target remains under separate test in C-1.6-T3.
@@ -1144,20 +947,10 @@ RECOMMENDED NEXT STEP
 - Commission further adversarial tests only when they target a concrete remaining uncertainty.
 ```
 
-## Bootstrap continuation
-
-This chapter was initialized from **AIP Mirror — C007 — Architecture & Research**.
-
-Bootstrap state:
-
-- Previous handoff: `C007`
-- Current handoff: `C008`
-- Status: `DRAFT`
-- C-1.6-T3 adversarial instruction is already prepared.
-- The next expected research input is the Qwen E001 response to C-1.6-T3.
-
-No final Architecture Decision has been made.
-
 ## Handoff readiness
 
-This chapter remains **DRAFT** while C-1.6-T3 is being analyzed.
+This chapter is **READY_FOR_HANDOFF** for migration to **AIP Mirror — C009 — Architecture & Research**.
+
+The receiving chapter should continue from **C-1.6-T3 — dependency target**. The C-1.6-T3 adversarial instruction has already been prepared; the next expected external-review input is the Qwen E002 response to C-1.6-T3.
+
+No final Architecture Decision has been made.

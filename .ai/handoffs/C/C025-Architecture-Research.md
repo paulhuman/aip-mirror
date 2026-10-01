@@ -12,257 +12,104 @@ C
 **Previous chapter:**
 024
 
-## Current objective
+## Starting objective
 
-Continue Iteration 2 of the AI-infrastructure restructuring by completing the semantic-ownership work around the repository entry layer.
+Continue Iteration 2 from the current repository state after the first repository-wide consistency sweep.
 
-The Repository Identity & Path Resolution ownership pass is complete. The next frontier is the design of `.ai/INDEX.md` as an operational command router and capability-discovery surface, followed by the final decision on whether the residual bootstrap workflow remains independently justified.
+The immediate task is to inspect and repair the bounded set of project-specific leakage and ownership inconsistencies identified by C024. Do not return to semantic-comparison or target-tree planning.
 
-## Completed
+## Durable context
 
-### Iteration 2 physical restructuring
+- `.ai/architecture/ai-infrastructure-restructuring.md` — current Iteration 2 architecture and migration context.
+- `.ai/config.yaml` — current project configuration and recovered external repository references.
+- Historical architecture research is preserved under `.ai/archive/architecture/` and is not active operational context unless specifically needed.
 
-- Physical restructuring of the AI-infrastructure tree is complete.
-- Handoffs were moved from `.ai/handoffs/` to `.ai/handoffs/<specialization>/`.
-- Architecture, rules, skills, and workflow locations were normalized according to the accepted Iteration 2 structure.
-- Historical one-letter chapter naming was removed from active architecture/handoff references.
+## Current architectural boundary
 
-### Repository Identity & Path Resolution ownership pass
+- `.ai/` is intended to become project-agnostic AI working infrastructure.
+- `docs/` contains AIP Mirror project knowledge and project-specific decisions.
+- Workstreams are organizational areas represented by separate AI conversations, not autonomous agents.
+- Handoff lifecycle is exactly `DRAFT → READY_FOR_HANDOFF → HANDED_OFF`.
+- `SUPERSEDED` is not a lifecycle state.
+- Do not introduce `ENTRY.md`.
+- Do not use `bootstrap kernel` as an architectural term.
 
-The canonical boundary is now:
+## Post-edit consistency requirement
 
-- `.ai/config.yaml` — project repository identity and configuration facts (**WHAT / WHERE**).
-- `.ai/rules/repository.md` — repository interpretation, path resolution, boundaries, taxonomy/hygiene, durable repository knowledge, and write safety (**HOW**).
-- Other rules, skills, and workflows — consumers/references; they must not redefine the canonical ownership.
+After every MOVE, RENAME, DECOMPOSE, or canonical-owner change:
 
-Completed bounded repairs include:
+1. search for old paths, filenames, owners, obsolete terms, duplicated normative wording, stale identifiers, bootstrap references, and routing targets;
+2. classify relevant hits semantically;
+3. repair actual inconsistencies or deliberately preserve valid historical references;
+4. read back changed files;
+5. inspect diff and scope;
+6. commit;
+7. verify the resulting repository state.
 
-- `.ai/rules/handoff/references.md` was cleaned to delegate repository identity/path resolution to `.ai/rules/repository.md`.
-- Commit: `69145e5bfd73a43ea464008d1060b0a8662f61b4`.
-- Commit-layer ownership was re-verified: `.ai/rules/commits.md` owns policy; `.ai/skills/commits/SKILL.md` owns reusable commit construction.
-- Stale commit/handoff naming references were removed in bounded corrective commits.
-- `.ai/skills/handoff/SKILL.md` frontmatter was normalized to `name: handoff`.
-- Duplicate migration-completion material was removed from `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`, leaving migration ownership in the handoff skill.
-- Commit: `9caf822259ad11587346c62981cbcc3981dc0a75`.
-- A durable TODO was recorded: if BOOTSTRAP remains after residual-core analysis, rename it to `.ai/workflows/handoff/BOOTSTRAP.md`.
-- Commit: `c40375b2f84d99eab30f3a932ac77f1159152d09`.
+## C024 sweep results
 
-### Entry-layer work
+The C024 repair frontier has been worked through in C025.
 
-- `.ai/AGENTS.md` exists as the compact AI repository operating contract.
-- `.ai/INDEX.md` exists as the future operational command/capability routing surface.
-- The approved layering is:
-  - `README.md` — human orientation;
-  - `.ai/AGENTS.md` — always-on AI operating contract;
-  - `.ai/INDEX.md` — command surface, capability discovery, canonical-owner routing;
-  - `.ai/rules/` — canonical semantics/constraints;
-  - `.ai/skills/` — reusable capabilities;
-  - `.ai/workflows/` — ordered procedures.
-- No `ENTRY.md` is planned in Iteration 2.
+Completed:
 
-### Command-routing model
+- genericized the active repository, workflow, commit, deep-understanding, and handoff infrastructure where project-specific leakage was confirmed;
+- separated project repository identity/configuration into `.ai/config.yaml`;
+- preserved repository path-resolution and safety mechanics in `.ai/rules/repository.md`;
+- centralized Chapter Identifier Format ownership in `.ai/rules/handoff/lifecycle.md`;
+- repaired stale operational references exposed by the C021–C025 consistency pass;
+- reduced independent-review onboarding to the current reusable workflow surface;
+- verified remaining checked historical matches are legitimate migration history rather than active operational references.
 
-Five currently documented user-facing handoff commands were identified:
+The remaining frontier is semantic ownership analysis of the active repository-identity and path-resolution consumers. This is the next chapter's assignment.
 
-1. `Пора обновить handoff`
-2. `Пора выполнить миграцию в чат XXYY`
-3. `Пора восстановить handoff`
-4. `Пора выполнить handoff lifecycle correction`
-5. `Пора выдать bootstrap-инструкцию`
+## Important architectural question
 
-The semantic routing model is:
+The target is not merely “remove the words AIP Mirror from `.ai`”. The stronger rule is:
 
-    user command
-        ↓
-    .ai/INDEX.md
-        ↓
-    operation identification
-        ↓
-    reread canonical owner files
-        ↓
-    execute owning rule / skill / workflow
+> Generic `.ai` rules, skills, and workflows must remain reusable without project-specific knowledge or embedded project configuration.
 
-Important distinctions are preserved:
+The repository identity case is therefore the key boundary question:
 
-- HANDOFF STATE != OPERATION != COMMIT.
-- Checkpoint keeps the handoff in DRAFT.
-- Migration ends the closing chapter at READY_FOR_HANDOFF; the receiving chapter later performs HANDED_OFF.
-- Lifecycle Recovery and Lifecycle Correction are distinct exceptional operations.
-- Bootstrap-instruction generation is not itself a lifecycle operation.
+> Where should project-specific repository identity live when repository safety and path-resolution mechanics remain reusable infrastructure?
 
-## Current implementation state
+Resolve this deliberately before editing `.ai/rules/repository.md`.
 
-The durable architecture file has been updated through C025:
+## Required next sequence
 
-`.ai/architecture/ai-infrastructure-restructuring.md`
+1. Read the affected files in context.
+2. Classify each project-specific occurrence as reusable mechanism, project configuration, illustrative example, historical evidence, or stale duplication.
+3. Decide repository-identity ownership.
+4. Repair generic rules/skills without weakening required operational context.
+5. Decide the ownership of independent-review onboarding/configuration.
+6. Run a second repository-wide consistency sweep.
+7. Only after the repaired repository is internally coherent, review `AGENTS.md` and `.ai/INDEX.md` entry surfaces.
 
-It now records:
+## External repository reference recovery — completed
 
-- completion of the Repository Identity & Path Resolution ownership pass;
-- the current AGENTS/INDEX entry-layer model;
-- the five-command routing table;
-- the decomposition of BOOTSTRAP into canonical-owner content versus residual bootstrap-specific semantics;
-- the current Iteration 2 frontier;
-- the assignment for C026.
+The external repository references recovered from the 03 handoff lineage have been recorded in `.ai/config.yaml` under `references.repositories`, with their documented roles.
 
-Architecture update commit:
-`5eb27327157e0fa4d7114ef5ce7a85a8329bbad7`
+Recovered research/reference repositories include:
 
-The architecture file's resulting blob was read back and verified to contain the C025 completion, entry-layer model, BOOTSTRAP residual-core analysis, and C026 assignment.
+- `paulhuman/adobe-illustrator-2026-sdk`
+- `paulhuman/spectrum-web-components`
+- `paulhuman/codex`
+- `paulhuman/skills`
+- `paulhuman/agent.md`
 
-## Decisions
+No further recovery work remains in this TODO.
 
-- Do not repeat physical Iteration 2 restructuring.
-- Do not reopen the completed Repository Identity & Path Resolution ownership decision without new evidence.
-- `.ai/config.yaml` remains the owner of repository identity/configuration facts.
-- `.ai/rules/repository.md` remains the owner of repository interpretation/path-resolution/safety mechanics.
-- `.ai/INDEX.md` is an operational router/discovery surface, not a new policy or procedure owner.
-- `.ai/AGENTS.md` remains compact and must not become a second INDEX or bootstrap document.
-- Do not create `ENTRY.md`.
-- Exact command IDs/syntax remain intentionally unfrozen.
-- Detailed procedures remain in their canonical rule/skill/workflow owners.
+## Migration boundary
 
-## BOOTSTRAP status
-
-`.ai/workflows/handoff-bootstrap/BOOTSTRAP.md` is **UNRESOLVED**.
-
-Its remaining potentially unique semantics are:
-
-- runtime inputs: `CURRENT_CHAPTER`, `NEXT_CHAPTER`, `SPECIALIZATION`;
-- receiving-chapter initialization;
-- write-capability branch selection;
-- ordered bootstrap sequence;
-- post-bootstrap completion gate.
-
-Its duplicated canonical material has already been reduced:
-
-- repository semantics → `.ai/rules/repository.md`;
-- lifecycle semantics → `.ai/rules/handoff/lifecycle.md`;
-- handoff capability/migration → `.ai/skills/handoff/SKILL.md`;
-- commit construction → `.ai/skills/commits/SKILL.md`.
-
-Do not delete BOOTSTRAP merely because it contains delegated material. First compare its residual core with the completed INDEX command-routing model.
-
-If it remains an independently useful ordered procedure, rename it to:
-
-`.ai/workflows/handoff/BOOTSTRAP.md`
-
-If no independent procedure remains, remove it rather than preserving a historical layer.
-
-## Open questions
-
-- Exact new command syntax and operation IDs.
-- Exact command-entry/fragment ID convention for INDEX.md.
-- Complete handoff operation vocabulary and operation-to-commit mapping.
-- Long-term handoff retention/archive policy.
-- Whether any remaining mixed rule files need another decomposition pass.
-- Final fate of BOOTSTRAP after the INDEX/residual-core comparison.
-- Exact long-term `.ai/architecture/` taxonomy.
-
-Do not start the handoff-operation/commit-vocabulary TODO unless explicitly authorized later.
-
-## Current files
-
-Primary entry-layer scope:
-
-- `.ai/AGENTS.md`
-- `.ai/INDEX.md`
-- `README.md`
-- `docs/PROJECT-INSTRUCTIONS.md`
-
-Canonical infrastructure owners:
-
-- `.ai/config.yaml`
-- `.ai/rules/repository.md`
-- `.ai/rules/handoff/lifecycle.md`
-- `.ai/rules/handoff/references.md`
-- `.ai/rules/commits.md`
-- `.ai/skills/handoff/SKILL.md`
-- `.ai/skills/commits/SKILL.md`
-- `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`
-
-Durable architecture context:
-
-- `.ai/architecture/ai-infrastructure-restructuring.md`
-
-## Evidence / confidence
-
-### Confirmed / observed
-
-- Repository identity is `paulhuman/aip-mirror`, default branch `main`.
-- Physical Iteration 2 restructuring is complete.
-- Repository Identity & Path Resolution ownership has been repaired and verified in the inspected active core.
-- `.ai/AGENTS.md` and `.ai/INDEX.md` exist.
-- The five handoff-related user-facing command phrases above are present in the current rules/skills/workflow model.
-- BOOTSTRAP's duplicate migration-completion section is removed.
-- The architecture note contains the current C025 state and C026 assignment.
-
-### Inferred
-
-- The next useful abstraction boundary is the entry-layer command router, not another physical tree change.
-- INDEX.md can carry the command surface without becoming a second procedure owner.
-
-### Assumed / unverified
-
-- Whether the full remaining `.ai/skills/` and `.ai/workflows/` population contains additional command surfaces not yet formalized in INDEX.md.
-- Whether BOOTSTRAP's residual core is sufficiently independent to justify its own workflow after INDEX is designed.
-
-### Open
-
-- Final INDEX.md content and exact command IDs.
-- Final BOOTSTRAP fate.
-
-## Last completed task
-
-Updated the durable Iteration 2 architecture context through C025, including the completed repository ownership pass, the entry-layer routing model, the BOOTSTRAP residual-core analysis, and the next-chapter assignment.
-
-## Immediate next task
-
-**C026 — Architecture & Research: design `.ai/INDEX.md`.**
-
-Start with the existing minimal `.ai/INDEX.md` and the command-routing table in the architecture note.
-
-Produce a compact but complete INDEX model that:
-
-1. lists the full current user-facing command surface using the new command syntax;
-2. gives each command its semantic operation;
-3. identifies the canonical owner;
-4. identifies the files that must be reread before execution;
-5. indicates whether the operation may change repository state;
-6. provides capability/workflow discovery without duplicating detailed procedures;
-7. keeps command IDs/syntax provisional until there is enough evidence to freeze them.
-
-Then compare the resulting INDEX model with the residual BOOTSTRAP semantics and decide whether BOOTSTRAP remains a genuinely independent ordered workflow.
-
-Do not broaden the task into physical restructuring or the handoff-operation/commit-vocabulary TODO.
+C025 is complete enough to hand off. The receiving chapter should continue from the repository state represented by this handoff and the durable architecture notes; it should not create a future chapter handoff as part of bootstrap.
 
 ## Things not to redo
 
-- Do not repeat physical Iteration 2 restructuring.
-- Do not reconstruct C020/C021/C022/C023/C024 from chat history.
-- Do not redo the Repository Identity & Path Resolution ownership sweep without new evidence.
-- Do not recreate `.ai/AGENTS.md`.
-- Do not create `ENTRY.md`.
-- Do not duplicate detailed lifecycle, handoff, commit, or repository procedures in INDEX.md.
-- Do not treat BOOTSTRAP as automatically obsolete before comparing its residual core.
-- Do not freeze command IDs merely because an example syntax looks convenient.
-
-## Recommended starting context for next chapter
-
-Read, in this order:
-
-1. `.ai/AGENTS.md`
-2. `.ai/INDEX.md`
-3. `.ai/architecture/ai-infrastructure-restructuring.md`
-4. this handoff: `.ai/handoffs/C/C025-Architecture-Research.md`
-5. `.ai/rules/handoff/lifecycle.md`
-6. `.ai/skills/handoff/SKILL.md`
-7. `.ai/workflows/handoff-bootstrap/BOOTSTRAP.md`
-
-Then design INDEX before changing BOOTSTRAP.
-
-The durable architectural question is:
-
-> How should the entry layer route a user command to the canonical capability without becoming another owner?
-
-The receiving chapter must not create a future handoff during bootstrap.
+- Do not reconstruct C021/C022/C023 from conversation history.
+- Do not restart semantic comparison.
+- Do not rebuild the old target tree.
+- Do not repeat completed physical moves.
+- Do not recreate old `.ai/handoffs/` paths.
+- Do not restore repository path resolution to `docs/PROJECT-INSTRUCTIONS.md` without new evidence.
+- Do not reintroduce `SUPERSEDED`.
+- Do not introduce `ENTRY.md` without new evidence.
+- Do not start the handoff-operation / commit-vocabulary TODO yet.

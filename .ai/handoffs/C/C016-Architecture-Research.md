@@ -14,30 +14,145 @@ C
 
 ## Current objective
 
-Continue specialization C architecture research after the completed C015 semantic-source/authority and intentional-acceptance audits.
+Continue specialization C architecture research after C015.
 
-C-12 and C-11.11–C-11.15 are CLOSED. Do not reopen them without concrete new evidence.
+C-12 — Cycle Semantics is CLOSED as a bounded research arc.
+C-11.11 — C-11.15 remain CLOSED as a separate bounded research arc.
 
-## Completed C015 research carried forward
+## Migration-specific first task
 
-The following are complete and should not be repeated merely because of migration:
+The FIRST substantive action after bootstrap is to review the completed Grok F001 Independent Architectural Reconstruction / Baseline response from the immediately preceding conversation context.
 
-- Grok F000 independent architectural reconstruction review.
-- Architectural Bottleneck Audit.
-- Qwen/Grok bottleneck comparison.
-- Architectural Bottleneck Cross-Audit.
-- C-13 — Authority Standing vs Effective Outcome.
-- Post-C-13 Architectural Leverage Audit.
-- C-14 evidence inspection / semantic-dimension discrimination protocol.
-- Semantic Source & Authority Audit.
-- Intentional Acceptance Audit.
-- C-12 and C-11.11–C-11.15 remain CLOSED.
+The Grok baseline is an independent external-review artifact. It is NOT an established architectural fact and must not be incorporated automatically.
 
-## Strongest current semantic boundaries
+The review must distinguish:
 
-C-13 established:
+- OBSERVED FACT
+- INFERENCE
+- ASSUMPTION
+- SPECIFICATION
+- IMPLEMENTATION DETAIL
+- OPEN QUESTION
 
-```
+The review must test for circular reasoning and unsupported semantic upgrades, and separately identify Grok's independent findings.
+
+Do not use the Qwen independent-review handoff as a premise for this initial Grok baseline review. Any later Qwen ↔ Grok comparison is a separate explicitly controlled cross-review task.
+
+## Established bounded results carried forward
+
+C-12 CLOSED:
+Within the tested positive Boolean models of requires, no independent cycle-specific semantic consequence was detected beyond composition of the individual dependencies. This is a bounded negative result, not a universal claim that cycle semantics do not exist.
+
+C-11.11 — C-11.15 CLOSED.
+
+## Preserved research distinctions
+
+Preserve, without promoting them automatically to semantic primitives:
+
+- representation ≠ interpretation context
+- state ≠ consequence
+- candidate effect ≠ effective outcome
+- applicability ≠ activation
+- authority ≠ precedence
+
+## Constraints
+
+Do not introduce without separate evidence:
+
+- typed UNRESOLVED
+- three-valued logic
+- fixed-point semantics
+- generic dependency engine
+- generic precedence engine
+- premature candidate-level precedence
+- Resolution = {subject, state, cause/reason}
+- Finding as a semantic entity
+- separate Result referent
+- graph implementation architecture
+- cycle = conflict / contradiction / error / unresolved
+- mandatory subject
+- unrestricted content as a universal semantic container
+- dependency as universally relation + target
+- target specification as a universal semantic container
+- ontology as mandatory component
+- role assignment as an established semantic entity
+- mapping as ontologically resolved
+
+No implementation authorization is granted by this research chapter.
+
+## Controlled reviewer experiment
+
+Qwen and Grok are independent external reviewers under a common reviewer contract.
+
+The ongoing comparison objective is to identify substantive differences in:
+
+- reconstruction
+- assumptions
+- distinctions
+- counterexamples
+- proposed research directions
+- evidence quality
+
+Do not rank reviewers or declare a winner.
+
+## Handoff lifecycle
+
+Previous chapter:
+C015 — HANDED_OFF
+
+This receiving handoff is intentionally created as DRAFT during lifecycle recovery/bootstrap.
+
+## Completed C016 research sequence
+
+The following research steps are now complete:
+
+1. Grok F001 Independent Architectural Reconstruction / Baseline review.
+2. C016 Architectural Bottleneck Audit:
+   docs/architecture/architectural-bottleneck-audit-C016.md
+3. Qwen E005 independent bottleneck audit comparison.
+4. Grok F001 bottleneck audit comparison.
+5. Cross-audit synthesis:
+   docs/architecture/architectural-bottleneck-cross-audit-C016.md
+6. C-13 bounded semantic discrimination test:
+   docs/architecture/c-13-authority-vs-effective-outcome-C016.md
+7. Post-C-13 Architectural Leverage Audit:
+   docs/architecture/post-c-13-architectural-leverage-audit-C016.md
+8. C-14 evidence inspection / semantic-dimension discrimination protocol:
+   docs/architecture/c-14-override-semantic-dimension-C016.md
+9. Semantic Source & Authority Audit:
+   docs/architecture/semantic-source-authority-audit-C016.md
+10. Intentional Acceptance Audit:
+    docs/architecture/intentional-acceptance-audit-C016.md
+
+## C-14 result
+
+C-14 behavioral execution was **not performed** because the current repository does not contain sufficiently explicit OVERRIDE semantics from which to instantiate a non-circular test.
+
+The repository does establish:
+
+- authority ≠ precedence;
+- precedence can affect effective outcome without changing authority standing or the losing candidate effect;
+- temporary OVERRIDE is an unresolved semantic branch.
+
+It does not establish whether OVERRIDE changes:
+
+- authority;
+- precedence;
+- applicability;
+- candidate selection;
+- candidate effect;
+- effective outcome;
+- another relation.
+
+Therefore no OVERRIDE behavior was invented.
+
+The C-14 protocol remains available for execution if authoritative project evidence later provides a concrete OVERRIDE operation/example.
+
+## Current architectural position
+
+C-13 remains the strongest positive discrimination:
+
+```text
 dependency on B
     ≠
 dependency on B's authority standing
@@ -47,31 +162,34 @@ dependency on B's candidate effect
 dependency on B's effective outcome
 ```
 
-The C015 bottleneck lineage does not justify a universal “Resolution → everything” or “Dependency → Resolution → everything” architecture.
+C-14 adds an evidence-boundary result:
 
-The strongest unresolved boundaries remain:
-
-```
-Dependency
-    ↕
-effective outcome
-    ↕
-Resolution / referent semantics
-
-Authority / Precedence
-    ↕
-OVERRIDE
-    ↕
-effective outcome
+```text
+authority ≠ precedence
+        │
+        └── OVERRIDE semantics = unresolved / evidence-insufficient
 ```
 
-C-14 did not establish OVERRIDE semantics. Historical OVERRIDE material in 03D/03E is evidence of prior accepted working reasoning, not automatic current canonical normative semantics.
+This is a research result, not an Architecture Decision.
 
-## Semantic source / authority boundary
+## Semantic Source & Authority Audit result
 
-The project distinguishes:
+The audit found that the project already distinguishes source roles and, more importantly, explicitly separates evidence/research from project specification.
 
-```
+Established by the inspected rules and architecture:
+
+- References are evidence/source material and do not automatically acquire authority over project rules.
+- TRACE is not an authority source.
+- Memory is not automatically an instruction.
+- Observed behavior is not automatically a project requirement.
+- Research is distinct from specification.
+- A finding is promoted to specification only through intentional project acceptance.
+
+The audit also found substantial historical OVERRIDE reasoning in the superseded 03D/03E handoffs. Those artifacts are durable evidence of prior project reasoning, but their historical existence does not automatically establish every statement as current canonical specification.
+
+The resulting working boundary is:
+
+```text
 source / observation / reference
             ↓
           evidence
@@ -83,208 +201,107 @@ source / observation / reference
      project semantics
 ```
 
-Evidence is not automatically project authority. Research/finding is not automatically specification. Human/project acceptance is required for promotion. No total source hierarchy was established.
+No total source hierarchy was established, and no claim/provenance ontology was introduced.
 
-## Intentional acceptance result
+The C-14 evidence boundary is therefore preserved and refined: historical OVERRIDE evidence exists, but its current normative status must not be inferred automatically.
 
-C015 established that the project already has an operational acceptance practice distributed across human decision, durable documentation, and lifecycle preservation.
+## Intentional Acceptance Audit result
 
-Observed distinction:
+The audit inspected the existing rules, architecture, handoff lifecycle, and historical 03D/03E practice to determine whether intentional acceptance already has a project-level mechanism.
 
-```
+Established:
+
+- intentional acceptance is explicitly required before promotion of a finding to specification;
+- human/project decision authority is explicitly retained;
+- historical 03D/03E handoffs demonstrate accepted working semantics in practice;
+- accepted working semantics can remain provisional and distinct from a formal numbered Architecture Decision;
+- handoffs preserve accepted state across chapter migrations;
+- handoff lifecycle status does not itself establish semantic status;
+- SUPERSEDED is a document/lifecycle state, not automatic semantic invalidation;
+- no dedicated Acceptance artifact or universal Decision registry is currently established.
+
+The resulting working model is:
+
+```text
 research / finding
         ↓
 human/project acceptance
         ↓
 accepted working direction / invariant
         ↓
-continued testing / refinement
+continued testing and refinement
         ↓
 stable specification / architecture decision
 ```
 
-Migration is a separate preservation path:
+with migration acting as a preservation path rather than the acceptance act itself.
 
-```
-accepted project state
-        ↓
-handoff
-        ↓
-READY_FOR_HANDOFF
-        ↓
-HANDED_OFF
-        ↓
-inherited state
-```
+The audit therefore identifies the remaining architectural gap as:
 
-Important:
+> What observable project-level act or repository state change proves that a particular finding was intentionally accepted, and what minimum durable information lets a later chapter recognize that status without conversational memory?
 
-- human acceptance is not the same thing as document lifecycle;
-- accepted working semantics are not necessarily formal Architecture Decisions;
-- HANDED_OFF does not mean every statement in the handoff is current canonical semantics;
-- Removal of a lifecycle state does not automatically semantically invalidate all historical material;
-- no Acceptance entity, approval protocol, or universal Decision registry is established.
+No Acceptance entity, approval protocol, decision registry, or new semantic primitive was introduced.
 
-## First substantive research question
+## Next action
 
-Before selecting another C-series experiment or designing a new mechanism, inspect existing repository practice around:
+Do not manufacture a C-14 behavior case.
+
+The Intentional Acceptance Audit is CLOSED:
+
+docs/architecture/intentional-acceptance-audit-C016.md
+
+Before selecting a new C-series experiment or introducing any new acceptance mechanism, inspect whether existing project practice already provides a sufficient convention for recognizing:
 
 - accepted working invariants;
-- formal Architecture Decisions;
+- formal architecture decisions;
 - specifications;
-- inheritance through handoffs;
-- later refinement;
-- supersession.
+- inherited accepted state;
+- later refinement or supersession.
 
-Primary question:
+The next migration is to be performed separately by the explicit chapter migration command, after this audit is complete.
 
-> What observable project-level act or repository state change constitutes intentional acceptance of a research finding, and what minimum durable information lets a later chapter distinguish accepted semantic status from recorded discussion, provisional reasoning, historical evidence, and inherited text without conversational memory?
-
-Do not introduce an Acceptance entity merely because the question suggests one.
-
-## Required research discipline
-
-Preserve these categories:
-
-- OBSERVED FACT
-- INFERENCE
-- ASSUMPTION
-- SPECIFICATION
-- IMPLEMENTATION DETAIL
-- OPEN QUESTION
-
-Do not promote inference to specification without sufficient evidence.
-
-Do not introduce automatically:
-
-- typed UNRESOLVED;
-- three-valued logic;
-- fixed-point semantics;
-- generic dependency/precedence engines;
-- graph architecture;
-- Resolution ontology;
-- Result entity;
-- Finding entity;
-- mandatory subject;
-- universal content container;
-- universal dependency = relation + target;
-- ontology as mandatory architecture;
-- role assignment as semantic entity;
-- mapping as ontologically resolved.
-
-No implementation authorization.
-
-## Required reading lineage
-
-The receiving chapter must preserve and use the following reading set:
-
-### Lifecycle / workflow
-
-- .ai/skills/conversation-handoff/BOOTSTRAP.md
-- .ai/rules/conversation-lifecycle.md
-- .ai/rules/handoff-references.md
-- .ai/rules/workflow.md
-- .ai/rules/project-architecture.md
-- .ai/rules/repository.md
-- .ai/handoffs/C015-Architecture-Research.md
-
-### Architecture baseline / acceptance
-
-- docs/PROJECT-INSTRUCTIONS.md
-- docs/architecture/ai-project-instruction-architecture.md
-- docs/architecture/semantic-source-authority-audit-C015.md
-- docs/architecture/intentional-acceptance-audit-C015.md
-
-### Dependency / result lineage
-
-- docs/architecture/prerequisite-dependency-semantics.md
-- docs/architecture/c-13-authority-vs-effective-outcome-C015.md
-
-### Bottleneck / leverage lineage
-
-- docs/architecture/architectural-bottleneck-audit-C015.md
-- docs/architecture/architectural-bottleneck-cross-audit-C015.md
-- docs/architecture/post-c-13-architectural-leverage-audit-C015.md
-
-### Historical OVERRIDE evidence
-
-- docs/architecture/c-14-override-semantic-dimension-C015.md
-- .ai/handoffs/03D-Architecture-Research.md
-- .ai/handoffs/03E-Architecture-Research.md
-
-These references are not a flat authority hierarchy.
-
-## Handoff lifecycle status
-
-The handoff lifecycle was explicitly simplified during C016 after the research distinction above was operationally confirmed:
-
-```
-DRAFT
-  ↓
-READY_FOR_HANDOFF
-  ↓
-HANDED_OFF
-```
-
-Current lifecycle semantics:
-
-- `HANDED_OFF` is the terminal handoff state.
-- The retired lifecycle state is not part of the current handoff lifecycle.
-- The retired historical lifecycle design must not be restored.
-- Lifecycle history remains available through repository history and handoff provenance.
-
-This cleanup is now reflected in the applicable `.ai/rules`, handoff skills, and architecture documentation.
-
-## Current implementation state
-
-No implementation work is authorized by this research chapter.
-
-No structural architecture refactor should begin until the relevant semantics are sufficiently stable.
-
-## Evidence / confidence
-
-### Confirmed / observed
-
-- C015 completed the listed bounded research and audits.
-- Intentional acceptance is an explicit project workflow requirement.
-- Human/project decision authority is retained.
-- Accepted working semantics are observable in historical 03D/03E practice.
-- Handoff preserves accepted state but does not itself constitute acceptance.
-- No dedicated Acceptance artifact or universal Decision registry is established by the inspected repository practice.
-- Historical OVERRIDE semantics exist as durable evidence, but current canonical normative status is not established merely by their historical presence.
-
-### Inferred
-
-- The remaining leverage point may be semantic status recognition and preservation rather than source ranking.
-- Existing project conventions may already be sufficient and may only need clearer interpretation.
-
-These remain inferences until further evidence is inspected.
-
-### Assumed / unverified
-
-- The exact observable act/state change that proves intentional acceptance is not yet fully discriminated.
-- The minimum durable information required for later recognition of acceptance is not yet formally characterized.
-- It is not established whether a new formal mechanism is necessary.
-
-### Open
-
-- Existing project convention for recognizing intentional acceptance.
-- Distinction between accepted working state and merely recorded discussion.
-- Durable recognition of accepted status across document types and migrations.
-- Relationship between later refinement/supersession and semantic status.
-
-## Last completed task
-
-C016 completed the lifecycle cleanup arising from the semantic distinction between handoff migration state and semantic status. The handoff lifecycle is now explicitly limited to DRAFT → READY_FOR_HANDOFF → HANDED_OFF, and the repository documentation was normalized accordingly. The final architecture-document lifecycle diagram was also corrected to remove an accidental duplicate HANDED_OFF node. The repository was checked for the exact duplicate sequence `HANDED_OFF HANDED_OFF` and no matches remained.
-
-The substantive research state from C015 remains as documented above; no implementation work was authorized.
-
-## Immediate next task
-
-Continue the bounded inspection of existing repository practice and evidence for accepted working invariants, formal Architecture Decisions, specifications, handoff inheritance, and later refinement. Do not reopen the completed lifecycle cleanup unless new concrete evidence requires it.
-
-The receiving chapter should first determine whether the existing repository already provides sufficient observable representation of intentional acceptance before designing any new acceptance mechanism.
-
-Do not design a new acceptance mechanism until this inspection establishes that existing practice is insufficient.
+No implementation authorization is granted.
 
 Human remains the final architecture decision-maker.
+
+## C016 → C017 migration reading set
+
+The receiving chapter MUST read the following before selecting new substantive research:
+
+### Bootstrap / lifecycle
+
+- `.ai/skills/conversation-handoff/BOOTSTRAP.md`
+- `.ai/rules/conversation-lifecycle.md`
+- `.ai/rules/handoff-references.md`
+- `.ai/rules/workflow.md`
+- `.ai/rules/project-architecture.md`
+
+### Core architecture / semantic baseline
+
+- `docs/PROJECT-INSTRUCTIONS.md`
+- `docs/architecture/ai-project-instruction-architecture.md`
+- `docs/architecture/semantic-source-authority-audit-C016.md`
+- `docs/architecture/intentional-acceptance-audit-C016.md`
+
+### Dependency / result boundary
+
+- `docs/architecture/prerequisite-dependency-semantics.md`
+- `docs/architecture/c-13-authority-vs-effective-outcome-C016.md`
+
+### Architectural leverage / bottleneck lineage
+
+- `docs/architecture/architectural-bottleneck-audit-C016.md`
+- `docs/architecture/architectural-bottleneck-cross-audit-C016.md`
+- `docs/architecture/post-c-13-architectural-leverage-audit-C016.md`
+
+### OVERRIDE evidence boundary
+
+- `docs/architecture/c-14-override-semantic-dimension-C016.md`
+- `.ai/handoffs/03D-Architecture-Research.md` — historical accepted OVERRIDE/authority/precedence working semantics; historical evidence only, not automatically current canonical specification.
+- `.ai/handoffs/03E-Architecture-Research.md` — inherited accepted working semantics and the transition into dependency research.
+
+The receiving chapter MUST treat the above as a reading set, not as a flat authority hierarchy. In particular, distinguish current canonical architecture, bounded research results, historical evidence, and chapter lifecycle state.
+
+The receiving chapter MUST NOT infer current OVERRIDE semantics merely from the historical 03D/03E material.
+
+The receiving chapter MUST NOT introduce an Acceptance entity or acceptance protocol before auditing whether the existing project convention is sufficient.

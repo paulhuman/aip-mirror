@@ -14,7 +14,7 @@ C
 
 ## Starting objective
 
-Continue the bounded Architecture & Research investigation from C040. The immediate subject is the operational TRACE visibility policy: determine which operation classes should show TRACE automatically, only on explicit request, or when activation is blocked/incomplete.
+Recover from the interrupted C040 → C041 migration and continue the Architecture & Research work from the durable repository state. Treat C040's completed bounded work as the starting point and do not reopen already accepted command, bootstrap, or entry-layer decisions.
 
 ## Known starting implementation state
 
@@ -24,17 +24,33 @@ Continue the bounded Architecture & Research investigation from C040. The immedi
 - Previous chapter: C040.
 - Specialization: C.
 - Resolved short name: `Architecture & Research`.
-- Canonical bootstrap runtime contract remains `PREVIOUS_CHAPTER`, `CURRENT_CHAPTER`, `SPECIALIZATION`.
-- Active command surface remains `>>handoff`, `>>migrate <chapter>`, and `>>generate-bootstrap <chapter>`.
-- C040 established the current operational TRACE model in `.ai/architecture/ai-infrastructure-restructuring.md` section 32.
-- TRACE is a temporary human-readable presentation of the fact that ACTIVATE was executed; it is not a separate capability.
-- TRACE is event-driven rather than always-on.
-- Bootstrap is an explicit visibility exception: TRACE MUST be visible during new-conversation initialization and SHOULD list the canonical owner files actually reread.
-- The current bounded research question is the operation-by-operation visibility policy; no configurable tracing subsystem is intended.
+- The canonical bootstrap runtime contract remains:
+  ```
+  PREVIOUS_CHAPTER
+  CURRENT_CHAPTER
+  SPECIALIZATION
+  ```
+- `SHORT_NAME` is contextual data resolved from supplied bootstrap context or `.ai/config.yaml` specialization vocabulary.
+- C040 stabilized the active command surface as:
+  ```
+  >>handoff
+  >>migrate <chapter>
+  >>generate-bootstrap <chapter>
+  ```
+- C040 confirmed that first-chapter initialization does not need a dedicated `>>init` or `>>new` operation.
+- C040 confirmed that interrupted migration is handled by the canonical BOOTSTRAP workflow and durable repository state; no separate recovery operation is part of the active command surface.
+- C040 validated the two manual bootstrap transport templates.
+- C040 completed the bounded semantic consistency sweep and found no additional active infrastructure changes required by that scope.
+- C040's latest repository checkpoint added the `Structural references` section to `.ai/INDEX.md`, pointing to `.ai/handoffs/README.md` as structural documentation and explicitly not a runtime activation owner.
+- That INDEX change was committed as `3e7009eb8be23f10372ffb8abe3786cab308b350` with message `ai-docs(index): add handoff structural reference`.
 
 ## Confirmed / observed
 
 - `.ai/AGENTS.md` item 6 routes requested new-chapter initialization to `.ai/workflows/handoff/BOOTSTRAP.md`.
+- BOOTSTRAP is the canonical ordered initialization workflow.
+- AGENTS determines when BOOTSTRAP is used; BOOTSTRAP determines how initialization is performed.
+- BOOTSTRAP MUST NOT call, re-enter, or redefine AGENTS.
+- Reading AGENTS alone MUST NOT trigger chapter initialization.
 - `.ai/config.yaml` defines `C → Architecture & Research`.
 - `.ai/rules/repository.md` owns repository identity/path resolution and repository write safety.
 - `.ai/rules/workflow.md` owns general workflow and repository-wide inspection principles.
@@ -42,31 +58,23 @@ Continue the bounded Architecture & Research investigation from C040. The immedi
 - `.ai/rules/handoff/references.md` owns preservation of material research references.
 - `.ai/skills/activation/SKILL.md` defines ACTIVATE as rereading required canonical owners.
 - `.ai/skills/handoff/SKILL.md` owns handoff structure and handoff capability.
-- `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical new-chapter initialization workflow.
-- Predecessor handoff `.ai/handoffs/C/C040-Architecture-Research.md` was read successfully.
-- Active architecture record section 32 was read as the implementation/research context identified by the predecessor.
-- ACTIVATE for conversation initialization reread: `.ai/rules/workflow.md`, `.ai/rules/handoff/lifecycle.md`, `.ai/skills/handoff/SKILL.md`, and `.ai/workflows/handoff/BOOTSTRAP.md`.
-- No additional external research reference was identified as materially required for bootstrap.
+- `.ai/INDEX.md` is the operational routing and capability-discovery surface, not a procedure owner.
+- The predecessor handoff `.ai/handoffs/C/C040-Architecture-Research.md` was read successfully during this bootstrap.
+- The C039 handoff and current architecture record were inspected as supporting context.
+- No C041 handoff existed before this recovery bootstrap.
 
 ## Confirmed decisions carried forward
 
-- `>>` is the stable command prefix.
-- `>>handoff` is the active handoff command.
-- `>>migrate <chapter>` is the migration command.
-- `>>generate-bootstrap <chapter>` is the standalone bootstrap-transport operation.
-- Normal migration generates bootstrap transport as its terminal step.
-- First-chapter initialization uses BOOTSTRAP with `PREVIOUS_CHAPTER = N/A`; no dedicated initialization command is required.
+- `>>` is the stable command prefix and MUST NOT be reopened without new evidence.
+- The active handoff command is `>>handoff`.
+- The migration command is `>>migrate <chapter>`.
+- The standalone bootstrap-transport operation is `>>generate-bootstrap <chapter>`.
+- Normal migration generates the bootstrap transport as its terminal step.
+- Generated bootstrap transport and execution of the receiving chapter's BOOTSTRAP workflow are separate concerns.
+- First-chapter initialization uses BOOTSTRAP's FIRST CHAPTER branch with `PREVIOUS_CHAPTER = N/A`; no dedicated initialization command is required.
 - Interrupted migration is a bootstrap/recovery condition, not a separate lifecycle operation.
-- Operational TRACE is not a persistent schema, registry, dependency graph, command layer, lifecycle mechanism, or separate capability.
-- TRACE MUST distinguish actual rereads from discovery/search.
-- TRACE MUST NOT expose hidden reasoning.
-- Accepted minimal TRACE shape:
-  ```
-  TRACE
-    operation: <operation>
-    owners: <canonical owners actually reread>
-    status: <ACTIVATED | BLOCKED | INCOMPLETE>
-  ```
+- Manual bootstrap interruption wording is transport context only and does not create a new command or lifecycle state.
+- Historical unresolved command wording remains historical evidence and MUST NOT be treated as active command semantics merely because it appears in older architecture records or handoffs.
 
 ## Relevant files and references
 
@@ -84,18 +92,19 @@ Continue the bounded Architecture & Research investigation from C040. The immedi
 - `.ai/handoffs/README.md`
 - `.ai/handoffs/C/C040-Architecture-Research.md`
 
+No additional external research reference was identified as materially required for bootstrap recovery.
+
 ## Important constraints
 
 - Preserve the `.ai/AGENTS.md` → `.ai/INDEX.md` → ACTIVATE → canonical-owner architecture.
 - Keep BOOTSTRAP as the canonical new-conversation initialization workflow.
-- Do not introduce a configurable tracing subsystem, persistent trace schema, command registry, universal router, command-ID layer, subcommand hierarchy, flag layer, dependency graph, dedicated recovery operation, or replacement lifecycle mechanism without concrete evidence.
-- Do not reopen stabilized command syntax or bootstrap semantics without new evidence.
-- Keep TRACE event-driven and lightweight.
-- Distinguish observable execution facts from hidden reasoning.
-- For existing-file mutation, follow repository write safety: read current content, make the minimal intended change, write complete content, read back, verify content, inspect diff, verify scope, commit, and verify the result.
+- Do not introduce a command registry, universal router, command-ID layer, subcommand hierarchy, flag layer, dependency graph, dedicated recovery operation, or replacement lifecycle mechanism without concrete evidence.
+- Do not reopen stabilized `>>` command syntax or C040 bootstrap semantics without new evidence.
+- Distinguish active semantics from historical architecture evidence.
+- For existing-file mutation, follow repository write safety: read current content, make the minimal intended change, write the complete file, read back, verify content, inspect diff, verify scope, commit, and verify the result.
 - Do not modify the predecessor handoff merely because it was consumed.
 - Do not create another future receiving-chapter handoff in advance.
-- Keep this chapter bounded to the TRACE visibility question unless research produces concrete evidence requiring a related architectural correction.
+- Keep this chapter bounded; do not broaden recovery into a general AI-infrastructure refactor.
 
 ## Confirmed versus inferred versus assumed
 
@@ -103,12 +112,12 @@ Continue the bounded Architecture & Research investigation from C040. The immedi
 
 - C041 is the receiving chapter for C040.
 - `C → Architecture & Research` is configured in `.ai/config.yaml`.
-- C040's TRACE model and bounded next question are recorded in the repository.
-- The current chapter can continue from durable repository state without reconstructing C040 from conversation history.
+- C040's active command and bootstrap decisions are recorded in the repository.
+- The current handoff can continue from durable repository state without reconstructing C040 from conversation history.
 
 ### Inferred
 
-- The next useful architectural step is to classify the active operation surface by TRACE visibility rather than add new TRACE machinery, because section 32 explicitly leaves the operation-by-operation matrix unfrozen.
+- The interrupted migration affected conversation transport rather than requiring correction of the durable C040 repository state, because C040's checkpoint and active infrastructure changes are present in the repository.
 
 ### Assumed / unverified
 
@@ -116,53 +125,90 @@ Continue the bounded Architecture & Research investigation from C040. The immedi
 
 ### Open
 
-- Which operation classes should make TRACE visible automatically?
-- Which operations should show TRACE only when explicitly requested?
-- Which failure or incomplete-activation conditions should force visible diagnostic TRACE?
-- Whether the resulting visibility policy needs a compact addition to section 32.
+- The next concrete Architecture & Research question is not specified by the recovery request itself. It SHOULD be selected from the current architecture record after bootstrap verification rather than guessed from older chapter TODOs.
+
+
+## C041 checkpoint
+
+Semantic consistency sweep completed. INDEX now exposes the activation capability. Obsolete negative references were removed from active handoff/bootstrap documentation. The next bounded question is operational TRACE design.
 
 ## Immediate next task
 
-Evaluate the bounded TRACE visibility question:
+Evaluate the bounded TRACE question now that the semantic consistency sweep is complete:
 
-> In which operations should TRACE be visible automatically, on request only, or never by default?
+> How exactly should operational TRACE for the .ai infrastructure be shaped so that it is useful for observation and debugging without becoming permanent noise?
 
-Start from the operation classes already present in the active architecture and infrastructure. Keep the resulting policy simple, event-driven, and auditable. Do not introduce a configurable tracing subsystem.
+Do not prematurely turn TRACE into a persistent schema or dependency registry. Do not reopen the already resolved bootstrap/command semantics unless new concrete evidence appears.
 
 ## Recommended starting context
 
-1. `.ai/architecture/ai-infrastructure-restructuring.md` — section 32, current TRACE model.
-2. `.ai/INDEX.md` — active command/capability surface.
-3. `.ai/workflows/handoff/BOOTSTRAP.md` — canonical initialization and mandatory bootstrap TRACE visibility.
-4. `.ai/skills/activation/SKILL.md` — ACTIVATE semantics and optional TRACE presentation.
-5. `.ai/skills/handoff/SKILL.md` — current handoff/migration operation surface.
-6. `.ai/rules/handoff/lifecycle.md` — continuity constraints.
+1. `.ai/architecture/ai-infrastructure-restructuring.md` — latest active architecture state.
+2. `.ai/INDEX.md` — current active command/capability surface.
+3. `.ai/workflows/handoff/BOOTSTRAP.md` — canonical initialization semantics.
+4. `.ai/skills/handoff/SKILL.md` — handoff capability and current operation surface.
+5. `.ai/rules/handoff/lifecycle.md` — continuity constraints.
 
-### C041 TRACE scope decision
+Bootstrap recovery is complete only after this handoff is read back and its header, immediate next task, predecessor context, and starting state are verified.
 
-C041 accepted the minimal two-layer observation model:
 
-- `ACTIVATE` shows canonical owners actually reread.
-- `OPERATION READS` shows unique repository files actually read during the operation, excluding files already shown as `ACTIVATE` owners.
-- Therefore `ACTIVATE owners ⊆ OPERATION READS`, with no duplicate paths in the human-readable presentation.
-- All pre-activation reads that belong to the operation count. ACTIVATE does not define the start of the operation.
-- Reads after ACTIVATE also count when they belong to the operation.
-- Discovery/search is not a read unless repository content was actually retrieved.
-- Repeated reads of the same repository file are shown once.
-- If an operation stops early or fails, show only the repository files actually read before it stopped.
-- No separate `VERIFICATION READS`, `WRITE`, `READ-BACK`, or `VERIFY` categories are introduced. A read-back is simply an actual read and may appear once.
-- `OPERATION READS` is shown when useful for observing the operation and on explicit request; bootstrap is a mandatory visibility case.
+## C041 TRACE research checkpoint
 
-The durable architecture record is `.ai/architecture/ai-infrastructure-restructuring.md`, section 33.
+The bounded TRACE research is recorded in `.ai/architecture/ai-infrastructure-restructuring.md` section 32.
 
-### C041 remaining open question
+Accepted conclusions:
 
-The only remaining bounded question is the operation boundary:
+- Operational TRACE is a temporary human-readable presentation of the fact that ACTIVATE was executed.
+- TRACE is not a separate capability.
+- TRACE is event-driven, not always-on.
+- TRACE is hidden by default unless the operation is diagnostically significant or the user explicitly requests it.
+- New-conversation bootstrap is an explicit exception: TRACE MUST be visible during bootstrap initialization.
+- Bootstrap TRACE MUST show the canonical owner files actually reread so the initialization is auditable.
+- Minimal TRACE shape:
+  ```
+  TRACE
+    operation: <operation>
+    owners: <canonical owners actually reread>
+    status: <ACTIVATED | BLOCKED | INCOMPLETE>
+  ```
+- TRACE presents observable execution facts; it does not expose hidden reasoning.
+- TRACE is not persistent state, schema, registry, dependency graph, command layer, lifecycle mechanism, or separate capability.
+- TRACE MUST distinguish actual rereads from discovery/search.
+- The complete operation-by-operation visibility matrix is intentionally NOT frozen yet.
 
-> Where does an operation end, particularly for repository reads that occur after the substantive result has been produced but before the assistant finishes the user-facing response?
+### C041 → C042 bounded research question
 
-Resolve this with minimum cognitive load. Do not introduce tracing lifecycle events, additional read categories, telemetry, or other machinery merely to answer it.
+Continue with exactly this question:
 
-## Immediate next task
+> **In which operations should TRACE be visible automatically, on request only, or never by default?**
 
-Continue the bounded operation-boundary question for `OPERATION READS`. Keep the model simple: the goal is to know what repository files were actually read during the operation, not to reconstruct read order or hidden execution history.
+Keep the decision simple and event-driven. Test the operation classes identified in the architecture record without introducing a configurable tracing subsystem.
+
+### Relevant architectural diagram
+
+```text
+ACTIVATE
+    ↓
+activation result
+    ↓
+TRACE (optional presentation)
+
+bootstrap
+    ↓
+establish repository
+    ↓
+read required canonical owners
+    ↓
+ACTIVATE
+    ↓
+VISIBLE TRACE
+    ↓
+chapter initialization
+```
+
+### C041 migration state
+
+- Architecture record updated and committed as `481f5f13e54fd9f4fe2ab516177ea5baa9acf050`.
+- The current C041 handoff remains the durable source for migration context.
+- The receiving C042 bootstrap MUST use the explicit repository locator already established by C041:
+  `https://github.com/paulhuman/aip-mirror`.
+- The next chapter is C042, specialization C, short name `Architecture & Research`.

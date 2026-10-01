@@ -14,102 +14,105 @@ C
 
 ## Starting objective
 
-Continue Iteration 2 from the current repository state after the first repository-wide consistency sweep.
+Continue Iteration 2 from the current repository state after physical restructuring.
 
-The immediate task is to inspect and repair the bounded set of project-specific leakage and ownership inconsistencies identified by C023. Do not return to semantic-comparison or target-tree planning.
+The immediate task is a repository-wide post-edit consistency sweep for stale references, duplicated normative instructions, obsolete terms, and stale dependencies left by the completed restructuring.
 
-## Durable context
+Do not restart the earlier semantic-comparison or target-tree planning stage.
 
-- `.ai/architecture/ai-infrastructure-restructuring.md` — current Iteration 2 architecture and migration context.
-- `.ai/config.yaml` — current project configuration and recovered external repository references.
-- Historical architecture research is preserved under `.ai/archive/architecture/` and is not active operational context unless specifically needed.
+## Known starting implementation state
 
-## Current architectural boundary
+C023 completed the current physical restructuring pass and documented the mandatory post-edit consistency-sweep procedure.
 
-- `.ai/` is intended to become project-agnostic AI working infrastructure.
-- `docs/` contains AIP Mirror project knowledge and project-specific decisions.
+The current architectural boundary remains:
+
+> If the primary subject is how AI should work with the project, it belongs in .ai/. If the primary subject is what AIP Mirror is or how it works, it belongs in docs/.
+
+The current repository state is authoritative.
+
+## Important constraints
+
+- .ai/ = AI working infrastructure.
+- docs/ = AIP Mirror project knowledge.
 - Workstreams are organizational areas represented by separate AI conversations, not autonomous agents.
-- Handoff lifecycle is exactly `DRAFT → READY_FOR_HANDOFF → HANDED_OFF`.
-- `SUPERSEDED` is not a lifecycle state.
-- Do not introduce `ENTRY.md`.
-- Do not use `bootstrap kernel` as an architectural term.
+- Handoff lifecycle is exactly DRAFT → READY_FOR_HANDOFF → HANDED_OFF.
+- SUPERSEDED is not a lifecycle state.
+- Do not introduce ENTRY.md.
+- Do not use “bootstrap kernel” as an architectural term.
+- After every MOVE, RENAME, DECOMPOSE, or canonical-owner change, perform a post-edit consistency sweep.
+- The sweep must search for old paths, old filenames, stale owners, obsolete terms, duplicated normative wording, stale chapter/specialization identifiers, bootstrap references, and routing/link targets; classify each relevant hit and repair or deliberately preserve it.
+- Repository writes follow the canonical read → minimal edit → complete write → read-back → verify → diff/scope → commit → verify sequence.
 
-## Post-edit consistency requirement
+## Durable architectural context
 
-After every MOVE, RENAME, DECOMPOSE, or canonical-owner change:
+- .ai/architecture/ai-infrastructure-restructuring.md
 
-1. search for old paths, filenames, owners, obsolete terms, duplicated normative wording, stale identifiers, bootstrap references, and routing targets;
-2. classify relevant hits semantically;
-3. repair actual inconsistencies or deliberately preserve valid historical references;
-4. read back changed files;
-5. inspect diff and scope;
-6. commit;
-7. verify the resulting repository state.
+Historical Iteration 2 architecture/research artifacts are preserved under `.ai/archive/architecture/` and should be consulted only when their historical context is specifically needed.
 
-## C023 sweep results
+## Operational sources
 
-The C023 repair frontier has been worked through in C024.
+- .ai/rules/repository.md
+- .ai/rules/handoff/lifecycle.md
+- .ai/rules/workflow.md
+- .ai/rules/commits.md
+- .ai/skills/commits/SKILL.md
+- .ai/workflows/handoff-bootstrap/BOOTSTRAP.md
 
-Completed:
+## Confirmed / observed
 
-- genericized the active repository, workflow, commit, deep-understanding, and handoff infrastructure where project-specific leakage was confirmed;
-- separated project repository identity/configuration into `.ai/config.yaml`;
-- preserved repository path-resolution and safety mechanics in `.ai/rules/repository.md`;
-- centralized Chapter Identifier Format ownership in `.ai/rules/handoff/lifecycle.md`;
-- repaired stale operational references exposed by the C020–C024 consistency pass;
-- reduced independent-review onboarding to the current reusable workflow surface;
-- verified remaining checked historical matches are legitimate migration history rather than active operational references.
+- C023 was READY_FOR_HANDOFF at bootstrap start.
+- C024 did not exist before this bootstrap.
+- The repository contains the completed Iteration 2 physical restructuring recorded by C023.
+- Historical architecture research has been moved to `.ai/archive/architecture/`; the active architecture layer now contains only the current restructuring working notes.
+- The first repository-wide sweep found no active `SUPERSEDED`, `bootstrap kernel`, `ENTRY.md`, or old `.ai/handoffs/` routing residue requiring repair.
+- The sweep did find project-specific leakage in several generic-looking `.ai` rules/skills, plus a deeper ownership question around repository identity in `.ai/rules/repository.md`.
 
-The remaining frontier is semantic ownership analysis of the active repository-identity and path-resolution consumers. This is the next chapter's assignment.
+## Current sweep findings
 
-## Important architectural question
+1. `.ai/rules/repository.md` contains concrete AIP Mirror and Adobe Illustrator SDK repository identity. This is an architectural boundary question, not a mechanical string-replacement task.
+2. `.ai/rules/handoff/references.md` contains project-specific repository identity and is a repair candidate.
+3. `.ai/rules/handoff/lifecycle.md` contains project-specific framing even though its lifecycle semantics are generic.
+4. `.ai/rules/workflow.md` contains project-specific framing even though its workflow guidance is generic.
+5. `.ai/skills/commits/SKILL.md` contains mixed generic commit procedure and project-specific references; inspect occurrences semantically before editing.
+6. `.ai/skills/deep-understanding/SKILL.md` contains AIP Mirror / Adobe Illustrator / JSX / FreeHand references and is a probable project-leakage case requiring semantic inspection.
+7. `.ai/skills/handoff/SKILL.md` contains project-specific wording mixed with otherwise reusable handoff capability.
+8. `.ai/workflows/independent-review/` contains project-specific onboarding/configuration for current model reviews; determine whether it belongs as project configuration rather than reusable workflow infrastructure.
 
-The target is not merely “remove the words AIP Mirror from `.ai`”. The stronger rule is:
+The bounded sweep findings and repair history are preserved in this handoff and in `.ai/architecture/ai-infrastructure-restructuring.md`.
 
-> Generic `.ai` rules, skills, and workflows must remain reusable without project-specific knowledge or embedded project configuration.
+## Recovered handoff-operation context
 
-The repository identity case is therefore the key boundary question:
+Important information recovered during C024 and preserved for the next continuation:
 
-> Where should project-specific repository identity live when repository safety and path-resolution mechanics remain reusable infrastructure?
+- Keep the three semantic dimensions distinct: **HANDOFF LIFECYCLE = state**, **HANDOFF OPERATION = action**, **HANDOFF COMMIT = durable Git record**.
+- Do not derive the operation vocabulary directly from lifecycle transitions. An operation may leave lifecycle state unchanged.
+- The archival analysis, examples, and unresolved TODO for operations and commit naming are preserved in:
+  - `.ai/architecture/ai-infrastructure-restructuring.md` §17.1 — **Archived TODO-A — handoff operations and commit vocabulary**
+  - `.ai/architecture/ai-infrastructure-restructuring.md` §17.2 — **Commit-message vocabulary TODO**
+- Those sections are durable context, not instructions to execute the analysis immediately.
+- When this TODO is eventually resumed, derive the operation vocabulary from the actual handoff workflow/rules/skills, then map operations to commit classifications and define the minimal hard-MUST commit-message vocabulary.
 
-Resolve this deliberately before editing `.ai/rules/repository.md`.
+## Immediate next task
 
-## Required next sequence
-
-1. Read the affected files in context.
-2. Classify each project-specific occurrence as reusable mechanism, project configuration, illustrative example, historical evidence, or stale duplication.
-3. Decide repository-identity ownership.
-4. Repair generic rules/skills without weakening required operational context.
-5. Decide the ownership of independent-review onboarding/configuration.
-6. Run a second repository-wide consistency sweep.
-7. Only after the repaired repository is internally coherent, review `AGENTS.md` and `.ai/INDEX.md` entry surfaces.
-
-## External repository reference recovery — completed
-
-The external repository references recovered from the 03 handoff lineage have been recorded in `.ai/config.yaml` under `references.repositories`, with their documented roles.
-
-Recovered research/reference repositories include:
-
-- `paulhuman/adobe-illustrator-2026-sdk`
-- `paulhuman/spectrum-web-components`
-- `paulhuman/codex`
-- `paulhuman/skills`
-- `paulhuman/agent.md`
-
-No further recovery work remains in this TODO.
-
-## Migration boundary
-
-C024 is complete enough to hand off. The receiving chapter should continue from the repository state represented by this handoff and the durable architecture notes; it should not create a future chapter handoff as part of bootstrap.
+1. Inspect the mixed project-specific findings in context.
+2. Decide the ownership boundary for repository identity before editing `.ai/rules/repository.md`.
+3. Generalize genuinely generic rules and skills.
+4. Determine whether independent-review onboarding should be separated into reusable mechanism plus project-specific configuration.
+5. Run the post-edit consistency sweep again after repairs.
+6. Only then review entry surfaces (`AGENTS.md` / `.ai/INDEX.md`).
 
 ## Things not to redo
 
-- Do not reconstruct C020/C021/C022 from conversation history.
+- Do not reconstruct C021/C022/C023 from conversation history.
 - Do not restart semantic comparison.
-- Do not rebuild the old target tree.
-- Do not repeat completed physical moves.
-- Do not recreate old `.ai/handoffs/` paths.
-- Do not restore repository path resolution to `docs/PROJECT-INSTRUCTIONS.md` without new evidence.
-- Do not reintroduce `SUPERSEDED`.
-- Do not introduce `ENTRY.md` without new evidence.
-- Do not start the handoff-operation / commit-vocabulary TODO yet.
+- Do not rebuild the old target tree as a future plan.
+- Do not repeat already completed physical moves.
+- Do not recreate the old docs/ handoff paths.
+- Do not restore repository path resolution to docs/PROJECT-INSTRUCTIONS.md.
+- Do not reintroduce SUPERSEDED.
+- Do not introduce ENTRY.md without new evidence.
+- Do not create a separate TODO file without a demonstrated ownership need.
+
+## Migration note
+
+C024 has completed its bounded consistency-sweep pass and has been handed off. The repository now contains a durable sweep report and a new C025 draft. Continue from those artifacts rather than reconstructing this analysis from chat history.

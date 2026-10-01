@@ -12,11 +12,213 @@ C
 **Previous chapter:**
 010
 
-## Current objective
+## Migration checkpoint
 
-Complete the bounded semantic dependency research line through C-10 — Dependency Relation vs. Dependency Target, and prepare migration to C012. The next chapter must begin with C-11 — Target Sufficiency Counterexample Test.
+This chapter is being finalized for migration to:
 
-Current working model remains intentionally conservative:
+AIP Mirror — C012 — Architecture & Research
+
+The repository state must preserve the completed C-1 through C-6 research chain below. The next chapter must continue from this checkpoint rather than reconstructing the research from memory.
+
+## Research objective
+
+The current research is no longer a generic search for fields of a `Resolution`. It is a bounded semantic/architectural investigation of what `Resolution` refers to, what semantic result an Evaluation produces, and which distinctions architecture must preserve.
+
+The current research pipeline is:
+
+```
+Evaluation
+    ↓
+semantic result / result-aspect
+    ↓
+Effective Outcome
+```
+
+This is intentionally not yet an ontological or implementation commitment.
+
+## Foundational constraints
+
+Preserve these distinctions throughout the research:
+
+```
+relationship semantics
+≠
+graph implementation architecture
+```
+
+```
+semantic necessity
+≠
+necessity to store information inside Resolution
+```
+
+```
+properties of evaluation
+≠
+properties of evaluation result
+≠
+properties of Resolution
+≠
+properties of its representation
+```
+
+Do not introduce prematurely:
+
+- typed `UNRESOLVED`;
+- 3-valued logic;
+- fixed-point semantics;
+- generic dependency engine;
+- generic precedence engine;
+- premature candidate-level precedence;
+- final `Resolution = {subject, state, cause/reason}`;
+- a predetermined ontology for Resolution;
+- a graph implementation merely because relationship semantics are present.
+
+Cycles may be allowed, prohibited by specific rules, or remain unresolved depending on eventual semantics. Do not introduce fixed-point semantics merely to handle cycles.
+
+Qwen is an independent adversarial reviewer, not an authority source. Its proposals and taxonomies are evidence for review, not adopted architecture.
+
+Human remains the final architecture decision-maker.
+
+## Important Qwen workflow rule
+
+The user explicitly authorized automatic commissioning of further Qwen research:
+
+> If the architect determines that another Qwen test or other research assignment is needed, formulate it immediately in the current response without waiting for user permission.
+
+This rule must be preserved in future handoffs. It does not mean every research question must use Qwen; it means permission is not required before formulating a Qwen assignment when such a test is warranted.
+
+## Research history
+
+### C-1 — Bounded Neutral Ontological Test for Resolution
+
+The initial question was whether Resolution could be identified as one of:
+
+```
+Event
+Node
+Edge
+Proposition
+```
+
+while preserving:
+
+```
+relationship semantics ≠ graph implementation architecture
+semantic necessity ≠ necessity to store information inside Resolution
+```
+
+Qwen's C-1 test was non-discriminating.
+
+Architect-side counterargument pass established:
+
+1. Representation does not determine ontology.
+2. Tested semantic properties did not uniquely discriminate Event, Node, Edge, and Proposition.
+3. Several apparent discriminators relied on imported assumptions.
+4. Temporal establishment, causation, and state change were not demonstrated as intrinsic.
+5. The one-subject observation did not independently establish a Node ontology.
+6. The Edge argument was incomplete.
+7. Proposition-like interpretation was not proven.
+8. `cause / reason` remained underspecified.
+9. A hybrid ontology was not established.
+10. A unique ontology remains unresolved.
+
+Final C-1 characterization:
+
+```
+C-1
+STATUS: COMPLETED
+RESULT: NON-DISCRIMINATING
+```
+
+Most important new question from C-1:
+
+> Before selecting an ontology for Resolution, determine whether “Resolution” denotes one semantic phenomenon or whether distinct semantic phenomena are currently collapsed under that term.
+
+---
+
+### C-2 — Referent Identification
+
+C-2 started from the observation that Resolution is definitely not simply `state`.
+
+The earlier use of `Resolution.state = UNRESOLVED` may have mixed subject state with evaluation status. For this semantic test, `UNRESOLVED` was deliberately excluded rather than treated as a semantic type/state.
+
+Provisional vocabulary:
+
+```
+Evaluation
+= process by which the system considers subject/candidate/relationship/rule in context
+
+Determination
+= candidate neutral term for a semantic answer produced by evaluation, if such an answer exists
+
+Outcome
+= effective state/action/consequence that follows from determination
+
+Reason
+= explanation of the basis for determination, if any
+
+Resolution
+= currently undefined; referent requires identification
+```
+
+Qwen proposed:
+
+```
+Evaluation → Finding → Effective Outcome
+```
+
+The architect-side counterargument pass rejected `Finding` as established ontology.
+
+Established instead:
+
+- Evaluation and Effective Outcome must not be assumed to be the same semantic phenomenon.
+- Evaluation can have a semantic result that participates in downstream semantics.
+- That result does not prove a separate semantic entity/referent.
+- Dependency consumption does not prove a separate Finding.
+- Multiple consumers do not prove a separate Finding.
+- Different evaluation occurrences do not prove distinct Findings.
+- Evaluation occurrence, context, provenance, and semantic identity must not be conflated.
+- “Reason = metadata” was not established.
+- “Finding” is not an adopted project term.
+
+Working result:
+
+```
+Evaluation
+    ↓
+semantic result of Evaluation
+    ↓
+Effective Outcome
+```
+
+---
+
+### C-3 — Result-vs-Evaluation Distinction Test
+
+C-3 tested:
+
+```
+H1 — Separate Result Phenomenon
+Evaluation → separate semantic result → Effective Outcome
+
+H2 — Result-as-Aspect
+Evaluation └── result/aspect → Effective Outcome
+```
+
+Tests included result description without reification, repeated evaluation, dependency consumption, multiple consumers, different evaluation bases, result without outcome, and outcome without explicitly naming an intermediate result.
+
+Qwen concluded NON-DISCRIMINATING.
+
+Architectural conclusion:
+
+- The semantic result of Evaluation is a necessary semantic role.
+- A separate Result phenomenon/referent has not been demonstrated.
+- Dependency and multi-consumer behavior can be expressed through an Evaluation and its result-aspect.
+- “Finding” remains only a descriptive shorthand at most.
+- Linguistic nominalization does not establish ontological separation.
+
+Current minimal semantic model:
 
 ```
 Evaluation
@@ -25,251 +227,316 @@ Evaluation
     Effective Outcome
 ```
 
-Dependency semantics are currently treated as relationship-level semantics. C-9/C-10 narrowed the question without establishing a generic dependency ontology or implementation model.
+Important boundary:
 
-No final Architecture Decision has been made.
+```
+semantic model
+      ↓
+what distinctions must architecture preserve?
+      ↓
+architectural consequences
+      ↓
+representation
+```
 
-## Completed
+Do not collapse this into a simple “semantics → implementation” shortcut.
 
-### C-1 through C-5
+---
 
-C-1 through C-4 were completed and architect-reviewed; C-5 was partially discriminating. The earlier conclusions remain:
+### C-4 — Architectural Boundary Test: Result-aspect Preservation
 
-- a separate Result referent has not been established;
-- Finding is not an adopted semantic entity;
-- semantic necessity is distinct from storage necessity;
-- the claim that subject is intrinsically required is not established;
-- unrestricted content is not accepted as a sufficient semantic category;
-- Resolution remains ontologically/referentially unresolved.
+C-4 tested whether architecture needs to preserve a distinction between an Evaluation occurrence and its result-aspect even if semantics does not require a separate Result entity.
+
+Hypotheses:
+
+```
+A1
+Architecture can preserve Evaluation plus result-aspect
+without a separate Result referent.
+
+A2
+Some architectural operation requires result-aspect to be independently
+addressable/persistent/traceable.
+```
+
+Tests covered:
+
+- dependency tracking;
+- change propagation;
+- consumer access;
+- diagnostics/tracing;
+- result persistence/lifecycle;
+- multiple result states/versions;
+- consumer-specific projections;
+- elimination/counterexamples.
+
+Qwen found no genuine counterexample requiring independent Result identity.
+
+Architect-side critique narrowed the claim further:
+
+- Downstream semantics needs access to what Evaluation concluded.
+- This does not establish two independent semantic phenomena.
+- “Subject + rule” as a universally stable reference was not established.
+- Persistence, versioning, provenance, and similar concerns must not be declared purely implementation concerns without further evidence.
+
+Strong surviving conclusion:
+
+```
+independent Result
+        ↓
+NOT REQUIRED BY TESTED ARCHITECTURAL OPERATIONS
+```
+
+This is NOT the claim that a separate Result representation can never be useful or necessary in a future architecture.
+
+---
+
+### C-5 — Minimal Semantic Content of the Result-aspect
+
+C-5 asked whether `{subject, content}` is sufficient as the minimum semantic content of the result-aspect, or whether additional intrinsic information is required.
+
+Qwen concluded in favor of a model resembling:
+
+```
+{subject, content}
+```
+
+but two parts of the report were rejected as established:
+
+#### Subject
+
+Qwen said:
+
+> “The subject is intrinsically required.”
+
+This is NOT accepted as established.
+
+Reason:
+
+- C-4 permits a relationship such as `B depends-on (A, result-aspect)`.
+- The subject may be carried by or recoverable from Evaluation A.
+- The fact that a bare linguistic value such as “LOCKED” is incomplete does not prove that subject must be intrinsically stored in result-aspect.
+- Semantic meaning of a conclusion is not identical to the information that must be carried by the result-aspect itself.
+
+Possible model remains open:
+
+```
+Evaluation A
+    subject = Path A
+    result-aspect
+        content = LOCKED
+```
+
+#### Content
+
+Qwen treated non-definitive explanation as part of `content`.
+
+This is considered dangerous because an unconstrained `content` can trivially absorb:
+
+- status;
+- reason;
+- prerequisite absence;
+- qualification;
+- conditions;
+- other semantic distinctions.
+
+Therefore `{subject, content}` is not yet proven minimal if `content` is allowed to mean “anything needed.”
+
+C-5 is therefore characterized:
+
+```
+C-5
+RESULT: PARTIALLY DISCRIMINATING
+```
+
+Useful result:
+
+- no independent Result representation has yet been required;
+- `content` may be too broad to serve as a falsifiable universal container;
+- the claim that subject is intrinsically required remains open.
+
+This directly motivated C-6.
+
+---
 
 ### C-6 — Content-vs-State Distinction Test
 
-Qwen tested definitive states, non-state conclusions, relational conclusions, eligibility, candidate effects, non-definitive conclusions, reasons, qualifications, and the subject question.
+C-6 was commissioned to Qwen and the Qwen response is the next expected research input.
 
-Architect-side synthesis:
+Objective:
 
-- YES, NO, and COULD NOT ESTABLISH are semantically distinguishable.
-- Not every evaluation result is a state.
-- A relational conclusion, eligibility determination, or candidate effect is not automatically an intrinsic state.
-- Qwen's claim that all non-state conclusions can simply be placed in content is not accepted as established.
-- Qwen's claim that the subject is intrinsically required is not accepted.
-- content remains a candidate category, not established ontology.
-- Subject remains a semantic candidate whose intrinsic storage requirement is unresolved.
-- A separate Result referent remains unestablished.
+> Determine whether `content` is genuinely broader than `state`, whether they are distinct semantic concepts, or whether the distinction is premature.
 
-C-6 therefore narrowed the semantic space without establishing content as a universal container or state as the final ontology.
-
-### C-7 — Definitive vs. Non-Definitive Outcome Test
-
-Cases:
+Hypotheses:
 
 ```
-A — eligibility established = YES
-B — eligibility established = NO
-C — eligibility could not be established
+H1 — State is a special case of Content
+content
+├── definitive state
+├── non-definitive conclusion
+└── other semantic conclusions
+
+H2 — State and Content are distinct semantic concepts.
+
+H3 — The distinction is premature because the terms remain underspecified.
 ```
 
-Strong result:
+Critical constraints:
+
+- Do not define content as “whatever result-aspect needs to contain.”
+- Do not define state as “content in definitive cases.”
+- Do not use implementation fields/classes/serialization/API ergonomics as evidence.
+- Do not use Resolution as the answer.
+- Do not introduce typed `UNRESOLVED`, 3-valued logic, or similar implementation semantics.
+
+C-6 tests:
+
+- A — pure definitive state;
+- B — different state values;
+- C — non-state conclusion;
+- D — relational conclusion;
+- E — eligibility;
+- F — candidate effect;
+- G — non-definitive conclusion;
+- H — conclusion with reason;
+- I — conclusion with qualification;
+- J — same state, different conclusions;
+- K — same content, different state;
+- L — minimal counterexample against H1;
+- M — minimal counterexample against H2;
+- N — re-test C-5 subject-intrinsic claim.
+
+Required counterargument areas:
+
+1. State Generalization
+2. Category Inflation
+3. Content Container
+4. Context
+5. Reason
+6. Qualification
+7. Subject
+8. WD-01
+
+Current status:
 
 ```
-YES ≠ NO ≠ COULD NOT ESTABLISH
+C-6
+STATUS: COMMISSIONED
+QWEN RESPONSE: PENDING AT MIGRATION
 ```
 
-More specifically:
+Do not assume a C-6 verdict before reviewing Qwen's report and performing the architect-side counterargument pass.
 
-- YES and NO are different values of the same kind of definitive determination.
-- C is not equivalent to YES or NO.
-- C means that no definitive determination was established.
-- An Evaluation can occur without producing a definitive determination.
-- Distinguishing evaluated-but-no-determination from never evaluated can be preserved without introducing a new semantic entity.
+---
 
-Qwen proposed treating C as an Evaluation property/status. This was not accepted as established. In particular, Evaluation.status, Inconclusive, NoResult, or equivalent ontology was not introduced.
+## Current semantic position
 
-### C-8 — Dependency Semantics Without Predefined Result or Status
-
-Setup:
+The strongest current model is:
 
 ```
-Evaluation A → eligibility question
-Evaluation B → depends on semantic consequence of A
+Evaluation
+    └── result-aspect
+          ↓
+    Effective Outcome
 ```
 
-The architect-side synthesis accepted:
-
-- YES, NO, and no definitive determination are distinct semantic situations.
-- Evaluation occurrence and what that Evaluation established must not be conflated.
-- Absence of a determination is not automatically a new semantic entity.
-- Evaluation A occurring does not by itself establish a dependency from B to A.
-- Dependency being unsatisfied was not accepted as an automatic consequence of missing information.
-
-A critical counterexample was preserved:
+with the following status:
 
 ```
-Evaluation A → cannot establish X
-Evaluation C → subsequently establishes X
+Evaluation
+→ process / occurrence
+
+result-aspect
+→ semantic resultative aspect of Evaluation
+→ can participate in downstream semantics
+→ separate Result referent not demonstrated
+
+Effective Outcome
+→ downstream effective state/action/consequence
+→ not automatically identical to evaluation result
+
+Reason
+→ ownership and intrinsic status remain open
+
+Subject
+→ surviving candidate, but intrinsic storage is NOT established
+
+State
+→ surviving candidate from earlier research, but C-6 must test
+   whether “state” is a distinct semantic concept or a narrower content category
+
+Resolution
+→ referent/ontology remains unresolved
 ```
 
-This demonstrates:
+Do not reintroduce “Finding” as an established semantic entity.
+
+Do not treat `UNRESOLVED` as a semantic ontology/type during this research line.
+
+## Earlier Resolution-context research carried into this chapter
+
+Before the C-1–C-6 line, bounded candidate testing had not demonstrated independent intrinsic necessity for:
 
 ```
-A did not establish X
-≠
-X was not established
-≠
-X is undetermined
+origin
+provenance
+consumer consequence
+dependency relation
+dependency target
+consumer role
+applicability condition
+conflict / cycle context
 ```
 
-The exact semantic target of B's dependency remained unresolved.
+Working classifications remain:
 
-### C-9 — Dependency Target Test
+- origin → derived/reconstructable candidate;
+- provenance → derived/reconstructable candidate;
+- consumer consequence → derived consumer-policy result;
+- dependency relation → relationship-level semantics;
+- dependency target → relationship-level semantics;
+- consumer role → evaluation/consumer context;
+- applicability condition → semantic information relevant to evaluation/eligibility/authority/etc., but independent internal Resolution necessity not demonstrated;
+- conflict/cycle context → semantically relevant context, but independent internal Resolution necessity not demonstrated.
 
-C-9 tested three candidate interpretations:
+These are semantic-level classifications, not approved implementation architectures.
 
-```
-A — B depends on Evaluation A itself
-B — B depends on something established by Evaluation A
-C — B depends on the underlying semantic fact X
-```
-
-The strongest established result was:
-
-- the three statements about A and X are semantically distinct;
-- existence of Evaluation A does not automatically create a dependency;
-- source-specific and source-independent dependency behavior can differ;
-- B depends on X and B depends on X as established by A have different substitution behavior;
-- dependency semantics cannot be inferred solely from the existence or result of A.
-
-The following stronger claims were weakened:
-
-- dependency is not proven to always target a result;
-- dependency is not proven to be always source-independent;
-- dependency is not proven to be always source-specific;
-- A failed to establish X does not automatically mean B's dependency is unsatisfied.
-
-C-9 left open whether A/B are distinct semantic forms or merely different referents of one relationship.
-
-### C-10 — Dependency Relation vs. Dependency Target
-
-C-10 tested whether the A/B/C candidates require distinct dependency types.
-
-Qwen's strongest useful observation was that all three can be read as:
+The surviving candidate group remains:
 
 ```
-B depends on [target]
+subject
+state
+cause / reason
 ```
 
-with different target/referent interpretations:
+with the explicit qualification that “surviving candidate” does not mean “proven mandatory field.”
 
-- Evaluation A;
-- something established by A;
-- underlying fact X.
+## Earlier research sequence
 
-The substitution test showed:
+U-1 through U-10 were completed in the independent-review research sequence.
 
-```
-B depends on A
-→ C cannot substitute for A
+The broad Model A vs Model B Architecture Decision remains open.
 
-B depends on something established by A
-→ C cannot substitute for A
+The previous surviving-candidate Qwen review retained:
 
-B depends on X
-→ C can satisfy the requirement if C establishes X
-```
+- Qwen Response 1 as the preferred bounded response;
+- Qwen Response 2 as an adversarial counterargument.
 
-The architect-side synthesis accepts the following narrower conclusion:
+Response 2's most valuable contribution was identifying the possibility that Resolution itself is ontologically underspecified. Its Event/Node/Edge/Proposition taxonomy must remain a research hypothesis, not an adopted architecture.
 
-> For the tested A/B/C cases, different dependency behavior did not require different dependency types.
+## Architecture/research boundaries
 
-This is a strong narrowing result, but it is not yet a proof that dependency is universally one semantic relation.
+Do not:
 
-The following Qwen claims were deliberately weakened:
+- restart U-1 through U-10 without a concrete evidentiary reason;
+- repeat completed bounded tests without a concrete counterexample;
+- formalize Qwen's taxonomy as architecture;
+- introduce generic dependency, precedence, or authorization engines;
+- treat graph terminology as proof of a graph substrate;
+- treat persistence/versioning/provenance as automatically “just implementation”;
+- make the final Model A vs Model B decision prematurely.
 
-> The dependency relation is one semantic relation.
-
-and:
-
-> All semantic differences can be explained by target specification.
-
-C-10 did not establish either claim universally.
-
-### C-10 architect-side counterargument: target specification is not yet an established universal container
-
-Qwen extended the target idea to examples such as:
-
-```
-X-as-established-by-A
-X-as-established-by-acceptable-source
-X-as-established-after-event-E
-```
-
-This is a useful hypothesis, but it risks turning target specification into a universal semantic container analogous to the earlier problematic use of content.
-
-C-10 itself identified a potential boundary case:
-
-```
-B depends on X
-only if Y
-```
-
-Here Y may be a condition on the dependency's applicability rather than part of the target. C-10 did not resolve whether such conditions belong to the target, to the dependency relationship, to B's rule, or to another semantic context.
-
-Therefore:
-
-```
-Dependency = relation + target
-```
-
-is not an Architecture Decision.
-
-The current status is:
-
-```
-dependency type differentiation
-        ↓
-not required by tested C-10 cases
-
-universal target-sufficiency
-        ↓
-not established
-```
-
-## Current implementation state
-
-No implementation work is authorized by this checkpoint.
-
-No separate Result referent has been established. Finding is not an adopted semantic entity. Resolution remains ontologically/referentially unresolved.
-
-Dependency remains a semantic relationship under investigation, not an implementation engine or graph model.
-
-## Decisions
-
-No final Architecture Decision has been made.
-
-Established working boundaries:
-
-- semantic necessity ≠ storage necessity;
-- relationship semantics ≠ graph implementation architecture;
-- properties of Evaluation, result, Resolution, and representation must not be conflated;
-- Qwen is an independent adversarial reviewer, not an authority source;
-- Qwen taxonomy is evidence for review, not adopted architecture;
-- Human remains the final architecture decision-maker;
-- dependency behavior must not be promoted into a generic dependency engine merely because dependency relationships exist;
-- C-10 does not establish target specification as a universal semantic container;
-- the next test must attempt to falsify target sufficiency rather than assume it.
-
-## Open questions
-
-1. Can a dependency have semantic conditions that cannot be reduced to a change in its target/referent?
-2. Does B depends on X only if Y provide a genuine counterexample to target sufficiency?
-3. If source, temporal, activation, or other constraints are present, are they target properties, dependency properties, rule/context properties, or some combination?
-4. Can two dependencies have the same apparent target but different semantic behavior for reasons that cannot be represented by changing the target?
-5. Is a single generic depends-on relation semantically sufficient for the tested domain, without prematurely declaring it universal?
-6. What is the smallest defensible semantic description of a dependency relationship?
-7. Does any of this materially affect the unresolved referent/ontology of Resolution?
-8. What bounded research question should follow C-11?
-
-## Current files
+## Relevant repository files
 
 Primary handoff/history:
 
@@ -277,7 +544,6 @@ Primary handoff/history:
 - .ai/handoffs/C010-Architecture-Research.md
 - .ai/handoffs/C009-Architecture-Research.md
 - .ai/handoffs/C008-Architecture-Research.md
-- .ai/handoffs/C007-Architecture-Research.md
 
 Architecture/research:
 
@@ -294,199 +560,124 @@ Process/rules:
 - .ai/skills/deep-understanding/SKILL.md
 - .ai/skills/commit-message/SKILL.md
 
-## Relevant references
-
-Canonical repository:
-
-```
-paulhuman/aip-mirror@main:/
-```
-
-Primary migration history:
-
-```
-paulhuman/aip-mirror@main:/.ai/handoffs/C010-Architecture-Research.md
-paulhuman/aip-mirror@main:/.ai/handoffs/C009-Architecture-Research.md
-```
-
-Qwen research onboarding:
-
-```
-paulhuman/aip-mirror@main:/docs/architecture/independent-review-qwen-onboarding.md
-```
-
-Dependency research:
-
-```
-paulhuman/aip-mirror@main:/docs/architecture/prerequisite-dependency-semantics.md
-```
-
-These references are evidence/context, not authority over the semantic conclusions.
-
-## Important constraints
-
-Do not introduce:
-
-- typed UNRESOLVED;
-- 3-valued logic;
-- fixed-point semantics;
-- generic dependency engine;
-- generic precedence engine;
-- premature candidate-level precedence;
-- final Resolution = {subject, state, cause/reason};
-- Finding as established ontology;
-- predetermined Resolution ontology;
-- graph implementation merely because relationship semantics exist.
-
-Do not accept automatically:
-
-- The subject is intrinsically required.
-- Explanation/reason can simply be unrestricted content.
-- Dependency is universally one relation plus target.
-- Target specification is an unrestricted semantic container.
-- Conditional dependencies are merely target refinements.
-
-Do not begin implementation work or convert Qwen taxonomy into Architecture Decision.
-
-### Required research discipline
-
-```
-Qwen report
-      ↓
-architect-side counterargument pass
-      ↓
-synthesis
-      ↓
-next bounded research question
-```
-
-The next question must be narrower than the conclusion it tests and must not presuppose the answer.
-
-## Evidence / confidence
+## Evidence and confidence
 
 ### Confirmed / observed
 
-- C-1 through C-5 were completed and architect-reviewed.
-- C-6 was completed and narrowed the Content-vs-State question.
-- C-7 established the semantic distinction between definitive NO and inability to establish.
-- C-8 established the importance of separating Evaluation occurrence, what it established, what B requires, and what B may inspect.
-- C-9 established that source-specific and source-independent dependency interpretations can have different substitution behavior.
-- C-10 established that the tested A/B/C dependency interpretations did not require different dependency types.
-- Finding remains unadopted.
-- Separate Result identity remains unestablished.
-- Subject intrinsic storage remains unestablished.
-- No final Architecture Decision exists.
+- C011 is the active closing chapter for this migration.
+- C010 was already HANDED_OFF before this migration and is now the predecessor that must be superseded.
+- C012 does not yet exist.
+- C-1 through C-4 are completed and architect-reviewed.
+- C-5 is completed with a PARTIALLY DISCRIMINATING characterization.
+- The Qwen statement “The subject is intrinsically required” is explicitly NOT accepted as established.
+- The claim that explanation/reason can simply become unrestricted `content` is explicitly treated as methodologically unsafe.
+- C-6 has been commissioned and its Qwen response is pending.
+- No final Architecture Decision has been made.
 
 ### Inferred
 
-- The research is increasingly about identifying semantic referents and ownership of distinctions rather than selecting fields.
-- Dependency should currently be treated as a relationship whose exact referent remains under test.
-- C-11 should be adversarial: try to produce a counterexample to target sufficiency rather than extend target specification by default.
+- The current research is better understood as referent identification plus semantic-ownership analysis than as field selection.
+- A separate Result entity has not been required by tested semantic or architectural cases.
+- The next useful evidence comes from testing content-vs-state rather than expanding Resolution fields.
 
 ### Assumed / unverified
 
-- Whether target sufficiency holds beyond the C-10 cases.
-- Whether conditional, temporal, provenance/source, or activation constraints introduce semantics not reducible to target specification.
-- Whether a dependency relation has any intrinsic properties beyond expressing a requirement.
-- Whether dependency semantics will materially affect the eventual Resolution contract.
+- Whether state is a special case of a broader semantic content concept.
+- Whether subject must be intrinsically carried by the result-aspect.
+- Whether cause/reason has any conditional intrinsic semantic role.
+- Whether a future architectural operation could justify independently addressable Result identity outside the tested cases.
+- Whether the Event/Node/Edge/Proposition distinction will materially affect the eventual Resolution contract.
 
-### Open
+## Open questions for C012
 
-- C-11 result.
-- Architect-side counterargument to C-11.
-- Whether target sufficiency survives the counterexample test.
-- Whether dependency needs any semantic dimension beyond referent/target.
-- Final minimum semantic contract.
-- Final Architecture Decision.
-
-## Last completed task
-
-C-10 — Dependency Relation vs. Dependency Target, including Qwen report review and architect-side counterargument.
-
-The decisive current synthesis is:
-
-> Different dependency behavior in the tested C-10 cases did not require different dependency types, but universal target sufficiency remains unproven.
+1. What does Qwen's C-6 report conclude about Content vs State?
+2. Does the architect-side counterargument pass agree, partially agree, or reject that conclusion?
+3. Is `content` a useful semantic term at all, or does it hide distinctions that need separate treatment?
+4. Is `state` a semantic result, a special category of result content, or a downstream effective outcome?
+5. Does the C-6 test further weaken or strengthen the claim that subject is intrinsic?
+6. What is the smallest defensible semantic description of an Evaluation result-aspect?
+7. Does Resolution refer to an Evaluation occurrence, its result-aspect, an effective outcome, or a distinct semantic phenomenon?
+8. Which remaining distinctions are genuinely semantic, which are evaluation-context, and which are downstream policy/relationship semantics?
+9. What bounded test should follow C-6?
+10. When, if ever, is the evidence strong enough to formulate an Architecture Decision?
 
 ## Immediate next task
 
-In the receiving chapter C012, run:
+Review the pending Qwen **C-6 — Content-vs-State Distinction Test** report.
 
-> C-11 — Target Sufficiency Counterexample Test
+Then perform an architect-side counterargument pass before accepting any Qwen conclusion.
 
-The purpose is to attempt to falsify:
-
-> Dependency semantics can always be explained by identifying its target/referent.
-
-Do not assume that conditions belong to the target. Do not assume that they belong to the relation either.
-
-The test should specifically seek a case where two dependencies have the same apparent target but differ semantically, or where a dependency has semantics that cannot be reduced to target identity/specification.
-
-Use:
+In particular, explicitly test:
 
 ```
-candidate hypothesis
-      ↓
-adversarial counterexample
-      ↓
-architect-side analysis
-      ↓
-narrowed synthesis
+“content” as a genuine semantic category
+        vs
+“content” as an unconstrained container that makes every case trivially fit
 ```
 
-Do not classify actual AIP Mirror dependencies yet.
+and:
+
+```
+“subject is intrinsically required”
+        vs
+subject being recoverable from Evaluation/context
+```
+
+If a new bounded Qwen test is warranted after that pass, formulate it immediately without waiting for user permission.
+
+## Recommended starting context
+
+Start with the pending C-6 report.
+
+Do not begin implementation.
+
+Do not update architecture decisions merely because Qwen supplies a neat taxonomy.
+
+Use the pattern:
+
+```
+Qwen report
+    ↓
+architect-side counterargument
+    ↓
+synthesis
+    ↓
+next bounded question / decision
+```
+
+Only after the C-6 evidence has been adversarially reviewed should the next research boundary be selected.
 
 ## Things not to redo
 
 - Do not redo U-1 through U-10 without a concrete evidentiary reason.
-- Do not redo completed C-1 through C-10 without a specific counterexample.
-- Do not regenerate the already-issued C-10 task.
-- Do not treat subject is intrinsically required as established.
-- Do not let unrestricted content absorb reason, qualification, status, or other distinctions merely to make a hypothesis fit.
-- Do not let target specification become the new universal container merely to preserve a hypothesis.
-- Do not reintroduce Finding.
-- Do not introduce typed UNRESOLVED, 3-valued logic, fixed-point semantics, generic dependency/precedence/authorization engines.
+- Do not redo completed C-1.4-T1 through C-1.6-T6 without a specific counterexample.
+- Do not regenerate an already-issued Qwen task.
+- Do not treat “subject is intrinsically required” as established.
+- Do not let unrestricted `content` absorb reason, qualification, status, or other distinctions merely to make a hypothesis fit.
+- Do not reintroduce `Finding` as an established entity.
+- Do not introduce typed `UNRESOLVED`, 3-valued logic, fixed-point semantics, generic dependency/precedence/authorization engines.
 - Do not redesign the handoff mechanism.
-- Do not promote graph hypotheses to implementation architecture without independent semantic evidence.
-- Do not begin implementation work in Architecture & Research.
-
-## Recommended starting context for next chapter
-
-Start from the C-10 synthesis above, then run the bounded research line:
-
-```
-C-10
-  ↓
-target sufficiency remains unproven
-  ↓
-C-11 — Target Sufficiency Counterexample Test
-  ↓
-Qwen report
-  ↓
-architect-side counterargument
-  ↓
-synthesis
-  ↓
-next bounded question
-```
-
-The key methodological rule is:
-
-> Do not repair a failed hypothesis by expanding the meaning of target until every counterexample fits.
-
-Human remains the final architecture decision-maker.
+- Do not promote graph-oriented hypotheses to implementation architecture without an independent semantic argument.
 
 ## Migration lifecycle
 
-Bootstrap of the receiving chapter has now completed the normal write-capable lifecycle transition:
+At migration finalization:
 
 ```
-C010 = SUPERSEDED
-C011 = HANDED_OFF
-C012 = DRAFT
+C010 = HANDED_OFF → SUPERSEDED
+C011 = DRAFT → READY_FOR_HANDOFF
+C012 = does not yet exist
 ```
 
-The receiving C012 chapter created and owns its own DRAFT handoff, then transitioned this handoff from READY_FOR_HANDOFF to HANDED_OFF.
+The closing chapter must not create or modify C012.
 
-Post-bootstrap consistency verification confirmed the receiving handoff remains DRAFT, identifies C011 as its previous chapter, and begins with C-11 as its immediate next substantive task.
+The receiving C012 chapter must later:
+
+1. create its own DRAFT handoff;
+2. verify the previous/receiving lifecycle pair;
+3. transition C011 READY_FOR_HANDOFF → HANDED_OFF;
+4. only then begin substantive work.
+
+This chapter has not performed or claimed the C012 bootstrap.
 
 Human remains the final architecture decision-maker.

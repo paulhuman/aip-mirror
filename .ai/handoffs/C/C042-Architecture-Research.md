@@ -14,9 +14,7 @@ C
 
 ## Starting objective
 
-Continue the bounded Architecture & Research investigation from C041. The immediate subject is the remaining operation-boundary question for `OPERATION READS`: determine where an operation ends, especially for repository reads that occur after the substantive result has been produced but before the assistant finishes the user-facing response.
-
-The goal is to keep TRACE observable and useful without introducing tracing lifecycle events, additional read categories, telemetry, or other machinery.
+Continue the bounded Architecture & Research investigation from C041. The immediate subject is the operational TRACE visibility policy: determine which operation classes should show TRACE automatically, only on explicit request, or when activation is blocked/incomplete.
 
 ## Known starting implementation state
 
@@ -27,45 +25,48 @@ The goal is to keep TRACE observable and useful without introducing tracing life
 - Specialization: C.
 - Resolved short name: `Architecture & Research`.
 - Canonical bootstrap runtime contract remains `PREVIOUS_CHAPTER`, `CURRENT_CHAPTER`, `SPECIALIZATION`.
-- Supplied `SHORT_NAME` is contextual data; configuration fallback remains available.
-- Active user-facing command surface remains `>>handoff`, `>>migrate <chapter>`, and `>>generate-bootstrap <chapter>`.
-- `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical new-chapter initialization workflow.
-- `.ai/skills/activation/SKILL.md` defines ACTIVATE as rereading required canonical owners.
-- TRACE is an observable presentation of activation evidence, not a separate capability or execution layer.
-- C041 established the two-layer observation model: ACTIVATE owners plus unique additional `OPERATION READS`.
+- Active command surface remains `>>handoff`, `>>migrate <chapter>`, and `>>generate-bootstrap <chapter>`.
+- C041 established the current operational TRACE model in `.ai/architecture/ai-infrastructure-restructuring.md` section 32.
+- TRACE is a temporary human-readable presentation of the fact that ACTIVATE was executed; it is not a separate capability.
+- TRACE is event-driven rather than always-on.
+- Bootstrap is an explicit visibility exception: TRACE MUST be visible during new-conversation initialization and SHOULD list the canonical owner files actually reread.
+- The current bounded research question is the operation-by-operation visibility policy; no configurable tracing subsystem is intended.
 
 ## Confirmed / observed
 
 - `.ai/AGENTS.md` item 6 routes requested new-chapter initialization to `.ai/workflows/handoff/BOOTSTRAP.md`.
-- `.ai/config.yaml` defines `C → Architecture & Research`, and `main` as the default branch.
+- `.ai/config.yaml` defines `C → Architecture & Research`.
 - `.ai/rules/repository.md` owns repository identity/path resolution and repository write safety.
 - `.ai/rules/workflow.md` owns general workflow and repository-wide inspection principles.
 - `.ai/rules/handoff/lifecycle.md` owns chapter continuity semantics.
 - `.ai/rules/handoff/references.md` owns preservation of material research references.
-- `.ai/skills/activation/SKILL.md` defines ACTIVATE and optional TRACE presentation.
-- `.ai/skills/handoff/SKILL.md` owns handoff structure and handoff operations.
-- `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical initialization workflow.
+- `.ai/skills/activation/SKILL.md` defines ACTIVATE as rereading required canonical owners.
+- `.ai/skills/handoff/SKILL.md` owns handoff structure and handoff capability.
+- `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical new-chapter initialization workflow.
 - Predecessor handoff `.ai/handoffs/C/C041-Architecture-Research.md` was read successfully.
-- Active architecture record `.ai/architecture/ai-infrastructure-restructuring.md`, sections 32–33, was read as the implementation/research context identified by C041.
-- `.ai/INDEX.md` was read as the active command/capability surface.
-- ACTIVATE for conversation initialization reread these canonical owners: `.ai/rules/workflow.md`, `.ai/rules/handoff/lifecycle.md`, `.ai/skills/handoff/SKILL.md`, and `.ai/workflows/handoff/BOOTSTRAP.md`.
-- No additional external research reference is materially required for bootstrap.
+- Active architecture record section 32 was read as the implementation/research context identified by the predecessor.
+- ACTIVATE for conversation initialization reread: `.ai/rules/workflow.md`, `.ai/rules/handoff/lifecycle.md`, `.ai/skills/handoff/SKILL.md`, and `.ai/workflows/handoff/BOOTSTRAP.md`.
+- No additional external research reference was identified as materially required for bootstrap.
 
-### C041 decisions carried forward
+## Confirmed decisions carried forward
 
-- `ACTIVATE` shows canonical owners actually reread.
-- `OPERATION READS` shows the unique repository files actually read during the operation, excluding files already presented as ACTIVATE owners.
-- `ACTIVATE owners ⊆ OPERATION READS`.
-- Files MUST NOT be duplicated between the ACTIVATE and OPERATION READS presentation.
-- All actual repository reads belonging to the operation count, including reads before ACTIVATE, during ACTIVATE, after ACTIVATE, and during later operation work.
-- Pre-activation reads count; ACTIVATE does not define the beginning of the operation.
-- Discovery/search is not a read unless repository content was actually retrieved.
-- Repeated reads of the same repository file are shown once.
-- If an operation stops early or fails, OPERATION READS contains the files actually read before it stopped.
-- No separate `VERIFICATION READS`, `WRITE`, `READ-BACK`, or `VERIFY` categories are introduced.
-- A read-back is simply an actual repository read and may appear once in OPERATION READS.
-- OPERATION READS is shown when useful for observing the operation and on explicit request; new-conversation bootstrap is a mandatory visibility case.
-- TRACE MUST remain a compact presentation of observable execution facts and MUST NOT expose hidden reasoning.
+- `>>` is the stable command prefix.
+- `>>handoff` is the active handoff command.
+- `>>migrate <chapter>` is the migration command.
+- `>>generate-bootstrap <chapter>` is the standalone bootstrap-transport operation.
+- Normal migration generates bootstrap transport as its terminal step.
+- First-chapter initialization uses BOOTSTRAP with `PREVIOUS_CHAPTER = N/A`; no dedicated initialization command is required.
+- Interrupted migration is a bootstrap/recovery condition, not a separate lifecycle operation.
+- Operational TRACE is not a persistent schema, registry, dependency graph, command layer, lifecycle mechanism, or separate capability.
+- TRACE MUST distinguish actual rereads from discovery/search.
+- TRACE MUST NOT expose hidden reasoning.
+- Accepted minimal TRACE shape:
+  ```
+  TRACE
+    operation: <operation>
+    owners: <canonical owners actually reread>
+    status: <ACTIVATED | BLOCKED | INCOMPLETE>
+  ```
 
 ## Relevant files and references
 
@@ -79,22 +80,22 @@ The goal is to keep TRACE observable and useful without introducing tracing life
 - `.ai/skills/activation/SKILL.md`
 - `.ai/skills/handoff/SKILL.md`
 - `.ai/workflows/handoff/BOOTSTRAP.md`
-- `.ai/architecture/ai-infrastructure-restructuring.md`, sections 32–33
+- `.ai/architecture/ai-infrastructure-restructuring.md`
+- `.ai/handoffs/README.md`
 - `.ai/handoffs/C/C041-Architecture-Research.md`
 
 ## Important constraints
 
 - Preserve the `.ai/AGENTS.md` → `.ai/INDEX.md` → ACTIVATE → canonical-owner architecture.
 - Keep BOOTSTRAP as the canonical new-conversation initialization workflow.
-- Keep ACTIVATE and OPERATION READS conceptually simple and event-driven.
-- Do not introduce a configurable tracing subsystem, trace registry, telemetry, lifecycle events, additional read categories, or hidden execution-history reconstruction merely to answer the operation-boundary question.
-- Do not reopen stabilized command syntax, bootstrap transport semantics, chapter identity, or handoff structure without new evidence.
-- Distinguish actual repository reads from discovery/search.
-- Keep human-readable TRACE focused on observable facts.
+- Do not introduce a configurable tracing subsystem, persistent trace schema, command registry, universal router, command-ID layer, subcommand hierarchy, flag layer, dependency graph, dedicated recovery operation, or replacement lifecycle mechanism without concrete evidence.
+- Do not reopen stabilized command syntax or bootstrap semantics without new evidence.
+- Keep TRACE event-driven and lightweight.
+- Distinguish observable execution facts from hidden reasoning.
 - For existing-file mutation, follow repository write safety: read current content, make the minimal intended change, write complete content, read back, verify content, inspect diff, verify scope, commit, and verify the result.
 - Do not modify the predecessor handoff merely because it was consumed.
 - Do not create another future receiving-chapter handoff in advance.
-- Keep this chapter bounded to the operation-boundary question unless research produces concrete evidence requiring a related architectural correction.
+- Keep this chapter bounded to the TRACE visibility question unless research produces concrete evidence requiring a related architectural correction.
 
 ## Confirmed versus inferred versus assumed
 
@@ -102,69 +103,66 @@ The goal is to keep TRACE observable and useful without introducing tracing life
 
 - C042 is the receiving chapter for C041.
 - `C → Architecture & Research` is configured in `.ai/config.yaml`.
-- C041's ACTIVATE / OPERATION READS model is recorded in the durable architecture record.
+- C041's TRACE model and bounded next question are recorded in the repository.
 - The current chapter can continue from durable repository state without reconstructing C041 from conversation history.
 
-### Resolved decision
+### Inferred
 
-- The operation-boundary question is resolved semantically rather than through a new observable lifecycle.
-- An operation ends when all work required to produce and, where applicable, verify the requested substantive result is complete.
-- A repository read made only to report an already-completed result is not part of the operation.
-- A read still required to complete or verify the result is part of the operation, regardless of whether it occurs before or after ACTIVATE.
-- The active canonical owner for these semantics is `.ai/skills/activation/SKILL.md`.
-- The durable architectural record is `.ai/architecture/ai-infrastructure-restructuring.md`, section 33.3.
+- The next useful architectural step is to classify the active operation surface by TRACE visibility rather than add new TRACE machinery, because section 32 explicitly leaves the operation-by-operation matrix unfrozen.
 
 ### Assumed / unverified
 
-- None currently required.
+- None currently required for bootstrap completion.
 
 ### Open
 
-- None within the bounded C042 operation-boundary question.
+- Which operation classes should make TRACE visible automatically?
+- Which operations should show TRACE only when explicitly requested?
+- Which failure or incomplete-activation conditions should force visible diagnostic TRACE?
+- Whether the resulting visibility policy needs a compact addition to section 32.
 
-## Completed implementation
+## Immediate next task
 
-The active and durable owners were updated with the resolved operation boundary:
+Evaluate the bounded TRACE visibility question:
 
-- `.ai/skills/activation/SKILL.md` now defines the operation boundary and the `OPERATION READS` presentation semantics.
-- `.ai/architecture/ai-infrastructure-restructuring.md`, section 33.3, records the durable decision and its implications.
-- `.ai/INDEX.md` and `.ai/rules/workflow.md` were intentionally not changed because neither owns this semantic.
+> In which operations should TRACE be visible automatically, on request only, or never by default?
 
-The implementation was verified by reading back the changed files and inspecting the resulting commit scope.
+Start from the operation classes already present in the active architecture and infrastructure. Keep the resulting policy simple, event-driven, and auditable. Do not introduce a configurable tracing subsystem.
 
 ## Recommended starting context
 
-1. `.ai/architecture/ai-infrastructure-restructuring.md` — sections 32–33, current TRACE and OPERATION READS model.
-2. `.ai/handoffs/C/C041-Architecture-Research.md` — predecessor reasoning and exact remaining question.
-3. `.ai/skills/activation/SKILL.md` — ACTIVATE semantics and TRACE observability boundary.
-4. `.ai/workflows/handoff/BOOTSTRAP.md` — canonical chapter initialization and mandatory bootstrap TRACE visibility.
-5. `.ai/INDEX.md` — current command/capability surface.
-6. `.ai/rules/handoff/lifecycle.md` — chapter continuity constraints.
+1. `.ai/architecture/ai-infrastructure-restructuring.md` — section 32, current TRACE model.
+2. `.ai/INDEX.md` — active command/capability surface.
+3. `.ai/workflows/handoff/BOOTSTRAP.md` — canonical initialization and mandatory bootstrap TRACE visibility.
+4. `.ai/skills/activation/SKILL.md` — ACTIVATE semantics and optional TRACE presentation.
+5. `.ai/skills/handoff/SKILL.md` — current handoff/migration operation surface.
+6. `.ai/rules/handoff/lifecycle.md` — continuity constraints.
 
+### C042 TRACE scope decision
 
-## Migration checkpoint — C043
+C042 accepted the minimal two-layer observation model:
 
-### Completed in C042
+- `ACTIVATE` shows canonical owners actually reread.
+- `OPERATION READS` shows unique repository files actually read during the operation, excluding files already shown as `ACTIVATE` owners.
+- Therefore `ACTIVATE owners ⊆ OPERATION READS`, with no duplicate paths in the human-readable presentation.
+- All pre-activation reads that belong to the operation count. ACTIVATE does not define the start of the operation.
+- Reads after ACTIVATE also count when they belong to the operation.
+- Discovery/search is not a read unless repository content was actually retrieved.
+- Repeated reads of the same repository file are shown once.
+- If an operation stops early or fails, show only the repository files actually read before it stopped.
+- No separate `VERIFICATION READS`, `WRITE`, `READ-BACK`, or `VERIFY` categories are introduced. A read-back is simply an actual read and may appear once.
+- `OPERATION READS` is shown when useful for observing the operation and on explicit request; bootstrap is a mandatory visibility case.
 
-- Resolved the OPERATION READS operation-boundary question and recorded the active semantics in .ai/skills/activation/SKILL.md.
-- Recorded the durable operation-boundary decision in .ai/architecture/ai-infrastructure-restructuring.md, section 33.3.
-- Created .ai/architecture/README.md to document the purpose and ownership boundary of the architecture directory.
-- Added the architecture README to .ai/INDEX.md under Structural references.
-- Added a future TODO to the architecture record for understanding manual natural-language invocation of ACTIVATE, REFRESH, and TRACE without introducing new command syntax.
-- Verified that these changes do not make .ai/architecture/ an active execution owner.
+The durable architecture record is `.ai/architecture/ai-infrastructure-restructuring.md`, section 33.
 
-### Next task for C043
+### C042 remaining open question
 
-Investigate the manual user-facing interface to .ai/skills/activation/SKILL.md:
+The only remaining bounded question is the operation boundary:
 
-- explain ACTIVATE, REFRESH, and TRACE in practical terms;
-- determine how the user can request each function directly in natural language when no dedicated command exists;
-- determine what reread and observable output should result from such a request;
-- keep the solution compatible with the existing activation semantics and avoid inventing a new command layer unless evidence requires it.
+> Where does an operation end, particularly for repository reads that occur after the substantive result has been produced but before the assistant finishes the user-facing response?
 
-### Migration target
+Resolve this with minimum cognitive load. Do not introduce tracing lifecycle events, additional read categories, telemetry, or other machinery merely to answer it.
 
-- PREVIOUS_CHAPTER = 042
-- CURRENT_CHAPTER = 043
-- SPECIALIZATION = C
-- SHORT_NAME = Architecture & Research
+## Immediate next task
+
+Continue the bounded operation-boundary question for `OPERATION READS`. Keep the model simple: the goal is to know what repository files were actually read during the operation, not to reconstruct read order or hidden execution history.

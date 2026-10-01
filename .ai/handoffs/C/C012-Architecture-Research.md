@@ -14,97 +14,9 @@ C
 
 ## Current objective
 
-Continue the bounded dependency-semantics research line after C-11.2 and conduct C-11.3 — Rule/Relation/Context Discrimination Test.
+Complete the bounded semantic dependency research line through C-10 — Dependency Relation vs. Dependency Target, and prepare migration to C013. The next chapter must begin with C-11 — Target Sufficiency Counterexample Test.
 
-C-11.1b established that target identity does not, by itself, determine dependency applicability. C-11.2 tested ownership of a conditional guard Y and found multiple semantically equivalent interpretations remained: target specification, dependency relation, governing rule, and applicability/context could not be distinguished by the current minimal cases.
-
-The conservative accepted result is: Y can affect applicability without changing apparent identity X; target-alone does not explain conditional applicability; B/C/D remain indistinguishable on current cases; A is not required, but not universally impossible.
-
-C-11.3 is the next bounded adversarial test and should discriminate Rule vs. Relation vs. Context ownership without assuming the answer in advance.
-
-No final Architecture Decision has been made.
-
-## Completed
-
-### C-1 through C-9
-
-The prior bounded research chain established and preserved the following working position:
-
-- a separate Result referent has not been established;
-- Finding is not an adopted semantic entity;
-- semantic necessity is distinct from storage necessity;
-- the claim that subject is intrinsically required is not established;
-- unrestricted content is not accepted as a sufficient universal semantic category;
-- Resolution remains ontologically/referentially unresolved;
-- definitive YES and NO are distinguishable from inability to establish a definitive determination;
-- Evaluation occurrence must not be conflated with what the Evaluation established;
-- dependency behavior cannot be inferred solely from the existence or result of a source Evaluation;
-- source-specific and source-independent dependency interpretations can have different substitution behavior.
-
-### C-10 — Dependency Relation vs. Dependency Target
-
-C-10 tested whether the A/B/C dependency interpretations require distinct dependency types.
-
-For the tested cases, the different dependency behaviors did not require different dependency types:
-
-```
-B depends on [target]
-```
-
-could describe:
-
-- Evaluation A;
-- something established by A;
-- underlying fact X.
-
-The architect-side conclusion was deliberately narrower than Qwen's proposed generalization:
-
-> For the tested A/B/C cases, different dependency behavior did not require different dependency types.
-
-C-10 did NOT establish:
-
-- that dependency is universally one semantic relation;
-- that all semantic differences can be explained by target specification;
-- that target specification is a universal semantic container.
-
-A potential boundary case remains:
-
-```
-B depends on X
-only if Y
-```
-
-where Y may be a condition on applicability rather than part of the target. C-10 did not determine whether such a condition belongs to the target, the dependency relation, B's rule, or another semantic context.
-
-### C-11.1b — Target Sufficiency Counterexample Test, applicability boundary
-
-C-11.1b established that the same apparent target X can have different dependency applicability depending on condition Y. The conservative accepted conclusion was:
-
-> C-11.1b establishes that target identity does not, by itself, determine dependency applicability. It does not determine whether target/referent is otherwise sufficient for dependency semantics.
-
-This weakens the stronger target-alone claim without establishing that target/referent is generally insufficient.
-
-### C-11.2 — Conditional Guard Ownership Test
-
-C-11.2 tested candidate ownership of Y across target specification, dependency relation, governing rule, applicability/context, and other.
-
-The architect-side synthesis was:
-
-> Multiple semantically equivalent interpretations remain.
-
-The accepted result is:
-
-> Y can affect applicability without changing apparent identity X; target-alone does not explain conditional applicability; B/C/D remain indistinguishable on current cases; A is not required, but not universally impossible.
-
-The test did not establish semantic ownership of Y, a new dependency type, a universal applicability/context mechanism, or a universal target-expansion rule.
-
-## Current implementation state
-
-No implementation work is authorized by this research chapter.
-
-Dependency remains a semantic relationship under investigation, not an implementation engine or graph model.
-
-The current working semantic model remains intentionally conservative:
+Current working model remains intentionally conservative:
 
 ```
 Evaluation
@@ -113,7 +25,222 @@ Evaluation
     Effective Outcome
 ```
 
-No separate Result referent, Finding entity, generic dependency engine, generic precedence engine, or graph implementation has been established.
+Dependency semantics are currently treated as relationship-level semantics. C-9/C-10 narrowed the question without establishing a generic dependency ontology or implementation model.
+
+No final Architecture Decision has been made.
+
+## Completed
+
+### C-1 through C-5
+
+C-1 through C-4 were completed and architect-reviewed; C-5 was partially discriminating. The earlier conclusions remain:
+
+- a separate Result referent has not been established;
+- Finding is not an adopted semantic entity;
+- semantic necessity is distinct from storage necessity;
+- the claim that subject is intrinsically required is not established;
+- unrestricted content is not accepted as a sufficient semantic category;
+- Resolution remains ontologically/referentially unresolved.
+
+### C-6 — Content-vs-State Distinction Test
+
+Qwen tested definitive states, non-state conclusions, relational conclusions, eligibility, candidate effects, non-definitive conclusions, reasons, qualifications, and the subject question.
+
+Architect-side synthesis:
+
+- YES, NO, and COULD NOT ESTABLISH are semantically distinguishable.
+- Not every evaluation result is a state.
+- A relational conclusion, eligibility determination, or candidate effect is not automatically an intrinsic state.
+- Qwen's claim that all non-state conclusions can simply be placed in content is not accepted as established.
+- Qwen's claim that the subject is intrinsically required is not accepted.
+- content remains a candidate category, not established ontology.
+- Subject remains a semantic candidate whose intrinsic storage requirement is unresolved.
+- A separate Result referent remains unestablished.
+
+C-6 therefore narrowed the semantic space without establishing content as a universal container or state as the final ontology.
+
+### C-7 — Definitive vs. Non-Definitive Outcome Test
+
+Cases:
+
+```
+A — eligibility established = YES
+B — eligibility established = NO
+C — eligibility could not be established
+```
+
+Strong result:
+
+```
+YES ≠ NO ≠ COULD NOT ESTABLISH
+```
+
+More specifically:
+
+- YES and NO are different values of the same kind of definitive determination.
+- C is not equivalent to YES or NO.
+- C means that no definitive determination was established.
+- An Evaluation can occur without producing a definitive determination.
+- Distinguishing evaluated-but-no-determination from never evaluated can be preserved without introducing a new semantic entity.
+
+Qwen proposed treating C as an Evaluation property/status. This was not accepted as established. In particular, Evaluation.status, Inconclusive, NoResult, or equivalent ontology was not introduced.
+
+### C-8 — Dependency Semantics Without Predefined Result or Status
+
+Setup:
+
+```
+Evaluation A → eligibility question
+Evaluation B → depends on semantic consequence of A
+```
+
+The architect-side synthesis accepted:
+
+- YES, NO, and no definitive determination are distinct semantic situations.
+- Evaluation occurrence and what that Evaluation established must not be conflated.
+- Absence of a determination is not automatically a new semantic entity.
+- Evaluation A occurring does not by itself establish a dependency from B to A.
+- Dependency being unsatisfied was not accepted as an automatic consequence of missing information.
+
+A critical counterexample was preserved:
+
+```
+Evaluation A → cannot establish X
+Evaluation C → subsequently establishes X
+```
+
+This demonstrates:
+
+```
+A did not establish X
+≠
+X was not established
+≠
+X is undetermined
+```
+
+The exact semantic target of B's dependency remained unresolved.
+
+### C-9 — Dependency Target Test
+
+C-9 tested three candidate interpretations:
+
+```
+A — B depends on Evaluation A itself
+B — B depends on something established by Evaluation A
+C — B depends on the underlying semantic fact X
+```
+
+The strongest established result was:
+
+- the three statements about A and X are semantically distinct;
+- existence of Evaluation A does not automatically create a dependency;
+- source-specific and source-independent dependency behavior can differ;
+- B depends on X and B depends on X as established by A have different substitution behavior;
+- dependency semantics cannot be inferred solely from the existence or result of A.
+
+The following stronger claims were weakened:
+
+- dependency is not proven to always target a result;
+- dependency is not proven to be always source-independent;
+- dependency is not proven to be always source-specific;
+- A failed to establish X does not automatically mean B's dependency is unsatisfied.
+
+C-9 left open whether A/B are distinct semantic forms or merely different referents of one relationship.
+
+### C-10 — Dependency Relation vs. Dependency Target
+
+C-10 tested whether the A/B/C candidates require distinct dependency types.
+
+Qwen's strongest useful observation was that all three can be read as:
+
+```
+B depends on [target]
+```
+
+with different target/referent interpretations:
+
+- Evaluation A;
+- something established by A;
+- underlying fact X.
+
+The substitution test showed:
+
+```
+B depends on A
+→ C cannot substitute for A
+
+B depends on something established by A
+→ C cannot substitute for A
+
+B depends on X
+→ C can satisfy the requirement if C establishes X
+```
+
+The architect-side synthesis accepts the following narrower conclusion:
+
+> For the tested A/B/C cases, different dependency behavior did not require different dependency types.
+
+This is a strong narrowing result, but it is not yet a proof that dependency is universally one semantic relation.
+
+The following Qwen claims were deliberately weakened:
+
+> The dependency relation is one semantic relation.
+
+and:
+
+> All semantic differences can be explained by target specification.
+
+C-10 did not establish either claim universally.
+
+### C-10 architect-side counterargument: target specification is not yet an established universal container
+
+Qwen extended the target idea to examples such as:
+
+```
+X-as-established-by-A
+X-as-established-by-acceptable-source
+X-as-established-after-event-E
+```
+
+This is a useful hypothesis, but it risks turning target specification into a universal semantic container analogous to the earlier problematic use of content.
+
+C-10 itself identified a potential boundary case:
+
+```
+B depends on X
+only if Y
+```
+
+Here Y may be a condition on the dependency's applicability rather than part of the target. C-10 did not resolve whether such conditions belong to the target, to the dependency relationship, to B's rule, or to another semantic context.
+
+Therefore:
+
+```
+Dependency = relation + target
+```
+
+is not an Architecture Decision.
+
+The current status is:
+
+```
+dependency type differentiation
+        ↓
+not required by tested C-10 cases
+
+universal target-sufficiency
+        ↓
+not established
+```
+
+## Current implementation state
+
+No implementation work is authorized by this checkpoint.
+
+No separate Result referent has been established. Finding is not an adopted semantic entity. Resolution remains ontologically/referentially unresolved.
+
+Dependency remains a semantic relationship under investigation, not an implementation engine or graph model.
 
 ## Decisions
 
@@ -127,18 +254,20 @@ Established working boundaries:
 - Qwen is an independent adversarial reviewer, not an authority source;
 - Qwen taxonomy is evidence for review, not adopted architecture;
 - Human remains the final architecture decision-maker;
+- dependency behavior must not be promoted into a generic dependency engine merely because dependency relationships exist;
 - C-10 does not establish target specification as a universal semantic container;
-- C-11 must attempt to falsify target sufficiency rather than assume it.
+- the next test must attempt to falsify target sufficiency rather than assume it.
 
 ## Open questions
 
-1. Can two dependencies have the same apparent target while differing in semantic behavior?
-2. Can conditional, temporal, provenance/source, or activation constraints produce dependency semantics that cannot be reduced to target identity/specification?
-3. If such constraints matter, what semantic level owns them without presupposing target or relation ownership?
-4. Is a single generic depends-on relation sufficient for the tested domain, without prematurely declaring it universal?
-5. What is the smallest defensible semantic description of a dependency relationship?
-6. Does any resulting dependency distinction materially affect the unresolved referent/ontology of Resolution?
-7. What bounded research question should follow C-11?
+1. Can a dependency have semantic conditions that cannot be reduced to a change in its target/referent?
+2. Does B depends on X only if Y provide a genuine counterexample to target sufficiency?
+3. If source, temporal, activation, or other constraints are present, are they target properties, dependency properties, rule/context properties, or some combination?
+4. Can two dependencies have the same apparent target but different semantic behavior for reasons that cannot be represented by changing the target?
+5. Is a single generic depends-on relation semantically sufficient for the tested domain, without prematurely declaring it universal?
+6. What is the smallest defensible semantic description of a dependency relationship?
+7. Does any of this materially affect the unresolved referent/ontology of Resolution?
+8. What bounded research question should follow C-11?
 
 ## Current files
 
@@ -148,6 +277,7 @@ Primary handoff/history:
 - .ai/handoffs/C011-Architecture-Research.md
 - .ai/handoffs/C010-Architecture-Research.md
 - .ai/handoffs/C009-Architecture-Research.md
+- .ai/handoffs/C008-Architecture-Research.md
 
 Architecture/research:
 
@@ -161,8 +291,6 @@ Process/rules:
 - .ai/rules/conversation-lifecycle.md
 - .ai/rules/workflow.md
 - .ai/rules/handoff-references.md
-- .ai/rules/project-architecture.md
-- .ai/rules/repository.md
 - .ai/skills/deep-understanding/SKILL.md
 - .ai/skills/commit-message/SKILL.md
 
@@ -179,7 +307,6 @@ Primary migration history:
 ```
 paulhuman/aip-mirror@main:/.ai/handoffs/C011-Architecture-Research.md
 paulhuman/aip-mirror@main:/.ai/handoffs/C010-Architecture-Research.md
-paulhuman/aip-mirror@main:/.ai/handoffs/C009-Architecture-Research.md
 ```
 
 Qwen research onboarding:
@@ -194,11 +321,11 @@ Dependency research:
 paulhuman/aip-mirror@main:/docs/architecture/prerequisite-dependency-semantics.md
 ```
 
-These references are evidence/context, not authority over semantic conclusions.
+These references are evidence/context, not authority over the semantic conclusions.
 
 ## Important constraints
 
-Do not introduce without separate evidence:
+Do not introduce:
 
 - typed UNRESOLVED;
 - 3-valued logic;
@@ -206,131 +333,132 @@ Do not introduce without separate evidence:
 - generic dependency engine;
 - generic precedence engine;
 - premature candidate-level precedence;
-- Resolution = {subject, state, cause/reason};
-- Finding as a semantic entity;
-- a separate Result referent;
-- graph implementation architecture.
+- final Resolution = {subject, state, cause/reason};
+- Finding as established ontology;
+- predetermined Resolution ontology;
+- graph implementation merely because relationship semantics exist.
 
-Do not treat as established:
+Do not accept automatically:
 
-- “The subject is intrinsically required.”
-- unrestricted content as a universal semantic container;
-- dependency as universally one relation plus target;
-- target specification as a universal semantic container;
-- conditional dependencies as mere target refinements.
+- The subject is intrinsically required.
+- Explanation/reason can simply be unrestricted content.
+- Dependency is universally one relation plus target.
+- Target specification is an unrestricted semantic container.
+- Conditional dependencies are merely target refinements.
 
-Do not assume in C-11 that conditional, temporal, provenance/source, or activation conditions are part of the target.
-
-Do not assume that those conditions are properties of the dependency relation either.
-
-Do not begin implementation work in Architecture & Research.
+Do not begin implementation work or convert Qwen taxonomy into Architecture Decision.
 
 ### Required research discipline
 
 ```
 Qwen report
       ↓
-architect-side counterargument
+architect-side counterargument pass
       ↓
 synthesis
       ↓
 next bounded research question
 ```
 
-Qwen remains an independent adversarial reviewer. The final architectural decision remains with Human.
+The next question must be narrower than the conclusion it tests and must not presuppose the answer.
 
 ## Evidence / confidence
 
 ### Confirmed / observed
 
-- C011 is READY_FOR_HANDOFF at bootstrap start.
-- C012 did not exist before this bootstrap.
-- C-10 was completed and architect-reviewed.
-- C-11.1b established that target identity does not, by itself, determine conditional applicability.
-- C-11.2 found multiple semantically equivalent interpretations for ownership of Y; B/C/D remain indistinguishable on the current minimal cases, while A is not required but not universally impossible.
-- Universal target sufficiency remains unproven.
-- The target-specification hypothesis remains a hypothesis rather than adopted architecture.
-- C-11.3 is the next bounded discrimination task.
-- No final Architecture Decision has been made.
+- C-1 through C-5 were completed and architect-reviewed.
+- C-6 was completed and narrowed the Content-vs-State question.
+- C-7 established the semantic distinction between definitive NO and inability to establish.
+- C-8 established the importance of separating Evaluation occurrence, what it established, what B requires, and what B may inspect.
+- C-9 established that source-specific and source-independent dependency interpretations can have different substitution behavior.
+- C-10 established that the tested A/B/C dependency interpretations did not require different dependency types.
+- Finding remains unadopted.
+- Separate Result identity remains unestablished.
+- Subject intrinsic storage remains unestablished.
+- No final Architecture Decision exists.
 
 ### Inferred
 
-- The most useful next step is adversarial testing of target sufficiency rather than broadening the target concept.
-- Boundary cases that may separate target identity from other semantic dimensions include conditional, temporal, provenance/source, and activation constraints.
+- The research is increasingly about identifying semantic referents and ownership of distinctions rather than selecting fields.
+- Dependency should currently be treated as a relationship whose exact referent remains under test.
+- C-11 should be adversarial: try to produce a counterexample to target sufficiency rather than extend target specification by default.
 
 ### Assumed / unverified
 
-- Whether any of those boundary cases actually produces a genuine counterexample.
-- Whether two dependencies with the same apparent target can exhibit different semantic behavior without a difference in target specification.
-- Whether any surviving distinction belongs to relation semantics, rule/context semantics, or another level.
+- Whether target sufficiency holds beyond the C-10 cases.
+- Whether conditional, temporal, provenance/source, or activation constraints introduce semantics not reducible to target specification.
+- Whether a dependency relation has any intrinsic properties beyond expressing a requirement.
+- Whether dependency semantics will materially affect the eventual Resolution contract.
 
 ### Open
 
 - C-11 result.
-- Qwen's C-11 report.
 - Architect-side counterargument to C-11.
 - Whether target sufficiency survives the counterexample test.
-- Minimum defensible dependency semantics.
-- Next bounded research question.
+- Whether dependency needs any semantic dimension beyond referent/target.
+- Final minimum semantic contract.
+- Final Architecture Decision.
 
 ## Last completed task
 
-C-11.2 — Conditional Guard Ownership Test, including Qwen report review, architect-side counterargument, and conservative synthesis.
+C-10 — Dependency Relation vs. Dependency Target, including Qwen report review and architect-side counterargument.
 
-The decisive current checkpoint is:
+The decisive current synthesis is:
 
-> Y can affect applicability without changing apparent identity X; target-alone does not explain conditional applicability; B/C/D remain indistinguishable on current cases; A is not required, but not universally impossible.
+> Different dependency behavior in the tested C-10 cases did not require different dependency types, but universal target sufficiency remains unproven.
 
 ## Immediate next task
 
-Run:
+In the receiving chapter C013, run:
 
-> C-11.3 — Rule/Relation/Context Discrimination Test
+> C-11 — Target Sufficiency Counterexample Test
 
-The purpose is to distinguish, using a new bounded case, whether conditional guard Y is semantically owned by the dependency relation, governing rule, applicability/context, target specification, or another explicitly justified semantic level.
+The purpose is to attempt to falsify:
 
-Do not assume that Y belongs to the target or relation. Do not expand the target merely to preserve target sufficiency.
+> Dependency semantics can always be explained by identifying its target/referent.
 
-The test should use the smallest case that can produce genuinely different predictions under the candidate interpretations, and it must report when the candidates remain observationally equivalent rather than forcing a distinction.
+Do not assume that conditions belong to the target. Do not assume that they belong to the relation either.
 
-Preserve the sequence:
+The test should specifically seek a case where two dependencies have the same apparent target but differ semantically, or where a dependency has semantics that cannot be reduced to target identity/specification.
+
+Use:
 
 ```
-Qwen report
+candidate hypothesis
       ↓
-architect-side counterargument
+adversarial counterexample
       ↓
-synthesis
+architect-side analysis
       ↓
-next bounded question
+narrowed synthesis
 ```
 
-Do not begin implementation.
+Do not classify actual AIP Mirror dependencies yet.
 
 ## Things not to redo
 
-- Do not redo completed C-1 through C-10 without a concrete evidentiary reason.
-- Do not regenerate the already-completed C-10 task.
-- Do not treat “The subject is intrinsically required” as established.
+- Do not redo U-1 through U-10 without a concrete evidentiary reason.
+- Do not redo completed C-1 through C-10 without a specific counterexample.
+- Do not regenerate the already-issued C-10 task.
+- Do not treat subject is intrinsically required as established.
 - Do not let unrestricted content absorb reason, qualification, status, or other distinctions merely to make a hypothesis fit.
-- Do not let target specification become a universal container merely to preserve the target hypothesis.
+- Do not let target specification become the new universal container merely to preserve a hypothesis.
 - Do not reintroduce Finding.
 - Do not introduce typed UNRESOLVED, 3-valued logic, fixed-point semantics, generic dependency/precedence/authorization engines.
-- Do not promote graph hypotheses to implementation architecture.
 - Do not redesign the handoff mechanism.
+- Do not promote graph hypotheses to implementation architecture without independent semantic evidence.
+- Do not begin implementation work in Architecture & Research.
 
 ## Recommended starting context for next chapter
 
-Start with the verified C-11.2 checkpoint and the meta-architecture north-star document `docs/architecture/ai-project-instruction-architecture.md`.
-
-Then formulate and run C-11.3 as a bounded discrimination test:
+Start from the C-10 synthesis above, then run the bounded research line:
 
 ```
-C-11.2
+C-10
   ↓
-B/C/D remain semantically indistinguishable on the current case
+target sufficiency remains unproven
   ↓
-C-11.3 — Rule/Relation/Context Discrimination Test
+C-11 — Target Sufficiency Counterexample Test
   ↓
 Qwen report
   ↓
@@ -341,7 +469,7 @@ synthesis
 next bounded question
 ```
 
-The methodological guardrail is:
+The key methodological rule is:
 
 > Do not repair a failed hypothesis by expanding the meaning of target until every counterexample fits.
 
@@ -349,39 +477,16 @@ Human remains the final architecture decision-maker.
 
 ## Migration lifecycle
 
-At bootstrap start:
+Bootstrap of the receiving chapter has now completed the normal write-capable lifecycle transition:
 
 ```
-C011 = READY_FOR_HANDOFF
-C012 = does not yet exist
+C011 = SUPERSEDED
+C012 = HANDED_OFF
+C013 = DRAFT
 ```
 
-During this write-capable bootstrap:
+The receiving C013 chapter created and owns its own DRAFT handoff, then transitioned this handoff from READY_FOR_HANDOFF to HANDED_OFF.
 
-```
-C012 = DRAFT
-C011 = HANDED_OFF
-```
+Post-bootstrap consistency verification confirmed the receiving handoff remains DRAFT, identifies C012 as its previous chapter, and begins with C-11 as its immediate next substantive task.
 
-C012 must remain DRAFT after bootstrap. When C012 later reaches READY_FOR_HANDOFF, it must apply the required supersession invariant to the older HANDED_OFF C011 handoff.
-
-## Bootstrap note
-
-This file was created by C012 itself as the receiving chapter's initial DRAFT state, as required by the conversation-handoff bootstrap procedure. It has since been advanced to READY_FOR_HANDOFF as part of the migration to C013.
-
-## Migration lifecycle
-
-C012 is now the closing chapter for migration to C013.
-
-Lifecycle transition performed by this closing chapter:
-
-C011 = HANDED_OFF → SUPERSEDED
-C012 = DRAFT → READY_FOR_HANDOFF
-
-The receiving chapter C013 must perform READY_FOR_HANDOFF → HANDED_OFF on this handoff during its bootstrap. When C013 later reaches READY_FOR_HANDOFF, it must apply the required supersession invariant to the older HANDED_OFF C012 handoff.
-
-## Migration note
-
-The substantive checkpoint for C013 is C-11.2. The immediate next task is C-11.3.
-
-The north-star meta-architecture document must be restored as bootstrap context before local research state is resumed.
+Human remains the final architecture decision-maker.

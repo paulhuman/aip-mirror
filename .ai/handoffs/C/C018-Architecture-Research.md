@@ -12,443 +12,617 @@ C
 **Previous chapter:**
 017
 
-## Chapter identity
+## Current objective
 
-- **Chapter:** C018
-- **Specialization:** 03 — Architecture & Research
-- **Previous chapter:** C017 — Architecture & Research
-- **Status:** HANDED_OFF
+Continue specialization C architecture research from the completed C017 handoff, preserving the distinction between semantic acceptance and handoff lifecycle.
 
-## Starting objective
+The immediate research task is bounded inspection of existing repository practice around intentional acceptance:
 
-Continue the architecture/research work from C017 while preserving established context. The remaining project constraints have now been supplied and consolidated. The next task is to reduce the highest-leverage architectural uncertainty before selecting implementation structure.
+- accepted working invariants;
+- formal Architecture Decisions;
+- specifications;
+- inheritance through handoffs;
+- later refinement;
+- historical/supersession language.
 
-## Bootstrap state
+Primary question:
 
-C017 is the direct predecessor and was verified as `READY_FOR_HANDOFF` at bootstrap.
+> What observable project-level act or repository state change constitutes intentional acceptance of a research finding, and what minimum durable information lets a later chapter distinguish accepted semantic status from recorded discussion, provisional reasoning, historical evidence, and inherited text without conversational memory?
 
-The current repository model remains:
+Do not design a new Acceptance mechanism until this inspection establishes that existing practice is insufficient.
 
-- `paulhuman/aip-mirror` on `main` is the canonical project repository.
-- `.ai/handoffs/` is temporary conversation context transfer.
-- Durable project knowledge belongs in authoritative project documentation.
-- specialization C owns architecture, research, cross-workstream decisions, and project-wide architectural consistency.
+## Completed
 
-## Current research context
-
-C017 completed the bounded inspection of intentional-acceptance practice. No dedicated Acceptance entity or universal acceptance mechanism was introduced.
-
-The historical semantic-trace direction remains paused.
-
-The new owner constraints are now explicit:
-
-1. The assistant is not a one-to-one command executor; the meta-system supports reasoning and work rather than replacing it with a rigid interpreter.
-2. `rules/` and `skills/` should be maximally compact, clear, and unambiguous, containing execution-critical knowledge rather than redundant explanation.
-3. Detailed rationale, history, examples, architecture explanation, and research context may live in Agents, README, docs, and handoffs.
-4. The system should minimize data reread before an action while preserving complete understanding of the relevant process.
-5. Compactness must not sacrifice semantic correctness.
-6. The eventual meta-system must remain project-agnostic and reusable outside AIP Mirror.
-7. Qwen and Grok are independent review inputs. They challenge the architecture but are not authority sources.
-
-## Constraint → Problem Map
-
-The bounded map is recorded in:
-
-`docs/architecture/constraint-problem-map-C018.md`
-
-The map separates owner constraints from architectural problems and deliberately avoids choosing a registry, router, manifest, memory store, command syntax, or filesystem structure.
-
-### Primary architectural uncertainty
-
-> **What is the Minimal Execution Context: the smallest set of knowledge and state that must be available to the assistant for a given action to be performed correctly, without requiring a full reread of the project's instruction system?**
-
-This is currently a semantic/operational research question, not an implementation commitment.
-
-## Bounded MEC test: applicability selection
-
-The first bounded MEC test inspected these existing instruction sources:
-
-- `.ai/rules/conversation-lifecycle.md`
-- `.ai/rules/workflow.md`
-- `.ai/rules/repository.md`
-- `.ai/rules/handoff-references.md`
-- `.ai/skills/conversation-handoff/SKILL.md`
-- `.ai/skills/conversation-handoff/BOOTSTRAP.md`
-
-The test asked whether applicability can be determined cheaply enough to select MEC before loading a full instruction body.
-
-### Findings
-
-1. **Applicability is state-dependent.** Task intent alone does not always determine the applicable execution path.
-2. **Document-level applicability is often cheap.** The task normally identifies the relevant instruction domain without loading the whole corpus.
-3. **Section-level applicability is currently more expensive.** Conditional paths such as Lifecycle Recovery and Lifecycle Correction place their applicability conditions inside the execution body.
-4. **Conditional execution knowledge should remain dormant.** Recovery, correction, read-only branches, and similar paths should not enter normal MEC unless their conditions are met.
-5. **Current project state is a first-class applicability input.** Examples include current chapter identity, bootstrap state, handoff existence/status, detected lifecycle violation, capability, and explicit authorization.
-6. **Instruction duplication is a separate compression problem.** `SKILL.md` and `BOOTSTRAP.md` currently duplicate substantial lifecycle/recovery/correction semantics. This increases rereading pressure and should eventually be addressed through a single authoritative execution source plus cross-references, but that is not yet an implementation change.
-
-### Refined MEC model
+C017 completed lifecycle cleanup and confirmed the current handoff lifecycle:
 
 ```
-MEC(action, state) =
-    task / intent
-  + applicable execution constraints
-  + required current project state
-  + required semantic/project knowledge
-  + applicable conditional context
+DRAFT
+  ↓
+READY_FOR_HANDOFF
+  ↓
+HANDED_OFF
 ```
 
-Applicability determination itself is part of the execution problem, but its input should be substantially smaller than the full instruction corpus if rereading is to be minimized.
+`SUPERSEDED` has been removed from the current lifecycle and must not be reintroduced. The current lifecycle is intentionally terminal at `HANDED_OFF`.
 
-## New architectural hypothesis from the owner
+C016/C017 research carried forward:
 
-The owner proposed a possible **compact command/action index**:
+- C-13 — Authority Standing vs Effective Outcome — CLOSED.
+- C-14 evidence inspection — CLOSED as evidence-blocked; no behavioral OVERRIDE test was executed.
+- Semantic Source & Authority Audit — CLOSED.
+- Intentional Acceptance Audit — CLOSED.
+- Architectural Bottleneck Audit — COMPLETE.
+- Architectural Bottleneck Cross-Audit — COMPLETE.
+- Post-C-13 Architectural Leverage Audit — COMPLETE.
+- C-12 and C-11.11–C-11.15 remain CLOSED.
 
-- a short list of commands/actions available to the AI;
-- a very short description of each;
-- references to the relevant `rules/` and `skills/` sources;
-- references ideally identifying the applicable sections of those sources;
-- potentially load this compact index during bootstrap so the assistant knows what capabilities/actions are available;
-- use it as an index when a user explicitly invokes an action from the list, while still allowing the assistant to reason rather than behave as a rigid one-to-one command interpreter.
+## Current implementation state
 
-This is a **research hypothesis, not an architecture decision**.
+No implementation work is authorized by this chapter.
 
-Its relevance to MEC is specific: such an index could provide a cheap applicability surface while keeping detailed execution knowledge dormant until needed.
+No structural architecture refactor should begin until the relevant semantics are sufficiently stable.
 
-The hypothesis must be tested against alternatives before any registry/router/manifest or command system is introduced.
+## Decisions / accepted working semantics
 
-## North-Star document assessment
+Preserve the following distinctions without upgrading them automatically into final ontology:
 
-`docs/architecture/ai-project-instruction-architecture.md` remains valuable context, but is now outdated as a clean current North-Star specification.
+- Evidence ≠ project authority.
+- Research/finding ≠ specification ≠ architecture decision.
+- Human/project acceptance ≠ repository lifecycle state.
+- Handoff preservation ≠ semantic canonization.
+- HANDED_OFF is a chapter/handoff lifecycle state, not automatic proof that every statement in the handoff is current canonical semantic truth.
+- Authority standing ≠ precedence.
+- Dependency on a decision source ≠ dependency on that source's authority standing ≠ dependency on candidate effect ≠ dependency on effective outcome.
+- Candidate effect ≠ effective outcome.
+- Representation ≠ ontology.
+- Dependency remains a relationship/research surface, not a justified generic engine.
+- No universal Resolution ontology, Result entity, generic Dependency engine, generic precedence engine, typed UNRESOLVED, or three-valued logic has been established by the current evidence.
 
-The bounded map identified concrete drift:
+Human remains the final architecture decision-maker.
 
-- command examples still use leading `/`;
-- Memory is described as a standing architectural category without the current rejection of `.ai/memory/`;
-- the document predates the explicit compactness requirement for `rules/` and `skills/`;
-- the execution model does not explicitly formulate Minimal Execution Context;
-- lifecycle wording contains historical supersession language inconsistent with the current lifecycle;
-- current meta-system/project-boundary constraints are not integrated.
+## Strongest current semantic boundaries
 
-**Do not patch it yet.** First complete the Minimal Execution Context research; then deliberately update or replace the North-Star document from the resulting model.
+C-13 established the following bounded positive discrimination:
 
-## Independent review inputs
+```
+dependency on B
+    ≠
+dependency on B's authority standing
+    ≠
+dependency on B's candidate effect
+    ≠
+dependency on B's effective outcome
+```
 
-### Qwen
+The strongest unresolved cross-boundaries remain:
 
-- `docs/architecture/independent-review-qwen-onboarding.md`
-- Current observed Qwen handoff: `.ai/handoffs/E004-Independent-Review-Qwen.md`.
-- The older `docs/architecture/independent-review-deepseek-onboarding.md` file is unrelated historical repository content and is not the Qwen onboarding source.
+```
+Dependency
+    ↕
+effective outcome
+    ↕
+Resolution / referent semantics
 
-### Grok
+Authority / Precedence
+    ↕
+OVERRIDE
+    ↕
+effective outcome
+```
 
-- `docs/architecture/independent-review-grok-onboarding.md`
-- Current observed Grok handoff: `.ai/handoffs/F000-Independent-Review-Grok.md`.
+C-14 currently remains evidence-blocked because the repository did not contain sufficiently explicit current OVERRIDE semantics to execute a non-circular behavioral test.
 
-These remain review inputs, not authority sources. They should be consulted selectively when a bounded research question benefits from independent counterexamples or critique.
+## Semantic source / acceptance boundary
+
+Current project practice supports:
+
+```
+source / observation / reference
+            ↓
+          evidence
+            ↓
+      research / finding
+            ↓
+  intentional project acceptance
+            ↓
+     project semantics
+```
+
+And a separate migration-preservation path:
+
+```
+accepted project state
+        ↓
+handoff
+        ↓
+READY_FOR_HANDOFF
+        ↓
+HANDED_OFF
+        ↓
+inherited state
+```
+
+C016 audits found no established universal Acceptance entity, approval protocol, Decision registry, or total source hierarchy.
+
+The remaining uncertainty is whether existing project conventions already provide sufficient observable recognition of accepted semantic status, especially when that status changes over time.
+
+## Repository practice inspection — current result
+
+The bounded repository inspection was completed against concrete historical/current practice in the handoff lineage and architecture documents.
+
+### Observed acceptance pattern
+
+The repository does not use a separate Acceptance artifact. Instead, intentional acceptance is made observable through **explicit normative wording in durable project documents**, especially:
+
+- `accepted working direction`;
+- `accepted working invariants`;
+- `Decisions`;
+- `Established architecture decisions`;
+- `Inherited accepted decisions / invariants`.
+
+The clearest observed transition is:
+
+```
+research / counterexamples
+        ↓
+human/project discussion
+        ↓
+explicitly recorded accepted working direction / invariant
+        ↓
+durable handoff or architecture document
+        ↓
+later chapter inherits that stated status
+```
+
+The repository therefore already contains a practical acceptance signal: **the document explicitly records that a proposition/decision has been accepted**, rather than merely describing it, hypothesizing it, or listing it as open.
+
+### Working acceptance is distinct from formal Architecture Decision
+
+Concrete C003/C004 practice shows three distinguishable documentation states:
+
+1. **research / hypothesis / validation evidence** — not normative;
+2. **accepted working direction / invariant** — intentionally accepted for current architectural reasoning, but still provisional;
+3. **formal Architecture Decision (`AD-*`)** — explicitly established architecture semantics.
+
+For example, C003 records inherited `AD-01` through `AD-21` as established architecture decisions, while its newly worked OVERRIDE conclusions are explicitly preserved as a durable checkpoint and are said to require a later Architecture Decision Pass before promotion to formal AD entries.
+
+C004 then records its OVERRIDE conclusions as **accepted working invariants**, while explicitly stating that candidate-level precedence remains a working model rather than a formal numbered Architecture Decision.
+
+This is important evidence that **acceptance does not equal finality**.
+
+### Human decision remains the actual acceptance act
+
+A later historical C006 checkpoint makes the process explicit as:
+
+```
+research hypothesis
+        ↓
+independent review / counterexamples
+        ↓
+evidence synthesis
+        ↓
+HUMAN DECISION
+        ↓
+ARCHITECTURE DECISION
+```
+
+That process is itself documented as not yet being a formal project architecture decision, so it is evidence of the observed decision pattern, not a new workflow rule.
+
+The strongest current interpretation is therefore:
+
+> The acceptance act is a human/project decision, while the durable repository representation is an explicit status-bearing statement in project documentation.
+
+### Handoff inheritance is preservation, not acceptance
+
+C005 provides direct evidence of the preservation mechanism through its section **Inherited accepted decisions / invariants**.
+
+The receiving chapter can therefore recognize accepted state because the inherited document explicitly labels the material as accepted/inherited. The handoff lifecycle state itself remains separate.
+
+This reinforces:
+
+```
+acceptance status
+    ≠
+handoff lifecycle status
+```
+
+### Specifications
+
+The current `docs/` tree contains `architecture/`, `handoffs/`, and `PROJECT-INSTRUCTIONS.md`, but no dedicated `specifications/` directory or universal specification registry.
+
+Therefore no separate repository-level specification acceptance mechanism was observed.
+
+### What is actually observable
+
+A later chapter can distinguish at least these cases from repository text alone when the author has used the established conventions:
+
+| Repository wording/state                            | Observable semantic status                  |
+| --------------------------------------------------- | ------------------------------------------- |
+| research / hypothesis / open question               | not accepted                                |
+| validation evidence / counterexample result         | evidence, not acceptance by itself          |
+| explicit `accepted working direction/invariant`     | intentionally accepted, still provisional   |
+| explicit `AD-*` / established architecture decision | formalized architecture decision            |
+| `Inherited accepted decisions / invariants`         | accepted status preserved through migration |
+| `HANDED_OFF` alone                                  | lifecycle state only; no semantic promotion |
+
+What remains **not mechanically encoded** is the identity of the particular human decision event itself, beyond the explicit durable statement that the project has accepted the proposition.
+
+### Current discrimination result
+
+The repository evidence therefore weakens the hypothesis that a new universal Acceptance primitive is immediately necessary.
+
+It supports a smaller interpretation:
+
+```
+HUMAN / PROJECT DECISION
+        ↓
+explicit semantic-status wording
+        ↓
+durable project document
+        ↓
+optional later promotion to formal AD / specification
+        ↓
+handoff preserves that status
+```
+
+The remaining gap is not "there is no acceptance mechanism". The gap is:
+
+> The repository convention is semantic and documentary rather than mechanically typed: a later chapter must recognize explicit status-bearing wording and distinguish it from ordinary discussion, without relying on conversational memory.
+
+This is an **observed repository limitation**, not yet a justification for introducing a new semantic entity.
+
+## Meta-layer boundary — current working direction
+
+A separate architectural boundary has now been identified between the project/domain architecture and the project-independent system used to reason about and evolve project architecture.
+
+Working boundary:
+
+```text
+docs/
+├── architecture/     ← project/domain-specific architecture
+├── meta/             ← project-independent meta-architecture/research
+└── handoffs/         ← chapter context-transfer mechanism
+```
+
+This is a **working architectural direction**, not yet a filesystem refactor and not yet a finalized ontology.
+
+The current interpretation is:
+
+- `docs/architecture/` is the natural home for architecture specific to AIP Mirror.
+- `docs/meta/` is a candidate home for project-independent research/architecture concerning mechanisms such as semantic status, intentional acceptance, provenance, source/decision handling, and related cross-project concerns.
+- `.ai/handoffs/` is an operational context-transfer mechanism between research chapters, not a semantic ontology or general knowledge hierarchy.
+
+The former attempted hierarchy
+
+```text
+REFERENCE
+   ↓
+HANDOFF
+   ↓
+ARCHITECTURE
+   ↓
+RULE
+```
+
+is no longer treated as a valid universal hierarchy. These artifacts/mechanisms may belong to different dimensions rather than forming a single semantic/documentary chain.
+
+Do **not** mass-move existing files into `docs/meta/` yet. The boundary should be validated by research before structural refactoring. In particular, do not assume that every concept currently called `authority`, `source`, `decision`, `dependency`, or `status` belongs to the meta-layer; domain and meta meanings must be discriminated separately.
+
+The intentional-acceptance research currently appears conceptually project-independent and is therefore a strong candidate for the future meta-layer, but this is not yet a final architectural classification.
+
+## Current research state after the meta-layer discussion
+
+The next research pass remains the historical semantic trace, but it is now explicitly **deferred pending additional project constraints** that may materially change the research direction.
+
+When resumed, the bounded pass should compare at least:
+
+- an accepted working invariant;
+- a provisional/non-formal candidate such as candidate-level precedence;
+- a formal `AD-*` decision;
+
+and trace for each:
+
+1. origin;
+2. initial status;
+3. acceptance evidence;
+4. inheritance;
+5. refinement/narrowing;
+6. contradiction/rejection, if present;
+7. promotion to formal status, if present;
+8. current status;
+9. historical residue;
+10. authority/source supporting the current status.
+
+The key discrimination is:
+
+> Which independently observable semantic/documentary dimensions are necessary to reconstruct the current status of a specific proposition after later refinement, contradiction, promotion, and handoff inheritance, without conflating document history with current normative meaning?
+
+A possible minimal representation such as `subject + state` remains only a research hypothesis. Do not design an ontology, state enum, Acceptance entity, or new mechanism from it before the bounded evidence supports that move.
 
 ## Evidence / confidence
 
 ### Confirmed / observed
 
-- Canonical repository/branch: `paulhuman/aip-mirror` / `main`.
-- C017 was `READY_FOR_HANDOFF` at bootstrap.
-- Current lifecycle: `DRAFT → READY_FOR_HANDOFF → HANDED_OFF`.
-- C017 intentional-acceptance inspection is complete.
-- No dedicated Acceptance mechanism was introduced.
-- The owner has supplied the remaining compactness / execution-context / project-agnosticity constraints.
-- The bounded Constraint → Problem Map has been created and read back successfully.
-- The North-Star document is stale in the specific areas listed above.
-- The bounded MEC applicability test has been completed on the six listed instruction sources.
-- The test found state-dependent applicability, dormant conditional execution paths, and duplicated execution semantics.
-- The owner has proposed a compact action/command index as a possible applicability surface.
+- The canonical repository is `paulhuman/aip-mirror`, branch `main`.
+- The receiving handoff `.ai/handoffs/C018-Architecture-Research.md` did not exist before bootstrap.
+- `.ai/handoffs/C017-Architecture-Research.md` was `READY_FOR_HANDOFF` at bootstrap.
+- The current lifecycle is DRAFT → READY_FOR_HANDOFF → HANDED_OFF.
+- Intentional project acceptance is an explicit workflow requirement before promoting research/finding to specification.
+- Accepted working semantics are observable in historical project practice.
+- The repository makes intentional acceptance observable through explicit status-bearing wording such as `accepted working direction`, `accepted working invariants`, `Decisions`, and `Established architecture decisions`.
+- Formal `AD-*` entries are explicitly distinguishable from provisional accepted working semantics in the C003/C004 lineage.
+- Handoff inheritance explicitly preserves accepted status through wording such as `Inherited accepted decisions / invariants`.
+- The current `docs/` tree has no dedicated `specifications/` directory or universal specification registry.
+- Handoff preserves accepted state but does not itself constitute acceptance.
+- No dedicated Acceptance artifact or universal Decision registry is established by the inspected C016 audits.
+- C-13 positively distinguishes authority standing, candidate effect, and effective outcome as dependency-reference surfaces in the bounded model.
+- C-14 did not execute a behavioral OVERRIDE test because current project evidence was insufficient.
 
 ### Inferred
 
-- Minimal Execution Context is currently the highest-leverage uncertainty to reduce.
-- The distinction between durable knowledge and active execution context is likely central to the eventual meta-system.
-- A compact execution layer may be possible without turning the assistant into a rigid command interpreter.
-- A compact action index may reduce the cost of applicability selection, but its sufficiency and optimal form are unverified.
+- The next leverage point may be semantic status recognition and preservation rather than source ranking.
+- Existing project conventions may be sufficient and may only need explicit interpretation.
+- The minimum durable representation of acceptance may be smaller than a new semantic primitive.
+
+These remain inferences.
 
 ### Assumed / unverified
 
-- The final shape of the reusable meta-system.
-- Whether any routing mechanism is necessary.
-- Whether the proposed index is necessary or merely one possible solution.
-- Whether an index should reference whole files, sections, IDs, or another semantic unit.
-- Whether existing handoffs need replacement or extension.
-- Whether a new filesystem boundary is needed.
+- The exact observable act/state change that proves intentional acceptance has not yet been fully discriminated.
+- The minimum durable information needed for later recognition of acceptance has not yet been formally characterized beyond the observed explicit status-bearing wording and its referenced proposition/decision.
+- It is not established whether a new formal mechanism is necessary.
 
 ### Open
 
-- Exact definition of Minimal Execution Context.
-- What an action can infer from current task/conversation state.
-- What must be discovered from project state.
-- What must be explicit in execution-critical instructions.
-- What can remain explanatory-only.
-- How missing execution context should be detected.
-- What is the minimum information needed for cheap applicability selection.
-- Whether a compact action index can provide that information without becoming a rigid command registry/router.
-- How duplicated execution semantics should eventually be eliminated without losing semantic completeness.
-- How independent review material can remain useful without becoming default execution context.
+- How accepted working invariants are actually marked or recognized in existing repository practice.
+- How formal Architecture Decisions are distinguished from accepted working semantics.
+- How specifications record intentional acceptance, if at all.
+- How later chapters recognize inherited accepted status.
+- How refinement changes semantic status without conflating it with lifecycle state.
+- Whether the project needs any new acceptance representation.
 
-## Research boundary
+## Last completed task
 
-Before introducing any implementation structure, determine:
+C017 completed the handoff lifecycle cleanup and left the repository with the current three-state handoff lifecycle. The final architecture lifecycle diagram was corrected, and the exact duplicate sequence `HANDED_OFF HANDED_OFF` was checked and found absent.
 
-1. what a representative action actually requires;
-2. what can be inferred from the current conversation/task;
-3. what must be discovered from project state;
-4. what must be explicit in execution instructions;
-5. what can remain explanatory-only;
-6. what failure occurs when a required element is absent;
-7. what minimum applicability information is required before loading detailed execution knowledge.
+C018 then completed the first bounded inspection of existing intentional-acceptance practice. The inspection found an existing documentary convention: human/project acceptance is represented durably by explicit semantic-status wording, with a clear distinction between accepted working semantics and formal `AD-*` decisions. No dedicated Acceptance mechanism was introduced.
 
-Do not create:
+## New constraints — context, command routing, and durable meta knowledge
 
-- `docs/meta/permanent/`;
-- `docs/meta/temporary/`;
-- `.ai/memory/`;
-- a command registry;
-- a command prefix;
+The project owner has now identified additional constraints that must be incorporated before the paused Phase 2 research is resumed.
 
-merely to support this research.
+### 1. Context accumulation is an observed reliability risk
 
-Do not resume the historical semantic-trace work or launch a new C-series experiment merely because the current ideas are visible.
+`C017` was the longest chapter in the project and also produced the largest observed concentration of assistant errors. Earlier chapters were approximately 20–25% shorter and showed fewer failures. The observed failures included:
 
-## Completed bounded test: Applicability Surface Test
+- incorrect/non-existent repository path recall;
+- stale handoff filenames surviving after renaming;
+- omission of a required handoff-preparation step during migration;
+- duplication of the terminal `HANDED_OFF` lifecycle state;
+- degradation in reliable retrieval of `RULE`/`SKILL` content that had been read near the beginning of a long chapter.
 
-Cases A/B/C compared:
+This is empirical project evidence of contextual reliability degradation. It does **not** establish a universal safe chat length or isolate one exact technical cause.
 
-1. task/state inference alone;
-2. a minimal explicit applicability surface attached to execution knowledge;
-3. a compact global capability index pointing to execution-critical sections.
+The current working hypothesis is that long conversations create at least two distinct risks:
 
-The test established a useful separation:
+1. **context accumulation / instruction retrieval degradation** — initially read rules and skills become less reliably available for later operations;
+2. **contextual interference after direction change** — a late change in research direction can leave obsolete active context competing with the newly established direction.
 
-### Capability discovery
+Do not treat either hypothesis as a finalized architecture claim yet.
 
-**Question:** What capabilities are available, and where can their execution knowledge be found?
+### 2. Instruction refresh should become action-scoped
 
-A compact capability surface can potentially answer this without becoming a router or semantic interpreter.
+A candidate future mechanism is a command/operation registry that maps a recognizable user/AI command to the minimal `RULE`/`SKILL` snippets required immediately before execution.
 
-### Applicability determination
+Conceptually:
 
-**Question:** What applies now, and which execution path is active?
-
-This depends on a small applicability surface plus current project state. Conditional execution knowledge can remain dormant until its applicability condition is met.
-
-### Execution
-
-**Question:** How is the action performed correctly?
-
-This still requires the applicable execution knowledge and the fresh project state needed by the action.
-
-The resulting bounded model is:
-
-    REASONING
-        |
-        +-----------------------+
-        |                       |
-        v                       v
-
-CAPABILITY DISCOVERY APPLICABILITY
-| |
-compact capability local applicability
-surface surface
-| |
-+-----------+-----------+
-|
-v
-EXECUTION KNOWLEDGE
-| + CURRENT STATE
-|
-v
-MEC
-|
-v
-EXECUTION
-
-The arrows represent knowledge availability/reasoning flow, not a mandatory programmatic pipeline.
-
-### Bounded conclusion
-
-A compact capability description has an independent potential role in capability discovery. This is distinct from applicability determination and execution.
-
-The test does **not** establish that a separate physical global index is required. The capability-discovery function could be implemented by a different or more compact mechanism.
-
-The test also does not establish a registry, router, manifest, command syntax, or universal metadata schema.
-
-### Argument boundary
-
-A capability description may identify required arguments, but it does not silently supply missing values. If the user gives an underspecified task such as “modify the existing file”, the assistant must resolve or ask for the missing target rather than having the capability surface guess it.
-
-## Completed bounded test: Applicability as runtime reasoning result
-
-Independent review by Grok and Qwen challenged the A/B/C boundary. The review surfaced two counterarguments: capability discovery and applicability may overlap when relevance is state-dependent; and treating applicability as a separate precondition/interface can create a circular dependency when the knowledge needed to evaluate that precondition exists only inside the execution body.
-
-The bounded follow-up test evaluated three hypotheses: applicability as separate knowledge; applicability as a capability interface/gate; and applicability as a runtime reasoning result.
-
-Current investigative model:
-
-```
-CAPABILITY KNOWLEDGE
-        +
-CURRENT STATE
-        +
-USER INTENT
-        +
-REASONING
-        ↓
-   APPLICABILITY
-        ↓
- if applicable
-        ↓
-EXECUTION KNOWLEDGE
-        ↓
-       MEC
-        ↓
-    EXECUTION
-        ↓
- NEW / OBSERVED STATE
-        │
-        └──────────► REASONING
+```text
+command
+   ↓
+command registry
+   ↓
+required instruction snippets
+   ↓
+refresh from authoritative RULE/SKILL sources
+   ↓
+execute command
 ```
 
-This is an **investigative model, not an architecture, schema, or filesystem decision**.
+The purpose is not to reread all instructions on every operation. It is to refresh the **small semantic slices relevant to the current action**.
 
-Key conclusions:
+Candidate configuration form: YAML or another machine-readable registry.
 
-1. Applicability is best treated as a reasoning result rather than a mandatory knowledge layer.
-2. Reasoning may need additional knowledge before it can reach a sufficiently reliable applicability judgment. Execution knowledge therefore does not have to be downstream of an already-complete applicability decision.
-3. Applicability may be refined iteratively as more relevant knowledge is obtained.
-4. After execution, observed current state returns to reasoning. Normal execution, correction, and recovery can therefore be understood as alternative execution knowledge selected by reasoning against newly observed state, rather than requiring a separate deterministic recovery subsystem.
-5. Current state remains distinct from instruction knowledge.
-6. The earlier A/B/C separation remains useful as a distinction of functions, but it should no longer be treated as a mandatory three-stage pipeline or as proof of three persistent artefacts.
-7. No global index, registry, router, manifest, command syntax, capability-ID scheme, universal metadata schema, .ai/memory/, or new filesystem boundary is justified by this result.
+Potential instruction references may use stable fragment identifiers, analogous to document-local `#id` anchors:
 
-### Current semantic model
-
-```
-                 ┌─────────────────────┐
-                 │ CAPABILITY KNOWLEDGE│
-                 │                     │
-                 │ what capabilities   │
-                 │ exist / what they   │
-                 │ are about / where   │
-                 │ detailed knowledge  │
-                 │ can be found        │
-                 └──────────┬──────────┘
-                            │
-                            ▼
-                     ┌────────────┐
-                     │  REASONING │◄──── USER INTENT
-                     └─────┬──────┘
-                           ▲
-                           │
-                     CURRENT STATE
-                           │
-                           ▼
-                    APPLICABILITY
-                           │
-                     "what applies?"
-                           │
-                           ▼
-                  REQUIRED KNOWLEDGE
-                           │
-                           ▼
-                          MEC
-                           │
-                           ▼
-                       EXECUTION
-                           │
-                           ▼
-                     OBSERVED STATE
-                           │
-                           └──────────► REASONING
+```text
+conversation-lifecycle#handoff
+handoff-references#receiving-chapter
+conversation-handoff#bootstrap
 ```
 
-The arrows represent semantic/information dependencies, not a mandatory programmatic pipeline.
+This is a research direction, not an accepted schema.
 
-### Important unresolved point
+### 3. Commands need a stable user-facing trigger syntax
 
-The bounded test does **not** prove that applicability can always be determined from capability knowledge + state + intent alone. Sometimes reasoning must obtain additional execution/project knowledge before reaching an applicability judgment.
+The web interface now intercepts command-like prefixes beginning with `/` and `@` for its own UI command/autocomplete behavior. Therefore a future project command syntax should **not** depend on a leading slash or at-sign.
 
-The resulting open question is therefore not "where is the applicability artefact?" but:
+Candidate forms discussed:
 
-> How does this reasoning-oriented model change the definition and boundary of Minimal Execution Context?
+```text
+>>handoff ...
+>/handoff ...
+```
 
-## Immediate next task for C019
+No prefix has been selected. The future syntax should be:
 
-Examine the consequences of the runtime-reasoning model for:
+- visually recognizable as a project command;
+- easy to type;
+- unlikely to trigger the ChatGPT web UI;
+- compatible with the command registry concept.
 
-1. the definition of MEC;
-2. P-01 Knowledge vs execution context;
-3. P-02 Context discovery and applicability;
-4. P-03 Compression boundary.
+Record this as an open design constraint, not as a decision.
 
-Do this before introducing implementation structure. In particular, determine whether the word **minimal** in MEC describes a static preselected context, a dynamically sufficient context at a reasoning moment, or something more precise.
+### 4. `.ai/memory/` is currently considered unnecessary
 
-Do not add another generic bounded case merely to generate more examples.
+The project owner questions the need for a separate persistent `.ai/memory/` directory if authoritative project knowledge belongs in durable documentation, temporary conversation transfer belongs in `.ai/handoffs/`, and action-specific instruction refresh can retrieve relevant `RULE`/`SKILL` snippets.
+
+Current working direction:
+
+> Do not introduce `.ai/memory/` merely as another knowledge store.
+
+Reconsider only if evidence shows that a memory layer can replace the handoff mechanism with a substantially more useful and polished capability without creating another competing source of truth.
+
+No memory directory should be created merely because the concept exists.
+
+### 5. `docs/meta/` must distinguish permanent meta-system knowledge from temporary development research
+
+The current `docs/meta/` idea is refined as follows.
+
+The eventual meta-layer is intended to describe the **agnostic meta-project itself**: the reusable system that operates through `.ai/`, its specifications, architecture, operational conventions, registries/configuration, and final documentation that can be copied into other projects and adapted.
+
+Therefore distinguish:
+
+```text
+docs/meta/
+├── permanent/
+│   └── reusable agnostic-meta-project knowledge
+│
+└── temporary/
+    └── development/research artifacts needed only while building it
+```
+
+These names are conceptual for now; do not create the directories or mass-move files until the boundary has been researched and accepted.
+
+Permanent meta knowledge is intended to survive completion of the current development effort and be reusable across future projects.
+
+Temporary meta-development material may include research notes, experiments, audits, migration material, and other artifacts whose purpose ends when the meta-system is completed.
+
+The important distinction is:
+
+> Development knowledge is not automatically runtime/operational knowledge.
+
+### 6. Handoffs are temporary context-transfer buffers
+
+The current working direction is that `.ai/handoffs/` is a **temporary context-transfer mechanism**, not permanent project knowledge and not a required source of truth for the finished system.
+
+Conceptually:
+
+```text
+conversation A
+    ↓
+handoff
+    ↓
+conversation B
+    ↓
+knowledge consolidated into authoritative docs
+    ↓
+handoff may eventually be deleted
+```
+
+A future project should not depend on historical handoffs for normal operation.
+
+For the finished AIP Mirror project, important project-specific knowledge should ultimately live in the appropriate durable `docs/` documentation. For the reusable meta-system, important meta knowledge should ultimately live in its permanent meta documentation.
+
+Handoffs remain useful during development and migration, but they should be removable without destroying the project's authoritative knowledge.
+
+### 7. Project-specific versus meta-system knowledge
+
+The intended final separation is approximately:
+
+```text
+AIP Mirror
+├── project-specific authoritative documentation
+├── project-specific source/prototypes
+└── reusable agnostic meta-system
+
+meta-system
+├── reusable .ai/
+├── operational entry points
+├── machine-readable registries/configuration
+└── permanent meta documentation
+```
+
+`README.md`, `Agents.md`, and YAML registries/configuration are candidate parts of the eventual reusable operational surface. Their exact roles and placement remain to be researched.
+
+### 8. Do not solve the new constraints prematurely
+
+The project owner explicitly requested that repository restructuring and architecture changes be deferred until all current constraints have been supplied and mapped.
+
+Therefore:
+
+- do not create `docs/meta/permanent/` or `docs/meta/temporary/` yet;
+- do not create `.ai/memory/` merely to address context loss;
+- do not introduce the command registry yet;
+- do not choose a command prefix yet;
+- do not mass-move existing research documents;
+- do not treat `README.md`, `Agents.md`, YAML registries, or memory as finalized architecture;
+- do not begin another C-series experiment merely because these ideas are now visible.
+
+The next chapter should first consolidate the constraints into a bounded problem map and then determine which architectural changes, if any, are actually necessary.
+
+## Immediate next task
+
+**Paused pending additional project constraints.**
+
+Before resuming the planned Phase 2 historical semantic trace, incorporate the real constraints that will be supplied by the project owner. Those constraints may require revising the current research boundary, the proposed `docs/meta/` split, or the shape of the next bounded investigation.
+
+Once resumed, the planned Phase 2 remains the default starting point:
+
+1. accepted working invariant → later formal `AD-*`;
+2. accepted working invariant → later refinement/narrowing;
+3. accepted statement → later contradiction/rejection, if such a case exists;
+4. historical wording versus current normative wording;
+5. handoff inheritance after such changes.
+
+Do not begin this pass before incorporating the new constraints. Do not introduce a new Acceptance entity, mechanism, ontology, or C-series experiment merely because the plan is currently paused.
+
+The purpose of the eventual pass remains to determine whether the existing documentary convention is sufficient when semantic status changes over time, and to identify the minimum independently observable dimensions needed to reconstruct current normative meaning.
 
 ## Things not to redo
 
 Do not repeat merely for migration:
 
-- the C017 intentional-acceptance inspection;
-- C-13;
-- C-14;
-- C-12;
-- C-11.11–C-11.15;
-- the C015 Semantic Source & Authority Audit;
-- the C015 Intentional Acceptance Audit;
-- the C015 Architectural Bottleneck Audit;
-- the C015 Architectural Bottleneck Cross-Audit;
-- the Post-C-13 Architectural Leverage Audit;
-- the completed C016 lifecycle cleanup.
+- C-13.
+- C-14 evidence inspection.
+- C-12.
+- C-11.11–C-11.15.
+- the C016 Semantic Source & Authority Audit.
+- the C016 Intentional Acceptance Audit.
+- the C016 Architectural Bottleneck Audit.
+- the C016 Architectural Bottleneck Cross-Audit.
+- the Post-C-13 Architectural Leverage Audit.
+- the completed C017 lifecycle cleanup.
 
-Do not reintroduce `SUPERSEDED` into the current lifecycle.
+Do not reintroduce `SUPERSEDED`; it has already been removed from the current lifecycle by project decision.
 
-## Recommended starting context
+## Recommended starting context for next chapter
 
-Already read during bootstrap:
+Read:
 
 - `docs/PROJECT-INSTRUCTIONS.md`
 - `.ai/skills/conversation-handoff/BOOTSTRAP.md`
 - `.ai/skills/conversation-handoff/SKILL.md`
 - `.ai/rules/conversation-lifecycle.md`
-- `.ai/rules/workflow.md`
 - `.ai/rules/handoff-references.md`
-- `.ai/skills/commit-message/SKILL.md`
-- `.ai/handoffs/C017-Architecture-Research.md`
-
-Additional research inputs now inspected selectively:
-
-- `docs/architecture/ai-project-instruction-architecture.md`
-- `docs/architecture/independent-review-qwen-onboarding.md`
-- `docs/architecture/independent-review-grok-onboarding.md`
-- `docs/architecture/independent-review-deepseek-onboarding.md` (historical leftover; not Qwen onboarding)
-- `.ai/handoffs/E004-Independent-Review-Qwen.md`
-- `.ai/handoffs/F000-Independent-Review-Grok.md`
-- `docs/architecture/constraint-problem-map-C018.md`
-- `.ai/rules/conversation-lifecycle.md`
 - `.ai/rules/workflow.md`
+- `.ai/rules/project-architecture.md`
 - `.ai/rules/repository.md`
-- `.ai/rules/handoff-references.md`
-- `.ai/skills/conversation-handoff/SKILL.md`
-- `.ai/skills/conversation-handoff/BOOTSTRAP.md`
+- `.ai/handoffs/C017-Architecture-Research.md`
+- `docs/architecture/ai-project-instruction-architecture.md`
+- `docs/architecture/semantic-source-authority-audit-C016.md`
+- `docs/architecture/intentional-acceptance-audit-C016.md`
+- `docs/architecture/architectural-bottleneck-audit-C016.md`
+- `docs/architecture/architectural-bottleneck-cross-audit-C016.md`
+- `docs/architecture/post-c-13-architectural-leverage-audit-C016.md`
+- `docs/architecture/prerequisite-dependency-semantics.md`
+- `docs/architecture/c-13-authority-vs-effective-outcome-C016.md`
+- `docs/architecture/c-14-override-semantic-dimension-C016.md`
 
-Further architecture documents should be read selectively according to the bounded research question. Do not reload the entire historical architecture corpus by default.
+The historical OVERRIDE lineage referenced by earlier handoffs is now confirmed in the normalized current filenames:
 
-## Last completed task
+- `.ai/handoffs/C004-Architecture-Research.md`
+- `.ai/handoffs/C005-Architecture-Research.md`
 
-C018 completed the A/B/C Applicability Surface Test, the independent Grok/Qwen boundary review, and the bounded follow-up test of applicability as runtime reasoning. The current research position is that applicability is best treated as a reasoning result that may be refined after obtaining additional knowledge, with observed post-execution state feeding reasoning again for normal, correction, or recovery paths. The next chapter should now examine what this does to MEC and P-01/P-02/P-03.
+These are the post-cleanup filenames corresponding to the historical 03D/03E references; they were inspected directly and must be used in current references.
 
-## Migration note
-
-C018 is finalized as `READY_FOR_HANDOFF` for migration to C019.
-
-The receiving chapter must create its own `.ai/handoffs/C019-Architecture-Research.md` as `DRAFT`, then perform the normal post-bootstrap verification and mark this handoff `HANDED_OFF`.
-
-## Bootstrap note
-
-This handoff remains a compact live checkpoint. It records the active research frontier and constraints without reproducing the accumulated architecture history.
+Human remains the final architecture decision-maker.

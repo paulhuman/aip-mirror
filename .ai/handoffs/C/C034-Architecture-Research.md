@@ -14,162 +14,208 @@ C
 
 ## Starting objective
 
-Continue the bounded Architecture & Research work from C033. C033 closed the bootstrap runtime-input normalization question and C034 first corrected the historical C031 handoff header defect. The current bounded objective is to substantially simplify the handoff model by removing lifecycle status bookkeeping while preserving receiving-chapter handoff creation and durable context continuity.
+Continue the bounded Architecture & Research work from C033 after an emergency conversation transition caused by loss of the previous chat context.
+
+C033 established that the reusable ACTIVATE capability is sufficiently integrated at the routing boundary and that no concrete ACTIVATE integration gap or architectural contradiction remains. C034 should consolidate that result, correct the remaining stale durable architecture documentation, run a targeted consistency sweep, and then move only to the next concrete architecture question supported by repository evidence.
 
 ## Starting state
 
-C034 verified that the canonical handoff-header rule already requires the Previous chapter field to contain only the three-digit chapter number. No additional canonical rule gap was found. The historical C031 defect was corrected from:
+C033 completed two real ACTIVATE integration checks:
 
-    Previous chapter:
-    030 — Architecture & Research
+1. `Пора обновить handoff` — ACTIVATE was applied at the routing boundary with the handoff skill, lifecycle rule, and current handoff as the required canonical owners.
+2. `Пора выдать bootstrap-инструкцию` — ACTIVATE was applied at the routing boundary with the handoff skill and BOOTSTRAP workflow as the required canonical owners.
 
-to:
+The resulting architecture boundary is:
 
-    Previous chapter:
-    030
+```
+INDEX / caller
+    ↓
+ACTIVATE
+    ↓
+canonical owner
+    ↓
+operation
+```
 
-The correction was committed as:
+ACTIVATE remains a small reusable capability. It does not own lifecycle, repository, project, mutation, commit, or verification semantics. REFRESH remains an invocation mode over ACTIVATE. TRACE remains optional observable evidence.
 
-    aec5211f7c2346d93471bb17f0e03b8e9c9ae5ba
-    fix(handoff): normalize C031 previous chapter
+Direct ACTIVATE integration inside BOOTSTRAP was tested and intentionally rejected because BOOTSTRAP already owns its ordered bootstrap procedure and required owner rereads.
 
-The current handoff architecture was then reviewed from a broader operational perspective. The three-state lifecycle:
+An emergency lifecycle inconsistency was detected during self-migration: C033 had remained `DRAFT` even though its historical work had already reached the point where the chapter was closed by the conversation transition. The user had explicitly supplied the Lifecycle Correction authorization command. The bounded correction was performed before bootstrap by changing only C033 from `DRAFT` to `READY_FOR_HANDOFF`, preserving the historical violating state and adding no history rewrite.
 
-    DRAFT
-      ↓
-    READY_FOR_HANDOFF
-      ↓
-    HANDED_OFF
+Lifecycle correction commit:
 
-creates substantial bookkeeping overhead and Git-history noise without preserving information that cannot already be represented by the handoff file, chapter identity, and Git history.
+    7795b1655df0d34eb222c5a04620933d910f9a6a
+    docs(handoff): correct C033 lifecycle state
 
-## Confirmed / observed
+C033 is now the predecessor handoff for this receiving chapter and is in `READY_FOR_HANDOFF`.
 
-- Repository: `paulhuman/aip-mirror`, branch `main`.
-- Current chapter: C034.
-- Previous chapter: C033.
-- Specialization: C.
-- The receiving chapter creates its own handoff at the beginning of a new conversation. This invariant is retained.
-- Handoff status transitions are the source of a large class of unnecessary lifecycle-only mutations and commits.
-- Conversation termination may be abrupt because of context limits, browser/session instability, or other interruption; a required final status transition is therefore operationally fragile.
-- Handoff commits are AI-infrastructure bookkeeping and should be visually distinguishable from project documentation commits.
-- The desired normal handoff commit vocabulary is intentionally short:
+## Confirmed architecture state
 
-  ai-docs(handoff): create C033
-  ai-docs(handoff): update C033
+The current entry/routing boundary is:
 
-- Normal handoff commit messages MUST NOT append conversation titles, task descriptions, rationale, milestone summaries, or other explanatory suffixes.
+```
+AGENTS
+  ↓
+INDEX
+  ↓
+ACTIVATE
+  ↓
+canonical owner
+  ↓
+operation
+```
 
-## Architectural decision
+There is no evidence-based need to introduce:
 
-C034 adopts the following target model:
+- ENTRY.md;
+- a registry;
+- a manifest;
+- a dependency graph;
+- a command-ID layer;
+- a universal router;
+- direct ACTIVATE procedure inside BOOTSTRAP.
 
-> **A handoff is a persistent conversation-context snapshot for a chapter, not a lifecycle-controlled transfer object.**
+The durable architecture note still contains one stale C032-era statement claiming that ACTIVATE was not yet wired into INDEX or BOOTSTRAP. The current repository state is instead:
 
-The active handoff schema MUST NOT contain a Status field.
+```
+ACTIVATE implementation
+        │
+        ├── INDEX integration: YES
+        │
+        └── BOOTSTRAP direct integration: NO
+             (tested and intentionally rejected)
+```
 
-The following lifecycle states are removed from the active architecture:
+The stale architecture note was documentation drift, not a new semantic contradiction between the current canonical owners. C034 resolved it by establishing the reusable chat-initialization boundary below.
 
-    DRAFT
-    READY_FOR_HANDOFF
-    HANDED_OFF
+## Previous chapter
 
-No replacement state machine is introduced.
+C033 — Architecture & Research.
 
-The receiving chapter still creates its own handoff at initialization:
-
-    new conversation
-        ↓
-    establish repository + chapter context
-        ↓
-    read predecessor handoff when applicable
-        ↓
-    create current chapter handoff
-        ↓
-    commit initial handoff
-        ↓
-    substantive work
-
-A current chapter may update its handoff whenever meaningful durable context accumulates. There is no required closing transition before the conversation ends.
-
-The receiving chapter reads the predecessor handoff but does not modify it merely to mark it as consumed. There is no receiving transition equivalent to READY_FOR_HANDOFF → HANDED_OFF.
-
-Chapter identity and bootstrap runtime-input normalization remain unchanged:
-
-    PREVIOUS_CHAPTER = <three-digit previous chapter number or N/A>
-    CURRENT_CHAPTER = <three-digit current chapter number>
-    SPECIALIZATION = <single uppercase specialization letter>
-
-## Consequences
-
-The canonical handoff skill, BOOTSTRAP workflow, INDEX routing, and existing handoff files now require a coordinated migration.
-
-The migration must:
-
-1. remove Status from active handoff files;
-2. remove lifecycle-state procedures and commands that exist solely to maintain the removed state machine;
-3. preserve receiving-chapter creation of its own handoff;
-4. preserve chapter identity and bootstrap invocation normalization;
-5. preserve meaningful handoff content and historical context;
-6. use the short `ai-docs(handoff): create/update <chapter>` commit convention;
-7. perform a repository-wide semantic consistency sweep for stale lifecycle terminology;
-8. avoid introducing a replacement state machine.
-
-The existing lifecycle recovery/correction machinery is expected to become obsolete if its only purpose is repairing the removed status model. This must be established by the implementation pass rather than assumed without inspection.
-
-Historical Git commits MUST NOT be rewritten. Existing lifecycle commits remain historical evidence of the former architecture.
-
-## Handoff commit convention
-
-For normal handoff creation and content updates, use exactly these forms:
-
-    ai-docs(handoff): create C034
-    ai-docs(handoff): update C034
-
-Keep these messages short. The handoff commit itself is the durable Git trace; the handoff file contains the useful context.
-
-The local `ai-docs` namespace is an intentional repository convention for `.ai/` infrastructure. It is not presented as a replacement for Conventional Commits.
-
-Project documentation remains under the normal project-facing `docs(...)` vocabulary.
+C033 is the verified source of the completed ACTIVATE integration work and is the predecessor handoff for this chapter.
 
 ## Important constraints
 
 - Preserve the established AGENTS → INDEX → ACTIVATE → canonical-owner architecture.
-- Treat `.ai/skills/handoff/SKILL.md` as the canonical owner of handoff structure unless repository evidence identifies a more specific owner.
-- BOOTSTRAP remains the canonical ordered new-conversation chapter initialization workflow.
-- Do not reintroduce a lifecycle status field under another name.
-- Do not create a new handoff state machine merely to replace the removed one.
-- Do not remove the receiving chapter's responsibility to create its own handoff.
-- Do not conflate full chapter identifiers such as C034 with the numeric chapter component 034.
-- Preserve historical Git commits; this is an active-architecture migration, not history rewriting.
-- Use the repository write-safety procedure for every existing-file mutation.
+- INDEX remains routing/discovery; it MUST NOT become a second procedural owner.
+- ACTIVATE MUST remain a context-establishment capability and MUST NOT absorb lifecycle, repository, project, mutation, commit, or verification semantics.
+- Preserve BOOTSTRAP ownership and its repository-identity ordering.
+- Do not create ENTRY.md.
+- Do not introduce a registry, manifest, dependency graph, command-ID layer, or universal router without a bounded test demonstrating a concrete need.
+- Treat REFRESH as an invocation mode over ACTIVATE unless new evidence proves otherwise.
+- Treat TRACE as optional observability evidence, not persistent schema or hidden-reasoning transcript.
+- Treat handoff continuity and activation context as distinct concerns.
+- Use current repository state as the source of truth.
+- Do not repeat the completed C032 five-case ACTIVATE owner-boundary experiment.
+- Do not invent another ACTIVATE experiment without a concrete boundary condition.
+- Preserve historical lifecycle commits; lifecycle correction MUST NOT rewrite or erase the historical record.
+
+## Evidence / confidence
+
+### Confirmed / observed
+
+- C032 completed the bounded five-case ACTIVATE owner-boundary experiment.
+- `.ai/skills/activation/SKILL.md` exists and defines the small reusable ACTIVATE capability.
+- INDEX explicitly invokes ACTIVATE with the operation and listed canonical owners before execution.
+- BOOTSTRAP remains unchanged and direct ACTIVATE integration was tested and rejected.
+- C033 completed two materially different routing-level ACTIVATE integration checks.
+- C033 found no concrete ACTIVATE integration gap or architectural contradiction.
+- C033 lifecycle correction was performed and committed as `7795b1655df0d34eb222c5a04620933d910f9a6a`.
+- C033 is currently `READY_FOR_HANDOFF`.
+- C034 did not previously exist when bootstrap began; this handoff is its initial `DRAFT`.
+
+### Inferred
+
+- ACTIVATE is sufficiently bounded to be treated as a settled reusable capability for the current architecture unless new evidence exposes a boundary condition.
+- The remaining ACTIVATE-related work is consistency/documentation cleanup rather than additional semantic experimentation.
+
+### Open
+
+- The stale C032-era ACTIVATE integration statement in `.ai/architecture/ai-infrastructure-restructuring.md` must be corrected.
+- A targeted consistency sweep should confirm that no other current documentation contradicts the validated ACTIVATE integration state.
+- After that sweep, identify the next concrete architecture question only from current repository evidence.
+
+## Result of current bounded question
+
+C034 tested the question:
+
+> Does a new reusable chat-initialization procedure need to exist, and can the existing BOOTSTRAP workflow own it without becoming a universal entry router?
+
+Result: **yes, and BOOTSTRAP can own it without introducing `ENTRY.md`.**
+
+The repository now treats `.ai/workflows/handoff/BOOTSTRAP.md` as the reusable new-conversation chapter-initialization workflow. It covers both receiving chapters and first chapters with `PREVIOUS_CHAPTER = N/A`. BOOTSTRAP explicitly invokes ACTIVATE after repository identity/path resolution and uses ACTIVATE to establish the canonical operational context required for initialization. BOOTSTRAP remains an ordered workflow and does not become a general command router, registry, or universal entry layer.
+
+Implemented and verified changes:
+
+- `12560a16e4791298b75423cbe41c2c31bc8b4b4e` — extended BOOTSTRAP to own reusable chat initialization and first-chapter input.
+- `24d159ca990bfb112cb688cd8fb8c560ccb6d6d3` — documented the new entry-layer boundary and replaced the stale ACTIVATE integration statement in the durable architecture note.
+- `3a1b9da9b9bdea3425a63bcd07ded365626f80df` — aligned the handoff skill's generated bootstrap input with `PREVIOUS_CHAPTER = N/A` for first chapters.
+- `8f2c83b3457303e148341c072e881eb0f380fc17` — reconciled the durable BOOTSTRAP architecture description and current entry-layer model.
+- `b15180ec75b4dab41628a4f5c950374d6afbdcca` — exposed BOOTSTRAP as the canonical new-chat initialization workflow from AGENTS.
+
+A targeted consistency sweep across AGENTS, INDEX, ACTIVATE, handoff skill, BOOTSTRAP, lifecycle, and the durable architecture note found no remaining current contradiction in the new boundary. Historical C031/C032 notes retain their original historical results and are not treated as current architecture statements.
+
+The earlier empty commit `dda218bcd9604b8506154dafda42dc3ab4f7428a` changed no files; it is retained as repository history and is not treated as evidence of a content change.
+
+## Bootstrap invocation normalization result
+
+C034 investigated whether `AGENTS.md` alone is sufficient as the architectural entry point for a new chat, and whether runtime bootstrap inputs need a standardized transport contract.
+
+Result: `AGENTS.md` remains the sole architectural entry point. No `ENTRY.md` or separate template file is justified. The existing `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical owner of the chat-initialization workflow and now also owns its canonical invocation format.
+
+The normalized runtime contract is:
+
+    PREVIOUS_CHAPTER = 032
+    CURRENT_CHAPTER = 033
+    SPECIALIZATION = C
+
+Chapter number values contain only the three-digit numeric component. The specialization letter is carried separately and MUST NOT be included in `PREVIOUS_CHAPTER` or `CURRENT_CHAPTER`.
+
+The handoff skill is the producer of this bootstrap message; BOOTSTRAP is the consumer. Lifecycle semantics remain owned by `.ai/rules/handoff/lifecycle.md`.
+
+This resolves the concrete representation ambiguity exposed by the recent C032/C033 header corrections without changing lifecycle semantics or adding a new architectural layer.
+
+The implementation commits are:
+
+- `2d0400b8d18863a6815ec651710b406419636a02` — `docs(bootstrap): define canonical invocation format`
+- `a096de354d5ff63a7eee73f87e2c2932a0e6dc2a` — `fix(handoff): normalize bootstrap runtime inputs`
+- `c280b15cd8ae04a88a1f28be588c8462151efea8` — `docs(architecture): define bootstrap input normalization`
 
 ## Immediate next task
 
-Migrate the work to C035 and continue with the bounded semantic consistency sweep over the active .ai infrastructure.
+ACTIVATE/chat initialization and the runtime-input normalization question are now bounded enough to close this investigation. The next task is to identify the next concrete architecture question from current repository evidence; do not create another ACTIVATE experiment or introduce `ENTRY.md` without a new bounded need.
 
-The C034 continuation plan has been recorded in:
+## Things not to redo
 
-    .ai/architecture/ai-infrastructure-restructuring.md
+- C028 entry-layer restructuring.
+- The AGENTS entry-contract decision.
+- The INDEX minimum-routing decision.
+- The decision not to create ENTRY.md.
+- BOOTSTRAP ownership and ordering.
+- The current chapter identifier format.
+- The completed normative-language cleanup.
+- C031 discovery-versus-activation research.
+- C032 five-case activation owner-boundary experiment.
+- C033 ACTIVATE integration experiments.
+- The distinction between handoff continuity and activation context.
+- The first activation skill implementation.
+- The already-authorized and completed C033 lifecycle correction.
 
-The next chapter MUST:
+## Recommended starting context
 
-1. inspect active canonical .ai rules, skills, workflows, and INDEX for stale lifecycle-state semantics;
-2. distinguish active stale behavior from valid historical descriptions in the architecture record;
-3. change the handoff continuity wording from MAY to SHOULD:
-   
-       A current chapter SHOULD update its own handoff whenever meaningful durable context accumulates.
-
-4. remove the stale Status field from the example in .ai/skills/handoff/SKILL.md;
-5. verify that the architecture record matches the resulting active canonical semantics;
-6. perform final content/scope verification;
-7. only then determine whether any concrete architectural contradiction remains.
-
-The sweep MUST NOT introduce a replacement lifecycle state machine or a new infrastructure layer merely to create another task.
-
-The mass removal of legacy Status fields from remaining handoffs was completed manually by the user in:
-
-    3985ac491462effe68cc5e1fd93485a08ec9c821
-    ai-refactor(handoff): remove legacy status fields
-
-C034's continuation plan is therefore the next bounded piece of work, not another handoff-lifecycle migration.
+- `.ai/AGENTS.md`
+- `.ai/config.yaml`
+- `.ai/INDEX.md`
+- `.ai/rules/repository.md`
+- `.ai/rules/workflow.md`
+- `.ai/rules/handoff/lifecycle.md`
+- `.ai/rules/commits.md`
+- `.ai/skills/activation/SKILL.md`
+- `.ai/skills/handoff/SKILL.md`
+- `.ai/skills/commits/SKILL.md`
+- `.ai/workflows/handoff/BOOTSTRAP.md`
+- `.ai/architecture/ai-infrastructure-restructuring.md`
+- `.ai/handoffs/C/C033-Architecture-Research.md`
+- `.ai/handoffs/C/C032-Architecture-Research.md`
+- `docs/PROJECT-INSTRUCTIONS.md`

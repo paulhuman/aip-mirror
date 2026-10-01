@@ -10,116 +10,111 @@ B
 001
 
 **Previous chapter:**
-000
+N/A
 
 ## Current objective
 
-Continue the Native AIP Plugin specialization from the validated handoff state of chapter B000, without restarting the established project workflow or handoff system.
+Establish the durable handoff state for chapter B001 and migrate the Native AIP Plugin work cleanly to chapter B002.
 
 ## Completed
 
-- Bootstrap procedure for chapter B001 has been started according to `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
-- Applicable lifecycle, workflow, repository, architecture, handoff, and commit-message rules have been read.
-- Previous handoff `.ai/handoffs/B/B000-Native-AIP-Plugin.md` was verified as `READY_FOR_HANDOFF` before this receiving chapter's lifecycle transition.
-- This chapter's mandatory initial `DRAFT` handoff has been created as part of bootstrap.
+- Defined the four-specialization / alphabetical-chapter conversation model.
+- Established the conversation handoff lifecycle: `DRAFT` → `READY_FOR_HANDOFF` → `HANDED_OFF`.
+- Established that every new chapter must immediately create its own `DRAFT` handoff and commit it without a separate user approval step.
+- Established the user checkpoint command `Пора обновить handoff` for repeated `DRAFT` checkpoint commits.
+- Established that checkpoint commits are not migration commits.
+- Established the migration command `Пора выполнить миграцию в чат XXY`.
+- Established that the receiving chapter owns `READY_FOR_HANDOFF` → `HANDED_OFF`.
+- Established that a later chapter must complete the handoff transition when the receiving chapter reaches `READY_FOR_HANDOFF`.
+- Added the static bootstrap procedure at `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
+- Updated the lifecycle/workflow rules to define bootstrap, checkpoint commits, pre-authorized handoff commits, and mandatory handoff lifecycle transitions.
 
 ## Current implementation state
 
-The B000 handoff records that native C++/AIP implementation has not yet been completed. The production target remains a native C++ plugin using the Illustrator 2026 AIP SDK, with an interactive Mirror tool as the priority.
+Chapter B001 is the Native AIP Plugin specialization stream. Native implementation has not yet been completed; this handoff captures the chapter/workflow state established before continuing in B002.
 
-No native implementation files were identified by the previous handoff as already established. The repository currently contains project documentation, references, and the JSX prototype area; the canonical Illustrator 2026 SDK remains external in `paulhuman/adobe-illustrator-2026-sdk`.
+The native implementation is intended to use C++ with the Illustrator 2026 AIP SDK. The interactive Mirror tool is the production target. The JSX prototype is a behavioral reference and must not be mechanically translated into C++.
 
 ## Decisions
 
-- Native implementation belongs to specialization `02`.
-- The native product is C++ plus the Illustrator AIP SDK.
-- The JSX prototype is an executable behavioral reference and must not be mechanically translated into C++.
-- Core geometry should remain independent from Illustrator-specific APIs where practical.
-- The first native milestone should prioritize the interactive mirror tool; a simple ADM settings UI is acceptable if needed.
-- CEP/UXP/NUXP/Spectrum are not foundations of the first native implementation.
-- Repository changes must follow the established write-safety and verification rules.
+- Native implementation belongs in specialization `02`.
+- The first native milestone may use a simple native ADM settings UI if needed; the interactive mirror tool is the priority.
+- Core geometry should remain as independent from Illustrator APIs as practical.
+- The development workflow is research → document → review → specify → prototype → validate → implement → test → document, where applicable.
+- Repository writes must follow the established read → minimal change → write → read-back → verify → diff/scope → commit → ref verification sequence.
+- Handoff bootstrap is a static procedure; chapter-specific values are supplied by the bootstrap message rather than written into `BOOTSTRAP.md`.
 
 ## Open questions
 
-- Exact Illustrator SDK suites/APIs required for the native tool.
-- Plugin lifecycle and registration details for the Illustrator 2026 SDK.
-- Native mouse/input event handling and interactive tool lifecycle.
-- Live preview mechanism and Illustrator document/object interaction.
-- Object/path manipulation, undo/cancel behavior, and native UI details.
-- Which validated JSX/FreeHand behaviors should be implemented first in the native milestone.
+- Native C++/AIP implementation details remain to be investigated and validated in chapter 02.
+- Exact Illustrator SDK suites/APIs, event handling, live preview mechanism, object/path operations, undo/cancel behavior, and native UI details remain implementation work.
 
 ## Current files
 
-- `.ai/skills/conversation-handoff/BOOTSTRAP.md`
 - `.ai/skills/conversation-handoff/SKILL.md`
-- `.ai/skills/commit-message/SKILL.md`
+- `.ai/skills/conversation-handoff/BOOTSTRAP.md`
 - `.ai/rules/conversation-lifecycle.md`
 - `.ai/rules/workflow.md`
 - `.ai/rules/repository.md`
-- `.ai/rules/project-architecture.md`
+- `.ai/skills/commit-message/SKILL.md`
 - `docs/PROJECT-INSTRUCTIONS.md`
-- `.ai/handoffs/B/B000-Native-AIP-Plugin.md`
-- `.ai/handoffs/B/B001-Native-AIP-Plugin.md`
-- `prototypes/jsx/`
-- `references/freehand/`
-- `references/javascript/`
-- `references/test-data/`
-- External canonical SDK reference: `paulhuman/adobe-illustrator-2026-sdk`
+- `prototypes/jsx/` — behavioral prototype area
+- `references/freehand/` — FreeHand reference material
+- `references/test-data/` — project test data
+- `paulhuman/adobe-illustrator-2026-sdk` — canonical external Illustrator 2026 SDK reference repository
 
 ## Relevant references
 
-- Macromedia FreeHand MX Mirror reference material under `references/freehand/`.
+- Macromedia FreeHand MX Mirror behavior and project reference material under `references/freehand/`.
+- Illustrator 2026 SDK in the canonical external SDK repository `paulhuman/adobe-illustrator-2026-sdk`.
 - Illustrator JavaScript scripting reference under `references/javascript/`.
-- Illustrator 2026 SDK in `paulhuman/adobe-illustrator-2026-sdk`.
-- Project test data under `references/test-data/`.
 
 ## Important constraints
 
-- Do not begin implementation before bootstrap is complete.
-- Do not redo the established conversation lifecycle or repository safety rules.
+- Preserve the distinction between behavioral research/prototyping and native implementation.
 - Do not invent unverified FreeHand or Illustrator behavior.
-- Do not copy the complete Illustrator SDK into `aip-mirror`.
-- Keep durable project decisions in repository documentation.
-- Ordinary feature-development commits remain user-controlled; mandatory handoff bootstrap/lifecycle commits are explicitly pre-authorized by the workflow.
+- Keep durable project knowledge in project documentation rather than duplicating it in handoffs.
+- Do not silently migrate to another chapter; migration is user-controlled.
+- Handoff lifecycle transitions must be represented by Git commits.
+- Handoff procedural commits are pre-authorized; ordinary development changes still require the normal user-controlled commit workflow.
 
 ## Evidence / confidence
 
 ### Confirmed / observed
 
-- `B000-Native-AIP-Plugin.md` was in `READY_FOR_HANDOFF` state at bootstrap start.
-- The project defines `02` as the Native AIP Plugin specialization.
-- The project uses C++ with the Illustrator 2026 AIP SDK for the production native plugin.
-- The native implementation was not yet completed according to the B000 handoff.
+- The project uses specializations A JSX Prototype, B Native AIP Plugin, C Architecture & Research, and D Project Workshop.
+- The 02 specialization is named Native AIP Plugin.
+- The chapter naming convention uses an alphabetical suffix within each specialization.
+- The handoff lifecycle and checkpoint/bootstrap procedures are explicitly defined in repository rules.
 
 ### Inferred
 
-- Chapter B001 should begin native implementation investigation/design from the existing project state rather than recreating the handoff infrastructure.
+- B002 should continue from this chapter's Native AIP Plugin scope rather than restart project-wide architectural decisions.
 
 ### Assumed / unverified
 
-- The exact first native implementation slice has not yet been selected.
-- No claim is made here that any particular Illustrator SDK suite or event API has already been validated for the Mirror tool.
+- No new native implementation behavior is claimed as verified by this handoff.
 
 ### Open
 
-- Native AIP implementation details listed under Open questions remain to be researched and validated.
+- Native AIP implementation design and implementation details are still open work.
 
 ## Last completed task
 
-Created the mandatory initial `DRAFT` handoff for chapter B001 during bootstrap.
+Formalized and tested the conversation handoff workflow, including mandatory initial `DRAFT` creation, checkpoint commits, migration finalization, receiving-chapter ownership, and mandatory handoff lifecycle handling.
 
 ## Immediate next task
 
-Complete the receiving-chapter bootstrap by updating `B000-Native-AIP-Plugin.md` from `READY_FOR_HANDOFF` to `HANDED_OFF`, commit that lifecycle transition, verify the resulting repository state, and only then begin chapter B001 work.
+Initialize chapter B002 using the static bootstrap procedure.
 
 ## Things not to redo
 
-- Do not redesign the established chapter/handoff lifecycle.
-- Do not recreate `BOOTSTRAP.md` with chapter-specific values.
-- Do not treat the JSX prototype as a C++ architecture template.
-- Do not copy the Adobe SDK into the project repository.
-- Do not assume unverified Illustrator SDK behavior.
+- Do not redesign the handoff lifecycle already established in repository rules.
+- Do not recreate chapter-specific values inside `BOOTSTRAP.md`.
+- Do not treat checkpoint commits as migration commits.
+- Do not require a separate user approval for mandatory handoff bootstrap/checkpoint commits.
+- Do not mark this handoff `HANDED_OFF` from chapter B001.
 
 ## Recommended starting context for next chapter
 
-After bootstrap completion, begin by identifying the smallest well-supported native AIP implementation slice and inspect the exact Illustrator 2026 SDK material needed for it. Preserve the evidence distinction between confirmed SDK facts, inference, assumptions, and implementation choices.
+Start by reading `.ai/skills/conversation-handoff/BOOTSTRAP.md`, `.ai/rules/conversation-lifecycle.md`, and `.ai/rules/workflow.md`, then read this handoff and inspect the relevant native-plugin/project files and references before beginning implementation. Chapter B002 must create its own `.ai/handoffs/B/B002-Native-AIP-Plugin.md` with status `DRAFT` immediately during bootstrap and commit it without asking for permission. After successful bootstrap, B002 must change this handoff from `READY_FOR_HANDOFF` to `HANDED_OFF` and commit that transition.

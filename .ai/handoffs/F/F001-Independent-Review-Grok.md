@@ -10,167 +10,172 @@ F
 001
 
 **Previous chapter:**
-000
+N/A
 
 ## Current objective
 
-Complete independent external review work accumulated in F001 (bootstrap-kernel falsification, P-02 bootstrap vs routing experiment, Iteration 2 entry-layer review, AGENTS.md responsibility research) and hand off a coherent state for F002.
+Complete independent external review of the current architecture research frontier (MEC, applicability, dynamic context activation) and hand off a coherent state for F002.
 
 ## Completed
 
-1. Bootstrap continuity from F000 (human placed F001 DRAFT; F000 HANDED_OFF).
-2. **Bootstrap-kernel falsification** — tested whether bootstrap kernel is a permanent semantic component of MEC. Verdict: falsified as permanent component; supported as necessary non-empty initial context / functional property of ordinary active knowledge at t₀.
-3. **P-02 experiment (H-A vs H-B)** — bootstrap-only vs routing/interface residual. H-A partially supported; H-B partially supported as interpretation, not as required separate semantic layer. Interface/payload = useful interpretation, not ontological split.
-4. Full repository tree inventory (on request).
-5. **Independent AI Infrastructure Restructuring review** (first-principles semantic ownership analysis of `.ai` vs `docs`, mixed documents, handoff model).
-6. **Iteration 2 Entry Layer & Command Routing review** — INDEX as router, AGENTS empty gap, BOOTSTRAP retention justified, state ≠ operation ≠ commit holds for five handoff commands.
-7. **C027 AGENTS.md responsibility research** — minimum semantic contract for AGENTS: always-on entry-layer operating contract + guardrails; not router, not catalogue, not procedure owner. Explicit exclusions documented. Open: optional config/repository pointer and write-capability self-check elevation.
+1. **Bootstrap of F001** as first chapter of specialization F.
+2. **Independent Architectural Reconstruction / Baseline** — formed without using Qwen conclusions as premises.
+3. **Dependency ↔ Resolution Architectural Stress Test** — examined coupling between Dependency formalization and Resolution uncertainty.
+4. **Architecture Bottleneck Audit** — audited Authority/Precedence, Dependency, Resolution, Mapping, Representation/Interpretation for what future decisions become blocked.
+5. **Post A/B/C Boundary Consistency Review** — independent attack on the capability-discovery / applicability / execution boundary from Cases A/B/C; verdict: coherent but incomplete.
+6. **Dynamic Context Activation investigation** — tested whether P-01/P-02/P-03 can be unified under available-knowledge vs operationally-active-context; partially supported, with residual distinctions (observed state + bootstrap kernel).
 
 ## Current implementation state
 
-No implementation work authorized by this specialization.
+No implementation work is authorized by this review specialization.
 Specialization C owns architecture construction.
-Paul remains final decision-maker.
-Grok is independent external AI architecture reviewer only.
-Repository mutations in this specialization follow READ-ONLY path unless human applies proposed content.
+Human (Paul) remains the final decision-maker.
+Grok is an independent external reviewer only.
 
-## Decisions / research findings (independent review only — not ADs)
+## Decisions / research findings from this chapter
 
-### Bootstrap kernel
+These are independent review findings, not Architecture Decisions.
 
-- Permanent semantic kernel (Model A): **FALSIFIED**.
-- Initial-condition only + functional property of sufficient active context (Models B+C): **SUPPORTED**.
-- Fully reconstructible from empty active set (Model D): only partially supported; empty active set is not a coherent reasoning moment.
-- Working characterization:
+### From Independent Baseline
 
-```
+- C-11 mapping and C-12 cycle results are bounded research findings, not frozen ADs.
+- Mapping is semantically consequential and informationally necessary for certain consumers, but ontologically unresolved.
+- No formal AD has been promoted from recent dependency research.
 
-necessary non-empty initial context
-= ordinary knowledge that happens to be active at t₀
-and is sufficient to start discovery
+### From Dependency ↔ Resolution Stress Test
 
-```
+- Uncertainty of Resolution blocks _full_ uniform formalization of Dependency, but does not block useful target-specific work.
+- Coupling is asymmetric: stronger for effective-outcome targets than for authority-standing targets.
+- prerequisite-dependency-semantics.md remains largely alive; its strongest distinctions survived later arcs.
 
-### P-02 / dynamic activation
+### From Bottleneck Audit
 
-- Non-empty bootstrap context required (Claim A).
-- Bounded discovery needs accessible information about dormant knowledge (Claim B).
-- That information need not form a separate semantic routing layer (Claim C not required).
-- MEC remains activation boundary at a reasoning moment (Model B refined).
+- Highest-severity blockages for further formalization sit at Authority/Precedence interactions with Dependency targets and at effective-outcome Resolution coupling.
+- Mapping and Representation/Interpretation produce more localized blockages.
 
-### Entry layer (Iteration 2)
+### From Post A/B/C Review
 
-- INDEX = routing/discovery only: **holds**.
-- Canonical owners retain procedure/normative authority: **holds**.
-- BOOTSTRAP as ordered workflow: **justified**.
-- AGENTS.md empty while architecture claims always-on contract: **critical gap**.
-- Soft dual source of command phrases in lifecycle.md vs INDEX: moderate.
-- Chapter-format embedding in generic rules: moderate portability issue.
+- Capability discovery, applicability determination, and execution are coherent functional distinctions on the tested surface.
+- They do **not** establish a physical global index, registry, router, manifest, command syntax, capability IDs, or universal metadata schema.
+- Strongest counterargument: when capability existence itself is state-dependent, discovery and applicability can collapse toward the same state inspection.
+- Minimal correction proposed: treat state-dependent capabilities as conditionally discoverable.
 
-### AGENTS.md responsibility
+### From Dynamic Context Activation
 
-- Smallest correct role: always-on entry-layer operating contract and guardrail.
-- Must point to INDEX for command/capability routing.
-- Must not contain command tables, capability maps, lifecycle, handoff procedures, commit policy, or path-resolution algorithms.
-- Next step (for C or F): draft minimal AGENTS content and validate with entry-path experiment.
+- Hypothesis partially supported: P-01/P-02/P-03 can largely be re-described as aspects of dynamic operational activation of available knowledge.
+- Residual distinctions that survive falsification:
+  - Fresh **observed project state** is not activatable instruction knowledge.
+  - A non-empty **bootstrap kernel** must already be active before reasoning can decide what further knowledge/state to obtain.
+- MEC is best understood as an activation boundary at a reasoning moment, not a static preselected package:
+  ```
+  MEC(t) = the set of knowledge and observed state
+           that is operationally active at reasoning moment t
+           and is jointly sufficient for the assistant
+           either to perform the next permissible action
+           or to decide, reliably, what additional knowledge
+           or state must be obtained next.
+  ```
+- Operational compactness does not require information deletion; deferred activation often suffices.
 
 ## Open questions
 
-1. Precise minimum ordinary-knowledge set sufficient at t₀ for typical task classes (project-agnostic vs project-specific).
-2. Whether AGENTS needs a one-line pointer to `config.yaml` / `repository.md` before INDEX, or INDEX-first is enough.
-3. Whether write-capability self-check belongs in AGENTS as universal guardrail or only in mutation skills/workflows.
-4. Minimum information a capability description and local applicability surface must each expose without duplication (carried from F000).
-5. How far deferred activation can be pushed before rediscovery cost dominates.
-6. Controlled Grok↔Qwen comparison (still deferred unless requested).
-7. INDEX table scalability beyond ~10–15 entries (presentation pressure, not ownership confusion).
+1. What exactly constitutes the non-empty bootstrap kernel that must be active before further activation decisions can be made?
+2. Minimum information that a capability description and a local applicability surface must each expose without duplication.
+3. Whether “loaded but dormant” vs “not yet retrieved” needs a semantic distinction or is only operational.
+4. How far deferred activation can be pushed before repeated discovery cost exceeds keeping more knowledge active.
+5. Interaction of the current MEC/activation model with the still-open Dependency target/consequence and Authority/Precedence questions from earlier research.
+6. Controlled comparison of Grok baseline with Qwen independent review (explicitly deferred until baseline was stable; now available for a later chapter if desired).
 
 ## Current files / relevant references
 
 ### Repository identity
 
-- `paulhuman/aip-mirror@main` via `.ai/config.yaml`
+- Canonical: `paulhuman/aip-mirror@main`
 
-### Active infrastructure (must use current paths)
+### Primary current architecture research (as of end of F001)
 
-- `.ai/INDEX.md`
-- `.ai/AGENTS.md` (empty — design pending)
-- `.ai/architecture/ai-infrastructure-restructuring.md`
-- `.ai/rules/repository.md`
+- `.ai/handoffs/C/C020-Architecture-Research.md` (current 03 frontier at time of this handoff)
+- `.ai/handoffs/C/C019-Architecture-Research.md`
+- `docs/architecture/constraint-problem-map-C019.md`
+- `docs/architecture/minimal-execution-context-C019.md`
+
+### Project rules / skills (read during chapter)
+
+- `docs/PROJECT-INSTRUCTIONS.md`
+- `.ai/rules/conversation-lifecycle.md`
 - `.ai/rules/workflow.md`
-- `.ai/rules/commits.md`
-- `.ai/rules/handoff/lifecycle.md`
-- `.ai/rules/handoff/references.md`
-- `.ai/skills/handoff/SKILL.md`
-- `.ai/skills/commits/SKILL.md`
-- `.ai/workflows/handoff/BOOTSTRAP.md`
-- `.ai/handoffs/F/F000-Independent-Review-Grok.md` (HANDED_OFF)
-- `.ai/handoffs/C/C027-Architecture-Research.md` (AGENTS/INDEX frontier on C side)
+- `.ai/rules/repository.md`
+- `.ai/rules/handoff-references.md`
+- `.ai/skills/conversation-handoff/SKILL.md`
+- `.ai/skills/conversation-handoff/BOOTSTRAP.md`
+- `.ai/skills/deep-understanding/SKILL.md`
+- `.ai/skills/commit-message/SKILL.md`
+- `docs/architecture/independent-review-grok-onboarding.md`
 
-### Do not use as active owners
+### Historical / selective
 
-- Old paths: `docs/handoffs/`, `.ai/skills/conversation-handoff/`, `.ai/rules/conversation-lifecycle.md`
-- Old chapter IDs (`06AA`, `06AB`, `[0-9]{2}[A-Z]{2}`)
+- `docs/architecture/ai-project-instruction-architecture.md` (stale North-Star; do not treat as current specification)
+- `docs/architecture/prerequisite-dependency-semantics.md` (still relevant for earlier dependency distinctions)
 
 ## Important constraints
 
-- Independent external reviewer only; not architect, not decision-maker.
+- Grok is independent external AI architecture reviewer only.
+- Do not become architect, implementation owner, or final decision-maker.
 - Do not promote review findings to Architecture Decisions.
-- Do not invent registry/router/manifest/capability-ID systems.
-- Preserve evidence discipline.
-- Lifecycle: DRAFT → READY_FOR_HANDOFF → HANDED_OFF.
-- Chapter ID format: `[A-Z][0-9]{3}` (this specialization: F).
-- Do not restore old handoff structure from conversation memory; repository state is authoritative.
-- Closing chapter must not create F002 handoff or mark F001 HANDED_OFF.
+- Do not invent registry / router / manifest / command system / capability IDs / universal metadata schema / `.ai/memory/` / new filesystem boundaries unless later research demonstrates necessity.
+- Do not turn the assistant into a deterministic command interpreter.
+- Preserve evidence discipline: Observed fact / Inference / Assumption / Specification / Implementation detail / Open question.
+- Human (Paul) remains the final architecture decision-maker.
+- Current lifecycle is DRAFT → READY_FOR_HANDOFF → HANDED_OFF (no SUPERSEDED in the active rules at time of this handoff).
 
 ## Evidence / confidence
 
 ### Confirmed / observed
 
-- F000 HANDED_OFF; F001 was stale DRAFT until this migration preparation.
-- AGENTS.md is empty (title only).
-- INDEX is functional router after C027 metadata trim.
-- BOOTSTRAP retains ordered-workflow semantics.
-- Five handoff commands route without state/operation/commit collapse.
+- F001 completed the five substantive review tasks listed above.
+- Current 03 research frontier (C020) is focused on the meaning of “minimal” in MEC under a runtime-reasoning model.
+- Applicability is currently treated in 03 as a runtime reasoning result, not a mandatory persistent knowledge layer.
+- No implementation artefacts were justified by the completed 03 or 06 tests.
 
 ### Inferred
 
-- Minimal AGENTS contract is sufficient to close the progressive-disclosure gap.
-- Bootstrap kernel work can stay closed unless new MEC evidence from C reopens it.
+- Dynamic activation + observed state is currently the most coherent semantic account of the MEC / P-01 / P-02 / P-03 cluster.
+- The bootstrap-kernel residual is the highest-leverage remaining uncertainty for further MEC work.
+
+### Assumed / unverified
+
+- Whether a later controlled Grok↔Qwen comparison will surface material disagreements beyond those already visible from independent baselines.
 
 ### Open
 
-- See Open questions.
+- See Open questions section.
 
 ## Last completed task
 
-AGENTS.md responsibility research report (C027-aligned independent review) and migration preparation of F001 to READY_FOR_HANDOFF.
+Dynamic Context Activation investigation and preparation of this READY_FOR_HANDOFF state.
 
 ## Immediate next task (for F002)
 
-1. Bootstrap F002 from this handoff (create `.ai/handoffs/F/F002-Independent-Review-Grok.md` as DRAFT; transition F001 READY_FOR_HANDOFF → HANDED_OFF).
-2. Continue independent review as directed by human referee — priority candidates:
-
-- validate/draft minimal AGENTS.md contract (entry-path experiment);
-- or align with current C-series frontier (C027+).
-
-3. Do not redo F000/F001 closed analyses unless new evidence requires it.
+1. Bootstrap F002 from this handoff.
+2. Continue independent review from the current frontier: the residual bootstrap-kernel question and/or the minimum-information characterisation of capability description vs applicability surface, as directed by the human referee or by the then-current 03 state.
+3. Do not automatically resume earlier C-series or Dependency formalization unless the current MEC question directly requires it.
 
 ## Things not to redo
 
-- F000 baseline, dependency stress test, bottleneck audit, Post A/B/C, dynamic context activation.
-- Full bootstrap-kernel permanent-component falsification (closed).
-- Full Iteration 2 physical restructuring.
-- Redesign of INDEX, lifecycle, or BOOTSTRAP without new contradictory evidence.
-- Treating Qwen conclusions as premises unless comparison is requested.
+- Do not repeat the F001 Independent Baseline, Dependency↔Resolution stress test, Bottleneck Audit, Post A/B/C review, or Dynamic Context Activation analysis merely for migration.
+- Do not re-derive the handoff lifecycle rules.
+- Do not treat Qwen conclusions as starting premises unless a controlled comparison is explicitly requested.
+- Do not invent implementation structure from the semantic findings.
 
-## Recommended starting context for F002
+## Recommended starting context for next chapter
 
-1. This handoff (after READY_FOR_HANDOFF applied)
-2. `.ai/INDEX.md`, `.ai/AGENTS.md`, `.ai/architecture/ai-infrastructure-restructuring.md`
-3. `.ai/rules/handoff/lifecycle.md`, `.ai/skills/handoff/SKILL.md`, `.ai/workflows/handoff/BOOTSTRAP.md`
-4. `.ai/handoffs/C/C027-Architecture-Research.md` (or successor)
-5. F000 only if historical baseline detail is needed
+1. This handoff (`.ai/handoffs/F/F001-Independent-Review-Grok.md`)
+2. `docs/architecture/independent-review-grok-onboarding.md`
+3. Current 03 handoff at the time of F002 bootstrap (likely C020 or its successor)
+4. `docs/architecture/constraint-problem-map-C019.md`
+5. `docs/architecture/minimal-execution-context-C019.md`
+6. Applicable `.ai/rules/*` and `.ai/skills/conversation-handoff/*`
 
 ## Research references
 
-Internal only; no external research references required for F001 tasks.
+All material references are internal repository documents listed above. No additional external research references were required for the completed F001 tasks.

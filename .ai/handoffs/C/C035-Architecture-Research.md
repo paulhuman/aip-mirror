@@ -14,26 +14,34 @@ C
 
 ## Starting objective
 
-Continue the bounded Architecture & Research work from C034. The handoff lifecycle-state migration is complete. C035 begins the semantic consistency sweep that verifies the simplified handoff model is expressed consistently across the active canonical .ai infrastructure.
+Continue the bounded Architecture & Research work from C034. C034 closed the bootstrap runtime-input normalization question and C035 first corrected the historical C032 handoff header defect. The current bounded objective is to substantially simplify the handoff model by removing lifecycle status bookkeeping while preserving receiving-chapter handoff creation and durable context continuity.
 
 ## Starting state
 
-C034 established the target handoff model:
+C035 verified that the canonical handoff-header rule already requires the Previous chapter field to contain only the three-digit chapter number. No additional canonical rule gap was found. The historical C032 defect was corrected from:
 
-> A handoff is a persistent conversation-context snapshot for a chapter, not a lifecycle-controlled transfer object.
+    Previous chapter:
+    030 — Architecture & Research
 
-The active handoff architecture no longer uses Status, DRAFT, READY_FOR_HANDOFF, HANDED_OFF, or SUPERSEDED as lifecycle states. Receiving-chapter creation remains part of bootstrap. No closing or receiving transition is required.
+to:
 
-The user manually removed legacy Status fields from the remaining handoff files in:
+    Previous chapter:
+    030
 
-    3985ac491462effe68cc5e1fd93485a08ec9c821
-    ai-refactor(handoff): remove legacy status fields
+The correction was committed as:
 
-C034 then recorded the next work plan in:
+    aec5211f7c2346d93471bb17f0e03b8e9c9ae5ba
+    fix(handoff): normalize C032 previous chapter
 
-    .ai/architecture/ai-infrastructure-restructuring.md
+The current handoff architecture was then reviewed from a broader operational perspective. The three-state lifecycle:
 
-That plan is intentionally bounded and distinguishes active canonical semantics from historical architecture-record text.
+    DRAFT
+      ↓
+    READY_FOR_HANDOFF
+      ↓
+    HANDED_OFF
+
+creates substantial bookkeeping overhead and Git-history noise without preserving information that cannot already be represented by the handoff file, chapter identity, and Git history.
 
 ## Confirmed / observed
 
@@ -41,76 +49,127 @@ That plan is intentionally bounded and distinguishes active canonical semantics 
 - Current chapter: C035.
 - Previous chapter: C034.
 - Specialization: C.
-- Handoff is a persistent context snapshot, not a lifecycle-controlled transfer object.
-- The receiving chapter creates its own handoff at initialization.
-- Historical Git commits are preserved; history is not rewritten.
-- Normal handoff commits use:
-  
-      ai-docs(handoff): create C035
-      ai-docs(handoff): update C035
+- The receiving chapter creates its own handoff at the beginning of a new conversation. This invariant is retained.
+- Handoff status transitions are the source of a large class of unnecessary lifecycle-only mutations and commits.
+- Conversation termination may be abrupt because of context limits, browser/session instability, or other interruption; a required final status transition is therefore operationally fragile.
+- Handoff commits are AI-infrastructure bookkeeping and should be visually distinguishable from project documentation commits.
+- The desired normal handoff commit vocabulary is intentionally short:
 
-- The active canonical infrastructure was already migrated away from the old handoff state machine, but the next bounded sweep must verify that no stale semantics remain.
-- The architecture record intentionally preserves historical descriptions of the former lifecycle model and those historical descriptions must not be mistaken for active rules.
+  ai-docs(handoff): create C034
+  ai-docs(handoff): update C034
 
-## Relevant canonical owners
+- Normal handoff commit messages MUST NOT append conversation titles, task descriptions, rationale, milestone summaries, or other explanatory suffixes.
 
-- `.ai/rules/handoff/lifecycle.md` — conversation continuity and handoff semantics.
-- `.ai/skills/handoff/SKILL.md` — handoff structure and operations.
-- `.ai/workflows/handoff/BOOTSTRAP.md` — ordered new-chapter bootstrap.
-- `.ai/INDEX.md` — routing and capability discovery.
-- `.ai/rules/commits.md` — commit policy.
-- `.ai/skills/commits/SKILL.md` — commit-message construction.
-- `.ai/architecture/ai-infrastructure-restructuring.md` — durable architectural record.
+## Architectural decision
 
-## Completed work
+C035 adopts the following target model:
 
-The semantic consistency sweep is complete.
+> **A handoff is a persistent conversation-context snapshot for a chapter, not a lifecycle-controlled transfer object.**
 
-- The declared active canonical `.ai` scope was inspected for stale handoff lifecycle-state semantics.
-- No active stale use of DRAFT, READY_FOR_HANDOFF, HANDED_OFF, SUPERSEDED, Status, or equivalent lifecycle-transition semantics was found in the active canonical rules, skills, workflows, or INDEX.
-- The former lifecycle terms remain only in the historical portions of `.ai/architecture/ai-infrastructure-restructuring.md`; those descriptions are intentionally preserved as historical record and are not active semantics.
-- `.ai/rules/handoff/lifecycle.md` was updated from MAY to SHOULD for the recommendation that a current chapter update its own handoff when meaningful durable context accumulates.
-- `.ai/architecture/ai-infrastructure-restructuring.md` was aligned with the same SHOULD wording.
-- `.ai/skills/handoff/SKILL.md` required no change because the stale Status example was already absent.
-- `.ai/workflows/handoff/BOOTSTRAP.md` and `.ai/INDEX.md` remain semantically aligned with the simplified handoff model and required no change.
-- Final content and changed-scope verification confirmed exactly two intended file changes in the sweep.
+The active handoff schema MUST NOT contain a Status field.
 
-The result was committed as:
+The following lifecycle states are removed from the active architecture:
 
-    091936856eef175f31c0b1cace6411972c808785
-    ai-refactor(handoff): align continuity recommendation
+    DRAFT
+    READY_FOR_HANDOFF
+    HANDED_OFF
 
-## Current architectural assessment
+No replacement state machine is introduced.
 
-No concrete active architectural contradiction was found after the sweep.
+The receiving chapter still creates its own handoff at initialization:
 
-The simplified handoff model is now expressed consistently across the active canonical infrastructure. Historical lifecycle descriptions remain as durable architecture history and should not be removed merely to make the current model look cleaner.
+    new conversation
+        ↓
+    establish repository + chapter context
+        ↓
+    read predecessor handoff when applicable
+        ↓
+    create current chapter handoff
+        ↓
+    commit initial handoff
+        ↓
+    substantive work
 
-No replacement lifecycle mechanism, registry, manifest, dependency graph, command-ID system, universal router, or other infrastructure is justified by the current evidence.
+A current chapter may update its handoff whenever meaningful durable context accumulates. There is no required closing transition before the conversation ends.
 
-## Next step
+The receiving chapter reads the predecessor handoff but does not modify it merely to mark it as consumed. There is no receiving transition equivalent to READY_FOR_HANDOFF → HANDED_OFF.
 
-Perform a final bounded assessment of the Architecture & Research work. If no concrete architectural question or contradiction emerges from that assessment, C035 can end without inventing another infrastructure task. Do not create a receiving-chapter handoff in advance.
+Chapter identity and bootstrap runtime-input normalization remain unchanged:
+
+    PREVIOUS_CHAPTER = <three-digit previous chapter number or N/A>
+    CURRENT_CHAPTER = <three-digit current chapter number>
+    SPECIALIZATION = <single uppercase specialization letter>
+
+## Consequences
+
+The canonical handoff skill, BOOTSTRAP workflow, INDEX routing, and existing handoff files now require a coordinated migration.
+
+The migration must:
+
+1. remove Status from active handoff files;
+2. remove lifecycle-state procedures and commands that exist solely to maintain the removed state machine;
+3. preserve receiving-chapter creation of its own handoff;
+4. preserve chapter identity and bootstrap invocation normalization;
+5. preserve meaningful handoff content and historical context;
+6. use the short `ai-docs(handoff): create/update <chapter>` commit convention;
+7. perform a repository-wide semantic consistency sweep for stale lifecycle terminology;
+8. avoid introducing a replacement state machine.
+
+The existing lifecycle recovery/correction machinery is expected to become obsolete if its only purpose is repairing the removed status model. This must be established by the implementation pass rather than assumed without inspection.
+
+Historical Git commits MUST NOT be rewritten. Existing lifecycle commits remain historical evidence of the former architecture.
+
+## Handoff commit convention
+
+For normal handoff creation and content updates, use exactly these forms:
+
+    ai-docs(handoff): create C035
+    ai-docs(handoff): update C035
+
+Keep these messages short. The handoff commit itself is the durable Git trace; the handoff file contains the useful context.
+
+The local `ai-docs` namespace is an intentional repository convention for `.ai/` infrastructure. It is not presented as a replacement for Conventional Commits.
+
+Project documentation remains under the normal project-facing `docs(...)` vocabulary.
 
 ## Important constraints
 
-- Preserve the AGENTS → INDEX → ACTIVATE → canonical-owner architecture.
+- Preserve the established AGENTS → INDEX → ACTIVATE → canonical-owner architecture.
 - Treat `.ai/skills/handoff/SKILL.md` as the canonical owner of handoff structure unless repository evidence identifies a more specific owner.
-- BOOTSTRAP remains the canonical ordered new-conversation initialization workflow.
-- Do not reintroduce Status or an equivalent lifecycle state under another name.
-- Do not erase historical architecture-record evidence merely because the active model changed.
-- Do not conflate full chapter identifiers such as C035 with numeric chapter component 035.
-- Use repository write-safety for every existing-file mutation.
-- Keep the next investigation bounded; do not create infrastructure without a concrete demonstrated need.
+- BOOTSTRAP remains the canonical ordered new-conversation chapter initialization workflow.
+- Do not reintroduce a lifecycle status field under another name.
+- Do not create a new handoff state machine merely to replace the removed one.
+- Do not remove the receiving chapter's responsibility to create its own handoff.
+- Do not conflate full chapter identifiers such as C035 with the numeric chapter component 034.
+- Preserve historical Git commits; this is an active-architecture migration, not history rewriting.
+- Use the repository write-safety procedure for every existing-file mutation.
 
-## Recommended context for continuation
+## Immediate next task
 
-Read:
+Migrate the work to C036 and continue with the bounded semantic consistency sweep over the active .ai infrastructure.
+
+The C035 continuation plan has been recorded in:
 
     .ai/architecture/ai-infrastructure-restructuring.md
-    .ai/rules/handoff/lifecycle.md
-    .ai/skills/handoff/SKILL.md
-    .ai/workflows/handoff/BOOTSTRAP.md
-    .ai/INDEX.md
 
-Then continue only if a concrete architectural question remains. Otherwise, preserve the current architecture and close the chapter without manufacturing additional work.
+The next chapter MUST:
+
+1. inspect active canonical .ai rules, skills, workflows, and INDEX for stale lifecycle-state semantics;
+2. distinguish active stale behavior from valid historical descriptions in the architecture record;
+3. change the handoff continuity wording from MAY to SHOULD:
+   
+       A current chapter SHOULD update its own handoff whenever meaningful durable context accumulates.
+
+4. remove the stale Status field from the example in .ai/skills/handoff/SKILL.md;
+5. verify that the architecture record matches the resulting active canonical semantics;
+6. perform final content/scope verification;
+7. only then determine whether any concrete architectural contradiction remains.
+
+The sweep MUST NOT introduce a replacement lifecycle state machine or a new infrastructure layer merely to create another task.
+
+The mass removal of legacy Status fields from remaining handoffs was completed manually by the user in:
+
+    3985ac491462effe68cc5e1fd93485a08ec9c821
+    ai-refactor(handoff): remove legacy status fields
+
+C035's continuation plan is therefore the next bounded piece of work, not another handoff-lifecycle migration.

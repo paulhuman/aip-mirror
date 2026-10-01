@@ -14,9 +14,9 @@ C
 
 ## Starting objective
 
-Continue the bounded Architecture & Research work from C038 by resolving the remaining semantic questions around bootstrap-instruction generation, first-chapter initialization, interrupted migration, and the two manual bootstrap templates. Only after those semantics are stable should active command references be migrated.
+Continue the bounded Architecture & Research work from C038 by formalizing the `SHORT_NAME` contract in the canonical BOOTSTRAP workflow and then resolving the remaining semantic questions around generated bootstrap instructions, first-chapter initialization, and interrupted migration before changing active command references.
 
-Do not reopen the accepted `>>` command prefix or the established `>>operation [arguments...]` grammar.
+Do not reopen the accepted `>>` syntax decision.
 
 ## Starting state
 
@@ -26,11 +26,11 @@ Do not reopen the accepted `>>` command prefix or the established `>>operation [
 - Previous chapter: C038.
 - Specialization: C.
 - Resolved short name: `Architecture & Research`.
-- Bootstrap runtime values supplied for this chapter:
+- Bootstrap runtime inputs supplied for this chapter:
 
   ```
-  PREVIOUS_CHAPTER = 038
-  CURRENT_CHAPTER = 039
+  PREVIOUS_CHAPTER = 037
+  CURRENT_CHAPTER = 038
   SPECIALIZATION = C
   SHORT_NAME = Architecture & Research
   ```
@@ -43,89 +43,62 @@ CURRENT_CHAPTER
 SPECIALIZATION
 ```
 
-`SHORT_NAME` is supplied contextual data. When omitted, BOOTSTRAP resolves it through the specialization vocabulary in `.ai/config.yaml`.
+`SHORT_NAME` is supplied context. When omitted, the receiving workflow resolves it through the `specializations → <letter> → short_name` vocabulary in `.ai/config.yaml`.
 
 ## Confirmed / observed
 
-- C038 resolved the AGENTS → BOOTSTRAP entry boundary.
-- `.ai/AGENTS.md` item 6 explicitly routes new conversation chapter initialization to `.ai/workflows/handoff/BOOTSTRAP.md`.
-- BOOTSTRAP is the canonical ordered workflow for receiving a chapter or starting the first chapter of a specialization.
-- BOOTSTRAP MUST NOT call, re-enter, or redefine AGENTS.
-- Reading AGENTS alone MUST NOT trigger chapter initialization.
-- An explicit initialization request with missing or malformed runtime values MUST stop before repository mutation and report the missing/malformed values.
-- The generated bootstrap transport is explicitly identified as a new-chapter initialization instruction and directs the receiving AI through AGENTS item 6.
-- Generated transport contains exactly four lines: PREVIOUS_CHAPTER, CURRENT_CHAPTER, SPECIALIZATION, and resolved SHORT_NAME.
-- SHORT_NAME is not a fourth canonical BOOTSTRAP runtime input.
-- `.ai/config.yaml` is the canonical specialization vocabulary and contains `C → Architecture & Research`.
-- `.ai/rules/handoff/lifecycle.md` defines handoffs as durable chapter context without lifecycle status transitions.
+- C038 resolved `SHORT_NAME` at the configuration and bootstrap-contract boundary.
+- `.ai/config.yaml` contains the specialization vocabulary, including `C → Architecture & Research`.
+- `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical ordered receiving/first-chapter initialization workflow.
+- `.ai/rules/handoff/lifecycle.md` defines handoffs as durable conversation-context snapshots without lifecycle status transitions.
 - `.ai/skills/handoff/SKILL.md` owns handoff capability and structure.
 - `.ai/rules/repository.md` owns repository identity/path resolution and repository write safety.
-- `.ai/skills/activation/SKILL.md` defines ACTIVATE as rereading required canonical owners; the required initialization owners were reread for this bootstrap.
+- `.ai/skills/activation/SKILL.md` defines ACTIVATE as rereading the required canonical owners.
 - C038 predecessor handoff was read successfully.
-- No C039 handoff existed before this bootstrap.
-- The current architecture record is `.ai/architecture/ai-infrastructure-restructuring.md`, with C038 conclusions recorded in section 23 and the C039 follow-up sequence recorded in the latest sections.
-- The active command surface in `.ai/INDEX.md` now documents the stabilized `>>handoff`, `>>migrate <chapter>`, and `>>generate-bootstrap <chapter>` operations.
+- This C039 handoff is being created by a WRITE-CAPABLE AI during bootstrap.
+- The active architecture record is `.ai/architecture/ai-infrastructure-restructuring.md`, especially section 29.
 
 ## C038 decisions carried forward
 
-### Entry-layer boundary
+### SHORT_NAME
+
+The canonical resolution model is:
 
 ```
-new conversation
+supplied SHORT_NAME
+    ↓ if omitted
+.ai/config.yaml specialization vocabulary
     ↓
-.ai/AGENTS.md
-    ↓
-new-chapter initialization requested?
-    ├─ NO  → ordinary work
-    └─ YES → AGENTS item 6
-               ↓
-        .ai/workflows/handoff/BOOTSTRAP.md
-               ↓
-        validate inputs
-               ↓
-        ACTIVATE canonical owners
-               ↓
-        initialize chapter
+resolved SHORT_NAME
 ```
 
-### Bootstrap transport
+Generated bootstrap instructions SHOULD expose the resolved short name explicitly for human-readable, self-contained context.
 
-The standard generated transport for C038 → C039 was:
+Manual bootstrap templates SHOULD expose `SHORT_NAME` explicitly as practical copy/paste context.
 
-```
-PREVIOUS_CHAPTER = 038
-CURRENT_CHAPTER = 039
-SPECIALIZATION = C
-SHORT_NAME = Architecture & Research
-```
-
-The receiving chapter is now executing that transport through the canonical initialization workflow.
+No fourth required BOOTSTRAP runtime input has been introduced.
 
 ### Command syntax
-
-The stable command prefix remains:
 
 ```
 >>
 >>operation [arguments...]
 ```
 
-Known accepted semantic operations include:
+This decision is accepted and MUST NOT be reopened in this chapter.
+
+The known semantic operations include:
 
 ```
 >>handoff
 >>migrate <chapter>
 ```
 
-This syntax decision MUST NOT be reopened merely because active command references still use historical `Пора...` wording.
+Normal migration MUST invoke bootstrap-instruction generation as its terminal step.
 
-Normal migration MUST generate the bootstrap transport as its terminal step. Standalone bootstrap-instruction generation remains a separate semantic operation that can be invoked when the terminal transport was omitted or needs to be regenerated.
-
-## Relevant canonical owners and references
+## Relevant canonical owners
 
 - `.ai/config.yaml`
-- `.ai/AGENTS.md`
-- `.ai/INDEX.md`
 - `.ai/rules/repository.md`
 - `.ai/rules/workflow.md`
 - `.ai/rules/handoff/lifecycle.md`
@@ -133,10 +106,10 @@ Normal migration MUST generate the bootstrap transport as its terminal step. Sta
 - `.ai/skills/activation/SKILL.md`
 - `.ai/skills/handoff/SKILL.md`
 - `.ai/workflows/handoff/BOOTSTRAP.md`
+- `.ai/INDEX.md`
 - `.ai/architecture/ai-infrastructure-restructuring.md`
+- `.ai/handoffs/README.md`
 - `.ai/handoffs/C/C038-Architecture-Research.md`
-
-No additional external research reference was identified by C038 as materially required for the immediate continuation.
 
 ## Important constraints
 
@@ -147,66 +120,152 @@ No additional external research reference was identified by C038 as materially r
 - Distinguish active semantics from historical architecture evidence.
 - Preserve the distinction between generated bootstrap instructions and execution of the receiving chapter's BOOTSTRAP workflow.
 - For every existing-file mutation, follow repository write safety: read current content, make the minimal intended change, write the complete file, read back, verify content, inspect diff, verify scope, commit, and verify the result.
-- Do not create a future receiving-chapter handoff in advance.
-- Do not silently treat SHORT_NAME as a fourth required canonical runtime input.
-- Do not broaden this chapter into a general AI-infrastructure refactor.
+- Do not create the next receiving-chapter handoff in advance.
+- Do not silently treat `SHORT_NAME` as a fourth required canonical runtime input.
 
-## C039 completed bounded work
+## C039 checkpoint
 
-1. Verified the AGENTS → BOOTSTRAP entry boundary and missing-input behavior against the current canonical files.
-2. Verified the generated four-line bootstrap transport against the current BOOTSTRAP contract.
-3. Accepted `>>generate-bootstrap <chapter>` as the standalone bootstrap-instruction generation operation.
-4. Confirmed that first-chapter initialization does not need a dedicated `>>init` or `>>new` operation.
-5. Confirmed that interrupted migration does not need a dedicated `>>recover` operation.
-6. Designed and validated Template A and Template B as manual bootstrap transport.
-7. Migrated active command references in `.ai/INDEX.md` and `.ai/skills/handoff/SKILL.md`.
-8. Completed the semantic consistency sweep and corrected the stale current-handoff checkpoint wording found during the sweep.
-9. Confirmed that no additional infrastructure is required.
+The first bounded implementation step is complete.
 
-## Semantic consistency sweep result
+### BOOTSTRAP contract
 
-- Active command references are consistent across INDEX and the handoff skill.
-- AGENTS item 6 and BOOTSTRAP remain the canonical initialization boundary and workflow.
-- Historical C036–C038 records retain their historical unresolved wording intentionally; they are not active command definitions.
-- No additional stale active reference requiring correction was identified.
+Updated `.ai/workflows/handoff/BOOTSTRAP.md` to formalize:
+
+- supplied `SHORT_NAME` as optional contextual input;
+- canonical runtime inputs remaining limited to `PREVIOUS_CHAPTER`, `CURRENT_CHAPTER`, and `SPECIALIZATION`;
+- resolution priority: supplied `SHORT_NAME` → configured specialization vocabulary;
+- fallback lookup: `specializations.<SPECIALIZATION>.short_name` in `.ai/config.yaml`;
+- bootstrap failure when neither a supplied nor configured `SHORT_NAME` is usable;
+- use of the resolved `SHORT_NAME` for the receiving handoff filename and conversation title.
+
+Commit: `1efd2d2c585a5b750884158b8f48fcc05d4b9885`.
+
+### Canonical-owner consistency check
+
+Read the current versions of:
+
+- `.ai/rules/handoff/lifecycle.md`
+- `.ai/skills/handoff/SKILL.md`
+
+No stale `SHORT_NAME` semantics were found that require changes at this stage. Both continue to delegate chapter initialization to BOOTSTRAP and use the established handoff filename/header model.
+
+The next bounded question remains the exact generated bootstrap-message format and its authoritative data source. Do not yet migrate active command references.
 
 ## Confirmed versus uncertain
 
 ### Confirmed
 
-- C039 is the receiving chapter for C038.
+- C039 is the current chapter being migrated to C040.
+- C038 was the predecessor.
 - `C → Architecture & Research` is configured in `.ai/config.yaml`.
-- The canonical BOOTSTRAP runtime contract is PREVIOUS_CHAPTER, CURRENT_CHAPTER, SPECIALIZATION.
-- SHORT_NAME is contextual data resolved from supplied context or specialization vocabulary.
-- AGENTS item 6 is the explicit entry path for requested new-chapter initialization.
-- BOOTSTRAP owns the ordered initialization procedure.
-- Generated bootstrap transport is a four-line context payload and not a second procedure.
-- `>>` is the stable command prefix and MUST NOT be reopened.
-- `>>migrate <chapter>` is the intended migration invocation shape.
-- Normal migration MUST generate bootstrap transport as its terminal step.
-- Active command-reference migration is complete for the stabilized command surface.
+- The canonical BOOTSTRAP runtime contract remains `PREVIOUS_CHAPTER`, `CURRENT_CHAPTER`, and `SPECIALIZATION`.
+- `SHORT_NAME` is contextual data: supplied when available, otherwise resolved from specialization vocabulary.
+- The resolved `SHORT_NAME` is the canonical short conversation title and filename component.
+- `.ai/AGENTS.md` is the always-on AI infrastructure entry contract.
+- AGENTS item 6 is the explicit entry/routing instruction for new conversation chapter initialization.
+- BOOTSTRAP is the canonical ordered workflow for new chapter initialization.
+- BOOTSTRAP MUST NOT call or redefine AGENTS.
+- Reading AGENTS alone MUST NOT trigger chapter initialization.
+- An explicit initialization request with missing or malformed runtime values MUST stop bootstrap before repository mutation and report the missing/malformed values.
+- Generated bootstrap transport MUST explicitly identify itself as a new-chapter initialization instruction and direct the receiving AI through AGENTS item 6 to BOOTSTRAP.
+- The generated transport contains exactly four lines: the three canonical runtime inputs plus resolved `SHORT_NAME`.
+- The generated transport MUST NOT contain `NEXT_CHAPTER`, filename/path metadata, or a second procedural framework.
+- `>>` and `>>operation [arguments...]` are accepted and the `>>` decision MUST NOT be reopened.
+- `>>migrate <chapter>` is the intended migration invocation shape; specialization and short name are resolved automatically.
+- Normal migration MUST generate the bootstrap transport as its terminal output.
+- The generated bootstrap instruction and execution of the receiving chapter's BOOTSTRAP workflow are separate concerns.
 
-### Confirmed decisions
+### Inferred
 
-- The standalone bootstrap-instruction operation is `>>generate-bootstrap <chapter>`.
-- First-chapter initialization does not need a dedicated `>>init` or `>>new` operation; BOOTSTRAP's FIRST CHAPTER branch is sufficient.
-- Interrupted migration does not need a dedicated `>>recover` operation; recovery remains a manual bootstrap transport condition handled by BOOTSTRAP and durable repository state.
-- Template A is the first-chapter manual bootstrap template.
-- Template B is the interrupted-migration recovery manual bootstrap template.
-- If SHORT_NAME is omitted from a manual template, BOOTSTRAP resolves it from .ai/config.yaml through the specialization vocabulary.
-- Generated migration transport MUST include the already-resolved SHORT_NAME.
-- The active command surface is stabilized as `>>handoff`, `>>migrate <chapter>`, and `>>generate-bootstrap <chapter>`.
-- The semantic consistency sweep found no stale active references requiring further correction.
-- Historical C036–C038 unresolved wording remains historical record and is intentionally preserved.
+- First-chapter initialization may not require a dedicated `init` or `new` operation if BOOTSTRAP already expresses the case unambiguously.
+- Interrupted migration may be recoverable entirely from durable repository state and BOOTSTRAP, but this remains to be tested rather than assumed.
 
-## Latest checkpoint
+### Open
 
-- Executed `>>handoff` after completing the bounded INDEX discoverability follow-up.
-- Added a single `Structural references` section to `.ai/INDEX.md` pointing to `.ai/handoffs/README.md` as structural documentation, explicitly not a runtime activation owner.
-- The INDEX change was committed as `3e7009eb8be23f10372ffb8abe3786cab308b350` with message `ai-docs(index): add handoff structural reference`.
-- Read back the updated INDEX and verified the intended section is present without unrelated content changes.
-- The handoff README remains unchanged; its role is now explicitly discoverable from INDEX while its structural/documentation role remains separate from runtime activation.
+- Name and exact semantics of the standalone bootstrap-instruction generation operation.
+- Whether first-chapter initialization needs a dedicated user-facing operation at all.
+- Whether interrupted migration needs a dedicated recovery operation.
+- Validation and placement of the two manual bootstrap templates.
+- Exact active command-reference changes in `.ai/INDEX.md` and `.ai/skills/handoff/SKILL.md`.
 
-## Immediate next task
+## C039 final checkpoint
 
-Continue with the next concrete Architecture & Research question. No additional INDEX, AGENTS, or handoff-README changes are currently implied by this checkpoint.
+The bounded C039 investigation is complete enough for migration to C040.
+
+### Repository changes completed
+
+1. `.ai/workflows/handoff/BOOTSTRAP.md`
+   - formalized the AGENTS → BOOTSTRAP entry boundary;
+   - clarified that AGENTS item 6 determines when BOOTSTRAP is used;
+   - clarified that AGENTS presence alone does not trigger initialization;
+   - added explicit stop behavior for missing or malformed bootstrap runtime values;
+   - formalized the four-line generated transport representation while preserving the three-value canonical runtime contract;
+   - clarified that generated transport must direct the receiving AI through AGENTS item 6.
+
+2. `.ai/architecture/ai-infrastructure-restructuring.md`
+   - corrected the entry-layer diagrams;
+   - recorded the AGENTS/BOOTSTRAP responsibility boundary;
+   - recorded missing-input stop behavior;
+   - recorded the four-line generated transport and source hierarchy;
+   - recorded the C040 bounded follow-up sequence.
+
+Architecture commit:
+`a9c561b0010329c6bed81445e9cef44d50107064`
+
+BOOTSTRAP commit:
+`01e1a532df72ecf956400c770e95a2959dbe1c60`
+
+### Migration transport for C040
+
+The terminal bootstrap instruction for the receiving chapter is:
+
+```text
+Initialize a new conversation chapter. Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
+
+PREVIOUS_CHAPTER = 038
+CURRENT_CHAPTER = 039
+SPECIALIZATION = C
+SHORT_NAME = Architecture & Research
+```
+
+The receiving AI MUST treat the first paragraph as the initialization trigger/context and the four following lines as bootstrap transport values.
+
+### C040 first bounded task
+
+After bootstrap, C040 SHOULD:
+
+1. verify the AGENTS → BOOTSTRAP entry boundary and missing-input behavior;
+2. verify the generated four-line transport against BOOTSTRAP;
+3. decide the standalone bootstrap-instruction generation operation name without reopening `>>`;
+4. decide whether first-chapter initialization needs a dedicated operation;
+5. decide whether interrupted migration needs a dedicated recovery operation;
+6. design and validate the two manual bootstrap templates;
+7. only after semantic stabilization, migrate active command references in INDEX and the handoff skill;
+8. run a final semantic consistency sweep across the affected AI infrastructure.
+
+Do not begin a broad infrastructure refactor.
+
+## Recommended starting context
+
+Read:
+
+1. `.ai/AGENTS.md`
+2. `.ai/workflows/handoff/BOOTSTRAP.md`
+3. section 23 of `.ai/architecture/ai-infrastructure-restructuring.md`
+4. `.ai/rules/handoff/lifecycle.md`
+5. `.ai/skills/handoff/SKILL.md`
+6. `.ai/INDEX.md`
+
+Then verify the C040 bootstrap path before changing active command references.
+
+## Recommended starting context
+
+Read:
+
+1. `.ai/workflows/handoff/BOOTSTRAP.md`
+2. section 29 of `.ai/architecture/ai-infrastructure-restructuring.md`
+3. `.ai/rules/handoff/lifecycle.md`
+4. `.ai/skills/handoff/SKILL.md`
+5. `.ai/INDEX.md`
+
+Then perform the bounded analysis above. Do not begin a broad infrastructure refactor.

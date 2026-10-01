@@ -14,355 +14,301 @@ C
 
 ## Current objective
 
-Continue Iteration 2 of the practical AI project-instruction infrastructure.
+Continue the architecture/research work from C019.
 
-The immediate goal is to finish a local inventory/classification of the existing .ai/ and docs/ structure before any physical restructuring.
+The immediate research question is:
 
-The central working boundary is:
+> What does the runtime-reasoning model do to Minimal Execution Context and problems P-01/P-02/P-03, especially the meaning of "minimal" in MEC?
 
-> If the primary subject is how AI should work with the project, it belongs in .ai/. If the primary subject is what AIP Mirror is or how it works, it belongs in docs/.
+Do not select an answer in advance. Determine whether MEC is a statically preselected minimum context, the minimum context sufficient at a particular reasoning moment, or something more precise.
 
-## Major architectural decisions reached in C020
+This remains semantic/operational research, not implementation design.
 
-### .ai is portable AI infrastructure
+## Completed
 
-The .ai directory should be reusable when the repository is adapted to another project.
+C019 completed:
 
-Project-specific material must not be embedded in supposedly generic .ai files.
+1. A/B/C Applicability Surface Test, distinguishing capability discovery, applicability determination, execution, and current state without proving separate physical artefacts.
+2. Independent Grok/Qwen review of that boundary.
+3. Bounded follow-up test comparing applicability as separate knowledge, capability interface/gate, and runtime reasoning result.
+4. Current research model in which applicability is a reasoning result that may be refined after obtaining additional knowledge.
+5. Observation that post-execution observed state returns to reasoning, allowing normal, correction, recovery, or abort paths to be selected by reasoning rather than requiring a deterministic recovery engine.
+6. Explicit rejection, for now, of a global index, registry, router, manifest, command syntax, capability IDs, universal metadata schema, .ai/memory/, and new docs/meta filesystem boundaries.
 
-When .ai is migrated to another project:
+The bounded result is a semantic relationship:
 
-- reusable infrastructure remains;
-- current project handoffs can be removed/cleared;
-- archive can be cleared or selectively retained;
-- the new project's docs/ is populated independently.
+    knowledge → reasoning → judgment → action → new state → reasoning
 
-This explains why several current .ai files are now recognized as misclassified: they describe AIP Mirror itself.
+Applicability is not established as a mandatory persistent knowledge layer.
 
-### docs is project knowledge
+## Current implementation state
 
-docs/ contains AIP Mirror-specific:
+No implementation structure has been introduced for the current research question.
 
-- architecture;
-- implementation/design;
-- Illustrator/FreeHand research;
-- specifications;
-- validated behavior;
-- project decisions;
-- project-specific development knowledge.
+No registry, router, manifest, command system, capability-ID scheme, universal metadata schema, .ai/memory/, or docs/meta/permanent/temporary structure is justified by the completed tests.
 
-Root references/ remains AIP Mirror-specific and is not part of this .ai restructuring.
+docs/architecture/ai-project-instruction-architecture.md remains historical/outdated North-Star context and must not be changed at this stage.
 
-### .ai/architecture exists conceptually
+## Decisions
 
-A new .ai/architecture/ area is now accepted.
+Current research findings, not final Architecture Decisions:
 
-Exact subfolders and exact filenames remain open.
+- Applicability is best treated as a runtime reasoning result rather than a mandatory separate knowledge layer.
+- Applicability may be iterative: reasoning may need additional execution/project knowledge before reaching a sufficiently reliable judgment.
+- Current state is distinct from instruction knowledge.
+- Execution does not terminate the reasoning loop; observed state may trigger reevaluation.
+- Capability descriptions may expose what knowledge/actions exist, but must not silently invent missing arguments.
+- The earlier distinction between capability discovery, applicability, and execution remains useful as a functional distinction, not as proof of three persistent artefacts or a mandatory pipeline.
+- Minimal execution context is action-relative and must not be equated with minimum text or a universal instruction package.
 
-Historical AI-infrastructure research will likely move into .ai/archive/.
+## C020 bounded experiment results
 
-### Handoffs
+### Dynamic Context Activation
 
-.ai/handoffs/ is AI conversation state, not AIP Mirror project documentation.
+The runtime-reasoning model is strongly supported as a unifying semantic description of P-01/P-02/P-03 and MEC.
 
-The likely target is:
+Current working interpretation:
 
-    .ai/handoffs/
-        -> .ai/handoffs/
+> **MEC(t) is the operationally active context at reasoning moment t that is jointly sufficient for the current reasoning step.**
 
-This is a target decision, not yet a physical move.
+The current reasoning step may be execution or deciding what additional knowledge/state must be obtained next.
 
-### Shorter handoff/skill naming
+Available knowledge and operationally active context need not coincide. Knowledge may remain durably available while dormant. Activation changes operationally active context without implying information loss.
 
-The current folder:
+### Bootstrap vs Routing / Interface
 
-    .ai/skills/conversation-handoff/
+The experiment separated:
 
-is considered unnecessarily verbose.
+- Claim A — non-empty initial active context is required;
+- Claim B — bounded discovery requires some accessible information about what is relevant;
+- Claim C — that information must be a separate routing/interface semantic layer.
 
-Working target:
+Claim A is supported. Claim B is supported functionally. Claim C is not established.
 
-    .ai/skills/handoff/
+Routing is best treated as a retrieval/activation transition rather than an architectural object:
 
-Likewise:
+    available knowledge
+            ↓
+           find
+            ↓
+         activate
 
-    .ai/rules/conversation-lifecycle.md
-        -> .ai/rules/handoff/lifecycle.md
+A physical index may later assist this transition in implementation, but that does not establish a semantic routing layer.
 
-and:
+Interface/payload and evaluative-surface distinctions remain useful interpretations of compactness and activation cost, but are not established ontological categories.
 
-    .ai/rules/handoff-references.md
-        -> .ai/rules/handoff/references.md
+### Bootstrap Kernel vs MEC
 
-No physical move has been made yet.
+The third experiment falsified the hypothesis that a bootstrap kernel is a semantically distinct or permanent component of MEC.
 
-## Repository entry points
+Both independent reviews converged on:
 
-Three distinct roles are now the working model:
+- a reasoning process requires some non-empty initial active context;
+- the initial active set may later become dormant;
+- its role may be performed by other ordinary active knowledge;
+- no unique semantic property distinguishes its contents from ordinary active knowledge;
+- initial context may contain durable knowledge, observed state, or ephemeral reasoning state.
 
-    README.md
-        -> human-facing repository introduction
+Therefore **bootstrap kernel is no longer an architectural term**. It is retained only as a historical label for the rejected hypothesis.
 
-    AGENTS.md
-        -> small AI repository entry point
+The surviving concept is:
 
-    .ai/INDEX.md
-        -> operational map of AI infrastructure
+> **non-empty initial active context**
 
-AGENTS.md must not become a copy of .ai/INDEX.md.
+This is a temporal/functional condition, not a semantic category.
 
-No nested AGENTS.md is currently needed.
+The initial active set need not persist or monotonically expand:
 
-The root README.md is currently empty, so there is no historical content that must be preserved there.
+    MEC(t₀) → MEC(t₁) → MEC(t₂)
 
-## docs/PROJECT-INSTRUCTIONS.md
+does not imply:
 
-Do not move or rename this file yet.
+    MEC(t₀) ⊂ MEC(t₁) ⊂ MEC(t₂)
 
-It is mixed and likely needs decomposition:
+Active context may be replaced, reduced, or reorganized.
 
-    docs/PROJECT-INSTRUCTIONS.md
-        |
-        +-- AIP Mirror project knowledge -> docs/...
-        +-- AI infrastructure -> .ai/...
-        +-- repository entry point -> AGENTS.md
+### Current meaning of “minimal”
 
-Whether a reduced PROJECT-INSTRUCTIONS.md survives is still open.
+The experiments do not support minimal as minimum text, a static package, a permanent kernel, or a universal knowledge set.
 
-## Important classification findings
+Current working interpretation:
 
-### Clearly project-specific and therefore not portable .ai
+> **minimal = the least operationally active context that is sufficient for the current reasoning step.**
 
-.ai/rules/project-architecture.md describes AIP Mirror architecture, including JSX/native boundaries, C++/AIP, geometry, FreeHand behavior, CEP/UXP, and AIP Mirror specializations.
+Minimality is therefore moment-relative, task/reasoning-relative, and sufficiency-relative.
 
-Working target:
+Non-empty is necessary for an initial reasoning context, but non-empty alone is not sufficient for MEC; sufficiency remains essential.
 
-    docs/architecture/...
+### Semantic reduction
 
-It should not remain a generic .ai rule.
+The experiments do not justify introducing the following as mandatory semantic architecture:
 
-.ai/rules/workflow.md is also substantially AIP Mirror-specific. It contains the AIP Mirror development cycle, four specializations, chapter numbering, and Workshop boundaries.
+- bootstrap kernel;
+- routing layer;
+- discovery metadata category;
+- interface/payload ontology;
+- evaluative-surface ontology;
+- registry;
+- router;
+- manifest;
+- capability IDs;
+- universal metadata schema;
+- .ai/memory/;
+- new docs/meta/permanent/ / temporary/ boundaries.
 
-It likely requires decomposition into project documentation plus any genuinely generic AI workflow material.
+Detailed findings are recorded in:
 
-.ai/rules/repository.md mixes project-specific repository facts with AI working behavior and requires content-level decomposition.
-
-### Clearly .ai infrastructure
-
-docs/architecture/ai-project-instruction-architecture.md is AI infrastructure architecture and belongs conceptually under:
-
-    .ai/architecture/...
-
-The exact name remains open.
-
-docs/architecture/independent-review-deepseek-onboarding.md
-docs/architecture/independent-review-grok-onboarding.md
-docs/architecture/independent-review-qwen-onboarding.md
-
-are AI onboarding/workflow material and are candidates for:
-
-    .ai/workflows/independent-review/...
-
-### Historical .ai research
-
-The following are strong .ai/archive candidates:
-
-- architectural-bottleneck-audit-C015.md
-- architectural-bottleneck-cross-audit-C015.md
-- c-13-authority-vs-effective-outcome-C015.md
-- c-14-override-semantic-dimension-C015.md
-- constraint-problem-map-C018.md
-- intentional-acceptance-audit-C015.md
-- mec-dynamic-context-C019.md
-- minimal-execution-context-C018.md
-- post-c-13-architectural-leverage-audit-C015.md
-- prerequisite-dependency-semantics.md
-- semantic-source-authority-audit-C015.md
-
-Reason: these primarily concern abstract AI/project-instruction infrastructure rather than AIP Mirror product architecture.
-
-MEC remains historical. Do not reintroduce "bootstrap kernel" as an architecture term.
-
-## New filename convention
-
-A new working naming rule was proposed for documents produced by a specialization/chapter.
-
-Old style:
-
-    architectural-bottleneck-cross-audit-C015.md
-
-New style:
-
-    C015_architectural-bottleneck-cross-audit.md
-
-For C020:
-
-    C020_document-name.md
-
-Reason:
-
-- chapter identity is immediately visible;
-- files sort naturally by chapter;
-- provenance is visible without a suffix;
-- underscore is preferred for now.
-
-Do not mass-rename historical files yet.
-
-Treat this as a working rule for new chapter-produced documents. Formalize it in the canonical rule set after the inventory/target-tree review.
-
-## Durable working material
-
-The accumulated restructuring work has been preserved in:
-
-    .ai/architecture/C020_ai-infrastructure-restructuring.md
-
-This file contains the working hypotheses, diagrams, classification findings, target-tree sketches, naming proposal, accepted decisions, open questions, and next work package.
-
-It was created and committed during C020.
-
-## Current target-tree hypothesis
-
-Conceptually:
-
-    .ai/
-    +-- INDEX.md
-    +-- rules/
-    |   +-- handoff/
-    |   +-- repository/
-    |   +-- ...
-    +-- skills/
-    |   +-- handoff/
-    |   +-- commit-message/
-    |   +-- deep-understanding/
-    |   +-- ...
-    +-- workflows/
-    |   +-- handoff-bootstrap/
-    |   +-- independent-review/
-    |   +-- ...
-    +-- references/
-    +-- handoffs/
-    +-- architecture/
-    +-- archive/
-
-This is not the final tree.
-
-## What has actually changed in the repository during this chapter
-
-No existing project files were moved or deleted.
-
-Created:
-
-    .ai/architecture/C020_ai-infrastructure-restructuring.md
-
-Commit:
-
-    1dbee551106f398d18efc53ddd4e756b9facb83c
-
-The new file was read back from GitHub after creation and verified to contain the preserved working material.
-
-## Immediate next task
-
-Do not jump to Grok/Qwen review yet.
-
-Finish the local inventory/classification first.
-
-For every relevant existing document, classify:
-
-    KEEP
-    MOVE
-    DECOMPOSE
-    ARCHIVE
-
-Record:
-
-- current path;
-- primary subject;
-- type;
-- target layer;
-- current problem;
-- proposed action;
-- unresolved question.
-
-Priority:
-
-1. all .ai/rules/
-2. all .ai/skills/
-3. docs/PROJECT-INSTRUCTIONS.md
-4. all docs/architecture/
-5. all .ai/handoffs/
-6. README.md
-7. planned AGENTS.md
-
-Then:
-
-1. produce the first complete target tree;
-2. identify decomposition/merge/split operations;
-3. preserve the chapter-prefix naming proposal;
-4. obtain independent Grok and Qwen alternatives;
-5. compare them;
-6. only then perform physical moves/merges/splits.
+- docs/architecture/mec-dynamic-context-C020.md
 
 ## Open questions
 
-Do not silently resolve:
+### P-01 — Knowledge vs Execution Context
 
-- exact .ai/architecture taxonomy;
-- exact architecture filenames;
-- exact rules/skills/workflows taxonomy;
-- exact AGENTS.md contents;
-- exact README.md contents;
-- exact .ai/INDEX.md format;
-- command syntax and operation IDs;
-- section/fragment ID conventions;
-- exact split of .ai/rules/repository.md;
-- exact split of .ai/rules/workflow.md;
-- whether docs/PROJECT-INSTRUCTIONS.md survives in reduced form;
-- whether historical files should later be renamed to the chapter-prefix convention.
+Does the distinction between durable knowledge and execution context remain too static if reasoning can obtain knowledge dynamically?
 
-## Repository safety
+Determine whether MEC is better understood as a context state that becomes sufficient at a given reasoning moment rather than as a preassembled package.
 
-For existing-file mutations:
+### P-02 — Context Discovery and Applicability
 
-READ CURRENT FILE -> minimal change -> WRITE COMPLETE FILE -> READ BACK -> VERIFY CONTENT -> INSPECT DIFF -> VERIFY SCOPE -> COMMIT -> VERIFY RESULT.
+Does the runtime-reasoning model imply that finding relevant knowledge and judging applicability are both reasoning activities rather than separate knowledge layers?
 
-Do not physically restructure the repository until the target classification has been completed and reviewed.
+Determine how much information is required to perform that reasoning before additional knowledge is obtained.
 
-## Bootstrap instruction for successor
+### P-03 — Compression Boundary
 
-Initialize the next chapter as:
+What does compactness mean when required context can be acquired dynamically?
 
-    CURRENT_CHAPTER = C020
-    NEXT_CHAPTER = C021
-    SPECIALIZATION = 03 — Architecture & Research
-    REPOSITORY = paulhuman/aip-mirror
-    BRANCH = main
+Identify the boundary between execution-critical knowledge that must be active now; knowledge that can remain dormant; knowledge that reasoning may fetch when needed; and explanatory/history material that need not enter active execution context.
 
-Before continuing research:
+### Central MEC question
 
-1. Read .ai/workflows/handoff-bootstrap/BOOTSTRAP.md.
-2. Read .ai/skills/handoff/SKILL.md.
-3. Read the applicable .ai/rules, especially conversation-lifecycle.md, workflow.md, repository.md, and handoff-references.md.
-4. Read this handoff completely.
-5. Read .ai/architecture/ai-infrastructure-restructuring.md completely; it is the primary durable C020 research context.
-6. Verify the repository state and the existence/readability of the referenced files.
-7. Create .ai/handoffs/C/C021-Architecture-Research.md with status DRAFT as part of bootstrap, then commit it according to the handoff lifecycle.
-8. After bootstrap verification, continue from the Immediate next task below. Do not restart the architectural reasoning from conversation history.
+What exactly does "minimal" quantify?
 
-The successor must preserve the current boundary: .ai is portable AI infrastructure; docs is AIP Mirror project knowledge. Do not physically move, rename, merge, split, or delete files merely because the target tree is sketched here. Complete the local inventory/classification first, then target-tree review, then independent Grok/Qwen review, and only then physical restructuring.
+Possible interpretations to test:
 
-Do not use “bootstrap kernel” as an architecture term. The current working language is “non-empty initial active context” where that concept is needed historically or descriptively.
+- minimum statically selected context;
+- minimum context sufficient at a particular reasoning moment;
+- another formulation that better captures dynamic knowledge acquisition.
+
+Do not choose among these before analysis.
+
+## Current files
+
+Primary architecture/research files:
+
+- docs/architecture/constraint-problem-map-C019.md
+- docs/architecture/minimal-execution-context-C019.md
+- .ai/handoffs/C019-Architecture-Research.md
+- docs/PROJECT-INSTRUCTIONS.md
+
+Applicable AI workflow:
+
+- .ai/skills/conversation-handoff/BOOTSTRAP.md
+- .ai/skills/conversation-handoff/SKILL.md
+- .ai/skills/commit-message/SKILL.md
+- .ai/rules/conversation-lifecycle.md
+- .ai/rules/workflow.md
+- .ai/rules/repository.md
+- .ai/rules/handoff-references.md
+
+## Relevant references
+
+- docs/architecture/constraint-problem-map-C019.md — bounded constraint/problem framing and MEC research boundary.
+- docs/architecture/minimal-execution-context-C019.md — bounded MEC analysis and Applicability Surface Test.
+- .ai/handoffs/C019-Architecture-Research.md — authoritative migration checkpoint from C019.
+- docs/architecture/independent-review-qwen-onboarding.md — Qwen review input, use selectively for counterarguments.
+- docs/architecture/independent-review-grok-onboarding.md — Grok review input, use selectively for counterarguments.
+- .ai/handoffs/E005-Independent-Review-Qwen.md — current Qwen review handoff.
+- .ai/handoffs/F001-Independent-Review-Grok.md — current Grok review handoff.
+
+These are evidence/reference inputs; they do not override 03 architectural decisions.
+
+## Important constraints
+
+- Do not continue applicability research merely by inventing more examples.
+- If a new bounded test is needed, first state exactly which uncertainty it is intended to remove.
+- Do not prematurely turn the research model into implementation design.
+- Do not create a registry, router, manifest, command system, capability IDs, universal metadata schema, .ai/memory/, docs/meta/permanent/, or docs/meta/temporary/ unless later research directly demonstrates necessity.
+- Do not change docs/architecture/ai-project-instruction-architecture.md at this stage.
+- Do not resume historical semantic-trace work.
+- Do not introduce SUPERSEDED; current lifecycle is DRAFT → READY_FOR_HANDOFF → HANDED_OFF.
+- Do not turn the AI into a deterministic command interpreter.
+- Preserve the distinction between observed facts, inferences, assumptions, specifications, and implementation details.
+- Repository is the durable project memory; do not rely on historical chat context when a canonical repository source exists.
+
+## Evidence / confidence
+
+### Confirmed / observed
+
+- Repository: paulhuman/aip-mirror, branch main.
+- Previous handoff C019 was READY_FOR_HANDOFF at bootstrap.
+- C019 completed the Applicability Surface Test and the runtime-reasoning applicability follow-up.
+- Applicability was not established as a separate persistent knowledge layer.
+- Applicability may require additional knowledge and may be refined iteratively.
+- Observed post-execution state feeds reasoning again.
+- No implementation artefact such as registry/router/manifest was justified by the completed tests.
+
+### Inferred
+
+- The highest-leverage remaining uncertainty is the semantic meaning of "minimal" in MEC.
+- The boundary between knowledge and active execution context may need to be dynamic rather than statically preselected.
+- Context discovery and applicability may be coupled reasoning activities without requiring a persistent combined artefact.
+
+### Assumed / unverified
+
+- Whether MEC should be defined at a reasoning moment, an action phase, an execution boundary, or by another unit.
+- Whether dynamic acquisition should be part of MEC itself or treated as a process surrounding MEC.
+- Whether any compact applicability/capability surface is ultimately needed.
+
+### Open
+
+- Exact definition of MEC.
+- Precise relationship between durable knowledge and active execution context.
+- Precise relationship between context discovery and applicability.
+- Meaning of compression/compactness under dynamic knowledge acquisition.
+- Failure boundary when required knowledge is absent or cannot be obtained.
+
+## Last completed task
+
+C019 completed the bounded test of applicability as a runtime reasoning result and handed off the resulting research frontier.
+
+## Immediate next task
+
+Receiving chapter C021 should bootstrap from this handoff and continue from the reduced dynamic-context model.
+
+The runtime-reasoning consequences for MEC/P-01/P-02/P-03 and the bootstrap-kernel hypothesis have now been bounded. Do not reintroduce bootstrap kernel as an architectural entity.
+
+Next research should target one clearly bounded remaining uncertainty, with particular candidates being minimum information for capability description/applicability or interaction with Dependency/Authority/Precedence semantics.
+
+Do not begin with implementation structure.
+
+## Things not to redo
+
+Do not repeat:
+
+- the C019 A/B/C Applicability Surface Test;
+- the Grok/Qwen review of that test;
+- the bounded applicability-as-runtime-reasoning follow-up;
+- earlier 03A-series semantic-trace work;
+- historical architecture audits already recorded in prior handoffs.
+
+Use the existing research findings as starting premises unless the current MEC question directly requires challenging one of them.
 
 ## Recommended starting context for next chapter
 
-1. .ai/architecture/C020_ai-infrastructure-restructuring.md
-2. this handoff
-3. docs/PROJECT-INSTRUCTIONS.md
-4. .ai/skills/conversation-handoff/BOOTSTRAP.md
-5. .ai/skills/conversation-handoff/SKILL.md
-6. .ai/rules/conversation-lifecycle.md
-7. .ai/rules/workflow.md
-8. .ai/rules/repository.md
-9. .ai/rules/handoff-references.md
-10. docs/architecture/ai-project-instruction-architecture.md
+Bootstrap/current research sources to read:
 
-The new architecture working file should be treated as the main preserved C020 research context; do not rely on conversation history to reconstruct the restructuring reasoning.
+1. docs/PROJECT-INSTRUCTIONS.md
+2. .ai/skills/conversation-handoff/BOOTSTRAP.md
+3. .ai/skills/conversation-handoff/SKILL.md
+4. .ai/rules/conversation-lifecycle.md
+5. .ai/rules/workflow.md
+6. .ai/rules/repository.md
+7. .ai/rules/handoff-references.md
+8. .ai/handoffs/C019-Architecture-Research.md
+9. docs/architecture/constraint-problem-map-C019.md
+10. docs/architecture/minimal-execution-context-C019.md
+
+Then inspect Qwen/Grok references only where an independent counterexample materially helps the MEC question.
+
+This handoff is the live C020 checkpoint.

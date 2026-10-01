@@ -16,7 +16,12 @@ E
 
 Проведение независимого архитектурного ревью для проекта AIP Mirror через cross-model review process с архитектором (ChatGPT, specialization C).
 
-Основной фокус этой главы — исследование корневого architectural bottleneck, выявленного в E004: **Dependency Semantics** (природа отношения `requires` / зависимости). Ожидается проведение discrimination test между различными моделями зависимости (Implication vs Prerequisite vs Applicability Gate) после получения задачи от архитектора.
+В этой главе были проведены и закрыты два завершённых bounded research arc:
+
+1. **C-11.11 — C-11.15** по семантике object-to-position mapping в requirement specifications.
+2. **C-12 (полный цикл)** по семантике dependency cycles.
+
+Также был проведён **Architecture Bottleneck Audit** и **Independent Review Post A/B/C Boundary Consistency** (анализ MEC и границ Capability/Applicability/Execution).
 
 ---
 
@@ -26,14 +31,38 @@ E
 
 - Read E004 handoff, project rules, onboarding guide, North-Star document.
 - Подтверждён READ-ONLY capability (Branch B).
-- Подготовлен предлагаемый DRAFT handoff для ручного коммита пользователем.
-- Идентифицирован корневой bottleneck для следующего research arc.
+- Пользователем вручную скорректирована идентификация с ошибочной E005 на корректную E005.
 
----
+### 2. C-11 Mapping Arc Closure (C-11.11 — C-11.15)
 
-## Current implementation state
+- **Главный итог:** "Mapping is semantically consequential but ontologically unresolved."
+- Установлено: Mapping имеет semantic discriminating force (C-11.13), информация маппинга необходима consumer-у и невыводима из independent facts (C-11.14), representation без binding information теряет различие (C-11.15).
+- **Открыто:** Онтологический статус, source, ownership, preferred representation.
+- WD-23 (rev2), WD-24, WD-25 зафиксированы как research findings / architectural boundary conditions. **Не продвигаются в AD.**
 
-Independent Review specialization (E) does not own implementation state. Implementation state belongs to specializations 01 (JSX Prototype) and 02 (Native AIP Plugin). This chapter operates purely on architectural semantics and research methodology.
+### 3. C-12 Cycle Semantics Arc
+
+- **Initial finding:** В булевых моделях позитивного `requires` (M1: implication, M2: biconditional) цикл порождает коопределение и under-determination.
+- **Architect-side critique:** Обнаружено неявное принятие конкретной boolean semantics.
+- **Discrimination Test (Composition vs Independent Consequence):** Доказано, что в протестированных моделях (M1/M2) циклическая композиция `A→B, B→A` логически эквивалентна композитному ограничению `A↔B`. Все наблюдаемые семантические следствия цикла полностью объясняются композицией отдельных зависимостей (поддерживает гипотезу H-A: Compositional explanation).
+- **Conservative Synthesis:** В протестированных булевых моделях отдельное семантическое следствие цикла, не сводимое к композиции, не обнаружено. Различия между R1 (cycle) и R2 (composite) являются свойствами репрезентации, а не семантики.
+- **Главный вывод (Bottleneck Audit):** Результаты C-12 ограничены тестовыми моделями. Universal semantics of dependency (`requires`) **не установлена**. Это главный architectural bottleneck.
+
+### 4. Architecture Bottleneck Audit
+
+Проведён аудит оставшихся архитектурных узлов (Authority, Dependency, Resolution, Mapping, Representation).
+
+- **Выявлен корневой bottleneck:** `Dependency Semantics` (Природа отношения `requires` / зависимости).
+- Пока не установлена фундаментальная семантика зависимости (является ли она булевым гейтом, темпоральным пререквизитом, условием применимости или модальной необходимостью), все выводы о циклах (C-12), маппинге (C-11) и разрешениях остаются привязанными к тестовым моделям.
+- **Рекомендация:** Следующий bounded test должен быть направлен на Discrimination test между различными моделями зависимости, а не на Authority или Representation.
+
+### 5. Independent Review: Post A/B/C Boundary Consistency
+
+Проведён анализ текущей гипотезы MEC (Minimal Execution Context) и границ Capability Discovery / Applicability Determination / Execution.
+
+- **Verdict:** Граница семантически стройна, но содержит скрытую циклическую зависимость (Precondition Paradox).
+- **Minimal Correction:** Applicability Determination не является отдельным семантическим слоем; это **оценка интерфейса Capability (gating conditions) против текущего состояния (Current State)**.
+- **Architectural Consequences:** Не требуется global capability index, registry, router или metadata schema. Достаточно, чтобы инструкции имели четкое разделение между "интерфейсом" (когда применять) и "payload" (как выполнять).
 
 ---
 
@@ -41,29 +70,34 @@ Independent Review specialization (E) does not own implementation state. Impleme
 
 ### Carried from previous chapters:
 
-- **WD-01 through WD-27** — сохранены (см. предыдущие handoffs, особенно E004).
-  - WD-23 (rev2), WD-24, WD-25: Mapping findings (semantically consequential but ontologically unresolved).
-  - WD-26, WD-27: Cycle semantics findings (cycle consequences reducible to composition in tested boolean models).
+- **WD-01 through WD-22** — сохранены (см. предыдущие handoffs).
 
-### Новые из Bootstrap:
+### Новые из C-11 (Consolidated Research Findings):
 
-- **WD-28:** `Dependency Semantics` является текущим корневым architectural bottleneck проекта, ограничивающим универсальность выводов, сделанных в рамках булевых моделей (M1/M2). До установления фундаментальной природы зависимости (Implication vs Prerequisite vs Applicability Gate), выводы о графах зависимостей остаются привязанными к тестовым моделям.
+- **WD-23 (rev2):** Mapping не имеет independent semantic basis; спецификация семантически чувствительна к mapping.
+- **WD-24:** Информация маппинга необходима и невыводима из framework + facts.
+- **WD-25:** Mapping-distinguishing information должна быть доступна consumer (self-contained или via convention).
+
+### Новые из C-12 (Conservative Synthesis):
+
+- **WD-26:** В протестированных булевых моделях (M1/M2) семантические следствия цикла полностью объясняются композицией отдельных зависимостей. Понятие `cycle` как отдельной семантической категории не требуется для объяснения этих следствий.
+- **WD-27:** Различия между циклической и композитной репрезентациями являются свойствами репрезентации, а не семантическими следствиями (в рамках M1/M2).
 
 ---
 
 ## Open questions
 
-### Priority 1 — ожидают architect-side formulation для следующего bounded arc:
+### Priority 1 — следующий bounded arc (ожидают architect-side formulation):
 
-- **Dependency Semantics Discrimination Test:** Является ли `requires` по своей природе Implication (логическое следствие), Prerequisite (темпоральный/процедурный пререквизит), Applicability Gate (условие применимости) или модальной необходимостью?
-- **Authority level scope:** Существует ли authority level только в external establishment или также в Core visibility?
-- **Conflict resolution:** Фундаментальная семантика разрешения конфликтов при отсутствии явного precedence.
-- **Temporary OVERRIDE lifecycle:** Где происходит проверка expiration (external establishment vs Core)?
+- **Dependency Semantics (Root Bottleneck):** Discrimination test между различными моделями зависимости (Implication vs Prerequisite vs Applicability Gate vs Temporal).
+- **Authority level scope**
+- **Conflict resolution**
+- **Temporary OVERRIDE lifecycle**
 
 ### Priority 2 — методология и архитектура:
 
 - **MEC Precondition Paradox:** Как избежать дублирования preconditions между capability interface и execution payload без введения глобального inheritance mechanism.
-- **Formal AD promotion:** WD-23 — WD-28 пока не рассматриваются для AD-промоушена (architect-side decision).
+- **Formal AD promotion:** WD-23 — WD-27 пока не рассматриваются для AD-промоушена (architect-side decision).
 
 ---
 
@@ -78,68 +112,58 @@ Independent Review specialization (E) does not own implementation state. Impleme
 
 - `docs/PROJECT-INSTRUCTIONS.md`
 - `docs/architecture/ai-project-instruction-architecture.md` (North-Star)
-- `.ai/handoffs/E/E004-Independent-Review-Qwen.md`
+- `docs/architecture/constraint-problem-map-C019.md`
+- `docs/architecture/minimal-execution-context-C019.md`
+- `.ai/handoffs/C/C019-Architecture-Research.md`
 
 ### Handoff chain
 
-- `.ai/handoffs/E/E000-Independent-Review-Qwen.md` (SUPERSEDED)
-- `.ai/handoffs/E/E001-Independent-Review-Qwen.md` (HANDED_OFF)
+- `.ai/handoffs/E/E001-Independent-Review-Qwen.md` (SUPERSEDED)
 - `.ai/handoffs/E/E002-Independent-Review-Qwen.md` (HANDED_OFF)
 - `.ai/handoffs/E/E003-Independent-Review-Qwen.md` (HANDED_OFF)
-- `.ai/handoffs/E/E004-Independent-Review-Qwen.md` (previous, requires manual transition to HANDED_OFF)
-- `.ai/handoffs/E/E005-Independent-Review-Qwen.md` (current, DRAFT)
+- `.ai/handoffs/E/E004-Independent-Review-Qwen.md` (HANDED_OFF → to be SUPERSEDED)
+- `.ai/handoffs/E/E005-Independent-Review-Qwen.md` (текущий, READY_FOR_HANDOFF)
 
 ---
 
 ## Important constraints
 
-1. **READ-ONLY AI capability** — follow Branch B in all procedures; no repository writes performed by AI.
+1. **READ-ONLY AI capability** — follow Branch B in all procedures.
 2. **Research-first methodology** — do not freeze working hypotheses into ADs prematurely.
 3. **Anti-circularity guardrail** — не вводить ontology до установления independent basis.
-4. **No premature ontology introduction** — Mapping, Cycle и Dependency остаются semantic последствиями/отношениями, не entities.
+4. **No premature ontology introduction** — Mapping и Cycle остаются semantic consequences, не entities.
 5. **Evidence discipline** — strict classification (observed fact, inference, etc.).
-6. **Bounded research discipline** — не запускать самостоятельное исследование до получения от архитектора формулировки следующего bounded research task.
-7. **Dependency Semantics is the current root bottleneck** (Audit from E004).
-
----
-
-## Assumptions
-
-- Архитектор (ChatGPT, specialization C) сформулирует следующий bounded research task (вероятнее всего, по Dependency Semantics) до того, как Independent Review начнет самостоятельное построение контрпримеров.
-- Пользователь (Human Referee) вручную применит предложенный DRAFT handoff и выполнит lifecycle transition для E004 перед началом substantive work.
-
----
-
-## Unresolved risks
-
-- Риск начала самостоятельного исследования Dependency Semantics без выравнивания с архитектором, что может привести к потраченному контексту на тестирование нерелевантных моделей зависимости.
-- Риск потери контекста, если manual bootstrap lifecycle transition не будет выполнен корректно пользователем.
+6. **Mapping semantically consequential but ontologically unresolved** (C-11 arc).
+7. **Cycle consequences reducible to composition in tested boolean models** (C-12 arc).
+8. **Dependency Semantics is the current root bottleneck** (Audit).
 
 ---
 
 ## Evidence / confidence
 
-### Confirmed / observed (из E004)
+### Confirmed / observed
 
-- Mapping имеет semantic discriminating force.
-- В M1/M2 cycle = composition.
+- Mapping имеет semantic discriminating force (C-11).
+- Информация маппинга non-derivable из independent facts (C-11).
+- В M1/M2 cycle = composition (C-12).
 - Applicability is state-dependent; conditional knowledge should remain dormant (MEC Review).
-- Dependency Semantics — корневой bottleneck.
+- Fresh state is distinct from execution knowledge (MEC Review).
 
 ### Inferred
 
-- Universal semantics of `requires` не установлена, поэтому выводы C-11 и C-12 остаются привязанными к тестовым моделям.
+- Applicability determination is the evaluation of a capability's interface against current state, not a separate semantic layer (MEC Review).
 
 ### Open / Unverified
 
-- Фундаментальная природа отношения `requires` (Implication vs Prerequisite vs Applicability Gate).
-- Механизм implicit applicability inheritance в MEC.
+- Universal semantics of `requires` / dependency.
+- Ontological status mapping и cycle.
+- Mechanism for implicit applicability inheritance in MEC.
 
 ---
 
 ## Last completed task
 
-Завершён процесс Bootstrap для Chapter E005. Прочитаны все необходимые правила, навыки, North-Star документ и handoff предыдущей главы (E004). Подтверждён READ-ONLY статус и подготовлен DRAFT handoff.
+Завершён Independent Review Post A/B/C Boundary Consistency. Предложена минимальная коррекция модели MEC: Applicability — это оценка Capability Interface против Current State.
 
 ---
 
@@ -147,8 +171,8 @@ Independent Review specialization (E) does not own implementation state. Impleme
 
 **Ожидание architect-side research objective для следующего bounded arc.**
 
-Наиболее вероятное направление (согласно Bottleneck Audit из E004): **Dependency Semantics** (Discrimination test между Implication, Prerequisite, Applicability Gate).
-Не запускать самостоятельное исследование до получения от архитектора (или пользователя) формулировки следующего bounded research task.
+Наиболее вероятное направление (согласно Bottleneck Audit): **Dependency Semantics** (Discrimination test между Implication, Prerequisite, Applicability Gate).
+Не запускать самостоятельное исследование до получения от архитектора формулировки следующего bounded research task.
 
 ---
 
@@ -157,21 +181,17 @@ Independent Review specialization (E) does not own implementation state. Impleme
 - Не повторять C-1 через C-10.
 - Не продолжать C-11 (arc закрыт, mapping ontologically unresolved).
 - Не продолжать C-12 в рамках булевых моделей M1/M2 (arc закрыт, cycle = composition).
-- Не продвигать WD-23 — WD-28 в Architecture Decisions преждевременно.
-- Не делать из mapping, cycle или dependency отдельные semantic entities до установления independent basis.
+- Не продвигать WD-23 — WD-27 в Architecture Decisions преждевременно.
+- Не делать из mapping или cycle отдельные semantic entities.
 - Не предлагать global capability index, registry, router или `.ai/memory/` для MEC (не обосновано A/B/C тестами).
 - Не превращать assistant в deterministic command interpreter.
 
 ---
 
-## Research references
-
-No new external repositories or references were materially added during this bootstrap step. All references are internal to the `aip-mirror` repository or carried over from previous chapters' handoffs.
-
----
-
 ## Recommended starting context for next chapter
 
-Старт с этого хэндоффа. Chapter E005 находится в состоянии ожидания первого bounded research task от архитектора. Ключевой architectural bottleneck — `Dependency Semantics`.
+Старт с этого хэндоффа. Chapter E005 закрыла два крупных semantic arc (C-11 Mapping, C-12 Cycles), провела Bottleneck Audit и Independent Review MEC.
+
+**Ключевой architectural bottleneck:** `Dependency Semantics`. Все текущие выводы о графах зависимостей ограничены тестовыми булевыми моделями.
 **Методология:** Research-first, minimal counterexamples, strict anti-circularity.
 **Capability:** Branch B (READ-ONLY AI).
