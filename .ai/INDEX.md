@@ -60,6 +60,10 @@ Use this map to find the canonical capability without reading the entire `.ai/` 
 | Commit construction | `.ai/skills/commits/SKILL.md` | reusable commit-message construction |
 | Conversation bootstrap | `.ai/workflows/handoff/BOOTSTRAP.md` | ordered new-chapter bootstrap procedure |
 
+## Structural references
+
+- `.ai/handoffs/README.md` — handoff tree structure and orientation. Read when inspecting or navigating the handoff structure; it is not a runtime activation owner.
+
 ## Owner boundary
 
 INDEX may identify and route to an owner.
