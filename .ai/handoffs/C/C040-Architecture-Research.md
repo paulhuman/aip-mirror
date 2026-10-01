@@ -1,27 +1,27 @@
 # Conversation Handoff
 
 **Conversation:**
-C040 — Architecture & Research
+C041 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-040
+041
 
 **Previous chapter:**
-039
+040
 
 ## Starting objective
 
-Recover from the interrupted C039 → C040 migration and continue the Architecture & Research work from the durable repository state. Treat C039's completed bounded work as the starting point and do not reopen already accepted command, bootstrap, or entry-layer decisions.
+Recover from the interrupted C040 → C041 migration and continue the Architecture & Research work from the durable repository state. Treat C040's completed bounded work as the starting point and do not reopen already accepted command, bootstrap, or entry-layer decisions.
 
 ## Known starting implementation state
 
 - Repository: `paulhuman/aip-mirror`.
 - Canonical branch: `main`.
-- Current chapter: C040.
-- Previous chapter: C039.
+- Current chapter: C041.
+- Previous chapter: C040.
 - Specialization: C.
 - Resolved short name: `Architecture & Research`.
 - The canonical bootstrap runtime contract remains:
@@ -31,17 +31,17 @@ Recover from the interrupted C039 → C040 migration and continue the Architectu
   SPECIALIZATION
   ```
 - `SHORT_NAME` is contextual data resolved from supplied bootstrap context or `.ai/config.yaml` specialization vocabulary.
-- C039 stabilized the active command surface as:
+- C040 stabilized the active command surface as:
   ```
   >>handoff
   >>migrate <chapter>
   >>generate-bootstrap <chapter>
   ```
-- C039 confirmed that first-chapter initialization does not need a dedicated `>>init` or `>>new` operation.
-- C039 confirmed that interrupted migration is handled by the canonical BOOTSTRAP workflow and durable repository state; no separate recovery operation is part of the active command surface.
-- C039 validated the two manual bootstrap transport templates.
-- C039 completed the bounded semantic consistency sweep and found no additional active infrastructure changes required by that scope.
-- C039's latest repository checkpoint added the `Structural references` section to `.ai/INDEX.md`, pointing to `.ai/handoffs/README.md` as structural documentation and explicitly not a runtime activation owner.
+- C040 confirmed that first-chapter initialization does not need a dedicated `>>init` or `>>new` operation.
+- C040 confirmed that interrupted migration is handled by the canonical BOOTSTRAP workflow and durable repository state; no separate recovery operation is part of the active command surface.
+- C040 validated the two manual bootstrap transport templates.
+- C040 completed the bounded semantic consistency sweep and found no additional active infrastructure changes required by that scope.
+- C040's latest repository checkpoint added the `Structural references` section to `.ai/INDEX.md`, pointing to `.ai/handoffs/README.md` as structural documentation and explicitly not a runtime activation owner.
 - That INDEX change was committed as `3e7009eb8be23f10372ffb8abe3786cab308b350` with message `ai-docs(index): add handoff structural reference`.
 
 ## Confirmed / observed
@@ -59,9 +59,9 @@ Recover from the interrupted C039 → C040 migration and continue the Architectu
 - `.ai/skills/activation/SKILL.md` defines ACTIVATE as rereading required canonical owners.
 - `.ai/skills/handoff/SKILL.md` owns handoff structure and handoff capability.
 - `.ai/INDEX.md` is the operational routing and capability-discovery surface, not a procedure owner.
-- The predecessor handoff `.ai/handoffs/C/C039-Architecture-Research.md` was read successfully during this bootstrap.
-- The C038 handoff and current architecture record were inspected as supporting context.
-- No C040 handoff existed before this recovery bootstrap.
+- The predecessor handoff `.ai/handoffs/C/C040-Architecture-Research.md` was read successfully during this bootstrap.
+- The C039 handoff and current architecture record were inspected as supporting context.
+- No C041 handoff existed before this recovery bootstrap.
 
 ## Confirmed decisions carried forward
 
@@ -90,7 +90,7 @@ Recover from the interrupted C039 → C040 migration and continue the Architectu
 - `.ai/workflows/handoff/BOOTSTRAP.md`
 - `.ai/architecture/ai-infrastructure-restructuring.md`
 - `.ai/handoffs/README.md`
-- `.ai/handoffs/C/C039-Architecture-Research.md`
+- `.ai/handoffs/C/C040-Architecture-Research.md`
 
 No additional external research reference was identified as materially required for bootstrap recovery.
 
@@ -99,7 +99,7 @@ No additional external research reference was identified as materially required 
 - Preserve the `.ai/AGENTS.md` → `.ai/INDEX.md` → ACTIVATE → canonical-owner architecture.
 - Keep BOOTSTRAP as the canonical new-conversation initialization workflow.
 - Do not introduce a command registry, universal router, command-ID layer, subcommand hierarchy, flag layer, dependency graph, dedicated recovery operation, or replacement lifecycle mechanism without concrete evidence.
-- Do not reopen stabilized `>>` command syntax or C039 bootstrap semantics without new evidence.
+- Do not reopen stabilized `>>` command syntax or C040 bootstrap semantics without new evidence.
 - Distinguish active semantics from historical architecture evidence.
 - For existing-file mutation, follow repository write safety: read current content, make the minimal intended change, write the complete file, read back, verify content, inspect diff, verify scope, commit, and verify the result.
 - Do not modify the predecessor handoff merely because it was consumed.
@@ -110,14 +110,14 @@ No additional external research reference was identified as materially required 
 
 ### Confirmed
 
-- C040 is the receiving chapter for C039.
+- C041 is the receiving chapter for C040.
 - `C → Architecture & Research` is configured in `.ai/config.yaml`.
-- C039's active command and bootstrap decisions are recorded in the repository.
-- The current handoff can continue from durable repository state without reconstructing C039 from conversation history.
+- C040's active command and bootstrap decisions are recorded in the repository.
+- The current handoff can continue from durable repository state without reconstructing C040 from conversation history.
 
 ### Inferred
 
-- The interrupted migration affected conversation transport rather than requiring correction of the durable C039 repository state, because C039's checkpoint and active infrastructure changes are present in the repository.
+- The interrupted migration affected conversation transport rather than requiring correction of the durable C040 repository state, because C040's checkpoint and active infrastructure changes are present in the repository.
 
 ### Assumed / unverified
 
@@ -128,7 +128,7 @@ No additional external research reference was identified as materially required 
 - The next concrete Architecture & Research question is not specified by the recovery request itself. It SHOULD be selected from the current architecture record after bootstrap verification rather than guessed from older chapter TODOs.
 
 
-## C040 checkpoint
+## C041 checkpoint
 
 Semantic consistency sweep completed. INDEX now exposes the activation capability. Obsolete negative references were removed from active handoff/bootstrap documentation. The next bounded question is operational TRACE design.
 
@@ -151,7 +151,7 @@ Do not prematurely turn TRACE into a persistent schema or dependency registry. D
 Bootstrap recovery is complete only after this handoff is read back and its header, immediate next task, predecessor context, and starting state are verified.
 
 
-## C040 TRACE research checkpoint
+## C041 TRACE research checkpoint
 
 The bounded TRACE research is recorded in `.ai/architecture/ai-infrastructure-restructuring.md` section 32.
 
@@ -175,7 +175,7 @@ Accepted conclusions:
 - TRACE MUST distinguish actual rereads from discovery/search.
 - The complete operation-by-operation visibility matrix is intentionally NOT frozen yet.
 
-### C040 → C041 bounded research question
+### C041 → C042 bounded research question
 
 Continue with exactly this question:
 
@@ -205,10 +205,10 @@ VISIBLE TRACE
 chapter initialization
 ```
 
-### C040 migration state
+### C041 migration state
 
 - Architecture record updated and committed as `481f5f13e54fd9f4fe2ab516177ea5baa9acf050`.
-- The current C040 handoff remains the durable source for migration context.
-- The receiving C041 bootstrap MUST use the explicit repository locator already established by C040:
+- The current C041 handoff remains the durable source for migration context.
+- The receiving C042 bootstrap MUST use the explicit repository locator already established by C041:
   `https://github.com/paulhuman/aip-mirror`.
-- The next chapter is C041, specialization C, short name `Architecture & Research`.
+- The next chapter is C042, specialization C, short name `Architecture & Research`.
