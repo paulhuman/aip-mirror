@@ -1,16 +1,16 @@
 # Conversation Handoff
 
 **Conversation:**
-E004 — Independent Review (Qwen)
+E005 — Independent Review (Qwen)
 
 **Specialization:**
 E
 
 **Chapter:**
-004
+005
 
 **Previous chapter:**
-003
+004
 
 ## Current objective
 
@@ -22,9 +22,9 @@ E
 
 ## Completed
 
-### 1. Bootstrap & Setup (E004)
+### 1. Bootstrap & Setup (E005)
 
-- Read E003 handoff, project rules, onboarding guide
+- Read E004 handoff, project rules, onboarding guide
 - Интегрирован North-Star документ `docs/architecture/ai-project-instruction-architecture.md`
 - Подтверждён READ-ONLY capability (Branch B)
 - Завершён post-bootstrap consistency verification (commit `a14f8e4` подтверждён)
@@ -107,9 +107,9 @@ E
 
 ## Working decisions (not yet formal ADs)
 
-### Carried from E002/E003:
+### Carried from E003/E004:
 
-- **WD-01 through WD-17** (все сохранены, см. E003 handoff)
+- **WD-01 through WD-17** (все сохранены, см. E004 handoff)
 
 ### Новые из C-11 series:
 
@@ -178,10 +178,10 @@ E
 
 ### Handoff chain
 
-- `.ai/handoffs/E/E001-Independent-Review-Qwen.md` (SUPERSEDED)
-- `.ai/handoffs/E/E002-Independent-Review-Qwen.md` (HANDED_OFF)
+- `.ai/handoffs/E/E002-Independent-Review-Qwen.md` (SUPERSEDED)
 - `.ai/handoffs/E/E003-Independent-Review-Qwen.md` (HANDED_OFF)
-- `.ai/handoffs/E/E004-Independent-Review-Qwen.md` (текущий, → READY_FOR_HANDOFF)
+- `.ai/handoffs/E/E004-Independent-Review-Qwen.md` (HANDED_OFF)
+- `.ai/handoffs/E/E005-Independent-Review-Qwen.md` (текущий, → READY_FOR_HANDOFF)
 
 ---
 
@@ -229,7 +229,7 @@ E
 
 ---
 
-## Immediate next task (для E005)
+## Immediate next task (для E006)
 
 ### Priority 1 — Continuation of C-series:
 
@@ -246,7 +246,7 @@ E
 
 ## Things not to redo
 
-- Не повторять C-1 через C-10 (results documented в E003)
+- Не повторять C-1 через C-10 (results documented в E004)
 - Не переоткрывать WD-01 through WD-17
 - Не ре-тестировать C-11.1 через C-11.10 (results documented здесь)
 - Не вводить typed UNRESOLVED, 3-valued logic, fixed-point semantics
@@ -260,7 +260,7 @@ E
 
 ## Recommended starting context for next chapter
 
-Старт с этого хэндоффа как baseline. Chapter E004 завершил полный C-11 series research arc по семантике conditional dependencies и role asymmetry.
+Старт с этого хэндоффа как baseline. Chapter E005 завершил полный C-11 series research arc по семантике conditional dependencies и role asymmetry.
 
 **Ключевые established findings:**
 
@@ -276,4 +276,4 @@ E
 
 **Capability:** Branch B (READ-ONLY AI) во всех bootstrap/checkpoint/migration procedures.
 
-Работа продолжается с E005 в том же adversarial, semantic-first режиме.
+Работа продолжается с E006 в том же adversarial, semantic-first режиме.
