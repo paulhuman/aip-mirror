@@ -59,9 +59,25 @@ A handoff-producing chapter prepares its own handoff for the next chapter; a rec
 
 ### Canonical invocation format
 
-The bootstrap message is the transport boundary for the initialization context. A generated migration instruction and the future manual templates MUST explicitly identify themselves as instructions to initialize a new conversation chapter and MUST direct the receiving AI to follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6.
+The bootstrap message is the transport boundary for the initialization context. A generated migration instruction and the future manual templates MUST explicitly identify themselves as instructions to initialize a new conversation chapter, MUST contain an explicit repository locator, and MUST direct the receiving AI to follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6.
 
-The standard generated transport format is exactly:
+The repository locator is transport context, not a canonical BOOTSTRAP runtime input. It exists so the receiving AI can identify the target repository before resolving any repository-relative path.
+
+The canonical generated form is:
+
+    Initialize a new conversation chapter for the repository:
+    https://github.com/paulhuman/aip-mirror
+
+    Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
+
+    PREVIOUS_CHAPTER = <three-digit previous chapter number or N/A>
+    CURRENT_CHAPTER = <three-digit current chapter number>
+    SPECIALIZATION = <single uppercase specialization letter>
+    SHORT_NAME = <resolved short conversation name>
+
+For this project, the generated repository locator is constructed from `project.hosting.base_url` and `project.repository` in `.ai/config.yaml`. The receiving AI MUST NOT be expected to infer the repository from memory, conversation history, local paths, attachments, or implicit project context.
+
+The standard generated transport contains the repository locator instruction above, followed by:
 
     PREVIOUS_CHAPTER = <three-digit previous chapter number or N/A>
     CURRENT_CHAPTER = <three-digit current chapter number>
@@ -102,9 +118,11 @@ A bootstrap message that supplies a chapter number with the specialization lette
 
 ## Canonical repository identity and path resolution
 
-Bootstrap uses the repository that contains this bootstrap procedure as the canonical project repository.
+Bootstrap MUST first use the explicit repository locator carried by the bootstrap instruction to identify the target repository.
 
-Before resolving any other repository-relative path, the bootstrap AI MUST read `.ai/config.yaml` from that repository and use:
+The receiving AI MUST NOT infer the target repository from memory, conversation history, local paths, attachments, or implicit project context.
+
+After the repository locator has established the target repository, the bootstrap AI MUST read `.ai/config.yaml` from that repository before resolving any other repository-relative path, and use:
 
 - `project.repository` as the repository identifier;
 - `project.default_branch` as the canonical project branch;
