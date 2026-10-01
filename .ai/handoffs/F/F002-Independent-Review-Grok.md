@@ -1,26 +1,26 @@
 # Conversation Handoff
 
 **Conversation:**
-F002 — Independent Review (Grok)
+F003 — Independent Review (Grok)
 
 **Specialization:**
 F
 
 **Chapter:**
-002
+003
 
 **Previous chapter:**
-001
+002
 
 ## Current objective
 
-Continue independent external review work from the coherent state handed off by F001. Priority candidates identified by F001: validate/draft minimal AGENTS.md contract (entry-path experiment) or align with current C-series frontier (C027+).
+Continue independent external review work from the coherent state handed off by F002. Priority candidates identified by F002: validate/draft minimal AGENTS.md contract (entry-path experiment) or align with current C-series frontier (C028+).
 
 ## Completed
 
-1. Bootstrap continuity from F001:
-   - Created `.ai/handoffs/F/F002-Independent-Review-Grok.md` as DRAFT.
-   - Transitioned F001 READY_FOR_HANDOFF → HANDED_OFF.
+1. Bootstrap continuity from F002:
+   - Created `.ai/handoffs/F/F003-Independent-Review-Grok.md` as DRAFT.
+   - Transitioned F002 READY_FOR_HANDOFF → HANDED_OFF.
    - Post-bootstrap consistency verification passed.
 
 ## Current implementation state
@@ -33,7 +33,7 @@ Repository mutations in this specialization follow READ-ONLY path unless human a
 
 ## Decisions / research findings (independent review only — not ADs)
 
-Inherited from F001 (do not re-open closed analyses without new evidence):
+Inherited from F002 (do not re-open closed analyses without new evidence):
 
 ### Bootstrap kernel
 
@@ -53,7 +53,7 @@ Inherited from F001 (do not re-open closed analyses without new evidence):
 - INDEX = routing/discovery only: holds.
 - Canonical owners retain procedure/normative authority: holds.
 - BOOTSTRAP as ordered workflow: justified.
-- AGENTS.md empty while architecture claims always-on contract: **critical gap** (primary candidate for F002).
+- AGENTS.md empty while architecture claims always-on contract: **critical gap** (primary candidate for F003).
 - Soft dual source of command phrases in lifecycle.md vs INDEX: moderate.
 
 ### AGENTS.md responsibility
@@ -68,7 +68,7 @@ Inherited from F001 (do not re-open closed analyses without new evidence):
 1. Precise minimum ordinary-knowledge set sufficient at t₀ for typical task classes (project-agnostic vs project-specific).
 2. Whether AGENTS needs a one-line pointer to `config.yaml` / `repository.md` before INDEX, or INDEX-first is enough.
 3. Whether write-capability self-check belongs in AGENTS as universal guardrail or only in mutation skills/workflows.
-4. Minimum information a capability description and local applicability surface must each expose without duplication (carried from F000).
+4. Minimum information a capability description and local applicability surface must each expose without duplication (carried from F001).
 5. How far deferred activation can be pushed before rediscovery cost dominates.
 6. Controlled Grok↔Qwen comparison (still deferred unless requested).
 7. INDEX table scalability beyond ~10–15 entries (presentation pressure, not ownership confusion).
@@ -92,9 +92,9 @@ Inherited from F001 (do not re-open closed analyses without new evidence):
 - `.ai/skills/handoff/SKILL.md`
 - `.ai/skills/commits/SKILL.md`
 - `.ai/workflows/handoff/BOOTSTRAP.md`
-- `.ai/handoffs/F/F000-Independent-Review-Grok.md` (HANDED_OFF)
 - `.ai/handoffs/F/F001-Independent-Review-Grok.md` (HANDED_OFF)
-- `.ai/handoffs/C/C027-Architecture-Research.md` (AGENTS/INDEX frontier on C side)
+- `.ai/handoffs/F/F002-Independent-Review-Grok.md` (HANDED_OFF)
+- `.ai/handoffs/C/C028-Architecture-Research.md` (AGENTS/INDEX frontier on C side)
 
 ### Do not use as active owners
 
@@ -115,11 +115,11 @@ Inherited from F001 (do not re-open closed analyses without new evidence):
 
 ### Confirmed / observed
 
-- F001 Status was READY_FOR_HANDOFF at bootstrap start; now HANDED_OFF.
-- F002 handoff did not exist prior to this bootstrap; now DRAFT.
+- F002 Status was READY_FOR_HANDOFF at bootstrap start; now HANDED_OFF.
+- F003 handoff did not exist prior to this bootstrap; now DRAFT.
 - AGENTS.md remains empty (title only).
-- INDEX is functional router after C027 metadata trim.
-- Post-bootstrap consistency verification: passed (F002 DRAFT + Previous=001; F001 HANDED_OFF; consistent pair).
+- INDEX is functional router after C028 metadata trim.
+- Post-bootstrap consistency verification: passed (F003 DRAFT + Previous=001; F002 HANDED_OFF; consistent pair).
 
 ### Inferred
 
@@ -132,20 +132,20 @@ Inherited from F001 (do not re-open closed analyses without new evidence):
 
 ## Last completed task
 
-Bootstrap of F002 complete (DRAFT created, F001 HANDED_OFF, post-bootstrap verification passed).
+Bootstrap of F003 complete (DRAFT created, F002 HANDED_OFF, post-bootstrap verification passed).
 
 ## Immediate next task
 
 Await human direction for substantive review priority:
 
 - validate/draft minimal AGENTS.md contract (entry-path experiment); or
-- align with current C-series frontier (C027+).
+- align with current C-series frontier (C028+).
 
-Do not redo F000/F001 closed analyses unless new evidence requires it.
+Do not redo F001/F002 closed analyses unless new evidence requires it.
 
 ## Things not to redo
 
-- F000 baseline, dependency stress test, bottleneck audit, Post A/B/C, dynamic context activation.
+- F001 baseline, dependency stress test, bottleneck audit, Post A/B/C, dynamic context activation.
 - Full bootstrap-kernel permanent-component falsification (closed).
 - Full Iteration 2 physical restructuring.
 - Redesign of INDEX, lifecycle, or BOOTSTRAP without new contradictory evidence.
@@ -156,8 +156,8 @@ Do not redo F000/F001 closed analyses unless new evidence requires it.
 1. This handoff
 2. `.ai/INDEX.md`, `.ai/AGENTS.md`, `.ai/architecture/ai-infrastructure-restructuring.md`
 3. `.ai/rules/handoff/lifecycle.md`, `.ai/skills/handoff/SKILL.md`, `.ai/workflows/handoff/BOOTSTRAP.md`
-4. `.ai/handoffs/C/C027-Architecture-Research.md` (or successor)
-5. F001 / F000 only if historical baseline detail is needed
+4. `.ai/handoffs/C/C028-Architecture-Research.md` (or successor)
+5. F002 / F001 only if historical baseline detail is needed
 
 ## Research references
 
