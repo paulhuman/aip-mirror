@@ -1011,6 +1011,10 @@ The templates MUST expose the required runtime values as explicit placeholders s
 
 The template design SHOULD be validated against the canonical `.ai/workflows/handoff/BOOTSTRAP.md` contract before becoming active infrastructure.
 
+### Operational TRACE Completeness Test
+
+Current TRACE does not fully reflect the observable operation: it lists canonical owners actually reread, but the operation may also read additional repository files. TRACE SHOULD eventually show all files actually read during the operation, while continuing to distinguish actual reads from discovery/search.
+
 ## 22. Migration note
 
 The current architecture state is represented by this file and the current `.ai` tree. Future chapters MUST start from current repository state rather than reconstructing earlier architecture chapters from conversation history.
