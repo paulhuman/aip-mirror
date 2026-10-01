@@ -1,34 +1,34 @@
 # Conversation Handoff
 
 **Conversation:**
-C003 — Architecture & Research
+C004 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-003
+004
 
 **Previous chapter:**
-002
+003
 
 ## Current objective
 
-Continue the project-wide AI-instruction architecture research from C002. The current focus is the **OVERRIDE Architecture Decision Pass**, now concentrated on authorization boundaries, precedence semantics, and the boundary between eligibility, candidate semantics, and effective outcome. Structural refactoring remains deferred until the relevant semantics are sufficiently stable.
+Continue the project-wide AI-instruction architecture research from C003. The current focus is the **OVERRIDE Architecture Decision Pass**, now concentrated on authorization boundaries, precedence semantics, and the boundary between eligibility, candidate semantics, and effective outcome. Structural refactoring remains deferred until the relevant semantics are sufficiently stable.
 
 The candidate-level precedence model is now strongly supported by the counterexample pass, but its formal AD is still pending. The next chapter should continue the one-decision-at-a-time counterexample process, now concentrating on `prerequisite` and `dependency` semantics and the exact boundary of candidate eligibility versus effect evaluation.
 
 ## Completed
 
-Bootstrap established the canonical starting state from C002. The C002 checkpoint recorded the completed OVERRIDE research/counterexample pass. During C003, the authorization model has been substantially narrowed and clarified through explicit Architecture Decision Passes:
+Bootstrap established the canonical starting state from C003. The C003 checkpoint recorded the completed OVERRIDE research/counterexample pass. During C004, the authorization model has been substantially narrowed and clarified through explicit Architecture Decision Passes:
 
 - **OVERRIDE-01 — Source of Authorization:** Model B, Explicit Authorization, is the baseline. Declaration of an OVERRIDE is not authorization; authorization is not itself effective application; TRACE is not authority. Automatic resolution is allowed only when the architecture can resolve deterministically; otherwise the result is `UNRESOLVED` and may require user decision.
 - **OVERRIDE-02 — Sufficient authorization:** authorization is a bounded grant with conceptual properties for subject, action, target boundary, applicability, activation, lifecycle validity, and delegation constraints. Delegation must itself be explicitly authorized and must not expand the source grant.
-- **OVERRIDE-B000 — Target boundary:** target-specific authorization is the semantic primitive. Target-class authorization is not part of Core and may only be introduced later as a separate extension/architecture decision.
-- **OVERRIDE-B001 — Bounded target set:** a bounded target set is semantically equivalent to an aggregation of independent target-specific grants when the grants share a compatible/common authorization boundary. It is a representation optimization, not a new authorization language.
+- **OVERRIDE-B001 — Target boundary:** target-specific authorization is the semantic primitive. Target-class authorization is not part of Core and may only be introduced later as a separate extension/architecture decision.
+- **OVERRIDE-B002 — Bounded target set:** a bounded target set is semantically equivalent to an aggregation of independent target-specific grants when the grants share a compatible/common authorization boundary. It is a representation optimization, not a new authorization language.
 - **OVERRIDE-03 — Authorization object boundary:** one authorization object has one authorization boundary and one lifecycle. A bounded target set may aggregate only targets whose authorization semantics do not require independent applicability, activation, or lifecycle states.
 - **OVERRIDE-04 — Authorization boundary contents:** subject, action, targets, applicability, activation, lifetime, and delegation constraints are semantic grant properties. Reason/provenance/identifiers are explanatory or provenance metadata unless separately defined as semantic. Reason must not become a hidden policy condition.
-- **OVERRIDE-D000 — Issuer and authority:** issuer identity is not equivalent to issuer authority. An authorization record is a claim, not authority merely because it exists. Authority establishment has the distinct states `AUTHORIZED / DENIED / UNRESOLVED`.
+- **OVERRIDE-D001 — Issuer and authority:** issuer identity is not equivalent to issuer authority. An authorization record is a claim, not authority merely because it exists. Authority establishment has the distinct states `AUTHORIZED / DENIED / UNRESOLVED`.
 - **OVERRIDE-04B — Authority mechanism:** Core uses an abstract **established authority** boundary. Core does not define the mechanism for constructing/verifying the authority chain. An external authority mechanism establishes whether a claimed authorization is authorized; Core evaluates what an established authorization permits.
 - **OVERRIDE-04C — Authority result:** Model C, a two-level result, is the baseline. External authority establishment returns `AUTHORIZED / DENIED / UNRESOLVED` plus an established authorization boundary/evidence when appropriate. Core then evaluates that boundary for the current operation/context and may return `EFFECTIVE / DENIED / UNRESOLVED`. These levels must not be conflated.
 - **OVERRIDE-04D — Core evaluation boundary:** Core may evaluate an established authorization boundary against the current operation, but MUST NOT enlarge, reinterpret, or strengthen it. Specificity cannot create authority. Expiration yields denial; unknown validity yields unresolved. Delegation beyond the established boundary must not be silently transformed into a different grant.
@@ -223,10 +223,10 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 
 ### Handoff chain
 
-- `.ai/handoffs/C000-Architecture-Research.md`
 - `.ai/handoffs/C001-Architecture-Research.md`
 - `.ai/handoffs/C002-Architecture-Research.md`
 - `.ai/handoffs/C003-Architecture-Research.md`
+- `.ai/handoffs/C004-Architecture-Research.md`
 
 ## Relevant references
 
@@ -272,16 +272,16 @@ No implementation of an OVERRIDE engine, authorization engine, precedence engine
 
 ### Confirmed / observed
 
-- C002 is `HANDED_OFF`; C001 and C000 are completed earlier handoffs; the lifecycle chain is coherent for the current C003 chapter.
-- C003 was initialized from the C002 receiving checkpoint and has now been prepared as `READY_FOR_HANDOFF` to C004.
+- C003 is `HANDED_OFF`; C002 and C001 are completed earlier handoffs; the lifecycle chain is coherent for the current C004 chapter.
+- C004 was initialized from the C003 receiving checkpoint and has now been prepared as `READY_FOR_HANDOFF` to C005.
 - No structural architecture refactor has been committed.
-- The authorization/precedence conclusions listed above were explicitly accepted during the C003 discussion as working architecture semantics.
+- The authorization/precedence conclusions listed above were explicitly accepted during the C004 discussion as working architecture semantics.
 - Candidate-level precedence, eligibility-before-precedence, and the distinction between candidate effect and effective outcome were explicitly accepted as the current working direction.
 - The repository handoff document was read before update and must be read back and verified after the write.
 
 ### Inferred
 
-- The evidence accumulated in C002 plus the focused C003 decision pass is sufficient to continue with targeted semantic counterexamples rather than broad exploratory research.
+- The evidence accumulated in C003 plus the focused C004 decision pass is sufficient to continue with targeted semantic counterexamples rather than broad exploratory research.
 - Candidate-level precedence is currently the strongest working model, but remains provisional until prerequisite/decision-dependency cases are tested and the model is promoted to a formal AD.
 - Keeping authorization standing separate from governing/effective outcome is a strong architectural boundary and should be preserved unless a counterexample requires refinement.
 - Conditions/predicates naturally contribute to eligibility, while effect semantics belong to the candidate and effective outcome follows governing-candidate selection; the remaining difficult boundary is semantic prerequisites/dependencies.
@@ -303,4 +303,4 @@ Completed the candidate-level precedence counterexample pass and established the
 
 ## Immediate next task
 
-Continue in **C004 — Architecture & Research** with a focused counterexample pass for **prerequisite and dependency semantics**. In particular, determine whether decision-source prerequisites belong to eligibility, how they interact with candidate-level precedence, and whether dependency graphs/cycles require explicit Core semantics. Do not promote candidate-level precedence to a formal AD until this boundary is sufficiently tested.
+Continue in **C005 — Architecture & Research** with a focused counterexample pass for **prerequisite and dependency semantics**. In particular, determine whether decision-source prerequisites belong to eligibility, how they interact with candidate-level precedence, and whether dependency graphs/cycles require explicit Core semantics. Do not promote candidate-level precedence to a formal AD until this boundary is sufficiently tested.
