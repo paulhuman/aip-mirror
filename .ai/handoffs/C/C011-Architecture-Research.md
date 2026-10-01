@@ -1,20 +1,20 @@
 # Conversation Handoff
 
 **Conversation:**
-C011 — Architecture & Research
+C012 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-011
+012
 
 **Previous chapter:**
-010
+011
 
 ## Current objective
 
-Complete the bounded semantic dependency research line through C-10 — Dependency Relation vs. Dependency Target, and prepare migration to C012. The next chapter must begin with C-11 — Target Sufficiency Counterexample Test.
+Complete the bounded semantic dependency research line through C-10 — Dependency Relation vs. Dependency Target, and prepare migration to C013. The next chapter must begin with C-11 — Target Sufficiency Counterexample Test.
 
 Current working model remains intentionally conservative:
 
@@ -273,11 +273,11 @@ Established working boundaries:
 
 Primary handoff/history:
 
+- .ai/handoffs/C012-Architecture-Research.md
 - .ai/handoffs/C011-Architecture-Research.md
 - .ai/handoffs/C010-Architecture-Research.md
 - .ai/handoffs/C009-Architecture-Research.md
 - .ai/handoffs/C008-Architecture-Research.md
-- .ai/handoffs/C007-Architecture-Research.md
 
 Architecture/research:
 
@@ -305,8 +305,8 @@ paulhuman/aip-mirror@main:/
 Primary migration history:
 
 ```
+paulhuman/aip-mirror@main:/.ai/handoffs/C011-Architecture-Research.md
 paulhuman/aip-mirror@main:/.ai/handoffs/C010-Architecture-Research.md
-paulhuman/aip-mirror@main:/.ai/handoffs/C009-Architecture-Research.md
 ```
 
 Qwen research onboarding:
@@ -409,7 +409,7 @@ The decisive current synthesis is:
 
 ## Immediate next task
 
-In the receiving chapter C012, run:
+In the receiving chapter C013, run:
 
 > C-11 — Target Sufficiency Counterexample Test
 
@@ -480,13 +480,13 @@ Human remains the final architecture decision-maker.
 Bootstrap of the receiving chapter has now completed the normal write-capable lifecycle transition:
 
 ```
-C010 = SUPERSEDED
-C011 = HANDED_OFF
-C012 = DRAFT
+C011 = SUPERSEDED
+C012 = HANDED_OFF
+C013 = DRAFT
 ```
 
-The receiving C012 chapter created and owns its own DRAFT handoff, then transitioned this handoff from READY_FOR_HANDOFF to HANDED_OFF.
+The receiving C013 chapter created and owns its own DRAFT handoff, then transitioned this handoff from READY_FOR_HANDOFF to HANDED_OFF.
 
-Post-bootstrap consistency verification confirmed the receiving handoff remains DRAFT, identifies C011 as its previous chapter, and begins with C-11 as its immediate next substantive task.
+Post-bootstrap consistency verification confirmed the receiving handoff remains DRAFT, identifies C012 as its previous chapter, and begins with C-11 as its immediate next substantive task.
 
 Human remains the final architecture decision-maker.
