@@ -1,34 +1,34 @@
 # Conversation Handoff
 
 **Conversation:**
-C045 — Architecture & Research
+C046 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-045
+046
 
 **Previous chapter:**
-044
+045
 
 ## Starting objective
 
-Recover the interrupted C044 migration work and continue the bounded handoff-infrastructure correction.
+Recover the interrupted C045 migration work and continue the bounded handoff-infrastructure correction.
 
 The interrupted work has two connected goals:
 
 1. migrate the handoff chapter numbering convention so active handoff history starts at `001` rather than `000`;
 2. correct the active repository-inspection example in `.ai/rules/workflow.md` so a repository-context inspection explicitly includes `docs/PROJECT-INSTRUCTIONS.md` together with the active `.ai` infrastructure.
 
-This chapter MUST continue from the current repository state rather than reconstructing uncommitted C044 work as if it had been committed.
+This chapter MUST continue from the current repository state rather than reconstructing uncommitted C045 work as if it had been committed.
 
 ## Known starting implementation state
 
 - Repository: `paulhuman/aip-mirror`.
 - Canonical branch: `main`.
-- Current chapter: C045.
-- Previous chapter: C044.
+- Current chapter: C046.
+- Previous chapter: C045.
 - Specialization: C.
 - Resolved short name: `Architecture & Research`.
 - `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical new-conversation initialization workflow.
@@ -41,13 +41,13 @@ This chapter MUST continue from the current repository state rather than reconst
 
 The current repository still contains legacy `000` handoff files:
 
-- `.ai/handoffs/B/B000-Native-AIP-Plugin.md`
-- `.ai/handoffs/C/C000-Architecture-Research.md`
-- `.ai/handoffs/D/D000-Project-Workshop.md`
-- `.ai/handoffs/E/E000-Independent-Review-Qwen.md`
-- `.ai/handoffs/F/F000-Independent-Review-Grok.md`
+- `.ai/handoffs/B/B001-Native-AIP-Plugin.md`
+- `.ai/handoffs/C/C001-Architecture-Research.md`
+- `.ai/handoffs/D/D001-Project-Workshop.md`
+- `.ai/handoffs/E/E001-Independent-Review-Qwen.md`
+- `.ai/handoffs/F/F001-Independent-Review-Grok.md`
 
-The current C-series continues through `C044-Architecture-Research.md`.
+The current C-series continues through `C045-Architecture-Research.md`.
 
 The current `.ai/rules/workflow.md` repository-context inspection example still lists only:
 
@@ -63,7 +63,7 @@ It does not yet include `docs/PROJECT-INSTRUCTIONS.md`.
 ## Decisions carried forward
 
 - Repository state is the source of truth after an interrupted migration.
-- Do not assume that changes discussed or prepared in the interrupted C044 chat were committed unless the repository confirms them.
+- Do not assume that changes discussed or prepared in the interrupted C045 chat were committed unless the repository confirms them.
 - The handoff numbering correction MUST be handled as a bounded migration of the existing handoff history and its active references, not as a redesign of the handoff lifecycle.
 - `docs/PROJECT-INSTRUCTIONS.md` remains the first project-level source for project work.
 - The repository-context inspection example SHOULD describe the complete declared active repository context rather than an artificial path relative to `.ai/rules/workflow.md`.
@@ -78,24 +78,24 @@ It does not yet include `docs/PROJECT-INSTRUCTIONS.md`.
     docs/PROJECT-INSTRUCTIONS.md
 
 - Historical material MUST be distinguished from active infrastructure during the migration and consistency sweep.
-- Do not reopen resolved C043 ACTIVATE / REFRESH / TRACE interface decisions without new evidence.
+- Do not reopen resolved C044 ACTIVATE / REFRESH / TRACE interface decisions without new evidence.
 
 ## Confirmed / observed
 
 - Bootstrap inputs supplied for this chapter are valid: `PREVIOUS_CHAPTER = 044`, `CURRENT_CHAPTER = 045`, `SPECIALIZATION = C`.
 - `.ai/config.yaml` confirms repository `paulhuman/aip-mirror`, default branch `main`, and `C → Architecture & Research`.
 - The required bootstrap owners were reread during initialization.
-- The predecessor handoff `.ai/handoffs/C/C044-Architecture-Research.md` was read successfully.
-- The receiving handoff `.ai/handoffs/C/C045-Architecture-Research.md` did not exist before this bootstrap.
+- The predecessor handoff `.ai/handoffs/C/C045-Architecture-Research.md` was read successfully.
+- The receiving handoff `.ai/handoffs/C/C046-Architecture-Research.md` did not exist before this bootstrap.
 - Repository write and commit capability is available; the WRITE-CAPABLE bootstrap branch applies.
 - The repository currently contains `000` handoffs in B, C, D, E, and F as listed above.
-- The repository currently contains C001 through C044 in the C specialization.
+- The repository currently contains C002 through C045 in the C specialization.
 - The active `.ai/rules/workflow.md` example does not yet list `docs/PROJECT-INSTRUCTIONS.md`.
-- The latest relevant committed repository state predates the interrupted C044 migration work; no committed C044 migration edit was found beyond the already-existing repository state.
+- The latest relevant committed repository state predates the interrupted C045 migration work; no committed C045 migration edit was found beyond the already-existing repository state.
 
 ## Inferred
 
-- The interrupted migration work was not durably recorded in C044's handoff because the C044 handoff remains a bootstrap snapshot whose immediate task predates the migration.
+- The interrupted migration work was not durably recorded in C045's handoff because the C045 handoff remains a bootstrap snapshot whose immediate task predates the migration.
 - The safest recovery is to re-establish the migration scope from the current tree and canonical owners before making renames or reference edits.
 - The numbering migration may affect multiple specialization handoff files and references, so the first substantive step should inventory all `000` handoffs and all active references that depend on their identifiers.
 
@@ -130,7 +130,7 @@ Only after the mapping is explicit should repository mutations begin. Keep the m
 6. `.ai/INDEX.md` — current routing and capability-discovery boundary.
 7. `.ai/handoffs/README.md` — handoff tree orientation.
 8. `.ai/config.yaml` — specialization vocabulary and repository identity.
-9. `.ai/handoffs/C/C044-Architecture-Research.md` — predecessor checkpoint.
+9. `.ai/handoffs/C/C045-Architecture-Research.md` — predecessor checkpoint.
 
 ## Bootstrap verification
 
