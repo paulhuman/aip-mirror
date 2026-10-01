@@ -1,28 +1,28 @@
 # Conversation Handoff
 
 **Conversation:**
-C016 — Architecture & Research
+C017 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-016
+017
 
 **Previous chapter:**
-015
+016
 
 ## Current objective
 
-Continue specialization C architecture research after the completed C015 semantic-source/authority and intentional-acceptance audits.
+Continue specialization C architecture research after the completed C016 semantic-source/authority and intentional-acceptance audits.
 
 C-12 and C-11.11–C-11.15 are CLOSED. Do not reopen them without concrete new evidence.
 
-## Completed C015 research carried forward
+## Completed C016 research carried forward
 
 The following are complete and should not be repeated merely because of migration:
 
-- Grok F000 independent architectural reconstruction review.
+- Grok F001 independent architectural reconstruction review.
 - Architectural Bottleneck Audit.
 - Qwen/Grok bottleneck comparison.
 - Architectural Bottleneck Cross-Audit.
@@ -47,7 +47,7 @@ dependency on B's candidate effect
 dependency on B's effective outcome
 ```
 
-The C015 bottleneck lineage does not justify a universal “Resolution → everything” or “Dependency → Resolution → everything” architecture.
+The C016 bottleneck lineage does not justify a universal “Resolution → everything” or “Dependency → Resolution → everything” architecture.
 
 The strongest unresolved boundaries remain:
 
@@ -87,7 +87,7 @@ Evidence is not automatically project authority. Research/finding is not automat
 
 ## Intentional acceptance result
 
-C015 established that the project already has an operational acceptance practice distributed across human decision, durable documentation, and lifecycle preservation.
+C016 established that the project already has an operational acceptance practice distributed across human decision, durable documentation, and lifecycle preservation.
 
 Observed distinction:
 
@@ -186,29 +186,29 @@ The receiving chapter must preserve and use the following reading set:
 - .ai/rules/workflow.md
 - .ai/rules/project-architecture.md
 - .ai/rules/repository.md
-- .ai/handoffs/C015-Architecture-Research.md
+- .ai/handoffs/C016-Architecture-Research.md
 
 ### Architecture baseline / acceptance
 
 - docs/PROJECT-INSTRUCTIONS.md
 - docs/architecture/ai-project-instruction-architecture.md
-- docs/architecture/semantic-source-authority-audit-C015.md
-- docs/architecture/intentional-acceptance-audit-C015.md
+- docs/architecture/semantic-source-authority-audit-C016.md
+- docs/architecture/intentional-acceptance-audit-C016.md
 
 ### Dependency / result lineage
 
 - docs/architecture/prerequisite-dependency-semantics.md
-- docs/architecture/c-13-authority-vs-effective-outcome-C015.md
+- docs/architecture/c-13-authority-vs-effective-outcome-C016.md
 
 ### Bottleneck / leverage lineage
 
-- docs/architecture/architectural-bottleneck-audit-C015.md
-- docs/architecture/architectural-bottleneck-cross-audit-C015.md
-- docs/architecture/post-c-13-architectural-leverage-audit-C015.md
+- docs/architecture/architectural-bottleneck-audit-C016.md
+- docs/architecture/architectural-bottleneck-cross-audit-C016.md
+- docs/architecture/post-c-13-architectural-leverage-audit-C016.md
 
 ### Historical OVERRIDE evidence
 
-- docs/architecture/c-14-override-semantic-dimension-C015.md
+- docs/architecture/c-14-override-semantic-dimension-C016.md
 - .ai/handoffs/03D-Architecture-Research.md
 - .ai/handoffs/03E-Architecture-Research.md
 
@@ -216,7 +216,7 @@ These references are not a flat authority hierarchy.
 
 ## Handoff lifecycle status
 
-The handoff lifecycle was explicitly simplified during C016 after the research distinction above was operationally confirmed:
+The handoff lifecycle was explicitly simplified during C017 after the research distinction above was operationally confirmed:
 
 ```
 DRAFT
@@ -245,7 +245,7 @@ No structural architecture refactor should begin until the relevant semantics ar
 
 ### Confirmed / observed
 
-- C015 completed the listed bounded research and audits.
+- C016 completed the listed bounded research and audits.
 - Intentional acceptance is an explicit project workflow requirement.
 - Human/project decision authority is retained.
 - Accepted working semantics are observable in historical 03D/03E practice.
@@ -275,9 +275,9 @@ These remain inferences until further evidence is inspected.
 
 ## Last completed task
 
-C016 completed the lifecycle cleanup arising from the semantic distinction between handoff migration state and semantic status. The handoff lifecycle is now explicitly limited to DRAFT → READY_FOR_HANDOFF → HANDED_OFF, and the repository documentation was normalized accordingly. The final architecture-document lifecycle diagram was also corrected to remove an accidental duplicate HANDED_OFF node. The repository was checked for the exact duplicate sequence `HANDED_OFF HANDED_OFF` and no matches remained.
+C017 completed the lifecycle cleanup arising from the semantic distinction between handoff migration state and semantic status. The handoff lifecycle is now explicitly limited to DRAFT → READY_FOR_HANDOFF → HANDED_OFF, and the repository documentation was normalized accordingly. The final architecture-document lifecycle diagram was also corrected to remove an accidental duplicate HANDED_OFF node. The repository was checked for the exact duplicate sequence `HANDED_OFF HANDED_OFF` and no matches remained.
 
-The substantive research state from C015 remains as documented above; no implementation work was authorized.
+The substantive research state from C016 remains as documented above; no implementation work was authorized.
 
 ## Immediate next task
 
