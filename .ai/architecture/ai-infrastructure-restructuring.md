@@ -2403,3 +2403,43 @@ No active references to the retired Пора... command phrases, >>init, >>new, 
 Historical architecture sections and older handoff snapshots retain earlier unresolved decisions where those decisions were true at the time. They are intentionally preserved as historical record and are not active command definitions.
 
 No additional infrastructure or corrective layer is required by this sweep.
+
+## 30. C040 — Explicit repository locator for bootstrap transport
+
+C040 identified a concrete transport-boundary defect in the bootstrap model: a receiving AI cannot reliably follow a repository-relative reference such as `.ai/AGENTS.md` until it knows which repository contains that path.
+
+The bounded result is:
+
+> **Bootstrap transport MUST contain an explicit repository locator; receiving AI MUST NOT be expected to infer the repository from memory, conversation history, local paths, or implicit project context.**
+
+The repository locator is part of the bootstrap instruction itself. It is transport context, not a fourth canonical BOOTSTRAP runtime input.
+
+The canonical semantic contract therefore remains:
+
+    PREVIOUS_CHAPTER
+    CURRENT_CHAPTER
+    SPECIALIZATION
+
+with resolved `SHORT_NAME` included in generated transport as contextual data.
+
+For this project, the generated instruction identifies the repository as:
+
+    https://github.com/paulhuman/aip-mirror
+
+The receiving sequence is now:
+
+    bootstrap instruction
+        ↓
+    explicit repository locator
+        ↓
+    establish target repository
+        ↓
+    read .ai/config.yaml
+        ↓
+    read .ai/rules/repository.md
+        ↓
+    continue canonical BOOTSTRAP initialization
+
+Manual bootstrap templates MUST carry the same explicit repository locator so they remain usable when a receiving AI has no implicit repository context.
+
+This does not introduce a `REPOSITORY` runtime input, command argument, registry, or new initialization layer. It closes a concrete transport gap at the existing bootstrap boundary.
