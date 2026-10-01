@@ -116,26 +116,19 @@ The immediate subject is how a user can request `ACTIVATE`, `REFRESH`, and `TRAC
 
 ### Inferred
 
-- The consistency check should remain bounded to ownership and discoverability; no new semantic layer is indicated by the current architecture.
+- The consistency check is bounded to ownership and discoverability; no new semantic layer is indicated by the current architecture.
 
 ### Assumed / unverified
 
-- None required for bootstrap continuation.
+- None.
 
 ### Open
 
-- Whether the new `.ai/architecture/faq/` directory needs to be represented in any discovery or scan surface.
-- Whether the new FAQ material introduces any ownership contradiction or duplication elsewhere.
-- Whether the C043 handoff needs any final bounded-state correction after the consistency check.
-- After those checks, whether any other bounded C043 work remains.
+- No unresolved architecture question remains from the C043 manual activation interface investigation.
 
 ## Immediate next task
 
-Perform a small consistency check of the completed C043 work:
-1. verify that `.ai/architecture/faq/` does not contradict the ownership model;
-2. determine whether it needs to be added to any discovery/scan surface;
-3. verify that this C043 handoff reflects the completed work;
-4. decide whether any bounded C043 work remains.
+No additional bounded C043 architecture work is identified. If C043 continues, work SHOULD begin only from a newly identified question rather than reopening the resolved manual activation interface.
 
 ## Recommended starting context
 
