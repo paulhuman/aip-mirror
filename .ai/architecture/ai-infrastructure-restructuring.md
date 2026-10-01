@@ -2380,3 +2380,26 @@ two manual bootstrap transport templates
 ```
 
 This resolves the C038 open questions without introducing a command registry, universal router, dedicated initialization layer, recovery operation, or additional lifecycle mechanism.
+
+
+### 23.9 C039 semantic consistency sweep
+
+C039 performed the bounded semantic consistency sweep after stabilizing the command and bootstrap decisions.
+
+The active command surface is consistent across .ai/INDEX.md and .ai/skills/handoff/SKILL.md:
+
+    >>handoff
+    >>migrate <chapter>
+    >>generate-bootstrap <chapter>
+
+The active initialization path is consistent across .ai/AGENTS.md and .ai/workflows/handoff/BOOTSTRAP.md:
+
+    AGENTS item 6 → BOOTSTRAP
+
+The canonical BOOTSTRAP runtime contract remains three values, with optional contextual SHORT_NAME resolved from .ai/config.yaml when omitted.
+
+No active references to the retired Пора... command phrases, >>init, >>new, >>recover, NEXT_CHAPTER, or the removed handoff lifecycle status model were found in the reviewed active owners.
+
+Historical architecture sections and older handoff snapshots retain earlier unresolved decisions where those decisions were true at the time. They are intentionally preserved as historical record and are not active command definitions.
+
+No additional infrastructure or corrective layer is required by this sweep.
