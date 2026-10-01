@@ -1,16 +1,16 @@
 # Conversation Handoff
 
 **Conversation:**
-C009 — Architecture & Research
+C010 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-009
+010
 
 **Previous chapter:**
-008
+009
 
 ## Current objective
 
@@ -559,22 +559,22 @@ No Architecture Decision should be made merely from the existence or absence of 
 
 This chapter is intended to be initialized from:
 
-**AIP Mirror — C008 — Architecture & Research**
+**AIP Mirror — C009 — Architecture & Research**
 
 Canonical predecessor chain observed before this bootstrap:
 
 ```text
-C006 = SUPERSEDED
 C007 = SUPERSEDED
-C008 = READY_FOR_HANDOFF
-C009 = DRAFT
+C008 = SUPERSEDED
+C009 = READY_FOR_HANDOFF
+C010 = DRAFT
 ```
 
 The intended write-capable bootstrap transition is:
 
 ```text
-C009: create DRAFT
-C008: READY_FOR_HANDOFF → HANDED_OFF
+C010: create DRAFT
+C009: READY_FOR_HANDOFF → HANDED_OFF
 ```
 
 Lifecycle Correction is not part of this migration.
