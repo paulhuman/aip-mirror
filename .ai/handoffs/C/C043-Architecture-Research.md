@@ -139,3 +139,18 @@ No additional bounded C043 architecture work is identified. If C043 continues, w
 5. `.ai/INDEX.md` — capability-discovery and command-routing boundary.
 6. `.ai/rules/workflow.md` — workflow and inspection constraints.
 7. `.ai/handoffs/C/C042-Architecture-Research.md` — predecessor reasoning and migration checkpoint.
+
+## Migration checkpoint to C044
+
+C043 is complete for its current bounded architecture investigation.
+
+The consistency check confirmed:
+- `.ai/architecture/faq/` does not create a competing semantic ownership layer;
+- `.ai/architecture/faq/` is already covered by the declared `architecture/*` inspection scope;
+- `.ai/INDEX.md` does not need a separate FAQ capability/discovery entry;
+- the manual activation interface remains resolved as natural-language invocation of ACTIVATE, REFRESH, and TRACE.
+
+C044 SHOULD begin from a newly identified Architecture & Research question and MUST NOT reopen the resolved manual activation interface unless new evidence requires it.
+
+The receiving C044 chapter MUST create its own handoff during bootstrap. C043 does not create or modify the C044 handoff in advance.
+
