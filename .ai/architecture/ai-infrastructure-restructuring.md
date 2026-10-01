@@ -1943,7 +1943,9 @@ A new conversation can represent at least two different situations:
 
 This continues an existing chapter sequence.
 
-**First chapter of a new specialization stream**
+**First chapter of a new specialization stream (historical zero-based convention)**
+
+The following example records the former convention used when this architecture decision was written. At that time, `000` represented the first chapter. The active convention is now one-based and starts at `001`; this historical example is retained only to preserve the architecture record.
 
     PREVIOUS_CHAPTER = N/A
     CURRENT_CHAPTER  = 000
