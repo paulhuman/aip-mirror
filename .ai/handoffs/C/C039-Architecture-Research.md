@@ -151,19 +151,17 @@ No additional external research reference was identified by C038 as materially r
 - Do not silently treat SHORT_NAME as a fourth required canonical runtime input.
 - Do not broaden this chapter into a general AI-infrastructure refactor.
 
-## C039 bounded work
+## C039 completed bounded work
 
-1. Verify the AGENTS → BOOTSTRAP entry boundary and missing-input behavior against the current canonical files.
-2. Verify the generated four-line bootstrap transport against the current BOOTSTRAP contract.
-3. Decide the standalone bootstrap-instruction generation operation name without reopening `>>`.
-4. Decide whether first-chapter initialization needs a dedicated user-facing operation or is sufficiently expressed by BOOTSTRAP.
-5. Decide whether interrupted migration needs a dedicated recovery operation or is fully recoverable from durable repository state and BOOTSTRAP.
-6. Design and validate the two manual bootstrap templates:
-   - first-chat initialization when no predecessor chapter exists;
-   - interrupted-chat recovery when migration was not completed or its final bootstrap instruction was not emitted.
-7. Only after semantic stabilization, migrate active command references in `.ai/INDEX.md` and `.ai/skills/handoff/SKILL.md`.
-8. Run a semantic consistency sweep across AGENTS, INDEX, BOOTSTRAP, handoff rules/skill, configuration vocabulary, architecture record, and historical references.
-9. If the sweep finds concrete stale references, make only bounded corrective changes; do not introduce new infrastructure merely to create another task.
+1. Verified the AGENTS → BOOTSTRAP entry boundary and missing-input behavior against the current canonical files.
+2. Verified the generated four-line bootstrap transport against the current BOOTSTRAP contract.
+3. Accepted `>>generate-bootstrap <chapter>` as the standalone bootstrap-instruction generation operation.
+4. Confirmed that first-chapter initialization does not need a dedicated `>>init` or `>>new` operation.
+5. Confirmed that interrupted migration does not need a dedicated `>>recover` operation.
+6. Designed and validated Template A and Template B as manual bootstrap transport.
+7. Migrated active command references in `.ai/INDEX.md` and `.ai/skills/handoff/SKILL.md`.
+8. Completed the semantic consistency sweep and corrected the stale current-handoff checkpoint wording found during the sweep.
+9. Confirmed that no additional infrastructure is required.
 
 ## Semantic consistency sweep result
 
@@ -186,24 +184,20 @@ No additional external research reference was identified by C038 as materially r
 - `>>` is the stable command prefix and MUST NOT be reopened.
 - `>>migrate <chapter>` is the intended migration invocation shape.
 - Normal migration MUST generate bootstrap transport as its terminal step.
-- Active command-reference migration is intentionally deferred.
+- Active command-reference migration is complete for the stabilized command surface.
 
-### Inferred
+### Confirmed decisions
 
-- First-chapter initialization may not require a dedicated `init` or `new` operation because BOOTSTRAP already has a first-chapter branch.
-- Interrupted migration may be recoverable entirely from durable repository state plus receiving-chapter BOOTSTRAP.
-- A standalone bootstrap-instruction operation may be better named around generation/emission rather than initialization, because it does not execute receiving-chapter bootstrap.
-
-These are working hypotheses only and MUST be tested against the canonical semantics before being promoted.
-
-### Open
-
-- Exact name and semantics of the standalone bootstrap-instruction generation operation.
-- Whether first-chapter initialization needs a dedicated user-facing operation.
-- Whether interrupted migration needs a dedicated recovery operation.
-- Exact content and activation wording of the two manual bootstrap templates.
-- Exact active command-reference changes in `.ai/INDEX.md` and `.ai/skills/handoff/SKILL.md`.
-- Scope of the final semantic consistency sweep and any genuinely stale active references it discovers.
+- The standalone bootstrap-instruction operation is `>>generate-bootstrap <chapter>`.
+- First-chapter initialization does not need a dedicated `>>init` or `>>new` operation; BOOTSTRAP's FIRST CHAPTER branch is sufficient.
+- Interrupted migration does not need a dedicated `>>recover` operation; recovery remains a manual bootstrap transport condition handled by BOOTSTRAP and durable repository state.
+- Template A is the first-chapter manual bootstrap template.
+- Template B is the interrupted-migration recovery manual bootstrap template.
+- If SHORT_NAME is omitted from a manual template, BOOTSTRAP resolves it from .ai/config.yaml through the specialization vocabulary.
+- Generated migration transport MUST include the already-resolved SHORT_NAME.
+- The active command surface is stabilized as `>>handoff`, `>>migrate <chapter>`, and `>>generate-bootstrap <chapter>`.
+- The semantic consistency sweep found no stale active references requiring further correction.
+- Historical C036–C038 unresolved wording remains historical record and is intentionally preserved.
 
 ## Immediate next task
 
