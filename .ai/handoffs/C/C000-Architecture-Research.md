@@ -1,13 +1,13 @@
 # Conversation Handoff
 
 **Conversation:**
-C000 — Architecture & Research
+C001 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-000
+001
 
 **Previous chapter:**
 N/A
@@ -16,11 +16,11 @@ N/A
 
 Refactor and clarify the project-wide AI-assisted development architecture before substantive native implementation expands. The immediate focus is to turn the existing rules, skills, handoff procedures, and project instructions into a coherent, non-duplicated AI instruction system with explicit applicability, ownership, observability, and lifecycle behavior.
 
-This migration checkpoint preserves the architectural reasoning and audit state accumulated in C000 so C001 can continue without reconstructing it from the old conversation.
+This migration checkpoint preserves the architectural reasoning and audit state accumulated in C001 so C002 can continue without reconstructing it from the old conversation.
 
 ## Completed
 
-- Established generic chapter patterns `[A-Z][0-9]{3}`, `[A-Z][0-9]{3}`, `[A-Z][0-9]{3}`, `[A-Z][0-9]{3}`; concrete chapters remain `C000`, `B001`, etc.
+- Established generic chapter patterns `[A-Z][0-9]{3}`, `[A-Z][0-9]{3}`, `[A-Z][0-9]{3}`, `[A-Z][0-9]{3}`; concrete chapters remain `C001`, `B002`, etc.
 - Established that 03 may detect/report problems in other specializations' handoffs but must not edit them; the owning chapter corrects its own handoff.
 - Agreed that handoffs remain under `.ai/handoffs/` and `.ai/handoffs/README.md` remains small and self-documenting.
 - Agreed that `.ai/memory/` is for durable accumulated knowledge and is distinct from handoffs.
@@ -59,9 +59,9 @@ Current relevant files:
 - `.ai/skills/deep-understanding/SKILL.md`
 - `docs/PROJECT-INSTRUCTIONS.md`
 - `.ai/handoffs/README.md`
-- `.ai/handoffs/B000-Native-AIP-Plugin.md`
 - `.ai/handoffs/B001-Native-AIP-Plugin.md`
-- `.ai/handoffs/C000-Architecture-Research.md`
+- `.ai/handoffs/B002-Native-AIP-Plugin.md`
+- `.ai/handoffs/C001-Architecture-Research.md`
 
 Target artifacts not yet created:
 
@@ -73,7 +73,7 @@ Target artifacts not yet created:
 - `.ai/workflows/conversation-handoff/BOOTSTRAP.md`
 - `consistency-pass` capability
 
-`.ai/handoffs/B001-Native-AIP-Plugin.md` remains owned by specialization B and must not be edited by 03.
+`.ai/handoffs/B002-Native-AIP-Plugin.md` remains owned by specialization B and must not be edited by 03.
 
 ## Audit checkpoint
 
@@ -121,7 +121,7 @@ The intended system separates:
 - Do not start native implementation merely because this refactor is underway.
 - Do not create a temporary memory/transcript dump for migration; preserve semantic state in handoff.
 
-### Open decisions for C001
+### Open decisions for C002
 
 - Exact applicability schema: representation of categories and trigger types while keeping precedence, ownership, obligation, and observability separate.
 - Exact `AGENTS.md` versus `.ai/README.md` boundary.
@@ -184,9 +184,9 @@ The next chapter should resolve the open decisions above through repository-back
 
 - `docs/PROJECT-INSTRUCTIONS.md`
 - `.ai/handoffs/README.md`
-- `.ai/handoffs/B000-Native-AIP-Plugin.md`
 - `.ai/handoffs/B001-Native-AIP-Plugin.md`
-- `.ai/handoffs/C000-Architecture-Research.md`
+- `.ai/handoffs/B002-Native-AIP-Plugin.md`
+- `.ai/handoffs/C001-Architecture-Research.md`
 
 ### Relevant project areas
 
@@ -218,14 +218,14 @@ The next chapter should resolve the open decisions above through repository-back
 
 ### Confirmed / observed
 
-- C000 existed as a `DRAFT` checkpoint before this migration preparation.
+- C001 existed as a `DRAFT` checkpoint before this migration preparation.
 - Current lifecycle rules define `[A-Z][0-9]{3}` and statuses `DRAFT`, `READY_FOR_HANDOFF`, `HANDED_OFF`.
 - Current lifecycle rules define both standard user commands.
 - Existing handoffs are under `.ai/handoffs/` and `.ai/handoffs/README.md` exists.
 - Current bootstrap procedure lives under `.ai/skills/conversation-handoff/BOOTSTRAP.md`.
 - Repository rules require full-content write verification for existing files.
 - `docs/PROJECT-INSTRUCTIONS.md` overlaps substantially with the `.ai` system.
-- `B001-Native-AIP-Plugin.md` is owned by specialization B.
+- `B002-Native-AIP-Plugin.md` is owned by specialization B.
 
 ### Inferred
 
@@ -244,15 +244,15 @@ The next chapter should resolve the open decisions above through repository-back
 
 ### Open
 
-- All open decisions listed above remain unresolved until C001 performs the repository-backed design work.
+- All open decisions listed above remain unresolved until C002 performs the repository-backed design work.
 
 ## Last completed task
 
-Prepared and finalized the C000 migration checkpoint, consolidating the architecture-refactor state, audit findings, decisions, open design questions, constraints, research inputs, and the new user-command guidance requirement. The handoff is intended to be sufficient for C001 to continue without reconstructing the architecture discussion from the previous chat.
+Prepared and finalized the C001 migration checkpoint, consolidating the architecture-refactor state, audit findings, decisions, open design questions, constraints, research inputs, and the new user-command guidance requirement. The handoff is intended to be sufficient for C002 to continue without reconstructing the architecture discussion from the previous chat.
 
 ## Immediate next task
 
-Bootstrap `C001` from this `READY_FOR_HANDOFF` handoff, perform the mandatory receiving-handoff consistency verification, and then continue the pre-change audit by producing the concrete migration map for every existing AI-facing file: `retain`, `rename`, `move`, `split`, `merge`, or `delete`; define canonical content ownership; and identify remaining contradictions or duplicated authority before executing the structural refactor.
+Bootstrap `C002` from this `READY_FOR_HANDOFF` handoff, perform the mandatory receiving-handoff consistency verification, and then continue the pre-change audit by producing the concrete migration map for every existing AI-facing file: `retain`, `rename`, `move`, `split`, `merge`, or `delete`; define canonical content ownership; and identify remaining contradictions or duplicated authority before executing the structural refactor.
 
 ## Things not to redo
 
@@ -267,4 +267,4 @@ Bootstrap `C001` from this `READY_FOR_HANDOFF` handoff, perform the mandatory re
 
 ## Recommended starting context for next chapter
 
-Start with this committed C000 handoff, then bootstrap `C001` using the canonical conversation-handoff procedure. After bootstrap verification, read the applicable lifecycle/workflow/repository/architecture guidance and perform the pre-change audit against the actual repository state. Treat this handoff as a semantic state snapshot, not a transcript. The first substantive deliverable in C001 should be the concrete AI-facing file migration/ownership map and its rationale; only then should structural file changes begin.
+Start with this committed C001 handoff, then bootstrap `C002` using the canonical conversation-handoff procedure. After bootstrap verification, read the applicable lifecycle/workflow/repository/architecture guidance and perform the pre-change audit against the actual repository state. Treat this handoff as a semantic state snapshot, not a transcript. The first substantive deliverable in C002 should be the concrete AI-facing file migration/ownership map and its rationale; only then should structural file changes begin.
