@@ -23,6 +23,14 @@ INDEX is a router and discovery surface. It is not a rule, skill, or workflow ow
 
 INDEX MUST NOT reproduce the detailed procedure owned by the target rule, skill, or workflow.
 
+## Project references
+
+For project-level work, the first project-level source is:
+
+- `docs/PROJECT-INSTRUCTIONS.md` — project-specific instructions, operating constraints, behavioral targets, and routing to canonical project knowledge.
+
+Project work MUST read `docs/PROJECT-INSTRUCTIONS.md` before following project-specific routing. It is a project-level orientation and routing source, not an AI-infrastructure owner.
+
 ## Command surface
 
 The current documented user-facing command surface is:
@@ -40,10 +48,11 @@ The table records only information needed to recognize and activate the canonica
 
 1. Match the user's command to the closest documented semantic operation.
 2. Treat the command phrase as an invocation signal, not as the procedure itself.
-3. Invoke ACTIVATE with the operation and listed canonical owners, rereading those owners before execution.
-4. Follow the canonical owner's procedure; DO NOT substitute INDEX content for it.
-5. Apply repository write-safety and commit rules from their canonical owners when the operation requires repository mutation.
-6. If the command does not match a known operation, inspect the capability map and relevant canonical owners before inventing any new operation.
+3. For project-level work, read `docs/PROJECT-INSTRUCTIONS.md` first and use its canonical project-source routing.
+4. Invoke ACTIVATE with the operation and listed canonical owners, rereading those owners before execution.
+5. Follow the canonical owner's procedure; DO NOT substitute INDEX content for it.
+6. Apply repository write-safety and commit rules from their canonical owners when the operation requires repository mutation.
+7. If the command does not match a known operation, inspect the capability map and relevant canonical owners before inventing any new operation.
 
 ## Capability discovery
 
