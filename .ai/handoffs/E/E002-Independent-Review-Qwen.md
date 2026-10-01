@@ -1,16 +1,16 @@
 # Conversation Handoff
 
 **Conversation:**
-E002 — Independent Review (Qwen)
+E003 — Independent Review (Qwen)
 
 **Specialization:**
 E
 
 **Chapter:**
-002
+003
 
 **Previous chapter:**
-001
+002
 
 ## Current objective
 
@@ -22,9 +22,9 @@ E
 
 ## Completed
 
-### 1. Bootstrap & Setup (E002)
+### 1. Bootstrap & Setup (E003)
 
-- Read E001 handoff, project rules, onboarding guide
+- Read E002 handoff, project rules, onboarding guide
 - Подтверждён READ-ONLY capability (Branch B)
 - Завершён post-bootstrap consistency verification после ручного коммита пользователем (commit `8f25538`)
 - BOOTSTRAP = COMPLETE
@@ -145,7 +145,7 @@ E
 
 ## Working decisions (not yet formal ADs)
 
-### Carried from E001:
+### Carried from E002:
 
 - **WD-01**: Resolution Context minimal core is `{subject, state}` (definitive cases)
 - **WD-02**: `cause/reason` conditionally necessary (UNRESOLVED only)
@@ -250,10 +250,10 @@ E
 - earlier architecture-research handoff
 - earlier architecture-research handoff
 - earlier architecture-research handoff
-- `.ai/handoffs/C/C005-Architecture-Research.md`
-- `.ai/handoffs/E/E000-Independent-Review-Qwen.md` (SUPERSEDED)
-- `.ai/handoffs/E/E001-Independent-Review-Qwen.md` (HANDED_OFF)
-- `.ai/handoffs/E/E002-Independent-Review-Qwen.md` (текущий, → READY_FOR_HANDOFF)
+- `.ai/handoffs/C/C006-Architecture-Research.md`
+- `.ai/handoffs/E/E001-Independent-Review-Qwen.md` (SUPERSEDED)
+- `.ai/handoffs/E/E002-Independent-Review-Qwen.md` (HANDED_OFF)
+- `.ai/handoffs/E/E003-Independent-Review-Qwen.md` (текущий, → READY_FOR_HANDOFF)
 
 ### Cross-model review reports (в этом чате):
 
@@ -310,8 +310,8 @@ E
 
 ### Confirmed / observed
 
-- 8 candidate axes eliminated from Resolution Context (E001)
-- `{subject, state}` minimum for definitive Resolution Context (E001)
+- 8 candidate axes eliminated from Resolution Context (E002)
+- `{subject, state}` minimum for definitive Resolution Context (E002)
 - Result-aspect model sufficient without separate entity (C-3, C-4)
 - `{subject, content}` minimum intrinsic content (C-5)
 - State ⊂ content (C-6)
@@ -351,7 +351,7 @@ E
 
 ---
 
-## Immediate next task (для E003)
+## Immediate next task (для E004)
 
 ### Priority 1 — Continuation of C-series:
 
@@ -383,7 +383,7 @@ E
 ## Things not to redo
 
 - Не повторять 6-phase independent review
-- Не переоткрывать WD-01 through WD-09 (established in E001/E002)
+- Не переоткрывать WD-01 through WD-09 (established in E002/E003)
 - Не ре-тестировать C-1 through C-10 (results documented)
 - Не вводить typed UNRESOLVED, 3-valued logic, fixed-point semantics
 - Не вводить generic dependency/precedence engines
@@ -398,7 +398,7 @@ E
 
 ## Recommended starting context for next chapter
 
-Старт с этого хэндоффа как baseline. Chapter E002 завершил полный C-series research arc (C-1 through C-10) по семантике evaluations и dependencies.
+Старт с этого хэндоффа как baseline. Chapter E003 завершил полный C-series research arc (C-1 through C-10) по семантике evaluations и dependencies.
 
 **Ключевые established findings:**
 
@@ -415,4 +415,4 @@ E
 
 **Capability:** Branch B (READ-ONLY AI) во всех bootstrap/checkpoint/migration procedures.
 
-Работа продолжается с E003 в том же adversarial, semantic-first режиме.
+Работа продолжается с E004 в том же adversarial, semantic-first режиме.
