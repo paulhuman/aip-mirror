@@ -2698,18 +2698,50 @@ If work that was thought to be complete is later found to require another read o
 
 This boundary is intentionally semantic. It does not introduce lifecycle events, additional read categories, telemetry, or other tracing machinery.
 
-## 34. Future TODO — manual activation interface
+## 34. C043 — Manual activation interface
 
-C042 left a practical usability question for the activation skill to investigate:
+C043 resolved the practical usability question left by C042:
 
 > How can a user manually request the functions described by `.ai/skills/activation/SKILL.md` when there is no dedicated user-facing command for them?
 
-The future investigation SHOULD explain, in plain language:
+The accepted interface is natural-language invocation, without new command IDs or a new command layer.
 
-- what `ACTIVATE` means when requested manually;
-- what `REFRESH` means, how it relates to `ACTIVATE`, and when a user would request it;
-- what `TRACE` means and when a user would request it;
-- how the user can ask for these functions directly in natural language without inventing new command syntax;
-- what the AI should actually reread and what observable output the user should expect.
+The practical meanings are:
 
-This is a usability/interface question, not a reason to introduce new command IDs or a new command layer. The investigation SHOULD first determine the simplest natural-language invocation that follows the existing activation semantics.
+- `ACTIVATE` = reread the current canonical owners required for the operation;
+- `REFRESH` = invoke ACTIVATE again when the current operational context needs to be reread;
+- `TRACE` = present observable evidence of activation without exposing hidden reasoning.
+
+A user MAY request these functions directly, for example:
+
+- “Activate the context for this operation.”
+- “Refresh the current activation context.”
+- “Show the TRACE for ACTIVATE.”
+- “REFRESH and show TRACE.”
+- “Reread the current canonical owners before we continue and show what was activated.”
+
+The canonical execution semantics remain owned by `.ai/skills/activation/SKILL.md`. Practical examples and human-oriented explanation are preserved separately in:
+
+`.ai/architecture/faq/manual-activation.md`
+
+This separation is intentional:
+
+```text
+.ai/skills/activation/SKILL.md
+    = canonical activation semantics
+
+.ai/architecture/faq/
+    = durable human-oriented usage explanations
+```
+
+The FAQ material MUST NOT become a second semantic owner or introduce command syntax. It explains and illustrates the active owner.
+
+## 35. Architecture FAQ convention
+
+C043 establishes `.ai/architecture/faq/` as the location for small, separate, durable answers to practical questions about how the `.ai` infrastructure works.
+
+Each file SHOULD address one coherent question or closely bounded topic. Unrelated questions SHOULD NOT be accumulated into a single large FAQ file.
+
+FAQ files are orientation and explanation material. When they describe an active rule, skill, or workflow, the canonical owner remains authoritative.
+
+The directory name `faq` is intentionally simple and recognizable. It is not a new semantic layer or execution mechanism.
