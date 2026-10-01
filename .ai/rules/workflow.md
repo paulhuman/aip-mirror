@@ -73,7 +73,6 @@ A pure mathematical transformation SHOULD NOT require launching the host applica
 
 Follow `.ai/rules/commits.md` for commit policy and commit-related repository rules.
 
-
 ## 7. Documentation follows decisions
 
 When an architectural or behavioral decision becomes stable, update the appropriate repository documentation.
@@ -123,4 +122,3 @@ Large or history-heavy areas such as archived architecture and historical handof
 When a required directory is too large for one retrieval, split it by its existing semantic subdirectories rather than arbitrarily truncating or sampling files.
 
 After each batch, record which paths were actually retrieved. A repository-wide conclusion MUST be based on complete coverage of the declared scope, not on successful retrieval of only a subset.
-

@@ -53,7 +53,6 @@ For generated migration transport, the value MUST already be resolved from the s
 
     .ai/handoffs/<specialization>/<chapter>-<short-name>.md
 
-
 A handoff-producing chapter prepares its own handoff for the next chapter; a receiving chapter executes bootstrap with itself as `CURRENT_CHAPTER` and the predecessor as `PREVIOUS_CHAPTER`.
 
 ### Canonical invocation format
@@ -229,6 +228,7 @@ After this self-check:
 ### Branch A — WRITE-CAPABLE AI
 
 A WRITE-CAPABLE AI MUST:
+
 1. create the new chapter handoff if it does not already exist;
 2. commit that initial handoff;
 3. perform post-bootstrap consistency verification;
@@ -239,6 +239,7 @@ If the receiving handoff already exists, DO NOT recreate or blindly overwrite it
 ### Branch B — READ-ONLY AI
 
 A READ-ONLY AI MUST:
+
 1. not create, update, or commit repository files;
 2. prepare the complete proposed new-chapter handoff;
 3. return the entire handoff content and exact manual initial-handoff commit message;
@@ -263,6 +264,7 @@ The repository handoff state MUST therefore outlive the conversation that create
 ## Post-bootstrap consistency verification
 
 Before substantive work, the receiving chapter MUST:
+
 1. read back its own handoff after creation or update;
 2. confirm Conversation, Specialization, Chapter, and Previous chapter identify the receiving chapter correctly;
 3. confirm Immediate next task describes the first real task after bootstrap;

@@ -235,13 +235,13 @@ Exact future command IDs and command syntax are intentionally **not frozen**.
 
 ### 5.1 Current routing semantics
 
-| Command | Semantic operation | Canonical owner | Activation context |
-|---|---|---|---|---|---|
-| `Пора обновить handoff` | checkpoint current chapter | handoff skill + lifecycle | lifecycle; handoff skill; current handoff | Yes; lifecycle remains `DRAFT` | Yes — checkpoint commit |
-| `Пора выполнить миграцию в чат XXYY` | migration of current chapter | handoff skill + lifecycle; BOOTSTRAP for generated instruction | lifecycle; handoff skill; BOOTSTRAP | Yes; closing handoff may move `DRAFT → READY_FOR_HANDOFF`; bootstrap instruction is separate | Yes — migration commit |
-| `Пора восстановить handoff` | Lifecycle Recovery | lifecycle rule | lifecycle; commit rule/skill when a write is required | Yes; bounded recovery | Yes, if recovery changes repository state |
-| `Пора выполнить handoff lifecycle correction` | historical Lifecycle Correction | lifecycle rule | lifecycle; commit rule/skill | Yes; bounded correction | Yes — explicit correction commit |
-| `Пора выдать bootstrap-инструкцию` | generate bootstrap instruction for future receiving chapter | handoff skill + BOOTSTRAP | handoff skill; BOOTSTRAP | No lifecycle change | No |
+| Command                                       | Semantic operation                                          | Canonical owner                                                | Activation context                                    |
+| --------------------------------------------- | ----------------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| `Пора обновить handoff`                       | checkpoint current chapter                                  | handoff skill + lifecycle                                      | lifecycle; handoff skill; current handoff             | Yes; lifecycle remains `DRAFT`                                                               | Yes — checkpoint commit                   |
+| `Пора выполнить миграцию в чат XXYY`          | migration of current chapter                                | handoff skill + lifecycle; BOOTSTRAP for generated instruction | lifecycle; handoff skill; BOOTSTRAP                   | Yes; closing handoff may move `DRAFT → READY_FOR_HANDOFF`; bootstrap instruction is separate | Yes — migration commit                    |
+| `Пора восстановить handoff`                   | Lifecycle Recovery                                          | lifecycle rule                                                 | lifecycle; commit rule/skill when a write is required | Yes; bounded recovery                                                                        | Yes, if recovery changes repository state |
+| `Пора выполнить handoff lifecycle correction` | historical Lifecycle Correction                             | lifecycle rule                                                 | lifecycle; commit rule/skill                          | Yes; bounded correction                                                                      | Yes — explicit correction commit          |
+| `Пора выдать bootstrap-инструкцию`            | generate bootstrap instruction for future receiving chapter | handoff skill + BOOTSTRAP                                      | handoff skill; BOOTSTRAP                              | No lifecycle change                                                                          | No                                        |
 
 The table is routing metadata, not a procedural specification.
 
@@ -639,7 +639,7 @@ C028 completed the following bounded work:
 4. performed a targeted semantic cleanup rather than blind capitalization;
 5. normalized applicable normative and procedural wording;
 6. explicitly preserved lowercase ordinary English, historical material, research conclusions, questions, and descriptive prose where they are not normative;
-7. verified that .ai/archive/** and conversation-specific handoffs outside the declared scope were not mechanically rewritten.
+7. verified that .ai/archive/\*\* and conversation-specific handoffs outside the declared scope were not mechanically rewritten.
 
 The cleanup deliberately treated lexical matches as evidence for review rather than as automatic rewrite targets. In particular, false positives such as descriptive uses of must were reverted during semantic review.
 
@@ -872,22 +872,22 @@ A future ENTRY MUST be a genuinely new semantic layer, not a relabelled bootstra
 
 The reviews are now consolidated against current repository evidence. The matrix distinguishes accepted work from questions deliberately left open.
 
-| Finding / question | Evidence / review | Decision | Current disposition |
-|---|---|---|---|
-| `INDEX` routing model | Grok + Qwen converge | Accept | **Keep** |
-| `INDEX` `Repository state may change` + `Commit` metadata | C027 tested their routing value against canonical owners | Remove from routing table | **Removed in C027; semantics remain canonical elsewhere** |
-| Minimum semantic metadata before router becomes owner | C027 tested the routing boundary against canonical owners | Four-field boundary established | **Resolved in C027** |
-| `Пора выдать bootstrap-инструкцию` as separate command | Both reviews raise semantic question | Keep unchanged | **Open; no merge with migration** |
-| `BOOTSTRAP.md` as ordered workflow | Grok + Qwen converge | Accept | **Keep** |
-| `SUPERSEDED` removal / historical ordering | Qwen suggestion; current filenames already encode chapter sequence | No new lifecycle rule | **No change** |
-| User-facing command phrases duplicated in `lifecycle.md` | Grok + Qwen | Soft dual source | **Targeted cleanup candidate** |
-| `.ai/AGENTS.md` effectively empty | Grok + Qwen + Phase 0/2 entry-path test | Real architecture/implementation gap | **Resolved in C027: minimal entry contract implemented** |
-| Active chapter identifier format `[A-Z][0-9]{3}` | Current infrastructure state | Keep | **Current** |
-| INDEX scalability / presentation | Grok + Qwen | Real design concern at ~10–15 commands | **Completed in C027** |
-| `ENTRY.md` | Both reviews; future semantic role identified | Do not create now | **Iteration 3 experiment** |
-| `config.yaml` contains project-specific scopes/terms | Qwen | Intentional configuration boundary | **No change** |
-| Project-specific data spread across generic rules/skills/workflows | Architecture objective | MUST remain prohibited | **Ongoing consistency rule** |
-| Physical Iteration 2 restructuring | Review checkpoint | Completed | **Do not restart** |
+| Finding / question                                                 | Evidence / review                                                  | Decision                               | Current disposition                                       |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | -------------------------------------- | --------------------------------------------------------- |
+| `INDEX` routing model                                              | Grok + Qwen converge                                               | Accept                                 | **Keep**                                                  |
+| `INDEX` `Repository state may change` + `Commit` metadata          | C027 tested their routing value against canonical owners           | Remove from routing table              | **Removed in C027; semantics remain canonical elsewhere** |
+| Minimum semantic metadata before router becomes owner              | C027 tested the routing boundary against canonical owners          | Four-field boundary established        | **Resolved in C027**                                      |
+| `Пора выдать bootstrap-инструкцию` as separate command             | Both reviews raise semantic question                               | Keep unchanged                         | **Open; no merge with migration**                         |
+| `BOOTSTRAP.md` as ordered workflow                                 | Grok + Qwen converge                                               | Accept                                 | **Keep**                                                  |
+| `SUPERSEDED` removal / historical ordering                         | Qwen suggestion; current filenames already encode chapter sequence | No new lifecycle rule                  | **No change**                                             |
+| User-facing command phrases duplicated in `lifecycle.md`           | Grok + Qwen                                                        | Soft dual source                       | **Targeted cleanup candidate**                            |
+| `.ai/AGENTS.md` effectively empty                                  | Grok + Qwen + Phase 0/2 entry-path test                            | Real architecture/implementation gap   | **Resolved in C027: minimal entry contract implemented**  |
+| Active chapter identifier format `[A-Z][0-9]{3}`                   | Current infrastructure state                                       | Keep                                   | **Current**                                               |
+| INDEX scalability / presentation                                   | Grok + Qwen                                                        | Real design concern at ~10–15 commands | **Completed in C027**                                     |
+| `ENTRY.md`                                                         | Both reviews; future semantic role identified                      | Do not create now                      | **Iteration 3 experiment**                                |
+| `config.yaml` contains project-specific scopes/terms               | Qwen                                                               | Intentional configuration boundary     | **No change**                                             |
+| Project-specific data spread across generic rules/skills/workflows | Architecture objective                                             | MUST remain prohibited                 | **Ongoing consistency rule**                              |
+| Physical Iteration 2 restructuring                                 | Review checkpoint                                                  | Completed                              | **Do not restart**                                        |
 
 ### 18.1 Bounded follow-up work — completed in C027
 
@@ -1021,7 +1021,6 @@ The current architecture state is represented by this file and the current `.ai`
 
 The next architecture/research chapter should treat the independent Grok/Qwen review as evidence against the current model, distinguish accepted findings from open questions, and avoid broad restructuring without evidence.
 
-
 ## 23. C027 result — INDEX presentation and minimum routing boundary
 
 C027 completed the bounded INDEX presentation/scalability task.
@@ -1146,8 +1145,6 @@ Project-specific handoffs and architecture notes remain project state/research a
 
 When an old note or external review proposes a change, first classify it as current evidence, already-decided state, open architectural question, or historical/deferred proposal. Only current evidence and genuinely open questions SHOULD normally drive the current chapter. A deferred proposal does not become active merely because it remains written down.
 
-
-
 ## 25. C027 Phase 2 — entry-path architecture result
 
 C027 tested the minimum AGENTS entry contract against the current repository rather than reconstructing the architecture from earlier chapters.
@@ -1230,6 +1227,7 @@ The Phase 2 experiment exposed two stale references in `docs/PROJECT-INSTRUCTION
 These are consistency defects in the project instruction layer, not evidence that the AGENTS architecture should grow. They are therefore a separate cleanup task.
 
 The lifecycle rule also contains user-facing command phrases that overlap with INDEX discovery. The bounded cleanup question is whether those discovery phrases can be reduced while preserving the lifecycle rule's operation semantics and explicit authorization. This is a cleanup/classification task, not an INDEX redesign.
+
 ### 25.5 C027 bounded next sequence
 
 1. implement the tested AGENTS contract;
@@ -1238,7 +1236,6 @@ The lifecycle rule also contains user-facing command phrases that overlap with I
 4. run a targeted entry-layer consistency sweep.
 
 DO NOT reopen the completed INDEX minimum-routing decision or restart Iteration 2 restructuring.
-
 
 ## 26. C030 — Activation, Refresh, and TRACE research
 
@@ -1310,13 +1307,13 @@ Post-mutation TRACE can report read-back, content verification, diff/scope verif
 
 ### 26.4 Coverage experiment
 
-| Case | ACTIVATE | REFRESH | TRACE | Current gap |
-|---|---|---|---|---|
-| New chapter from handoff | Partially covered by BOOTSTRAP | Not a normal bootstrap step | Not standardized | Bootstrap initializes repository/lifecycle context, but does not expose a general activation trace |
-| New specialization | Not covered by a general activation template | Not applicable initially | Not standardized | No reusable general entry/activation template exists for a specialization without a predecessor handoff |
-| Ordinary continuation | Partially covered by AGENTS/INDEX + operation-specific reread | User can request reread, but no standard refresh operation | Not standardized | Activation is required but not externally visible as a repeatable protocol |
-| Mid-conversation refresh | Historical guidance says to reread critical instructions at meaningful checkpoints | No explicit refresh command/template | Not standardized | Manual intent exists, but no compact reusable refresh invocation is defined |
-| Before repository mutation | Canonical repository rule requires reread | Can be manually reactivated | Not standardized | C030 demonstrated that required reread can be skipped even when discoverable |
+| Case                       | ACTIVATE                                                                           | REFRESH                                                    | TRACE            | Current gap                                                                                             |
+| -------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------- |
+| New chapter from handoff   | Partially covered by BOOTSTRAP                                                     | Not a normal bootstrap step                                | Not standardized | Bootstrap initializes repository/lifecycle context, but does not expose a general activation trace      |
+| New specialization         | Not covered by a general activation template                                       | Not applicable initially                                   | Not standardized | No reusable general entry/activation template exists for a specialization without a predecessor handoff |
+| Ordinary continuation      | Partially covered by AGENTS/INDEX + operation-specific reread                      | User can request reread, but no standard refresh operation | Not standardized | Activation is required but not externally visible as a repeatable protocol                              |
+| Mid-conversation refresh   | Historical guidance says to reread critical instructions at meaningful checkpoints | No explicit refresh command/template                       | Not standardized | Manual intent exists, but no compact reusable refresh invocation is defined                             |
+| Before repository mutation | Canonical repository rule requires reread                                          | Can be manually reactivated                                | Not standardized | C030 demonstrated that required reread can be skipped even when discoverable                            |
 
 ### 26.5 Bounded architectural conclusion
 
@@ -1394,6 +1391,7 @@ Therefore the next bounded test MUST compare a real handoff's current `Recommend
 Do not change the handoff reference rule or activation architecture from this hypothesis alone. First test it against C029/C030 and at least one other real handoff. The goal is to determine whether handoff references can become a compact record of **where the work and durable context live**, while ACTIVATE/REFRESH independently provides the canonical operational context.
 
 This test is specifically intended to prevent a false positive in which a receiving chapter appears to have activated the infrastructure simply because its handoff supplied a large list of canonical files.
+
 ### 26.8 C031 activation owner-boundary experiment — completed
 
 C031 tested the bounded question from C030 against five concrete cases:
@@ -1698,14 +1696,14 @@ Examples:
 
 The ai-docs(handoff) scope identifies .ai/handoffs/ infrastructure. It prevents ordinary docs(...) history from mixing project documentation work with AI-context bookkeeping.
 
-The broader ai-* namespace is a local repository convention for commits whose primary subject is .ai/ infrastructure. It is intentionally not presented as a replacement for Conventional Commits. Its purpose is semantic visibility in this project's history.
+The broader ai-\* namespace is a local repository convention for commits whose primary subject is .ai/ infrastructure. It is intentionally not presented as a replacement for Conventional Commits. Its purpose is semantic visibility in this project's history.
 
 Project documentation remains under the normal project-facing vocabulary, for example:
 
     docs(plugin): document native AIP architecture
     docs(prototype): document Mirror behavior
 
-The exact set of future ai-* types beyond ai-docs remains open unless a concrete need establishes them. The handoff create/update forms above are the currently fixed convention.
+The exact set of future ai-\* types beyond ai-docs remains open unless a concrete need establishes them. The handoff create/update forms above are the currently fixed convention.
 
 ### 27.8 Git-history objective
 
@@ -1741,7 +1739,7 @@ The following existing files are expected to require coordinated changes:
 - .ai/skills/handoff/SKILL.md
 - .ai/workflows/handoff/BOOTSTRAP.md
 - .ai/INDEX.md
-- existing .ai/handoffs/*/*.md
+- existing .ai/handoffs/_/_.md
 
 The migration MUST:
 
@@ -1852,8 +1850,6 @@ The intended bounded sequence is:
 Do not invent a new infrastructure layer during this sweep. In particular, do not introduce a registry, manifest, dependency graph, command-ID system, universal router, or replacement lifecycle state machine unless a concrete contradiction demonstrates that one is necessary.
 
 Only after final verification should the project decide whether any specific architectural contradiction remains. The absence of such a contradiction is itself a valid result; no follow-up architecture mechanism should be created merely to produce another task.
-
-
 
 ## 28. C036 — Command-surface semantics and migration composition
 
@@ -2017,7 +2013,6 @@ Confirmed in C036:
 
 The next architecture work SHOULD first resolve the semantic operation set and naming boundary, then update INDEX/SKILL/BOOTSTRAP only after the command meanings are stable.
 
-
 ## 29. C037 — SHORT_NAME resolution and specialization vocabulary
 
 C037 resolved the SHORT_NAME question at the configuration and bootstrap-contract boundary.
@@ -2133,7 +2128,6 @@ Still open:
 - whether interrupted migration needs a separate recovery command;
 - exact active command-reference migration after these semantic questions are settled.
 
-
 ## 23. C038 entry-layer and bootstrap transport decisions
 
 C038 resolved the remaining ambiguity around the relationship between `.ai/AGENTS.md` and `.ai/workflows/handoff/BOOTSTRAP.md`.
@@ -2230,12 +2224,12 @@ The transport MUST NOT include `NEXT_CHAPTER`, filename/path metadata, extra rou
 
 For normal migration:
 
-| Value | Source |
-|---|---|
-| `PREVIOUS_CHAPTER` | current chapter |
-| `CURRENT_CHAPTER` | migration target |
-| `SPECIALIZATION` | current chapter |
-| `SHORT_NAME` | resolved specialization vocabulary |
+| Value              | Source                             |
+| ------------------ | ---------------------------------- |
+| `PREVIOUS_CHAPTER` | current chapter                    |
+| `CURRENT_CHAPTER`  | migration target                   |
+| `SPECIALIZATION`   | current chapter                    |
+| `SHORT_NAME`       | resolved specialization vocabulary |
 
 The generated message is therefore self-contained enough for the receiving chapter to enter the canonical initialization workflow without requiring the user to repeat specialization or short-name context.
 
@@ -2279,7 +2273,6 @@ The following statements are now the bounded C038 conclusions:
 - `SHORT_NAME` is not a fourth canonical runtime input.
 - The generated transport is context, not a second bootstrap procedure.
 - `>>` remains accepted and MUST NOT be reopened.
-
 
 ### 23.8 C039 command and initialization decisions
 
@@ -2345,21 +2338,21 @@ Two manual templates are part of the accepted transport surface:
 
 1. **Template A — first chapter**
 
-       Initialize a new conversation chapter. Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
+   Initialize a new conversation chapter. Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
 
-       PREVIOUS_CHAPTER = N/A
-       CURRENT_CHAPTER = <three-digit chapter>
-       SPECIALIZATION = <single uppercase specialization letter>
-       SHORT_NAME = <short conversation name>
+   PREVIOUS_CHAPTER = N/A
+   CURRENT_CHAPTER = <three-digit chapter>
+   SPECIALIZATION = <single uppercase specialization letter>
+   SHORT_NAME = <short conversation name>
 
 2. **Template B — interrupted migration recovery**
 
-       Initialize a new conversation chapter as a recovery from an interrupted migration. Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
+   Initialize a new conversation chapter as a recovery from an interrupted migration. Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
 
-       PREVIOUS_CHAPTER = <three-digit previous chapter>
-       CURRENT_CHAPTER = <three-digit current chapter>
-       SPECIALIZATION = <single uppercase specialization letter>
-       SHORT_NAME = <short conversation name>
+   PREVIOUS_CHAPTER = <three-digit previous chapter>
+   CURRENT_CHAPTER = <three-digit current chapter>
+   SPECIALIZATION = <single uppercase specialization letter>
+   SHORT_NAME = <short conversation name>
 
 The recovery wording is descriptive transport context only. It does not create a new recovery operation or lifecycle state.
 
@@ -2386,7 +2379,6 @@ two manual bootstrap transport templates
 ```
 
 This resolves the C038 open questions without introducing a command registry, universal router, dedicated initialization layer, recovery operation, or additional lifecycle mechanism.
-
 
 ### 23.9 C039 semantic consistency sweep
 
@@ -2463,7 +2455,6 @@ The bounded correction is:
 This is a discoverability correction, not a new dependency registry or execution layer.
 
 The sweep of the declared active `.ai` scope found no other active contradiction requiring correction. The remaining hits for `NEXT_CHAPTER` and `>>recover` are explicit negative references that state those constructs are not active semantics. The older four-line bootstrap wording in the architecture record remains historical C038 material and is preserved as record rather than treated as the current transport contract.
-
 
 ## 32. C040 — Operational TRACE design
 
@@ -2628,7 +2619,6 @@ Likely candidate classes to test in C041 include:
 6. activation blocked or incomplete.
 
 No automatic visibility policy beyond the bootstrap exception is frozen by this record.
-
 
 ## 33. C041 — ACTIVATE and OPERATION READS
 

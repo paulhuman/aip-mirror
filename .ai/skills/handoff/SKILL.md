@@ -75,7 +75,6 @@ Use this canonical structure for every handoff:
     **Previous chapter:**
     <previous chapter number or N/A>
 
-
 Header field rules:
 
 - `SHORT_NAME` is the canonical short conversation title.
@@ -87,7 +86,7 @@ Header field rules:
 - DO NOT include the specialization letter in the `Chapter` or `Previous chapter` field.
 - Use bold Markdown (`**...:**`) for every header field name exactly as shown above.
 - The full chapter identifier is formed from `Specialization` + `Chapter`; for example, `E` + `001` = `E001`.
-Chapter numbering is one-based: the first chapter is `001`, and `000` MUST NOT be used as a chapter number.
+  Chapter numbering is one-based: the first chapter is `001`, and `000` MUST NOT be used as a chapter number.
 - The handoff filename uses the full chapter identifier: `<chapter>-<short-name>.md`.
 
 Example:
@@ -105,7 +104,6 @@ Example:
 
     **Previous chapter:**
     N/A
-
 
 ## New chapter initialization
 

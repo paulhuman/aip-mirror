@@ -17,7 +17,7 @@ Use the type that best describes the primary purpose of the change. Standard pro
 
 ## AI-infrastructure commit namespace
 
-This repository uses a local ai-* namespace to make .ai/ infrastructure visible in Git history.
+This repository uses a local ai-\* namespace to make .ai/ infrastructure visible in Git history.
 
 For handoff creation and update operations, including migration, use exactly:
 
@@ -29,7 +29,7 @@ Migration MUST use `update`, not `migrate`, in the commit message.
 
 Keep these messages short. Do not append conversation titles, task descriptions, rationale, milestone summaries, or other explanatory suffixes.
 
-For other .ai/ infrastructure changes, use the ai-* form that most clearly identifies the operation when a dedicated form is useful. Do not invent a larger taxonomy without a concrete need.
+For other .ai/ infrastructure changes, use the ai-\* form that most clearly identifies the operation when a dedicated form is useful. Do not invent a larger taxonomy without a concrete need.
 
 Project documentation remains under normal docs(...) vocabulary.
 

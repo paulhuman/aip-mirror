@@ -35,12 +35,12 @@ Project work MUST read `docs/PROJECT-INSTRUCTIONS.md` before following project-s
 
 The current documented user-facing command surface is:
 
-| Command phrase | Semantic operation | Canonical owner | Read before execution |
-|---|---|---|---|
-| `>>handoff` | checkpoint current chapter | `.ai/skills/handoff/SKILL.md` | `.ai/rules/handoff/lifecycle.md`; current handoff |
-| `>>migrate <chapter>` | migrate current chapter | `.ai/skills/handoff/SKILL.md` + `.ai/workflows/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow; current handoff |
+| Command phrase                   | Semantic operation                                              | Canonical owner                                                      | Read before execution                              |
+| -------------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------- |
+| `>>handoff`                      | checkpoint current chapter                                      | `.ai/skills/handoff/SKILL.md`                                        | `.ai/rules/handoff/lifecycle.md`; current handoff  |
+| `>>migrate <chapter>`            | migrate current chapter                                         | `.ai/skills/handoff/SKILL.md` + `.ai/workflows/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow; current handoff |
 | `>>generate-bootstrap <chapter>` | generate bootstrap instruction for the future receiving chapter | `.ai/skills/handoff/SKILL.md` + `.ai/workflows/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow; current handoff |
-| `>>explain-code` | explain code or codebase behavior | `.ai/skills/explain-code/SKILL.md` | explain-code skill |
+| `>>explain-code`                 | explain code or codebase behavior                               | `.ai/skills/explain-code/SKILL.md`                                   | explain-code skill                                 |
 
 The table records only information needed to recognize and activate the canonical operation. It does not define write authorization, commit construction, or workflow steps.
 
@@ -58,19 +58,19 @@ The table records only information needed to recognize and activate the canonica
 
 Use this map to find the canonical capability without reading the entire `.ai/` tree.
 
-| Capability | Canonical owner | Purpose |
-|---|---|---|
-| Repository identity, path resolution, repository boundaries, write safety | `.ai/rules/repository.md` | canonical repository semantics and mutation safety |
-| General workflow principles | `.ai/rules/workflow.md` | general AI development workflow constraints |
-| Activation | `.ai/skills/activation/SKILL.md` | establish the current canonical operational context before executing an operation |
-| Normative language | `.ai/rules/normative-language.md` | canonical normative and procedural language conventions |
-| Conversation continuity | `.ai/rules/handoff/lifecycle.md` | chapter naming, handoff continuity, and context preservation |
-| Handoff reference preservation | `.ai/rules/handoff/references.md` | material research references that survive handoff |
-| Commit policy | `.ai/rules/commits.md` | commit policy and project commit vocabulary |
-| Handoff capability | `.ai/skills/handoff/SKILL.md` | checkpoint and migration capability |
-| Commit construction | `.ai/skills/commits/SKILL.md` | reusable commit-message construction |
-| Conversation bootstrap | `.ai/workflows/handoff/BOOTSTRAP.md` | ordered new-chapter bootstrap procedure |
-| Code explanation | `.ai/skills/explain-code/SKILL.md` | explain code with analogies, ASCII diagrams, step-by-step walkthrough, and gotchas |
+| Capability                                                                | Canonical owner                      | Purpose                                                                            |
+| ------------------------------------------------------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------- |
+| Repository identity, path resolution, repository boundaries, write safety | `.ai/rules/repository.md`            | canonical repository semantics and mutation safety                                 |
+| General workflow principles                                               | `.ai/rules/workflow.md`              | general AI development workflow constraints                                        |
+| Activation                                                                | `.ai/skills/activation/SKILL.md`     | establish the current canonical operational context before executing an operation  |
+| Normative language                                                        | `.ai/rules/normative-language.md`    | canonical normative and procedural language conventions                            |
+| Conversation continuity                                                   | `.ai/rules/handoff/lifecycle.md`     | chapter naming, handoff continuity, and context preservation                       |
+| Handoff reference preservation                                            | `.ai/rules/handoff/references.md`    | material research references that survive handoff                                  |
+| Commit policy                                                             | `.ai/rules/commits.md`               | commit policy and project commit vocabulary                                        |
+| Handoff capability                                                        | `.ai/skills/handoff/SKILL.md`        | checkpoint and migration capability                                                |
+| Commit construction                                                       | `.ai/skills/commits/SKILL.md`        | reusable commit-message construction                                               |
+| Conversation bootstrap                                                    | `.ai/workflows/handoff/BOOTSTRAP.md` | ordered new-chapter bootstrap procedure                                            |
+| Code explanation                                                          | `.ai/skills/explain-code/SKILL.md`   | explain code with analogies, ASCII diagrams, step-by-step walkthrough, and gotchas |
 
 ## Structural references
 
