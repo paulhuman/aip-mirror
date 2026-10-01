@@ -1,30 +1,30 @@
 # Conversation Handoff
 
 **Conversation:**
-C001 — Architecture & Research
+C002 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-001
+002
 
 **Previous chapter:**
-000
+001
 
 ## Handoff destination
 
-AIP Mirror — C002 — Architecture & Research
+AIP Mirror — C003 — Architecture & Research
 
-C002 was initialized from the complete C001 architecture checkpoint and is now the receiving chapter. The repository remains in the legacy/pre-refactor layout; no structural refactor has been executed.
+C003 was initialized from the complete C002 architecture checkpoint and is now the receiving chapter. The repository remains in the legacy/pre-refactor layout; no structural refactor has been executed.
 
 ## Handoff state
 
-C001 completed the audit/design pass and transferred the current architecture checkpoint to C002. The substantive context is preserved in `.ai/handoffs/C002-Architecture-Research.md`.
+C002 completed the audit/design pass and transferred the current architecture checkpoint to C003. The substantive context is preserved in `.ai/handoffs/C003-Architecture-Research.md`.
 
 ## Completed architecture checkpoint
 
-C001 established AD-01 through AD-21, including:
+C002 established AD-01 through AD-21, including:
 
 - semantic types `RULE / SKILL / WORKFLOW / REFERENCE / MEMORY`, with `EXTENSIONS` separate;
 - RULE/SKILL/WORKFLOW semantic boundaries;
@@ -43,7 +43,7 @@ C001 established AD-01 through AD-21, including:
 - the rule portability test;
 - future repositories as conceptual validation cases only.
 
-## Immediate next work transferred to C002
+## Immediate next work transferred to C003
 
 Perform the dedicated **OVERRIDE Architecture Decision Pass** first:
 
@@ -63,7 +63,7 @@ For future repository changes: read current content; preserve unrelated content;
 
 ## Things not to redo
 
-- Do not recreate C000 decisions from scratch.
+- Do not recreate C001 decisions from scratch.
 - Do not redesign the chapter/handoff model.
 - Do not create `.ai/plugins/`.
 - Do not treat HANDOFF as an optional extension.
