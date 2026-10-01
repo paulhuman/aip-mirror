@@ -2457,3 +2457,168 @@ The bounded correction is:
 This is a discoverability correction, not a new dependency registry or execution layer.
 
 The sweep of the declared active `.ai` scope found no other active contradiction requiring correction. The remaining hits for `NEXT_CHAPTER` and `>>recover` are explicit negative references that state those constructs are not active semantics. The older four-line bootstrap wording in the architecture record remains historical C038 material and is preserved as record rather than treated as the current transport contract.
+
+
+## 32. C040 — Operational TRACE design
+
+C040 bounded the operational TRACE question after the activation capability became discoverable and the active vocabulary cleanup was completed.
+
+The accepted conceptual model is:
+
+> **Operational TRACE is a temporary human-readable presentation of the fact that ACTIVATE was executed. TRACE is not a separate capability.**
+
+The key architectural distinction is:
+
+```text
+ACTIVATE
+    ↓
+activation result
+    ↓
+TRACE (optional presentation)
+```
+
+TRACE therefore does not perform activation, own canonical semantics, or introduce another execution layer.
+
+### 32.1 Event-driven visibility
+
+TRACE MUST be event-driven rather than always-on.
+
+By default, ACTIVATE MAY execute without emitting a visible TRACE. TRACE becomes visible when activation evidence is diagnostically useful, when the operation crosses an important architecture/safety boundary, or when the user explicitly asks to see it.
+
+The intended visibility model is:
+
+```text
+ordinary operation
+    ↓
+ACTIVATE
+    ↓
+no visible TRACE by default
+
+diagnostically significant operation
+    ↓
+ACTIVATE
+    ↓
+visible TRACE
+
+explicit user request
+    ↓
+ACTIVATE
+    ↓
+visible TRACE
+
+activation blocked / incomplete
+    ↓
+visible diagnostic TRACE
+```
+
+This avoids turning activation evidence into permanent conversational noise while retaining a human-auditable path when it matters.
+
+### 32.2 Bootstrap exception
+
+New-conversation BOOTSTRAP is a deliberate exception:
+
+> **During bootstrap initialization, TRACE MUST be visible.**
+
+The reason is operational auditability. The receiving AI is expected to establish the repository and reread the canonical owners required for initialization. The user should be able to see which files were actually read before the chapter begins substantive work.
+
+Bootstrap TRACE therefore has a practical purpose beyond debugging:
+
+```text
+bootstrap transport
+    ↓
+establish repository
+    ↓
+read required canonical owners
+    ↓
+ACTIVATE
+    ↓
+VISIBLE TRACE
+    ↓
+chapter initialization
+```
+
+The bootstrap TRACE SHOULD remain minimal and SHOULD list the files actually reread as canonical owners. It MUST NOT claim discovery or reading that did not occur.
+
+### 32.3 Minimal TRACE shape
+
+The accepted minimal operational shape is:
+
+```text
+TRACE
+  operation: <operation>
+  owners: <canonical owners actually reread>
+  status: <ACTIVATED | BLOCKED | INCOMPLETE>
+```
+
+For bootstrap, the same shape is used, with the owner list providing the required initialization evidence.
+
+TRACE SHOULD contain facts about observable execution, not hidden reasoning. In particular:
+
+- `operation` identifies the operation whose activation is being presented;
+- `owners` lists canonical owners actually reread;
+- `status` reports the activation result.
+
+TRACE SHOULD NOT grow into a general execution log.
+
+### 32.4 What TRACE is not
+
+TRACE is explicitly NOT:
+
+- a persistent state store;
+- a schema;
+- a registry;
+- a dependency graph;
+- a new capability;
+- a command layer;
+- a lifecycle mechanism;
+- a substitute for canonical ownership;
+- a permanent conversational transcript.
+
+The architecture deliberately does not introduce trace IDs, span IDs, telemetry storage, persistent trace records, or a separate TRACE skill.
+
+### 32.5 Activation versus observation
+
+The semantic distinction remains:
+
+```text
+DISCOVER
+    ↓
+find candidate canonical owner
+
+READ
+    ↓
+retrieve current repository content
+
+ACTIVATE
+    ↓
+reread required canonical owners
+    ↓
+establish current operational context
+
+TRACE
+    ↓
+optionally present the observable activation result
+```
+
+TRACE MUST NOT be used as evidence that a file was merely discovered or mentioned. For a bootstrap or diagnostic TRACE, the listed owners MUST correspond to files actually reread for the operation.
+
+### 32.6 Visibility classification — intentionally deferred
+
+C040 did NOT freeze the complete operation-by-operation visibility matrix.
+
+The next bounded research question is:
+
+> **In which operations should TRACE be visible automatically, on request only, or never by default?**
+
+The intended research should remain simple and should classify operations by observable need rather than introduce a configurable tracing subsystem.
+
+Likely candidate classes to test in C041 include:
+
+1. new-conversation bootstrap;
+2. repository mutation and mutation verification;
+3. architecture/research and semantic consistency work;
+4. ordinary read-only operation and capability discovery;
+5. explicit ACTIVATE / REFRESH requests;
+6. activation blocked or incomplete.
+
+No automatic visibility policy beyond the bootstrap exception is frozen by this record.
