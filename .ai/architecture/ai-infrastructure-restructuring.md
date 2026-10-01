@@ -2443,3 +2443,17 @@ The receiving sequence is now:
 Manual bootstrap templates MUST carry the same explicit repository locator so they remain usable when a receiving AI has no implicit repository context.
 
 This does not introduce a `REPOSITORY` runtime input, command argument, registry, or new initialization layer. It closes a concrete transport gap at the existing bootstrap boundary.
+
+## 31. C040 — Activation capability discoverability in INDEX
+
+The C040 semantic consistency sweep found a small active-layer inconsistency: `.ai/INDEX.md` already routes operations through ACTIVATE and describes the activation context, but its capability map did not list `.ai/skills/activation/SKILL.md` as a discoverable capability.
+
+The bounded correction is:
+
+- `.ai/INDEX.md` SHOULD expose Activation in the capability map.
+- The capability entry SHOULD point to `.ai/skills/activation/SKILL.md` and summarize its purpose without copying the skill procedure.
+- `.ai/skills/activation/SKILL.md` remains the canonical owner of activation semantics and TRACE behavior.
+
+This is a discoverability correction, not a new dependency registry or execution layer.
+
+The sweep of the declared active `.ai` scope found no other active contradiction requiring correction. The remaining hits for `NEXT_CHAPTER` and `>>recover` are explicit negative references that state those constructs are not active semantics. The older four-line bootstrap wording in the architecture record remains historical C038 material and is preserved as record rather than treated as the current transport contract.
