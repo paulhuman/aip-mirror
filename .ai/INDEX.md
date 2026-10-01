@@ -32,6 +32,7 @@ The current documented user-facing command surface is:
 | `>>handoff` | checkpoint current chapter | `.ai/skills/handoff/SKILL.md` | `.ai/rules/handoff/lifecycle.md`; current handoff |
 | `>>migrate <chapter>` | migrate current chapter | `.ai/skills/handoff/SKILL.md` + `.ai/workflows/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow; current handoff |
 | `>>generate-bootstrap <chapter>` | generate bootstrap instruction for the future receiving chapter | `.ai/skills/handoff/SKILL.md` + `.ai/workflows/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow; current handoff |
+| `>>explain-code` | explain code or codebase behavior | `.ai/skills/explain-code/SKILL.md` | explain-code skill |
 
 The table records only information needed to recognize and activate the canonical operation. It does not define write authorization, commit construction, or workflow steps.
 
@@ -60,6 +61,7 @@ Use this map to find the canonical capability without reading the entire `.ai/` 
 | Handoff capability | `.ai/skills/handoff/SKILL.md` | checkpoint and migration capability |
 | Commit construction | `.ai/skills/commits/SKILL.md` | reusable commit-message construction |
 | Conversation bootstrap | `.ai/workflows/handoff/BOOTSTRAP.md` | ordered new-chapter bootstrap procedure |
+| Code explanation | `.ai/skills/explain-code/SKILL.md` | explain code with analogies, ASCII diagrams, step-by-step walkthrough, and gotchas |
 
 ## Structural references
 
