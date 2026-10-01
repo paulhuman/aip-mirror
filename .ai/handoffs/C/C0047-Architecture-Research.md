@@ -7,10 +7,10 @@ C0047 — Architecture & Research
 C
 
 **Chapter:**
-047
+0047
 
 **Previous chapter:**
-046
+0046
 
 ## Starting objective
 

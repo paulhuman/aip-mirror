@@ -7,10 +7,10 @@ B0002 — Native AIP Plugin
 B
 
 **Chapter:**
-002
+0002
 
 **Previous chapter:**
-001
+0001
 
 ## Current objective
 

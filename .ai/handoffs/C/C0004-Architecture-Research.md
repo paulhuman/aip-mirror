@@ -7,10 +7,10 @@ C0004 — Architecture & Research
 C
 
 **Chapter:**
-004
+0004
 
 **Previous chapter:**
-003
+0003
 
 ## Current objective
 

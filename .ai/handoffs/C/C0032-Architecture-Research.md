@@ -7,10 +7,10 @@ C0032 — Architecture & Research
 C
 
 **Chapter:**
-032
+0032
 
 **Previous chapter:**
-031
+0031
 
 ## Current objective
 

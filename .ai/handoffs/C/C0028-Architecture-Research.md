@@ -7,10 +7,10 @@ C0028 — Architecture & Research
 C
 
 **Chapter:**
-028
+0028
 
 **Previous chapter:**
-027
+0027
 
 ## Current objective
 

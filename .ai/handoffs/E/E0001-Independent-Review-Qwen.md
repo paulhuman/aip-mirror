@@ -7,7 +7,7 @@ E0001 — Independent Review (Qwen)
 E
 
 **Chapter:**
-001
+0001
 
 **Previous chapter:**
 N/A

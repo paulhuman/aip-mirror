@@ -7,10 +7,10 @@ C0026 — Architecture & Research
 C
 
 **Chapter:**
-026
+0026
 
 **Previous chapter:**
-025
+0025
 
 ## Current objective
 

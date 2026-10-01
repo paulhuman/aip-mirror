@@ -7,10 +7,10 @@ C0043 — Architecture & Research
 C
 
 **Chapter:**
-043
+0043
 
 **Previous chapter:**
-042
+0042
 
 ## Starting objective
 

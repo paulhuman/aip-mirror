@@ -7,10 +7,10 @@ C0006 — Architecture & Research
 C
 
 **Chapter:**
-006
+0006
 
 **Previous chapter:**
-005
+0005
 
 ## Current objective
 

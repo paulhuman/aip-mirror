@@ -7,10 +7,10 @@ C0009 — Architecture & Research
 C
 
 **Chapter:**
-009
+0009
 
 **Previous chapter:**
-008
+0008
 
 ## Current objective
 

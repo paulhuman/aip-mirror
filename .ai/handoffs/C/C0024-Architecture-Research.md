@@ -7,10 +7,10 @@ C0024 — Architecture & Research
 C
 
 **Chapter:**
-024
+0024
 
 **Previous chapter:**
-023
+0023
 
 ## Starting objective
 

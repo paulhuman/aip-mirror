@@ -7,10 +7,10 @@ E0003 — Independent Review (Qwen)
 E
 
 **Chapter:**
-003
+0003
 
 **Previous chapter:**
-002
+0002
 
 ## Current objective
 

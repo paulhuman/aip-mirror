@@ -7,10 +7,10 @@ F0003 — Independent Review (Grok)
 F
 
 **Chapter:**
-003
+0003
 
 **Previous chapter:**
-002
+0002
 
 ## Current objective
 

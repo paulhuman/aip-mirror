@@ -7,10 +7,10 @@ C0025 — Architecture & Research
 C
 
 **Chapter:**
-025
+0025
 
 **Previous chapter:**
-024
+0024
 
 ## Starting objective
 

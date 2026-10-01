@@ -7,10 +7,10 @@ C0023 — Architecture & Research
 C
 
 **Chapter:**
-023
+0023
 
 **Previous chapter:**
-022
+0022
 
 ## Bootstrap state
 

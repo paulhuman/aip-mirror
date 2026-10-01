@@ -7,10 +7,10 @@ C0002 — Architecture & Research
 C
 
 **Chapter:**
-002
+0002
 
 **Previous chapter:**
-001
+0001
 
 ## Handoff destination
 

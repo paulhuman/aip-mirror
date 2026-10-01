@@ -7,10 +7,10 @@ C0031 — Architecture & Research
 C
 
 **Chapter:**
-031
+0031
 
 **Previous chapter:**
-030
+0030
 
 ## Current objective
 
