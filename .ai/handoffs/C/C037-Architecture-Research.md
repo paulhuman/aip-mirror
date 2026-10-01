@@ -1,20 +1,20 @@
 # Conversation Handoff
 
 **Conversation:**
-C037 — Architecture & Research
+C038 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-037
+038
 
 **Previous chapter:**
-036
+037
 
 ## Starting objective
 
-Continue the bounded Architecture & Research work from C036 by resolving the semantic operation boundary around command-driven chapter continuity before changing active command references.
+Continue the bounded Architecture & Research work from C037 by resolving the semantic operation boundary around command-driven chapter continuity before changing active command references.
 
 The immediate questions are:
 
@@ -29,7 +29,7 @@ Do not reopen the already accepted `>>` syntax decision.
 
 ## Starting state
 
-C036 established and recorded that:
+C037 established and recorded that:
 
 ```
 >>operation [arguments...]
@@ -60,8 +60,8 @@ No new command registry, subcommand hierarchy, flag layer, universal router, or 
 
 - Repository: `paulhuman/aip-mirror`.
 - Canonical branch: `main`.
-- Current chapter: C037.
-- Previous chapter: C036.
+- Current chapter: C038.
+- Previous chapter: C037.
 - Specialization: C.
 - Bootstrap runtime inputs supplied for this chapter:
 
@@ -80,13 +80,13 @@ No new command registry, subcommand hierarchy, flag layer, universal router, or 
 - `.ai/skills/activation/SKILL.md` defines ACTIVATE as rereading required canonical owners; it does not execute operations or mutate repository state.
 - `.ai/skills/handoff/SKILL.md` owns handoff capability and structure.
 - `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical ordered receiving/first-chapter initialization workflow.
-- C036 predecessor handoff was read successfully.
+- C037 predecessor handoff was read successfully.
 - `.ai/INDEX.md` still documents the older natural-language command phrases; active command-reference migration has not yet been performed.
-- `.ai/architecture/ai-infrastructure-restructuring.md`, section 28, records the C036 command-surface semantics and migration-composition decision.
-- C037 bootstrap is WRITE-CAPABLE through the connected GitHub repository mechanism.
-- The C037 receiving handoff did not exist before this bootstrap.
+- `.ai/architecture/ai-infrastructure-restructuring.md`, section 28, records the C037 command-surface semantics and migration-composition decision.
+- C038 bootstrap is WRITE-CAPABLE through the connected GitHub repository mechanism.
+- The C038 receiving handoff did not exist before this bootstrap.
 
-## C036 decisions carried forward
+## C037 decisions carried forward
 
 ### Command syntax
 
@@ -171,11 +171,11 @@ Whether this requires a separate user-facing recovery operation remains open. No
 - `.ai/workflows/handoff/BOOTSTRAP.md`
 - `.ai/INDEX.md`
 - `.ai/architecture/ai-infrastructure-restructuring.md`
-- `.ai/handoffs/C/C036-Architecture-Research.md`
+- `.ai/handoffs/C/C037-Architecture-Research.md`
 
 ## Research references
 
-No new external research references were introduced during bootstrap. The material architecture evidence for this chapter is currently repository-local, especially the C036 handoff and section 28 of the architecture record.
+No new external research references were introduced during bootstrap. The material architecture evidence for this chapter is currently repository-local, especially the C037 handoff and section 28 of the architecture record.
 
 ## Important constraints
 
@@ -207,8 +207,8 @@ No new external research references were introduced during bootstrap. The materi
 
 ### Confirmed
 
-- C037 is the receiving chapter.
-- C036 is the predecessor.
+- C038 is the receiving chapter.
+- C037 is the predecessor.
 - `>>` is the accepted command prefix.
 - `>>operation [arguments...]` is the accepted minimal grammar.
 - `>>migrate <chapter>` is the intended migration operation.
@@ -216,7 +216,7 @@ No new external research references were introduced during bootstrap. The materi
 - Bootstrap-instruction generation does not execute the receiving chapter's BOOTSTRAP workflow.
 - Interrupted migration is a real continuity condition that MUST NOT be confused with successful migration.
 - First-chapter initialization is semantically distinct from receiving-chapter continuation.
-- C036 section 28 is the durable architecture record for these decisions.
+- C037 section 28 is the durable architecture record for these decisions.
 
 ### Inferred
 
@@ -233,9 +233,9 @@ No new external research references were introduced during bootstrap. The materi
 - How `SHORT_NAME` is resolved when creating a receiving chapter's handoff.
 - Exact active command-reference changes in INDEX/SKILL/BOOTSTRAP after semantic boundaries are resolved.
 
-## C037 checkpoint
+## C038 checkpoint
 
-C037 resolved the SHORT_NAME configuration boundary.
+C038 resolved the SHORT_NAME configuration boundary.
 
 The six current specialization mappings are now recorded in `.ai/config.yaml`:
 
@@ -276,7 +276,7 @@ SHORT_NAME = Architecture & Research
 
 Manual bootstrap templates SHOULD expose SHORT_NAME as an explicit value for copy/paste, while this does not make it a fourth required canonical runtime input.
 
-C037 also confirmed that no command registry, universal router, command-ID layer, subcommand hierarchy, or lifecycle mechanism follows from this configuration decision.
+C038 also confirmed that no command registry, universal router, command-ID layer, subcommand hierarchy, or lifecycle mechanism follows from this configuration decision.
 
 The full durable record is section 29 of `.ai/architecture/ai-infrastructure-restructuring.md`.
 
