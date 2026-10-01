@@ -1,16 +1,16 @@
 # Conversation Handoff
 
 **Conversation:**
-C012 — Architecture & Research
+C013 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-012
+013
 
 **Previous chapter:**
-011
+012
 
 ## Current objective
 
@@ -144,10 +144,10 @@ Established working boundaries:
 
 Primary handoff/history:
 
+- .ai/handoffs/C013-Architecture-Research.md
 - .ai/handoffs/C012-Architecture-Research.md
 - .ai/handoffs/C011-Architecture-Research.md
 - .ai/handoffs/C010-Architecture-Research.md
-- .ai/handoffs/C009-Architecture-Research.md
 
 Architecture/research:
 
@@ -177,9 +177,9 @@ paulhuman/aip-mirror@main:/
 Primary migration history:
 
 ```
+paulhuman/aip-mirror@main:/.ai/handoffs/C012-Architecture-Research.md
 paulhuman/aip-mirror@main:/.ai/handoffs/C011-Architecture-Research.md
 paulhuman/aip-mirror@main:/.ai/handoffs/C010-Architecture-Research.md
-paulhuman/aip-mirror@main:/.ai/handoffs/C009-Architecture-Research.md
 ```
 
 Qwen research onboarding:
@@ -243,8 +243,8 @@ Qwen remains an independent adversarial reviewer. The final architectural decisi
 
 ### Confirmed / observed
 
-- C011 is READY_FOR_HANDOFF at bootstrap start.
-- C012 did not exist before this bootstrap.
+- C012 is READY_FOR_HANDOFF at bootstrap start.
+- C013 did not exist before this bootstrap.
 - C-10 was completed and architect-reviewed.
 - C-11.1b established that target identity does not, by itself, determine conditional applicability.
 - C-11.2 found multiple semantically equivalent interpretations for ownership of Y; B/C/D remain indistinguishable on the current minimal cases, while A is not required but not universally impossible.
@@ -352,36 +352,36 @@ Human remains the final architecture decision-maker.
 At bootstrap start:
 
 ```
-C011 = READY_FOR_HANDOFF
-C012 = does not yet exist
+C012 = READY_FOR_HANDOFF
+C013 = does not yet exist
 ```
 
 During this write-capable bootstrap:
 
 ```
-C012 = DRAFT
-C011 = HANDED_OFF
+C013 = DRAFT
+C012 = HANDED_OFF
 ```
 
-C012 must remain DRAFT after bootstrap. When C012 later reaches READY_FOR_HANDOFF, it must apply the required supersession invariant to the older HANDED_OFF C011 handoff.
+C013 must remain DRAFT after bootstrap. When C013 later reaches READY_FOR_HANDOFF, it must apply the required supersession invariant to the older HANDED_OFF C012 handoff.
 
 ## Bootstrap note
 
-This file was created by C012 itself as the receiving chapter's initial DRAFT state, as required by the conversation-handoff bootstrap procedure. It has since been advanced to READY_FOR_HANDOFF as part of the migration to C013.
+This file was created by C013 itself as the receiving chapter's initial DRAFT state, as required by the conversation-handoff bootstrap procedure. It has since been advanced to READY_FOR_HANDOFF as part of the migration to C014.
 
 ## Migration lifecycle
 
-C012 is now the closing chapter for migration to C013.
+C013 is now the closing chapter for migration to C014.
 
 Lifecycle transition performed by this closing chapter:
 
-C011 = HANDED_OFF → SUPERSEDED
-C012 = DRAFT → READY_FOR_HANDOFF
+C012 = HANDED_OFF → SUPERSEDED
+C013 = DRAFT → READY_FOR_HANDOFF
 
-The receiving chapter C013 must perform READY_FOR_HANDOFF → HANDED_OFF on this handoff during its bootstrap. When C013 later reaches READY_FOR_HANDOFF, it must apply the required supersession invariant to the older HANDED_OFF C012 handoff.
+The receiving chapter C014 must perform READY_FOR_HANDOFF → HANDED_OFF on this handoff during its bootstrap. When C014 later reaches READY_FOR_HANDOFF, it must apply the required supersession invariant to the older HANDED_OFF C013 handoff.
 
 ## Migration note
 
-The substantive checkpoint for C013 is C-11.2. The immediate next task is C-11.3.
+The substantive checkpoint for C014 is C-11.2. The immediate next task is C-11.3.
 
 The north-star meta-architecture document must be restored as bootstrap context before local research state is resumed.
