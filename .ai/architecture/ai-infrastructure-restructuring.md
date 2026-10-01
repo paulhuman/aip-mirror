@@ -136,23 +136,31 @@ canonical owner
 operation
 ```
 
-New conversation initialization is a separate workflow boundary:
+New conversation initialization is a separate workflow boundary. `.ai/AGENTS.md` is the always-on entry contract; it does not itself initialize a chapter. When new chapter initialization is requested, AGENTS item 6 directs the AI to the canonical BOOTSTRAP workflow:
 
 ```text
 new conversation
     ↓
-.ai/workflows/handoff/BOOTSTRAP.md
+.ai/AGENTS.md
     ↓
-ACTIVATE
-    ↓
-chapter initialization
-    ↓
-substantive work
+initialization requested?
+    ├─ NO  → ordinary work
+    └─ YES → item 6
+               ↓
+        .ai/workflows/handoff/BOOTSTRAP.md
+               ↓
+        validate bootstrap context
+               ↓
+        ACTIVATE
+               ↓
+        chapter initialization
+               ↓
+        substantive work
 ```
 
 Architectural boundary:
 
-> **INDEX identifies and routes ordinary operations; BOOTSTRAP initializes new chapters; ACTIVATE establishes the current canonical operational context; canonical owners define and execute their operations.**
+> **AGENTS determines when new-chapter BOOTSTRAP is used; BOOTSTRAP determines how chapter initialization is performed; INDEX routes ordinary operations; ACTIVATE establishes the current canonical operational context; canonical owners define and execute their operations.**
 
 `INDEX.md` MUST NOT become a second lifecycle rule, handoff skill, commit skill, bootstrap workflow, repository rule, or general workflow document.
 
@@ -174,11 +182,17 @@ The resulting separation is:
 ```text
 new conversation
     ↓
-BOOTSTRAP
+AGENTS
     ↓
-ACTIVATE
-    ↓
-chapter initialization
+is new-chapter initialization requested?
+    ├─ NO  → normal conversation setup/work
+    └─ YES → AGENTS item 6
+               ↓
+            BOOTSTRAP
+               ↓
+            ACTIVATE
+               ↓
+            chapter initialization
 
 already-initialized conversation
     ↓
@@ -189,7 +203,11 @@ ACTIVATE
 operation
 ```
 
-No `ENTRY.md` is justified by this boundary. A separate ENTRY would require evidence of a distinct semantic responsibility that BOOTSTRAP cannot own without becoming overloaded.
+The presence of AGENTS item 6 does **not** mean that every new conversation must initialize a chapter. The AI MUST enter BOOTSTRAP only when new-chapter initialization is actually requested or explicitly invoked.
+
+If initialization is requested but the bootstrap runtime values are absent or incomplete, BOOTSTRAP MUST inspect its own input contract and stop rather than guessing values or auto-initializing from defaults. It MUST report which required values are missing or malformed.
+
+No `ENTRY.md` is justified by this boundary. A separate ENTRY would require evidence of a distinct semantic responsibility that AGENTS, INDEX, and BOOTSTRAP cannot own without becoming overloaded.
 
 ## 5. Current `.ai/INDEX.md` model
 
@@ -2108,3 +2126,150 @@ Still open:
 - whether first-chapter initialization needs init, new, or no dedicated command;
 - whether interrupted migration needs a separate recovery command;
 - exact active command-reference migration after these semantic questions are settled.
+
+
+## 23. C038 entry-layer and bootstrap transport decisions
+
+C038 resolved the remaining ambiguity around the relationship between `.ai/AGENTS.md` and `.ai/workflows/handoff/BOOTSTRAP.md`.
+
+### 23.1 Entry responsibility
+
+The stable boundary is:
+
+> **AGENTS determines when BOOTSTRAP is used; BOOTSTRAP determines how initialization is performed.**
+
+`.ai/AGENTS.md` is the always-on AI infrastructure entry contract. Its item 6 is the explicit trigger/routing instruction for new conversation chapter initialization.
+
+BOOTSTRAP MUST NOT call, re-enter, or redefine AGENTS. AGENTS is upstream entry context; BOOTSTRAP is the downstream ordered initialization workflow.
+
+The presence of item 6 MUST NOT cause every new conversation to initialize automatically. A normal new conversation can read AGENTS and continue ordinary work without chapter initialization.
+
+The intended entry model is:
+
+```text
+new conversation
+    ↓
+.ai/AGENTS.md
+    ↓
+is new-chapter initialization requested?
+    ├─ NO  → ordinary work
+    └─ YES → AGENTS item 6
+               ↓
+        .ai/workflows/handoff/BOOTSTRAP.md
+               ↓
+        validate inputs
+               ↓
+        ACTIVATE canonical owners
+               ↓
+        initialize chapter
+```
+
+### 23.2 Missing runtime values
+
+When new-chapter initialization is requested, BOOTSTRAP is responsible for determining the required runtime context.
+
+If the user explicitly requests initialization but does not provide the required runtime values, the AI MUST enter BOOTSTRAP through AGENTS item 6, inspect the canonical input contract, and stop bootstrap before repository mutation. It MUST report the missing or malformed values and MUST NOT guess, infer, or silently substitute chapter values.
+
+This distinction is intentional:
+
+```text
+AGENTS present
+    ≠
+bootstrap requested
+
+bootstrap requested
+    +
+missing runtime inputs
+    =
+bootstrap STOP + report missing inputs
+```
+
+### 23.3 Bootstrap transport message
+
+The generated migration message and future manual templates are transport mechanisms for entering the canonical BOOTSTRAP workflow. They are not alternative initialization procedures.
+
+A generated or manual bootstrap message MUST explicitly state that it is an instruction to initialize a new conversation chapter and MUST direct the receiving AI to follow the new-chapter initialization procedure specified by AGENTS item 6 and then use `.ai/workflows/handoff/BOOTSTRAP.md`.
+
+The standard generated transport contains exactly these four lines:
+
+```text
+PREVIOUS_CHAPTER = <previous chapter>
+CURRENT_CHAPTER = <current chapter>
+SPECIALIZATION = <specialization>
+SHORT_NAME = <resolved short name>
+```
+
+The semantic contract remains three canonical runtime inputs:
+
+```text
+PREVIOUS_CHAPTER
+CURRENT_CHAPTER
+SPECIALIZATION
+```
+
+`SHORT_NAME` remains contextual data, not a fourth canonical runtime input. For generated migration transport, the value is already resolved from the specialization vocabulary. For manual transport, the value MAY be supplied explicitly; if omitted, BOOTSTRAP applies its documented configuration fallback.
+
+For C038 → C039, the generated transport values are:
+
+```text
+PREVIOUS_CHAPTER = 038
+CURRENT_CHAPTER = 039
+SPECIALIZATION = C
+SHORT_NAME = Architecture & Research
+```
+
+The transport MUST NOT include `NEXT_CHAPTER`, filename/path metadata, extra routing metadata, or a second procedural framework.
+
+### 23.4 Source hierarchy for generated transport
+
+For normal migration:
+
+| Value | Source |
+|---|---|
+| `PREVIOUS_CHAPTER` | current chapter |
+| `CURRENT_CHAPTER` | migration target |
+| `SPECIALIZATION` | current chapter |
+| `SHORT_NAME` | resolved specialization vocabulary |
+
+The generated message is therefore self-contained enough for the receiving chapter to enter the canonical initialization workflow without requiring the user to repeat specialization or short-name context.
+
+### 23.5 C038 → C039 migration boundary
+
+C038 resolves the semantic design questions below before active command-reference migration:
+
+1. The stable command prefix remains `>>` and MUST NOT be reopened.
+2. `>>migrate <chapter>` is the intended migration invocation shape; specialization and short name are resolved automatically.
+3. Normal migration MUST generate the bootstrap transport as its terminal output.
+4. Generated bootstrap transport and receiving-chapter BOOTSTRAP execution remain separate concerns.
+5. First-chapter initialization and interrupted-migration recovery remain bounded follow-up questions; neither receives a new command solely from this decision.
+6. Two manual bootstrap templates remain future work and MUST be validated against BOOTSTRAP before becoming active infrastructure.
+7. Active command references in `.ai/INDEX.md` and `.ai/skills/handoff/SKILL.md` SHOULD be migrated only after the command semantics are fully stabilized.
+
+### 23.6 Next bounded work for C039
+
+C039 SHOULD continue with:
+
+1. verify the updated AGENTS → BOOTSTRAP entry boundary and missing-input behavior;
+2. verify the generated four-line bootstrap transport against BOOTSTRAP;
+3. decide the standalone bootstrap-instruction generation operation name, without reopening `>>`;
+4. decide whether first-chapter initialization needs a dedicated operation or is sufficiently expressed by BOOTSTRAP;
+5. decide whether interrupted migration needs a dedicated recovery operation or is fully recoverable from durable repository state;
+6. design and validate the two manual bootstrap templates;
+7. only then migrate active command references in `.ai/INDEX.md` and `.ai/skills/handoff/SKILL.md`;
+8. run a semantic consistency sweep covering AGENTS, INDEX, BOOTSTRAP, handoff skill/rules, configuration vocabulary, and historical references.
+
+Do not begin a broad infrastructure refactor.
+
+### 23.7 Architectural invariants
+
+The following statements are now the bounded C038 conclusions:
+
+- **AGENTS determines when BOOTSTRAP is used; BOOTSTRAP determines how initialization is performed.**
+- BOOTSTRAP MUST NOT call or redefine AGENTS.
+- Reading AGENTS alone MUST NOT trigger chapter initialization.
+- An explicit initialization request with missing runtime values MUST stop bootstrap and report the missing values.
+- The generated migration bootstrap transport MUST explicitly identify itself as new-chapter initialization and direct the receiving AI to the AGENTS item 6 path.
+- The generated transport contains four lines: the three canonical runtime inputs plus resolved `SHORT_NAME`.
+- `SHORT_NAME` is not a fourth canonical runtime input.
+- The generated transport is context, not a second bootstrap procedure.
+- `>>` remains accepted and MUST NOT be reopened.
