@@ -1,24 +1,24 @@
 # Conversation Handoff
 
 **Conversation:**
-C032 — Architecture & Research
+C033 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-032
+033
 
 **Previous chapter:**
-031
+032
 
 ## Starting objective
 
-Continue the bounded architecture work on ACTIVATE after C031 established and implemented the smallest reusable activation capability. Determine where that capability can be integrated into one real existing operation with the smallest useful change, without duplicating routing, lifecycle, repository, commit, or project semantics.
+Continue the bounded architecture work on ACTIVATE after C032 established and implemented the smallest reusable activation capability. Determine where that capability can be integrated into one real existing operation with the smallest useful change, without duplicating routing, lifecycle, repository, commit, or project semantics.
 
 ## Starting state
 
-C031 completed the owner-boundary experiment for five cases:
+C032 completed the owner-boundary experiment for five cases:
 
 1. handoff bootstrap;
 2. new-specialization entry;
@@ -47,9 +47,9 @@ Its contract is intentionally small:
 
 ACTIVATE does not own lifecycle, repository, project, mutation, commit, or verification semantics. REFRESH reuses ACTIVATE as an invocation mode. TRACE remains optional observability evidence.
 
-C031 also established that handoff continuity and activation context are distinct. A handoff should preserve material current-work and durable-context references; activation independently establishes the canonical operational context required for the current operation.
+C032 also established that handoff continuity and activation context are distinct. A handoff should preserve material current-work and durable-context references; activation independently establishes the canonical operational context required for the current operation.
 
-## C032 integration experiment — first result
+## C033 integration experiment — first result
 
 The first real operation tested was:
 
@@ -67,7 +67,7 @@ The smallest useful integration point was `.ai/INDEX.md`: its routing rule now e
 
 This gives the first concrete evidence that ACTIVATE can sit between operation routing and canonical-owner execution without introducing a second procedural owner.
 
-## C032 integration experiment — second result
+## C033 integration experiment — second result
 
 The second real operation tested was:
 
@@ -80,15 +80,15 @@ The required canonical owner set was:
 
 ACTIVATE was applied at the routing boundary by rereading those current repository versions before execution. The operation then used the established handoff capability and bootstrap workflow to generate the bootstrap instruction for the future receiving chapter.
 
-For the current C032 chapter, the generated runtime values are:
+For the current C033 chapter, the generated runtime values are:
 
-    PREVIOUS_CHAPTER = C032
-    CURRENT_CHAPTER = C033
+    PREVIOUS_CHAPTER = C033
+    CURRENT_CHAPTER = C034
     SPECIALIZATION = C
 
 The test confirmed that neither canonical owner needed to be modified to know about ACTIVATE. The handoff skill did not need an internal ACTIVATE step, and BOOTSTRAP remained unchanged. This provides a second concrete example of ACTIVATE functioning as a compositional routing boundary rather than as a requirement that every canonical workflow wrap its own procedure in ACTIVATE.
 
-The operation also confirmed the existing semantic boundary: bootstrap-instruction generation does not initialize C033, change lifecycle state, or create a receiving handoff.
+The operation also confirmed the existing semantic boundary: bootstrap-instruction generation does not initialize C034, change lifecycle state, or create a receiving handoff.
 
 ## Result after two integration checks
 
@@ -111,9 +111,9 @@ Further experimentation should be driven by a concrete operation that exposes a 
 
 ## Previous chapter
 
-C031 — Architecture & Research.
+C032 — Architecture & Research.
 
-C031 is the verified source of the completed activation owner-boundary experiment and is transitioned to HANDED_OFF as part of C032 bootstrap.
+C032 is the verified source of the completed activation owner-boundary experiment and is transitioned to HANDED_OFF as part of C033 bootstrap.
 
 ## Important constraints
 
@@ -134,10 +134,10 @@ C031 is the verified source of the completed activation owner-boundary experimen
 
 ### Confirmed / observed
 
-- C031 completed the bounded five-case ACTIVATE owner-boundary experiment.
+- C032 completed the bounded five-case ACTIVATE owner-boundary experiment.
 - .ai/skills/activation/SKILL.md exists and was read back after creation.
 - Activation skill commit: 028ec2254d31a985149edcd1e7c32a79385e352e.
-- Architecture notes were updated with the C031 result: 7047eb0a43b515025ed6b6b42e7340a59e6e2769.
+- Architecture notes were updated with the C032 result: 7047eb0a43b515025ed6b6b42e7340a59e6e2769.
 - The activation skill is now explicitly invoked by INDEX routing before execution; BOOTSTRAP remains unchanged.
 - A second real operation, bootstrap-instruction generation, also passed the routing-level ACTIVATE boundary without owner changes.
 - Two distinct operation types now provide concrete integration evidence.
@@ -161,15 +161,15 @@ Do not broaden the experiment into a general entry-layer redesign. The next work
 
 ## Things not to redo
 
-- C027 entry-layer restructuring.
+- C028 entry-layer restructuring.
 - The AGENTS entry-contract decision.
 - The INDEX minimum-routing decision.
 - The decision not to create ENTRY.md.
 - BOOTSTRAP ownership and ordering.
 - The current chapter identifier format.
 - The completed normative-language cleanup.
-- C030 discovery-versus-activation observation.
-- C031 five-case activation owner-boundary experiment.
+- C031 discovery-versus-activation observation.
+- C032 five-case activation owner-boundary experiment.
 - The distinction between handoff continuity and activation context.
 - The first activation skill implementation.
 
@@ -185,5 +185,5 @@ Do not broaden the experiment into a general entry-layer redesign. The next work
 - .ai/skills/handoff/SKILL.md
 - .ai/workflows/handoff/BOOTSTRAP.md
 - .ai/architecture/ai-infrastructure-restructuring.md
-- .ai/handoffs/C/C031-Architecture-Research.md
+- .ai/handoffs/C/C032-Architecture-Research.md
 - docs/PROJECT-INSTRUCTIONS.md
