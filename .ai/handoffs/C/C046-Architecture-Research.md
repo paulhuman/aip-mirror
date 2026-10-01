@@ -49,26 +49,24 @@ This chapter continued from repository state rather than reconstructing uncommit
 - `.ai/rules/workflow.md` owns repository inspection guidance.
 - `.ai/config.yaml` resolves C to `Architecture & Research`.
 
-The current repository still contains legacy `000` handoff files:
+The active handoff tree uses one-based chapter numbering.
 
-- `.ai/handoffs/B/B001-Native-AIP-Plugin.md`
-- `.ai/handoffs/C/C001-Architecture-Research.md`
-- `.ai/handoffs/D/D001-Project-Workshop.md`
-- `.ai/handoffs/E/E001-Independent-Review-Qwen.md`
-- `.ai/handoffs/F/F001-Independent-Review-Grok.md`
+- The B series starts at B001.
+- The C series currently reaches C046.
+- The D series starts at D001.
+- The E series starts at E001.
+- The F series currently reaches F003.
 
-The current C-series continues through `C045-Architecture-Research.md`.
+The active `.ai/rules/workflow.md` repository-context inspection example includes:
 
-The current `.ai/rules/workflow.md` repository-context inspection example still lists only:
+    .ai/config.yaml
+    .ai/architecture/*
+    .ai/rules/*
+    .ai/skills/*
+    .ai/workflows/*
+    .ai/handoffs/README.md
+    docs/PROJECT-INSTRUCTIONS.md
 
-    config.yaml
-    architecture/*
-    rules/*
-    skills/*
-    workflows/*
-    handoffs/README.md
-
-It does not yet include `docs/PROJECT-INSTRUCTIONS.md`.
 
 ## Decisions carried forward
 
