@@ -199,19 +199,14 @@ No additional external research reference was identified by C038 as materially r
 - The semantic consistency sweep found no stale active references requiring further correction.
 - Historical C036–C038 unresolved wording remains historical record and is intentionally preserved.
 
+## Latest checkpoint
+
+- Executed `>>handoff` after completing the bounded INDEX discoverability follow-up.
+- Added a single `Structural references` section to `.ai/INDEX.md` pointing to `.ai/handoffs/README.md` as structural documentation, explicitly not a runtime activation owner.
+- The INDEX change was committed as `3e7009eb8be23f10372ffb8abe3786cab308b350` with message `ai-docs(index): add handoff structural reference`.
+- Read back the updated INDEX and verified the intended section is present without unrelated content changes.
+- The handoff README remains unchanged; its role is now explicitly discoverable from INDEX while its structural/documentation role remains separate from runtime activation.
+
 ## Immediate next task
 
-Continue with any concrete follow-up discovered by the semantic consistency sweep. The bootstrap command surface, first-chapter behavior, interrupted-migration recovery model, manual templates, and active command references are now semantically stabilized.
-
-## Recommended starting context
-
-Read/re-read:
-
-1. `.ai/workflows/handoff/BOOTSTRAP.md`
-2. the latest relevant sections of `.ai/architecture/ai-infrastructure-restructuring.md`
-3. `.ai/rules/handoff/lifecycle.md`
-4. `.ai/skills/handoff/SKILL.md`
-5. `.ai/INDEX.md`
-6. `.ai/AGENTS.md`
-
-Then compare the actual current wording with the C038 conclusions before making any repository mutation.
+Continue with the next concrete Architecture & Research question. No additional INDEX, AGENTS, or handoff-README changes are currently implied by this checkpoint.
