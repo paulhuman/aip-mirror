@@ -2273,3 +2273,110 @@ The following statements are now the bounded C038 conclusions:
 - `SHORT_NAME` is not a fourth canonical runtime input.
 - The generated transport is context, not a second bootstrap procedure.
 - `>>` remains accepted and MUST NOT be reopened.
+
+
+### 23.8 C039 command and initialization decisions
+
+C039 resolved the remaining semantic questions from the C038 follow-up sequence.
+
+#### Standalone bootstrap-instruction generation
+
+The accepted standalone operation is:
+
+    >>generate-bootstrap <chapter>
+
+This operation generates the bootstrap transport for a future receiving chapter. It does not execute `.ai/workflows/handoff/BOOTSTRAP.md` and does not initialize the receiving chapter.
+
+The distinction is intentional:
+
+```text
+>>migrate <chapter>
+    ↓
+update current handoff
+    ↓
+verify
+    ↓
+commit
+    ↓
+generate bootstrap transport
+    ↓
+emit transport to the user
+```
+
+The standalone form exists so the terminal transport can be generated or regenerated without repeating the migration operation.
+
+The name `generate-bootstrap` is preferred over `bootstrap` because `bootstrap` alone could be interpreted as execution of the canonical BOOTSTRAP workflow rather than generation of its transport. `generate-bootstrap` names the artifact-producing operation directly.
+
+The accepted active command surface is therefore:
+
+    >>handoff
+    >>migrate <chapter>
+    >>generate-bootstrap <chapter>
+
+No dedicated `>>init`, `>>new`, or `>>recover` operation is introduced.
+
+#### First-chapter initialization
+
+A first chapter does not require a dedicated `>>init` or `>>new` operation.
+
+The existing BOOTSTRAP workflow already has an explicit FIRST CHAPTER branch using:
+
+    PREVIOUS_CHAPTER = N/A
+
+Adding another operation would duplicate the existing initialization semantic owner without solving a concrete routing problem.
+
+#### Interrupted migration
+
+Interrupted migration does not require a dedicated `>>recover` operation.
+
+Recovery is a transport/input condition for the canonical new-chapter BOOTSTRAP workflow, not a distinct lifecycle operation. The durable repository state and the receiving-chapter BOOTSTRAP procedure are sufficient to continue when a predecessor conversation ended before completing its migration transport.
+
+Recovery context is therefore expressed by a manual bootstrap template rather than by a new command.
+
+#### Manual bootstrap templates
+
+Two manual templates are part of the accepted transport surface:
+
+1. **Template A — first chapter**
+
+       Initialize a new conversation chapter. Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
+
+       PREVIOUS_CHAPTER = N/A
+       CURRENT_CHAPTER = <three-digit chapter>
+       SPECIALIZATION = <single uppercase specialization letter>
+       SHORT_NAME = <short conversation name>
+
+2. **Template B — interrupted migration recovery**
+
+       Initialize a new conversation chapter as a recovery from an interrupted migration. Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
+
+       PREVIOUS_CHAPTER = <three-digit previous chapter>
+       CURRENT_CHAPTER = <three-digit current chapter>
+       SPECIALIZATION = <single uppercase specialization letter>
+       SHORT_NAME = <short conversation name>
+
+The recovery wording is descriptive transport context only. It does not create a new recovery operation or lifecycle state.
+
+Both templates remain human-facing convenience mechanisms. Their canonical semantic owner is BOOTSTRAP.
+
+If `SHORT_NAME` is omitted from either manual template, BOOTSTRAP MUST resolve it from `.ai/config.yaml` using:
+
+    SPECIALIZATION → specializations.<SPECIALIZATION>.short_name
+
+Therefore the omission of `SHORT_NAME` does not create a fourth required runtime input. If it cannot be resolved from configuration, BOOTSTRAP MUST stop and report the unresolved short name rather than guessing.
+
+Generated migration transport remains stricter: it MUST include the already-resolved `SHORT_NAME`.
+
+#### C039 architectural result
+
+The minimal accepted model is:
+
+```text
+one canonical chapter-initialization workflow
+        +
+three user-facing operations
+        +
+two manual bootstrap transport templates
+```
+
+This resolves the C038 open questions without introducing a command registry, universal router, dedicated initialization layer, recovery operation, or additional lifecycle mechanism.
