@@ -1,16 +1,16 @@
 # Conversation Handoff
 
 **Conversation:**
-C021 — Architecture & Research
+C022 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-021
+022
 
 **Previous chapter:**
-020
+021
 
 ## Current objective
 
@@ -30,12 +30,12 @@ Bootstrap source context has been read from the canonical repository on `main`, 
 - `.ai/skills/conversation-handoff/SKILL.md`
 - applicable lifecycle, workflow, repository, and handoff-reference rules
 - `docs/PROJECT-INSTRUCTIONS.md`
-- `.ai/handoffs/C020-Architecture-Research.md`
+- `.ai/handoffs/C021-Architecture-Research.md`
 - `.ai/architecture/C020_ai-infrastructure-restructuring.md`
 
-The C020 durable research context has been preserved as the primary architectural source for this chapter.
+The C021 durable research context has been preserved as the primary architectural source for this chapter.
 
-The C020 → C021 lifecycle bootstrap was completed by a write-capable AI.
+The C021 → C022 lifecycle bootstrap was completed by a write-capable AI.
 
 The local inventory/classification and two independent blind semantic reviews (Grok and Qwen) have now been completed. No target tree was shown to the independent reviewers.
 
@@ -67,7 +67,7 @@ The current repository still contains the historical/incremental organization. T
 18. The handoffs README is navigation/orientation material, not a lifecycle event or canonical lifecycle rule.
 19. BOOTSTRAP is WORKFLOW material and should be evaluated for placement under .ai/workflows/.
 20. The current .ai/handoffs/ model with README.md plus numbered specialization directories 01–06 remains the working choice for now.
-21. A separate TODO file is not yet required; the expanding TODO remains in the C020 architecture working document for now.
+21. A separate TODO file is not yet required; the expanding TODO remains in the C021 architecture working document for now.
 
 ## Open questions
 
@@ -92,8 +92,8 @@ Primary durable research context:
 
 Current migration handoff:
 
-- `.ai/handoffs/C020-Architecture-Research.md`
 - `.ai/handoffs/C021-Architecture-Research.md`
+- `.ai/handoffs/C022-Architecture-Research.md`
 
 High-priority inventory sources:
 
@@ -115,11 +115,11 @@ High-priority inventory sources:
 ### Primary durable research context
 
 - `paulhuman/aip-mirror@main:/.ai/architecture/C020_ai-infrastructure-restructuring.md`
-  - Role: main preserved C020 research context for the AI-infrastructure restructuring.
+  - Role: main preserved C021 research context for the AI-infrastructure restructuring.
 
 ### Handoff
 
-- `paulhuman/aip-mirror@main:/.ai/handoffs/C020-Architecture-Research.md`
+- `paulhuman/aip-mirror@main:/.ai/handoffs/C021-Architecture-Research.md`
   - Role: predecessor chapter checkpoint and migration state.
 
 ## Important constraints
@@ -142,9 +142,9 @@ High-priority inventory sources:
 
 ### Confirmed / observed
 
-- C020 marked the local inventory/classification as the immediate next task.
-- `.ai/architecture/C020_ai-infrastructure-restructuring.md` is the main durable C020 research context.
-- No physical restructuring was performed in C020.
+- C021 marked the local inventory/classification as the immediate next task.
+- `.ai/architecture/C020_ai-infrastructure-restructuring.md` is the main durable C021 research context.
+- No physical restructuring was performed in C021.
 - The `.ai/` versus `docs/` boundary is an accepted working decision.
 - The current repository is `paulhuman/aip-mirror` on `main`.
 
@@ -167,7 +167,7 @@ All unresolved architecture/taxonomy questions listed above remain open until th
 
 ## Last completed task
 
-Completed the local inventory/classification and obtained independent blind semantic reviews from Grok and Qwen. Updated the durable C020 restructuring notes with the resulting consensus and the newly identified handoff semantic model.
+Completed the local inventory/classification and obtained independent blind semantic reviews from Grok and Qwen. Updated the durable C021 restructuring notes with the resulting consensus and the newly identified handoff semantic model.
 
 ## Immediate next task
 
@@ -203,7 +203,7 @@ Deferred later-iteration question: whether .ai/INDEX.md is sufficient or a separ
 
 ## Things not to redo
 
-- Do not reconstruct the C020 architectural reasoning from conversation history.
+- Do not reconstruct the C021 architectural reasoning from conversation history.
 - Do not restart MEC theory.
 - Do not re-derive the `.ai/` versus `docs/` boundary unless new evidence contradicts it.
 - Do not physically move or delete files merely because a target location has been proposed.
@@ -213,7 +213,7 @@ Deferred later-iteration question: whether .ai/INDEX.md is sufficient or a separ
 ## Recommended starting context for next chapter
 
 1. `.ai/architecture/C020_ai-infrastructure-restructuring.md`
-2. `.ai/handoffs/C021-Architecture-Research.md`
+2. `.ai/handoffs/C022-Architecture-Research.md`
 3. `docs/PROJECT-INSTRUCTIONS.md`
 4. `.ai/skills/conversation-handoff/BOOTSTRAP.md`
 5. `.ai/skills/conversation-handoff/SKILL.md`
@@ -223,4 +223,4 @@ Deferred later-iteration question: whether .ai/INDEX.md is sufficient or a separ
 9. `.ai/rules/handoff-references.md`
 10. `docs/architecture/ai-project-instruction-architecture.md`
 
-The durable C020 architecture working file is the primary preserved research context. The next chapter should continue from repository state rather than from conversational reconstruction.
+The durable C021 architecture working file is the primary preserved research context. The next chapter should continue from repository state rather than from conversational reconstruction.
