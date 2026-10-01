@@ -19,10 +19,13 @@ Use the type that best describes the primary purpose of the change. Standard pro
 
 This repository uses a local ai-* namespace to make .ai/ infrastructure visible in Git history.
 
-For normal handoff creation and update operations, use exactly:
+For handoff creation and update operations, including migration, use exactly:
 
     ai-docs(handoff): create C034
     ai-docs(handoff): update C034
+
+Migration MUST use `update`, not `migrate`, in the commit message.
+`migrate` is a workflow operation, not a handoff commit-message action.
 
 Keep these messages short. Do not append conversation titles, task descriptions, rationale, milestone summaries, or other explanatory suffixes.
 
