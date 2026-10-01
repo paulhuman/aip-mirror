@@ -1,16 +1,16 @@
 # Conversation Handoff
 
 **Conversation:**
-C008 — Architecture & Research
+C009 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-008
+009
 
 **Previous chapter:**
-007
+008
 
 ## Current objective
 
@@ -143,7 +143,7 @@ A valid counterexample had to show that changing only provenance requires a **di
 
 #### C-1.5-T1 independent-review result
 
-Qwen E001 returned:
+Qwen E002 returned:
 
 ```text
 B — No counterexample found
@@ -251,7 +251,7 @@ The burden of proof was **independent semantic necessity**, not caching, logging
 
 #### C-1.6-T1 independent-review result
 
-Qwen E001 returned:
+Qwen E002 returned:
 
 ```text
 B — no independent semantic necessity demonstrated
@@ -548,7 +548,7 @@ Otherwise, the next productive step is architecture design work around **context
 
 This handoff has been updated with Synthesis-1, the C-1.4 research checkpoint, and the completed C-1.5-T1 provenance adversarial pass. No Architecture Decision has been recorded.
 
-The chapter is now `READY_FOR_HANDOFF` for migration to **AIP Mirror — C008 — Architecture & Research**. The research remains provisional and no final Architecture Decision has been made.
+The chapter is now `READY_FOR_HANDOFF` for migration to **AIP Mirror — C009 — Architecture & Research**. The research remains provisional and no final Architecture Decision has been made.
 
 ### C-1.6-T2 — `dependency relation`
 
@@ -562,7 +562,7 @@ semantic necessity of information
 necessity to store that information inside Resolution Context
 ```
 
-Qwen E001 returned:
+Qwen E002 returned:
 
 ```
 B — no independent semantic necessity demonstrated
@@ -691,8 +691,8 @@ Working invariants carried forward and consolidated by Synthesis-1 and C-1.5-T1:
 
 ### Handoff / lifecycle files read during bootstrap
 
+- `.ai/handoffs/C007-Architecture-Research.md`
 - `.ai/handoffs/C006-Architecture-Research.md`
-- `.ai/handoffs/C005-Architecture-Research.md`
 - `.ai/handoffs/03E-Architecture-Research.md`
 
 ### Rules / skills read during bootstrap
@@ -715,9 +715,9 @@ Working invariants carried forward and consolidated by Synthesis-1 and C-1.5-T1:
 
 - `docs/architecture/independent-review-qwen-onboarding.md` — operational onboarding and role boundary for the Qwen independent-review workflow.
 - `docs/architecture/prerequisite-dependency-semantics.md` — semantic separation and dependency/prerequisite boundaries.
-- `.ai/handoffs/C006-Architecture-Research.md` — immediate research checkpoint before U-7 through U-10.
-- `.ai/handoffs/C005-Architecture-Research.md` — predecessor same-specialization research inventory.
-- `.ai/handoffs/E000-Independent-Review-Qwen.md` — independent-review role boundary and evidence-handling context.
+- `.ai/handoffs/C007-Architecture-Research.md` — immediate research checkpoint before U-7 through U-10.
+- `.ai/handoffs/C006-Architecture-Research.md` — predecessor same-specialization research inventory.
+- `.ai/handoffs/E001-Independent-Review-Qwen.md` — independent-review role boundary and evidence-handling context.
 
 ## Important constraints
 
@@ -1061,7 +1061,7 @@ STATUS
 
 C-1.5 — provenance
 STATUS
-- No semantic-necessity counterexample found by Qwen E001.
+- No semantic-necessity counterexample found by Qwen E002.
 - Tested source-sensitive, consumer-policy, and dependency-reconstruction attacks.
 - Rejected counterexamples either collapsed into other fields or required new policies not currently defined.
 - provenance is not currently demonstrated as an independent Context axis.
@@ -1069,7 +1069,7 @@ STATUS
 
 C-1.6-T1 — consumer consequence
 STATUS
-- No semantic-necessity counterexample found by Qwen E001.
+- No semantic-necessity counterexample found by Qwen E002.
 - Eligibility, candidate effect, effective outcome, authority/precedence, consumer-role, and definition-level derivation attacks were tested.
 - consumer consequence is currently classified as a derived semantic result / consumer-policy output.
 - It is not currently demonstrated as an independent Resolution Context axis.
@@ -1084,7 +1084,7 @@ INTERIM SYNTHESIS
 
 C-1.6-T2 — dependency relation
 STATUS
-- No semantic-necessity counterexample found by Qwen E001 for dependency relation as an internal Resolution Context axis.
+- No semantic-necessity counterexample found by Qwen E002 for dependency relation as an internal Resolution Context axis.
 - dependency relation is currently classified as relationship / graph-edge semantics.
 - This does not mean dependency relation is semantically unnecessary; it means its semantic necessity belongs to the relationship between Resolution instances rather than to the internal state/context of one Resolution.
 - dependency target remains under separate test in C-1.6-T3.
@@ -1146,15 +1146,15 @@ RECOMMENDED NEXT STEP
 
 ## Bootstrap continuation
 
-This chapter was initialized from **AIP Mirror — C007 — Architecture & Research**.
+This chapter was initialized from **AIP Mirror — C008 — Architecture & Research**.
 
 Bootstrap state:
 
-- Previous handoff: `C007`
-- Current handoff: `C008`
+- Previous handoff: `C008`
+- Current handoff: `C009`
 - Status: `DRAFT`
 - C-1.6-T3 adversarial instruction is already prepared.
-- The next expected research input is the Qwen E001 response to C-1.6-T3.
+- The next expected research input is the Qwen E002 response to C-1.6-T3.
 
 No final Architecture Decision has been made.
 
