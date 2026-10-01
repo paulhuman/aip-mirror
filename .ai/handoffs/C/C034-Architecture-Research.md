@@ -1,24 +1,24 @@
 # Conversation Handoff
 
 **Conversation:**
-C034 — Architecture & Research
+C035 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-034
+035
 
 **Previous chapter:**
-033
+034
 
 ## Starting objective
 
-Continue the bounded Architecture & Research work from C033. C033 closed the bootstrap runtime-input normalization question and C034 first corrected the historical C031 handoff header defect. The current bounded objective is to substantially simplify the handoff model by removing lifecycle status bookkeeping while preserving receiving-chapter handoff creation and durable context continuity.
+Continue the bounded Architecture & Research work from C034. C034 closed the bootstrap runtime-input normalization question and C035 first corrected the historical C032 handoff header defect. The current bounded objective is to substantially simplify the handoff model by removing lifecycle status bookkeeping while preserving receiving-chapter handoff creation and durable context continuity.
 
 ## Starting state
 
-C034 verified that the canonical handoff-header rule already requires the Previous chapter field to contain only the three-digit chapter number. No additional canonical rule gap was found. The historical C031 defect was corrected from:
+C035 verified that the canonical handoff-header rule already requires the Previous chapter field to contain only the three-digit chapter number. No additional canonical rule gap was found. The historical C032 defect was corrected from:
 
     Previous chapter:
     030 — Architecture & Research
@@ -31,7 +31,7 @@ to:
 The correction was committed as:
 
     aec5211f7c2346d93471bb17f0e03b8e9c9ae5ba
-    fix(handoff): normalize C031 previous chapter
+    fix(handoff): normalize C032 previous chapter
 
 The current handoff architecture was then reviewed from a broader operational perspective. The three-state lifecycle:
 
@@ -46,8 +46,8 @@ creates substantial bookkeeping overhead and Git-history noise without preservin
 ## Confirmed / observed
 
 - Repository: `paulhuman/aip-mirror`, branch `main`.
-- Current chapter: C034.
-- Previous chapter: C033.
+- Current chapter: C035.
+- Previous chapter: C034.
 - Specialization: C.
 - The receiving chapter creates its own handoff at the beginning of a new conversation. This invariant is retained.
 - Handoff status transitions are the source of a large class of unnecessary lifecycle-only mutations and commits.
@@ -55,14 +55,14 @@ creates substantial bookkeeping overhead and Git-history noise without preservin
 - Handoff commits are AI-infrastructure bookkeeping and should be visually distinguishable from project documentation commits.
 - The desired normal handoff commit vocabulary is intentionally short:
 
-  ai-docs(handoff): create C033
-  ai-docs(handoff): update C033
+  ai-docs(handoff): create C034
+  ai-docs(handoff): update C034
 
 - Normal handoff commit messages MUST NOT append conversation titles, task descriptions, rationale, milestone summaries, or other explanatory suffixes.
 
 ## Architectural decision
 
-C034 adopts the following target model:
+C035 adopts the following target model:
 
 > **A handoff is a persistent conversation-context snapshot for a chapter, not a lifecycle-controlled transfer object.**
 
@@ -123,8 +123,8 @@ Historical Git commits MUST NOT be rewritten. Existing lifecycle commits remain 
 
 For normal handoff creation and content updates, use exactly these forms:
 
-    ai-docs(handoff): create C034
-    ai-docs(handoff): update C034
+    ai-docs(handoff): create C035
+    ai-docs(handoff): update C035
 
 Keep these messages short. The handoff commit itself is the durable Git trace; the handoff file contains the useful context.
 
@@ -140,15 +140,15 @@ Project documentation remains under the normal project-facing `docs(...)` vocabu
 - Do not reintroduce a lifecycle status field under another name.
 - Do not create a new handoff state machine merely to replace the removed one.
 - Do not remove the receiving chapter's responsibility to create its own handoff.
-- Do not conflate full chapter identifiers such as C034 with the numeric chapter component 034.
+- Do not conflate full chapter identifiers such as C035 with the numeric chapter component 034.
 - Preserve historical Git commits; this is an active-architecture migration, not history rewriting.
 - Use the repository write-safety procedure for every existing-file mutation.
 
 ## Immediate next task
 
-Migrate the work to C035 and continue with the bounded semantic consistency sweep over the active .ai infrastructure.
+Migrate the work to C036 and continue with the bounded semantic consistency sweep over the active .ai infrastructure.
 
-The C034 continuation plan has been recorded in:
+The C035 continuation plan has been recorded in:
 
     .ai/architecture/ai-infrastructure-restructuring.md
 
@@ -172,4 +172,4 @@ The mass removal of legacy Status fields from remaining handoffs was completed m
     3985ac491462effe68cc5e1fd93485a08ec9c821
     ai-refactor(handoff): remove legacy status fields
 
-C034's continuation plan is therefore the next bounded piece of work, not another handoff-lifecycle migration.
+C035's continuation plan is therefore the next bounded piece of work, not another handoff-lifecycle migration.
