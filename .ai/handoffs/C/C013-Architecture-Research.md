@@ -1,20 +1,20 @@
 # Conversation Handoff
 
 **Conversation:**
-C013 — Architecture & Research
+C014 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-013
+014
 
 **Previous chapter:**
-012
+013
 
 ## Current objective
 
-Close the C013 research line and hand off the verified C-11.10 result to C014.
+Close the C014 research line and hand off the verified C-11.10 result to C015.
 
 The next bounded question is:
 
@@ -28,7 +28,7 @@ Bootstrap context restored from:
 
 - docs/PROJECT-INSTRUCTIONS.md
 - docs/architecture/ai-project-instruction-architecture.md
-- .ai/handoffs/C012-Architecture-Research.md
+- .ai/handoffs/C013-Architecture-Research.md
 - applicable conversation-handoff and workflow rules
 
 C-11.2 through C-11.8 are accepted as research checkpoints.
@@ -179,8 +179,8 @@ Current research boundaries include:
 
 Primary handoff/history:
 
+- .ai/handoffs/C013-Architecture-Research.md
 - .ai/handoffs/C012-Architecture-Research.md
-- .ai/handoffs/C011-Architecture-Research.md
 
 Architecture/research:
 
@@ -212,7 +212,7 @@ paulhuman/aip-mirror@main:/docs/architecture/ai-project-instruction-architecture
 
 Previous chapter:
 
-paulhuman/aip-mirror@main:/.ai/handoffs/C012-Architecture-Research.md
+paulhuman/aip-mirror@main:/.ai/handoffs/C013-Architecture-Research.md
 
 Dependency research:
 
@@ -255,8 +255,8 @@ Do not begin implementation work.
 
 ### Confirmed / observed
 
-- C012 was READY_FOR_HANDOFF at bootstrap start.
-- C013 did not exist before bootstrap.
+- C013 was READY_FOR_HANDOFF at bootstrap start.
+- C014 did not exist before bootstrap.
 - The meta-architecture north-star document was restored before local research state.
 - C-11.2 found multiple semantically equivalent interpretations; B/C/D remained indistinguishable on the tested cases.
 - C-11.3 did not establish ownership of Y.
