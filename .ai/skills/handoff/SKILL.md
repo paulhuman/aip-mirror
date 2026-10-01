@@ -116,7 +116,7 @@ This skill provides the handoff capability and structure; it does not duplicate 
 
 The user MAY request a checkpoint with:
 
-    Пора обновить handoff
+    >>handoff
 
 A WRITE-CAPABLE AI MUST create the handoff if absent, update it with current durable state, preserve the canonical header, verify content and scope, and commit the checkpoint. A READ-ONLY AI MUST prepare the complete proposed handoff and exact manual commit message without claiming repository writes.
 
