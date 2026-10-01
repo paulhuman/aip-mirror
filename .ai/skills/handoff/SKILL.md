@@ -190,8 +190,6 @@ Manual bootstrap transport MAY be used when starting the first chapter directly 
     SPECIALIZATION = <single uppercase specialization letter>
     SHORT_NAME = <short conversation name>
 
-The recovery wording is descriptive context only. It does not define a `>>recover` operation or a new lifecycle state.
-
 If `SHORT_NAME` is omitted from a manual bootstrap message, BOOTSTRAP MUST resolve it from `.ai/config.yaml` through:
 
     SPECIALIZATION → specializations.<SPECIALIZATION>.short_name
