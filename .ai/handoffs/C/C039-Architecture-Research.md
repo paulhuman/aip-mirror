@@ -64,7 +64,7 @@ SPECIALIZATION
 - C038 predecessor handoff was read successfully.
 - No C039 handoff existed before this bootstrap.
 - The current architecture record is `.ai/architecture/ai-infrastructure-restructuring.md`, with C038 conclusions recorded in section 23 and the C039 follow-up sequence recorded in the latest sections.
-- The active command surface in `.ai/INDEX.md` still documents the older `Пора...` command phrases; active command-reference migration is intentionally deferred until semantic decisions are stable.
+- The active command surface in `.ai/INDEX.md` now documents the stabilized `>>handoff`, `>>migrate <chapter>`, and `>>generate-bootstrap <chapter>` operations.
 
 ## C038 decisions carried forward
 
@@ -165,6 +165,13 @@ No additional external research reference was identified by C038 as materially r
 8. Run a semantic consistency sweep across AGENTS, INDEX, BOOTSTRAP, handoff rules/skill, configuration vocabulary, architecture record, and historical references.
 9. If the sweep finds concrete stale references, make only bounded corrective changes; do not introduce new infrastructure merely to create another task.
 
+## Semantic consistency sweep result
+
+- Active command references are consistent across INDEX and the handoff skill.
+- AGENTS item 6 and BOOTSTRAP remain the canonical initialization boundary and workflow.
+- Historical C036–C038 records retain their historical unresolved wording intentionally; they are not active command definitions.
+- No additional stale active reference requiring correction was identified.
+
 ## Confirmed versus uncertain
 
 ### Confirmed
@@ -200,7 +207,7 @@ These are working hypotheses only and MUST be tested against the canonical seman
 
 ## Immediate next task
 
-Perform the bounded semantic analysis of the standalone bootstrap-instruction operation, first-chapter initialization, interrupted migration, and the two manual bootstrap templates. Do not modify active command references until the semantic operation set is settled.
+Continue with any concrete follow-up discovered by the semantic consistency sweep. The bootstrap command surface, first-chapter behavior, interrupted-migration recovery model, manual templates, and active command references are now semantically stabilized.
 
 ## Recommended starting context
 
