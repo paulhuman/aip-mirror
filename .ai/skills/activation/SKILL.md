@@ -58,6 +58,18 @@ When useful for reasoning or review, activation MAY be made observable with:
 
 This trace is evidence of activation, not a persistent schema or repository state.
 
+For operation-level TRACE, the presentation MAY also include:
+
+    OPERATION READS
+      files:
+        <additional unique repository files actually read>
+
+`OPERATION READS` contains the unique repository files actually read as part of the operation. ACTIVATE owners are also members of that read set when they were read as part of the operation, but are omitted from the OPERATION READS presentation to avoid duplication.
+
+The operation ends when all work required to produce and, where applicable, verify the requested substantive result is complete.
+
+A repository read made only to report an already-completed result is not part of the operation. A read still required to complete or verify the result is part of the operation.
+
 ## Boundary
 
     INDEX / caller

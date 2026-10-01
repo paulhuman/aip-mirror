@@ -105,28 +105,32 @@ The goal is to keep TRACE observable and useful without introducing tracing life
 - C041's ACTIVATE / OPERATION READS model is recorded in the durable architecture record.
 - The current chapter can continue from durable repository state without reconstructing C041 from conversation history.
 
-### Inferred
+### Confirmed
 
-- The cleanest answer is likely to define the operation boundary semantically rather than introduce a new observable lifecycle, but this remains to be tested against the wording and actual operation flow.
+- The operation-boundary question is resolved semantically rather than through a new observable lifecycle.
+- An operation ends when all work required to produce and, where applicable, verify the requested substantive result is complete.
+- A repository read made only to report an already-completed result is not part of the operation.
+- A read still required to complete or verify the result is part of the operation, regardless of whether it occurs before or after ACTIVATE.
+- The active canonical owner for these semantics is `.ai/skills/activation/SKILL.md`.
+- The durable architectural record is `.ai/architecture/ai-infrastructure-restructuring.md`, section 33.3.
 
 ### Assumed / unverified
 
-- None currently required for bootstrap completion.
+- None currently required.
 
 ### Open
 
-- Where does an operation end for the purposes of OPERATION READS?
-- Do repository reads performed after the substantive result has been produced but before the user-facing response is emitted still belong to the operation?
-- Can the boundary be expressed as a simple semantic rule without introducing execution lifecycle machinery?
-- Does the resulting rule require a compact update to section 33 of `.ai/architecture/ai-infrastructure-restructuring.md`?
+- None within the bounded C042 operation-boundary question.
 
-## Immediate next task
+## Completed implementation
 
-Resolve the bounded operation-boundary question for `OPERATION READS`:
+The active and durable owners were updated with the resolved operation boundary:
 
-> Where does an operation end, particularly for repository reads that occur after the substantive result has been produced but before the assistant finishes the user-facing response?
+- `.ai/skills/activation/SKILL.md` now defines the operation boundary and the `OPERATION READS` presentation semantics.
+- `.ai/architecture/ai-infrastructure-restructuring.md`, section 33.3, records the durable decision and its implications.
+- `.ai/INDEX.md` and `.ai/rules/workflow.md` were intentionally not changed because neither owns this semantic.
 
-Use the existing two-layer model and minimum-cognitive-load principle. Define only the smallest semantic boundary needed to make the observed read set unambiguous. Do not add lifecycle events, read categories, telemetry, or other tracing machinery.
+The implementation was verified by reading back the changed files and inspecting the resulting commit scope.
 
 ## Recommended starting context
 

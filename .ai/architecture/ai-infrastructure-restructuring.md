@@ -2681,8 +2681,19 @@ The conceptual presentation may therefore contain:
 
 `OPERATION READS` is shown when useful for observing the operation and on explicit request. New-conversation bootstrap is a mandatory visibility case.
 
-The final operation-boundary question remains open:
+### 33.3 Operation boundary
 
-> **Where does an operation end, particularly for repository reads that occur after the substantive result has been produced but before the assistant finishes the user-facing response?**
+C042 resolved the operation-boundary question with a semantic boundary rather than a new observable lifecycle:
 
-This question SHOULD be resolved with the same minimum-cognitive-load principle. Do not introduce lifecycle events, read categories, telemetry, or other tracing machinery merely to answer it.
+> **An operation ends when all work required to produce and, where applicable, verify the requested substantive result is complete.**
+
+Therefore:
+
+- repository reads made before, during, or after ACTIVATE count when they are still required to complete or verify the operation;
+- a read-back used for verification remains part of the operation;
+- a read made only to report an already-completed result is not part of the operation;
+- the fact that a read occurs before the assistant emits the user-facing response does not by itself make it part of the operation.
+
+If work that was thought to be complete is later found to require another read or verification step, the operation boundary extends to include that work.
+
+This boundary is intentionally semantic. It does not introduce lifecycle events, additional read categories, telemetry, or other tracing machinery.
