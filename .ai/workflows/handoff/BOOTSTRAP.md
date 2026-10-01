@@ -275,7 +275,7 @@ The initial handoff is intentionally a live checkpoint document. It MAY be incom
 
 During the chapter, the user MAY say:
 
-    Пора обновить handoff
+    >>handoff
 
 Treat this as a direct request to update the current handoff with meaningful durable state, verify it, and commit the update.
 
