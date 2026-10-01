@@ -1,29 +1,29 @@
 # Conversation Handoff
 
 **Conversation:**
-C044 — Architecture & Research
+C045 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-044
+045
 
 **Previous chapter:**
-043
+044
 
 ## Starting objective
 
-Continue the Architecture & Research specialization from C043 with a newly identified bounded architecture/research question.
+Continue the Architecture & Research specialization from C044 with a newly identified bounded architecture/research question.
 
-C043 completed the investigation of the practical user-facing interface for `ACTIVATE`, `REFRESH`, and `TRACE`. C044 MUST NOT reopen that resolved question unless new evidence requires it.
+C044 completed the investigation of the practical user-facing interface for `ACTIVATE`, `REFRESH`, and `TRACE`. C045 MUST NOT reopen that resolved question unless new evidence requires it.
 
 ## Known starting implementation state
 
 - Repository: `paulhuman/aip-mirror`.
 - Canonical branch: `main`.
-- Current chapter: C044.
-- Previous chapter: C043.
+- Current chapter: C045.
+- Previous chapter: C044.
 - Specialization: C.
 - Resolved short name: `Architecture & Research`.
 - `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical new-conversation initialization workflow.
@@ -34,10 +34,10 @@ C043 completed the investigation of the practical user-facing interface for `ACT
 - `.ai/rules/handoff/lifecycle.md` owns chapter continuity semantics.
 - `.ai/rules/handoff/references.md` owns preservation of material research references.
 - `.ai/INDEX.md` is the routing and capability-discovery surface.
-- C043 established natural-language invocation of ACTIVATE, REFRESH, and TRACE without introducing command IDs or a new command layer.
+- C044 established natural-language invocation of ACTIVATE, REFRESH, and TRACE without introducing command IDs or a new command layer.
 - `.ai/architecture/faq/manual-activation.md` is durable human-oriented usage guidance and is not a semantic owner.
 - `.ai/architecture/README.md` defines the architecture/FAQ ownership boundary.
-- `.ai/architecture/ai-infrastructure-restructuring.md` records the durable restructuring decisions, including the C043 manual-activation decision.
+- `.ai/architecture/ai-infrastructure-restructuring.md` records the durable restructuring decisions, including the C044 manual-activation decision.
 
 ## Decisions carried forward
 
@@ -67,14 +67,14 @@ C043 completed the investigation of the practical user-facing interface for `ACT
 - `.ai/architecture/README.md`
 - `.ai/architecture/ai-infrastructure-restructuring.md`, sections 34–35 and surrounding current architecture context
 - `.ai/architecture/faq/manual-activation.md`
-- `.ai/handoffs/C/C043-Architecture-Research.md`
+- `.ai/handoffs/C/C044-Architecture-Research.md`
 
 ## Important constraints
 
 - Preserve the `.ai/AGENTS.md` → `.ai/INDEX.md` → ACTIVATE → canonical-owner architecture.
 - Keep canonical semantics in their existing owners; architecture notes and FAQ material MUST NOT become competing semantic owners.
 - Do not invent dedicated command IDs or a new command layer merely to expose existing capabilities.
-- Do not reopen the resolved C043 manual-activation interface without new evidence.
+- Do not reopen the resolved C044 manual-activation interface without new evidence.
 - Keep the next investigation bounded to one concrete Architecture & Research question.
 - Any repository mutation MUST follow `.ai/rules/repository.md` write-safety requirements.
 - Do not modify the predecessor handoff merely because it was consumed.
@@ -85,15 +85,15 @@ C043 completed the investigation of the practical user-facing interface for `ACT
 - Bootstrap context supplied by the user is valid: `PREVIOUS_CHAPTER = 043`, `CURRENT_CHAPTER = 044`, `SPECIALIZATION = C`, `SHORT_NAME = Architecture & Research`.
 - `.ai/config.yaml` confirms repository `paulhuman/aip-mirror`, default branch `main`, and `C → Architecture & Research`.
 - The required bootstrap owners were reread during initialization.
-- The predecessor handoff `.ai/handoffs/C/C043-Architecture-Research.md` was read successfully.
-- C043 identifies no unresolved architecture question from its bounded manual-activation investigation.
+- The predecessor handoff `.ai/handoffs/C/C044-Architecture-Research.md` was read successfully.
+- C044 identifies no unresolved architecture question from its bounded manual-activation investigation.
 - The current receiving handoff did not exist before this bootstrap.
 - Repository write and commit capability is available; the WRITE-CAPABLE bootstrap branch applies.
 - The receiving handoff is being created as required by BOOTSTRAP.
 
 ## Inferred
 
-- C044 should begin by selecting the next concrete Architecture & Research question rather than extending the already-resolved activation-interface work.
+- C045 should begin by selecting the next concrete Architecture & Research question rather than extending the already-resolved activation-interface work.
 
 ## Assumed / unverified
 
@@ -107,7 +107,7 @@ C043 completed the investigation of the practical user-facing interface for `ACT
 
 Identify the next concrete Architecture & Research question from the current repository state and existing architecture TODO/open-question records. Before changing architecture, inspect the relevant canonical owner and supporting architecture context, then define a small, reviewable scope for the investigation.
 
-Do not reopen the C043 manual activation interface unless new repository evidence demonstrates an inconsistency.
+Do not reopen the C044 manual activation interface unless new repository evidence demonstrates an inconsistency.
 
 ## Recommended starting context
 
@@ -116,11 +116,11 @@ Do not reopen the C043 manual activation interface unless new repository evidenc
 3. `.ai/skills/activation/SKILL.md` — resolved ACTIVATE / REFRESH / TRACE semantics, if the next question touches activation.
 4. `.ai/architecture/README.md` — architecture and FAQ ownership boundary.
 5. `.ai/rules/workflow.md` — research, documentation, and repository inspection constraints.
-6. `.ai/handoffs/C/C043-Architecture-Research.md` — predecessor checkpoint and explicit C044 starting constraint.
+6. `.ai/handoffs/C/C044-Architecture-Research.md` — predecessor checkpoint and explicit C045 starting constraint.
 
 ## Bootstrap verification
 
 - Conversation, Specialization, Chapter, and Previous chapter identify the receiving chapter correctly.
 - The predecessor handoff was read successfully.
 - The immediate next task is a real post-bootstrap task: identify the next bounded Architecture & Research question.
-- The handoff contains sufficient starting context to continue without reconstructing C043 from conversation history.
+- The handoff contains sufficient starting context to continue without reconstructing C044 from conversation history.
