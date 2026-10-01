@@ -1,20 +1,20 @@
 # Conversation Handoff
 
 **Conversation:**
-C022 — Architecture & Research
+C023 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-022
+023
 
 **Previous chapter:**
-021
+022
 
 ## Bootstrap state
 
-C022 was received from the canonical repository state and continued the Iteration 2 restructuring.
+C023 was received from the canonical repository state and continued the Iteration 2 restructuring.
 
 The repository has now moved beyond the original pre-physical-restructuring plan.
 
@@ -297,7 +297,7 @@ Therefore:
 
 This is now durable Iteration 2 knowledge.
 
-## Architecture files updated in C022
+## Architecture files updated in C023
 
 The following files were explicitly updated to preserve this discovery and remove stale planning:
 
@@ -384,25 +384,25 @@ Do not restart the old semantic-comparison stage.
 
 ## Migration status
 
-C022 is READY_FOR_HANDOFF.
+C023 is READY_FOR_HANDOFF.
 
 The receiving chapter should be:
 
-C023 — Architecture & Research
+C024 — Architecture & Research
 
 The receiving bootstrap should:
 
 - read this handoff from .ai/handoffs/C/;
 - read the updated three architecture files;
 - read the current repository rules/lifecycle/workflow as needed;
-- verify that C022 is READY_FOR_HANDOFF;
-- transition C022 to HANDED_OFF;
-- create C023 as DRAFT;
-- continue from the current repository state rather than reconstructing C020/C021 history.
+- verify that C023 is READY_FOR_HANDOFF;
+- transition C023 to HANDED_OFF;
+- create C024 as DRAFT;
+- continue from the current repository state rather than reconstructing C021/C022 history.
 
 ## Things not to redo
 
-- Do not reconstruct the old C020 reasoning from chat history.
+- Do not reconstruct the old C021 reasoning from chat history.
 - Do not restart MEC theory.
 - Do not redo the blind Grok/Qwen reviews.
 - Do not treat the original v2 target tree as an unexecuted plan.
@@ -418,7 +418,7 @@ The receiving bootstrap should:
 
 Before considering the migration complete, verify:
 
-- C022 status is READY_FOR_HANDOFF;
+- C023 status is READY_FOR_HANDOFF;
 - the updated architecture files are present at their current .ai/ paths;
 - the stale lifecycle path-resolution dependency has been removed;
 - the new repository path-resolution ownership is present;
