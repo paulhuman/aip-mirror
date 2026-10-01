@@ -70,6 +70,22 @@ The operation ends when all work required to produce and, where applicable, veri
 
 A repository read made only to report an already-completed result is not part of the operation. A read still required to complete or verify the result is part of the operation.
 
+## Manual invocation
+
+Users MAY request ACTIVATE, REFRESH, or TRACE directly in natural language. These are not separate commands or capabilities.
+
+Examples:
+
+- “Activate the context for this operation.”
+- “Refresh the current activation context.”
+- “Show the TRACE for ACTIVATE.”
+- “REFRESH and show TRACE.”
+- “Reread the current canonical owners before we continue and show what was activated.”
+
+When ACTIVATE is requested manually, identify the current operation and reread the canonical owners required for that operation. When REFRESH is requested, repeat ACTIVATE. When TRACE is requested, present observable activation evidence without exposing hidden reasoning.
+
+See `.ai/architecture/faq/manual-activation.md` for practical examples and usage guidance.
+
 ## Boundary
 
     INDEX / caller
