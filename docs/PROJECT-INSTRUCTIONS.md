@@ -20,10 +20,10 @@ Each workstream may span multiple conversation chapters. Chapter identifiers use
 [A-Z][0-9]{3}
 ```
 
-The chapter number advances within the specialization letter, using three digits:
+The chapter number advances within the specialization letter, using three digits, starting at `001`:
 
 ```text
-A000 → A001 → ... → A999
+A001 → A002 → ... → A999
 ```
 
 Conversation lifecycle, chapter transitions, and handoff state are defined by:
