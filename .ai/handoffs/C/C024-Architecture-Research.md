@@ -1,22 +1,22 @@
 # Conversation Handoff
 
 **Conversation:**
-C024 — Architecture & Research
+C025 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-024
+025
 
 **Previous chapter:**
-023
+024
 
 ## Starting objective
 
 Continue Iteration 2 from the current repository state after the first repository-wide consistency sweep.
 
-The immediate task is to inspect and repair the bounded set of project-specific leakage and ownership inconsistencies identified by C023. Do not return to semantic-comparison or target-tree planning.
+The immediate task is to inspect and repair the bounded set of project-specific leakage and ownership inconsistencies identified by C024. Do not return to semantic-comparison or target-tree planning.
 
 ## Durable context
 
@@ -46,9 +46,9 @@ After every MOVE, RENAME, DECOMPOSE, or canonical-owner change:
 6. commit;
 7. verify the resulting repository state.
 
-## C023 sweep results
+## C024 sweep results
 
-The C023 repair frontier has been worked through in C024.
+The C024 repair frontier has been worked through in C025.
 
 Completed:
 
@@ -56,7 +56,7 @@ Completed:
 - separated project repository identity/configuration into `.ai/config.yaml`;
 - preserved repository path-resolution and safety mechanics in `.ai/rules/repository.md`;
 - centralized Chapter Identifier Format ownership in `.ai/rules/handoff/lifecycle.md`;
-- repaired stale operational references exposed by the C020–C024 consistency pass;
+- repaired stale operational references exposed by the C021–C025 consistency pass;
 - reduced independent-review onboarding to the current reusable workflow surface;
 - verified remaining checked historical matches are legitimate migration history rather than active operational references.
 
@@ -100,11 +100,11 @@ No further recovery work remains in this TODO.
 
 ## Migration boundary
 
-C024 is complete enough to hand off. The receiving chapter should continue from the repository state represented by this handoff and the durable architecture notes; it should not create a future chapter handoff as part of bootstrap.
+C025 is complete enough to hand off. The receiving chapter should continue from the repository state represented by this handoff and the durable architecture notes; it should not create a future chapter handoff as part of bootstrap.
 
 ## Things not to redo
 
-- Do not reconstruct C020/C021/C022 from conversation history.
+- Do not reconstruct C021/C022/C023 from conversation history.
 - Do not restart semantic comparison.
 - Do not rebuild the old target tree.
 - Do not repeat completed physical moves.
