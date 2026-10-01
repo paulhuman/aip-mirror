@@ -105,7 +105,7 @@ The goal is to keep TRACE observable and useful without introducing tracing life
 - C041's ACTIVATE / OPERATION READS model is recorded in the durable architecture record.
 - The current chapter can continue from durable repository state without reconstructing C041 from conversation history.
 
-### Confirmed
+### Resolved decision
 
 - The operation-boundary question is resolved semantically rather than through a new observable lifecycle.
 - An operation ends when all work required to produce and, where applicable, verify the requested substantive result is complete.
