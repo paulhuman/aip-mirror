@@ -25,13 +25,13 @@ INDEX MUST NOT reproduce the detailed procedure owned by the target rule, skill,
 
 ## Command surface
 
-The following are the currently documented user-facing command phrases. Their exact future command IDs/syntax remain provisional.
+The current documented user-facing command surface is:
 
 | Command phrase | Semantic operation | Canonical owner | Read before execution |
 |---|---|---|---|
-| `Пора обновить handoff` | checkpoint current chapter | `.ai/skills/handoff/SKILL.md` | `.ai/rules/handoff/lifecycle.md`; current handoff |
-| `Пора выполнить миграцию в чат [A-Z][0-9]{3}` | migrate current chapter | `.ai/skills/handoff/SKILL.md` + `.ai/workflows/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow; current handoff |
-| `Пора выдать bootstrap-инструкцию` | generate bootstrap instruction for the future receiving chapter | `.ai/skills/handoff/SKILL.md` + `.ai/workflows/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow |
+| `>>handoff` | checkpoint current chapter | `.ai/skills/handoff/SKILL.md` | `.ai/rules/handoff/lifecycle.md`; current handoff |
+| `>>migrate <chapter>` | migrate current chapter | `.ai/skills/handoff/SKILL.md` + `.ai/workflows/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow; current handoff |
+| `>>generate-bootstrap <chapter>` | generate bootstrap instruction for the future receiving chapter | `.ai/skills/handoff/SKILL.md` + `.ai/workflows/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow; current handoff |
 
 The table records only information needed to recognize and activate the canonical operation. It does not define write authorization, commit construction, or workflow steps.
 

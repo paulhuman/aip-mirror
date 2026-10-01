@@ -132,11 +132,68 @@ A READ-ONLY AI MUST prepare the proposed handoff and manual commit message witho
 
 ## Bootstrap instruction
 
-The standard migration workflow generates the bootstrap instruction. If it was omitted, the user MAY say:
+The standard migration workflow generates the bootstrap instruction. The standalone operation is:
 
-    Пора выдать bootstrap-инструкцию
+    >>generate-bootstrap <chapter>
+
+Use it when the bootstrap transport for a future receiving chapter needs to be generated or regenerated independently of migration. It generates transport only; it does not execute the receiving chapter's BOOTSTRAP workflow, create the receiving handoff, or change the current conversation identity.
+
+Normal migration remains:
+
+    >>migrate <chapter>
+
+and MUST generate the bootstrap transport as its terminal step.
+
+The standard generated transport is:
+
+    Initialize a new conversation chapter. Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
+
+    PREVIOUS_CHAPTER = <current chapter>
+    CURRENT_CHAPTER = <target chapter>
+    SPECIALIZATION = <current specialization>
+    SHORT_NAME = <resolved short name>
+
+The generated transport MUST contain the resolved `SHORT_NAME`.
 
 The instruction is for a future receiving conversation and MUST NOT be presented as evidence that the receiving chapter has already started.
+
+## Manual bootstrap templates
+
+Manual bootstrap transport MAY be used when starting the first chapter directly or recovering from an interrupted migration.
+
+### Template A — first chapter
+
+    Initialize a new conversation chapter. Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
+
+    PREVIOUS_CHAPTER = N/A
+    CURRENT_CHAPTER = <three-digit chapter>
+    SPECIALIZATION = <single uppercase specialization letter>
+    SHORT_NAME = <short conversation name>
+
+### Template B — interrupted migration recovery
+
+    Initialize a new conversation chapter as a recovery from an interrupted migration. Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
+
+    PREVIOUS_CHAPTER = <three-digit previous chapter>
+    CURRENT_CHAPTER = <three-digit current chapter>
+    SPECIALIZATION = <single uppercase specialization letter>
+    SHORT_NAME = <short conversation name>
+
+The recovery wording is descriptive context only. It does not define a `>>recover` operation or a new lifecycle state.
+
+If `SHORT_NAME` is omitted from a manual bootstrap message, BOOTSTRAP MUST resolve it from `.ai/config.yaml` through:
+
+    SPECIALIZATION → specializations.<SPECIALIZATION>.short_name
+
+If `SHORT_NAME` is supplied, BOOTSTRAP uses the supplied value unless it is malformed or unusable. If no supplied or configured short name is available, BOOTSTRAP MUST stop and report the unresolved value rather than guessing.
+
+The canonical bootstrap runtime contract remains exactly:
+
+    PREVIOUS_CHAPTER
+    CURRENT_CHAPTER
+    SPECIALIZATION
+
+`SHORT_NAME` remains contextual data rather than a fourth canonical runtime input.
 
 ## Writing rules
 
