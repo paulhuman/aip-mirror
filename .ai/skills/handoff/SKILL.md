@@ -146,14 +146,19 @@ and MUST generate the bootstrap transport as its terminal step.
 
 The standard generated transport is:
 
-    Initialize a new conversation chapter. Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
+    Initialize a new conversation chapter for the repository:
+    https://github.com/paulhuman/aip-mirror
+
+    Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
 
     PREVIOUS_CHAPTER = <current chapter>
     CURRENT_CHAPTER = <target chapter>
     SPECIALIZATION = <current specialization>
     SHORT_NAME = <resolved short name>
 
-The generated transport MUST contain the resolved `SHORT_NAME`.
+The generated transport MUST contain an explicit repository locator and the resolved `SHORT_NAME`.
+
+The repository locator is transport context, not a canonical BOOTSTRAP runtime input. The receiving AI MUST use it to establish repository identity before resolving any repository-relative `.ai/...` path.
 
 The instruction is for a future receiving conversation and MUST NOT be presented as evidence that the receiving chapter has already started.
 
@@ -163,7 +168,10 @@ Manual bootstrap transport MAY be used when starting the first chapter directly 
 
 ### Template A — first chapter
 
-    Initialize a new conversation chapter. Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
+    Initialize a new conversation chapter for the repository:
+    https://github.com/paulhuman/aip-mirror
+
+    Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
 
     PREVIOUS_CHAPTER = N/A
     CURRENT_CHAPTER = <three-digit chapter>
@@ -172,7 +180,10 @@ Manual bootstrap transport MAY be used when starting the first chapter directly 
 
 ### Template B — interrupted migration recovery
 
-    Initialize a new conversation chapter as a recovery from an interrupted migration. Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
+    Initialize a new conversation chapter as a recovery from an interrupted migration for the repository:
+    https://github.com/paulhuman/aip-mirror
+
+    Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
 
     PREVIOUS_CHAPTER = <three-digit previous chapter>
     CURRENT_CHAPTER = <three-digit current chapter>
