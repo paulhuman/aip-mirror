@@ -1,28 +1,28 @@
 # Conversation Handoff
 
 **Conversation:**
-C036 — Architecture & Research
+C037 — Architecture & Research
 
 **Specialization:**
 C
 
 **Chapter:**
-036
+037
 
 **Previous chapter:**
-035
+036
 
 ## Starting objective
 
-Continue the bounded Architecture & Research work after the C035 semantic consistency sweep. The command-surface syntax question has been resolved: `>>` is accepted as the stable command prefix, with minimal grammar `>>operation [arguments...]`. The next bounded question concerns the semantics of `>>bootstrap` before active command references are migrated.
+Continue the bounded Architecture & Research work after the C036 semantic consistency sweep. The command-surface syntax question has been resolved: `>>` is accepted as the stable command prefix, with minimal grammar `>>operation [arguments...]`. The next bounded question concerns the semantics of `>>bootstrap` before active command references are migrated.
 
 ## Starting state
 
-C035 completed the semantic consistency sweep for the simplified handoff model. The active canonical .ai infrastructure no longer uses the former handoff lifecycle state machine. The architecture record intentionally retains historical descriptions of the former model.
+C036 completed the semantic consistency sweep for the simplified handoff model. The active canonical .ai infrastructure no longer uses the former handoff lifecycle state machine. The architecture record intentionally retains historical descriptions of the former model.
 
 The current command surface in `.ai/INDEX.md` still uses the older natural-language command phrases. No command-syntax migration has been performed yet.
 
-During the end of C035, the user selected `>>` as the preferred command prefix after bounded comparison with alternatives.
+During the end of C036, the user selected `>>` as the preferred command prefix after bounded comparison with alternatives.
 
 Proposed command form:
 
@@ -31,7 +31,7 @@ Proposed command form:
 Current examples:
 
     >>handoff
-    >>migrate C036
+    >>migrate C037
     >>bootstrap
 
 The syntax decision is now bounded and verified. Active reference migration remains a separate controlled change. INDEX and the architecture record have not yet been changed.
@@ -39,8 +39,8 @@ The syntax decision is now bounded and verified. Active reference migration rema
 ## Confirmed / observed
 
 - Repository: `paulhuman/aip-mirror`, branch `main`.
-- Current chapter: C036.
-- Previous chapter: C035.
+- Current chapter: C037.
+- Previous chapter: C036.
 - Specialization: C.
 - Bootstrap runtime inputs were supplied as:
   
@@ -51,11 +51,11 @@ The syntax decision is now bounded and verified. Active reference migration rema
 - `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical chat-initialization workflow.
 - `.ai/rules/repository.md` is the canonical owner of repository identity/path resolution and write safety.
 - `.ai/skills/activation/SKILL.md` defines ACTIVATE as rereading required canonical owners; it does not execute operations or mutate the repository.
-- The C035 handoff exists and was read successfully as the predecessor handoff.
-- C035's semantic consistency sweep was committed in `091936856eef175f31c0b1cace6411972c808785`.
-- C035's own handoff was updated in `ae881735385642b71be9257b973641fa5131518e`.
-- The receiving C036 handoff did not exist before this bootstrap and is being created by C036.
-- No C036 handoff was created in advance by C035.
+- The C036 handoff exists and was read successfully as the predecessor handoff.
+- C036's semantic consistency sweep was committed in `091936856eef175f31c0b1cace6411972c808785`.
+- C036's own handoff was updated in `ae881735385642b71be9257b973641fa5131518e`.
+- The receiving C037 handoff did not exist before this bootstrap and is being created by C037.
+- No C037 handoff was created in advance by C036.
 - `.ai/INDEX.md` currently documents three active natural-language handoff commands: checkpoint, migration, and bootstrap-instruction generation.
 - `.ai/INDEX.md` explicitly says future command IDs/syntax are provisional.
 - `.ai/architecture/ai-infrastructure-restructuring.md` still contains historical command/lifecycle descriptions and must not be treated as the active semantic owner for those old mechanisms.
@@ -99,14 +99,14 @@ No active command-reference files have yet been changed for this syntax decision
 - Read `.ai/rules/repository.md` first among repository-controlled rules after configuration, as required by BOOTSTRAP.
 - Read the BOOTSTRAP workflow and applicable handoff/workflow/activation owners.
 - Invoked ACTIVATE conceptually for conversation initialization using the required canonical owner set.
-- Read predecessor handoff C035.
+- Read predecessor handoff C036.
 - Confirmed the predecessor context is sufficient to continue without guessing.
-- Created this C036 receiving handoff.
+- Created this C037 receiving handoff.
 - The initial handoff creation is the only repository mutation performed by bootstrap.
 
 ## Immediate next task
 
-C037 must continue the bounded command-semantics analysis recorded in architecture section 28.
+C038 must continue the bounded command-semantics analysis recorded in architecture section 28.
 
 First, resolve the semantic operation boundary for:
 
@@ -145,8 +145,8 @@ A concrete contract question also remains open: SHORT_NAME is required by the ha
 
 ### Confirmed
 
-- C036 is the receiving chapter.
-- C035 is the predecessor.
+- C037 is the receiving chapter.
+- C036 is the predecessor.
 - `>>` is the user's selected and accepted command prefix.
 - The minimal grammar is `>>operation [arguments...]`.
 - The active command mapping has been semantically checked:
@@ -193,14 +193,14 @@ Read:
 Then continue with the bounded syntax decision and command-reference inventory. Do not start a broad .ai refactor.
 
 
-## Migration checkpoint for C037
+## Migration checkpoint for C038
 
-C036 is being migrated to C037.
+C037 is being migrated to C038.
 
 The durable architecture observation from this chapter is recorded in:
 
     .ai/architecture/ai-infrastructure-restructuring.md
-    section 28 — C036 — Command-surface semantics and migration composition
+    section 28 — C037 — Command-surface semantics and migration composition
 
 The key reliability finding is:
 
@@ -220,4 +220,4 @@ The naming question for that standalone operation is still open. The previous sh
 
 The first-chapter initialization command is also unresolved between `init` and `new`. Interrupted migration/recovery is an additional open boundary and MUST NOT be conflated with first-chapter initialization.
 
-C037 should continue from these durable decisions rather than reopening the `>>` syntax decision.
+C038 should continue from these durable decisions rather than reopening the `>>` syntax decision.
