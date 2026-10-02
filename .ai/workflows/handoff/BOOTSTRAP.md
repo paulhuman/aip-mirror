@@ -49,9 +49,23 @@ If `SHORT_NAME` is neither supplied nor resolvable from configured specializatio
 The resolved `SHORT_NAME` is the canonical short conversation title.
 It is used for the `Conversation` field and for the canonical handoff filename.
 
+For the filename, derive `FILENAME_SHORT_NAME` by replacing every space in `SHORT_NAME` with a hyphen. This normalization is part of the canonical handoff filename contract.
+
 For generated migration transport, the value MUST already be resolved from the specialization vocabulary. The receiving AI MUST NOT require the user to repeat specialization or short-name context.
 
-    .ai/handoffs/<specialization>/<chapter>-<short-name>.md
+    .ai/handoffs/<SPECIALIZATION>/<CHAPTER_ID>-<FILENAME_SHORT_NAME>.md
+
+For example:
+
+    SPECIALIZATION = A
+    CURRENT_CHAPTER = 0001
+    CHAPTER_ID = A0001
+    SHORT_NAME = JSX Prototype
+    FILENAME_SHORT_NAME = JSX-Prototype
+
+    .ai/handoffs/A/A0001-JSX-Prototype.md
+
+A handoff filename MUST NOT be constructed as `<CURRENT_CHAPTER>-<SHORT_NAME>.md`.
 
 A handoff-producing chapter prepares its own handoff for the next chapter; a receiving chapter executes bootstrap with itself as `CURRENT_CHAPTER` and the predecessor as `PREVIOUS_CHAPTER`.
 
@@ -110,7 +124,11 @@ not:
 
 `CURRENT_CHAPTER` and `PREVIOUS_CHAPTER` therefore carry only the numeric chapter component. The specialization is carried separately by `SPECIALIZATION`.
 
-The full chapter identifier is derived from these values as `SPECIALIZATION` + `CURRENT_CHAPTER` (for example, `C` + `033` = `C0033`). The predecessor handoff path is derived from `SPECIALIZATION` + `PREVIOUS_CHAPTER` when `PREVIOUS_CHAPTER` is not `N/A`.
+The full chapter identifier is derived from these values as `SPECIALIZATION` + `CURRENT_CHAPTER` (for example, `C` + `0033` = `C0033`). This derived value is `CHAPTER_ID`.
+
+    CHAPTER_ID = SPECIALIZATION + CURRENT_CHAPTER
+
+The handoff filename MUST use `CHAPTER_ID`, never `CURRENT_CHAPTER` alone. The predecessor handoff path is derived from `SPECIALIZATION` + `PREVIOUS_CHAPTER` when `PREVIOUS_CHAPTER` is not `N/A`.
 
 A bootstrap message that supplies a chapter number with the specialization letter included is malformed and MUST be corrected before bootstrap proceeds.
 
@@ -218,8 +236,9 @@ After this self-check:
 1. Validate that new-chapter initialization was actually requested through the AGENTS item 6 entry path.
 2. Confirm current chapter identity, previous chapter, specialization, and supplied contextual `SHORT_NAME` from the bootstrap message.
 3. If any canonical runtime input is missing or malformed, STOP before repository mutation and report exactly what is missing or malformed.
-4. Read this file.
-5. Read .ai/rules/workflow.md, .ai/rules/handoff/references.md, and the handoff skill.
+4. Compute `CHAPTER_ID = SPECIALIZATION + CURRENT_CHAPTER` and `FILENAME_SHORT_NAME` by replacing spaces in `SHORT_NAME` with hyphens. Before repository mutation, verify that the resulting handoff path matches `.ai/handoffs/<SPECIALIZATION>/<CHAPTER_ID>-<FILENAME_SHORT_NAME>.md`. If it does not, STOP and report the mismatch.
+5. Read this file.
+5. Read .ai/rules/workflow.md, .ai/rules/handoff/references.md, the handoff skill, `.ai/handoffs/README.md`, and `.ai/architecture/README.md`. The two README files are bootstrap orientation reads, not activation owners.
 6. Read .ai/skills/activation/SKILL.md and invoke ACTIVATE.
 7. After the repository write-capability self-check, a WRITE-CAPABLE bootstrap MUST read .ai/rules/commits.md before emitting the operation-level TRACE, because the bootstrap branch includes an authorized repository commit. For a READ-ONLY bootstrap, .ai/rules/commits.md is not required solely for bootstrap.
 8. During bootstrap initialization, emit the required operation-level TRACE defined by `.ai/skills/activation/SKILL.md` before executing the applicable bootstrap branch. The TRACE MUST identify the bootstrap operation, list the canonical owners actually reread for ACTIVATE, report `status: ACTIVATED`, and include the unique additional repository files actually read in `OPERATION READS` without duplicating ACTIVATE owners. For a WRITE-CAPABLE bootstrap, `.ai/rules/commits.md` MUST therefore appear in `OPERATION READS`. If bootstrap aborts or fails after ACTIVATE, the TRACE MUST still show the activation and the `OPERATION READS` accumulated up to that point.
