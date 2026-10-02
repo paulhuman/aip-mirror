@@ -1,4 +1,4 @@
-# Manual use of ACTIVATE, REFRESH, and TRACE
+# Manual use of ACTIVATE and TRACE
 
 ## Why this exists
 
@@ -9,14 +9,12 @@ The important point is that these are **not new commands**. They are natural-lan
 ## How to think about them
 
 - `ACTIVATE` = перечитай актуальные canonical owners.
-- `REFRESH` = повтори ACTIVATE.
-- `TRACE` = покажи evidence того, что ACTIVATE действительно выполнен.
+- `TRACE` = покажи observable execution evidence в assistant response.
 
-The three concepts have different roles:
+The two concepts have different roles:
 
 ```text
 ACTIVATE ≠ выполнение задачи
-REFRESH  ≠ выполнение задачи
 TRACE    ≠ выполнение задачи
 ```
 
@@ -50,37 +48,6 @@ ACTIVATE
 
 ACTIVATE itself does not execute the requested operation.
 
-## REFRESH
-
-REFRESH is simply another way to request ACTIVATE again.
-
-A user can say:
-
-> Сделай REFRESH текущего activation context.
-
-or:
-
-> Перечитай актуальные canonical owners перед тем, как продолжим.
-
-This is useful when:
-
-- a relevant canonical file has just changed;
-- the conversation has been paused for a while;
-- the user wants to make sure the AI is working from the current repository state;
-- the user explicitly wants the activation context re-established.
-
-The semantic sequence is:
-
-```text
-REFRESH
-    ↓
-ACTIVATE
-    ↓
-ACTIVATED
-```
-
-REFRESH does not introduce another capability.
-
 ## TRACE
 
 TRACE is an observable presentation of activation, not another operation.
@@ -102,7 +69,7 @@ TRACE
     status: ACTIVATED
 ```
 
-TRACE should describe observable execution facts. It should not expose hidden reasoning.
+TRACE should describe observable execution facts. It should not expose hidden reasoning. For operation-level TRACE, the completed TRACE block is inserted into the assistant response after the operation is complete.
 
 For an operation-level TRACE, the presentation may also contain:
 
@@ -129,9 +96,9 @@ ACTIVATE
     ↓
 canonical owners reread
     ↓
-TRACE
-    ↓
 actual operation
+    ↓
+TRACE inserted into assistant response
 ```
 
 ## Natural-language examples
@@ -139,9 +106,7 @@ actual operation
 The user does not need a special command syntax. Examples:
 
 - «Активируй контекст для этой операции.»
-- «Сделай REFRESH текущего context.»
 - «Покажи TRACE последнего ACTIVATE.»
-- «REFRESH и покажи TRACE.»
 - «Давай сначала перечитаем актуальные canonical owners, прежде чем продолжать работу. Покажи, что именно активировалось.»
 
 These requests should be interpreted through the existing activation semantics rather than through a new command registry.
@@ -152,18 +117,13 @@ When the user says **ACTIVATE**, the AI should understand it as:
 
 > перечитай актуальные canonical owners, необходимые для текущей операции.
 
-When the user says **REFRESH**, the AI should understand it as:
-
-> повтори ACTIVATE, потому что текущий context нужно перечитать заново.
-
 When the user says **TRACE**, the AI should understand it as:
 
-> покажи наблюдаемое evidence выполнения ACTIVATE.
+> покажи observable execution evidence в assistant response.
 
 The core model remains:
 
 ```text
 ACTIVATE = перечитай актуальные canonical owners
-REFRESH  = повтори ACTIVATE
-TRACE    = покажи evidence того, что ACTIVATE действительно выполнен
+TRACE    = вставь observable execution evidence в assistant response
 ```
