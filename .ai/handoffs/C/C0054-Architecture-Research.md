@@ -14,7 +14,7 @@ C
 
 ## Starting objective
 
-Continue Architecture & Research from the durable repository state established at the end of C0053. Complete the real runtime verification of the operation-level TRACE presentation contract, with particular focus on the remaining >>migrate 0054 path and the corresponding runtime test result.
+Continue Architecture & Research from the durable repository state established at the end of C0053. Complete the real runtime verification of the operation-level TRACE presentation contract and leave a durable checkpoint for the next conversation chapter.
 
 ## Known starting implementation state
 
@@ -42,8 +42,8 @@ Continue Architecture & Research from the durable repository state established a
 - The TRACE presentation contract is explicit: execute the operation, accumulate actual reads, assemble the canonical fenced monospace TRACE, and insert it into the assistant response.
 - Response-level TRACE presentation has already been observed.
 - Real >>handoff execution was completed and verified in C0053, with commit da585569c9cbf0d74a6bc3056e0e25d5ab1b6594.
-- Real >>migrate 0054 was authorized in C0053 and is the remaining repository-mutating operation in the runtime verification run.
-- The reusable cold-start test scenario remains a four-command structural audit, while the active INDEX currently documents five user-facing commands.
+- Real >>migrate 0054 was not executed because C0054 was initialized directly; the runtime migration verification was instead completed as a real C0054→C0055 operation.
+- The reusable cold-start test scenario has now been expanded to cover the active five-command surface at execution time; the exact command names remain derived from the current INDEX.
 
 ## Decisions carried forward
 
@@ -58,7 +58,7 @@ Continue Architecture & Research from the durable repository state established a
 - For repository-mutating handoff/migration work, .ai/rules/commits.md remains an operation dependency.
 - Architecture notes preserve durable reasoning but are not active semantic owners.
 - The runtime verification must test the actual assistant-response presentation boundary rather than merely simulate repository command behavior.
-- The existing cold-start scenario should remain stable unless runtime evidence identifies a narrowly scoped defect in the scenario itself.
+- The reusable cold-start scenario may be intentionally revised when its defined test coverage must track the active command surface.
 - New runtime test results belong under .ai/architecture/tests/results/<test-name>/<run-id>.md and historical results must remain separate.
 
 ## Relevant files and references
@@ -113,35 +113,33 @@ Continue Architecture & Research from the durable repository state established a
 - .ai/rules/commits.md was read as a WRITE-CAPABLE bootstrap operation dependency before mutation.
 - The predecessor state records response-level TRACE presentation as observed and real >>handoff execution as completed and verified.
 - The active TRACE presentation contract remains implemented and explicit.
-- C0054 is the receiving chapter and its initial handoff is being created by this bootstrap operation.
+- Real C0054→C0055 migration runtime verification completed successfully, including mutation, read-back, diff/scope verification, bootstrap transport generation, and user-visible TRACE.
+- The runtime TRACE observed for migration separated ACTIVATE owners from additional OPERATION READS without duplication.
+- The runtime result is recorded at .ai/architecture/tests/results/cold-start-command-trace/20261002-1352-c0054-to-c0055-runtime.md.
+- The reusable cold-start scenario was updated to the active five-command surface and committed as 86805f747886b8b4f693b40114aeb5daec321be1.
+- C0054 remains the active chapter; C0055 is only the generated receiving-chapter bootstrap target.
 
 ## Inferred
 
-- The next useful step is to complete the already-authorized real >>migrate 0054 runtime path and record its actual evidence rather than redesigning TRACE infrastructure.
-- The existing cold-start scenario should remain the baseline for comparison unless the runtime evidence identifies a concrete scenario defect.
-- Any discrepancy should first be classified as observed runtime behavior, test-scenario limitation, or architecture question before changing canonical infrastructure.
+- The runtime TRACE presentation verification is complete for the tested migration path; no TRACE architecture redesign is indicated by this evidence.
+- Future regression runs should use the expanded five-command reusable cold-start scenario.
+- Any future discrepancy should first be classified as observed runtime behavior, test-scenario limitation, or architecture question before changing canonical infrastructure.
 
 ## Assumed / unverified
 
 - The earlier C0053→C0054 migration path was not executed as a real migration operation because C0054 was initialized directly in the receiving conversation.
-- The current chapter can still provide valid runtime evidence by executing a real C0054→C0055 migration and observing its mutation, bootstrap transport, and final TRACE presentation.
-- It is not yet verified whether the complete runtime read set for migration matches the expected separation between ACTIVATE owners and OPERATION READS.
-- It is not yet verified whether the five-command active INDEX surface should be reflected in the reusable cold-start scenario; this remains a test-scope question, not an assumption to change immediately.
+- The C0054→C0055 migration runtime evidence is complete for the tested path; the reusable five-command scenario remains a future regression test rather than a newly executed full five-command runtime run.
 
 ## Open
 
-- Complete the real >>migrate 0055 operation requested in C0054.
-- Record the actual C0054→C0055 migration runtime result, including repository mutation, read-back, diff/scope verification, generated bootstrap transport, and user-visible TRACE.
-- Verify that ACTIVATE owners are not duplicated under OPERATION READS.
-- Verify that OPERATION READS reflects actual repository files read during execution.
-- Create a new runtime result artifact under .ai/architecture/tests/results/cold-start-command-trace/<run-id>.md rather than rewriting the historical simulation result.
-- Compare the runtime evidence with the existing cold-start scenario and classify any discrepancy before changing architecture.
+- Initialize the receiving C0055 chapter in the next conversation using the generated bootstrap transport.
+- Run the expanded five-command cold-start regression scenario when its next test execution is scheduled.
 - Re-run relevant consistency verification after any active routing, bootstrap, activation, or handoff change.
-- Decide whether the active five-command surface requires a bounded update to the reusable cold-start scenario after the runtime evidence is complete.
+- Do not reopen resolved TRACE architecture questions without new runtime evidence.
 
 ## Immediate next task
 
-Execute and verify the real >>migrate 0055 operation requested in C0054. Then record the complete runtime evidence in a new test-result artifact and determine whether TODO 3 is satisfied or whether a narrowly scoped follow-up is required.
+Start C0055 through the generated bootstrap transport, then continue from the durable state recorded here. The next regression-oriented test should use the expanded five-command cold-start scenario.
 
 ## Recommended starting context
 
@@ -158,12 +156,12 @@ Execute and verify the real >>migrate 0055 operation requested in C0054. Then re
 11. .ai/rules/commits.md
 12. .ai/skills/commits/SKILL.md
 
-## Bootstrap verification
+## Handoff checkpoint verification
 
-- C0054 is the active receiving chapter.
+- C0054 remains the active chapter at handoff time.
 - The chapter header uses the required four-digit chapter format.
-- The predecessor C0053 handoff was read successfully before creating this handoff.
-- Required canonical bootstrap owners were reread before repository mutation.
+- The C0054 handoff was read before this checkpoint update.
+- Required handoff/activation/repository/commit owners were reread before repository mutation.
 - The write-capability branch was verified as WRITE-CAPABLE.
-- This receiving handoff is created as part of bootstrap.
-- Post-creation read-back, content verification, and changed-file scope verification are performed during bootstrap.
+- The current handoff was updated as a checkpoint rather than creating a new receiving handoff.
+- Post-update read-back, content verification, and changed-file scope verification are performed for this checkpoint.
