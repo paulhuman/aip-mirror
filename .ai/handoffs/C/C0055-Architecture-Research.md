@@ -134,7 +134,6 @@ Continue Architecture & Research from the durable state established by C0054. Th
 ## Open
 
 - Execute the expanded five-command cold-start regression with the renamed `>>normative-language` command and verify its skill-to-rule read boundary.
-
 - Re-run relevant consistency verification after any active routing, bootstrap, activation, or handoff change.
 - Execute a fresh cold-start regression after the filename-contract changes, with particular attention to the `A0001-JSX-Prototype.md` derivation case.
 - Decide separately how to reconcile the historical noncanonical `0001-JSX Prototype.md` / `0002-JSX Prototype.md` artifacts after the new contract is regression-tested.
@@ -144,8 +143,6 @@ Continue Architecture & Research from the durable state established by C0054. Th
 ## Immediate next task
 
 Continue in C0056 by running the fresh cold-start regression against the updated command surface, especially `>>normative-language`, and record the runtime result without reopening the resolved generic ACTIVATE architecture.
-
-Continue C0055 from the durable state above. The next regression-oriented test should execute the expanded five-command cold-start scenario and record a new result artifact without rewriting the reusable scenario unless the test definition itself intentionally changes.
 
 ## Recommended starting context
 
