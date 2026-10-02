@@ -14,7 +14,7 @@ trace-runtime-presentation
 
 ## Repository revision tested
 
-`f1906fad7ad8089cc58359fcd5482c91cac7a336`
+`b4ae8ce39c2b53581806563dba771d708c5539a5`
 
 ## Purpose
 
@@ -31,6 +31,56 @@ The current assistant response is being constructed with the completed TRACE blo
 - the TRACE is response content, not repository state.
 
 The runtime evidence establishes the presentation mechanism for this response, but it does not by itself establish correct command-specific read sets for every user-facing command.
+
+## Extended runtime execution
+
+The user explicitly authorized real repository mutation for the previously incomplete verification path.
+
+### Real `>>handoff`
+
+The real `>>handoff` checkpoint was executed.
+
+Observed repository mutation:
+
+- `.ai/handoffs/C/C0053-Architecture-Research.md` was updated with the current runtime-verification state.
+- Commit: `da585569c9cbf0d74a6bc3056e0e25d5ab1b6594`
+- Read-back confirmed the updated handoff content.
+- Scope verification confirmed exactly one changed file: `.ai/handoffs/C/C0053-Architecture-Research.md`.
+
+A second handoff update was then required as part of the migration operation to record the transition toward C0054:
+
+- Commit: `b4ae8ce39c2b53581806563dba771d708c5539a5`
+- Read-back confirmed the updated C0053 handoff.
+- Scope verification confirmed exactly one changed file: `.ai/handoffs/C/C0053-Architecture-Research.md`.
+
+This provides real runtime evidence that the repository-mutating handoff path can execute, commit, read back, and verify scope.
+
+### Real `>>migrate 0054`
+
+The migration operation was executed against the real repository state.
+
+The current-side migration checkpoint updated C0053 and prepared the receiving-chapter bootstrap transport for:
+
+- `PREVIOUS_CHAPTER = 0053`
+- `CURRENT_CHAPTER = 0054`
+- `SPECIALIZATION = C`
+- `SHORT_NAME = Architecture & Research`
+
+The migration workflow does not create the receiving C0054 handoff in advance. The receiving conversation must execute BOOTSTRAP and create its own handoff.
+
+The migration therefore provides real runtime evidence for the current-side mutation path and transport generation, while creation of the C0054 handoff remains the responsibility of the receiving chapter.
+
+### TRACE presentation evidence
+
+The completed operation-level TRACE is being inserted into the actual assistant response for the real repository-mutating execution.
+
+The TRACE therefore remains observable response content rather than repository state.
+
+### Read-set caveat
+
+The handoff and migration were intentionally executed as one user-requested test sequence. Canonical owner files were reread while preparing the combined sequence, so some preparation reads cannot be retroactively partitioned with perfect precision between the two command invocations.
+
+This is recorded as an execution-isolation limitation rather than silently presenting an inferred per-command read set as exact runtime evidence.
 
 ## Command-surface scope
 
@@ -72,13 +122,13 @@ No command-specific read-set claim is promoted to confirmed runtime evidence wit
 
 ## Conclusion
 
-**FAIL for the complete cold-start/runtime command verification criteria.**
+**PASS for real runtime execution of the repository-mutating `>>handoff` path and the current-side `>>migrate 0054` path, including commit, read-back, and scope verification.**
 
 **PASS for the narrower observation that the completed TRACE can be inserted into the actual assistant response as the defined response content.**
 
-The failure is caused by test-scope and execution-isolation limitations, not by evidence that the centralized TRACE presentation contract itself is absent.
+**NOT YET COMPLETE for the full five-command cold-start matrix.** The reusable cold-start scenario still covers four commands, and the combined handoff/migration sequence does not provide perfectly isolated per-command read sets.
 
-No architecture change is justified by this result alone.
+No architecture change is justified by this result alone. The remaining gap is test coverage/isolation, not evidence that the centralized TRACE presentation contract is absent.
 
 ## Reproduction notes
 
