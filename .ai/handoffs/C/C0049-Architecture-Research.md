@@ -137,7 +137,7 @@ Continue Architecture & Research from the durable repository state at the end of
 
 ## Immediate next task
 
-Analyze `.ai/architecture/tests/results/cold-start-command-trace/20261002-0900-cold-start-command-trace.md` against `.ai/architecture/tests/cold-start-command-trace.md`, `.ai/INDEX.md`, and the canonical owners for the four active commands. Identify concrete observations and any bounded discrepancies before deciding whether further repository changes are justified.
+Continue the bounded ACTIVATE / operation-level TRACE architecture work: update `.ai/skills/activation/SKILL.md` as the single TRACE owner, add one shared routing rule to `.ai/INDEX.md`, and align `.ai/workflows/handoff/BOOTSTRAP.md` with the unified model. Then perform runtime verification of the four documented `>>` commands.
 
 ## Recommended starting context
 
@@ -151,6 +151,17 @@ Analyze `.ai/architecture/tests/results/cold-start-command-trace/20261002-0900-c
 8. `.ai/rules/repository.md` — repository read/write safety.
 9. `.ai/skills/commits/SKILL.md` — handoff commit convention.
 10. `.ai/handoffs/C/C0048-Architecture-Research.md` — predecessor checkpoint.
+
+## Current checkpoint
+
+- The long-form \`.ai/architecture/ai-infrastructure-restructuring.md\` was archived at \`.ai/archive/architecture/ai-infrastructure-restructuring.md\`.
+- \`.ai/architecture/ai-infrastructure-restructuring.md\` was replaced with a bounded active TODO file.
+- The TODO records the accepted decision that every user-facing \`>>\` command requiring ACTIVATE MUST also expose operation-level TRACE.
+- The intended implementation is centralized in \`.ai/skills/activation/SKILL.md\`, with one shared routing clarification in \`.ai/INDEX.md\`; no per-command TRACE column is planned.
+- BOOTSTRAP is to be aligned with the same general TRACE model.
+- Historical commit-message cleanup was deliberately deferred. The four previously identified historical commits are recorded as a separate TODO.
+- GitHub's \`VERIFIED\` label on \`4ad2cd90...\` was recorded as cryptographic signature verification, distinct from project content verification.
+- The archive copy and active TODO were read back and the scope from the pre-change C0049 commit was verified as exactly two files: the archive addition and the active architecture-note replacement.
 
 ## Bootstrap verification
 
