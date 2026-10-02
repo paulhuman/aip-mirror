@@ -81,7 +81,7 @@ Use this map to find the canonical capability without reading the entire `.ai/` 
 
 ## Owner boundary
 
-INDEX may identify and route to an owner.
+INDEX identifies and routes to an owner.
 
 INDEX MUST NOT become the owner of:
 
