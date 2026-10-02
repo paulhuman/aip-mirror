@@ -72,7 +72,7 @@ After the active files are updated:
 
 Status: OPEN
 
-The canonical TRACE requirements are implemented, but runtime verification remains open because the new-chat BOOTSTRAP initialization has again failed to produce the required user-visible TRACE. This requires a separate investigation and a new runtime result artifact.
+The canonical TRACE requirements and response presentation contract are implemented, but runtime verification remains open because the existing cold-start result does not test actual user-visible delivery. A new runtime result artifact is still required.
 
 ### Investigation result — TRACE response presentation contract
 
@@ -172,7 +172,7 @@ Action:
 
 Status: RESOLVED
 
-The decision is to keep `.ai/rules/commits.md` outside the ACTIVATE owner set. For WRITE-CAPABLE BOOTSTRAP it is a required operation dependency and MUST be read before operation-level TRACE and repository mutation, so it appears in OPERATION READS.
+The decision is to keep `.ai/rules/commits.md` outside the ACTIVATE owner set. For WRITE-CAPABLE BOOTSTRAP it is a required operation dependency and MUST be read before repository mutation, so it appears in OPERATION READS.
 
 ## TODO 7 — Distinguish activation-boundary ownership from operation dependency
 
@@ -193,4 +193,4 @@ Action:
 
 Status: RESOLVED
 
-The boundary is now explicit: `.ai/rules/commits.md` is an operation dependency for WRITE-CAPABLE BOOTSTRAP, not an ACTIVATE owner. `.ai/workflows/handoff/BOOTSTRAP.md` now requires that read before TRACE and repository mutation.
+The boundary is now explicit: `.ai/rules/commits.md` is an operation dependency for WRITE-CAPABLE BOOTSTRAP, not an ACTIVATE owner. `.ai/workflows/handoff/BOOTSTRAP.md` now requires that read before repository mutation and records it in the completed TRACE.
