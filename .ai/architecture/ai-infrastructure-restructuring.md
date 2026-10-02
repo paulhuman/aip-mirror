@@ -70,9 +70,9 @@ After the active files are updated:
 - preserve the existing cold-start scenario as the stable test input;
 - create a new result artifact rather than rewriting the historical simulation result.
 
-Status: RESOLVED
+Status: OPEN
 
-The boundary is now explicit: `.ai/rules/commits.md` is an operation dependency for WRITE-CAPABLE BOOTSTRAP, not an ACTIVATE owner. `.ai/workflows/handoff/BOOTSTRAP.md` now requires that read before TRACE and repository mutation.
+The canonical TRACE requirements are implemented, but runtime verification remains open because the new-chat BOOTSTRAP initialization has again failed to produce the required user-visible TRACE. This requires a separate investigation and a new runtime result artifact.
 
 The canonical TRACE requirements are implemented, but runtime verification remains open because the new-chat BOOTSTRAP initialization has again failed to produce the required user-visible TRACE. This requires a separate investigation and a new runtime result artifact.
 
@@ -162,4 +162,6 @@ Action:
 - In particular, compare the consequences of adding `.ai/rules/commits.md` to an ACTIVATE owner set versus keeping it as an operation dependency recorded in `OPERATION READS`.
 - Resolve this together with TODO 6 rather than prematurely changing the activation boundary.
 
-Status: OPEN
+Status: RESOLVED
+
+The boundary is now explicit: `.ai/rules/commits.md` is an operation dependency for WRITE-CAPABLE BOOTSTRAP, not an ACTIVATE owner. `.ai/workflows/handoff/BOOTSTRAP.md` now requires that read before TRACE and repository mutation.
