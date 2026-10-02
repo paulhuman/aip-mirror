@@ -50,7 +50,7 @@ Continue Architecture & Research from the durable repository state established a
 - New-chapter initialization follows AGENTS item 6 and the canonical BOOTSTRAP workflow.
 - BOOTSTRAP is the ordered new-conversation initialization workflow; it is not a universal entry router.
 - ACTIVATE and TRACE are natural-language interfaces/capabilities rather than separate command IDs.
-- The active command surface is `>>handoff`, `>>migrate <chapter>`, `>>generate-bootstrap <chapter>`, and `>>explain-code`.
+- The active command surface is `>>handoff`, `>>migrate <chapter>`, `>>generate-bootstrap <chapter>`, `>>explain-code`, and `>>activate-normative-language`.
 - `SHORT_NAME` is contextual bootstrap data, not a fourth canonical BOOTSTRAP runtime input.
 - The bootstrap transport requires an explicit repository locator and resolved `SHORT_NAME`.
 - Architecture notes preserve durable reasoning but are not active semantic owners.
@@ -76,6 +76,7 @@ Continue Architecture & Research from the durable repository state established a
 - `.ai/skills/commits/SKILL.md` — handoff commit convention.
 - `.ai/workflows/handoff/BOOTSTRAP.md` — canonical new-conversation chapter initialization workflow.
 - `.ai/INDEX.md` — current routing and capability-discovery surface.
+- `.ai/rules/normative-language.md` — canonical normative-language and procedural-language conventions.
 
 ### Architecture and test context
 
@@ -108,6 +109,8 @@ Continue Architecture & Research from the durable repository state established a
 - The applicable WRITE-CAPABLE bootstrap branch applies.
 - The canonical bootstrap owners were reread before repository mutation.
 - The centralized TRACE implementation is recorded as complete in the predecessor state.
+- The TRACE response-template contract is now explicit: execute the operation, accumulate actual reads, assemble the canonical fenced monospace TRACE, and insert it into the assistant response.
+- `REFRESH` has been removed from the active protocol; its historical purpose is preserved only in `.ai/architecture/ai-infrastructure-restructuring.md`.
 - The latest cold-start result is explicitly a simulation and does not establish runtime evidence for repository-mutating commands.
 - The repository did not already contain the C0052 receiving handoff before this bootstrap.
 - The C0051 diagnosis identifies a runtime presentation-contract gap for required TRACE output.
@@ -117,6 +120,7 @@ Continue Architecture & Research from the durable repository state established a
 - The next substantive task should continue the presentation-contract investigation rather than redesigning centralized TRACE routing.
 - The existing cold-start scenario should remain the baseline unless the presentation contract requires a narrowly scoped extension.
 - The presentation contract is owned by `.ai/skills/activation/SKILL.md`, while BOOTSTRAP follows that contract as a workflow consumer.
+- `>>activate-normative-language` was added as a routing entry for explicitly rereading `.ai/rules/normative-language.md` before normative-language-sensitive work.
 
 ## Assumed / unverified
 
@@ -134,7 +138,7 @@ Continue Architecture & Research from the durable repository state established a
 
 ## Immediate next task
 
-Run the runtime verification for the new TRACE response contract. Confirm that the completed TRACE block is inserted into the assistant response, that ACTIVATE owners are not duplicated under OPERATION READS, and that OPERATION READS reflects actual repository reads without redesigning the centralized TRACE model.
+In C0053, run the runtime verification for the new TRACE response contract. Confirm that the completed TRACE block is inserted into the assistant response, that ACTIVATE owners are not duplicated under OPERATION READS, and that OPERATION READS reflects actual repository reads without redesigning the centralized TRACE model. Also use `>>activate-normative-language` whenever normative-language-sensitive repository edits are performed.
 
 ## Recommended starting context
 
