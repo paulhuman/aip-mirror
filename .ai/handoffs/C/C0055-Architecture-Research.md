@@ -58,6 +58,9 @@ Continue Architecture & Research from the durable state established by C0054. Th
 - Architecture notes preserve durable reasoning but are not active semantic owners.
 - Runtime verification must test the actual assistant-response presentation boundary rather than merely simulate repository command behavior.
 - The reusable cold-start scenario should track the active command surface and currently covers five commands.
+- The canonical handoff filename contract is now explicit: `CHAPTER_ID = SPECIALIZATION + CURRENT_CHAPTER`; handoff filenames use `CHAPTER_ID`, not `CURRENT_CHAPTER` alone.
+- `FILENAME_SHORT_NAME` is derived from `SHORT_NAME` by replacing spaces with hyphens; this is now normative for handoff filenames.
+- `.ai/handoffs/README.md` and `.ai/architecture/README.md` are bootstrap orientation reads, not activation owners.
 - New runtime test results belong under .ai/architecture/tests/results/<test-name>/<run-id>.md and historical results remain separate.
 
 ## Relevant files and references
@@ -110,6 +113,9 @@ Continue Architecture & Research from the durable state established by C0054. Th
 - The C0054 handoff records successful real C0054 → C0055 migration runtime verification.
 - User-visible TRACE presentation was observed on that migration path.
 - The reusable cold-start scenario currently defines the active five-command surface.
+- The canonical filename contract was updated in `.ai/workflows/handoff/BOOTSTRAP.md`, `.ai/rules/handoff/lifecycle.md`, and `.ai/handoffs/README.md`.
+- The updated bootstrap contract explicitly reads `.ai/handoffs/README.md` and `.ai/architecture/README.md` as operation context, not activation owners.
+- The normative-language skill requested by the user was not discoverable in the repository skill tree/search surface, so no claim is made that a dedicated normative-language skill review was executed.
 - This C0055 handoff is the receiving handoff created during bootstrap.
 
 ## Inferred
@@ -127,6 +133,8 @@ Continue Architecture & Research from the durable state established by C0054. Th
 
 - Execute the expanded five-command cold-start regression when its next test run is scheduled.
 - Re-run relevant consistency verification after any active routing, bootstrap, activation, or handoff change.
+- Execute a fresh cold-start regression after the filename-contract changes, with particular attention to the `A0001-JSX-Prototype.md` derivation case.
+- Decide separately how to reconcile the historical noncanonical `0001-JSX Prototype.md` / `0002-JSX Prototype.md` artifacts after the new contract is regression-tested.
 - Do not reopen resolved TRACE architecture questions without new runtime evidence.
 - Review any remaining active TODO items only within their existing bounded scope.
 
