@@ -14,9 +14,7 @@ N/A
 
 ## Current objective
 
-Establish D0001 as the practical Project Workshop for AIP Mirror and maintain a synchronized working context for developer tooling, repository mechanics, Codex, IDE/toolchain work, and related practical development questions.
-
-The current immediate objective is to prepare D0001 for controlled observation of Codex Desktop for Windows and, later, the VS Code Codex integration, without prematurely changing the project instruction architecture.
+Maintain D0001 as the practical Project Workshop for AIP Mirror using the repository's current `.ai` AI-infrastructure architecture. The current focus is practical tooling, Codex/Codex Desktop, IDE/toolchain work, Git/GitHub mechanics, and controlled observation of AI-assisted repository behavior.
 
 ## Completed
 
@@ -25,7 +23,10 @@ The current immediate objective is to prepare D0001 for controlled observation o
 - Verified the current repository HEAD as `21fb38ad00f3dd77f85cbb9fca4064b7cf7f67b9`.
 - Reviewed the current instruction architecture relevant to D0001, including lifecycle, handoff, repository safety, deep-understanding, and project-architecture guidance.
 - Confirmed that C0003 Lifecycle Recovery is already represented in repository history and that recovery remains explicitly authorization-gated.
-- Confirmed that the current D0001 conversation is the first chapter in specialization D, so it requires its own initial handoff rather than a previous 04-series handoff.
+- Confirmed that the current D0001 conversation is the first chapter in specialization D, so it requires its own initial handoff.
+- Confirmed that the repository has migrated from the former 04A-era `docs/handoffs/` model to the current `.ai/handoffs/<specialization>/` model.
+- Confirmed that the current handoff model has no required lifecycle-state transitions; handoffs are durable chapter snapshots.
+- Confirmed that `>>handoff` is now a checkpoint/update operation on the current handoff.
 
 ## Current implementation state
 
@@ -46,30 +47,85 @@ D0001 is a practical workshop. Its expected scope includes:
 
 D0001 does not own AIP Mirror architecture, FreeHand research, JSX behavioral implementation, or native AIP implementation.
 
+## Current AI-infrastructure model
+
+The current repository establishes this operational chain:
+
+```text
+user command
+    ↓
+.ai/INDEX.md
+    ↓
+operation identification
+    ↓
+ACTIVATE required canonical owners
+    ↓
+canonical owner procedure
+    ↓
+operation
+    ↓
+operation-level TRACE when required
+```
+
+Key current boundaries:
+
+- `.ai/AGENTS.md` is the AI operating contract and new-chapter entry point.
+- `.ai/INDEX.md` routes user-facing commands and discovers capabilities; it is not a procedure owner.
+- `.ai/config.yaml` establishes repository identity, default branch, and specialization vocabulary before repository-relative paths are resolved.
+- `.ai/rules/repository.md` owns repository identity/path resolution and write safety.
+- `.ai/rules/handoff/lifecycle.md` owns chapter identity and continuity semantics.
+- `.ai/skills/activation/SKILL.md` owns ACTIVATE and the user-visible operation-level TRACE presentation contract.
+- `.ai/skills/handoff/SKILL.md` owns handoff structure and handoff operations.
+- `.ai/workflows/handoff/BOOTSTRAP.md` owns ordered new-chapter initialization.
+- `docs/PROJECT-INSTRUCTIONS.md` is the thin project-specific instruction layer.
+- Architecture notes are durable knowledge/reference material, not automatically active semantic owners.
+
+`ACTIVATE` and `TRACE` are capabilities/natural-language interfaces, not separate command IDs. TRACE is response content: for a user-facing `>>` command whose routing requires ACTIVATE, the completed operation-level TRACE is inserted into the assistant response after the operation.
+
 ## Decisions
 
 - Chapter identity and model selection are separate concerns. A model is selected by task complexity/capability, not by chapter number.
-- D0001 may investigate practical tooling behavior and report architectural findings, but it must not silently replace decisions owned by C0003 or another responsible specialization.
+- D0001 may investigate practical tooling behavior and report architectural findings, but it must not silently replace decisions owned elsewhere.
 - Codex experiments should begin with read-only observation before any production write.
 - A Codex write is not considered safe merely because an API/write operation succeeds; resulting file content, diff, changed-file scope, commit, and final repository state must be verified.
 - Do not add new `.ai` rules merely because Codex fails to understand an existing instruction. First determine whether the cause is architecture, discovery, activation, tool/environment behavior, or model capability.
 - The current repository write-safety procedure remains: read → edit → write → read back → verify → diff → scope → commit → verify.
-- `HANDOFF` is a lifecycle mechanism, not a core semantic instruction type.
+- Handoffs are durable conversation-context snapshots and do not use the former `DRAFT → READY_FOR_HANDOFF → HANDED_OFF → SUPERSEDED` lifecycle in the current architecture.
+- `>>handoff` updates the current handoff and commits the checkpoint; it does not change conversation identity.
+- `>>migrate <chapter>` updates the current handoff and generates bootstrap transport for the future receiving chapter; it does not create the future receiving handoff.
+- `>>generate-bootstrap <chapter>` generates transport only.
+
 
 ## Open questions
 
+- How accurately does Codex Desktop discover and apply the current `.ai` architecture in a local checkout?
+- Which canonical owners does Codex actually discover automatically, and which require explicit prompting?
+- How does Codex Desktop behave during controlled repository writes under the current write-safety rules?
+- How does Codex Desktop compare with the VS Code Codex integration?
+- Which model and reasoning controls are actually exposed by the installed Codex environment at test time?
+- Which practical tooling observations should be transferred into durable project documentation or architecture work rather than remaining D0001-only knowledge?
+
+<!-- The remaining historical questions below are superseded by the current architecture refresh. -->
+<!--
 - How well does Codex Desktop actually discover and apply the repository's current instruction architecture?
 - What repository visibility does Codex Desktop provide for `.ai/`, `docs/`, `references/`, and source files?
 - How accurately does it understand current Git state, history, diffs, and changed-file scope?
 - Does it follow the repository write-safety procedure during a controlled write test?
-- How does Codex Desktop's behavior compare with the later VS Code integration?
-- Which current model and reasoning controls are actually exposed by the installed Codex environment at test time?
+-->
 
-These questions are intentionally unresolved until observed in the actual tooling environment.
 
 ## Current files
 
 Primary repository areas relevant to D0001:
+
+- `.ai/AGENTS.md`
+- `.ai/config.yaml`
+- `.ai/INDEX.md`
+- `.ai/rules/`
+- `.ai/skills/`
+- `.ai/workflows/handoff/BOOTSTRAP.md`
+- `.ai/handoffs/D/`
+
 
 - `.ai/rules/`
 - `.ai/skills/`
@@ -136,11 +192,11 @@ The complete SDK must not be copied into `aip-mirror`.
 
 ## Last completed task
 
-Performed the D0001 Context Refresh and created this initial `DRAFT` handoff because D0001 is the first chapter in specialization D.
+Refreshed D0001 against the current `main` AI-infrastructure architecture, reread the canonical routing/activation/handoff/repository sources, and updated this handoff to replace obsolete 04A-era assumptions with the current D0001 baseline.
 
 ## Immediate next task
 
-Wait for the user's explicit command to begin the first controlled Codex Desktop observation experiment.
+Continue with the next explicitly requested Project Workshop experiment, preferably a read-only Codex Desktop inspection of the current `.ai` architecture before any controlled write test.
 
 Recommended first test:
 
@@ -158,11 +214,12 @@ Do not begin a production write test until the read-only observations are review
 
 ## Things not to redo
 
-- Do not repeat the completed repository Context Refresh unless repository state has materially changed or the user explicitly requests another refresh.
+- Do not repeat the previous 04A-era architecture refresh or lifecycle model.
+- Do not recreate the former `docs/handoffs/` chapter structure for current handoff work.
 - Do not automatically perform Lifecycle Recovery.
-- Do not redesign `.ai` architecture merely because Codex behavior is initially imperfect.
-- Do not re-establish the specialization boundaries unless a new repository rule changes them.
-- Do not treat the model recommendations from conversation context as immutable repository policy.
+- Do not redesign `.ai` merely because Codex behavior is imperfect.
+- Do not introduce a new command registry or universal routing layer without concrete need.
+- Do not begin a production AIP implementation from D0001.
 
 ## Recommended starting context for next chapter
 
