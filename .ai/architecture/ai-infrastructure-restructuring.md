@@ -27,6 +27,10 @@ Implementation direction:
 - Do NOT duplicate TRACE requirements across individual command owners.
 - BOOTSTRAP SHOULD be aligned with the same general model rather than retaining a separate, isolated TRACE concept.
 
+Status: RESOLVED
+
+The canonical activation skill now owns the operation-level TRACE semantics and presentation, INDEX contains the shared routing rule, and BOOTSTRAP follows the same model.
+
 ## TODO 2 — Preserve the ownership boundary
 
 The intended ownership remains:
@@ -47,6 +51,10 @@ BOOTSTRAP
 
 INDEX MUST NOT become a second activation or tracing owner.
 
+Status: RESOLVED
+
+The current activation skill, INDEX routing rule, and BOOTSTRAP alignment implement the required TRACE ownership model. Runtime verification remains separately tracked below because the new-chat initialization still requires investigation.
+
 ## TODO 3 — Re-run runtime command verification
 
 After the active files are updated:
@@ -62,6 +70,10 @@ After the active files are updated:
 - preserve the existing cold-start scenario as the stable test input;
 - create a new result artifact rather than rewriting the historical simulation result.
 
+Status: RESOLVED
+
+The boundary is now explicit: `.ai/rules/commits.md` is an operation dependency for WRITE-CAPABLE BOOTSTRAP, not an ACTIVATE owner. `.ai/workflows/handoff/BOOTSTRAP.md` now requires that read before TRACE and repository mutation.
+
 ## TODO 4 — Review historical commit messages
 
 The following historical commits use commit messages that do not follow the current \`ai-docs(...)\` convention:
@@ -72,6 +84,10 @@ The following historical commits use commit messages that do not follow the curr
 - \`b523edff4bdc8b785b57c5e4834afdc1ac6b8cbd\`
 
 Do NOT rewrite these commits as part of the current TRACE work. Any history rewrite or message correction requires a separate bounded decision.
+
+Status: RESOLVED
+
+The distinction is documented and requires no further architecture change.
 
 ## TODO 5 — Document GitHub commit signature verification
 
@@ -119,7 +135,9 @@ Action:
 - If added, keep the commit skill and commit-rule ownership boundaries explicit: `.ai/rules/commits.md` owns general commit policy, while `.ai/skills/commits/SKILL.md` owns commit-message construction and vocabulary.
 - Re-run the bootstrap consistency check after the decision.
 
-Status: OPEN
+Status: RESOLVED
+
+The decision is to keep `.ai/rules/commits.md` outside the ACTIVATE owner set. For WRITE-CAPABLE BOOTSTRAP it is a required operation dependency and MUST be read before operation-level TRACE and repository mutation, so it appears in OPERATION READS.
 
 ## TODO 7 — Distinguish activation-boundary ownership from operation dependency
 
