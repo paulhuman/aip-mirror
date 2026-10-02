@@ -100,3 +100,23 @@ No architecture change is required for this distinction. The topic is recorded h
 ## Deferred
 
 This TODO file does not itself change the active routing, activation, or TRACE semantics. Those changes belong to the canonical owners listed above and SHOULD be handled as a separate bounded repository operation.
+## TODO 6 — Align BOOTSTRAP activation with commit-rule ownership
+
+Observation:
+
+The current BOOTSTRAP initialization owner set explicitly activates:
+
+- `.ai/rules/workflow.md`;
+- `.ai/rules/handoff/lifecycle.md`;
+- `.ai/skills/handoff/SKILL.md`;
+- `.ai/workflows/handoff/BOOTSTRAP.md`.
+
+However, bootstrap also contains repository commit semantics, including the required handoff commit convention, while `.ai/rules/commits.md` is not currently included in the canonical ACTIVATE owner set for conversation initialization.
+
+Action:
+
+- Review whether `.ai/rules/commits.md` MUST be added to the conversation-initialization ACTIVATE owner set in `.ai/workflows/handoff/BOOTSTRAP.md`.
+- If added, keep the commit skill and commit-rule ownership boundaries explicit: `.ai/rules/commits.md` owns general commit policy, while `.ai/skills/commits/SKILL.md` owns commit-message construction and vocabulary.
+- Re-run the bootstrap consistency check after the decision.
+
+Status: OPEN
