@@ -123,14 +123,15 @@ Continue Architecture & Research from the durable repository state established a
 
 ## Assumed / unverified
 
-- The full runtime evidence for >>migrate 0054, including its repository mutation, read-back, scope verification, generated bootstrap transport, and final TRACE presentation, is not yet recorded in the C0054 handoff.
+- The earlier C0053→C0054 migration path was not executed as a real migration operation because C0054 was initialized directly in the receiving conversation.
+- The current chapter can still provide valid runtime evidence by executing a real C0054→C0055 migration and observing its mutation, bootstrap transport, and final TRACE presentation.
 - It is not yet verified whether the complete runtime read set for migration matches the expected separation between ACTIVATE owners and OPERATION READS.
 - It is not yet verified whether the five-command active INDEX surface should be reflected in the reusable cold-start scenario; this remains a test-scope question, not an assumption to change immediately.
 
 ## Open
 
-- Complete the real >>migrate 0054 operation authorized by C0053.
-- Record the actual migration runtime result, including repository mutation, read-back, diff/scope verification, generated bootstrap transport, and user-visible TRACE.
+- Complete the real >>migrate 0055 operation requested in C0054.
+- Record the actual C0054→C0055 migration runtime result, including repository mutation, read-back, diff/scope verification, generated bootstrap transport, and user-visible TRACE.
 - Verify that ACTIVATE owners are not duplicated under OPERATION READS.
 - Verify that OPERATION READS reflects actual repository files read during execution.
 - Create a new runtime result artifact under .ai/architecture/tests/results/cold-start-command-trace/<run-id>.md rather than rewriting the historical simulation result.
@@ -140,7 +141,7 @@ Continue Architecture & Research from the durable repository state established a
 
 ## Immediate next task
 
-Execute and verify the real >>migrate 0054 operation that was authorized in C0053. Then record the complete runtime evidence in a new test-result artifact and determine whether TODO 3 is satisfied or whether a narrowly scoped follow-up is required.
+Execute and verify the real >>migrate 0055 operation requested in C0054. Then record the complete runtime evidence in a new test-result artifact and determine whether TODO 3 is satisfied or whether a narrowly scoped follow-up is required.
 
 ## Recommended starting context
 
