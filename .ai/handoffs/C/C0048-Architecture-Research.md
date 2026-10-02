@@ -41,7 +41,7 @@ The bootstrap task is to establish C0048 from the canonical BOOTSTRAP procedure,
 - The latest repository commit before C0048 initialization is `c009fb2672a6f74a84d712362c94b7904e0630e6`, `ai-docs(architecture): reconcile completed TODO statuses`.
 - C0047's predecessor handoff exists at `.ai/handoffs/C/C0047-Architecture-Research.md` and was read successfully.
 - C0047's latest recorded architecture work reconciled completed TODO/OPEN statuses to `RESOLVED` where the corresponding work was already complete.
-- The remaining explicitly open architecture/research items in the active restructuring note include the Handoff Content Extraction Test, the Iteration 3 Entry-Layer Test, and the still-open portion of Operational TRACE visibility/completeness research.
+- The Handoff Content Extraction Test and Operational TRACE Completeness Test are resolved in the active architecture record; the Iteration 3 Entry-Layer Test is also resolved, with `ENTRY.md` explicitly not created.
 
 ## Decisions carried forward
 
@@ -52,7 +52,7 @@ The bootstrap task is to establish C0048 from the canonical BOOTSTRAP procedure,
 - AGENTS determines when BOOTSTRAP is used; BOOTSTRAP determines how chapter initialization is performed.
 - ACTIVATE, REFRESH, and TRACE are natural-language interfaces/capabilities rather than separate command IDs.
 - Do not reopen resolved activation, TRACE interface, bootstrap transport, command-surface, or handoff-initialization decisions without new evidence.
-- The active command surface is `>>handoff`, `>>migrate <chapter>`, and `>>generate-bootstrap <chapter>`.
+- The active command surface is `>>handoff`, `>>migrate <chapter>`, `>>generate-bootstrap <chapter>`, and `>>explain-code`.
 - `SHORT_NAME` is contextual bootstrap data, not a fourth canonical BOOTSTRAP runtime input; configured specialization vocabulary is the fallback source.
 - The bootstrap transport requires an explicit repository locator and resolved `SHORT_NAME`.
 - Handoff is a persistent conversation-context snapshot, not a lifecycle-controlled transfer object.
@@ -81,6 +81,7 @@ The bootstrap task is to establish C0048 from the canonical BOOTSTRAP procedure,
 ### Architecture context
 
 - `.ai/architecture/README.md` — architecture-note ownership and usage boundary.
+- `.ai/architecture/tests/cold-start-command-trace.md` — reusable cold-start command TRACE test scenario.
 - `.ai/architecture/ai-infrastructure-restructuring.md` — durable Iteration 2 architecture, entry-layer decisions, activation/TRACE decisions, handoff simplification, and current deferred research questions.
 - `.ai/architecture/faq/manual-activation.md` — human-oriented explanation of manual ACTIVATE / REFRESH / TRACE usage.
 
@@ -111,9 +112,9 @@ The bootstrap task is to establish C0048 from the canonical BOOTSTRAP procedure,
 - The repository provides working GitHub write operations and commit capability.
 - The applicable WRITE-CAPABLE bootstrap branch therefore applies.
 - The latest architecture status reconciliation was committed as `c009fb2672a6f74a84d712362c94b7904e0630e6`.
-- The active architecture note records the Handoff Content Extraction Test as unresolved and describes its intended bounded comparison against real handoffs.
-- The active architecture note records the Iteration 3 Entry-Layer Test as deferred and explicitly says not to create `ENTRY.md` yet.
-- The active architecture note records the Operational TRACE Completeness Test as unresolved: current TRACE needs a bounded investigation of visibility/completeness without introducing a tracing subsystem.
+- The active architecture note records the Handoff Content Extraction Test as resolved after comparison against real handoffs.
+- The active architecture note records the Iteration 3 Entry-Layer Test as resolved and explicitly says not to create `ENTRY.md`.
+- The active architecture note records the Operational TRACE Completeness Test as resolved; bootstrap requires visible TRACE and no tracing subsystem was introduced.
 
 ## Inferred
 
@@ -128,11 +129,8 @@ The bootstrap task is to establish C0048 from the canonical BOOTSTRAP procedure,
 
 ## Open
 
-- Execute the Handoff Content Extraction Test against real handoffs, beginning with C0047/C0046 and at least one additional real handoff as required by the recorded hypothesis.
-- Classify current `Recommended starting context` entries as handoff continuity, activation context, both, or incidental/redundant.
-- Determine whether handoff references can become a compact record of where the current work and durable context live while ACTIVATE/REFRESH independently establishes canonical operational context.
-- Keep the Operational TRACE Completeness/visibility question bounded and separate unless the extraction experiment provides concrete evidence connecting the two.
-- Keep the Iteration 3 `ENTRY.md` question deferred unless new evidence establishes a distinct semantic responsibility that current AGENTS/INDEX/BOOTSTRAP cannot own.
+- Re-run the cold-start command TRACE test after future changes to the active `.ai` routing, bootstrap, activation, or handoff infrastructure.
+- Compare the observed read set against the test scenario's pass criteria and record any deviations without changing the scenario merely to make the test pass.
 
 ## Handoff Content Extraction Test — result
 
@@ -164,11 +162,7 @@ ENTRY.md will not be created.
 
 ## Immediate next task
 
-Continue with the next genuinely open Architecture & Research question, if any.
-
-Start with C0047 and C0046, then include at least one additional real C-specialization handoff. Compare each handoff's `Recommended starting context` with the files actually touched or materially relied upon by that chapter, using the repository state and handoff contents as evidence rather than reconstructing missing chat history.
-
-Do not modify the handoff reference rule or activation architecture before the comparison produces evidence.
+Use `.ai/architecture/tests/cold-start-command-trace.md` as the reusable scenario for validating cold-start bootstrap plus each active `>>` command. The scenario is an input artifact and MUST remain stable across reruns; historical results MAY be recorded separately under a results location when useful.
 
 ## Recommended starting context
 
@@ -180,6 +174,11 @@ Do not modify the handoff reference rule or activation architecture before the c
 6. `.ai/rules/handoff/references.md` — material reference-preservation rule.
 7. `.ai/skills/activation/SKILL.md` — canonical activation semantics.
 8. `.ai/workflows/handoff/BOOTSTRAP.md` — canonical new-chapter initialization workflow.
+
+## Current test artifact
+
+- Created `.ai/architecture/tests/cold-start-command-trace.md` as a reusable, non-mutating cold-start simulation scenario for every active `>>` command.
+- The scenario deliberately keeps test input separate from historical results so the same test can be rerun unchanged after infrastructure changes.
 
 ## Handoff verification
 
