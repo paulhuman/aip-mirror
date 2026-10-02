@@ -49,22 +49,35 @@ Re-invoke ACTIVATE when the current canonical context needs to be reread.
 
 ## TRACE
 
-When useful for reasoning or review, activation MAY be made observable with:
+For a user-facing `>>` command whose canonical routing requires ACTIVATE, operation-level TRACE MUST be visible before canonical operation execution. This requirement is centralized here and MUST NOT be repeated as separate TRACE requirements in individual command owners.
 
-    ACTIVATE
+For other operations, TRACE MAY be made visible when useful for reasoning or review.
+
+The visible operation-level TRACE MUST use this structure:
+
+    TRACE
       operation: <operation>
-      owners: <canonical owners reread>
-      status: ACTIVATED
 
-This trace is evidence of activation, not a persistent schema or repository state.
+      ACTIVATE
+        owners:
+          <canonical owners reread>
+        status: ACTIVATED
 
-For operation-level TRACE, the presentation MAY also include:
+      OPERATION READS
+        files:
+          <additional unique repository files actually read>
 
-    OPERATION READS
+This trace is observable execution evidence, not a persistent repository schema or repository state.
+
+`OPERATION READS` is REQUIRED for a user-facing `>>` command whose canonical routing requires ACTIVATE. For other operations it MAY be omitted.
+
+`OPERATION READS` contains the unique repository files actually read as part of the operation. ACTIVATE owners are also members of that read set when they were read as part of the operation, but are omitted from the OPERATION READS presentation to avoid duplication.
       files:
         <additional unique repository files actually read>
 
-`OPERATION READS` contains the unique repository files actually read as part of the operation. ACTIVATE owners are also members of that read set when they were read as part of the operation, but are omitted from the OPERATION READS presentation to avoid duplication.
+The operation-level TRACE MUST be emitted before the canonical operation begins. If the operation aborts or fails after ACTIVATE, the TRACE MUST still show the activation and the OPERATION READS accumulated up to that point.
+
+Human-readable TRACE output MUST deduplicate files even when a file is reread during the same operation.
 
 The operation ends when all work required to produce and, where applicable, verify the requested substantive result is complete.
 
