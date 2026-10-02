@@ -275,6 +275,10 @@ Before substantive work, the receiving chapter MUST:
 
 If a check fails, bootstrap is incomplete. Correct only the current receiving handoff within normal ownership; otherwise stop and report the inconsistency.
 
+After the applicable bootstrap branch and post-bootstrap consistency verification are complete, assemble the required operation-level TRACE defined by `.ai/skills/activation/SKILL.md` and insert the completed TRACE into the assistant response. The TRACE MUST identify the bootstrap operation, list the canonical owners actually reread for ACTIVATE, report `status: ACTIVATED`, and include the unique additional repository files actually read in `OPERATION READS` without duplicating ACTIVATE owners. For a WRITE-CAPABLE bootstrap, `.ai/rules/commits.md` MUST therefore appear in `OPERATION READS`.
+
+If bootstrap aborts or fails after ACTIVATE, insert a TRACE into the assistant response showing the activation and the `OPERATION READS` accumulated up to the failure point. The TRACE is response content, not repository state.
+
 ## Initial handoff
 
 The initial handoff MUST use the standard handoff structure from the `.ai/skills/handoff/SKILL.md` unless a project-specific format requires otherwise and MUST contain, at minimum:
