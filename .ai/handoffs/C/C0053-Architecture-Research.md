@@ -132,7 +132,8 @@ Continue Architecture & Research from the durable repository state established a
 
 ## Open
 
-- Complete real runtime verification for `>>handoff` and `>>migrate 0054`.
+- Real `>>handoff` checkpoint completed in commit `da585569c9cbf0d74a6bc3056e0e25d5ab1b6594`; read-back and one-file scope verification passed.
+- Real `>>migrate 0054` is now the remaining repository-mutating operation in this verification run.
 - Runtime-verify TODO 3: confirm that completed TRACE is actually inserted into the assistant response for the applicable operations.
 - Verify that ACTIVATE owners are not duplicated under `OPERATION READS`.
 - Verify that `OPERATION READS` reflects actual repository files read during execution.
@@ -162,9 +163,9 @@ Execute the real `>>handoff` checkpoint, record its actual runtime result, then 
 ## Runtime test status
 
 - Response-level TRACE presentation: observed.
+- Real `>>handoff`: executed and verified; commit `da585569c9cbf0d74a6bc3056e0e25d5ab1b6594`.
+- Real `>>migrate 0054`: authorized and now being executed.
 - Full command-path runtime verification: in progress.
-- Real `>>handoff`: authorized and next to execute.
-- Real `>>migrate 0054`: authorized and to be executed after the handoff checkpoint.
 - No architecture change is being made before the complete evidence is recorded.
 
 ## Bootstrap verification
