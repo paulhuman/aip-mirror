@@ -51,9 +51,9 @@ At the time this scenario was last updated, the active command surface was:
 - `>>migrate <chapter>`;
 - `>>generate-bootstrap <chapter>`;
 - `>>explain-code`;
-- `>><fifth active command>`.
+- `>>activate-normative-language`.
 
-The exact command names and count MUST be obtained from the current `.ai/INDEX.md` at test execution time. The fifth command listed above is a placeholder indicating that the current active surface contains five commands; it MUST NOT be treated as a literal command.
+The exact command names and count MUST be obtained from the current `.ai/INDEX.md` at test execution time.
 
 Historical command phrases MUST NOT be treated as active commands merely because they appear in architecture history.
 
