@@ -24,7 +24,7 @@ An architecture file may contain the reasoning and history behind a decision whi
 
 The `.ai/architecture/faq/` directory contains small, human-oriented explanations of how the `.ai` infrastructure is used in practice.
 
-These files are durable orientation material, not canonical semantic owners. They MAY answer practical “how does this work?” questions in more detail than an active rule or skill should.
+These files are durable orientation material, not canonical semantic owners. They MAY answer practical “how does this work?” questions in more detail than an active rule or skill SHOULD.
 
 Prefer separate files for separate questions rather than accumulating unrelated answers in one large document.
 
