@@ -51,6 +51,7 @@ The table records only information needed to recognize and activate the canonica
 3. For project-level work, read `docs/PROJECT-INSTRUCTIONS.md` first and use its canonical project-source routing.
 4. Invoke ACTIVATE with the operation and listed canonical owners, rereading those owners before execution.
 5. Follow the canonical owner's procedure; DO NOT substitute INDEX content for it.
+6. For every user-facing `>>` command whose routing requires ACTIVATE, operation-level TRACE MUST be visible before canonical operation execution. The exact TRACE format is owned by `.ai/skills/activation/SKILL.md`; individual command entries MUST NOT duplicate this requirement.
 6. Apply repository write-safety and commit rules from their canonical owners when the operation requires repository mutation.
 7. If the command does not match a known operation, inspect the capability map and relevant canonical owners before inventing any new operation.
 
