@@ -2,89 +2,128 @@
 
 ## Purpose
 
-This file is a reproducible test instruction for validating the observable repository-read and ACTIVATE behavior of the active `>>` command surface.
+This file defines a reproducible test scenario for validating the observable repository-read and ACTIVATE behavior of the active `>>` command surface.
 
-The test is intentionally stored as an input scenario rather than as an architectural rule. It can be reused after changes to `.ai/` infrastructure to check whether command routing, activation, and bootstrap behavior still match the intended architecture.
+The scenario MUST remain an input artifact. Test results MUST be recorded separately.
 
 ## Scenario
 
-Simulate execution of every currently documented `>>` command from `.ai/INDEX.md`.
+The test MUST simulate execution of every currently documented `>>` command from `.ai/INDEX.md`.
 
-For each command, perform a **cold-start simulation**:
+For each command, the test MUST perform an independent **cold-start simulation**:
 
-1. Assume a completely new chat with no prior chapter context.
-2. Start from the repository locator and `.ai/AGENTS.md`.
-3. Treat the chat as requiring new-chapter bootstrap initialization.
-4. Supply arbitrary valid runtime values for the simulation:
-   - `PREVIOUS_CHAPTER`
-   - `CURRENT_CHAPTER`
-   - `SPECIALIZATION`
-   - `SHORT_NAME`
-5. Complete the simulated bootstrap initialization.
-6. Then execute exactly one selected `>>` command.
-7. Show the TRACE for bootstrap and for the selected command.
-8. In each TRACE, distinguish:
+1. The simulation MUST start from the explicit repository locator and `.ai/AGENTS.md`.
+2. The simulation MUST treat the conversation as a new conversation that has requested new-chapter bootstrap initialization.
+3. The simulation MUST supply valid runtime values for:
+   - `PREVIOUS_CHAPTER`;
+   - `CURRENT_CHAPTER`;
+   - `SPECIALIZATION`;
+   - `SHORT_NAME`.
+4. The simulation MUST execute the applicable BOOTSTRAP procedure.
+5. The simulation MUST then execute exactly one selected `>>` command.
+6. The simulation MUST show a visible TRACE for bootstrap initialization.
+7. The simulation MUST show a TRACE for the selected command.
+8. Each TRACE MUST distinguish:
    - canonical owners reread by ACTIVATE;
    - additional unique repository files actually read during the operation.
-9. Do not expose hidden reasoning. Report only observable file reads and activation status.
-10. Repeat the entire cold-start simulation independently for every active `>>` command in `.ai/INDEX.md`.
+9. `OPERATION READS` MUST contain only additional unique repository files actually read during that operation and MUST NOT duplicate ACTIVATE owners.
+10. Repeated reads MUST be represented once.
+11. Conditional reads MUST be identified as conditional and MUST NOT be presented as mandatory default reads.
+12. The simulation MUST report observable activation and repository-read evidence only. It MUST NOT expose hidden reasoning.
+13. The complete cold-start simulation MUST be repeated independently for every active `>>` command.
+
+### Bootstrap ordering
+
+The simulation MUST preserve the distinction between the chat entry boundary and the BOOTSTRAP workflow:
+
+1. The repository locator MUST establish repository identity.
+2. `.ai/AGENTS.md` MUST be read as the always-on AI entry contract.
+3. When new-chapter initialization is requested, BOOTSTRAP MUST apply its canonical repository-identity/path-resolution ordering, including reading `.ai/config.yaml` before resolving further repository-relative paths.
+4. The simulation MUST NOT infer repository identity or repository-relative paths from memory, local paths, attachments, or implicit project context.
 
 ## Commands under test
 
-At the time this test was created, the active command surface is:
+The test MUST derive the command list from the current `.ai/INDEX.md` when it is executed.
 
-- `>>handoff`
-- `>>migrate <chapter>`
-- `>>generate-bootstrap <chapter>`
-- `>>explain-code`
+At the time this scenario was created, the active command surface was:
 
-The test MUST derive the command list from the current `.ai/INDEX.md` when it is rerun. Historical command phrases MUST NOT be treated as active commands merely because they appear in architecture history.
+- `>>handoff`;
+- `>>migrate <chapter>`;
+- `>>generate-bootstrap <chapter>`;
+- `>>explain-code`.
+
+Historical command phrases MUST NOT be treated as active commands merely because they appear in architecture history.
 
 ## Expected focus
 
-The primary question is:
+The test MUST answer:
 
 > Which repository files are read by default when a completely new chat is initialized through BOOTSTRAP and then asks to execute each individual `>>` command?
 
-The test should make the bootstrap read set visible separately from the command read set. Files already read during bootstrap SHOULD NOT be redundantly listed again in the command's `OPERATION READS` section.
+The result MUST present the bootstrap read set separately from the command read set.
 
-Conditional reads should be identified as conditional rather than presented as mandatory defaults.
+Files already read during bootstrap MUST NOT be redundantly listed again in the command's `OPERATION READS` section.
+
+The result MUST distinguish:
+
+- default reads;
+- conditional reads;
+- reads required only for verification;
+- files read solely to report a completed result.
+
+A repository read made only to report an already-completed result MUST NOT be counted as an operation read.
 
 ## Non-goals
 
-This test does not:
+The test MUST NOT:
 
 - change the command surface;
 - introduce a command registry;
 - introduce a dependency graph;
-- define a new tracing subsystem;
+- define a tracing subsystem;
 - change ACTIVATE, REFRESH, or TRACE semantics;
 - execute repository mutations merely because a command under simulation would normally mutate the repository.
 
-The simulation is a behavioral audit of the current architecture, not a real execution of every command.
+The simulation MUST remain a behavioral audit of the current architecture, not a real execution of every command.
 
 ## Result recording
 
-The scenario itself SHOULD remain stable so it can be rerun unchanged.
+The scenario MUST remain unchanged between test runs unless the test definition itself is intentionally revised.
 
-If historical results need to be preserved, store them separately from the scenario under a dedicated results location, for example:
+Historical results MUST be stored separately under:
 
 `.ai/architecture/tests/results/<test-name>/<run-id>.md`
 
-A result record should capture the date, repository revision tested, runtime simulation values, observed TRACE, deviations from the expected architecture, and the conclusion.
+Each result record MUST contain:
 
-Do not overwrite the scenario file with test results.
+- test name;
+- run identifier;
+- execution date;
+- repository revision tested;
+- runtime simulation values;
+- commands tested;
+- bootstrap TRACE;
+- command TRACE for each command;
+- default reads;
+- conditional reads;
+- deviations from the expected architecture;
+- pass/fail conclusion;
+- notes required to reproduce the run.
+
+A result record MUST NOT replace or modify the scenario file.
 
 ## Pass criteria
 
-A run passes when:
+A run PASSES only when:
 
 1. every active `>>` command in the current INDEX is tested;
-2. each test starts from a fresh bootstrap simulation;
+2. every command test starts from an independent cold-start bootstrap simulation;
 3. bootstrap TRACE is visible;
 4. ACTIVATE owners are canonical owners actually reread;
 5. `OPERATION READS` contains only additional unique repository files actually read;
 6. repeated reads are not duplicated;
 7. conditional reads are clearly distinguished from default reads;
 8. historical commands are excluded;
-9. no new infrastructure is invented merely to perform the test.
+9. no new infrastructure is introduced merely to perform the test.
+
+If any pass criterion is not satisfied, the result MUST be recorded as FAIL and the deviation MUST be stated explicitly.
