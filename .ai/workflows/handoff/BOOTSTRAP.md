@@ -224,8 +224,8 @@ After this self-check:
 7. After the repository write-capability self-check, a WRITE-CAPABLE bootstrap MUST read .ai/rules/commits.md before emitting the operation-level TRACE, because the bootstrap branch includes an authorized repository commit. For a READ-ONLY bootstrap, .ai/rules/commits.md is not required solely for bootstrap.
 8. During bootstrap initialization, emit the required operation-level TRACE defined by `.ai/skills/activation/SKILL.md` before executing the applicable bootstrap branch. The TRACE MUST identify the bootstrap operation, list the canonical owners actually reread for ACTIVATE, report `status: ACTIVATED`, and include the unique additional repository files actually read in `OPERATION READS` without duplicating ACTIVATE owners. For a WRITE-CAPABLE bootstrap, `.ai/rules/commits.md` MUST therefore appear in `OPERATION READS`. If bootstrap aborts or fails after ACTIVATE, the TRACE MUST still show the activation and the `OPERATION READS` accumulated up to that point.
 9. If PREVIOUS_CHAPTER is not N/A, read the predecessor handoff.
-9. Inspect implementation files and references identified by the predecessor handoff when applicable.
-10. Confirm that the new chapter can continue from the recorded state without guessing.
+10. Inspect implementation files and references identified by the predecessor handoff when applicable.
+11. Confirm that the new chapter can continue from the recorded state without guessing.
 
 ### Branch A — WRITE-CAPABLE AI
 
