@@ -74,6 +74,8 @@ Status: RESOLVED
 
 The boundary is now explicit: `.ai/rules/commits.md` is an operation dependency for WRITE-CAPABLE BOOTSTRAP, not an ACTIVATE owner. `.ai/workflows/handoff/BOOTSTRAP.md` now requires that read before TRACE and repository mutation.
 
+The canonical TRACE requirements are implemented, but runtime verification remains open because the new-chat BOOTSTRAP initialization has again failed to produce the required user-visible TRACE. This requires a separate investigation and a new runtime result artifact.
+
 ## TODO 4 — Review historical commit messages
 
 The following historical commits use commit messages that do not follow the current \`ai-docs(...)\` convention:
@@ -87,7 +89,7 @@ Do NOT rewrite these commits as part of the current TRACE work. Any history rewr
 
 Status: RESOLVED
 
-The distinction is documented and requires no further architecture change.
+The historical messages have been identified and the required boundary is documented: no history rewrite is part of the current TRACE work. Any future correction remains a separate bounded decision.
 
 ## TODO 5 — Document GitHub commit signature verification
 
@@ -112,6 +114,10 @@ ACTIVATE / TRACE evidence
 \`\`\`
 
 No architecture change is required for this distinction. The topic is recorded here so it is not accidentally conflated with repository workflow verification later.
+
+Status: RESOLVED
+
+The distinction is documented and requires no further architecture change.
 
 ## Deferred
 
