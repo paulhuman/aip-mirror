@@ -26,7 +26,7 @@ Continue Architecture & Research from the durable repository state established a
 - Resolved short name: `Architecture & Research`.
 - `.ai/AGENTS.md` item 6 directs new-chapter initialization to `.ai/workflows/handoff/BOOTSTRAP.md`.
 - `.ai/workflows/handoff/BOOTSTRAP.md` is the canonical new-conversation initialization workflow.
-- `.ai/skills/activation/SKILL.md` owns ACTIVATE, REFRESH, and TRACE semantics.
+- `.ai/skills/activation/SKILL.md` owns ACTIVATE and TRACE semantics.
 - `.ai/skills/handoff/SKILL.md` owns handoff structure and handoff operations.
 - `.ai/rules/handoff/lifecycle.md` owns chapter identity and continuity semantics.
 - `.ai/rules/handoff/references.md` owns material research-reference preservation.
@@ -49,7 +49,7 @@ Continue Architecture & Research from the durable repository state established a
 - The receiving chapter creates its own handoff; the predecessor handoff is not modified merely because it has been consumed.
 - New-chapter initialization follows AGENTS item 6 and the canonical BOOTSTRAP workflow.
 - BOOTSTRAP is the ordered new-conversation initialization workflow; it is not a universal entry router.
-- ACTIVATE, REFRESH, and TRACE are natural-language interfaces/capabilities rather than separate command IDs.
+- ACTIVATE and TRACE are natural-language interfaces/capabilities rather than separate command IDs.
 - The active command surface is `>>handoff`, `>>migrate <chapter>`, `>>generate-bootstrap <chapter>`, and `>>explain-code`.
 - `SHORT_NAME` is contextual bootstrap data, not a fourth canonical BOOTSTRAP runtime input.
 - The bootstrap transport requires an explicit repository locator and resolved `SHORT_NAME`.
@@ -71,7 +71,7 @@ Continue Architecture & Research from the durable repository state established a
 - `.ai/rules/handoff/lifecycle.md` — chapter identity and continuity semantics.
 - `.ai/rules/handoff/references.md` — material reference preservation.
 - `.ai/rules/commits.md` — commit policy.
-- `.ai/skills/activation/SKILL.md` — ACTIVATE / REFRESH / TRACE capability.
+- `.ai/skills/activation/SKILL.md` — ACTIVATE / TRACE capability.
 - `.ai/skills/handoff/SKILL.md` — handoff structure and command semantics.
 - `.ai/skills/commits/SKILL.md` — handoff commit convention.
 - `.ai/workflows/handoff/BOOTSTRAP.md` — canonical new-conversation chapter initialization workflow.
@@ -116,18 +116,17 @@ Continue Architecture & Research from the durable repository state established a
 
 - The next substantive task should continue the presentation-contract investigation rather than redesigning centralized TRACE routing.
 - The existing cold-start scenario should remain the baseline unless the presentation contract requires a narrowly scoped extension.
-- The likely architectural boundary is between activation semantics and the bootstrap/user-response layer, but this remains an investigation question rather than a confirmed design decision.
+- The presentation contract is owned by `.ai/skills/activation/SKILL.md`, while BOOTSTRAP follows that contract as a workflow consumer.
 
 ## Assumed / unverified
 
-- It remains unverified whether the presentation contract should be owned entirely by `.ai/skills/activation/SKILL.md`, entirely by `.ai/workflows/handoff/BOOTSTRAP.md`, or explicitly split across the two.
+
 - It remains unverified whether the existing runtime environment can provide a reliable observable test of assistant-visible TRACE delivery.
 - It remains unverified whether any command-specific operation-read sets require adjustment after observing real execution.
 
 ## Open
 
-- Resolve TODO 3: define the architectural meaning of TRACE `visible` as assistant-visible response content.
-- Determine the smallest canonical owner/change for the presentation contract.
+- Runtime-verify TODO 3: confirm that completed TRACE is actually inserted into the assistant response for the applicable operations.
 - Add or adapt runtime verification so that the test checks actual user-visible TRACE delivery rather than only structural simulation.
 - Record any new runtime or verification result under the test results directory.
 - Re-run relevant cold-start/consistency verification after any active routing, bootstrap, activation, or handoff change.
@@ -135,7 +134,7 @@ Continue Architecture & Research from the durable repository state established a
 
 ## Immediate next task
 
-Read TODO 3 and the current activation/bootstrap presentation semantics together, then determine whether the presentation contract belongs in `.ai/skills/activation/SKILL.md`, `.ai/workflows/handoff/BOOTSTRAP.md`, or at their boundary. Define `visible` precisely as assistant-visible response content, make the smallest canonical change required, and verify actual TRACE delivery without redesigning the centralized TRACE model.
+Run the runtime verification for the new TRACE response contract. Confirm that the completed TRACE block is inserted into the assistant response, that ACTIVATE owners are not duplicated under OPERATION READS, and that OPERATION READS reflects actual repository reads without redesigning the centralized TRACE model.
 
 ## Recommended starting context
 
