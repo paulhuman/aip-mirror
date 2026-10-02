@@ -106,7 +106,7 @@ For any occurrence of `must`, `should`, `may`, or `do not`, ask:
 3. Is it ordinary English, a question, historical narration, research material, or descriptive text?
 4. If ambiguous, does the surrounding context establish current normative force?
 
-Only after this classification should capitalization or wording be changed.
+Only after this classification SHOULD capitalization or wording be changed.
 
 ## 8. Consistency
 
