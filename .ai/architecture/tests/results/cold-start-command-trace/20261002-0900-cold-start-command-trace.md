@@ -9,7 +9,7 @@
 - **Run ID:** 20261002-0900-cold-start-command-trace
 - **Execution date:** 2026-10-02
 - **Repository:** `paulhuman/aip-mirror`
-- **Revision tested:** current repository state after normalization of the test scenario and qualification of the BOOTSTRAP path in `.ai/AGENTS.md`
+- **Revision tested:** `66b350dcb5fc90f0b26aae5b2ada2606ab044a72` (the repository state immediately before this result artifact was created)
 - **Simulation mode:** cold-start simulation; repository-mutating commands were not actually executed
 - **Runtime values:**
   - `PREVIOUS_CHAPTER = N/A`
