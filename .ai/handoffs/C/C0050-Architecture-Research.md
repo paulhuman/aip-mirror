@@ -122,16 +122,48 @@ Continue Architecture & Research from the durable repository state at the end of
 - Classify any discrepancy as an observed deviation, simulation limitation, or architecture question before proposing changes.
 - Re-run the cold-start TRACE test after future changes to active routing, bootstrap, activation, or handoff infrastructure.
 
-## Immediate next task
+## Runtime-verification simulation result
 
-Continue runtime verification of:
+The bounded structural simulation of all four documented user-facing `>>` commands was completed in C0050:
 
 - `>>handoff`
-- `>>migrate <chapter>`
-- `>>generate-bootstrap <chapter>`
+- `>>migrate 0051`
+- `>>generate-bootstrap 0051`
 - `>>explain-code`
 
-Compare observable operation-level TRACE and repository-operation evidence against the current canonical owners and the stable cold-start scenario.
+The simulation confirmed the intended centralized TRACE shape at the routing/activation level and reinforced that `OPERATION READS` is a record of repository files actually read during a particular operation execution, not a static dependency inventory.
+
+For `>>generate-bootstrap`, no commit operation occurs, so `.ai/rules/commits.md` is not required merely because migration has commit semantics.
+
+For repository-mutating handoff/migration work, `.ai/rules/commits.md` remains an operation read at minimum, pending the separate architectural decision recorded in TODO 6/7 about whether it should also become an ACTIVATE owner.
+
+This was a structural simulation, not independent runtime evidence from a native `>>` command interpreter.
+
+## Migration checkpoint
+
+C0050 migration to C0051 was executed after the four-command simulation.
+
+- Current handoff updated with the completed verification checkpoint and migration state.
+- Handoff update was committed using the canonical migration/update commit convention.
+- Standard bootstrap transport for receiving chapter C0051 was generated as the terminal migration step.
+- The receiving C0051 handoff was NOT created or modified.
+- C0050 remains the current chapter until a future conversation executes the bootstrap instruction.
+
+Generated bootstrap transport:
+
+    Initialize a new conversation chapter for the repository:
+    https://github.com/paulhuman/aip-mirror
+
+    Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
+
+    PREVIOUS_CHAPTER = 0050
+    CURRENT_CHAPTER = 0051
+    SPECIALIZATION = C
+    SHORT_NAME = Architecture & Research
+
+## Immediate next task
+
+Receiving chapter C0051 should execute the generated bootstrap transport and continue from the durable repository state established here. The next substantive architecture task remains the bounded investigation of TODO 6/7: decide whether `.ai/rules/commits.md` belongs in the ACTIVATE boundary or remains an operation dependency recorded in `OPERATION READS`, then make any required canonical-file changes and rerun the relevant consistency verification.
 
 ## Recommended starting context
 
