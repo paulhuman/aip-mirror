@@ -123,8 +123,16 @@ Continue Architecture & Research from the durable repository state established a
 - It is not yet verified whether the current execution environment provides reliable observable evidence that the completed TRACE block is delivered in the final assistant response for each applicable operation.
 - It is not yet verified whether any operation-specific read set differs from the expected centralized TRACE presentation after real execution.
 
+## Runtime verification update
+
+- The TRACE presentation boundary has now been observed in the actual assistant response.
+- The earlier runtime result remained incomplete because `>>handoff` and `>>migrate <chapter>` had not yet been executed as real repository-mutating operations.
+- The user explicitly authorized real execution of `>>handoff` and `>>migrate 0054` for the verification run.
+- The current test is therefore extended from response-level presentation evidence to real repository-mutating command execution and post-operation verification.
+
 ## Open
 
+- Complete real runtime verification for `>>handoff` and `>>migrate 0054`.
 - Runtime-verify TODO 3: confirm that completed TRACE is actually inserted into the assistant response for the applicable operations.
 - Verify that ACTIVATE owners are not duplicated under `OPERATION READS`.
 - Verify that `OPERATION READS` reflects actual repository files read during execution.
@@ -134,7 +142,7 @@ Continue Architecture & Research from the durable repository state established a
 
 ## Immediate next task
 
-Run the runtime verification of the TRACE response contract. Exercise the applicable operations, observe the actual assistant-response boundary, verify ACTIVATE/OPERATION READS deduplication and read-set accuracy, and record the resulting evidence without redesigning the centralized TRACE model.
+Execute the real `>>handoff` checkpoint, record its actual runtime result, then execute the real `>>migrate 0054`. Update the runtime verification result artifact with the observed command execution, repository mutations, TRACE presentation, ACTIVATE/OPERATION READS separation, and post-operation verification. Only after that decide whether any architecture change is justified.
 
 ## Recommended starting context
 
@@ -150,6 +158,14 @@ Run the runtime verification of the TRACE response contract. Exercise the applic
 10. `.ai/rules/repository.md`
 11. `.ai/rules/commits.md`
 12. `.ai/skills/commits/SKILL.md`
+
+## Runtime test status
+
+- Response-level TRACE presentation: observed.
+- Full command-path runtime verification: in progress.
+- Real `>>handoff`: authorized and next to execute.
+- Real `>>migrate 0054`: authorized and to be executed after the handoff checkpoint.
+- No architecture change is being made before the complete evidence is recorded.
 
 ## Bootstrap verification
 
