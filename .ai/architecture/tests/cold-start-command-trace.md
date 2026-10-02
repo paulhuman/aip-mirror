@@ -12,7 +12,7 @@ The test MUST simulate execution of every currently documented `>>` command from
 
 For each command, the test MUST perform an independent **cold-start simulation**:
 
-1. The simulation MUST start from the explicit repository locator and `.ai/AGENTS.md`.
+1. The simulation MUST start from the explicit repository locator and `paulhuman/aip-mirror@main:/.ai/AGENTS.md`.
 2. The simulation MUST treat the conversation as a new conversation that has requested new-chapter bootstrap initialization.
 3. The simulation MUST supply valid runtime values for:
    - `PREVIOUS_CHAPTER`;
@@ -37,7 +37,7 @@ For each command, the test MUST perform an independent **cold-start simulation**
 The simulation MUST preserve the distinction between the chat entry boundary and the BOOTSTRAP workflow:
 
 1. The repository locator MUST establish repository identity.
-2. `.ai/AGENTS.md` MUST be read as the always-on AI entry contract.
+2. `paulhuman/aip-mirror@main:/.ai/AGENTS.md` MUST be read as the always-on AI entry contract.
 3. When new-chapter initialization is requested, BOOTSTRAP MUST apply its canonical repository-identity/path-resolution ordering, including reading `.ai/config.yaml` before resolving further repository-relative paths.
 4. The simulation MUST NOT infer repository identity or repository-relative paths from memory, local paths, attachments, or implicit project context.
 
