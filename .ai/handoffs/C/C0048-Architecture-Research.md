@@ -162,7 +162,7 @@ ENTRY.md will not be created.
 
 ## Immediate next task
 
-Use `.ai/architecture/tests/cold-start-command-trace.md` as the reusable scenario for validating cold-start bootstrap plus each active `>>` command. The scenario is an input artifact and MUST remain stable across reruns; historical results MAY be recorded separately under a results location when useful.
+Migrate to C0049 and continue by analyzing the recorded cold-start command TRACE test result. The test scenario remains an input artifact and MUST remain stable across reruns; historical results MAY be recorded separately under a results location when useful.
 
 ## Recommended starting context
 
@@ -178,6 +178,9 @@ Use `.ai/architecture/tests/cold-start-command-trace.md` as the reusable scenari
 ## Current test artifact
 
 - Created `.ai/architecture/tests/cold-start-command-trace.md` as a reusable, non-mutating cold-start simulation scenario for every active `>>` command.
+- Recorded the cold-start test result at `.ai/architecture/tests/results/cold-start-command-trace/20261002-0900-cold-start-command-trace.md`.
+- Corrected the test to identify the chat entry boundary with the qualified path `paulhuman/aip-mirror@main:/.ai/AGENTS.md`.
+- Normalized `.ai/AGENTS.md` normative wording while preserving its short repository-relative BOOTSTRAP path and `DO NOT` procedural wording.
 - The scenario deliberately keeps test input separate from historical results so the same test can be rerun unchanged after infrastructure changes.
 
 ## Handoff verification
