@@ -72,8 +72,6 @@ This trace is observable execution evidence, not a persistent repository schema 
 `OPERATION READS` is REQUIRED for a user-facing `>>` command whose canonical routing requires ACTIVATE. For other operations it MAY be omitted.
 
 `OPERATION READS` contains the unique repository files actually read as part of the operation. ACTIVATE owners are also members of that read set when they were read as part of the operation, but are omitted from the OPERATION READS presentation to avoid duplication.
-      files:
-        <additional unique repository files actually read>
 
 The operation-level TRACE MUST be emitted before the canonical operation begins. If the operation aborts or fails after ACTIVATE, the TRACE MUST still show the activation and the OPERATION READS accumulated up to that point.
 
