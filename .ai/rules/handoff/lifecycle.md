@@ -28,7 +28,11 @@ Bootstrap runtime inputs keep these components separate:
     CURRENT_CHAPTER = 0034
     SPECIALIZATION = C
 
-The full identifier is derived as SPECIALIZATION + CURRENT_CHAPTER.
+The full identifier is derived as SPECIALIZATION + CURRENT_CHAPTER and is the canonical `CHAPTER_ID`.
+
+    CHAPTER_ID = SPECIALIZATION + CURRENT_CHAPTER
+
+`CHAPTER_ID` is the full chapter identifier and MUST be used wherever a chapter identifier is required. `CURRENT_CHAPTER` is only the numeric runtime component.
 
 ## 3. Handoff purpose
 
@@ -48,9 +52,19 @@ A handoff MUST NOT silently promote an inference or assumption into a confirmed 
 
 Conversation handoffs belong under .ai/handoffs/. Use one file per chapter:
 
-    .ai/handoffs/<specialization>/<chapter>-<short-name>.md
+    .ai/handoffs/<SPECIALIZATION>/<CHAPTER_ID>-<FILENAME_SHORT_NAME>.md
 
-The filename uses the full chapter identifier.
+The filename uses the full `CHAPTER_ID`. `FILENAME_SHORT_NAME` is derived from `SHORT_NAME` by replacing every space with a hyphen. Handoff filenames MUST NOT be constructed from `CURRENT_CHAPTER` alone.
+
+Example:
+
+    SPECIALIZATION = A
+    CURRENT_CHAPTER = 0001
+    CHAPTER_ID = A0001
+    SHORT_NAME = JSX Prototype
+    FILENAME_SHORT_NAME = JSX-Prototype
+
+    .ai/handoffs/A/A0001-JSX-Prototype.md
 
 Handoffs remain in the repository as historical context. No handoff state transition is required.
 
