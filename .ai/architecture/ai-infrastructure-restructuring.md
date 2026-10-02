@@ -40,7 +40,7 @@ INDEX
   = routing and capability discovery
 
 activation/SKILL.md
-  = ACTIVATE / REFRESH / TRACE semantics and TRACE presentation
+  = ACTIVATE / TRACE semantics and TRACE response presentation
 
 canonical operation owner
   = operation-specific execution semantics
@@ -74,19 +74,19 @@ Status: OPEN
 
 The canonical TRACE requirements are implemented, but runtime verification remains open because the new-chat BOOTSTRAP initialization has again failed to produce the required user-visible TRACE. This requires a separate investigation and a new runtime result artifact.
 
-### Investigation result — new-chat BOOTSTRAP presentation gap
+### Investigation result — TRACE response presentation contract
 
 The investigation confirms three distinct facts:
 
-1. The canonical requirement exists. `.ai/skills/activation/SKILL.md` defines operation-level TRACE semantics and presentation, `.ai/INDEX.md` routes applicable user-facing commands to visible TRACE, and `.ai/workflows/handoff/BOOTSTRAP.md` explicitly requires TRACE during bootstrap initialization.
-2. The runtime presentation contract is not sufficiently formalized at the final assistant-response boundary. The activation skill's mandatory visibility language is framed primarily around user-facing `>>` commands, while new-chat chapter initialization is not a `>>` command. BOOTSTRAP says TRACE must be "emitted", but does not explicitly define that emission as assistant-visible response content delivered to the user.
-3. The existing cold-start test does not verify this presentation layer. Its result is explicitly a simulation and validates the scenario structure, not actual runtime delivery of TRACE into the user-visible assistant response.
+1. The canonical requirement exists. `.ai/skills/activation/SKILL.md` defines operation-level TRACE semantics and response presentation, `.ai/INDEX.md` routes applicable user-facing commands to TRACE inserted into the assistant response, and `.ai/workflows/handoff/BOOTSTRAP.md` explicitly requires the completed TRACE to be inserted into the assistant response during bootstrap initialization.
+2. The presentation contract is now explicitly defined at the assistant-response boundary: TRACE is visible when the completed TRACE block is inserted into the assistant response content delivered to the user. The canonical template is a compact fenced monospace block. The operation completes first, the actual read set is accumulated, the TRACE is assembled, and the completed TRACE is then inserted into the response.
+3. The existing cold-start test still does not verify this presentation layer. Its result is explicitly a simulation and validates the scenario structure, not actual runtime delivery of TRACE into the user-visible assistant response.
 
 Therefore the current architectural finding is:
 
-> **Canonical requirement exists, but the runtime presentation contract is insufficiently formalized, and the existing cold-start test does not verify this layer.**
+> **The TRACE presentation contract is now explicit: completed TRACE is inserted into the assistant response. Runtime delivery remains unverified by the existing cold-start test.**
 
-This is a diagnosis, not yet the final implementation decision. The next step is to determine the smallest canonical change needed to make the presentation boundary explicit and then add a runtime verification that tests actual user-visible TRACE delivery.
+The next step is runtime verification of the four documented command paths and the new response-template behavior.
 
 ## TODO 4 — Review historical commit messages
 
