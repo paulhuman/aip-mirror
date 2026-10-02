@@ -35,25 +35,21 @@ This skill does not execute the operation, mutate repository state, perform life
 
 Repository, project, lifecycle, commit, mutation, and verification semantics remain with their canonical owners.
 
-## REFRESH
-
-REFRESH is an invocation mode, not a separate capability.
-
-    REFRESH
-        ↓
-    ACTIVATE
-        ↓
-    ACTIVATED
-
-Re-invoke ACTIVATE when the current canonical context needs to be reread.
-
 ## TRACE
 
-For a user-facing `>>` command whose canonical routing requires ACTIVATE, operation-level TRACE MUST be visible before canonical operation execution. This requirement is centralized here and MUST NOT be repeated as separate TRACE requirements in individual command owners.
+For a user-facing `>>` command whose canonical routing requires ACTIVATE, operation-level TRACE MUST be inserted into the assistant response after the canonical operation is complete. This requirement is centralized here and MUST NOT be repeated as separate TRACE requirements in individual command owners.
 
-For other operations, TRACE MAY be made visible when useful for reasoning or review.
+For other operations, TRACE MAY be presented when useful for reasoning or review.
 
-The visible operation-level TRACE MUST use this structure:
+### TRACE presentation contract
+
+TRACE is a response template, not a repository artifact or a separate operation.
+
+TRACE is visible when the completed TRACE block is inserted into the assistant response content delivered to the user.
+
+> TRACE = user-visible execution evidence inserted into the assistant response.
+
+The operation-level TRACE MUST use this canonical response template:
 
     TRACE
       operation: <operation>
@@ -67,13 +63,20 @@ The visible operation-level TRACE MUST use this structure:
         files:
           <additional unique repository files actually read>
 
-This trace is observable execution evidence, not a persistent repository schema or repository state.
+The canonical TRACE response SHOULD be presented as a compact fenced monospace block in the assistant response. Do not use HTML such as `<small>` or `</small>` because Markdown/UI support is not guaranteed.
+
+The presentation contract is:
+
+1. Execute the operation.
+2. Accumulate the actual read set.
+3. Assemble the TRACE using the canonical template.
+4. Insert the completed TRACE into the assistant response.
 
 `OPERATION READS` is REQUIRED for a user-facing `>>` command whose canonical routing requires ACTIVATE. For other operations it MAY be omitted.
 
 `OPERATION READS` contains the unique repository files actually read as part of the operation. ACTIVATE owners are also members of that read set when they were read as part of the operation, but are omitted from the OPERATION READS presentation to avoid duplication.
 
-The operation-level TRACE MUST be emitted before the canonical operation begins. If the operation aborts or fails after ACTIVATE, the TRACE MUST still show the activation and the OPERATION READS accumulated up to that point.
+The completed operation-level TRACE MUST be inserted into the assistant response after the operation ends. If the operation aborts or fails after ACTIVATE, insert a TRACE into the assistant response showing the activation and the OPERATION READS accumulated up to the failure point.
 
 Human-readable TRACE output MUST deduplicate files even when a file is reread during the same operation.
 
@@ -83,17 +86,15 @@ A repository read made only to report an already-completed result is not part of
 
 ## Manual invocation
 
-Users MAY request ACTIVATE, REFRESH, or TRACE directly in natural language. These are not separate commands or capabilities.
+Users MAY request ACTIVATE or TRACE directly in natural language. These are not separate commands.
 
 Examples:
 
 - “Activate the context for this operation.”
-- “Refresh the current activation context.”
 - “Show the TRACE for ACTIVATE.”
-- “REFRESH and show TRACE.”
 - “Reread the current canonical owners before we continue and show what was activated.”
 
-When ACTIVATE is requested manually, identify the current operation and reread the canonical owners required for that operation. When REFRESH is requested, repeat ACTIVATE. When TRACE is requested, present observable activation evidence without exposing hidden reasoning.
+When ACTIVATE is requested manually, identify the current operation and reread the canonical owners required for that operation. When TRACE is requested, present observable activation evidence without exposing hidden reasoning.
 
 See `.ai/architecture/faq/manual-activation.md` for practical examples and usage guidance.
 
