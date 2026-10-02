@@ -196,3 +196,39 @@ Action:
 Status: RESOLVED
 
 The boundary is now explicit: `.ai/rules/commits.md` is an operation dependency for WRITE-CAPABLE BOOTSTRAP, not an ACTIVATE owner. `.ai/workflows/handoff/BOOTSTRAP.md` now requires that read before repository mutation and records it in the completed TRACE.
+
+## TODO 8 — Normalize normative-language command entry
+
+Observation:
+
+The command `>>activate-normative-language` exposed an avoidable ambiguity at the activation entry point: although the canonical normative-language owner is a rule, the `activate-*` command shape can bias an AI toward looking for a `.ai/skills/.../SKILL.md` entry.
+
+Investigation:
+
+- `.ai/skills/activation/SKILL.md` is already owner-agnostic: ACTIVATE receives canonical owner files and rereads them; it does not require the owner to be a skill.
+- `.ai/rules/workflow.md` does not define an activation-to-skill mapping.
+- `.ai/AGENTS.md` requires rereading the canonical rule, skill, workflow, or project source that owns an operation.
+- `.ai/INDEX.md` previously routed `>>activate-normative-language` directly to `.ai/rules/normative-language.md`.
+- No repository evidence was found that the active activation machinery itself requires every `activate-*` target to be a skill.
+
+Decision:
+
+Use a thin skill as the explicit command entry point rather than changing the general ACTIVATE model.
+
+Implementation:
+
+- Added `.ai/skills/normative-language/SKILL.md`.
+- The new skill MUST read `.ai/rules/normative-language.md` before executing the normative-language operation.
+- The rule remains the canonical owner of normative-language semantics.
+- Renamed the user-facing command from `>>activate-normative-language` to `>>normative-language`.
+- Updated `.ai/INDEX.md` to route `>>normative-language` to `.ai/skills/normative-language/SKILL.md`.
+
+This preserves the existing generic activation architecture while making the normative-language command discoverable through an explicit skill entry point.
+
+Regression follow-up:
+
+- The fresh cold-start regression SHOULD include the renamed `>>normative-language` command.
+- The regression SHOULD verify that the skill is read first as the command owner and that `.ai/rules/normative-language.md` is read as its required canonical semantic owner.
+- The regression SHOULD verify that the retired `>>activate-normative-language` phrase is no longer part of the active command surface.
+
+Status: RESOLVED
