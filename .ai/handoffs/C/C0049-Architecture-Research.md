@@ -163,6 +163,16 @@ Continue the bounded ACTIVATE / operation-level TRACE architecture work: update 
 - GitHub's \`VERIFIED\` label on \`4ad2cd90...\` was recorded as cryptographic signature verification, distinct from project content verification.
 - The archive copy and active TODO were read back and the scope from the pre-change C0049 commit was verified as exactly two files: the archive addition and the active architecture-note replacement.
 
+## TRACE architecture implementation checkpoint
+
+- `.ai/skills/activation/SKILL.md` now centrally requires visible operation-level TRACE before canonical execution for every user-facing `>>` command whose routing requires ACTIVATE.
+- The same file defines the canonical visible TRACE structure: `TRACE` → `ACTIVATE` → `OPERATION READS`.
+- `OPERATION READS` is mandatory for those commands, deduplicated, and excludes ACTIVATE owners from presentation.
+- `.ai/INDEX.md` now contains one shared routing rule for the mandatory operation-level TRACE. No per-command TRACE column was added.
+- `.ai/workflows/handoff/BOOTSTRAP.md` now delegates TRACE presentation to `activation/SKILL.md` and requires the unified operation-level TRACE before the bootstrap branch executes.
+- The three active infrastructure files were read back after mutation and checked for the intended centralized ownership and numbering.
+- Compared with commit `155f7549741e08f2f0f8345ee5b5ed19eb82f2b1`, the implementation scope is exactly three files: `.ai/INDEX.md`, `.ai/skills/activation/SKILL.md`, and `.ai/workflows/handoff/BOOTSTRAP.md`.
+- Runtime verification of the four documented `>>` commands remains the next substantive task.
 ## Bootstrap verification
 
 - C0049 is the active receiving chapter.
