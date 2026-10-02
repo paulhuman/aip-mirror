@@ -133,6 +133,22 @@ The distinction is documented and requires no further architecture change.
 
 ## Deferred
 
+## Retired activation mode — historical note
+
+The former `REFRESH` mode has been removed from the active AI-infrastructure protocol.
+
+Historically, `REFRESH` was a convenience invocation for repeating `ACTIVATE` when the current canonical context might have become stale. Its semantic sequence was:
+
+    REFRESH
+        ↓
+    ACTIVATE
+        ↓
+    ACTIVATED
+
+It did not introduce a different capability or operation. Its purpose was to reread the current canonical owners and re-establish the active operational context.
+
+This note preserves the historical intent only. `REFRESH` is not an active capability, command, or response protocol. If a future architecture needs equivalent behavior, this note provides the original semantic reference point.
+
 This TODO file does not itself change the active routing, activation, or TRACE semantics. Those changes belong to the canonical owners listed above and SHOULD be handled as a separate bounded repository operation.
 
 ## TODO 6 — Align BOOTSTRAP activation with commit-rule ownership
