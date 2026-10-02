@@ -57,7 +57,7 @@ Continue Architecture & Research from the durable state established by C0054. Th
 - For repository-mutating bootstrap/handoff work, .ai/rules/commits.md remains an operation dependency and is recorded in OPERATION READS.
 - Architecture notes preserve durable reasoning but are not active semantic owners.
 - Runtime verification must test the actual assistant-response presentation boundary rather than merely simulate repository command behavior.
-- The reusable cold-start scenario should track the active command surface and currently covers five commands.
+- The reusable cold-start scenario should track the active command surface and currently covers five commands. The normative-language entry is now `>>normative-language` rather than `>>activate-normative-language`.
 - The canonical handoff filename contract is now explicit: `CHAPTER_ID = SPECIALIZATION + CURRENT_CHAPTER`; handoff filenames use `CHAPTER_ID`, not `CURRENT_CHAPTER` alone.
 - `FILENAME_SHORT_NAME` is derived from `SHORT_NAME` by replacing spaces with hyphens; this is now normative for handoff filenames.
 - `.ai/handoffs/README.md` and `.ai/architecture/README.md` are bootstrap orientation reads, not activation owners.
@@ -112,10 +112,12 @@ Continue Architecture & Research from the durable state established by C0054. Th
 - .ai/rules/commits.md was read as a WRITE-CAPABLE bootstrap operation dependency before mutation.
 - The C0054 handoff records successful real C0054 → C0055 migration runtime verification.
 - User-visible TRACE presentation was observed on that migration path.
-- The reusable cold-start scenario currently defines the active five-command surface.
+- The reusable cold-start scenario currently defines the active five-command surface; the normative-language command surface is now named `>>normative-language` and routes through `.ai/skills/normative-language/SKILL.md`.
 - The canonical filename contract was updated in `.ai/workflows/handoff/BOOTSTRAP.md`, `.ai/rules/handoff/lifecycle.md`, and `.ai/handoffs/README.md`.
+- The normative-language command entry now uses `.ai/skills/normative-language/SKILL.md`, while `.ai/rules/normative-language.md` remains the canonical semantic owner.
 - The updated bootstrap contract explicitly reads `.ai/handoffs/README.md` and `.ai/architecture/README.md` as operation context, not activation owners.
-- The normative-language skill requested by the user was not discoverable in the repository skill tree/search surface, so no claim is made that a dedicated normative-language skill review was executed.
+- The activation architecture investigation found no evidence that generic ACTIVATE requires canonical owners to be skills; the new normative-language skill is an explicit command-entry compatibility layer rather than a change to generic ACTIVATE semantics.
+- A dedicated `.ai/skills/normative-language/SKILL.md` was added as the explicit normative-language command entry point; it MUST read `.ai/rules/normative-language.md`, which remains the canonical semantic owner.
 - This C0055 handoff is the receiving handoff created during bootstrap.
 
 ## Inferred
@@ -131,7 +133,8 @@ Continue Architecture & Research from the durable state established by C0054. Th
 
 ## Open
 
-- Execute the expanded five-command cold-start regression when its next test run is scheduled.
+- Execute the expanded five-command cold-start regression with the renamed `>>normative-language` command and verify its skill-to-rule read boundary.
+
 - Re-run relevant consistency verification after any active routing, bootstrap, activation, or handoff change.
 - Execute a fresh cold-start regression after the filename-contract changes, with particular attention to the `A0001-JSX-Prototype.md` derivation case.
 - Decide separately how to reconcile the historical noncanonical `0001-JSX Prototype.md` / `0002-JSX Prototype.md` artifacts after the new contract is regression-tested.
@@ -139,6 +142,8 @@ Continue Architecture & Research from the durable state established by C0054. Th
 - Review any remaining active TODO items only within their existing bounded scope.
 
 ## Immediate next task
+
+Continue in C0056 by running the fresh cold-start regression against the updated command surface, especially `>>normative-language`, and record the runtime result without reopening the resolved generic ACTIVATE architecture.
 
 Continue C0055 from the durable state above. The next regression-oriented test should execute the expanded five-command cold-start scenario and record a new result artifact without rewriting the reusable scenario unless the test definition itself intentionally changes.
 
