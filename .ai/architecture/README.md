@@ -30,6 +30,26 @@ Prefer separate files for separate questions rather than accumulating unrelated 
 
 When a practical explanation describes an active semantic rule, skill, or workflow, the canonical owner remains authoritative. FAQ material SHOULD explain or illustrate that owner rather than redefine it.
 
+## Tests and results
+
+The `.ai/architecture/tests/` directory contains reproducible architecture-level test scenarios for validating AI-infrastructure behavior.
+
+Test scenario files define the reusable test input and expected pass criteria. They are not runtime results and SHOULD remain stable between runs unless the test definition itself is intentionally revised.
+
+The `.ai/architecture/tests/results/` subtree contains separate result artifacts for individual test runs. Each result records the tested repository revision, execution context, observed behavior, deviations, and pass/fail outcome without replacing the reusable scenario.
+
+This separation keeps the test definition distinct from historical evidence:
+
+```text
+.ai/architecture/tests/
+    = reusable architecture test scenarios
+
+.ai/architecture/tests/results/
+    = per-run historical test evidence
+```
+
+Architecture tests are durable infrastructure evidence, not active semantic owners. Their scenarios and results MUST NOT be treated as replacements for the canonical rule, skill, workflow, or other owner being tested.
+
 ## Ownership boundary
 
 Architecture notes are **not active execution owners**.
