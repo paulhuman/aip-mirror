@@ -51,7 +51,7 @@ At the time this scenario was last updated, the active command surface was:
 - `>>migrate <chapter>`;
 - `>>generate-bootstrap <chapter>`;
 - `>>explain-code`;
-- `>>activate-normative-language`.
+- `>>normative-language`.
 
 The exact command names and count MUST be obtained from the current `.ai/INDEX.md` at test execution time.
 
