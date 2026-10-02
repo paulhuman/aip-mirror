@@ -127,6 +127,7 @@ Continue Architecture & Research from the durable repository state established a
 - Rerun the relevant cold-start/consistency verification after any active routing, bootstrap, activation, or handoff change.
 - Record any new runtime or verification result under the test results directory.
 - Classify discrepancies as observed deviations, simulation limitations, or architecture questions before proposing further changes.
+- **New TODO:** investigate why the BOOTSTRAP chat initialization did not visibly emit the required operation-level TRACE to the user, despite the canonical BOOTSTRAP and Activation instructions requiring it. Determine whether the issue is in the canonical infrastructure, execution behavior, or response presentation, and record the result with appropriate verification.
 
 ## Immediate next task
 
