@@ -16,4 +16,4 @@
 5. Re-read the canonical rule, skill, workflow, or project source that owns
    the operation before executing it.
 
-6. When initializing a new conversation chapter, use `paulhuman/aip-mirror@main:/.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow; DO NOT invent a separate entry procedure.
+6. When initializing a new conversation chapter, use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow; DO NOT invent a separate entry procedure.
