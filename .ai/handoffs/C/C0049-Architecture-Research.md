@@ -137,7 +137,13 @@ Continue Architecture & Research from the durable repository state at the end of
 
 ## Immediate next task
 
-Continue the bounded ACTIVATE / operation-level TRACE architecture work: update `.ai/skills/activation/SKILL.md` as the single TRACE owner, add one shared routing rule to `.ai/INDEX.md`, and align `.ai/workflows/handoff/BOOTSTRAP.md` with the unified model. Then perform runtime verification of the four documented `>>` commands.
+Continue with runtime verification of the four documented user-facing `>>` commands under the now-active centralized ACTIVATE / operation-level TRACE model:
+- `>>handoff`
+- `>>migrate <chapter>`
+- `>>generate-bootstrap <chapter>`
+- `>>explain-code`
+
+Preserve the cold-start scenario as the stable input artifact and create a new result artifact for actual runtime evidence.
 
 ## Recommended starting context
 
@@ -181,3 +187,11 @@ Continue the bounded ACTIVATE / operation-level TRACE architecture work: update 
 - Required canonical bootstrap owners were reread before repository mutation.
 - The write-capability branch was verified as WRITE-CAPABLE.
 - Post-creation read-back and commit/scope verification are required before bootstrap is considered complete.
+
+
+## Final normative-language refresh checkpoint
+
+- `.ai/rules/normative-language.md` was reread immediately before migration.
+- The latest modified active infrastructure files were reread and checked against the normative-language rule.
+- The reviewed files use the canonical BCP 14 vocabulary where statements are normative; lowercase occurrences of `may`, `should`, `must`, and procedural `Do not` were retained where their meaning is ordinary English, descriptive, or procedural rather than BCP 14.
+- No normalization edit was required by this refresh.
