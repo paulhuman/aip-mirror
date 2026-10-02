@@ -238,13 +238,13 @@ After this self-check:
 3. If any canonical runtime input is missing or malformed, STOP before repository mutation and report exactly what is missing or malformed.
 4. Compute `CHAPTER_ID = SPECIALIZATION + CURRENT_CHAPTER` and `FILENAME_SHORT_NAME` by replacing spaces in `SHORT_NAME` with hyphens. Before repository mutation, verify that the resulting handoff path matches `.ai/handoffs/<SPECIALIZATION>/<CHAPTER_ID>-<FILENAME_SHORT_NAME>.md`. If it does not, STOP and report the mismatch.
 5. Read this file.
-5. Read .ai/rules/workflow.md, .ai/rules/handoff/references.md, the handoff skill, `.ai/handoffs/README.md`, and `.ai/architecture/README.md`. The two README files are bootstrap orientation reads, not activation owners.
-6. Read .ai/skills/activation/SKILL.md and invoke ACTIVATE.
-7. After the repository write-capability self-check, a WRITE-CAPABLE bootstrap MUST read .ai/rules/commits.md before emitting the operation-level TRACE, because the bootstrap branch includes an authorized repository commit. For a READ-ONLY bootstrap, .ai/rules/commits.md is not required solely for bootstrap.
-8. During bootstrap initialization, emit the required operation-level TRACE defined by `.ai/skills/activation/SKILL.md` before executing the applicable bootstrap branch. The TRACE MUST identify the bootstrap operation, list the canonical owners actually reread for ACTIVATE, report `status: ACTIVATED`, and include the unique additional repository files actually read in `OPERATION READS` without duplicating ACTIVATE owners. For a WRITE-CAPABLE bootstrap, `.ai/rules/commits.md` MUST therefore appear in `OPERATION READS`. If bootstrap aborts or fails after ACTIVATE, the TRACE MUST still show the activation and the `OPERATION READS` accumulated up to that point.
-9. If PREVIOUS_CHAPTER is not N/A, read the predecessor handoff.
-10. Inspect implementation files and references identified by the predecessor handoff when applicable.
-11. Confirm that the new chapter can continue from the recorded state without guessing.
+6. Read .ai/rules/workflow.md, .ai/rules/handoff/references.md, the handoff skill, `.ai/handoffs/README.md`, and `.ai/architecture/README.md`. The two README files are bootstrap orientation reads, not activation owners.
+7. Read .ai/skills/activation/SKILL.md and invoke ACTIVATE.
+8. After the repository write-capability self-check, a WRITE-CAPABLE bootstrap MUST read .ai/rules/commits.md before emitting the operation-level TRACE, because the bootstrap branch includes an authorized repository commit. For a READ-ONLY bootstrap, .ai/rules/commits.md is not required solely for bootstrap.
+9. During bootstrap initialization, emit the required operation-level TRACE defined by `.ai/skills/activation/SKILL.md` before executing the applicable bootstrap branch. The TRACE MUST identify the bootstrap operation, list the canonical owners actually reread for ACTIVATE, report `status: ACTIVATED`, and include the unique additional repository files actually read in `OPERATION READS` without duplicating ACTIVATE owners. For a WRITE-CAPABLE bootstrap, `.ai/rules/commits.md` MUST therefore appear in `OPERATION READS`. If bootstrap aborts or fails after ACTIVATE, the TRACE MUST still show the activation and the `OPERATION READS` accumulated up to that point.
+10. If PREVIOUS_CHAPTER is not N/A, read the predecessor handoff.
+11. Inspect implementation files and references identified by the predecessor handoff when applicable.
+12. Confirm that the new chapter can continue from the recorded state without guessing.
 
 ### Branch A — WRITE-CAPABLE AI
 
