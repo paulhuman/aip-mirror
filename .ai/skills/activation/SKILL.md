@@ -63,7 +63,7 @@ The operation-level TRACE MUST use this canonical response template:
         files:
           <additional unique repository files actually read>
 
-The canonical TRACE response SHOULD be presented as a compact fenced monospace block in the assistant response. Do not use HTML such as `<small>` or `</small>` because Markdown/UI support is not guaranteed.
+The canonical TRACE response SHOULD be presented as a compact fenced monospace block in the assistant response.
 
 The presentation contract is:
 
