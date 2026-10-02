@@ -14,7 +14,7 @@ C
 
 ## Starting objective
 
-Continue Architecture & Research from the durable repository state established at the end of C0050. Complete the bounded investigation of TODO 6/7 concerning whether `.ai/rules/commits.md` belongs in the ACTIVATE boundary or remains an operation dependency recorded in `OPERATION READS`, then make only the required canonical-file changes and rerun the relevant consistency verification.
+Continue Architecture & Research from the durable repository state established at the end of C0050. Complete the bounded investigation of TODO 6/7 concerning whether `.ai/rules/commits.md` belongs in the ACTIVATE boundary or remains an operation dependency recorded in `OPERATION READS`, then investigate and resolve the newly identified BOOTSTRAP TRACE presentation gap with the smallest required canonical change and appropriate runtime verification.
 
 ## Known starting implementation state
 
@@ -128,10 +128,11 @@ Continue Architecture & Research from the durable repository state established a
 - Record any new runtime or verification result under the test results directory.
 - Classify discrepancies as observed deviations, simulation limitations, or architecture questions before proposing further changes.
 - **New TODO:** investigate why the BOOTSTRAP chat initialization did not visibly emit the required operation-level TRACE to the user, despite the canonical BOOTSTRAP and Activation instructions requiring it. Determine whether the issue is in the canonical infrastructure, execution behavior, or response presentation, and record the result with appropriate verification.
+- **Investigation result recorded:** the canonical requirement exists, but the runtime presentation contract is insufficiently formalized at the final assistant-response boundary, and the existing cold-start test does not verify this presentation layer. See TODO 3 in `.ai/architecture/ai-infrastructure-restructuring.md`.
 
 ## Immediate next task
 
-Read the current TODO 6/7 context and determine whether `.ai/rules/commits.md` belongs in the ACTIVATE boundary or remains an operation dependency represented in `OPERATION READS`. Then, if a canonical change is required, perform the minimal repository-safe update and verify its resulting content and scope.
+Determine where the TRACE presentation contract belongs: `.ai/skills/activation/SKILL.md`, `.ai/workflows/handoff/BOOTSTRAP.md`, or the boundary between them. Define what `visible` means in the architecture as assistant-visible response content, then make the smallest canonical change required and add runtime verification that tests actual user-visible TRACE delivery. Use TODO 3 in `.ai/architecture/ai-infrastructure-restructuring.md` as the investigation anchor. Do not redesign the centralized TRACE model or reopen resolved TODO 6/7 without new evidence.
 
 ## Recommended starting context
 
@@ -146,6 +147,15 @@ Read the current TODO 6/7 context and determine whether `.ai/rules/commits.md` b
 9. `.ai/rules/repository.md`
 10. `.ai/rules/commits.md`
 11. `.ai/skills/commits/SKILL.md`
+
+## Migration checkpoint to C0052
+
+- Migration requested by the user with `>>migrate 0052`.
+- Current durable investigation result is recorded in TODO 3 of `.ai/architecture/ai-infrastructure-restructuring.md`.
+- The next chapter MUST begin from that recorded diagnosis rather than reconstructing it from conversation history.
+- The immediate question is the ownership and definition of the runtime presentation contract for TRACE, including the architectural meaning of `visible`.
+- No canonical presentation change has been made yet; this chapter records the diagnosis only.
+- The receiving chapter is C0052 — Architecture & Research.
 
 ## Bootstrap verification
 
