@@ -105,13 +105,6 @@ Key current boundaries:
 - Which model and reasoning controls are actually exposed by the installed Codex environment at test time?
 - Which practical tooling observations should be transferred into durable project documentation or architecture work rather than remaining D0001-only knowledge?
 
-<!-- The remaining historical questions below are superseded by the current architecture refresh. -->
-<!--
-- How well does Codex Desktop actually discover and apply the repository's current instruction architecture?
-- What repository visibility does Codex Desktop provide for `.ai/`, `docs/`, `references/`, and source files?
-- How accurately does it understand current Git state, history, diffs, and changed-file scope?
-- Does it follow the repository write-safety procedure during a controlled write test?
--->
 
 
 ## Current files
@@ -124,14 +117,9 @@ Primary repository areas relevant to D0001:
 - `.ai/rules/`
 - `.ai/skills/`
 - `.ai/workflows/handoff/BOOTSTRAP.md`
-- `.ai/handoffs/D/`
-
-
-- `.ai/rules/`
-- `.ai/skills/`
-- `docs/PROJECT-INSTRUCTIONS.md`
-- `.ai/handoffs/`
 - `.ai/handoffs/D/D0001-Project-Workshop.md`
+- `docs/PROJECT-INSTRUCTIONS.md`
+- project source and build/tooling files as required by individual workshop tasks
 - project source and build/tooling files as required by individual workshop tasks
 
 Canonical external SDK reference:
@@ -144,15 +132,18 @@ The complete SDK must not be copied into `aip-mirror`.
 
 - `.ai/rules/repository.md`
 - `.ai/rules/workflow.md`
-- `.ai/rules/conversation-lifecycle.md`
-- `.ai/rules/project-architecture.md`
-- `.ai/skills/conversation-handoff/SKILL.md`
-- `.ai/skills/conversation-handoff/BOOTSTRAP.md`
-- `.ai/skills/commit-message/SKILL.md`
-- `.ai/skills/deep-understanding/SKILL.md`
+- `.ai/INDEX.md`
+- `.ai/rules/repository.md`
+- `.ai/rules/workflow.md`
+- `.ai/rules/handoff/lifecycle.md`
+- `.ai/rules/handoff/references.md`
+- `.ai/rules/commits.md`
+- `.ai/skills/activation/SKILL.md`
+- `.ai/skills/handoff/SKILL.md`
+- `.ai/skills/commits/SKILL.md`
+- `.ai/workflows/handoff/BOOTSTRAP.md`
 - `docs/PROJECT-INSTRUCTIONS.md`
-- `.ai/handoffs/README.md`
-- `.ai/handoffs/C/C0003-Architecture-Research.md`
+- `.ai/handoffs/D/D0001-Project-Workshop.md`
 
 ## Important constraints
 
@@ -169,12 +160,15 @@ The complete SDK must not be copied into `aip-mirror`.
 
 ### Confirmed / observed
 
-- Current repository HEAD is `21fb38ad00f3dd77f85cbb9fca4064b7cf7f67b9`.
-- D0001 is the first chapter in specialization D; no previous 04-series handoff is required.
-- The current repository contains the lifecycle recovery rules and recovery history introduced after the earlier lifecycle violation.
-- C0003 remains the architecture/research specialization and owns architecture-level questions such as authority, lifecycle semantics, OVERRIDE, TRACE, and project-agnosticity.
+- Current repository HEAD is `bd1c54b53927db4cf90b3e4b9e2e281994953ca2`.
+- D0001 is the first chapter in specialization D; no previous specialization-D handoff is required.
+- The current repository contains the new `.ai/` infrastructure layout and current handoff model.
 - D0001 owns practical Project Workshop concerns.
 - No D0001 production source implementation has been started in this chapter.
+- The current handoff path is `.ai/handoffs/D/D0001-Project-Workshop.md`.
+- The current handoff model has no required lifecycle-state transitions.
+- `>>handoff` is a checkpoint/update operation for the current handoff.
+- `.ai/skills/activation/SKILL.md` centralizes the operation-level TRACE presentation contract.
 
 ### Inferred
 
@@ -223,4 +217,4 @@ Do not begin a production write test until the read-only observations are review
 
 ## Recommended starting context for next chapter
 
-D0001 is the first Project Workshop chapter. Its durable baseline is the current repository instruction architecture plus the practical Workshop boundary recorded above. If a later D chapter is created, the receiving chapter should read this handoff, inspect the current repository state, and only then transition this handoff through the normal lifecycle as required.
+D0001 is the first Project Workshop chapter. Its durable baseline is the current repository instruction architecture plus the practical Workshop boundary recorded above. If a later D chapter is created, the receiving chapter should read this handoff, inspect the current repository state, and create/update its own handoff according to the current BOOTSTRAP and handoff procedures.
