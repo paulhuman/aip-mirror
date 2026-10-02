@@ -45,12 +45,15 @@ The simulation MUST preserve the distinction between the chat entry boundary and
 
 The test MUST derive the command list from the current `.ai/INDEX.md` when it is executed.
 
-At the time this scenario was created, the active command surface was:
+At the time this scenario was last updated, the active command surface was:
 
 - `>>handoff`;
 - `>>migrate <chapter>`;
 - `>>generate-bootstrap <chapter>`;
-- `>>explain-code`.
+- `>>explain-code`;
+- `>><fifth active command>`.
+
+The exact command names and count MUST be obtained from the current `.ai/INDEX.md` at test execution time. The fifth command listed above is a placeholder indicating that the current active surface contains five commands; it MUST NOT be treated as a literal command.
 
 Historical command phrases MUST NOT be treated as active commands merely because they appear in architecture history.
 
