@@ -18,7 +18,7 @@ ACTIVATE ≠ выполнение задачи
 TRACE    ≠ выполнение задачи
 ```
 
-ACTIVATE prepares current operational context. REFRESH rereads that context when it may have become stale. TRACE makes the observable activation result visible.
+ACTIVATE prepares current operational context. TRACE makes the observable execution result visible.
 
 ## ACTIVATE
 
