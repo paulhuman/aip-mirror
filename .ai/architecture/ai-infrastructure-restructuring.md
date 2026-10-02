@@ -59,16 +59,18 @@ The current activation skill, INDEX routing rule, and BOOTSTRAP alignment implem
 
 After the active files are updated:
 
-- exercise the four documented user-facing commands:
-  - `>>handoff`
-  - `>>migrate <chapter>`
-  - `>>generate-bootstrap <chapter>`
-  - `>>explain-code`
+- exercise the user-facing commands documented by the current `.ai/INDEX.md`;
+- note that the current `.ai/INDEX.md` documents five user-facing commands, while the reusable cold-start test files below currently enumerate only four;
 - verify that each command requiring ACTIVATE visibly produces the required operation-level TRACE;
 - verify that ACTIVATE owners are not duplicated under OPERATION READS;
 - verify that OPERATION READS reflects actual repository reads for the operation;
-- preserve the existing cold-start scenario as the stable test input;
+- preserve the existing cold-start scenario as the stable test input until the discrepancy is classified;
 - create a new result artifact rather than rewriting the historical simulation result.
+
+Relevant test artifacts:
+
+- `.ai/architecture/tests/cold-start-command-trace.md` — reusable cold-start test scenario; currently enumerates four commands;
+- `.ai/architecture/tests/results/cold-start-command-trace/20261002-0900-cold-start-command-trace.md` — latest historical structural-simulation result; also reflects the four-command scope.
 
 Status: OPEN
 
