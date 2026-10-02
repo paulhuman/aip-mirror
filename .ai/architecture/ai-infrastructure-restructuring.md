@@ -120,3 +120,22 @@ Action:
 - Re-run the bootstrap consistency check after the decision.
 
 Status: OPEN
+
+## TODO 7 — Distinguish activation-boundary ownership from operation dependency
+
+Observation:
+
+The investigation needs to distinguish two different roles for a canonical rule file:
+
+- **activation boundary** — the file is part of the canonical owner set that MUST be reread by ACTIVATE before the operation begins;
+- **operation dependency** — the file is not an ACTIVATE owner, but the operation MUST read it before performing the relevant work and therefore it belongs in `OPERATION READS`.
+
+For repository-mutating handoff/bootstrap work, `.ai/rules/commits.md` MUST be included at minimum as an operation read before repository work is performed.
+
+Action:
+
+- Explain later how these two roles differ operationally and what concrete file-structure changes would be required for each choice.
+- In particular, compare the consequences of adding `.ai/rules/commits.md` to an ACTIVATE owner set versus keeping it as an operation dependency recorded in `OPERATION READS`.
+- Resolve this together with TODO 6 rather than prematurely changing the activation boundary.
+
+Status: OPEN
