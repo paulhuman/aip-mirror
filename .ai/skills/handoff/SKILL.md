@@ -181,7 +181,7 @@ The AI MUST then validate `USER_SUPPLIED_CURRENT_CHAPTER` against any repository
 - if evidence is consistent, accept `USER_SUPPLIED_CURRENT_CHAPTER` as `CURRENT_CHAPTER_CONTEXT` in RECOVERED state and continue;
 - if evidence directly contradicts `USER_SUPPLIED_CURRENT_CHAPTER`, STOP and explain the contradiction.
 
-This continuation rule is mandatory: a valid user response MUST NOT enter a circular UNKNOWN → ask → UNKNOWN STOP loop.
+This continuation rule MUST be applied: a valid user response MUST NOT enter a circular UNKNOWN → ask → UNKNOWN STOP loop.
 
 ### Migration argument validation
 
