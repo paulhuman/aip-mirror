@@ -237,6 +237,56 @@ Status: RESOLVED
 Implementation is encoded in the canonical migration and lifecycle owners. Dedicated recovery test coverage is defined separately; runtime execution evidence remains subject to the existing test-result process.
 
 
+## TODO 10 — Define the GitHub disposable-branch fallback for repository fixtures
+
+Problem:
+
+GitHub repository operations may allow creation of a commit object but reject moving an existing branch ref with `update_ref`. Treating the ref update as the only way to construct a disposable test state creates an unnecessary tool-level dead end.
+
+Decision:
+
+For isolated repository tests that require destructive or synthetic history, prefer creating a new branch directly from the required commit SHA rather than moving an existing branch ref.
+
+The canonical fixture flow is:
+
+    known commit SHA
+        ↓
+    create disposable branch from that SHA
+        ↓
+    create / modify / delete fixture files on that branch
+        ↓
+    read back the resulting repository state
+        ↓
+    verify diff and fixture scope
+        ↓
+    exercise the test operation
+        ↓
+    create the next disposable branch from the resulting commit when another state is required
+
+The important distinction is:
+
+    create branch from commit
+        ≠
+    move existing branch ref
+
+The first operation constructs a new isolated test path without rewriting or relocating an existing ref. The second mutates an existing ref and MAY be rejected by the connected GitHub tool even when the requested repository state is otherwise valid.
+
+Rules to add to the canonical repository/GitHub workflow documentation:
+
+- Test harnesses MUST prefer disposable branches created from known commit SHAs when isolated repository state is required.
+- A blocked `update_ref` MUST NOT be treated as evidence that the required fixture state cannot be constructed.
+- AI SHOULD decompose a fixture operation into commit-sized stages and create a new disposable branch from each resulting commit when ref movement is unavailable.
+- Fixture branches MUST remain clearly isolated from canonical branches such as `main`.
+- Repository-state verification MUST use the actual fixture branch/ref and MUST NOT infer the state from the intended commit operation alone.
+- This fallback is a test/repository-operation strategy; it MUST NOT alter the project's canonical Git history or introduce a new persistent state mechanism.
+
+Implementation target:
+
+Add the concrete branch-from-commit fallback and the corresponding `update_ref` failure handling to the canonical repository rules/workflow documentation. Keep the architectural decision here as the concise rationale and routing rule; detailed operational procedure belongs in the repository owner.
+
+Status: OPEN
+
+
 ## Deferred
 
 ## Retired activation mode — historical note
