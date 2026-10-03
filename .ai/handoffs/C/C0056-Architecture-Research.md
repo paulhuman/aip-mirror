@@ -40,11 +40,11 @@ Continue Architecture & Research from the durable state established by C0055. Ex
 - The predecessor handoff exists at `.ai/handoffs/C/C0055-Architecture-Research.md` and was read successfully.
 - The centralized operation-level TRACE architecture is implemented.
 - The TRACE presentation contract is explicit: execute the operation, accumulate actual reads, assemble the canonical fenced monospace TRACE, and insert it into the assistant response.
-- The reusable cold-start command scenario now covers the active five-command surface: `>>handoff`, `>>migrate <chapter>`, `>>generate-bootstrap <chapter>`, `>>explain-code`, and `>>normative-language`.
+- The reusable cold-start command scenario covers the active five-command surface: `>>handoff`, `>>migrate <chapter>`, `>>generate-bootstrap <chapter>`, `>>explain-code`, and `>>normative-language`.
 - The normative-language command entry is `.ai/skills/normative-language/SKILL.md`; its canonical semantic owner is `.ai/rules/normative-language.md`.
 - `.ai/handoffs/README.md` and `.ai/architecture/README.md` are bootstrap orientation reads, not activation owners.
 - New runtime test results belong under `.ai/architecture/tests/results/<test-name>/<run-id>.md`.
-- The receiving C0056 handoff is being created by this bootstrap, not by the predecessor migration.
+- The receiving C0056 handoff is this file.
 
 ## Decisions carried forward
 
@@ -60,9 +60,28 @@ Continue Architecture & Research from the durable state established by C0055. Ex
 - Runtime verification must test the actual assistant-response presentation boundary rather than merely simulate repository command behavior.
 - The canonical handoff filename contract is explicit: `CHAPTER_ID = SPECIALIZATION + CURRENT_CHAPTER`; handoff filenames use `CHAPTER_ID`, not `CURRENT_CHAPTER` alone.
 - `FILENAME_SHORT_NAME` is derived from `SHORT_NAME` by replacing spaces with hyphens.
-- The normative-language command is now `>>normative-language`; the retired `>>activate-normative-language` phrase is not part of the active command surface.
+- The normative-language command is `>>normative-language`; the retired `>>activate-normative-language` phrase is not part of the active command surface.
 - The normative-language skill is a thin command entry point; `.ai/rules/normative-language.md` remains the canonical semantic owner.
 - The generic ACTIVATE architecture does not require every canonical owner to be a skill.
+- `A / Project Workshop` and `A0001-Project-Workshop.md` are canonical neutral format examples only. They are not universal specialization requirements or handoffs to copy into a new project.
+
+## Recent work completed in C0056
+
+The FAQ audit and correction for adapting the `.ai` infrastructure to a new project is complete.
+
+Updated:
+- `.ai/architecture/faq/adapting-to-a-new-project.md`
+
+Corrections:
+- Removed the false requirement that every project MUST reserve specialization A for Project Workshop.
+- Clarified that `A / Project Workshop` is the canonical neutral format example and that other specialization letters and names remain project-specific.
+- Removed the inaccurate `shown above` wording from the filename-example explanation.
+
+Commit:
+`4633fe1bf687fde49fff1e0d63fe15c3d7106822`
+`ai-docs(architecture): clarify specialization example`
+
+The FAQ was also re-audited against the current handoff skill, lifecycle rule, BOOTSTRAP workflow, and handoff README. The four-digit chapter contract is consistent: first chapter `0001`, `0000` invalid, and `CHAPTER_ID = SPECIALIZATION + CURRENT_CHAPTER`.
 
 ## Relevant files and references
 
@@ -87,9 +106,11 @@ Continue Architecture & Research from the durable state established by C0055. Ex
 
 - `.ai/architecture/ai-infrastructure-restructuring.md` — active bounded TODO surface; runtime command verification remains the relevant open work.
 - `.ai/architecture/README.md` — architecture-note ownership and usage boundary.
+- `.ai/architecture/faq/adapting-to-new-project.md` — FAQ explaining project-specific adaptation boundaries and canonical neutral examples.
 - `.ai/architecture/tests/cold-start-command-trace.md` — reusable cold-start test scenario covering the current five-command surface.
 - `.ai/architecture/tests/results/cold-start-command-trace/20261002-1352-c0054-to-c0055-runtime.md` — previous real runtime migration result.
 - `.ai/handoffs/C/C0055-Architecture-Research.md` — predecessor checkpoint.
+- `.ai/handoffs/C/C0056-Architecture-Research.md` — current chapter checkpoint.
 
 ## Important constraints
 
@@ -104,26 +125,25 @@ Continue Architecture & Research from the durable state established by C0055. Ex
 - Do not introduce a registry, manifest, dependency graph, command-ID layer, universal router, new lifecycle state machine, or ENTRY.md without a concrete architectural need.
 - For bootstrap/migration evidence, distinguish ACTIVATE owners from additional OPERATION READS and do not duplicate owners in the latter.
 - The cold-start test scenario is a reusable input artifact; runtime result evidence belongs in a separate result file.
+- Historical noncanonical handoff filename artifacts remain a separate cleanup concern and MUST NOT be mixed into unrelated runtime verification.
 
 ## Confirmed / observed
 
 - `.ai/config.yaml` confirms repository paulhuman/aip-mirror, default branch main, and C → Architecture & Research.
-- The supplied bootstrap values are valid: PREVIOUS_CHAPTER = 0055, CURRENT_CHAPTER = 0056, SPECIALIZATION = C.
-- The supplied SHORT_NAME is Architecture & Research.
 - C0055 exists at `.ai/handoffs/C/C0055-Architecture-Research.md` and was read successfully.
-- The applicable WRITE-CAPABLE bootstrap branch applies.
-- The canonical bootstrap owners were reread before repository mutation.
-- `.ai/rules/commits.md` was read as a WRITE-CAPABLE bootstrap operation dependency before mutation.
-- `.ai/skills/commits/SKILL.md` was read before constructing the initial handoff commit.
-- The C0055 handoff records successful real C0054 → C0055 migration runtime verification.
+- The applicable WRITE-CAPABLE handoff/migration branch applies.
+- The centralized TRACE requirements and presentation contract are implemented.
 - The current INDEX documents five active user-facing commands.
 - The reusable cold-start scenario explicitly names the five-command surface and requires the exact active list to be derived from INDEX at test execution time.
 - `.ai/skills/normative-language/SKILL.md` requires reading `.ai/rules/normative-language.md` before executing the normative-language operation.
 - The normative-language rule explicitly distinguishes normative, procedural, ordinary-English, and ambiguous uses and forbids blind search-and-replace.
+- The FAQ adaptation audit found and corrected the universal-specialization wording and the inaccurate filename-reference wording.
+- The FAQ correction commit changed only `.ai/architecture/faq/adapting-to-a-new-project.md`.
+- The current FAQ read-back confirmed the corrected wording and absence of the superseded formulations.
 
 ## Inferred
 
-- The next bounded architecture task is the fresh five-command cold-start regression, not another redesign of generic ACTIVATE / TRACE.
+- The next bounded architecture task remains the fresh five-command cold-start regression.
 - The most useful regression evidence will explicitly verify the `>>normative-language` skill-to-rule boundary and exclusion of the retired command phrase.
 - The existing C0054 → C0055 runtime result is evidence for the migration path but is not sufficient evidence for the complete five-command regression.
 
@@ -135,7 +155,7 @@ Continue Architecture & Research from the durable state established by C0055. Ex
 
 ## Open
 
-- Execute the fresh five-command cold-start regression from the current INDEX and record a new runtime result.
+- Execute the fresh five-command cold-start regression from the current INDEX and record the runtime result under `.ai/architecture/tests/results/cold-start-command-trace/`.
 - Verify the `>>normative-language` command reads its skill entry point and then its canonical normative-language rule.
 - Verify the retired `>>activate-normative-language` phrase is excluded from the active command surface.
 - Re-run relevant consistency verification after any active routing, bootstrap, activation, or handoff change.
@@ -164,10 +184,10 @@ Run the fresh five-command cold-start regression against the current `.ai/INDEX.
 
 ## Handoff checkpoint verification
 
-- C0056 is the receiving chapter.
+- C0056 is the current chapter being migrated to C0057.
 - The chapter header uses the required four-digit chapter format.
-- The C0055 predecessor handoff was read successfully before creating this handoff.
-- Required bootstrap/activation/repository/commit owners were reread before repository mutation.
+- The C0055 predecessor handoff was read successfully before updating this handoff.
+- Required handoff, bootstrap, activation, repository, and commit owners were reread before migration.
 - The write-capability branch was verified as WRITE-CAPABLE.
-- The receiving C0056 handoff is created at the canonical specialization path.
-- Post-creation read-back and content verification are required before bootstrap is considered complete.
+- The C0056 handoff content was updated with the latest durable state, including the completed FAQ audit and correction.
+- Post-update read-back and content verification are required before migration is considered complete.
