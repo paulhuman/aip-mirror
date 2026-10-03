@@ -287,6 +287,60 @@ Add the concrete branch-from-commit fallback and the corresponding `update_ref` 
 Status: OPEN
 
 
+
+## TODO 11 — Prepare C0061 for the migration-recovery runtime test
+
+Decision:
+
+The next chapter, C0061, begins the real five-case runtime exercise defined by .ai/architecture/tests/migration-recovery.md. The test MUST start with Case 1 and must record observed behavior separately from structural expectations.
+
+### C0061 starting sequence
+
+Case 1 MUST be exercised as three distinct repository-evidence states:
+
+    active
+        ↓
+    archive-only
+        ↓
+    active + archive duplicate
+
+For each state, the next chapter MUST:
+
+1. establish the disposable fixture branch from the known fixture commit SHA;
+2. read the actual handoff fixture and validate its semantic header;
+3. exercise the migration/recovery behavior at the assistant-response boundary;
+4. record the actual CURRENT_CHAPTER classification and resulting continuation/STOP behavior;
+5. verify the fixture branch, changed files, and fixture scope;
+6. preserve the distinction between repository evidence and conversation context.
+
+The three Case 1 states MUST NOT be collapsed into one structural simulation. Each state is an independent runtime observation.
+
+### Fixture branch rule
+
+The next chapter MUST use the disposable branch-from-commit strategy documented in TODO 10. DO NOT attempt to move an existing canonical or reusable fixture branch with update_ref merely to reach the next state.
+
+When another Case 1 state is needed, create the next disposable branch from the commit that establishes that state. Read back the resulting branch contents before exercising migration.
+
+### Result recording
+
+The Case 1 observations MUST be recorded in a new result artifact under:
+
+    .ai/architecture/tests/results/migration-recovery/<run-id>.md
+
+The result MUST identify:
+
+- the disposable fixture branch used for each state;
+- the source commit SHA for each fixture;
+- the handoff evidence present in the state;
+- the recovered classification;
+- the observed assistant-response-boundary behavior;
+- any STOP condition and its exact reason;
+- the distinction between repository evidence and user-supplied recovery input.
+
+DO NOT declare the complete five-case test PASS from Case 1 alone. The remaining four cases stay OPEN until they are actually exercised.
+
+Status: OPEN
+
 ## Deferred
 
 ## Retired activation mode — historical note
