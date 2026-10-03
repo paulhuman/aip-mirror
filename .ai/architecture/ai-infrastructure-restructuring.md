@@ -134,27 +134,97 @@ Status: RESOLVED
 The distinction is documented and requires no further architecture change.
 
 
-## TODO 9 — Decide whether `>>migrate` should require an argument
+## TODO 9 — Define `CURRENT_CHAPTER` recovery and `>>migrate <chapter>` validation
 
-Question:
+Decision:
 
-The current command surface documents:
+Keep the explicit numeric argument in the active migration command:
 
     >>migrate <chapter>
 
-However, the migration target is now derived exclusively from the current chapter:
+The argument MUST NOT become a direct target selector. Its role is a user assertion of the expected next chapter and a safety/validation input.
+
+Canonical migration semantics remain:
 
     TARGET_CHAPTER = CURRENT_CHAPTER + 1
 
-The numeric argument is therefore no longer a target selector.
+The argument MUST therefore equal `TARGET_CHAPTER`. A mismatch MUST stop migration rather than override the sequential target.
 
-Open question:
+### Canonical `CURRENT_CHAPTER` determination
 
-- Should the active command surface eventually become simply `>>migrate`, with the immediate successor always derived from the current chapter?
-- If so, update the command routing, canonical handoff semantics, bootstrap transport documentation, and relevant runtime tests together rather than treating argumentless `>>migrate` as an implicit alias.
-- Until this question is resolved, `>>migrate` without an argument remains outside the documented command syntax and MUST NOT be silently treated as valid.
+`CURRENT_CHAPTER` has three possible states during migration preparation:
 
-Status: OPEN
+    KNOWN
+    RECOVERED
+    UNKNOWN
+
+1. **KNOWN** — use the chapter established by the active conversation/bootstrap context.
+2. **RECOVERED** — if the active context has been lost, recover the chapter deterministically from repository evidence. Handoff history is evidence for recovery, not a universal definition such as "latest handoff = CURRENT_CHAPTER". Recovery MUST validate chapter continuity rather than blindly selecting the numerically latest handoff.
+3. **UNKNOWN** — if repository evidence is insufficient or contradictory, STOP. The AI MUST NOT guess a current chapter or silently treat the latest available handoff as authoritative.
+
+The repository is the durable project record, but it does not necessarily contain transient conversation state. In particular:
+
+- the first chapter may have no predecessor handoff;
+- a read-only AI may have no ability to create a handoff;
+- the current conversation may exist without a current handoff because `>>handoff` was never performed;
+- a handoff may be absent or stale even though the conversation has advanced.
+
+Therefore the recovery procedure MUST distinguish repository evidence from the current conversation state.
+
+### Role of the numeric argument
+
+When `CURRENT_CHAPTER` is known or deterministically recovered:
+
+    USER_ASSERTED_NEXT_CHAPTER = <chapter>
+    EXPECTED_TARGET = CURRENT_CHAPTER + 1
+
+Migration is valid only when:
+
+    USER_ASSERTED_NEXT_CHAPTER == EXPECTED_TARGET
+
+The argument does not select a different target.
+
+When `CURRENT_CHAPTER` cannot be established, the argument MAY participate in recovery validation but MUST NOT by itself silently select an arbitrary migration target. The recovery procedure MUST establish a valid current chapter or stop.
+
+This also supports the first-chapter case. If no handoff exists and the supplied argument is `0002`, the system may derive the candidate predecessor `0001`, then validate that `0001` is a valid first chapter under the lifecycle rules. No registry, manifest, or separate persistent current-chapter state file is required.
+
+### Required behavior
+
+    >>migrate 0059
+          |
+          v
+    determine CURRENT_CHAPTER
+          |
+       +--+--+
+       |     |
+      KNOWN RECOVERED
+       |     |
+       +--+--+
+          |
+          v
+    EXPECTED_TARGET = CURRENT_CHAPTER + 1
+          |
+          v
+    compare <chapter> with EXPECTED_TARGET
+          |
+       +--+--+
+       |     |
+     MATCH MISMATCH
+       |     |
+       v     v
+    migrate STOP
+
+If `CURRENT_CHAPTER = UNKNOWN`, migration MUST stop rather than guess.
+
+Argumentless `>>migrate` is therefore NOT an implicit alias and MUST remain outside the documented command syntax unless a later bounded decision changes this contract.
+
+Status: RESOLVED
+
+Implementation follow-up:
+
+- Update the canonical migration command owner and related bootstrap/lifecycle documentation only when the implementation of this recovery/validation contract is undertaken.
+- Update relevant runtime tests together with that implementation.
+- Do not introduce a registry, manifest, dependency graph, command-ID layer, universal router, new lifecycle state machine, or separate persistent current-chapter state file solely to support this recovery procedure.
 
 ## Deferred
 
