@@ -123,11 +123,26 @@ Checkpoint updates MAY be repeated when meaningful state accumulates.
 
 ## Migration
 
-When the user requests migration to another chapter, a WRITE-CAPABLE AI MUST update the current handoff, verify content and scope, commit the handoff update, and generate the standard bootstrap instruction.
+When the user requests migration with `>>migrate <chapter>`, the migration target is ALWAYS derived as exactly one increment from the current chapter:
+
+    TARGET_CHAPTER = CURRENT_CHAPTER + 1
+
+The numeric `<chapter>` argument is not a target selector. It MUST be ignored for target selection. If the supplied argument is the same as the current chapter, skips a chapter, or points backward, the migration MUST still proceed to the immediate successor without rejecting the request or waiting for a corrected command.
+
+A WRITE-CAPABLE AI MUST update the current handoff for the immediate successor, verify content and scope, commit the handoff update, and generate the standard bootstrap instruction for that derived target.
+
+The generated bootstrap transport MUST use:
+
+    PREVIOUS_CHAPTER = <current chapter>
+    CURRENT_CHAPTER = <current chapter + 1>
+    SPECIALIZATION = <current specialization>
+    SHORT_NAME = <resolved short name>
 
 The current handoff is not marked as transferred or closed. The previous handoff MUST NOT be modified merely to record that it has been consumed.
 
-A READ-ONLY AI MUST prepare the proposed handoff and manual commit message without modifying the repository.
+A READ-ONLY AI MUST prepare the proposed handoff and manual commit message for the immediate successor without modifying the repository.
+
+An explicit user request to violate normal sequential migration is a different, separately explained operation. A bare `>>migrate <chapter>` command MUST never skip, repeat, or move backward.
 
 ## Bootstrap instruction
 
