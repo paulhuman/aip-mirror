@@ -91,6 +91,7 @@ Continue the Architecture & Research work from C0060 by executing the first real
 
 - Fresh runtime behavior of the three Case 1 evidence states remains unverified in this chapter.
 - The existing fixture branches contain exactly the intended evidence and no unintended files; they must be read back from their actual refs before use.
+- Repository-only tooling cannot create the required fresh assistant-response boundary for `>>migrate 0061`; a preparation/blocker result was recorded at `.ai/architecture/tests/results/migration-recovery/20261003-c0061-case1-runtime-boundary.md`.
 
 ## Open
 
