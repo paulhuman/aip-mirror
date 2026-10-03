@@ -119,6 +119,26 @@ Continue Architecture & Research from the durable state established by C0058. Im
 - TODO 3 runtime verification remains relevant but should be coordinated with the migration-contract implementation and updated tests rather than conflated with the bootstrap itself.
 
 ## Latest audit findings — TODO 9 recovery evidence
+### Recovery interaction clarification — avoid circular STOP loops
+
+A user-supplied `CURRENT_CHAPTER` after an explicit recovery STOP is a recovery input that establishes the missing conversation chapter context; it is **not** required to become repository evidence before the workflow can continue.
+
+The implementation MUST NOT create a circular validation loop:
+
+    UNKNOWN
+      ↓
+    ask user for CURRENT_CHAPTER
+      ↓
+    validate format + consistency where repository evidence exists
+      ↓
+    accept the supplied chapter as the recovered conversation context
+      ↓
+    continue migration validation
+
+If no repository handoff evidence exists at all, the absence of evidence MUST NOT force another STOP after a syntactically valid user response. Repository evidence is used to detect contradictions when available, not as an impossible proof requirement for recovered conversation state.
+
+If repository evidence directly contradicts the supplied chapter, the workflow MUST STOP and explain the contradiction rather than silently accepting either side.
+
 
 The archive structure was inspected directly. `.ai/archive/handoffs/` contains specialization subdirectories using the same specialization-per-directory layout as `.ai/handoffs/`; for example, `.ai/archive/handoffs/C/C0047-Architecture-Research.md` is a structurally valid archived handoff with `Specialization: C` and `Chapter: 0047`.
 
