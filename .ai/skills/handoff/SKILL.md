@@ -129,13 +129,63 @@ When the user requests migration with `>>migrate <chapter>`, the migration targe
 
 The numeric `<chapter>` argument is a user assertion of the expected next chapter and a safety/validation input. It MUST NOT select a different target.
 
-Before migration, determine `CURRENT_CHAPTER` as follows:
+Before migration, determine `CURRENT_CHAPTER` as follows.
 
-- **KNOWN** — use the chapter established by the active conversation/bootstrap context.
-- **RECOVERED** — if the active context has been lost, recover the chapter deterministically from repository evidence and validate chapter continuity. Handoff history is evidence for recovery, not a universal rule that the latest handoff equals the current chapter.
-- **UNKNOWN** — if available evidence is insufficient or contradictory, STOP. Do not guess the current chapter.
+### Recovery evidence set
 
-When `CURRENT_CHAPTER` is known or deterministically recovered:
+When active conversation/bootstrap context does not establish the current chapter, inspect both repository handoff locations for the current specialization:
+
+    .ai/handoffs/<SPECIALIZATION>/
+    .ai/archive/handoffs/<SPECIALIZATION>/
+
+Both locations are repository evidence. Location alone MUST NOT determine the current chapter.
+
+For each candidate handoff, validate its semantic identity from its canonical header:
+
+    Specialization = <SPECIALIZATION>
+    Chapter = <four-digit chapter>
+
+The filename MAY be checked as an additional consistency signal, but it MUST NOT replace validation of the header.
+
+Recovery MUST classify the result as:
+
+- **KNOWN** — the active conversation/bootstrap context establishes the chapter.
+- **RECOVERED** — repository evidence establishes exactly one chapter consistent with lifecycle continuity.
+- **UNKNOWN** — evidence is absent, insufficient, or contradictory and no deterministic chapter can be established.
+
+### Deterministic recovery cases
+
+The recovery procedure MUST handle these cases explicitly:
+
+1. **Active evidence** — a valid active handoff may establish the candidate chapter when continuity is unambiguous.
+2. **Archive-only evidence** — a valid archived handoff may establish the candidate chapter when active evidence is absent and continuity is unambiguous.
+3. **First chapter / no handoff evidence** — absence of handoffs does not by itself prove an existing current chapter. For a migration assertion `<chapter>`, the procedure MAY derive candidate predecessor `<chapter> - 1`; `0001` is the only valid first chapter. A candidate `0001` with no predecessor handoff is valid only when the first-chapter lifecycle invariant is satisfied. Otherwise the chapter remains UNKNOWN.
+4. **Duplicate or contradictory evidence** — active and archived copies of the same semantic chapter are duplicates, not a contradiction. Different chapters, malformed headers, or continuity conflicts are contradictory evidence unless one copy is demonstrably historical and the other establishes the same current chapter. Do not resolve contradiction by choosing the newest path or numerically latest handoff.
+5. **No usable evidence** — if none of the deterministic cases establishes a chapter, classify the result as UNKNOWN.
+
+When a valid active and archived handoff describe the same specialization and chapter, treat them as duplicate-location evidence for one chapter. Do not infer two current chapters merely because two copies exist.
+
+### UNKNOWN recovery interaction
+
+If recovery reaches UNKNOWN, the AI MUST STOP and ask the user for the chat's `CURRENT_CHAPTER`.
+
+The STOP response MUST require exactly a four-digit numeric chapter value, for example:
+
+    Please provide CURRENT_CHAPTER as a four-digit number, e.g. 0059.
+
+After the user supplies a syntactically valid value, that value becomes the **RECOVERED conversation context** for the pending migration validation. It is user-provided recovery input, not new repository evidence.
+
+The AI MUST then validate the supplied value against any repository evidence that is available:
+
+- if repository evidence is absent, the supplied value MUST NOT trigger another UNKNOWN STOP solely because evidence is absent;
+- if evidence is consistent, accept the supplied value as RECOVERED and continue;
+- if evidence directly contradicts the supplied value, STOP and explain the contradiction.
+
+This continuation rule is mandatory: a valid user response MUST NOT enter a circular UNKNOWN → ask → UNKNOWN STOP loop.
+
+### Migration argument validation
+
+When `CURRENT_CHAPTER` is KNOWN or RECOVERED:
 
     USER_ASSERTED_NEXT_CHAPTER = <chapter>
     EXPECTED_TARGET = CURRENT_CHAPTER + 1
@@ -146,7 +196,7 @@ Migration is valid only when:
 
 A mismatch MUST stop migration rather than override sequential target selection.
 
-If `CURRENT_CHAPTER` is unknown, the supplied argument MAY participate in recovery validation but MUST NOT by itself silently select an arbitrary target. The recovery procedure must establish a valid current chapter or stop. This includes the first-chapter case: where no handoff exists, an argument such as `0002` may yield candidate predecessor `0001`, which must then be validated as a valid first chapter under lifecycle rules.
+If the numeric argument does not match the expected target and the current chapter itself is not established by active context, the AI MUST ask for `CURRENT_CHAPTER` using the same four-digit format before attempting recovery again. A user-supplied current chapter then becomes recovery input; it MUST NOT be required to create new repository evidence before validation can continue.
 
 Argumentless `>>migrate` is outside the documented command syntax and MUST NOT be treated as an implicit alias unless a later bounded decision changes this contract.
 
