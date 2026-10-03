@@ -41,7 +41,7 @@ Continue Architecture & Research from the durable state established by C0057. Re
 - The active `.ai/INDEX.md` documents five user-facing commands: `>>handoff`, `>>migrate <chapter>`, `>>generate-bootstrap <chapter>`, `>>explain-code`, and `>>normative-language`.
 - The reusable cold-start TRACE scenario is designed to derive the active command list from INDEX at test execution time.
 - TODO 3 in `.ai/architecture/ai-infrastructure-restructuring.md` remains open for fresh runtime verification of the command surface and user-visible TRACE delivery.
-- TODO 9 is open: decide whether the active migration command should become argumentless `>>migrate`.
+NaN
 - The current migration semantics derive `TARGET_CHAPTER = CURRENT_CHAPTER + 1`; the numeric argument is ignored for target selection.
 - The C0057 migration request using `>>migrate 1111` therefore initialized this receiving chapter as C0058.
 - No C0058 handoff existed before this bootstrap.
@@ -64,9 +64,9 @@ Continue Architecture & Research from the durable state established by C0057. Re
 - The normative-language command is `>>normative-language`; the retired `>>activate-normative-language` phrase is not part of the active command surface.
 - The normative-language skill is a thin command entry point; `.ai/rules/normative-language.md` remains the canonical semantic owner.
 - The generic ACTIVATE architecture does not require every canonical owner to be a skill.
-- `>>migrate <chapter>` always advances exactly one chapter from the current chapter. The numeric argument is ignored for target selection.
+NaN
 - An explicitly explained request to violate sequential migration is a separate operation, not an override of the bare migration command.
-- Until TODO 9 is resolved, `>>migrate` without an argument remains outside the documented command syntax and MUST NOT be silently treated as valid.
+NaN
 - `A / Project Workshop` and `A0001-Project-Workshop.md` are canonical neutral format examples only.
 
 ## Relevant files and references
@@ -132,18 +132,18 @@ Continue Architecture & Research from the durable state established by C0057. Re
 
 ## Open
 
-- TODO 9: decide whether the active command surface should eventually allow argumentless `>>migrate` now that the numeric argument is semantically ignored.
 - TODO 3: complete fresh runtime verification of the active command surface and visible TRACE delivery when explicitly resumed.
+- Implement and test the resolved `CURRENT_CHAPTER` recovery/validation contract in any remaining canonical migration/bootstrap documentation if further gaps are found.
 - Historical noncanonical `0001-JSX Prototype.md` / `0002-JSX Prototype.md` artifacts remain a separate cleanup concern.
 
 ## Immediate next task
 
-Review TODO 9 against the current `.ai/INDEX.md`, `.ai/skills/handoff/SKILL.md`, and `.ai/workflows/handoff/BOOTSTRAP.md`; determine the required semantics and documentation changes, if any, for making `>>migrate` argumentless.
+Continue from the resolved migration contract: test the `CURRENT_CHAPTER` recovery and `<chapter>` validation behavior, especially cold-start, first-chapter, read-only, missing-handoff, and stale-handoff cases; keep any required canonical-owner updates bounded to the documented recovery contract.
 
 ## Recommended starting context
 
-1. `.ai/architecture/ai-infrastructure-restructuring.md` — TODO 9.
-2. `.ai/skills/handoff/SKILL.md` — current migration semantics.
+1. `.ai/architecture/ai-infrastructure-restructuring.md` — resolved TODO 9 and migration recovery contract.
+2. `.ai/skills/handoff/SKILL.md` — canonical migration semantics and validation procedure.
 3. `.ai/INDEX.md` — current command routing.
 4. `.ai/workflows/handoff/BOOTSTRAP.md` — bootstrap transport and chapter initialization.
 5. `.ai/architecture/tests/cold-start-command-trace.md` — runtime regression implications.
