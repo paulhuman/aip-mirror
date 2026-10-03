@@ -111,36 +111,33 @@ Continue the Architecture & Research work from C0059. Implement and validate the
 - Canonical receiving handoff path: `.ai/handoffs/C/C0060-Architecture-Research.md`.
 - C0059 exists and was read successfully.
 - The repository is write-capable through the connected GitHub interface.
-- The canonical migration architecture currently records TODO 9 as RESOLVED at the decision level, while implementation follow-up remains open.
-- The current lifecycle rule does not yet contain the full active/archive recovery model described in the C0059 audit.
-- The current handoff skill does not yet contain the full deterministic recovery evidence model and UNKNOWN user-interaction contract.
+- The canonical migration architecture records the TODO 9 recovery decision as RESOLVED.
+- The lifecycle rule and handoff skill now encode the active/archive recovery model, deterministic evidence classification, and non-circular UNKNOWN recovery interaction.
+- The dedicated `.ai/architecture/tests/migration-recovery.md` scenario now defines the five required recovery cases.
 - The current BOOTSTRAP workflow remains the owner of chapter initialization, not migration recovery.
 
 ## Inferred
 
-- The immediate implementation should likely touch `.ai/skills/handoff/SKILL.md` and `.ai/rules/handoff/lifecycle.md`, with bounded updates to the architecture decision record and dedicated recovery tests as required by the final implementation.
-- `.ai/workflows/handoff/BOOTSTRAP.md` should remain a bootstrap owner and should only change if the implementation reveals a consistency issue with its first-chapter or chapter-context wording.
-- The existing cold-start TRACE scenario should not be repurposed as the migration-recovery test; a dedicated recovery scenario/result is more appropriate.
+- The next verification task is the bounded runtime exercise defined by `.ai/architecture/tests/migration-recovery.md`.
+- `.ai/workflows/handoff/BOOTSTRAP.md` remains a bootstrap owner and does not need to change for the recovery contract.
+- The existing cold-start TRACE scenario remains separate from migration-recovery testing.
 
 ## Assumed / unverified
 
-- The exact minimal wording and ownership split for the recovery algorithm has not yet been finalized.
-- The repository's archived handoff population may contain edge cases beyond the C0059 examples and should be inspected as part of the recovery implementation/testing.
-- Fresh runtime verification of the active `>>` command surface and visible TRACE delivery remains unperformed.
+- Fresh runtime verification of all five migration-recovery cases remains unperformed.
+- The actual assistant-response-boundary behavior for UNKNOWN → user recovery → continuation remains to be exercised explicitly.
 
 ## Open
 
-- Implement the TODO 9 recovery model in the canonical migration/lifecycle owners.
-- Define deterministic handling of active-only, archive-only, duplicate active/archive, contradictory, absent, and first-chapter evidence.
-- Define the exact UNKNOWN and migration-argument-mismatch interaction, including the four-digit response format.
-- Add or update dedicated recovery test scenarios and result artifacts.
-- Preserve the distinction between repository evidence and user-provided recovered conversation context to avoid circular STOP loops.
+- Execute the five-case migration-recovery runtime test and record its result under `.ai/architecture/tests/results/migration-recovery/<run-id>.md`.
+- Explicitly exercise the non-circular UNKNOWN → user recovery → continuation branch.
+- Preserve the distinction between repository evidence and user-provided recovered conversation context in the recorded result.
 - TODO 3: complete fresh runtime verification of the active command surface and visible TRACE delivery.
 - Historical noncanonical `0001-JSX Prototype.md` / `0002-JSX Prototype.md` artifacts remain a separate cleanup concern.
 
 ## Immediate next task
 
-Perform a bounded implementation audit of the current canonical migration/lifecycle owners against the C0059 TODO 9 recovery contract, then make only the minimal canonical changes required to encode active/archive evidence recovery, deterministic validation, and the non-circular UNKNOWN interaction.
+Execute the bounded five-case migration-recovery runtime test from `.ai/architecture/tests/migration-recovery.md`, distinguishing actual assistant-response-boundary command execution from structural analysis.
 
 ## Recommended starting context
 
@@ -151,6 +148,12 @@ Perform a bounded implementation audit of the current canonical migration/lifecy
 5. `.ai/INDEX.md` — active command routing.
 6. `.ai/architecture/tests/cold-start-command-trace.md` — existing runtime TRACE test boundary.
 7. `.ai/rules/repository.md` — repository write safety.
+
+## Migration checkpoint
+
+- `>>migrate 0062` was evaluated against `CURRENT_CHAPTER=0060` and correctly STOPPED because the expected target is `0061`; no repository mutation was performed for the mismatch.
+- `>>migrate 0061` was accepted against `CURRENT_CHAPTER=0060`; the derived target is `0061`.
+- This migration checkpoint updates the current C0060 handoff only; it does not create or modify a future C0061 handoff.
 
 ## Handoff checkpoint verification
 
