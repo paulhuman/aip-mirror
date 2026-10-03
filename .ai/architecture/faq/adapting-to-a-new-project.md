@@ -116,16 +116,16 @@ For example, a new project could define:
 ```yaml
 specializations:
   A:
-    short_name: Application Core
+    short_name: Project Workshop
   B:
     short_name: Tauri UI
   C:
     short_name: Architecture & Research
   D:
-    short_name: Project Workshop
+    short_name: Python Image Processing
 ```
 
-The exact letters and names are a project decision.
+Every project using this infrastructure MUST reserve specialization `A` for `Project Workshop`. Other specialization letters and names are project-specific.
 
 If you change them, make sure existing handoff files are not copied into the new repository with incompatible names.
 
@@ -272,13 +272,7 @@ It appears in generated/manual bootstrap transport examples.
 
 For a reusable template, this should be generalized so the actual repository locator is derived from `.ai/config.yaml`, rather than being permanently embedded as an AIP Mirror URL.
 
-There is also a project-specific illustrative sentence:
-
-```text
-"We worked on the mirror tool."
-```
-
-That should become a neutral example or be removed.
+Any project-specific illustrative sentence should be neutralized or removed when adapting the infrastructure.
 
 The semantic handoff procedure itself should remain.
 
@@ -303,14 +297,14 @@ project.repository
 
 Therefore the reusable workflow should not contain a literal AIP Mirror URL as if it were the new project's canonical locator.
 
-Its examples such as:
+Its example:
 
 ```text
 SPECIALIZATION = A
-SHORT_NAME = JSX Prototype
+SHORT_NAME = Project Workshop
 ```
 
-are examples, not project configuration. They may remain if clearly presented as generic examples, although neutral examples are preferable for a reusable template.
+is the canonical neutral example and SHOULD remain unchanged. It is an example, not project configuration.
 
 ---
 
@@ -344,16 +338,9 @@ cold-start test
 
 ## 6.4 `.ai/rules/handoff/lifecycle.md`
 
-The AIP Mirror-specific-looking example:
+The `A0001 / Project Workshop` example is the canonical neutral example of the filename/chapter contract.
 
-```text
-A0001
-JSX Prototype
-```
-
-is only an example of the filename/chapter contract.
-
-It does not need to become Sprite Sheet Editor terminology if it is clearly an example. For a clean template, however, replacing it with neutral placeholder data makes the boundary clearer.
+Keep it when adapting the infrastructure to another project. It is an example of the required generic `A` specialization, not a project-specific technology name.
 
 The actual chapter format and lifecycle rules are reusable.
 
@@ -363,9 +350,9 @@ The actual chapter format and lifecycle rules are reusable.
 
 Same principle.
 
-Its A0001 / JSX Prototype example is a format example, not an active AIP Mirror dependency.
+Its `A0001 / Project Workshop` example is a neutral format example, not an active project dependency.
 
-It can remain as a generic example or be converted to neutral placeholders.
+Keep this example unchanged when adapting the infrastructure to another project.
 
 Do not copy the actual AIP Mirror handoff files themselves.
 
@@ -529,10 +516,10 @@ Treat the current handoffs as disposable project state when creating a new proje
 Do not carry:
 
 ```text
-A0001...
-A0002...
-B0001...
-C0056...
+A0001-Project-Workshop.md
+B0001-<Project-Specific-Name>.md
+C0001-<Project-Specific-Name>.md
+...
 ...
 ```
 
