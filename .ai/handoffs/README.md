@@ -20,10 +20,10 @@ For example:
     SPECIALIZATION = A
     CURRENT_CHAPTER = 0001
     CHAPTER_ID = A0001
-    SHORT_NAME = JSX Prototype
-    FILENAME_SHORT_NAME = JSX-Prototype
+    SHORT_NAME = Project Workshop
+    FILENAME_SHORT_NAME = Project-Workshop
 
-    .ai/handoffs/A/A0001-JSX-Prototype.md
+    .ai/handoffs/A/A0001-Project-Workshop.md
 
 Handoff filenames use `CHAPTER_ID`, not `CURRENT_CHAPTER` alone. The filename component is derived from `SHORT_NAME`; it is not a separate conversation-title value.
 
