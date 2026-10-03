@@ -70,7 +70,7 @@ Use this canonical structure for every handoff:
     <A-Z>
 
     **Chapter:**
-    <001-999>
+    <0001-9999>
 
     **Previous chapter:**
     <previous chapter number or N/A>
