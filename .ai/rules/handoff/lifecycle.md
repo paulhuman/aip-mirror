@@ -19,14 +19,14 @@ The Chapter Identifier Format is:
     [A-Z][0-9]{4}
 
 Chapter numbering is one-based. The first chapter of a specialization is `001`.
-`000` is not a valid chapter number. The sequence is `001 → 002 → 003 ...`.
+`0000` is not a valid chapter number. The sequence is `0001 → 0002 → 0003 ...`.
 
 The specialization is the uppercase letter. The chapter number is the four-digit numeric component.
 
 Bootstrap runtime inputs keep these components separate:
 
-    CURRENT_CHAPTER = 0034
-    SPECIALIZATION = C
+    CURRENT_CHAPTER = 0001
+    SPECIALIZATION = A
 
 The full identifier is derived as SPECIALIZATION + CURRENT_CHAPTER and is the canonical `CHAPTER_ID`.
 
