@@ -513,17 +513,9 @@ For a new project:
 
 Treat the current handoffs as disposable project state when creating a new project from this repository.
 
-Do not carry:
+Do not carry the existing project handoff files into the new repository.
 
-```text
-A0001-Project-Workshop.md
-B0001-<Project-Specific-Name>.md
-C0001-<Project-Specific-Name>.md
-...
-...
-```
-
-into the new repository.
+The canonical `A0001-Project-Workshop.md` shown above is a format example only. It is not a handoff to copy into the new project.
 
 Instead:
 
