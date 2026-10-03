@@ -118,6 +118,34 @@ Continue Architecture & Research from the durable state established by C0058. Im
 - The immediate substantive focus of C0059 is the implementation-level audit of TODO 9's resolved migration recovery/validation contract, unless repository evidence changes that priority.
 - TODO 3 runtime verification remains relevant but should be coordinated with the migration-contract implementation and updated tests rather than conflated with the bootstrap itself.
 
+## Latest audit findings — TODO 9 recovery evidence
+
+The archive structure was inspected directly. `.ai/archive/handoffs/` contains specialization subdirectories using the same specialization-per-directory layout as `.ai/handoffs/`; for example, `.ai/archive/handoffs/C/C0047-Architecture-Research.md` is a structurally valid archived handoff with `Specialization: C` and `Chapter: 0047`.
+
+The resolved recovery model therefore needs to treat both locations as repository chapter evidence:
+
+    .ai/handoffs/<SPECIALIZATION>/
+    .ai/archive/handoffs/<SPECIALIZATION>/
+
+Location alone MUST NOT determine `CURRENT_CHAPTER`. An archived handoff can be the only surviving repository evidence for a chapter, including the current chapter. Active and archived copies of the same chapter are not automatically contradictory merely because they exist in different locations; recovery must validate semantic chapter identity and continuity.
+
+The audit found these implementation-level gaps:
+
+1. `.ai/skills/handoff/SKILL.md` defines KNOWN / RECOVERED / UNKNOWN and argument validation, but RECOVERED is still too abstract: it does not define the active/archive evidence set, deterministic candidate validation, duplicate-location handling, or the exact user interaction when recovery reaches UNKNOWN.
+2. `.ai/rules/handoff/lifecycle.md` defines active handoff location and continuity but does not define archived handoffs as valid repository evidence for recovery, nor the distinction between evidence absence and first-chapter initialization.
+3. `.ai/workflows/handoff/BOOTSTRAP.md` correctly receives explicit `CURRENT_CHAPTER` and supports `PREVIOUS_CHAPTER=N/A`, but it is not the owner of migration recovery and therefore does not need to become a recovery router. Its first-chapter wording should remain consistent with the eventual lifecycle/recovery definition.
+4. `.ai/architecture/ai-infrastructure-restructuring.md` records the architectural recovery decision but does not yet incorporate the archive-evidence cases or the user-interaction rule for UNKNOWN / argument mismatch.
+5. `.ai/architecture/tests/cold-start-command-trace.md` does not test `>>migrate` recovery. A dedicated recovery scenario/result is needed when the implementation is made; it should cover active evidence, archive-only evidence, no handoffs, first-chapter validation, duplicate active/archive copies, contradictory evidence, UNKNOWN, and argument mismatch.
+
+Additional required behavior decided in this chapter:
+
+- If recovery produces `UNKNOWN`, the AI MUST STOP and ask the user for the chat's `CURRENT_CHAPTER` rather than guessing.
+- If `<chapter>` does not match `CURRENT_CHAPTER + 1`, migration MUST STOP and ask the user for the chat's `CURRENT_CHAPTER` rather than overriding the sequential target.
+- The prompt MUST state the expected response format explicitly: a four-digit numeric chapter value, e.g. `0059`.
+- The supplied `CURRENT_CHAPTER` response is user-provided recovery input and must still be validated against the migration/lifecycle rules; it does not retroactively turn an unvalidated guess into repository evidence.
+- `>>migrate` without an argument remains outside the documented command syntax.
+- No registry, manifest, persistent current-chapter state file, dependency graph, or other new recovery infrastructure is required.
+
 ## Assumed / unverified
 
 - The current canonical migration documentation may already contain some or all of the TODO 9 recovery/validation behavior; this must be verified from the current repository files before editing.
@@ -125,14 +153,15 @@ Continue Architecture & Research from the durable state established by C0058. Im
 
 ## Open
 
-- Audit and, if necessary, implement the resolved `CURRENT_CHAPTER` recovery and `>>migrate <chapter>` validation contract in the canonical migration owner and related lifecycle/bootstrap documentation.
-- Add or update the relevant runtime/recovery test scenarios together with any implementation changes.
+- Implement the audited TODO 9 recovery model in the canonical migration/lifecycle owners, including active/archive repository evidence and deterministic candidate validation.
+- Define the exact STOP interaction for `UNKNOWN` and argument mismatch, including the required four-digit `CURRENT_CHAPTER` response format.
+- Add or update dedicated recovery test scenarios and results together with the implementation; do not claim simulated recovery behavior as runtime evidence.
 - TODO 3: complete fresh runtime verification of the active command surface and visible TRACE delivery.
 - Historical noncanonical `0001-JSX Prototype.md` / `0002-JSX Prototype.md` artifacts remain a separate cleanup concern.
 
 ## Immediate next task
 
-Audit the current `.ai/skills/handoff/SKILL.md`, `.ai/rules/handoff/lifecycle.md`, and `.ai/workflows/handoff/BOOTSTRAP.md` against the resolved TODO 9 recovery/validation contract, then make only the bounded canonical-owner changes that are actually missing and update the corresponding test coverage.
+Implement the bounded TODO 9 recovery contract identified by the audit. The next implementation pass SHOULD modify only the canonical owners that actually need the new semantics, then update dedicated recovery tests and verify the resulting scope before commit.
 
 ## Recommended starting context
 
