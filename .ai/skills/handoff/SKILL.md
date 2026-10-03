@@ -85,8 +85,8 @@ Header field rules:
 - `Previous chapter` contains only the previous chapter's four-digit number, or `N/A` when this is the first chapter in the specialization.
 - DO NOT include the specialization letter in the `Chapter` or `Previous chapter` field.
 - Use bold Markdown (`**...:**`) for every header field name exactly as shown above.
-- The full chapter identifier is formed from `Specialization` + `Chapter`; for example, `E` + `001` = `E0001`.
-  Chapter numbering is one-based: the first chapter is `001`, and `000` MUST NOT be used as a chapter number.
+- The full chapter identifier is formed from `Specialization` + `Chapter`; for example, `A` + `0001` = `A0001`.
+  Chapter numbering is one-based: the first chapter is `0001`, and `0000` MUST NOT be used as a chapter number.
 - The handoff filename uses the full chapter identifier: `<chapter>-<short-name>.md`.
 
 Example:
@@ -94,13 +94,13 @@ Example:
     # Conversation Handoff
 
     **Conversation:**
-    E0001 — Independent Review (Qwen)
+    A0001 — Project Workshop
 
     **Specialization:**
-    E
+    A
 
     **Chapter:**
-    001
+    0001
 
     **Previous chapter:**
     N/A
