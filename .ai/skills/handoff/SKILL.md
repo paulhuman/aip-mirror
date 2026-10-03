@@ -157,13 +157,13 @@ Recovery MUST classify the result as:
 
 The recovery procedure MUST handle these cases explicitly:
 
-1. **Active evidence** — a valid active handoff may establish the candidate chapter when continuity is unambiguous.
-2. **Archive-only evidence** — a valid archived handoff may establish the candidate chapter when active evidence is absent and continuity is unambiguous.
+1. **Active evidence** — a valid active handoff MAY establish the candidate chapter when continuity is unambiguous.
+2. **Archive-only evidence** — a valid archived handoff MAY establish the candidate chapter when active evidence is absent and continuity is unambiguous.
 3. **First chapter / no handoff evidence** — absence of handoffs does not by itself prove an existing current chapter. For a migration assertion `<chapter>`, the procedure MAY derive candidate predecessor `<chapter> - 1`; `0001` is the only valid first chapter. A candidate `0001` with no predecessor handoff is valid only when the first-chapter lifecycle invariant is satisfied. Otherwise the chapter remains UNKNOWN.
-4. **Duplicate or contradictory evidence** — active and archived copies of the same semantic chapter are duplicates, not a contradiction. Different chapters, malformed headers, or continuity conflicts are contradictory evidence unless one copy is demonstrably historical and the other establishes the same current chapter. Do not resolve contradiction by choosing the newest path or numerically latest handoff.
+4. **Duplicate or contradictory evidence** — active and archived copies of the same semantic chapter are duplicates, not a contradiction. Different chapters, malformed headers, or continuity conflicts are contradictory evidence unless one copy is demonstrably historical and the other establishes the same current chapter. DO NOT resolve contradiction by choosing the newest path or numerically latest handoff.
 5. **No usable evidence** — if none of the deterministic cases establishes a chapter, classify the result as UNKNOWN.
 
-When a valid active and archived handoff describe the same specialization and chapter, treat them as duplicate-location evidence for one chapter. Do not infer two current chapters merely because two copies exist.
+When a valid active and archived handoff describe the same specialization and chapter, treat them as duplicate-location evidence for one chapter. DO NOT infer two current chapters merely because two copies exist.
 
 ### UNKNOWN recovery interaction
 
@@ -213,7 +213,7 @@ The current handoff is not marked as transferred or closed. The previous handoff
 
 A READ-ONLY AI MUST prepare the proposed handoff and manual commit message for the immediate successor without modifying the repository.
 
-An explicit user request to violate normal sequential migration is a different, separately explained operation. A bare `>>migrate <chapter>` command MUST never skip, repeat, or move backward.
+An explicit user request to violate normal sequential migration is a different, separately explained operation. A bare `>>migrate <chapter>` command MUST NOT skip, repeat, or move backward.
 
 ## Bootstrap instruction
 
