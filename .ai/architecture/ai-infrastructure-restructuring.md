@@ -215,7 +215,7 @@ The absence of repository evidence after the user response MUST NOT send the ope
 
 ### Migration argument validation
 
-When `CURRENT_CHAPTER` is KNOWN or RECOVERED:
+When `CURRENT_CHAPTER_CONTEXT` is KNOWN or RECOVERED:
 
     USER_ASSERTED_NEXT_CHAPTER = <chapter>
     EXPECTED_TARGET = CURRENT_CHAPTER_CONTEXT + 1
