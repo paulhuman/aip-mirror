@@ -158,22 +158,64 @@ The argument MUST therefore equal `TARGET_CHAPTER`. A mismatch MUST stop migrati
     RECOVERED
     UNKNOWN
 
-1. **KNOWN** — use the chapter established by the active conversation/bootstrap context.
-2. **RECOVERED** — if the active context has been lost, recover the chapter deterministically from repository evidence. Handoff history is evidence for recovery, not a universal definition such as "latest handoff = CURRENT_CHAPTER". Recovery MUST validate chapter continuity rather than blindly selecting the numerically latest handoff.
-3. **UNKNOWN** — if repository evidence is insufficient or contradictory, STOP. The AI MUST NOT guess a current chapter or silently treat the latest available handoff as authoritative.
+**KNOWN** is established by active conversation/bootstrap context.
 
-The repository is the durable project record, but it does not necessarily contain transient conversation state. In particular:
+When that context is unavailable, repository recovery MUST inspect both:
 
-- the first chapter may have no predecessor handoff;
-- a read-only AI may have no ability to create a handoff;
-- the current conversation may exist without a current handoff because `>>handoff` was never performed;
-- a handoff may be absent or stale even though the conversation has advanced.
+    .ai/handoffs/<SPECIALIZATION>/
+    .ai/archive/handoffs/<SPECIALIZATION>/
 
-Therefore the recovery procedure MUST distinguish repository evidence from the current conversation state.
+Both are evidence sources. A handoff header is authoritative for the semantic candidate:
 
-### Role of the numeric argument
+    Specialization = <SPECIALIZATION>
+    Chapter = <four-digit chapter>
 
-When `CURRENT_CHAPTER` is known or deterministically recovered:
+The recovery procedure MUST explicitly handle:
+
+1. **Active evidence** — a valid active handoff establishes the candidate when continuity is unambiguous.
+2. **Archive-only evidence** — a valid archived handoff establishes the candidate when active evidence is absent and continuity is unambiguous.
+3. **First-chapter / no-handoff evidence** — absence of handoffs does not itself establish a current chapter. `0001` is the only valid first chapter. When the migration assertion is `0002`, candidate predecessor `0001` MAY be validated directly under the first-chapter invariant without a predecessor handoff.
+4. **Duplicate evidence** — active and archived copies of the same semantic chapter are one chapter with duplicate-location evidence, not two competing current chapters.
+5. **Contradictory evidence** — different semantic chapters, malformed identity, or continuity conflicts that cannot be reconciled MUST remain contradictory. Recovery MUST NOT resolve them by choosing the latest path or numerically latest handoff.
+6. **No usable evidence** — if no deterministic case establishes the chapter, the state is UNKNOWN.
+
+A stale or missing handoff does not by itself prove that the current conversation has not advanced.
+
+### UNKNOWN and user recovery
+
+If recovery is UNKNOWN, the AI MUST STOP and request:
+
+    CURRENT_CHAPTER = <four-digit numeric value>
+
+The prompt MUST explicitly require four digits, for example `0059`.
+
+A valid user response becomes RECOVERED conversation context for the pending migration. It is **input**, not repository evidence.
+
+The AI MUST validate that input against repository evidence when evidence exists:
+
+- no evidence → accept the supplied value as recovered context; do not repeat the UNKNOWN STOP;
+- consistent evidence → accept and continue;
+- direct contradiction → STOP and explain the contradiction.
+
+This is the explicit non-circular rule:
+
+    UNKNOWN
+      ↓
+    STOP + ask CURRENT_CHAPTER
+      ↓
+    user supplies four digits
+      ↓
+    validate against available evidence
+      ↓
+    RECOVERED
+      ↓
+    continue migration validation
+
+The absence of repository evidence after the user response MUST NOT send the operation back to UNKNOWN solely because the evidence is still absent.
+
+### Migration argument validation
+
+When `CURRENT_CHAPTER` is KNOWN or RECOVERED:
 
     USER_ASSERTED_NEXT_CHAPTER = <chapter>
     EXPECTED_TARGET = CURRENT_CHAPTER + 1
@@ -182,49 +224,18 @@ Migration is valid only when:
 
     USER_ASSERTED_NEXT_CHAPTER == EXPECTED_TARGET
 
-The argument does not select a different target.
+A mismatch MUST stop migration rather than override sequential target selection.
 
-When `CURRENT_CHAPTER` cannot be established, the argument MAY participate in recovery validation but MUST NOT by itself silently select an arbitrary migration target. The recovery procedure MUST establish a valid current chapter or stop.
+If the migration argument mismatches and the current chapter is not established by active context, the AI MUST request `CURRENT_CHAPTER` in the same four-digit format. The supplied value is then recovery input and MUST be validated without requiring a new repository handoff.
 
-This also supports the first-chapter case. If no handoff exists and the supplied argument is `0002`, the system may derive the candidate predecessor `0001`, then validate that `0001` is a valid first chapter under the lifecycle rules. No registry, manifest, or separate persistent current-chapter state file is required.
+Argumentless `>>migrate` is NOT an implicit alias and remains outside the documented command syntax.
 
-### Required behavior
-
-    >>migrate 0059
-          |
-          v
-    determine CURRENT_CHAPTER
-          |
-       +--+--+
-       |     |
-      KNOWN RECOVERED
-       |     |
-       +--+--+
-          |
-          v
-    EXPECTED_TARGET = CURRENT_CHAPTER + 1
-          |
-          v
-    compare <chapter> with EXPECTED_TARGET
-          |
-       +--+--+
-       |     |
-     MATCH MISMATCH
-       |     |
-       v     v
-    migrate STOP
-
-If `CURRENT_CHAPTER = UNKNOWN`, migration MUST stop rather than guess.
-
-Argumentless `>>migrate` is therefore NOT an implicit alias and MUST remain outside the documented command syntax unless a later bounded decision changes this contract.
+No registry, manifest, dependency graph, command-ID layer, universal router, new lifecycle state machine, or separate persistent current-chapter state file is required for this recovery model.
 
 Status: RESOLVED
 
-Implementation follow-up:
+Implementation is encoded in the canonical migration and lifecycle owners. Dedicated recovery test coverage is defined separately; runtime execution evidence remains subject to the existing test-result process.
 
-- Update the canonical migration command owner and related bootstrap/lifecycle documentation only when the implementation of this recovery/validation contract is undertaken.
-- Update relevant runtime tests together with that implementation.
-- Do not introduce a registry, manifest, dependency graph, command-ID layer, universal router, new lifecycle state machine, or separate persistent current-chapter state file solely to support this recovery procedure.
 
 ## Deferred
 
