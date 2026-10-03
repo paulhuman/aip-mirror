@@ -87,7 +87,7 @@ The prompt MUST explicitly show a four-digit example such as `0059`.
 
 Then test a migration argument that does not equal:
 
-    CURRENT_CHAPTER + 1
+    CURRENT_CHAPTER_CONTEXT + 1
 
 Expected:
 
