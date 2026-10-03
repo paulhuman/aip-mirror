@@ -130,14 +130,15 @@ Continue the Architecture & Research work from C0059. Implement and validate the
 ## Open
 
 - Execute the five-case migration-recovery runtime test and record its result under `.ai/architecture/tests/results/migration-recovery/<run-id>.md`.
-- Explicitly exercise the non-circular UNKNOWN → user recovery → continuation branch.
+- Start with Case 1 in C0061 and exercise its three repository-evidence states separately: active, archive-only, and active + archive duplicate.
+- For each Case 1 state, distinguish actual assistant-response-boundary execution from structural analysis and record the observed recovery classification and continuation/STOP behavior.
 - Preserve the distinction between repository evidence and user-provided recovered conversation context in the recorded result.
 - TODO 3: complete fresh runtime verification of the active command surface and visible TRACE delivery.
 - Historical noncanonical `0001-JSX Prototype.md` / `0002-JSX Prototype.md` artifacts remain a separate cleanup concern.
 
 ## Immediate next task
 
-Execute the bounded five-case migration-recovery runtime test from `.ai/architecture/tests/migration-recovery.md`, distinguishing actual assistant-response-boundary command execution from structural analysis.
+In C0061, begin the real migration-recovery runtime test with Case 1. Use disposable branches created directly from the known fixture commit SHA; do not move an existing fixture ref with update_ref. Exercise active → archive-only → active + archive duplicate as three independent states, read back and validate each fixture, then record the actual assistant-response-boundary behavior in a new migration-recovery result artifact. Do not declare the complete five-case test PASS from Case 1 alone.
 
 ## Recommended starting context
 
@@ -154,6 +155,53 @@ Execute the bounded five-case migration-recovery runtime test from `.ai/architec
 - `>>migrate 0062` was evaluated against `CURRENT_CHAPTER=0060` and correctly STOPPED because the expected target is `0061`; no repository mutation was performed for the mismatch.
 - `>>migrate 0061` was accepted against `CURRENT_CHAPTER=0060`; the derived target is `0061`.
 - This migration checkpoint updates the current C0060 handoff only; it does not create or modify a future C0061 handoff.
+
+
+## C0061 migration starting checkpoint
+
+The C0060 migration is complete as a handoff checkpoint. The receiving C0061 conversation MUST begin substantive work with the bounded migration-recovery runtime test rather than redoing the recovery design.
+
+### First runtime slice — Case 1
+
+Use three isolated fixture states in this order:
+
+1. **Active evidence** — disposable branch containing a valid active C0060 handoff.
+2. **Archive-only evidence** — disposable branch containing a valid archived C0060 handoff and no active C0060 handoff.
+3. **Duplicate-location evidence** — disposable branch containing both active and archived C0060 handoffs with the same semantic header.
+
+The expected semantic distinctions are already canonical: active and archive-only evidence can recover the chapter when continuity is unambiguous; active + archive copies of the same semantic chapter are duplicate-location evidence, not contradiction.
+
+### Runtime discipline
+
+- The test starts without active conversation chapter context for the repository-evidence recovery portion.
+- Each fixture MUST be read from its actual disposable branch before the migration behavior is exercised.
+- Fixture state MUST be verified from the actual branch/ref; intended commit construction is not evidence by itself.
+- Use the branch-from-commit fallback from TODO 10. DO NOT attempt to move an existing fixture branch with update_ref.
+- If another fixture state must be constructed from a resulting commit, create a new disposable branch from that commit.
+- Record each state's branch name, source commit SHA, evidence paths, semantic header, recovery classification, and observed assistant-response-boundary behavior.
+- Keep repository evidence separate from user-supplied recovery input.
+- Case 1 is only the first slice of the five-case test. A Case 1 success MUST NOT be reported as an overall PASS.
+
+### Existing disposable fixture branches
+
+The prepared Case 1 fixtures already include:
+
+    test/migration-recovery-case1-active
+    test/migration-recovery-case1-archive
+    test/migration-recovery-case1-duplicate
+
+They were created from the destructive fixture base commit and verified by comparison as isolated additions. Read the actual branch contents again in C0061 before relying on them as runtime evidence.
+
+The broader fixture set for Cases 2–5 also exists, but C0061 MUST NOT jump ahead of Case 1.
+
+### Result artifact
+
+Record the Case 1 observations in a new file under:
+
+    .ai/architecture/tests/results/migration-recovery/<run-id>.md
+
+The historical incomplete result from the earlier attempt MUST remain historical; create a new result artifact rather than overwriting it.
+
 
 ## Handoff checkpoint verification
 
