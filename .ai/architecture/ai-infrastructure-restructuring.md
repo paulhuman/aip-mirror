@@ -146,13 +146,13 @@ The argument MUST NOT become a direct target selector. Its role is a user assert
 
 Canonical migration semantics remain:
 
-    TARGET_CHAPTER = CURRENT_CHAPTER + 1
+    TARGET_CHAPTER = CURRENT_CHAPTER_CONTEXT + 1
 
 The argument MUST therefore equal `TARGET_CHAPTER`. A mismatch MUST stop migration rather than override the sequential target.
 
-### Canonical `CURRENT_CHAPTER` determination
+### Canonical migration-context determination
 
-`CURRENT_CHAPTER` has three possible states during migration preparation:
+`CURRENT_CHAPTER_CONTEXT` has three possible states during migration preparation:
 
     KNOWN
     RECOVERED
@@ -187,9 +187,9 @@ If recovery is UNKNOWN, the AI MUST STOP and request:
 
     CURRENT_CHAPTER = <four-digit numeric value>
 
-The prompt MUST explicitly require four digits, for example `0059`.
+The prompt MUST explicitly require four digits, for example `0059`. The supplied value MUST be recorded internally as `USER_SUPPLIED_CURRENT_CHAPTER` and validated before it establishes RECOVERED `CURRENT_CHAPTER_CONTEXT`.
 
-A valid user response becomes RECOVERED conversation context for the pending migration. It is **input**, not repository evidence.
+A valid user response becomes `USER_SUPPLIED_CURRENT_CHAPTER` and, after validation, RECOVERED `CURRENT_CHAPTER_CONTEXT` for the pending migration. It is **input**, not repository evidence.
 
 The AI MUST validate that input against repository evidence when evidence exists:
 
@@ -218,7 +218,7 @@ The absence of repository evidence after the user response MUST NOT send the ope
 When `CURRENT_CHAPTER` is KNOWN or RECOVERED:
 
     USER_ASSERTED_NEXT_CHAPTER = <chapter>
-    EXPECTED_TARGET = CURRENT_CHAPTER + 1
+    EXPECTED_TARGET = CURRENT_CHAPTER_CONTEXT + 1
 
 Migration is valid only when:
 
@@ -226,7 +226,7 @@ Migration is valid only when:
 
 A mismatch MUST stop migration rather than override sequential target selection.
 
-If the migration argument mismatches and the current chapter is not established by active context, the AI MUST request `CURRENT_CHAPTER` in the same four-digit format. The supplied value is then recovery input and MUST be validated without requiring a new repository handoff.
+If the migration argument mismatches and `CURRENT_CHAPTER_CONTEXT` is not established by active context, the AI MUST request `CURRENT_CHAPTER` in the same four-digit format. The supplied value is then `USER_SUPPLIED_CURRENT_CHAPTER` and MUST be validated before establishing `CURRENT_CHAPTER_CONTEXT`; it MUST NOT require a new repository handoff.
 
 Argumentless `>>migrate` is NOT an implicit alias and remains outside the documented command syntax.
 
