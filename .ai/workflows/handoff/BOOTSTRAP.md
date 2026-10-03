@@ -19,7 +19,7 @@ These values are runtime context for the receiving chapter. DO NOT write them in
 `CURRENT_CHAPTER` always means the receiving chapter that is executing this bootstrap procedure.
 
 Chapter numbering is one-based. The first chapter of a specialization is `0001`, and `0000` MUST NOT be used as a chapter number.
-The chapter sequence advances as `001 → 002 → 003 ...`.
+The chapter sequence advances as `0001 → 0002 → 0003 ...`.
 
 `PREVIOUS_CHAPTER` means the predecessor chapter whose handoff is being received. For the first chapter of a specialization, use `N/A`.
 
