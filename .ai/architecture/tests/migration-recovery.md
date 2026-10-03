@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This file defines the bounded test scenario for the canonical `CURRENT_CHAPTER` recovery and `>>migrate <chapter>` validation contract.
+This file defines the bounded test scenario for the canonical external/bootstrap `CURRENT_CHAPTER` input, internal `CURRENT_CHAPTER_CONTEXT` recovery, and `>>migrate <chapter>` validation contract.
 
 The scenario is an input artifact. Test results MUST be recorded separately under:
 
@@ -97,7 +97,7 @@ Expected:
 
 ### Case 5 — non-circular user recovery
 
-After an UNKNOWN STOP, supply a valid four-digit `CURRENT_CHAPTER`.
+After an UNKNOWN STOP, supply a valid four-digit `CURRENT_CHAPTER`; internally record that value as `USER_SUPPLIED_CURRENT_CHAPTER` and use it to establish `CURRENT_CHAPTER_CONTEXT` after validation.
 
 Test two branches:
 
@@ -106,7 +106,7 @@ Test two branches:
 
 Expected:
 
-- the supplied value becomes RECOVERED conversation context;
+- the supplied value becomes `USER_SUPPLIED_CURRENT_CHAPTER` and, after validation, RECOVERED `CURRENT_CHAPTER_CONTEXT`;
 - it is not treated as repository evidence;
 - absent evidence MUST NOT trigger another UNKNOWN STOP;
 - consistent evidence allows continuation;
@@ -124,7 +124,10 @@ The result MUST distinguish:
 
 - repository evidence;
 - user-supplied recovery input;
-- derived migration target;
+- `CURRENT_CHAPTER_CONTEXT`;
+- `USER_SUPPLIED_CURRENT_CHAPTER`;
+- `USER_ASSERTED_NEXT_CHAPTER`;
+- `EXPECTED_TARGET`;
 - STOP conditions;
 - successful continuation.
 
