@@ -245,7 +245,7 @@ GitHub repository operations may allow creation of a commit object but reject mo
 
 Decision:
 
-For isolated repository tests that require destructive or synthetic history, prefer creating a new branch directly from the required commit SHA rather than moving an existing branch ref.
+For isolated repository tests that require destructive or synthetic history, the test harness SHOULD prefer creating a new branch directly from the required commit SHA rather than moving an existing branch ref.
 
 The canonical fixture flow is:
 
