@@ -82,6 +82,7 @@ Continue the Architecture & Research work from C0060 by executing the first real
 - The repository is write-capable through the connected GitHub interface.
 - The canonical recovery architecture and non-circular UNKNOWN recovery interaction are already implemented in the active lifecycle and handoff owners.
 - Terminology was clarified across the handoff skill, lifecycle rule, migration-recovery test, and architecture TODO: `CURRENT_CHAPTER` remains the external/bootstrap contract while internal migration/recovery roles use the explicit names above.
+- The `>>normative-language` pass was applied to the affected canonical migration/recovery documentation; normative requirements use the repository's uppercase BCP 14 vocabulary and procedural `DO NOT` form where required.
 - A fresh-chat Case 1 runtime attempt actually executed `>>migrate 0061` against all three disposable fixture branches, but the test supplied `CURRENT_CHAPTER=0061` while repository evidence established C0060. The resulting contradiction STOP was correct under the canonical migration formula; the test input was therefore invalid for exercising successful continuation. Result: `.ai/architecture/tests/results/migration-recovery/20261003-2317-c0061-case1-runtime.md`, commit `3efb89c7cdda955f0316c5f48584e34b4d2a62e8`.
 - The C0061 starting task is Case 1 only; completion of Case 1 MUST NOT be reported as completion of the full five-case test.
 
