@@ -193,7 +193,7 @@ A valid user response becomes `USER_SUPPLIED_CURRENT_CHAPTER` and, after validat
 
 The AI MUST validate that input against repository evidence when evidence exists:
 
-- no evidence → accept the supplied value as recovered context; do not repeat the UNKNOWN STOP;
+- no evidence → accept the supplied value as recovered context; DO NOT repeat the UNKNOWN STOP;
 - consistent evidence → accept and continue;
 - direct contradiction → STOP and explain the contradiction.
 
