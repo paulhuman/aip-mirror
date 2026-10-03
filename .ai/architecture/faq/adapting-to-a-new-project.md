@@ -125,7 +125,7 @@ specializations:
     short_name: Python Image Processing
 ```
 
-Every project using this infrastructure MUST reserve specialization `A` for `Project Workshop`. Other specialization letters and names are project-specific.
+The `A / Project Workshop` pairing is the canonical neutral example used by the handoff documentation. It is a format example, not a universal specialization requirement. Other specialization letters and names are project-specific.
 
 If you change them, make sure existing handoff files are not copied into the new repository with incompatible names.
 
@@ -515,7 +515,7 @@ Treat the current handoffs as disposable project state when creating a new proje
 
 Do not carry the existing project handoff files into the new repository.
 
-The canonical `A0001-Project-Workshop.md` shown above is a format example only. It is not a handoff to copy into the new project.
+The `A0001-Project-Workshop.md` example is a format example only. It is not a handoff to copy into the new project.
 
 Instead:
 
