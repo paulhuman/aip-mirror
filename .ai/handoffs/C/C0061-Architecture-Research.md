@@ -86,15 +86,105 @@ Continue the Architecture & Research work from C0060 by executing the first real
 - A fresh-chat Case 1 runtime attempt actually executed `>>migrate 0061` against all three disposable fixture branches, but the test supplied `CURRENT_CHAPTER=0061` while repository evidence established C0060. The resulting contradiction STOP was correct under the canonical migration formula; the test input was therefore invalid for exercising successful continuation. Result: `.ai/architecture/tests/results/migration-recovery/20261003-2317-c0061-case1-runtime.md`, commit `3efb89c7cdda955f0316c5f48584e34b4d2a62e8`.
 - The C0061 starting task is Case 1 only; completion of Case 1 MUST NOT be reported as completion of the full five-case test.
 
+## Case 1 runtime completion
+
+The corrected fresh assistant-response-boundary runtime for Case 1 was completed successfully after the earlier invalid-context attempt.
+
+### Runtime objective
+
+The test intentionally did **not** supply `CURRENT_CHAPTER = 0061`. Each fixture independently established the current chapter from repository evidence as:
+
+    CURRENT_CHAPTER_CONTEXT = 0060
+    USER_ASSERTED_NEXT_CHAPTER = 0061
+    EXPECTED_TARGET = 0061
+
+The migration argument was validated as an assertion of the sequential successor, not interpreted as a target selector.
+
+### Actual fixture observations
+
+1. **Active evidence** — `test/migration-recovery-case1-active`
+   - Source ref remained at `50e32652fcd10e7df96c140e8e01c3d8062a99ac`.
+   - `.ai/handoffs/C/C0060-Architecture-Research.md` was present; archive copy was absent.
+   - Header identified specialization `C` and chapter `0060`.
+   - Recovery classification: `RECOVERED — active evidence`.
+   - `>>migrate 0061` passed sequential validation and continued.
+
+2. **Archive-only evidence** — `test/migration-recovery-case1-archive`
+   - Source ref remained at `ec9e559941e85c80ee05f0c43bdcaf387fb5827f`.
+   - Active copy was absent; `.ai/archive/handoffs/C/C0060-Architecture-Research.md` was present.
+   - Header identified specialization `C` and chapter `0060`.
+   - Recovery classification: `RECOVERED — archive-only evidence`.
+   - `>>migrate 0061` passed sequential validation and continued.
+
+3. **Duplicate-location evidence** — `test/migration-recovery-case1-duplicate`
+   - Source ref remained at `2bc48feff5f12455f6aba1c0826adc4c6d5ea7e1`.
+   - Both active and archive copies were present.
+   - Both headers identified the same semantic C0060 handoff.
+   - Recovery classification: `RECOVERED — duplicate-location evidence`.
+   - The duplicate was not treated as contradictory evidence.
+   - `>>migrate 0061` passed sequential validation and continued.
+
+All three fixture refs were left unchanged. The runtime result was recorded at `.ai/architecture/tests/results/migration-recovery/20261003-2337-c0061-case1-runtime.md` and committed as `b598d8ccc67b99abe72894760a2d618048ce58f4` with message `test(architecture): record C0061 Case 1 runtime`. The result file was read back after commit; diff/scope verification reported exactly one new file and no unrelated changes.
+
+### Runtime TRACE observation
+
+The runtime response showed the required separation:
+
+    ACTIVATE
+      .ai/skills/handoff/SKILL.md
+      .ai/workflows/handoff/BOOTSTRAP.md
+
+    OPERATION READS
+      additional repository rules, skills, architecture/test docs,
+      and the actual handoff evidence from all three fixture branches
+
+ACTIVATE owners were not duplicated in OPERATION READS. The runtime exercised the visible response-boundary TRACE rather than merely simulating the structural model.
+
+### Important conclusion
+
+Case 1 is now a runtime PASS under the corrected `CURRENT_CHAPTER_CONTEXT` model. The earlier `20261003-2317-c0061-case1-runtime` result remains historical and must not be rewritten: its `CURRENT_CHAPTER=0061` input conflicted with repository C0060 evidence, so its contradiction STOP was correct but did not test successful continuation.
+
+Case 1 PASS does **not** establish the full five-case migration-recovery test. Cases 2–5 remain unverified by runtime.
+
+## Migration to C0062
+
+`>>migrate 0062` is the immediate next operation after this Case 1 milestone.
+
+For the receiving chapter, the migration contract is:
+
+    PREVIOUS_CHAPTER = 0061
+    CURRENT_CHAPTER = 0062
+    SPECIALIZATION = C
+    SHORT_NAME = Architecture & Research
+
+Internally, the migration assertion is:
+
+    CURRENT_CHAPTER_CONTEXT = 0061
+    USER_ASSERTED_NEXT_CHAPTER = 0062
+    EXPECTED_TARGET = 0062
+
+The C0061 handoff is the durable source context for the receiving C0062 conversation. The receiving C0062 bootstrap must read this handoff and continue with the next bounded migration-recovery runtime slice, without treating Case 1 as evidence that Cases 2–5 have passed.
+
+## Future chat observations and conclusions
+
+- The central terminology correction is now validated by a real successful runtime: repository evidence established `CURRENT_CHAPTER_CONTEXT`, while the migration argument populated `USER_ASSERTED_NEXT_CHAPTER`.
+- `CURRENT_CHAPTER` remains the external/bootstrap contract and must not be overloaded as the internal recovered context variable.
+- A successful user-supplied recovery value, when needed by Case 5, must become `USER_SUPPLIED_CURRENT_CHAPTER` and then RECOVERED `CURRENT_CHAPTER_CONTEXT`; absence of repository evidence alone must not restart the UNKNOWN loop.
+- Active/archive duplication is a location-level duplicate when semantic headers match; it is not contradictory chapter evidence.
+- A valid Git commit and successful API write remain insufficient evidence of correctness; the Case 1 result demonstrates the required read-back and diff/scope verification discipline.
+- Fixture refs are disposable test infrastructure. They must not be moved or rewritten merely to obtain a runtime result.
+- Runtime evidence must remain distinct from structural/documentation evidence. The Case 1 result is specifically an assistant-response-boundary runtime observation.
+- Do not claim a five-case PASS until Cases 2, 3, 4, and 5 have each been exercised and their actual runtime results recorded.
+
 ## Inferred
 
-- The next substantive operation is a fresh read/validation of the three prepared Case 1 fixture branches followed by actual assistant-response-boundary exercise and result recording.
+- Case 1 is now complete and passed under the corrected context model.
+- The next substantive operation is migration to C0062, followed by the next bounded migration-recovery runtime slice defined by `.ai/architecture/tests/migration-recovery.md`.
 
 ## Assumed / unverified
 
-- Successful continuation behavior for Case 1 remains unverified because the fresh runtime test used the wrong `CURRENT_CHAPTER` context for the recovered C0060 fixtures.
-- The existing fixture branches contain exactly the intended evidence and no unintended files; they must be read back from their actual refs before another runtime attempt.
-- The fresh assistant-response boundary is available and was exercised; the next test must use repository-recovered `CURRENT_CHAPTER_CONTEXT=0060` with `>>migrate 0061`.
+- Cases 2–5 remain unverified by assistant-response-boundary runtime.
+- The receiving C0062 conversation must independently activate the canonical owners and establish its current chapter context according to the migration/recovery rules; it must not inherit runtime claims merely because they appear in this handoff.
 
 ## Open
 
@@ -111,7 +201,7 @@ Continue the Architecture & Research work from C0060 by executing the first real
 
 ## Immediate next task
 
-Repeat the Case 1 migration-recovery runtime test with the corrected context model. Read and validate the three prepared fixture branches independently, establish `CURRENT_CHAPTER_CONTEXT=0060` from repository evidence, then exercise `>>migrate 0061` for active → archive-only → duplicate-location evidence. Do not redo the recovery architecture from scratch and do not declare the complete five-case test PASS from Case 1 alone.
+Migrate to C0062 and continue the bounded migration-recovery runtime test with Case 2 as defined by `.ai/architecture/tests/migration-recovery.md`. Do not redo the recovery architecture from scratch. Preserve the verified Case 1 result as historical runtime evidence and do not declare the complete five-case test PASS until Cases 2–5 are also exercised.
 
 ## Case 1 runtime discipline
 
