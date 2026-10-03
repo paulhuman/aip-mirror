@@ -75,7 +75,7 @@ When repository evidence is required to recover `CURRENT_CHAPTER`, both of these
     .ai/handoffs/<SPECIALIZATION>/
     .ai/archive/handoffs/<SPECIALIZATION>/
 
-An active handoff and an archived handoff with the same semantic `Specialization` and `Chapter` identify one chapter. Their different locations do not make them contradictory.
+An active handoff and an archived handoff with the same semantic `Specialization` and `Chapter` identify one chapter. Their different locations DO NOT make them contradictory.
 
 Recovery MUST validate the handoff header, not merely its path or filename. A valid candidate has:
 
@@ -88,7 +88,7 @@ Recovery MUST distinguish:
 - **Archive-only evidence** — valid candidate in the archive when no active candidate establishes the chapter.
 - **Duplicate evidence** — active and archive copies of the same chapter.
 - **Contradictory evidence** — candidates that cannot be reconciled into one valid chapter under sequential continuity.
-- **No-handoff / first-chapter case** — no repository handoff exists. Absence alone does not establish a current chapter. The first valid chapter is `0001`; a migration assertion for `0002` may therefore validate candidate predecessor `0001` without requiring a predecessor handoff.
+- **No-handoff / first-chapter case** — no repository handoff exists. Absence alone does not establish a current chapter. The first valid chapter is `0001`; a migration assertion for `0002` MAY therefore validate candidate predecessor `0001` without requiring a predecessor handoff.
 
 A recovery procedure MUST NOT select the numerically latest handoff merely because it is latest, and MUST NOT treat path location alone as proof of currentness.
 
@@ -114,7 +114,7 @@ A handoff update is a normal content operation.
 
 When the user requests a handoff checkpoint, update the current handoff with durable state that matters for future continuation and commit the update.
 
-When the user requests migration: update the current handoff, commit that update, generate the bootstrap instruction for the future receiving chapter, and do not modify the future receiving handoff or predecessor merely to mark it consumed.
+When the user requests migration: update the current handoff, commit that update, generate the bootstrap instruction for the future receiving chapter, and DO NOT modify the future receiving handoff or predecessor merely to mark it consumed.
 
 The current conversation remains the current chapter until a new conversation actually executes bootstrap.
 
