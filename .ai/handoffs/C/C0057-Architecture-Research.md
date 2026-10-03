@@ -63,6 +63,7 @@ Continue Architecture & Research from the durable state established by C0056. Fo
 - The generic ACTIVATE architecture does not require every canonical owner to be a skill.
 - `>>migrate <chapter>` always advances exactly one chapter from the current chapter. The numeric argument is ignored for target selection; a bare migration command never skips, repeats, or moves backward.
 - An explicitly explained request to violate sequential migration is a separate operation, not an override of the bare migration command.
+- The question of whether the documented command should eventually become argumentless `>>migrate` is tracked as TODO 9; until resolved, `>>migrate` without an argument remains outside the documented syntax.
 - `A / Project Workshop` and `A0001-Project-Workshop.md` are canonical neutral format examples only. They are not universal specialization requirements or handoffs to copy into a new project.
 
 ## Recent work completed before C0057
@@ -73,7 +74,9 @@ Continue Architecture & Research from the durable state established by C0056. Fo
 - The FAQ was re-audited against the current handoff skill, lifecycle rule, BOOTSTRAP workflow, and handoff README.
 - The four-digit chapter contract remains consistent: first chapter `0001`, `0000` invalid, and `CHAPTER_ID = SPECIALIZATION + CURRENT_CHAPTER`.
 - `.ai/skills/handoff/SKILL.md` now defines `TARGET_CHAPTER = CURRENT_CHAPTER + 1` for bare migration commands.
-- The requested `>>migrate 0059` from C0057 therefore targets C0058; the supplied `0059` is ignored for target selection.
+- The earlier requested `>>migrate 0059` from C0057 therefore targets C0058; the supplied `0059` is ignored for target selection.
+- The current real migration request `>>migrate 1111` likewise targets C0058; the supplied `1111` is ignored for target selection.
+- TODO 9 was added to `.ai/architecture/ai-infrastructure-restructuring.md` to track whether `>>migrate` should eventually become an argumentless command.
 
 ## Relevant files and references
 
@@ -132,7 +135,7 @@ Continue Architecture & Research from the durable state established by C0056. Fo
 ## Inferred
 
 - The five-command cold-start regression remains superseded and is not the active task.
-- The requested migration argument `0059` does not alter the target; the immediate successor of C0057 is C0058.
+- The migration argument `1111` does not alter the target; the immediate successor of C0057 is C0058.
 
 ## Assumed / unverified
 
@@ -142,6 +145,7 @@ Continue Architecture & Research from the durable state established by C0056. Fo
 
 ## Open
 
+- TODO 9 remains open: decide whether the active command surface should eventually allow argumentless `>>migrate` now that the numeric argument is semantically ignored.
 - Complete the C0057 handoff checkpoint and use the generated C0058 bootstrap transport when starting the next conversation.
 - C0058 must execute the canonical BOOTSTRAP workflow and create its own receiving handoff.
 - The fresh five-command cold-start regression remains deferred unless explicitly revived.
