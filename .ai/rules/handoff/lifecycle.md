@@ -70,7 +70,7 @@ Handoffs remain in the repository as historical context. No handoff state transi
 
 ## 5. Recovery evidence and first-chapter rules
 
-When repository evidence is required to recover `CURRENT_CHAPTER`, both of these locations are valid evidence sources:
+When repository evidence is required to recover `CURRENT_CHAPTER_CONTEXT`, both of these locations are valid evidence sources:
 
     .ai/handoffs/<SPECIALIZATION>/
     .ai/archive/handoffs/<SPECIALIZATION>/
@@ -92,7 +92,7 @@ Recovery MUST distinguish:
 
 A recovery procedure MUST NOT select the numerically latest handoff merely because it is latest, and MUST NOT treat path location alone as proof of currentness.
 
-If deterministic recovery is impossible, `CURRENT_CHAPTER` is UNKNOWN. After an explicit recovery STOP, a syntactically valid user-supplied `CURRENT_CHAPTER` becomes recovered conversation context. It MUST be checked against repository evidence when evidence exists, but lack of evidence MUST NOT cause the same STOP to repeat. Direct contradiction remains a STOP condition.
+If deterministic recovery is impossible, `CURRENT_CHAPTER_CONTEXT` is UNKNOWN. After an explicit recovery STOP, a syntactically valid user-supplied `CURRENT_CHAPTER` MUST be recorded as `USER_SUPPLIED_CURRENT_CHAPTER` and becomes recovered `CURRENT_CHAPTER_CONTEXT` after validation. It MUST be checked against repository evidence when evidence exists, but lack of evidence MUST NOT cause the same STOP to repeat. Direct contradiction remains a STOP condition.
 
 ## 5. Handoff continuity
 
