@@ -127,7 +127,28 @@ When the user requests migration with `>>migrate <chapter>`, the migration targe
 
     TARGET_CHAPTER = CURRENT_CHAPTER + 1
 
-The numeric `<chapter>` argument is not a target selector. It MUST be ignored for target selection. If the supplied argument is the same as the current chapter, skips a chapter, or points backward, the migration MUST still proceed to the immediate successor without rejecting the request or waiting for a corrected command.
+The numeric `<chapter>` argument is a user assertion of the expected next chapter and a safety/validation input. It MUST NOT select a different target.
+
+Before migration, determine `CURRENT_CHAPTER` as follows:
+
+- **KNOWN** — use the chapter established by the active conversation/bootstrap context.
+- **RECOVERED** — if the active context has been lost, recover the chapter deterministically from repository evidence and validate chapter continuity. Handoff history is evidence for recovery, not a universal rule that the latest handoff equals the current chapter.
+- **UNKNOWN** — if available evidence is insufficient or contradictory, STOP. Do not guess the current chapter.
+
+When `CURRENT_CHAPTER` is known or deterministically recovered:
+
+    USER_ASSERTED_NEXT_CHAPTER = <chapter>
+    EXPECTED_TARGET = CURRENT_CHAPTER + 1
+
+Migration is valid only when:
+
+    USER_ASSERTED_NEXT_CHAPTER == EXPECTED_TARGET
+
+A mismatch MUST stop migration rather than override sequential target selection.
+
+If `CURRENT_CHAPTER` is unknown, the supplied argument MAY participate in recovery validation but MUST NOT by itself silently select an arbitrary target. The recovery procedure must establish a valid current chapter or stop. This includes the first-chapter case: where no handoff exists, an argument such as `0002` may yield candidate predecessor `0001`, which must then be validated as a valid first chapter under lifecycle rules.
+
+Argumentless `>>migrate` is outside the documented command syntax and MUST NOT be treated as an implicit alias unless a later bounded decision changes this contract.
 
 A WRITE-CAPABLE AI MUST update the current handoff for the immediate successor, verify content and scope, commit the handoff update, and generate the standard bootstrap instruction for that derived target.
 
