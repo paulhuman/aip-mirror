@@ -14,7 +14,7 @@ C
 
 ## Starting objective
 
-Continue Architecture & Research from the durable state established by C0056. Execute the fresh five-command cold-start regression against the current command surface, with particular attention to the `>>normative-language` skill-to-rule read boundary and exclusion of the retired command phrase.
+Continue Architecture & Research from the durable state established by C0056. Formalize deterministic sequential migration semantics and prepare the current chapter for migration to its immediate successor C0058.
 
 ## Known starting implementation state
 
@@ -61,6 +61,8 @@ Continue Architecture & Research from the durable state established by C0056. Ex
 - The normative-language command is `>>normative-language`; the retired `>>activate-normative-language` phrase is not part of the active command surface.
 - The normative-language skill is a thin command entry point; `.ai/rules/normative-language.md` remains the canonical semantic owner.
 - The generic ACTIVATE architecture does not require every canonical owner to be a skill.
+- `>>migrate <chapter>` always advances exactly one chapter from the current chapter. The numeric argument is ignored for target selection; a bare migration command never skips, repeats, or moves backward.
+- An explicitly explained request to violate sequential migration is a separate operation, not an override of the bare migration command.
 - `A / Project Workshop` and `A0001-Project-Workshop.md` are canonical neutral format examples only. They are not universal specialization requirements or handoffs to copy into a new project.
 
 ## Recent work completed before C0057
@@ -70,6 +72,8 @@ Continue Architecture & Research from the durable state established by C0056. Ex
 - The FAQ correction was committed as `4633fe1bf687fde49fff1e0d63fe15c3d7106822` with `ai-docs(architecture): clarify specialization example`.
 - The FAQ was re-audited against the current handoff skill, lifecycle rule, BOOTSTRAP workflow, and handoff README.
 - The four-digit chapter contract remains consistent: first chapter `0001`, `0000` invalid, and `CHAPTER_ID = SPECIALIZATION + CURRENT_CHAPTER`.
+- `.ai/skills/handoff/SKILL.md` now defines `TARGET_CHAPTER = CURRENT_CHAPTER + 1` for bare migration commands.
+- The requested `>>migrate 0059` from C0057 therefore targets C0058; the supplied `0059` is ignored for target selection.
 
 ## Relevant files and references
 
@@ -127,27 +131,25 @@ Continue Architecture & Research from the durable state established by C0056. Ex
 
 ## Inferred
 
-- The fresh five-command cold-start regression was the previously planned next task, but it is now superseded by the migration-behavior simulation requested in this chapter.
-- No fresh five-command runtime regression is currently required; its earlier scope remains historical context only.
-- The existing C0054 → C0055 runtime result is evidence for the migration path but is not sufficient evidence for the complete five-command regression.
+- The five-command cold-start regression remains superseded and is not the active task.
+- The requested migration argument `0059` does not alter the target; the immediate successor of C0057 is C0058.
 
 ## Assumed / unverified
 
-- The fresh five-command cold-start regression has not been executed in C0057 and is no longer the active next task.
-- No C0057 result artifact is required for that superseded regression unless it is explicitly revived later.
-- The runtime behavior of the renamed `>>normative-language` command remains independently unverified in this chapter.
+- The receiving C0058 conversation has not started yet.
+- No C0058 receiving handoff has been created in advance.
+- The migration transport is not evidence that C0058 has already started.
 
 ## Open
 
-- Simulate migration requests to the current chapter, a future chapter, and a previous chapter to verify how the migration procedure should behave without claiming that simulation is runtime evidence.
-- Verify, from the canonical migration rules, which repository mutation belongs to the current handoff and which chapter identity remains unchanged until a receiving conversation actually bootstraps.
-- Re-run relevant consistency verification after any active routing, bootstrap, activation, or handoff change.
-- Review remaining active TODO items only within their existing bounded scope.
-- Separately decide how to reconcile historical noncanonical `0001-JSX Prototype.md` / `0002-JSX Prototype.md` artifacts after the filename-contract regression work, without mixing that cleanup into unrelated runtime verification.
+- Complete the C0057 handoff checkpoint and use the generated C0058 bootstrap transport when starting the next conversation.
+- C0058 must execute the canonical BOOTSTRAP workflow and create its own receiving handoff.
+- The fresh five-command cold-start regression remains deferred unless explicitly revived.
+- Historical noncanonical `0001-JSX Prototype.md` / `0002-JSX Prototype.md` artifacts remain a separate cleanup concern.
 
 ## Immediate next task
 
-Run the fresh five-command cold-start regression against the current `.ai/INDEX.md`, then record the runtime result under `.ai/architecture/tests/results/cold-start-command-trace/` without reopening the resolved generic ACTIVATE architecture.
+Start a new conversation chapter as C0058 using the generated bootstrap transport from the migration operation.
 
 ## Recommended starting context
 
@@ -168,6 +170,8 @@ Run the fresh five-command cold-start regression against the current `.ai/INDEX.
 ## Handoff checkpoint verification
 
 - C0057 is the receiving chapter initialized from C0056.
+- The migration rule was updated and verified: bare `>>migrate <chapter>` derives C0058 from current C0057 regardless of the supplied numeric argument.
+- The C0057 handoff is updated as the current chapter checkpoint; no future C0058 handoff is created in advance.
 - The chapter header uses the required four-digit chapter format.
 - The C0056 predecessor handoff was read successfully during bootstrap.
 - Required handoff, bootstrap, activation, repository, and commit owners were reread before repository mutation.
