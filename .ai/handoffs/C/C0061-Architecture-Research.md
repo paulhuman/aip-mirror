@@ -188,14 +188,10 @@ The C0061 handoff is the durable source context for the receiving C0062 conversa
 
 ## Open
 
-- Exercise Case 1 in three isolated states:
-  1. \`test/migration-recovery-case1-active\`
-  2. \`test/migration-recovery-case1-archive\`
-  3. \`test/migration-recovery-case1-duplicate\`
-- For each state, read the actual fixture branch, validate the handoff header, exercise migration/recovery at the assistant-response boundary, and record observed classification and continuation/STOP behavior.
-- Record a new result under \`.ai/architecture/tests/results/migration-recovery/<run-id>.md\`.
-- Preserve the distinction between repository evidence and user-supplied recovery context.
-- Do not use \`update_ref\` to move the prepared fixture branches. If a new isolated state must be derived, create a new disposable branch from the required commit SHA.
+- Continue the five-case migration-recovery runtime test from C0062 using `.ai/architecture/tests/migration-recovery.md` as the scenario source.
+- Exercise Cases 2–5 independently; record actual assistant-response-boundary behavior and preserve the distinction between repository evidence and user-supplied recovery context.
+- Record each runtime result under `.ai/architecture/tests/results/migration-recovery/<run-id>.md`.
+- Do not use `update_ref` to move prepared fixture branches. If a new isolated state must be derived, create a new disposable branch from the required commit SHA.
 - TODO 3 remains open: fresh runtime verification of the active command surface and visible TRACE delivery.
 - Historical noncanonical handoff filename cleanup remains separate.
 
