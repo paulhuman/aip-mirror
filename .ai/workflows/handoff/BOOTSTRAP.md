@@ -39,8 +39,8 @@ When `SHORT_NAME` is omitted, the bootstrap procedure MUST resolve it from the s
 
 For example:
 
-    SPECIALIZATION = C
-    SHORT_NAME = Architecture & Research
+    SPECIALIZATION = A
+    SHORT_NAME = Project Workshop
 
 If a supplied `SHORT_NAME` is present, configuration lookup is a fallback and MUST NOT replace the supplied value merely because a configured value also exists.
 
@@ -108,23 +108,19 @@ The chapter number values MUST NOT include the specialization letter.
 
 Use:
 
-    CURRENT_CHAPTER = 0033
+    CURRENT_CHAPTER = 0001
 
 not:
 
-    CURRENT_CHAPTER = C0033
+    CURRENT_CHAPTER = A0001
 
-Likewise, use:
+For this first-chapter example:
 
-    PREVIOUS_CHAPTER = 0032
-
-not:
-
-    PREVIOUS_CHAPTER = C0032
+    PREVIOUS_CHAPTER = N/A
 
 `CURRENT_CHAPTER` and `PREVIOUS_CHAPTER` therefore carry only the numeric chapter component. The specialization is carried separately by `SPECIALIZATION`.
 
-The full chapter identifier is derived from these values as `SPECIALIZATION` + `CURRENT_CHAPTER` (for example, `C` + `0033` = `C0033`). This derived value is `CHAPTER_ID`.
+The full chapter identifier is derived from these values as `SPECIALIZATION` + `CURRENT_CHAPTER` (for example, `A` + `0001` = `A0001`). This derived value is `CHAPTER_ID`.
 
     CHAPTER_ID = SPECIALIZATION + CURRENT_CHAPTER
 
