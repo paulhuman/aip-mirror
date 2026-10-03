@@ -125,15 +125,15 @@ Checkpoint updates MAY be repeated when meaningful state accumulates.
 
 When the user requests migration with `>>migrate <chapter>`, the migration target is ALWAYS derived as exactly one increment from the current chapter:
 
-    TARGET_CHAPTER = CURRENT_CHAPTER + 1
+    TARGET_CHAPTER = CURRENT_CHAPTER_CONTEXT + 1
 
 The numeric `<chapter>` argument is a user assertion of the expected next chapter and a safety/validation input. It MUST NOT select a different target.
 
-Before migration, determine `CURRENT_CHAPTER` as follows.
+Before migration, determine `CURRENT_CHAPTER_CONTEXT` as follows.
 
 ### Recovery evidence set
 
-When active conversation/bootstrap context does not establish the current chapter, inspect both repository handoff locations for the current specialization:
+When active conversation/bootstrap context does not establish `CURRENT_CHAPTER_CONTEXT`, inspect both repository handoff locations for the current specialization:
 
     .ai/handoffs/<SPECIALIZATION>/
     .ai/archive/handoffs/<SPECIALIZATION>/
@@ -167,28 +167,28 @@ When a valid active and archived handoff describe the same specialization and ch
 
 ### UNKNOWN recovery interaction
 
-If recovery reaches UNKNOWN, the AI MUST STOP and ask the user for the chat's `CURRENT_CHAPTER`.
+If recovery reaches UNKNOWN, the AI MUST STOP and ask the user to supply `CURRENT_CHAPTER`.
 
 The STOP response MUST require exactly a four-digit numeric chapter value, for example:
 
     Please provide CURRENT_CHAPTER as a four-digit number, e.g. 0059.
 
-After the user supplies a syntactically valid value, that value becomes the **RECOVERED conversation context** for the pending migration validation. It is user-provided recovery input, not new repository evidence.
+After the user supplies a syntactically valid value, record it as `USER_SUPPLIED_CURRENT_CHAPTER`. That value becomes the **RECOVERED `CURRENT_CHAPTER_CONTEXT`** for the pending migration validation. It is user-provided recovery input, not new repository evidence.
 
-The AI MUST then validate the supplied value against any repository evidence that is available:
+The AI MUST then validate `USER_SUPPLIED_CURRENT_CHAPTER` against any repository evidence that is available:
 
-- if repository evidence is absent, the supplied value MUST NOT trigger another UNKNOWN STOP solely because evidence is absent;
-- if evidence is consistent, accept the supplied value as RECOVERED and continue;
-- if evidence directly contradicts the supplied value, STOP and explain the contradiction.
+- if repository evidence is absent, `USER_SUPPLIED_CURRENT_CHAPTER` MUST NOT trigger another UNKNOWN STOP solely because evidence is absent;
+- if evidence is consistent, accept `USER_SUPPLIED_CURRENT_CHAPTER` as `CURRENT_CHAPTER_CONTEXT` in RECOVERED state and continue;
+- if evidence directly contradicts `USER_SUPPLIED_CURRENT_CHAPTER`, STOP and explain the contradiction.
 
 This continuation rule is mandatory: a valid user response MUST NOT enter a circular UNKNOWN → ask → UNKNOWN STOP loop.
 
 ### Migration argument validation
 
-When `CURRENT_CHAPTER` is KNOWN or RECOVERED:
+When `CURRENT_CHAPTER_CONTEXT` is KNOWN or RECOVERED:
 
     USER_ASSERTED_NEXT_CHAPTER = <chapter>
-    EXPECTED_TARGET = CURRENT_CHAPTER + 1
+    EXPECTED_TARGET = CURRENT_CHAPTER_CONTEXT + 1
 
 Migration is valid only when:
 
@@ -196,7 +196,7 @@ Migration is valid only when:
 
 A mismatch MUST stop migration rather than override sequential target selection.
 
-If the numeric argument does not match the expected target and the current chapter itself is not established by active context, the AI MUST ask for `CURRENT_CHAPTER` using the same four-digit format before attempting recovery again. A user-supplied current chapter then becomes recovery input; it MUST NOT be required to create new repository evidence before validation can continue.
+If the numeric argument does not match the expected target and `CURRENT_CHAPTER_CONTEXT` is not established by active context, the AI MUST ask for `CURRENT_CHAPTER` using the same four-digit format before attempting recovery again. A user-supplied `CURRENT_CHAPTER` then becomes `USER_SUPPLIED_CURRENT_CHAPTER` and, after validation, `CURRENT_CHAPTER_CONTEXT`; it MUST NOT be required to create new repository evidence before validation can continue.
 
 Argumentless `>>migrate` is outside the documented command syntax and MUST NOT be treated as an implicit alias unless a later bounded decision changes this contract.
 
@@ -204,8 +204,8 @@ A WRITE-CAPABLE AI MUST update the current handoff for the immediate successor, 
 
 The generated bootstrap transport MUST use:
 
-    PREVIOUS_CHAPTER = <current chapter>
-    CURRENT_CHAPTER = <current chapter + 1>
+    PREVIOUS_CHAPTER = <current chapter context>
+    CURRENT_CHAPTER = <current chapter context + 1>
     SPECIALIZATION = <current specialization>
     SHORT_NAME = <resolved short name>
 
@@ -236,7 +236,7 @@ The standard generated transport is:
 
     Follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6, and use `.ai/workflows/handoff/BOOTSTRAP.md` as the canonical chat-initialization workflow.
 
-    PREVIOUS_CHAPTER = <current chapter>
+    PREVIOUS_CHAPTER = <current chapter context>
     CURRENT_CHAPTER = <target chapter>
     SPECIALIZATION = <current specialization>
     SHORT_NAME = <resolved short name>
