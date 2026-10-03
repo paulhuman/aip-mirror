@@ -120,7 +120,7 @@ The result MUST distinguish:
 - STOP conditions;
 - successful continuation.
 
-No result may claim runtime execution unless the command was actually exercised at the assistant-response boundary. Structural review or simulation MUST be labeled as such.
+No result MUST claim runtime execution unless the command was actually exercised at the assistant-response boundary. Structural review or simulation MUST be labeled as such.
 
 ## Non-goals
 
