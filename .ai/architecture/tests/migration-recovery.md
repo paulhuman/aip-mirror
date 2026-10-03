@@ -10,6 +10,14 @@ The scenario is an input artifact. Test results MUST be recorded separately unde
 
 The scenario MUST NOT be treated as runtime evidence.
 
+## Test fixture boundary
+
+A complete run MUST use disposable Git branches or equivalent isolated repository fixtures when a case requires handoff evidence that does not exist in the canonical history.
+
+Fixture mutations MAY create, remove, or alter handoff files inside the isolated test environment. They MUST NOT be treated as canonical project history.
+
+The test result MUST record the fixture branch or equivalent isolation boundary used for each mutated case.
+
 ## Canonical cases
 
 A complete run MUST exercise all five recovery cases below.
@@ -129,5 +137,5 @@ The test MUST NOT:
 - introduce a registry, manifest, dependency graph, command-ID layer, universal router, lifecycle state machine, or persistent current-chapter state file;
 - change the documented `>>migrate <chapter>` syntax;
 - treat `<chapter>` as a target selector;
-- modify predecessor or future handoffs merely to simulate recovery;
+- mutate canonical handoff history merely to simulate recovery;
 - conflate duplicate active/archive evidence with contradiction.
