@@ -18,7 +18,7 @@ The Chapter Identifier Format is:
 
     [A-Z][0-9]{4}
 
-Chapter numbering is one-based. The first chapter of a specialization is `001`.
+Chapter numbering is one-based. The first chapter of a specialization is `0001`.
 `0000` is not a valid chapter number. The sequence is `0001 → 0002 → 0003 ...`.
 
 The specialization is the uppercase letter. The chapter number is the four-digit numeric component.
