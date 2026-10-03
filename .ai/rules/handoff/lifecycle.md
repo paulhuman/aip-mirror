@@ -120,7 +120,7 @@ The current conversation remains the current chapter until a new conversation ac
 
 ## 7. Contextual risk
 
-There is no reliable user-visible counter for remaining context. Do not claim a precise percentage or message count.
+There is no reliable user-visible counter for remaining context. DO NOT claim a precise percentage or message count.
 
 Monitor conversation length, technical-state accumulation, distant-context reliance, chat-only decisions, and risk of reconstructing details from incomplete context.
 
@@ -128,7 +128,7 @@ When contextual risk becomes significant, warn the user and recommend updating t
 
 ## 8. Keep handoffs useful and lightweight
 
-Do not create a handoff for every ordinary message. Do not copy the entire conversation. Do not duplicate stable project documentation unnecessarily.
+DO NOT create a handoff for every ordinary message. DO NOT copy the entire conversation. DO NOT duplicate stable project documentation unnecessarily.
 
 Record concrete state and decisions that future work actually needs.
 
