@@ -323,7 +323,7 @@ Treat this as a direct request to update the current handoff with meaningful dur
 
 Normal handoff creation and update commits MUST use these short forms:
 
-    ai-docs(handoff): create C0034
-    ai-docs(handoff): update C0034
+    ai-docs(handoff): create A0001
+    ai-docs(handoff): update A0001
 
 Do not append conversation titles, task descriptions, rationale, milestone summaries, or other explanatory suffixes to normal handoff commit messages.
