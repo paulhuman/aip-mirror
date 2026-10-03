@@ -61,10 +61,10 @@ Example:
     SPECIALIZATION = A
     CURRENT_CHAPTER = 0001
     CHAPTER_ID = A0001
-    SHORT_NAME = JSX Prototype
-    FILENAME_SHORT_NAME = JSX-Prototype
+    SHORT_NAME = Project Workshop
+    FILENAME_SHORT_NAME = Project-Workshop
 
-    .ai/handoffs/A/A0001-JSX-Prototype.md
+    .ai/handoffs/A/A0001-Project-Workshop.md
 
 Handoffs remain in the repository as historical context. No handoff state transition is required.
 
