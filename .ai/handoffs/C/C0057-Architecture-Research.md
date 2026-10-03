@@ -127,21 +127,20 @@ Continue Architecture & Research from the durable state established by C0056. Ex
 
 ## Inferred
 
-- The next bounded architecture task remains the fresh five-command cold-start regression.
-- The most useful regression evidence will explicitly verify the `>>normative-language` skill-to-rule boundary and exclusion of the retired command phrase.
+- The fresh five-command cold-start regression was the previously planned next task, but it is now superseded by the migration-behavior simulation requested in this chapter.
+- No fresh five-command runtime regression is currently required; its earlier scope remains historical context only.
 - The existing C0054 → C0055 runtime result is evidence for the migration path but is not sufficient evidence for the complete five-command regression.
 
 ## Assumed / unverified
 
-- The fresh five-command cold-start regression has not yet been executed in C0057.
-- The five-command regression has not yet produced a new result artifact for C0057.
-- The runtime behavior of the renamed `>>normative-language` command has not yet been independently verified in this chapter.
+- The fresh five-command cold-start regression has not been executed in C0057 and is no longer the active next task.
+- No C0057 result artifact is required for that superseded regression unless it is explicitly revived later.
+- The runtime behavior of the renamed `>>normative-language` command remains independently unverified in this chapter.
 
 ## Open
 
-- Execute the fresh five-command cold-start regression from the current `.ai/INDEX.md`, then record the runtime result under `.ai/architecture/tests/results/cold-start-command-trace/`.
-- Verify the `>>normative-language` command reads its skill entry point and then its canonical normative-language rule.
-- Verify the retired `>>activate-normative-language` phrase is excluded from the active command surface.
+- Simulate migration requests to the current chapter, a future chapter, and a previous chapter to verify how the migration procedure should behave without claiming that simulation is runtime evidence.
+- Verify, from the canonical migration rules, which repository mutation belongs to the current handoff and which chapter identity remains unchanged until a receiving conversation actually bootstraps.
 - Re-run relevant consistency verification after any active routing, bootstrap, activation, or handoff change.
 - Review remaining active TODO items only within their existing bounded scope.
 - Separately decide how to reconcile historical noncanonical `0001-JSX Prototype.md` / `0002-JSX Prototype.md` artifacts after the filename-contract regression work, without mixing that cleanup into unrelated runtime verification.
