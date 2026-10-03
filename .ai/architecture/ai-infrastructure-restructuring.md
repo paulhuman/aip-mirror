@@ -133,6 +133,29 @@ Status: RESOLVED
 
 The distinction is documented and requires no further architecture change.
 
+
+## TODO 9 — Decide whether `>>migrate` should require an argument
+
+Question:
+
+The current command surface documents:
+
+    >>migrate <chapter>
+
+However, the migration target is now derived exclusively from the current chapter:
+
+    TARGET_CHAPTER = CURRENT_CHAPTER + 1
+
+The numeric argument is therefore no longer a target selector.
+
+Open question:
+
+- Should the active command surface eventually become simply `>>migrate`, with the immediate successor always derived from the current chapter?
+- If so, update the command routing, canonical handoff semantics, bootstrap transport documentation, and relevant runtime tests together rather than treating argumentless `>>migrate` as an implicit alias.
+- Until this question is resolved, `>>migrate` without an argument remains outside the documented command syntax and MUST NOT be silently treated as valid.
+
+Status: OPEN
+
 ## Deferred
 
 ## Retired activation mode — historical note
