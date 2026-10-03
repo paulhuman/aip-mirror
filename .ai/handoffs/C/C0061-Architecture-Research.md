@@ -81,6 +81,8 @@ Continue the Architecture & Research work from C0060 by executing the first real
 - C0060 predecessor handoff was read successfully.
 - The repository is write-capable through the connected GitHub interface.
 - The canonical recovery architecture and non-circular UNKNOWN recovery interaction are already implemented in the active lifecycle and handoff owners.
+- Terminology was clarified across the handoff skill, lifecycle rule, migration-recovery test, and architecture TODO: `CURRENT_CHAPTER` remains the external/bootstrap contract while internal migration/recovery roles use the explicit names above.
+- A fresh-chat Case 1 runtime attempt actually executed `>>migrate 0061` against all three disposable fixture branches, but the test supplied `CURRENT_CHAPTER=0061` while repository evidence established C0060. The resulting contradiction STOP was correct under the canonical migration formula; the test input was therefore invalid for exercising successful continuation. Result: `.ai/architecture/tests/results/migration-recovery/20261003-2317-c0061-case1-runtime.md`, commit `3efb89c7cdda955f0316c5f48584e34b4d2a62e8`.
 - The C0061 starting task is Case 1 only; completion of Case 1 MUST NOT be reported as completion of the full five-case test.
 
 ## Inferred
@@ -89,9 +91,9 @@ Continue the Architecture & Research work from C0060 by executing the first real
 
 ## Assumed / unverified
 
-- Fresh runtime behavior of the three Case 1 evidence states remains unverified in this chapter.
-- The existing fixture branches contain exactly the intended evidence and no unintended files; they must be read back from their actual refs before use.
-- Repository-only tooling cannot create the required fresh assistant-response boundary for `>>migrate 0061`; a preparation/blocker result was recorded at `.ai/architecture/tests/results/migration-recovery/20261003-c0061-case1-runtime-boundary.md`.
+- Successful continuation behavior for Case 1 remains unverified because the fresh runtime test used the wrong `CURRENT_CHAPTER` context for the recovered C0060 fixtures.
+- The existing fixture branches contain exactly the intended evidence and no unintended files; they must be read back from their actual refs before another runtime attempt.
+- The fresh assistant-response boundary is available and was exercised; the next test must use repository-recovered `CURRENT_CHAPTER_CONTEXT=0060` with `>>migrate 0061`.
 
 ## Open
 
@@ -108,7 +110,7 @@ Continue the Architecture & Research work from C0060 by executing the first real
 
 ## Immediate next task
 
-Begin the real migration-recovery runtime test with Case 1. Read and validate the three prepared fixture branches independently, then exercise active → archive-only → duplicate-location evidence and record actual runtime behavior. Do not redo the recovery architecture from scratch and do not declare the complete five-case test PASS from Case 1 alone.
+Repeat the Case 1 migration-recovery runtime test with the corrected context model. Read and validate the three prepared fixture branches independently, establish `CURRENT_CHAPTER_CONTEXT=0060` from repository evidence, then exercise `>>migrate 0061` for active → archive-only → duplicate-location evidence. Do not redo the recovery architecture from scratch and do not declare the complete five-case test PASS from Case 1 alone.
 
 ## Case 1 runtime discipline
 
