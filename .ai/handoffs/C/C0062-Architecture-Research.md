@@ -178,10 +178,58 @@ For runtime result artifacts, create the new file, read it back, inspect the res
 - Case 2 can be runtime-tested without mutating canonical handoff history by using the prepared no-handoff fixture branches.
 - `>>migrate 0002` is the first-chapter positive branch; `>>migrate 0003` is the non-first UNKNOWN branch.
 
+## Case 2 runtime completion
+
+Case 2 was runtime-verified at the assistant-response boundary using the two prepared disposable branches.
+
+### First-chapter branch
+
+Fixture: `test/migration-recovery-case2-first`
+
+Command: `>>migrate 0002`
+
+Observed:
+
+- no qualifying C handoff evidence was present;
+- candidate predecessor `0001` was established by the first-chapter lifecycle invariant;
+- `CURRENT_CHAPTER_CONTEXT = 0001` in RECOVERED state;
+- `USER_ASSERTED_NEXT_CHAPTER = 0002`;
+- `EXPECTED_TARGET = 0002`;
+- migration validation continued;
+- no registry or persistent current-chapter state was introduced.
+
+Result: PASS.
+
+### Non-first UNKNOWN branch
+
+Fixture: `test/migration-recovery-case2-unknown`
+
+Command: `>>migrate 0003`
+
+Observed:
+
+- no qualifying C handoff evidence was present;
+- candidate predecessor `0002` could not be established;
+- the first-chapter invariant does not establish `0002`;
+- `CURRENT_CHAPTER_CONTEXT = UNKNOWN`;
+- migration stopped and requested `CURRENT_CHAPTER` as a four-digit numeric value.
+
+Result: PASS.
+
+### Durable result
+
+`.ai/architecture/tests/results/migration-recovery/20261004-1815-c0062-case2-runtime.md`
+
+Commit: `057774267105101e9d683a1fcb92c77a2ce0703a`
+
+Commit message: `test(architecture): record C0062 Case 2 runtime`
+
+The result file was read back successfully and its commit diff contains exactly the new result artifact. Case 2 is now confirmed runtime PASS.
+
 ## Assumed / unverified
 
-- The actual assistant-response-boundary behavior for Case 2 has not yet been recorded in a result artifact.
-- The first-chapter invariant and non-first UNKNOWN behavior must be demonstrated by the runtime execution rather than inferred from the written rules.
+- Cases 3–5 remain unverified by assistant-response-boundary runtime.
+- The five-case migration-recovery test MUST NOT be declared complete from Cases 1–2 alone.
 
 ## Open
 
