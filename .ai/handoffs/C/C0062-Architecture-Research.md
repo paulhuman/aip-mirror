@@ -233,21 +233,16 @@ The result file was read back successfully and its commit diff contains exactly 
 
 ## Open
 
-- Execute the actual Case 2 runtime on both prepared branches.
-- Record the actual visible TRACE and observed behavior.
-- Create a separate result artifact under `.ai/architecture/tests/results/migration-recovery/<run-id>.md`.
-- Verify the result file and commit scope.
-- Do not declare the five-case test PASS.
-- After Case 2 is complete, migrate to C0063 and continue with Case 3 only through the normal receiving-chapter bootstrap boundary.
+- Continue with Case 3 through the normal receiving-chapter bootstrap boundary.
+- Preserve the verified Case 1 and Case 2 result artifacts as historical runtime evidence.
+- Do not modify or move disposable fixture refs merely to obtain a result.
+- After migration to C0063, independently activate the canonical owners and runtime-verify Case 3.
 
 ## Immediate next task
 
-Runtime-verify Case 2 using the two prepared disposable branches:
+Migrate to C0063 and continue the bounded migration-recovery runtime test with Case 3 as defined by `.ai/architecture/tests/migration-recovery.md`.
 
-1. `test/migration-recovery-case2-first` with `>>migrate 0002`;
-2. `test/migration-recovery-case2-unknown` with `>>migrate 0003`.
-
-Then record the actual result and preserve all observations needed by the next chapter.
+Do not redo Cases 1–2 from scratch. Preserve their verified runtime results and do not declare the complete five-case test PASS until Cases 3–5 are also exercised.
 
 ## Recommended starting context
 
