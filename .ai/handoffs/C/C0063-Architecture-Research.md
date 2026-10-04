@@ -160,25 +160,49 @@ For runtime result artifacts, create the new file, read it back, inspect the res
 - The available Case 3 fixture should be tested as-is before any fixture mutation is considered.
 - The current fixture state may exercise continuity-aware reconciliation rather than the contradictory branch described by the scenario; runtime behavior must determine the observed result.
 
+## Case 3 runtime completion
+
+Case 3 was runtime-verified at the assistant-response boundary across six disposable fixture branches.
+
+### Observed evidence classes
+
+- `test/migration-recovery-case3-contradictory`: active C0060 plus archive C0059 was correctly reconciled because C0060 explicitly declares C0059 as its predecessor; this branch is continuity-reconcilable, not contradictory despite its name.
+- `test/migration-recovery-case3-duplicate`: active/archive C0060 copies were classified as duplicate-location evidence and migration continued.
+- `test/migration-recovery-case3-contradiction`: active C0060 plus archive C0062 was classified as contradictory and recovery stopped as `UNKNOWN`.
+- `test/migration-recovery-case3-mismatch`: a C-path handoff declaring Specialization B was rejected as valid C evidence and recovery stopped as `UNKNOWN`.
+- `test/migration-recovery-case3-malformed`: malformed Chapter identity was rejected and recovery stopped as `UNKNOWN`.
+- `test/migration-recovery-case3-unreconcilable`: C0060 declaring Previous chapter 0001 could not be reconciled with archive C0059 and recovery stopped as `UNKNOWN`.
+
+All Case 3 branches used `>>migrate 0061`. No fixture ref was moved or rewritten. Additional isolated disposable branches were created because the existing contradictory-named fixture did not itself contain contradictory evidence.
+
+Result artifact:
+
+`.ai/architecture/tests/results/migration-recovery/20261005-0022-c0063-case3-runtime.md`
+
+Result commit:
+
+`e21f35c2f1a1eb1ee64a6d1609235f86bd223ae5`
+
+The result file was read back successfully, contains `CASE 3: PASS — runtime verified.`, and its commit scope contains exactly the new result artifact.
+
 ## Assumed / unverified
 
-- The complete Case 3 pass criteria have not yet been demonstrated at the assistant-response boundary.
-- Cases 4–5 remain unverified.
-- The five-case migration-recovery test MUST NOT be declared complete.
+- Cases 4–5 remain unverified by assistant-response-boundary runtime.
+- The five-case migration-recovery test MUST NOT be declared complete from Cases 1–3 alone.
 
 ## Open
 
-- Execute the actual Case 3 runtime against the existing disposable fixture without moving or rewriting its ref.
-- Distinguish duplicate, contradictory, malformed/mismatched, and unreconcilable evidence according to canonical lifecycle semantics.
-- Record the actual visible TRACE and observed behavior.
-- Create a separate result artifact under `.ai/architecture/tests/results/migration-recovery/<run-id>.md`.
-- Read back the result, inspect diff and changed-file scope, and verify the commit.
-- Preserve Cases 1–2 as historical runtime evidence.
-- Do not declare the five-case test PASS.
+- Continue with Case 4 through the normal bounded runtime test.
+- Preserve Cases 1–3 as historical runtime evidence.
+- Do not modify or move disposable fixture refs merely to obtain a result.
+- Record the actual Case 4 result under `.ai/architecture/tests/results/migration-recovery/<run-id>.md`.
+- Do not declare the five-case test PASS until Cases 4–5 are also runtime-verified.
 
 ## Immediate next task
 
-Runtime-verify Case 3 at the assistant-response boundary using the existing `test/migration-recovery-case3-contradictory` fixture first. Do not mutate the fixture merely to obtain a desired outcome.
+Continue the bounded migration-recovery runtime test with Case 4 as defined by `.ai/architecture/tests/migration-recovery.md`.
+
+Do not redo Cases 1–3 from scratch.
 
 ## Recommended starting context
 
