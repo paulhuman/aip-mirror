@@ -139,3 +139,30 @@ A successful API operation, a valid blob SHA, or a valid Git commit does not by 
 Content integrity MUST be verified independently of API success.
 
 This rule applies to source code, documentation, configuration, scripts, tests, AI instructions, and every other existing repository file.
+## 8. Disposable repository fixtures
+
+When an isolated repository test requires synthetic or destructive repository state, the test harness MUST prefer creating a disposable branch directly from the known commit SHA that establishes the required baseline.
+
+Use this fixture flow:
+
+    known commit SHA
+        ↓
+    create disposable branch from that SHA
+        ↓
+    create / modify / delete fixture files
+        ↓
+    read back the resulting repository state
+        ↓
+    verify diff and fixture scope
+        ↓
+    exercise the test operation
+        ↓
+    create the next disposable branch from the resulting commit when another state is required
+
+A branch created from a commit is a new isolated test path. It MUST NOT be confused with moving an existing branch ref.
+
+If moving an existing branch ref with `update_ref` is blocked, the AI MUST NOT treat that failure as evidence that the required fixture state cannot be constructed. The AI SHOULD decompose the fixture setup into commit-sized stages and create the next disposable branch from each resulting commit when ref movement is unavailable.
+
+Fixture branches MUST remain clearly isolated from canonical branches such as `main`. Repository-state verification MUST use the actual fixture branch/ref and MUST NOT infer the resulting state from the intended commit operation alone.
+
+Disposable fixture construction MUST NOT alter canonical project history or introduce persistent repository state merely to support a test.
