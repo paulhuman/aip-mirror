@@ -204,9 +204,31 @@ Durable terminology remains:
 
 ## Immediate next task
 
-Begin C0066 by researching the bootstrap boundary defined in `.ai/workflows/handoff/BOOTSTRAP.md`, specifically the distinction between mandatory repository locator transport context and canonical runtime inputs.
+C0066 completed the bounded migration-recovery TODO reconciliation and repository-fixture rule work. The next chapter MUST perform the remaining TODO 3 runtime audit before another architecture TODO sweep.
 
-Do not modify the bootstrap workflow yet. First establish whether the existing contract has an actual semantic gap, and identify the canonical owner and evidence required for any proposed change.
+### Completed in C0066
+
+- TODO 10 is RESOLVED. Disposable repository fixture construction is now canonical in `.ai/rules/repository.md`, §8 "Disposable repository fixtures".
+- TODO 11 is RESOLVED. The migration-recovery runtime exercise expanded to the complete five-case suite, with separate runtime result artifacts for Cases 1–5.
+- The canonical migration terminology is confirmed in the handoff/handoff-lifecycle owners: `CURRENT_CHAPTER`, `CURRENT_CHAPTER_CONTEXT`, `USER_SUPPLIED_CURRENT_CHAPTER`, `USER_ASSERTED_NEXT_CHAPTER`, and `EXPECTED_TARGET`.
+- `>>normative-language` is part of the current five-command surface and its TRACE path has been checked. The historical cold-start result remains a four-command simulation and MUST NOT be rewritten as if it were new runtime evidence.
+
+### Next chapter plan — TODO 3 runtime audit
+
+1. Run a genuine runtime audit of all five currently documented `>>` commands:
+   - `>>handoff`
+   - `>>migrate <chapter>`
+   - `>>generate-bootstrap <chapter>`
+   - `>>explain-code`
+   - `>>normative-language`
+2. Verify the visible operation-level TRACE for each command.
+3. Verify that `ACTIVATE` owners are not duplicated in `OPERATION READS`.
+4. Verify that `OPERATION READS` reflects actual repository reads rather than simulated or inferred reads.
+5. Record the complete five-command runtime evidence in a new result artifact under `.ai/tests/results/cold-start-command-trace/<run-id>.md`.
+6. Do NOT rewrite the historical 20261002 result.
+7. After the runtime audit, perform a small TODO sweep of `.ai/docs/architecture/ai-infrastructure-restructuring.md` and reconcile any remaining stale/open TODOs against the new evidence.
+
+This is the intended first bounded scope for C0067.
 
 ## Recommended starting context
 
