@@ -239,108 +239,52 @@ Implementation is encoded in the canonical migration and lifecycle owners. Dedic
 
 ## TODO 10 — Define the GitHub disposable-branch fallback for repository fixtures
 
-Problem:
-
-GitHub repository operations may allow creation of a commit object but reject moving an existing branch ref with `update_ref`. Treating the ref update as the only way to construct a disposable test state creates an unnecessary tool-level dead end.
-
 Decision:
 
-For isolated repository tests that require destructive or synthetic history, the test harness SHOULD prefer creating a new branch directly from the required commit SHA rather than moving an existing branch ref.
+For isolated repository tests that require synthetic repository state, the test harness MUST prefer creating a disposable branch directly from the required commit SHA rather than moving an existing branch ref.
 
-The canonical fixture flow is:
+The detailed operational procedure is now canonical in:
 
-    known commit SHA
-        ↓
-    create disposable branch from that SHA
-        ↓
-    create / modify / delete fixture files on that branch
-        ↓
-    read back the resulting repository state
-        ↓
-    verify diff and fixture scope
-        ↓
-    exercise the test operation
-        ↓
-    create the next disposable branch from the resulting commit when another state is required
+    .ai/rules/repository.md
+        §8 Disposable repository fixtures
 
-The important distinction is:
+The architectural distinction remains:
 
     create branch from commit
         ≠
     move existing branch ref
 
-The first operation constructs a new isolated test path without rewriting or relocating an existing ref. The second mutates an existing ref and MAY be rejected by the connected GitHub tool even when the requested repository state is otherwise valid.
+Runtime migration-recovery Cases 1–5 already exercised this strategy successfully through disposable fixture branches. The rule is therefore documentation of an observed repository-testing workflow.
 
-Rules to add to the canonical repository/GitHub workflow documentation:
-
-- Test harnesses MUST prefer disposable branches created from known commit SHAs when isolated repository state is required.
-- A blocked `update_ref` MUST NOT be treated as evidence that the required fixture state cannot be constructed.
-- AI SHOULD decompose a fixture operation into commit-sized stages and create a new disposable branch from each resulting commit when ref movement is unavailable.
-- Fixture branches MUST remain clearly isolated from canonical branches such as `main`.
-- Repository-state verification MUST use the actual fixture branch/ref and MUST NOT infer the state from the intended commit operation alone.
-- This fallback is a test/repository-operation strategy; it MUST NOT alter the project's canonical Git history or introduce a new persistent state mechanism.
-
-Implementation target:
-
-Add the concrete branch-from-commit fallback and the corresponding `update_ref` failure handling to the canonical repository rules/workflow documentation. Keep the architectural decision here as the concise rationale and routing rule; detailed operational procedure belongs in the repository owner.
-
-Status: OPEN
-
+Status: RESOLVED
 
 
 ## TODO 11 — Prepare C0061 for the migration-recovery runtime test
 
 Decision:
 
-The next chapter, C0061, begins the real five-case runtime exercise defined by .ai/tests/scenarios/migration-recovery.md. The test MUST start with Case 1 and must record observed behavior separately from structural expectations.
+The planned C0061 migration-recovery runtime exercise was completed and expanded into the full five-case suite. Cases 1–5 are individually runtime-verified PASS.
 
-### C0061 starting sequence
+Evidence:
 
-Case 1 MUST be exercised as three distinct repository-evidence states:
+- .ai/tests/results/migration-recovery/20261003-2337-c0061-case1-runtime.md
+- .ai/tests/results/migration-recovery/20261004-1815-c0062-case2-runtime.md
+- .ai/tests/results/migration-recovery/20261005-0022-c0063-case3-runtime.md
+- .ai/tests/results/migration-recovery/20261005-0036-c0064-case4-runtime.md
+- .ai/tests/results/migration-recovery/20261005-1412-c0064-case5-runtime.md
 
-    active
-        ↓
-    archive-only
-        ↓
-    active + archive duplicate
+The suite verifies active/archive recovery, first-chapter handling, duplicate and contradictory evidence, UNKNOWN/STOP behavior, four-digit user recovery input, non-circular recovery, and sequential migration-argument validation.
 
-For each state, the next chapter MUST:
+The canonical migration rules and durable terminology are now encoded in:
 
-1. establish the disposable fixture branch from the known fixture commit SHA;
-2. read the actual handoff fixture and validate its semantic header;
-3. exercise the migration/recovery behavior at the assistant-response boundary;
-4. record the actual CURRENT_CHAPTER classification and resulting continuation/STOP behavior;
-5. verify the fixture branch, changed files, and fixture scope;
-6. preserve the distinction between repository evidence and conversation context.
+- .ai/skills/handoff/SKILL.md
+- .ai/rules/handoff/lifecycle.md
+- .ai/tests/scenarios/migration-recovery.md
+- this architecture record
 
-The three Case 1 states MUST NOT be collapsed into one structural simulation. Each state is an independent runtime observation.
+The durable terminology includes CURRENT_CHAPTER, CURRENT_CHAPTER_CONTEXT, USER_SUPPLIED_CURRENT_CHAPTER, USER_ASSERTED_NEXT_CHAPTER, and EXPECTED_TARGET.
 
-### Fixture branch rule
-
-The next chapter MUST use the disposable branch-from-commit strategy documented in TODO 10. DO NOT attempt to move an existing canonical or reusable fixture branch with update_ref merely to reach the next state.
-
-When another Case 1 state is needed, create the next disposable branch from the commit that establishes that state. Read back the resulting branch contents before exercising migration.
-
-### Result recording
-
-The Case 1 observations MUST be recorded in a new result artifact under:
-
-    .ai/tests/results/migration-recovery/<run-id>.md
-
-The result MUST identify:
-
-- the disposable fixture branch used for each state;
-- the source commit SHA for each fixture;
-- the handoff evidence present in the state;
-- the recovered classification;
-- the observed assistant-response-boundary behavior;
-- any STOP condition and its exact reason;
-- the distinction between repository evidence and user-supplied recovery input.
-
-DO NOT declare the complete five-case test PASS from Case 1 alone. The remaining four cases stay OPEN until they are actually exercised.
-
-Status: OPEN
-
+Status: RESOLVED
 
 ## TODO 12 — Restructure .ai taxonomy by semantic role
 
