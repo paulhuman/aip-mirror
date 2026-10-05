@@ -69,26 +69,31 @@ After the active files are updated:
 
 Relevant test artifacts:
 
-- `.ai/tests/scenarios/cold-start-command-trace.md` — reusable cold-start test scenario; currently enumerates four commands;
-- `.ai/tests/results/cold-start-command-trace/20261002-0900-cold-start-command-trace.md` — latest historical structural-simulation result; also reflects the four-command scope.
+- `.ai/tests/scenarios/cold-start-command-trace.md` — reusable cold-start test scenario;
+- `.ai/tests/results/cold-start-command-trace/20261002-0900-cold-start-command-trace.md` — historical structural-simulation result;
+- `.ai/tests/results/cold-start-command-trace/20261005-2054-c0067-five-command-runtime.md` — genuine five-command runtime audit result.
 
-Status: OPEN
+Status: RESOLVED
 
-The canonical TRACE requirements and response presentation contract are implemented, but runtime verification remains open because the existing cold-start result does not test actual user-visible delivery. A new runtime result artifact is still required.
+The five-command runtime audit was executed against a disposable repository branch. All five commands currently documented by `.ai/INDEX.md` were exercised:
 
-### Investigation result — TRACE response presentation contract
+1. `>>handoff`
+2. `>>migrate <chapter>`
+3. `>>generate-bootstrap <chapter>`
+4. `>>explain-code`
+5. `>>normative-language`
 
-The investigation confirms three distinct facts:
+The audit produced fresh observable operation-level TRACE for every command. ACTIVATE owners were not duplicated in OPERATION READS, and command-specific OPERATION READS were recorded from actual repository retrievals rather than reconstructed from the historical simulation.
 
-1. The canonical requirement exists. `.ai/skills/activation/SKILL.md` defines operation-level TRACE semantics and response presentation, `.ai/INDEX.md` routes applicable user-facing commands to TRACE inserted into the assistant response, and `.ai/workflows/handoff/BOOTSTRAP.md` explicitly requires the completed TRACE to be inserted into the assistant response during bootstrap initialization.
-2. The presentation contract is now explicitly defined at the assistant-response boundary: TRACE is visible when the completed TRACE block is inserted into the assistant response content delivered to the user. The canonical template is a compact fenced monospace block. The operation completes first, the actual read set is accumulated, the TRACE is assembled, and the completed TRACE is then inserted into the response.
-3. The existing cold-start test still does not verify this presentation layer. Its result is explicitly a simulation and validates the scenario structure, not actual runtime delivery of TRACE into the user-visible assistant response.
+The historical 20261002 result remains unchanged. The new runtime evidence is stored separately under `.ai/tests/results/cold-start-command-trace/`.
 
-Therefore the current architectural finding is:
+### Runtime audit result — C0067
 
-> **The TRACE presentation contract is now explicit: completed TRACE is inserted into the assistant response. Runtime delivery remains unverified by the existing cold-start test.**
+Run ID: `20261005-2054-c0067-five-command-runtime`
 
-The next step is runtime verification of the four documented command paths and the new response-template behavior.
+Result: **PASS**
+
+The canonical command surface and the reusable scenario discrepancy are now classified: the scenario remains a reusable cold-start input, while the new result artifact records the current five-command runtime surface and its observed TRACE/read behavior.
 
 ## TODO 4 — Review historical commit messages
 
