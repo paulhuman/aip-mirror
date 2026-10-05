@@ -89,6 +89,34 @@ Two runtime slices were verified:
 
 The pre-existing UNKNOWN fixture ref was not moved or rewritten. The mismatch fixture was isolated on a separate disposable branch.
 
+
+
+### Case 5
+
+Confirmed assistant-response-boundary runtime PASS for non-circular user recovery.
+
+Result artifact:
+`.ai/architecture/tests/results/migration-recovery/20261005-1412-c0064-case5-runtime.md`
+
+Result commit:
+`45ebef093b66afc3c89d8f77ecf78b0958ae57a4`
+
+Three required runtime slices were verified:
+
+- no repository evidence: UNKNOWN → request four-digit `CURRENT_CHAPTER` → `USER_SUPPLIED_CURRENT_CHAPTER=0059` → `CURRENT_CHAPTER_CONTEXT=0059` → no repeated UNKNOWN STOP → `EXPECTED_TARGET=0060` → CONTINUE;
+- consistent repository evidence: supplied `0060` matched independent active C0060 evidence → recovered context 0060 → `EXPECTED_TARGET=0061` → CONTINUE;
+- direct contradiction: independent C0060 evidence versus supplied `0059` → one explicit contradiction STOP; supplied value was not promoted to repository evidence.
+
+The forbidden circular sequence `UNKNOWN → ask user → valid user response → UNKNOWN → ask user` was not observed. User-supplied recovery input remained distinct from repository evidence.
+
+## Migration-recovery suite status
+
+Cases 1–5 are individually runtime-verified PASS.
+
+The complete five-case migration-recovery suite is now **PASS**.
+
+No registry, manifest, dependency graph, command-ID layer, universal router, lifecycle state machine, or persistent current-chapter state file was introduced.
+
 ## Case 4 scenario
 
 Canonical Case 4 from `.ai/architecture/tests/migration-recovery.md` is UNKNOWN / mismatch STOP.
@@ -149,8 +177,8 @@ For runtime result artifacts, create the new file, read it back, inspect the res
 - C0063 predecessor handoff was read successfully.
 - Canonical bootstrap, activation, handoff, lifecycle, repository, workflow, references, README, INDEX, and commit sources were reread.
 - Repository is write-capable.
-- Cases 1–4 are runtime PASS.
-- Case 5 remains unverified.
+- Cases 1–5 are runtime PASS.
+- Case 5 is now verified PASS.
 - Case 4 result artifact was read back successfully and its commit scope contained only the new Case 4 result artifact.
 
 ## Inferred
@@ -166,7 +194,7 @@ For runtime result artifacts, create the new file, read it back, inspect the res
 ## Open
 
 - Preserve Cases 1–4 as historical runtime evidence.
-- Continue with Case 5 as the next bounded runtime test.
+- Preserve Cases 1–5 as historical runtime evidence.
 - Do not modify or move disposable fixture refs merely to obtain a desired result.
 - Record the actual Case 5 result under `.ai/architecture/tests/results/migration-recovery/<run-id>.md`.
 - Do not declare the five-case test PASS until Case 5 is also runtime-verified.
