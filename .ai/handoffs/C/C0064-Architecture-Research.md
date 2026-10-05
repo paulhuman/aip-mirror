@@ -14,9 +14,9 @@ C
 
 ## Starting objective
 
-Continue the bounded migration-recovery architecture test from C0063 and runtime-verify Case 4 of `.ai/architecture/tests/migration-recovery.md`.
+Complete the bounded migration-recovery architecture test defined by `.ai/architecture/tests/migration-recovery.md`, preserve its verified runtime evidence, and prepare migration from C0064 to C0065.
 
-Cases 1–3 are confirmed assistant-response-boundary runtime PASS. Case 4 is now confirmed PASS. Case 5 remains unverified and MUST NOT be treated as passed.
+Cases 1–5 are confirmed assistant-response-boundary runtime PASS. The complete five-case migration-recovery suite is PASS.
 
 ## Known starting implementation state
 
@@ -188,8 +188,8 @@ For runtime result artifacts, create the new file, read it back, inspect the res
 
 ## Assumed / unverified
 
-- Case 5 runtime outcome is not yet established.
-- The five-case migration-recovery test MUST NOT be declared complete.
+- No unverified assumption remains for the completed five-case migration-recovery suite.
+- The next bounded architecture task has not yet been selected; C0065 must use this handoff as the durable starting context rather than guessing.
 
 ## Open
 
@@ -199,10 +199,31 @@ For runtime result artifacts, create the new file, read it back, inspect the res
 
 ## Immediate next task
 
-Preserve the verified five-case migration-recovery PASS and use the durable result artifacts as the baseline for any later bounded work.
+Initialize C0065 from this migration checkpoint and use the verified five-case migration-recovery suite as the baseline for selecting the next bounded architecture task.
 
-Do not redo Cases 1–5 from scratch.
+Do not redo Cases 1–5 from scratch unless new evidence specifically invalidates a result.
+
+No new migration-recovery rules are being introduced by this migration. Preserve the verified semantics and avoid adding registry/manifest/persistent current-chapter infrastructure merely to extend the completed test.
+
+## Migration checkpoint: C0064 → C0065
+
+Migration validation for `>>migrate 0065`:
+
+- `CURRENT_CHAPTER_CONTEXT = 0064` (KNOWN from the current conversation chapter identity).
+- `USER_ASSERTED_NEXT_CHAPTER = 0065`.
+- `EXPECTED_TARGET = 0065`.
+- Validation result: PASS; migration target is the required immediate successor.
+- The current C0064 handoff is updated as the durable migration checkpoint.
+- The receiving C0065 handoff is NOT created by this migration; the receiving chapter must create/verify its own handoff during bootstrap.
+- Generated bootstrap transport:
+  - Repository: `https://github.com/paulhuman/aip-mirror`
+  - `PREVIOUS_CHAPTER = 0064`
+  - `CURRENT_CHAPTER = 0065`
+  - `SPECIALIZATION = C`
+  - `SHORT_NAME = Architecture & Research`
 
 ## Recommended starting context
 
-Read this handoff, `.ai/architecture/tests/migration-recovery.md`, and the canonical migration/handoff owners before continuing. Treat Cases 1–4 as verified historical runtime evidence and Case 5 as the only current bounded test objective.
+Read this handoff, `.ai/architecture/tests/migration-recovery.md`, and the canonical migration/handoff owners before continuing.
+
+Treat Cases 1–5 as verified historical runtime evidence. Do not infer that new rules are required merely because the five-case test is complete; first identify the next bounded architecture question and its canonical owner, then make only evidence-backed changes.
