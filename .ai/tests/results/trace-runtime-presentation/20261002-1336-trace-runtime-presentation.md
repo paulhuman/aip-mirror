@@ -92,7 +92,7 @@ The current `.ai/INDEX.md` documents five user-facing commands:
 - `>>explain-code`
 - `>>activate-normative-language`
 
-The reusable cold-start scenario `.ai/tests/cold-start-command-trace.md` currently enumerates four commands and therefore does not cover `>>activate-normative-language`.
+The reusable cold-start scenario `.ai/tests/scenarios/cold-start-command-trace.md` currently enumerates four commands and therefore does not cover `>>activate-normative-language`.
 
 The historical result `.ai/tests/results/cold-start-command-trace/20261002-0900-cold-start-command-trace.md` also reflects the four-command scope.
 
@@ -134,6 +134,6 @@ No architecture change is justified by this result alone. The remaining gap is t
 
 - Current active routing source: `.ai/INDEX.md`.
 - TRACE semantics and presentation owner: `.ai/skills/activation/SKILL.md`.
-- Stable cold-start scenario: `.ai/tests/cold-start-command-trace.md`.
+- Stable cold-start scenario: `.ai/tests/scenarios/cold-start-command-trace.md`.
 - Historical simulation result: `.ai/tests/results/cold-start-command-trace/20261002-0900-cold-start-command-trace.md`.
 - Active TODO: `.ai/docs/architecture/ai-infrastructure-restructuring.md`, TODO 3.

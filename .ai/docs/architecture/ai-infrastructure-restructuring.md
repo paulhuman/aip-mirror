@@ -69,7 +69,7 @@ After the active files are updated:
 
 Relevant test artifacts:
 
-- `.ai/tests/cold-start-command-trace.md` — reusable cold-start test scenario; currently enumerates four commands;
+- `.ai/tests/scenarios/cold-start-command-trace.md` — reusable cold-start test scenario; currently enumerates four commands;
 - `.ai/tests/results/cold-start-command-trace/20261002-0900-cold-start-command-trace.md` — latest historical structural-simulation result; also reflects the four-command scope.
 
 Status: OPEN
@@ -292,7 +292,7 @@ Status: OPEN
 
 Decision:
 
-The next chapter, C0061, begins the real five-case runtime exercise defined by .ai/tests/migration-recovery.md. The test MUST start with Case 1 and must record observed behavior separately from structural expectations.
+The next chapter, C0061, begins the real five-case runtime exercise defined by .ai/tests/scenarios/migration-recovery.md. The test MUST start with Case 1 and must record observed behavior separately from structural expectations.
 
 ### C0061 starting sequence
 

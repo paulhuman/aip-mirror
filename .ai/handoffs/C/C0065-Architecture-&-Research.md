@@ -40,7 +40,7 @@ The complete five-case migration-recovery suite is runtime-verified PASS. C0065 
 
 ## Verified migration-recovery baseline
 
-Cases 1–5 from `.ai/tests/migration-recovery.md` are individually runtime-verified PASS.
+Cases 1–5 from `.ai/tests/scenarios/migration-recovery.md` are individually runtime-verified PASS.
 
 ### Case 1
 
@@ -147,7 +147,7 @@ The forbidden circular sequence was not observed:
 
 ### Migration-recovery architecture evidence
 
-- `.ai/tests/migration-recovery.md`
+- `.ai/tests/scenarios/migration-recovery.md`
 - `.ai/tests/results/migration-recovery/20261003-2337-c0061-case1-runtime.md`
 - `.ai/tests/results/migration-recovery/20261004-1815-c0062-case2-runtime.md`
 - `.ai/tests/results/migration-recovery/20261005-0022-c0063-case3-runtime.md`
