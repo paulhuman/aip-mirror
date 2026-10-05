@@ -161,3 +161,12 @@ Only after that audit, perform the small architecture TODO sweep requested by C0
 Start with this handoff, `.ai/workflows/handoff/BOOTSTRAP.md`, `.ai/rules/repository.md`, `.ai/rules/handoff/lifecycle.md`, `.ai/skills/activation/SKILL.md`, and the C0066 handoff.
 
 Treat C0065's .ai taxonomy migration and C0066's migration-recovery Cases 1–5 plus TODO 10/11 as completed historical baseline. Do not redo them. Continue with fresh runtime evidence for TODO 3.
+
+
+## TODO 3 completion checkpoint
+
+The genuine five-command runtime audit is complete. Result artifact: `.ai/tests/results/cold-start-command-trace/20261005-2054-c0067-five-command-runtime.md`.
+
+All five documented commands passed the runtime TRACE/read-set audit. The architecture TODO sweep found TODO 3 to be the only remaining OPEN item; it is now RESOLVED in `.ai/docs/architecture/ai-infrastructure-restructuring.md`.
+
+The historical 20261002 cold-start simulation result was preserved unchanged.
