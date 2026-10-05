@@ -261,7 +261,7 @@ The present artifact is new runtime evidence and does not replace the historical
 
 No command-level TRACE deviation was observed.
 
-One methodological distinction is retained explicitly: this audit used a disposable repository branch for mutating command execution. The canonical `main` branch was not mutated by the audited command paths. The result artifact itself is recorded separately on `main).
+One methodological distinction is retained explicitly: this audit used a disposable repository branch for mutating command execution. The canonical `main` branch was not mutated by the audited command paths. The result artifact itself is recorded separately on `main`.
 
 ## Conclusion
 
