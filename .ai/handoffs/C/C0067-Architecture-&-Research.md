@@ -80,11 +80,7 @@ The complete five-command runtime evidence MUST be recorded as a new result arti
 
 Do NOT rewrite the historical 20261002 result.
 
-After the runtime audit, perform a small TODO sweep of:
-
-`.ai/docs/architecture/ai-infrastructure-restructuring.md`
-
-Reconcile any remaining stale/open TODOs against the new runtime evidence. Do not begin architecture restructuring merely because a TODO exists; first establish whether the TODO is still actionable.
+After the runtime audit, perform a small TODO sweep of the active architecture record. Once all individual TODOs are resolved, archive the completed record under `.ai/archive/docs/architecture/` rather than retaining it as an active TODO surface. Do not begin architecture restructuring merely because a historical TODO record exists; first establish whether the item is still actionable.
 
 ## Relevant files and references
 
@@ -109,9 +105,10 @@ Reconcile any remaining stale/open TODOs against the new runtime evidence. Do no
 
 - `.ai/handoffs/C/C0066-Architecture-&-Research.md`
 
-### Architecture record
+### Architecture record / archived TODO
 
-- `.ai/docs/architecture/ai-infrastructure-restructuring.md`
+- `.ai/archive/docs/architecture/ai-infrastructure-restructuring.md` — durable historical restructuring notes
+- `.ai/archive/docs/architecture/ai-infrastructure-restructuring-todo.md` — completed C0067 TODO surface
 
 ### Runtime audit definitions and evidence
 
@@ -167,6 +164,6 @@ Treat C0065's .ai taxonomy migration and C0066's migration-recovery Cases 1–5 
 
 The genuine five-command runtime audit is complete. Result artifact: `.ai/tests/results/cold-start-command-trace/20261005-2054-c0067-five-command-runtime.md`.
 
-All five documented commands passed the runtime TRACE/read-set audit. The architecture TODO sweep found TODO 3 to be the only remaining OPEN item; it is now RESOLVED in `.ai/docs/architecture/ai-infrastructure-restructuring.md`.
+All five documented commands passed the runtime TRACE/read-set audit. The architecture TODO sweep found TODO 3 to be the only remaining OPEN item; all individual TODOs are now RESOLVED. The completed TODO surface was archived as `.ai/archive/docs/architecture/ai-infrastructure-restructuring-todo.md`.
 
 The historical 20261002 cold-start simulation result was preserved unchanged.
