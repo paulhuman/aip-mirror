@@ -193,17 +193,15 @@ For runtime result artifacts, create the new file, read it back, inspect the res
 
 ## Open
 
-- Preserve Cases 1–4 as historical runtime evidence.
 - Preserve Cases 1–5 as historical runtime evidence.
 - Do not modify or move disposable fixture refs merely to obtain a desired result.
-- Record the actual Case 5 result under `.ai/architecture/tests/results/migration-recovery/<run-id>.md`.
-- Do not declare the five-case test PASS until Case 5 is also runtime-verified.
+- Preserve the verified five-case PASS and result artifacts as durable evidence.
 
 ## Immediate next task
 
-Continue the bounded migration-recovery runtime test with Case 5 as defined by `.ai/architecture/tests/migration-recovery.md`.
+Preserve the verified five-case migration-recovery PASS and use the durable result artifacts as the baseline for any later bounded work.
 
-Do not redo Cases 1–4 from scratch.
+Do not redo Cases 1–5 from scratch.
 
 ## Recommended starting context
 
