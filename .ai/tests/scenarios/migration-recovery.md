@@ -6,7 +6,7 @@ This file defines the bounded test scenario for the canonical external/bootstrap
 
 The scenario is an input artifact. Test results MUST be recorded separately under:
 
-    .ai/architecture/tests/results/migration-recovery/<run-id>.md
+    .ai/tests/results/migration-recovery/<run-id>.md
 
 The scenario MUST NOT be treated as runtime evidence.
 

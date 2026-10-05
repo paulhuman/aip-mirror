@@ -65,7 +65,7 @@ TRACE
   ACTIVATE
     owners:
       .ai/skills/activation/SKILL.md
-      .ai/architecture/ai-infrastructure-restructuring.md
+      .ai/docs/architecture/ai-infrastructure-restructuring.md
     status: ACTIVATED
 ```
 

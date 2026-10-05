@@ -1,7 +1,7 @@
 # Migration recovery test result
 
 **Run:** 2026-10-03 22:45 local chapter context
-**Scenario:** `.ai/architecture/tests/migration-recovery.md`
+**Scenario:** `.ai/tests/migration-recovery.md`
 **Status:** INCOMPLETE — bounded runtime verification performed; full five-case PASS not established.
 
 ## Runtime boundary

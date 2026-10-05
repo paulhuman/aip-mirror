@@ -2,7 +2,7 @@
 
 ## Test
 
-`.ai/architecture/tests/cold-start-command-trace.md`
+`.ai/tests/cold-start-command-trace.md`
 
 ## Run
 

@@ -48,9 +48,9 @@ Copy:
     .ai/rules/
     .ai/skills/
     .ai/workflows/
-    .ai/architecture/README.md
-    .ai/architecture/faq/
-    .ai/architecture/tests/     ← after checking scenarios
+    .ai/docs/architecture/README.md
+    .ai/docs/faq/
+    .ai/tests/scenarios/     ← after checking scenarios
     docs/                        ← replace project-specific documents
 
 Do NOT blindly copy:
@@ -308,7 +308,7 @@ is the canonical neutral example and SHOULD remain unchanged. It is an example, 
 
 ---
 
-## 6.3 `.ai/architecture/tests/cold-start-command-trace.md`
+## 6.3 `.ai/tests/scenarios/cold-start-command-trace.md`
 
 The test scenario is conceptually reusable, but it currently hardcodes:
 
@@ -457,7 +457,7 @@ If the new project will not use Qwen/Grok independent-review conversations, they
 
 ---
 
-# 12. `.ai/architecture/`
+# 12. `.ai/docs/architecture/`
 
 This directory has two different kinds of content.
 
@@ -465,7 +465,7 @@ This directory has two different kinds of content.
 
 Keep:
 
-- `.ai/architecture/README.md`
+- `.ai/docs/architecture/README.md`
 - reusable FAQ material;
 - reusable architecture test scenarios after checking them.
 
@@ -474,7 +474,7 @@ Keep:
 The current:
 
 ```text
-.ai/architecture/ai-infrastructure-restructuring.md
+.ai/docs/architecture/ai-infrastructure-restructuring.md
 ```
 
 is an architecture-history document for this repository's infrastructure evolution.
@@ -485,15 +485,15 @@ For a copied template, remove it or replace it with the new project's own archit
 
 ---
 
-# 13. `.ai/architecture/tests/results/`
+# 13. `.ai/tests/scenarios/results/`
 
 Do not copy old runtime results into a new project.
 
 For example:
 
 ```text
-.ai/architecture/tests/results/cold-start-command-trace/...
-.ai/architecture/tests/results/trace-runtime-presentation/...
+.ai/tests/scenarios/results/cold-start-command-trace/...
+.ai/tests/scenarios/results/trace-runtime-presentation/...
 ```
 
 are evidence about previous runs of this repository's infrastructure.
@@ -633,7 +633,7 @@ Check:
 ```text
 .ai/skills/handoff/SKILL.md
 .ai/workflows/handoff/BOOTSTRAP.md
-.ai/architecture/tests/cold-start-command-trace.md
+.ai/tests/scenarios/cold-start-command-trace.md
 ```
 
 for the old repository URL and make those references configuration-driven or neutral.

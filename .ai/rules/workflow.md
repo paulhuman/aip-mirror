@@ -110,7 +110,7 @@ For a semantic sweep of an active infrastructure layer, first retrieve the activ
 For example, an active repository-context inspection may be batched as:
 
     .ai/config.yaml
-    .ai/architecture/*
+    .ai/docs/architecture/*
     .ai/rules/*
     .ai/skills/*
     .ai/workflows/*

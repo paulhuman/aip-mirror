@@ -95,7 +95,7 @@ The scenario MUST remain unchanged between test runs unless the test definition 
 
 Historical results MUST be stored separately under:
 
-`.ai/architecture/tests/results/<test-name>/<run-id>.md`
+`.ai/tests/results/<test-name>/<run-id>.md`
 
 Each result record MUST contain:
 

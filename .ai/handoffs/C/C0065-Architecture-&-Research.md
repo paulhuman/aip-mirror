@@ -40,14 +40,14 @@ The complete five-case migration-recovery suite is runtime-verified PASS. C0065 
 
 ## Verified migration-recovery baseline
 
-Cases 1–5 from `.ai/architecture/tests/migration-recovery.md` are individually runtime-verified PASS.
+Cases 1–5 from `.ai/tests/migration-recovery.md` are individually runtime-verified PASS.
 
 ### Case 1
 
 Assistant-response-boundary runtime PASS.
 
 Result artifact:
-`.ai/architecture/tests/results/migration-recovery/20261003-2337-c0061-case1-runtime.md`
+`.ai/tests/results/migration-recovery/20261003-2337-c0061-case1-runtime.md`
 
 Commit:
 `b598d8ccc67b99abe72894760a2d618048ce58f4`
@@ -59,7 +59,7 @@ The earlier `20261003-2317-c0061-case1-runtime` result remains historical and MU
 Assistant-response-boundary runtime PASS.
 
 Result artifact:
-`.ai/architecture/tests/results/migration-recovery/20261004-1815-c0062-case2-runtime.md`
+`.ai/tests/results/migration-recovery/20261004-1815-c0062-case2-runtime.md`
 
 Commit:
 `057774267105101e9d683a1fcb92c77a2ce0703a`
@@ -69,7 +69,7 @@ Commit:
 Assistant-response-boundary runtime PASS across six disposable fixture branches.
 
 Result artifact:
-`.ai/architecture/tests/results/migration-recovery/20261005-0022-c0063-case3-runtime.md`
+`.ai/tests/results/migration-recovery/20261005-0022-c0063-case3-runtime.md`
 
 Commit:
 `e21f35c2f1a1eb1ee64a6d1609235f86bd223ae5`
@@ -81,7 +81,7 @@ Same-chapter active/archive copies are duplicate-location evidence. Contradictor
 Assistant-response-boundary runtime PASS.
 
 Result artifact:
-`.ai/architecture/tests/results/migration-recovery/20261005-0036-c0064-case4-runtime.md`
+`.ai/tests/results/migration-recovery/20261005-0036-c0064-case4-runtime.md`
 
 Commit:
 `c32ac15a9d9580935158bdf5cdb54232d5958a71`
@@ -95,7 +95,7 @@ Verified slices:
 Assistant-response-boundary runtime PASS for non-circular user recovery.
 
 Result artifact:
-`.ai/architecture/tests/results/migration-recovery/20261005-1412-c0064-case5-runtime.md`
+`.ai/tests/results/migration-recovery/20261005-1412-c0064-case5-runtime.md`
 
 Commit:
 `45ebef093b66afc3c89d8f77ecf78b0958ae57a4`
@@ -147,12 +147,12 @@ The forbidden circular sequence was not observed:
 
 ### Migration-recovery architecture evidence
 
-- `.ai/architecture/tests/migration-recovery.md`
-- `.ai/architecture/tests/results/migration-recovery/20261003-2337-c0061-case1-runtime.md`
-- `.ai/architecture/tests/results/migration-recovery/20261004-1815-c0062-case2-runtime.md`
-- `.ai/architecture/tests/results/migration-recovery/20261005-0022-c0063-case3-runtime.md`
-- `.ai/architecture/tests/results/migration-recovery/20261005-0036-c0064-case4-runtime.md`
-- `.ai/architecture/tests/results/migration-recovery/20261005-1412-c0064-case5-runtime.md`
+- `.ai/tests/migration-recovery.md`
+- `.ai/tests/results/migration-recovery/20261003-2337-c0061-case1-runtime.md`
+- `.ai/tests/results/migration-recovery/20261004-1815-c0062-case2-runtime.md`
+- `.ai/tests/results/migration-recovery/20261005-0022-c0063-case3-runtime.md`
+- `.ai/tests/results/migration-recovery/20261005-0036-c0064-case4-runtime.md`
+- `.ai/tests/results/migration-recovery/20261005-1412-c0064-case5-runtime.md`
 
 ### Predecessor
 
@@ -191,6 +191,66 @@ The forbidden circular sequence was not observed:
 - Determine the canonical owner for that question before making changes.
 - Preserve the verified five-case migration-recovery baseline while evaluating the next task.
 - Avoid adding infrastructure whose need is not established by evidence.
+
+
+## C0066 migration checkpoint — .ai semantic taxonomy migration
+
+The bounded architecture question selected in C0065 was the semantic taxonomy of the .ai infrastructure.
+
+Accepted boundary:
+
+```text
+                         ┌─ operational entry
+                         │
+.ai/ ────────────────────┼─ canonical semantic owner
+                         │
+                         ├─ operational subsystem
+                         │
+                         ├─ meta documentation
+                         │
+                         ├─ verification
+                         │
+                         └─ historical archive
+```
+
+Project boundary:
+
+```text
+.ai/   = project-agnostic AI infrastructure
+docs/  = AIP Mirror project-specific knowledge
+```
+
+Reference-impact inventory was completed before mutation. Active references to the old architecture and test paths were identified and updated as part of the migration. Historical archive documents were treated as historical content and were not bulk-rewritten.
+
+Migration mapping:
+
+| Old path | New path |
+|---|---|
+| .ai/architecture/README.md | .ai/docs/architecture/README.md |
+| .ai/architecture/ai-infrastructure-restructuring.md | .ai/docs/architecture/ai-infrastructure-restructuring.md |
+| .ai/architecture/faq/ | .ai/docs/faq/ |
+| .ai/architecture/tests/ | .ai/tests/scenarios/ |
+| .ai/architecture/tests/results/ | .ai/tests/results/ |
+| .ai/archive/architecture/ | .ai/archive/docs/architecture/ |
+
+The migration preserves semantic ownership:
+- .ai/rules/ remains canonical semantic ownership;
+- .ai/skills/ remains capabilities;
+- .ai/workflows/ remains procedures;
+- .ai/handoffs/ remains conversation continuity;
+- .ai/docs/ is meta documentation;
+- .ai/tests/ is verification;
+- .ai/archive/ is historical storage;
+- docs/ remains project-specific knowledge.
+
+The migration does not introduce a registry, manifest, dependency graph, command-ID layer, universal router, lifecycle state machine, or persistent current-chapter state.
+
+The accepted semantic taxonomy MUST later be encoded in canonical normative rules. That is a separate bounded follow-up and is intentionally not conflated with this structural migration.
+
+The durable architecture record was updated in:
+.ai/docs/architecture/ai-infrastructure-restructuring.md
+
+The receiving chapter bootstrap target is C0066. Per migration semantics, this current handoff is updated as the migration checkpoint; the future C0066 handoff is created by the receiving chapter's BOOTSTRAP, not in advance.
 
 ## Immediate next task
 

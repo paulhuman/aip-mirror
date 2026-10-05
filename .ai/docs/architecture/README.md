@@ -14,7 +14,7 @@ They are the **large durable-memory layer** for `.ai` architecture work:
 .ai/handoffs/
     = small chapter continuity snapshots
 
-.ai/architecture/
+.ai/docs/architecture/
     = larger durable architecture context
 ```
 
@@ -22,7 +22,7 @@ An architecture file may contain the reasoning and history behind a decision whi
 
 ## Architecture FAQ and usage notes
 
-The `.ai/architecture/faq/` directory contains small, human-oriented explanations of how the `.ai` infrastructure is used in practice.
+The `.ai/docs/faq/` directory contains small, human-oriented explanations of how the `.ai` infrastructure is used in practice.
 
 These files are durable orientation material, not canonical semantic owners. They MAY answer practical “how does this work?” questions in more detail than an active rule or skill SHOULD.
 
@@ -32,19 +32,19 @@ When a practical explanation describes an active semantic rule, skill, or workfl
 
 ## Tests and results
 
-The `.ai/architecture/tests/` directory contains reproducible architecture-level test scenarios for validating AI-infrastructure behavior.
+The `.ai/tests/scenarios/` directory contains reproducible architecture-level test scenarios for validating AI-infrastructure behavior.
 
 Test scenario files define the reusable test input and expected pass criteria. They are not runtime results and SHOULD remain stable between runs unless the test definition itself is intentionally revised.
 
-The `.ai/architecture/tests/results/` subtree contains separate result artifacts for individual test runs. Each result records the tested repository revision, execution context, observed behavior, deviations, and pass/fail outcome without replacing the reusable scenario.
+The `.ai/tests/results/` subtree contains separate result artifacts for individual test runs. Each result records the tested repository revision, execution context, observed behavior, deviations, and pass/fail outcome without replacing the reusable scenario.
 
 This separation keeps the test definition distinct from historical evidence:
 
 ```text
-.ai/architecture/tests/
+.ai/tests/scenarios/
     = reusable architecture test scenarios
 
-.ai/architecture/tests/results/
+.ai/tests/results/
     = per-run historical test evidence
 ```
 
@@ -97,7 +97,7 @@ A handoff SHOULD point to relevant architecture notes when they are part of the 
 
 Architecture notes are working durable memory, not permanent active infrastructure.
 
-When an architecture investigation is complete and its remaining useful content has been incorporated into the appropriate active owners or otherwise preserved as historical evidence, the architecture files MAY be moved to `.ai/archive/architecture/` according to the repository's archive rules.
+When an architecture investigation is complete and its remaining useful content has been incorporated into the appropriate active owners or otherwise preserved as historical evidence, the architecture files MAY be moved to `.ai/archive/docs/architecture/` according to the repository's archive rules.
 
 The archive is outside the active `.ai` scan.
 

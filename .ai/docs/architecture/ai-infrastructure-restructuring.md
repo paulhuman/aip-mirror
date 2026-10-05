@@ -5,7 +5,7 @@ Scope: `.ai` infrastructure, ACTIVATE / TRACE routing semantics, and deferred re
 
 The previous long-form restructuring notes were archived at:
 
-`.ai/archive/architecture/ai-infrastructure-restructuring.md`
+`.ai/archive/docs/architecture/ai-infrastructure-restructuring.md`
 
 This file is intentionally a small active TODO surface. Historical architectural reasoning MUST remain in the archive rather than being copied forward.
 
@@ -69,8 +69,8 @@ After the active files are updated:
 
 Relevant test artifacts:
 
-- `.ai/architecture/tests/cold-start-command-trace.md` — reusable cold-start test scenario; currently enumerates four commands;
-- `.ai/architecture/tests/results/cold-start-command-trace/20261002-0900-cold-start-command-trace.md` — latest historical structural-simulation result; also reflects the four-command scope.
+- `.ai/tests/cold-start-command-trace.md` — reusable cold-start test scenario; currently enumerates four commands;
+- `.ai/tests/results/cold-start-command-trace/20261002-0900-cold-start-command-trace.md` — latest historical structural-simulation result; also reflects the four-command scope.
 
 Status: OPEN
 
@@ -292,7 +292,7 @@ Status: OPEN
 
 Decision:
 
-The next chapter, C0061, begins the real five-case runtime exercise defined by .ai/architecture/tests/migration-recovery.md. The test MUST start with Case 1 and must record observed behavior separately from structural expectations.
+The next chapter, C0061, begins the real five-case runtime exercise defined by .ai/tests/migration-recovery.md. The test MUST start with Case 1 and must record observed behavior separately from structural expectations.
 
 ### C0061 starting sequence
 
@@ -325,7 +325,7 @@ When another Case 1 state is needed, create the next disposable branch from the 
 
 The Case 1 observations MUST be recorded in a new result artifact under:
 
-    .ai/architecture/tests/results/migration-recovery/<run-id>.md
+    .ai/tests/results/migration-recovery/<run-id>.md
 
 The result MUST identify:
 
@@ -340,6 +340,136 @@ The result MUST identify:
 DO NOT declare the complete five-case test PASS from Case 1 alone. The remaining four cases stay OPEN until they are actually exercised.
 
 Status: OPEN
+
+
+## TODO 12 — Restructure .ai taxonomy by semantic role
+
+Decision:
+
+> Classify repository locations by semantic role, not by file extension or by whether a file happens to be documentation-shaped.
+
+Accepted semantic model:
+
+```text
+                         ┌─ operational entry
+                         │
+.ai/ ────────────────────┼─ canonical semantic owner
+                         │
+                         ├─ operational subsystem
+                         │
+                         ├─ meta documentation
+                         │
+                         ├─ verification
+                         │
+                         └─ historical archive
+```
+
+Project boundary:
+
+```text
+.ai/   = project-agnostic AI infrastructure
+docs/  = AIP Mirror project-specific knowledge
+```
+
+Accepted active taxonomy:
+
+| Semantic role | Canonical location |
+|---|---|
+| Operational entry | .ai/AGENTS.md, .ai/INDEX.md, .ai/config.yaml |
+| Canonical semantic owner | .ai/rules/ |
+| Capabilities | .ai/skills/ |
+| Procedures | .ai/workflows/ |
+| Operational subsystem / continuity | .ai/handoffs/ |
+| Meta documentation | .ai/docs/ |
+| Verification | .ai/tests/ |
+| Historical archive | .ai/archive/ |
+| Project-specific knowledge | docs/ |
+
+The taxonomy is semantic. A README.md inside an operational subsystem remains part of that subsystem when its location carries operational meaning; conversely, durable architecture documentation for the AI infrastructure belongs to .ai/docs/.
+
+Migration mapping:
+
+| Old path | New path | Semantic result |
+|---|---|---|
+| .ai/architecture/README.md | .ai/docs/architecture/README.md | meta documentation |
+| .ai/architecture/ai-infrastructure-restructuring.md | .ai/docs/architecture/ai-infrastructure-restructuring.md | meta documentation |
+| .ai/architecture/faq/ | .ai/docs/faq/ | meta documentation |
+| .ai/architecture/tests/ | .ai/tests/scenarios/ | reusable verification scenarios |
+| .ai/architecture/tests/results/ | .ai/tests/results/ | historical verification evidence |
+| .ai/archive/architecture/ | .ai/archive/docs/architecture/ | historical meta documentation |
+
+Historical archive content is preserved. The archive taxonomy changes its semantic container; historical documents are not rewritten merely to modernize their prose.
+
+Reference-impact inventory completed before mutation:
+
+| Reference class | Update |
+|---|---|
+| Active architecture documentation | update to .ai/docs/... |
+| FAQ documentation | update to .ai/docs/faq/... |
+| Verification scenarios/results | update to .ai/tests/... |
+| Operational routing/bootstrap references | update architecture README reference to .ai/docs/architecture/README.md |
+| Historical archive documents | preserve historical content; no bulk rewrite |
+| Project-specific docs/ | no taxonomy move; remains project-specific |
+
+Migration scope:
+
+- move all active files under .ai/architecture/ into their accepted semantic destinations;
+- move all archived architecture files under .ai/archive/architecture/ to .ai/archive/docs/architecture/;
+- preserve file contents for moved artifacts except required path-reference updates;
+- preserve verification result artifacts as historical evidence;
+- do not change canonical ownership of rules, skills, workflows, or handoffs;
+- do not change project-specific docs/ taxonomy;
+- update active references so the new taxonomy is self-consistent;
+- do not introduce a registry, manifest, or new state mechanism.
+
+Resulting active structure:
+
+```text
+.ai/
+├── AGENTS.md
+├── INDEX.md
+├── config.yaml
+├── docs/
+│   ├── architecture/
+│   └── faq/
+├── tests/
+│   ├── scenarios/
+│   └── results/
+├── rules/
+├── skills/
+├── workflows/
+├── handoffs/
+└── archive/
+    ├── docs/
+    │   └── architecture/
+    └── handoffs/
+
+docs/
+├── PROJECT-INSTRUCTIONS.md
+└── architecture/
+```
+
+Normative follow-up:
+
+The accepted semantic taxonomy MUST later be encoded in the canonical repository/infrastructure rules so a receiving AI can determine the boundary from semantic role alone. The future rule MUST distinguish:
+
+```text
+project-agnostic AI infrastructure
+    .ai/
+        operational entry
+        canonical semantic owner
+        operational subsystem
+        meta documentation
+        verification
+        historical archive
+
+project-specific knowledge
+    docs/
+```
+
+Status: RESOLVED
+
+C0066 migration scope is the completed taxonomy migration described above. Normative-rule encoding is intentionally deferred to a separate bounded scope so this migration does not conflate structural reorganization with canonical rule redesign.
 
 ## Deferred
 
