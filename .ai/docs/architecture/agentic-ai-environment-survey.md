@@ -218,13 +218,28 @@ The strongest current hypothesis is:
 
 The adapter boundary concerns invocation, context/reference translation, capability discovery and evidence presentation. It should not contain a second implementation of the operation.
 
+## Phase 2 owner-by-seam checkpoint
+
+The matrix has now been validated against the active `.ai` canonical owners in `.ai/docs/architecture/agentic-ai-owner-seam-audit.md`.
+
+The audit found semantic coverage for every surveyed capability seam. No second semantic owner is required for routing, skills, rules, workflows, repository mutation, authorization, session continuity, verification, or durable architecture evidence.
+
+The remaining compatibility questions are bounded to adapter concerns:
+
+- environment invocation/context mapping;
+- skill discovery/packaging compatibility;
+- TRACE/evidence presentation outside the `>>` transport;
+- concrete proof that a future transport can execute the existing repository safety contract.
+
+No `.ai/interfaces/` directory is justified by the current evidence.
+
 ## Remaining Phase 2 work
 
-1. Validate the matrix against the exact AIP Mirror canonical owners and identify any missing seam.
-2. Inspect whether Agent Skills portability is sufficient for the existing `.ai/skills/` structure or requires only metadata/adapters.
-3. Record evidence requirements for TRACE across transport, execution and verification surfaces.
-4. Determine whether any environment creates a real requirement for a dedicated transport/interface artifact.
-5. If no new semantic seam is discovered, close Phase 2 and use this matrix as the input to Phase 3.
+1. Preserve and review the owner-by-seam audit.
+2. Test Agent Skills portability against a concrete existing `.ai/skills/` package.
+3. Define the minimal reusable evidence model required when TRACE is rendered outside the current chat transport.
+4. Decide whether these adapter concerns require any durable transport-neutral artifact.
+5. If no new semantic seam is discovered, close Phase 2 and use the resulting capability matrix as the input to Phase 3.
 
 ## Non-conclusions
 
