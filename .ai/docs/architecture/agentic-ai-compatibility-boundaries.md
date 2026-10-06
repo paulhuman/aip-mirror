@@ -46,7 +46,7 @@ However, the skill is intentionally **not standalone**. Its instructions depend 
 - `.ai/rules/repository.md`;
 - `.ai/rules/workflow.md`;
 - canonical operation owners;
-- repository-relative `.ai/... ` paths.
+- repository-relative `.ai/...` paths.
 
 Therefore portability means:
 
