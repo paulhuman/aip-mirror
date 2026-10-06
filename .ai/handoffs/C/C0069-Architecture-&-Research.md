@@ -119,3 +119,30 @@ Do not redesign active `.ai` infrastructure during this research pass.
 ## Recommended starting context
 
 Start with this handoff, C0068's handoff, and the two Agentic architecture research artifacts. Treat C0068 Phase 0 and Phase 1 as completed baseline state.
+
+## Phase 2 checkpoint — initial environment survey
+
+A first evidence pass has been completed and recorded in:
+
+- `.ai/docs/architecture/agentic-ai-environment-survey.md`
+
+The initial survey covers:
+
+- OpenAI Codex;
+- Claude Code;
+- DeepSeek Harness / DSH Desktop;
+- Gemini CLI.
+
+Confirmed research findings so far:
+
+- repository-local instruction discovery is common, but instruction filenames and precedence models differ;
+- reusable skills are a strong cross-environment capability pattern;
+- `/` is environment transport syntax rather than a universal semantic operation primitive;
+- `@` is environment-specific reference/context syntax and should not receive project-wide meaning;
+- execution safety is a cross-environment capability category expressed through approvals, sandboxing, policies, and permission modes;
+- verification evidence exists outside ordinary chat text, including diffs, tool results, session logs, plans, approval decisions, and structured output;
+- the evidence currently supports the transport → semantic operation → canonical owner boundary;
+- Gate 2 is provisionally PASS with bounded uncertainty;
+- no evidence yet justifies creating `.ai/interfaces/`.
+
+This is an initial survey checkpoint, not the final Phase 2 decision. Remaining work is listed in the survey artifact and includes deeper source verification, the final cross-environment matrix, and an explicit semantic-ownership boundary test.
