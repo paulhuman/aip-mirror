@@ -20,7 +20,7 @@ Each workstream may span multiple conversation chapters. Chapter identifiers use
 [A-Z][0-9]{4}
 ```
 
-The chapter number advances within the specialization letter, using four digits, starting at `001`:
+The chapter number advances within the specialization letter, using four digits, starting at `0001`:
 
 ```text
 A0001 → A0002 → ... → A0999
