@@ -176,3 +176,64 @@ Skill discovery/packaging portability is a third compatibility question, but the
 Current Phase 2 conclusion candidate: **PASS — semantic coverage confirmed; adapter boundaries remain to be validated.**
 
 Immediate next research step SHOULD be a concrete portability test against one existing AIP Mirror skill and a minimal evidence/TRACE model for a non-`>>` transport. Do not redesign active `.ai` infrastructure until such evidence requires it.
+
+## Phase 2 checkpoint — compatibility boundaries and final Gate 2
+
+The concrete compatibility tests are complete.
+
+Durable evidence is recorded in:
+
+- `.ai/docs/architecture/agentic-ai-compatibility-boundaries.md`
+
+### Skill portability test
+
+The existing `.ai/skills/activation/SKILL.md` was tested against the current Agent Skills package shape.
+
+Result:
+
+- **PASS** — YAML `name` / `description` front matter plus Markdown instruction body is compatible with the common Agent Skills shape;
+- semantic ownership remains in `.ai/skills/` and its referenced canonical owners;
+- environment-specific discovery roots, repository context, and invocation remain adapter responsibilities;
+- no second skill registry, duplicate skill copies, or `.ai/interfaces/` layer is justified.
+
+The skill is intentionally repository-local rather than standalone. Portability means that an environment can discover and load the package without moving its semantic ownership out of AIP Mirror.
+
+### Transport-neutral evidence model
+
+The TRACE question was resolved by separating evidence from presentation.
+
+The reusable evidence record consists of:
+
+- operation identity/status;
+- activation owners/status;
+- repository reads;
+- relevant execution/tool actions;
+- verification result and scope/diff evidence;
+- authorization state when applicable;
+- durable artifact references when applicable.
+
+Current chat TRACE is one presentation of this evidence. Future environments MAY present equivalent evidence through CLI output, event streams, structured results, session records, or test artifacts.
+
+Repository mutation evidence remains governed by the existing repository safety contract and is not replaced by environment-native approval or sandbox records.
+
+### Final Gate 2 decision
+
+**PASS — semantic coverage confirmed and adapter boundaries validated.**
+
+Final dependency direction:
+
+`environment transport → invocation/context adapter → existing AIP Mirror semantic owner → environment execution capability → transport-neutral evidence → environment-native presentation`
+
+No new semantic seam was discovered. `.ai/interfaces/` remains unjustified.
+
+### Phase 3 starting point
+
+Phase 3 SHOULD specify the minimal adapter/conformance contract only:
+
+1. invocation/context mapping;
+2. skill discovery/packaging mapping;
+3. transport-neutral evidence fields;
+4. repository mutation verification mapping;
+5. one conformance test proving that a future environment preserves existing semantic owners and the repository safety contract.
+
+No universal transport layer implementation is required by current evidence.
