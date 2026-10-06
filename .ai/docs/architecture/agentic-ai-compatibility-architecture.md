@@ -199,7 +199,7 @@ Produce one evidence record per environment containing:
 
 ### Gate 2
 
-Do not generalize an environment-specific feature into the common architecture unless evidence shows that the feature is shared or can be isolated behind a transport adapter.
+DO NOT generalize an environment-specific feature into the common architecture unless evidence shows that the feature is shared or can be isolated behind a transport adapter.
 
 ## Phase 3 — Cross-environment capability matrix
 
@@ -314,7 +314,7 @@ Potential architecture elements to evaluate:
 - machine-readable execution contracts;
 - shared verification contracts.
 
-Do not add an element merely because an Agentic environment happens to expose a feature with a similar name.
+DO NOT add an element merely because an Agentic environment happens to expose a feature with a similar name.
 
 ### Required decision questions
 
@@ -422,7 +422,7 @@ If Phase 7 produces a design requiring repository restructuring:
 3. record the branch name and starting commit;
 4. implement only the approved architectural scope on that branch;
 5. verify every changed file and the complete diff;
-6. do not merge into `main` until the redesign has been reviewed.
+6. DO NOT merge into `main` until the redesign has been reviewed.
 
 The redesign branch is an implementation environment, not part of the research baseline.
 
