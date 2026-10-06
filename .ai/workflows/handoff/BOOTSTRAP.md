@@ -98,7 +98,7 @@ Before returning generated bootstrap transport, the AI MUST verify that it conta
 
 ### Canonical invocation format
 
-The bootstrap message is the transport boundary for the initialization context. A generated migration instruction and the future manual templates MUST explicitly identify themselves as instructions to initialize a new conversation chapter, MUST contain an explicit repository locator, and MUST direct the receiving AI to follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6.
+The bootstrap message is the transport boundary for the initialization context. A generated migration instruction MUST explicitly identify itself as an instruction to initialize a new conversation chapter, MUST contain an explicit repository locator, and MUST direct the receiving AI to follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6. Human manual bootstrap templates are maintained separately in `.ai/templates/handoff-bootstrap.md`.
 
 The repository locator is transport context, not a canonical BOOTSTRAP runtime input. It exists so the receiving AI can identify the target repository before resolving any repository-relative path.
 
