@@ -146,3 +146,33 @@ Confirmed research findings so far:
 - no evidence yet justifies creating `.ai/interfaces/`.
 
 This is an initial survey checkpoint, not the final Phase 2 decision. Remaining work is listed in the survey artifact and includes deeper source verification, the final cross-environment matrix, and an explicit semantic-ownership boundary test.
+
+## Phase 2 checkpoint — owner-by-seam audit
+
+The initial environment survey was validated against the active `.ai` canonical owners and recorded in:
+
+- `.ai/docs/architecture/agentic-ai-owner-seam-audit.md`
+
+The audit confirms semantic coverage for every surveyed capability seam:
+
+- routing → `.ai/INDEX.md`;
+- rules → `.ai/rules/`;
+- reusable capabilities → `.ai/skills/`;
+- ordered procedures → `.ai/workflows/`;
+- repository mutation safety → `.ai/rules/repository.md`;
+- lifecycle/session continuity → `.ai/rules/handoff/lifecycle.md` + `.ai/handoffs/`;
+- verification/evidence → operation owners + activation/TRACE + `.ai/tests/results/`;
+- durable architecture evidence → `.ai/docs/architecture/`.
+
+No second semantic owner was identified. In particular, the audit does NOT justify creating `.ai/interfaces/`.
+
+Two bounded compatibility concerns remain:
+
+1. environment invocation/context mapping;
+2. TRACE/evidence presentation outside the current `>>` transport.
+
+Skill discovery/packaging portability is a third compatibility question, but the existing `.ai/skills/` structure is already semantically sufficient; any required adaptation would be packaging/discovery metadata rather than duplicated skill semantics.
+
+Current Phase 2 conclusion candidate: **PASS — semantic coverage confirmed; adapter boundaries remain to be validated.**
+
+Immediate next research step SHOULD be a concrete portability test against one existing AIP Mirror skill and a minimal evidence/TRACE model for a non-`>>` transport. Do not redesign active `.ai` infrastructure until such evidence requires it.
