@@ -102,26 +102,36 @@ DO NOT require Illustrator to test mathematical operations that can be tested in
 
 ## 13. Preserve the conversation specialization boundaries
 
-The project uses four complementary specializations:
+The project uses the current complementary specializations defined by `.ai/config.yaml`:
 
-- `AIP Mirror — 01 — JSX Prototype`
-- `AIP Mirror — 02 — Native AIP Plugin`
-- `AIP Mirror — 03 — Architecture & Research`
-- `AIP Mirror — 04 — Project Workshop`
+| Specialization | Short name | Role |
+| --- | --- | --- |
+| `A` | JSX Prototype | Experimental and behavioral implementation work in JSX |
+| `B` | Native AIP Plugin | Native C++ / Illustrator AIP implementation |
+| `C` | Architecture & Research | AI infrastructure, project architecture, and research work |
+| `D` | Project Workshop | Practical development support and routine technical work |
+| `E` | Independent Review (Qwen) | Independent architectural and technical review |
+| `F` | Independent Review (Grok) | Independent architectural and technical review |
 
-The current Chapter Identifier Format is `[A-Z][0-9]{3}`. The first uppercase letter identifies the specialization and the final three digits identify the chapter number within that specialization. Historical chapter identifiers from the previous scheme are migration history only and MUST NOT be used as current identifiers.
+The canonical specialization-to-short-name mapping is owned by `.ai/config.yaml`. This document MUST NOT maintain a competing specialization registry.
 
+Current chapter identifiers use the format `[A-Z][0-9]{4}`. The uppercase letter identifies the specialization and the final four digits identify the chapter number within that specialization. For example:
 
+```text
+A0001 → A0002 → ...
+C0066 → C0067 → ...
+```
 
+Historical identifiers from superseded numbering schemes are migration history only and MUST NOT be used as current chapter identifiers.
 
-The roles are complementary, not competing.
+The specializations are complementary organizational boundaries, not permanent ownership of all knowledge they produce. Canonical project knowledge belongs to its semantic owner regardless of which specialization discovered or documented it.
 
 Architecture decisions that affect multiple areas SHOULD be documented in the repository so they are not dependent on conversation history alone.
 
 ## 14. Project Workshop is support, not a competing implementation stream
 
-The `04` specialization is for practical development support and learning: IDE configuration, build/toolchain setup, Git usage, repository mechanics, ChatGPT interface questions, SDK/tooling setup, and other routine technical questions that do not belong in the primary workstreams.
+The `D` specialization is for practical development support and learning: IDE configuration, build/toolchain setup, Git usage, repository mechanics, ChatGPT interface questions, SDK/tooling setup, and other routine technical questions that do not belong in the primary implementation or research work.
 
-It may explain, troubleshoot, and prepare changes, but it should not become an alternative place for project architecture, behavioral research, JSX implementation, or native plugin implementation.
+It may explain, troubleshoot, and prepare changes, but it MUST NOT become an alternative place for project architecture, behavioral research, JSX implementation, or native plugin implementation.
 
-When a question produces a durable project decision, the decision belongs in the appropriate project documentation and, when cross-cutting, primarily in the `03` specialization.
+When a question produces a durable project decision, the decision belongs in the appropriate semantic project documentation rather than being permanently owned by the `D` specialization.
