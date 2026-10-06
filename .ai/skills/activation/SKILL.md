@@ -19,11 +19,11 @@ The activation context is supplied by the caller. This skill does not create a d
 
 For each required canonical owner:
 
-1. Read the current repository version.
-2. Treat that version as authoritative for the operation.
-3. Establish the reread owner set as the active operational context.
+1. DO read the current repository version.
+2. DO treat that version as authoritative for the operation.
+3. DO establish the reread owner set as the active operational context.
 
-Do not substitute remembered content for the current repository version.
+DO NOT substitute remembered content for the current repository version.
 
 ## Output
 
@@ -94,7 +94,7 @@ Examples:
 - “Show the TRACE for ACTIVATE.”
 - “Reread the current canonical owners before we continue and show what was activated.”
 
-When ACTIVATE is requested manually, identify the current operation and reread the canonical owners required for that operation. When TRACE is requested, present observable activation evidence without exposing hidden reasoning.
+When ACTIVATE is requested manually, DO identify the current operation and reread the canonical owners required for that operation. When TRACE is requested, DO present observable activation evidence without exposing hidden reasoning.
 
 See `.ai/architecture/faq/manual-activation.md` for practical examples and usage guidance.
 
