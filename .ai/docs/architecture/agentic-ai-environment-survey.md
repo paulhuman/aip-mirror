@@ -21,7 +21,7 @@ Primary evidence is current official documentation or official source repositori
 
 | Capability seam | OpenAI Codex / Agents | Claude Code | DeepSeek Harness | Gemini CLI | AIP Mirror implication |
 |---|---|---|---|---|---|
-| Repository/project instructions | `AGENTS.md`; layered root-to-leaf discovery | `CLAUDE.md` and supported `AGENTS.md`; project memory | Repository `AGENTS.md`; plugin/context model | Hierarchical `GEMINI.md); JIT context | Keep semantic ownership in `.ai`; environment filenames are adapters |
+| Repository/project instructions | `AGENTS.md`; layered root-to-leaf discovery | `CLAUDE.md` and supported `AGENTS.md`; project memory | Repository `AGENTS.md`; plugin/context model | Hierarchical `GEMINI.md`; JIT context | Keep semantic ownership in `.ai`; environment filenames are adapters |
 | Reusable task capability | `SKILL.md` skill packages | Skills/plugins/subagents | Skill registry + filesystem providers + loader | Agent Skills; workspace `.gemini/skills/` or `.agents/skills/` | Existing `.ai/skills/` is conceptually portable; activation transport varies |
 | Direct command / invocation | Environment-owned slash surface | Slash commands and skills | Dedicated human command plane | Slash commands; `!` shell control | Never make punctuation the semantic API |
 | Resource/context reference | Environment-specific; no universal project meaning established for `@` | `@file` adds file to context | No evidence that `@` is a project semantic | `@` includes files/directories in prompt context | Resource reference is a capability; syntax is transport-specific |
