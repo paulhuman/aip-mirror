@@ -145,3 +145,83 @@ Do not assume that the next task is identical to C0067's completed TODO work.
 Start with this handoff, `.ai/workflows/handoff/BOOTSTRAP.md`, `.ai/rules/repository.md`, `.ai/rules/handoff/lifecycle.md`, `.ai/skills/activation/SKILL.md`, `.ai/skills/handoff/SKILL.md`, and the C0067 predecessor handoff.
 
 Treat C0067's five-command runtime audit, final architecture TODO resolution, and bootstrap-template restructuring as completed baseline state. Continue only from current repository evidence.
+
+
+## Migration checkpoint — C0068
+
+C0068 substantive work established the Agentic AI Compatibility Architecture research track.
+
+### Phase 0 — repository hygiene
+
+- The branch baseline was inspected.
+- The user manually deleted all old branches and retained only `main`.
+- Repository branch verification now reports exactly one branch: `main`.
+- Branch hygiene is therefore COMPLETE.
+- No old branch was force-moved as a substitute for deletion.
+
+### Phase 1 — existing .ai architecture capability audit
+
+The current `.ai` architecture was audited for transport independence.
+
+Result artifact:
+
+`.ai/docs/architecture/agentic-ai-compatibility-capability-audit.md`
+
+Commit:
+
+`5e01351b1751adc4dd1edf9e38328b63bfbeb5e4`
+
+Key findings:
+
+- `.ai/INDEX.md` is a router/discovery surface rather than a semantic owner.
+- Rules, skills, and workflows contain the substantive canonical procedures.
+- The repository mutation-safety contract is transport-neutral and directly relevant to Agentic execution.
+- Activation/read-set semantics are reusable; the current user-facing TRACE presentation has a `>>`-specific edge.
+- No `.ai/interfaces/` layer is justified by Phase 1 evidence alone.
+- Gate 1 PASSED: the existing architecture can be described without introducing a second semantic source of truth.
+
+### Research plan
+
+The active research plan is:
+
+`.ai/docs/architecture/agentic-ai-compatibility-architecture.md`
+
+The plan defines Phase 2 as a real survey of Agentic environments and explicitly requires evidence before any transport/interface redesign.
+
+### Phase 2 — next bounded task
+
+Begin the real Agentic environment survey.
+
+Initial targets:
+
+- OpenAI Codex
+- Claude Code
+- DSH Desktop / DeepSeek-oriented Agentic environment
+- at least one materially different Agentic environment
+
+The survey MUST use current, verifiable sources and distinguish observed environment behavior from architectural inference.
+
+Phase 2 MUST investigate:
+
+1. repository-local instruction discovery;
+2. reusable skill/capability mechanisms;
+3. actual meanings of environment-specific command syntaxes such as `/` and `@`;
+4. mapping environment commands to project semantic operations;
+5. tool execution, repository writes, confirmation, and verification;
+6. enforcement of the existing repository safety contract;
+7. representation of activation evidence / TRACE outside the current chat response model;
+8. whether a real transport/interface layer is actually necessary.
+
+Do NOT redesign active `.ai` infrastructure during this research phase. Any global redesign requires a separate dedicated branch after the research decision.
+
+### Migration boundary
+
+C0069 is the receiving Architecture & Research chapter.
+
+C0069 MUST continue from this checkpoint and MUST NOT redo:
+
+- C0067's five-command runtime audit;
+- the completed C0067 architecture TODO restructuring;
+- the C0068 Phase 0 branch audit;
+- the C0068 Phase 1 capability audit.
+
