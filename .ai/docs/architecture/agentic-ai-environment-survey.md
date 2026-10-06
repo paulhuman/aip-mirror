@@ -233,13 +233,51 @@ The remaining compatibility questions are bounded to adapter concerns:
 
 No `.ai/interfaces/` directory is justified by the current evidence.
 
-## Remaining Phase 2 work
+## Phase 2 completion checkpoint — compatibility boundaries
 
-1. Preserve and review the owner-by-seam audit.
-2. Test Agent Skills portability against a concrete existing `.ai/skills/` package.
-3. Define the minimal reusable evidence model required when TRACE is rendered outside the current chat transport.
-4. Decide whether these adapter concerns require any durable transport-neutral artifact.
-5. If no new semantic seam is discovered, close Phase 2 and use the resulting capability matrix as the input to Phase 3.
+The remaining Phase 2 questions were tested against the concrete existing skill `.ai/skills/activation/SKILL.md` and against the current TRACE contract.
+
+Durable evidence is recorded in:
+
+- `.ai/docs/architecture/agentic-ai-compatibility-boundaries.md`
+
+The concrete skill test produced:
+
+- **PASS** for Agent Skills package shape: YAML `name` / `description` front matter plus Markdown instructions;
+- **PASS** for semantic portability: the skill can remain canonical in `.ai/skills/`;
+- **bounded adapter requirement** for discovery root, repository context, and native invocation;
+- **no evidence** requiring a second skill registry or environment-specific copies.
+
+The TRACE test produced:
+
+- **PASS** for transport-neutral evidence;
+- the reusable evidence is the operation, activation, reads, execution, and verification record;
+- chat TRACE, CLI output, event streams, structured results, session records, and test artifacts are presentation surfaces rather than separate semantic models;
+- repository mutation evidence MUST remain compatible with the existing READ → CHANGE → WRITE → READ BACK → VERIFY → DIFF → SCOPE → COMMIT → VERIFY RESULT contract.
+
+No new semantic seam was discovered.
+
+### Phase 2 Gate 2 final assessment
+
+**PASS — semantic coverage confirmed and adapter boundaries validated.**
+
+The final Phase 2 architecture boundary is:
+
+`environment transport → invocation/context adapter → existing AIP Mirror semantic owner → environment execution capability → transport-neutral evidence → environment-native presentation`
+
+The evidence does **not** justify creating `.ai/interfaces/`.
+
+### Phase 3 input
+
+Phase 3 SHOULD specify only:
+
+1. invocation/context adapter responsibilities;
+2. skill discovery/packaging mapping;
+3. transport-neutral evidence fields;
+4. mapping repository mutation verification into environment-native evidence;
+5. a minimal conformance test proving that an environment preserves existing semantic ownership and the repository safety contract.
+
+A universal transport layer or duplicated semantic implementation is not required by the Phase 2 evidence.
 
 ## Non-conclusions
 
