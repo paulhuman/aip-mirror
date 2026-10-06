@@ -69,6 +69,33 @@ A handoff filename MUST NOT be constructed as `<CURRENT_CHAPTER>-<SHORT_NAME>.md
 
 A handoff-producing chapter prepares its own handoff for the next chapter; a receiving chapter executes bootstrap with itself as `CURRENT_CHAPTER` and the predecessor as `PREVIOUS_CHAPTER`.
 
+## Transport generation and template ownership
+
+The generated bootstrap transport is a canonical template instantiation, not newly authored prose.
+
+When generating bootstrap transport, the AI MUST:
+
+1. read the current `.ai/workflows/handoff/BOOTSTRAP.md`;
+2. copy the applicable canonical generated-transport template exactly;
+3. replace only the explicitly variable placeholders;
+4. preserve all fixed text, ordering, repository locator, field names, and required instructions exactly;
+5. MUST NOT reconstruct, summarize, paraphrase, shorten, redesign, or otherwise rewrite the template from memory.
+
+The repository locator is mandatory transport content even though it is not a canonical BOOTSTRAP runtime input.
+
+A generated transport is invalid if the canonical repository locator or any other fixed template element is omitted, paraphrased, reordered, or replaced with an inferred value.
+
+Before returning generated bootstrap transport, the AI MUST verify that it contains:
+
+- the canonical repository locator;
+- the canonical `.ai/AGENTS.md` item 6 instruction;
+- the canonical `.ai/workflows/handoff/BOOTSTRAP.md` reference;
+- `PREVIOUS_CHAPTER`;
+- `CURRENT_CHAPTER`;
+- `SPECIALIZATION`;
+- the resolved `SHORT_NAME`;
+- the canonical field ordering.
+
 ### Canonical invocation format
 
 The bootstrap message is the transport boundary for the initialization context. A generated migration instruction and the future manual templates MUST explicitly identify themselves as instructions to initialize a new conversation chapter, MUST contain an explicit repository locator, and MUST direct the receiving AI to follow the new-chapter initialization procedure specified by `.ai/AGENTS.md`, item 6.
