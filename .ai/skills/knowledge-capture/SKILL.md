@@ -110,6 +110,8 @@ related concepts
 
 The exact section set MUST follow the educational needs of the entry.
 
+Before writing an entry, the skill MUST validate the educational language policy from `.ai/docs/architecture/developer-knowledge-archive.md`. Explanatory prose MUST be Russian; canonical technical vocabulary MUST remain in English. A capture is not complete if the body is predominantly English merely because the source material was English.
+
 The knowledge repository follows the project's language policy:
 
 - explanatory material is written in Russian;
