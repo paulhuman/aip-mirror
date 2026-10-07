@@ -99,6 +99,18 @@ When a decision materially affects implementation, record it in the appropriate 
 
 Do not duplicate generic workflow guidance here; `.ai/rules/workflow.md` owns the general documentation principle.
 
+## 6.1 Active documentation and archive references
+
+The active repository documentation boundary and the historical archive boundary MUST remain separate.
+
+Canonical active documents MUST NOT link to, depend on, or establish semantic requirements from files under `.ai/archives/`.
+
+Archived material is historical evidence only. It MAY be read for explicitly requested recovery, audit, or bounded historical research, but such access MUST NOT turn archived content into an active semantic dependency.
+
+When active documentation supersedes or absorbs an architecture note or other durable document, the historical original MAY be moved from `.ai/docs/` to the corresponding `.ai/archives/docs/` path.
+
+Active documentation MUST remain understandable and operationally complete without references to archived documents.
+
 ## 7. Repository write safety
 
 GitHub API file updates are full-content replacements, not line-level edits. When an existing file is updated through an API that accepts complete file content, the new content MUST contain the entire intended file.
