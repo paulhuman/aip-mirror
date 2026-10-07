@@ -95,11 +95,25 @@ A handoff SHOULD point to relevant architecture notes when they are part of the 
 
 ## Lifecycle and archive boundary
 
-Architecture notes are working durable memory, not permanent active infrastructure.
+The `.ai/docs/` tree is **active durable documentation, not permanent storage**.
 
-When an architecture investigation is complete and its remaining useful content has been incorporated into the appropriate active owners or otherwise preserved as historical evidence, the architecture files MAY be moved to `.ai/archives/docs/architecture/` according to the repository's archive rules.
+Documents in `.ai/docs/` MAY be periodically archived after their active work is complete, obsolete, or their useful content has been incorporated into the appropriate active semantic owners. Archived copies belong under the corresponding `.ai/archives/docs/` path.
 
-The archive is outside the active `.ai` scan.
+For architecture notes, for example:
+
+```text
+.ai/docs/architecture/
+    = active architecture context
+
+.ai/archives/docs/architecture/
+    = historical architecture context
+```
+
+The active `.ai/docs/` tree SHOULD therefore remain focused on architecture context that is still useful to active work. Historical material does not need to remain in the active tree merely for completeness.
+
+The `.ai/archives/` tree is outside the active `.ai` scan and MUST NOT be treated as an active source of truth.
+
+Canonical active documents MUST NOT link to or depend on archived documents. If historical evidence is needed, the operation MAY explicitly retrieve it through the archive boundary, but the active semantic model MUST remain understandable without that historical reference.
 
 ## README role
 
