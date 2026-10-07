@@ -229,3 +229,30 @@ read-back / scope verification
 ```
 
 This is the current C0073 validation baseline. Further infrastructure SHOULD be driven by evidence from additional real entries.
+
+## C0074 migration checkpoint
+
+Before migration, C0073 reread and updated `.ai/docs/architecture/developer-knowledge-archive.md` to record the remaining bounded work after the first implementation.
+
+Architecture-note update:
+
+- commit: `ee937636c6002b0cb04a20bf866abb1c90b5e7be`
+- content SHA after update: `b63a539bd385cbd1306b37c87e4364474950b8d3`
+- read-back completed;
+- commit comparison against the preceding architecture-note commit showed exactly one modified file: `.ai/docs/architecture/developer-knowledge-archive.md`.
+
+The architecture note now records these remaining items:
+
+1. Validate the model against additional real knowledge entries, especially a materially different version-sensitive or troubleshooting case such as the DSH Desktop / Harness material.
+2. Resolve remaining repository-model questions only when real usage requires them: taxonomy growth, cross-topic linking, external-source requirements, and version representation.
+3. Keep the architecture note synchronized with active owners without making it a second semantic owner; `.ai/rules/developer-knowledge.md` owns active policy and `.ai/skills/knowledge-capture/SKILL.md` owns the capture procedure.
+4. Reconcile and retire stale design wording as implementation evolves.
+5. Keep a dedicated `>>capture` command and additional external-repository infrastructure deferred until real usage demonstrates a concrete need.
+
+No broader redesign is currently required. The next bounded work should be driven by a second real knowledge-capture case or a concrete inconsistency in the current model.
+
+## Migration target
+
+`>>migrate 0074` is valid: current chapter is C0073, therefore the sequential target is C0074.
+
+The receiving chapter MUST create its own C0074 handoff during bootstrap. This current C0073 handoff is the durable migration checkpoint; no future C0074 handoff is pre-created here.
