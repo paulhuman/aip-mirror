@@ -22,9 +22,11 @@ Before executing the operation, activate the canonical owners required by this o
     .ai/rules/repository.md
     .ai/rules/workflow.md
     .ai/skills/activation/SKILL.md
+    .ai/skills/normative-language/SKILL.md
+    .ai/rules/normative-language.md
     .ai/INDEX.md
 
-The current repository versions are authoritative.
+The current repository versions are authoritative. Normative-language semantics remain owned by `.ai/rules/normative-language.md`.
 
 ## Elevated context
 
@@ -37,7 +39,7 @@ Read:
     README.md
     docs/PROJECT-INSTRUCTIONS.md
 
-These provide project identity and the project-specific boundary that must remain distinct from the AI-infrastructure layer.
+These provide project identity and the project-specific boundary that MUST remain distinct from the AI-infrastructure layer.
 
 ### AI-infrastructure orientation
 
@@ -50,7 +52,7 @@ Read:
 
 Then discover the active `.ai/**/README.md` files from the current repository tree and read those README files that orient active infrastructure.
 
-README files are orientation sources. They do not replace canonical semantic owners.
+README files are orientation sources. They MUST NOT replace canonical semantic owners.
 
 ### Active infrastructure semantics
 
