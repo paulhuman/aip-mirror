@@ -120,6 +120,48 @@ The external knowledge repository location should be configured in `.ai/config.y
 
 The exact configuration key and repository name remain open.
 
+### Provenance model
+
+C0071 refined provenance into a universal, source-oriented model:
+
+```yaml
+provenance:
+  kind: ai-conversation
+  agent: ChatGPT
+  project: aip-mirror
+  chapter: C0071
+```
+
+Semantic roles:
+
+- `kind` → semantic source category;
+- `agent` → who or what provided the material, when applicable;
+- `project` → where the material originated, when applicable;
+- `chapter` → optional project-local context, when applicable.
+
+Important architectural decisions:
+
+- `kind` is the primary discriminator.
+- `chapter` is NOT mandatory.
+- `chapter` may eventually be removed entirely; its long-term retention remains OPEN.
+- Provenance must work for sources that have no project or chapter, including agentic AI, official documentation, personal experiments, and external articles.
+- Source project/chapter are provenance metadata, not semantic ownership.
+- One knowledge entry may have multiple provenance sources.
+
+### Educational language policy
+
+C0071 also established the intended language model for the future knowledge repository:
+
+> **Russian is the explanatory language; English is the canonical vocabulary of professional terminology.**
+
+The normative wording is:
+
+> **Учебные материалы пишутся на русском языке. Названия сущностей, профессиональная терминология, имена технологий, команд, API, параметров и устойчивые технические выражения сохраняются на English.**
+
+Professional terms should not be translated merely for translation's sake. Canonical English terminology should be retained and explained in Russian when useful. This does not require English everywhere; natural Russian remains appropriate in ordinary explanatory phrasing.
+
+The language policy is an architectural rule for the future repository, not merely a formatting preference.
+
 ## Real-world source example
 
 The user supplied a real answer from Grok about maintaining DSH Desktop / Harness / dshmarket on Windows.
@@ -200,6 +242,9 @@ The future system should be able to preserve the useful explanation while correc
 - `.ai/docs/architecture/developer-knowledge-archive.md` exists as a draft architecture note describing the proposed system.
 - The external knowledge repository is intended to be project-independent.
 - The future capture capability and the existing `explain-code` capability have distinct responsibilities.
+- Provenance uses a universal source-oriented model with `kind` as the primary semantic discriminator; `agent`, `project`, and `chapter` are contextual fields as applicable.
+- `provenance.chapter` is optional and may be removed later; a chapter is not a universal provenance requirement.
+- The future knowledge repository uses Russian as its explanatory language and English as the canonical vocabulary for professional terminology and technical identifiers.
 
 ## Inferred
 
@@ -208,6 +253,8 @@ The future system should be able to preserve the useful explanation while correc
 - External AI answers should be treated as source material requiring verification rather than as authoritative knowledge.
 - The knowledge repository should prioritize learner understanding and mental models over snippet accumulation.
 - Repository location belongs in configuration, while capture behavior belongs in the skill.
+- A universal provenance model is more durable than a chapter-centric model because not all future sources will belong to an AIP Mirror chapter.
+- The Russian explanatory layer plus canonical English terminology should reduce learning friction without disconnecting the learner from real technical documentation, CLI, IDE, and source-code vocabulary.
 
 ## Assumed / unverified
 
@@ -224,7 +271,7 @@ The future system should be able to preserve the useful explanation while correc
 - Select the final conceptual and repository name.
 - Refine the taxonomy using realistic entries rather than precreating a large directory tree.
 - Define the canonical knowledge-entry schema.
-- Define provenance and verification metadata.
+- Define the final provenance metadata schema; specifically decide whether `provenance.chapter` survives as an optional field or is removed.
 - Define the capture workflow and future `knowledge-capture` skill contract.
 - Decide the exact `.ai/config.yaml` repository reference.
 - Determine how duplicate/overlapping knowledge entries are detected.
@@ -232,16 +279,33 @@ The future system should be able to preserve the useful explanation while correc
 - Determine the validation and write-safety workflow for the external repository.
 - Later, use the Grok DSH example and the Git branch cleanup example as concrete design fixtures.
 
+## C0071 final checkpoint
+
+The bounded C0071 provenance/language design task is complete.
+
+Implemented in `.ai/docs/architecture/developer-knowledge-archive.md`:
+
+- universal provenance model with `kind` as the primary semantic source discriminator;
+- optional contextual fields for `agent`, `project`, and `chapter`;
+- explicit recognition that `chapter` may be removed later;
+- support for sources without a project-local chapter, including agentic AI;
+- formal Russian explanatory-language / English canonical-terminology policy;
+- clarification that English terminology is canonical vocabulary, not a requirement to write every sentence in English.
+
+Verified repository commit:
+
+`0a755a8fb16b3464840a2ae11a4af9e645e4f232`
+
 ## Immediate next task
 
-Continue the architecture design before implementing the new repository or skill.
+Continue the architecture design in the receiving chapter before implementing the new repository or skill.
 
 Recommended next bounded work:
 
 1. settle the repository concept/name;
 2. design one ideal knowledge entry in detail;
 3. use the Git branch cleanup and Grok DSH examples as fixtures;
-4. derive the minimum metadata schema;
+4. derive the minimum metadata schema, including the final decision on `provenance.chapter`;
 5. derive the minimum `knowledge-capture` skill contract;
 6. only then decide the initial external repository skeleton and `.ai/config.yaml` integration.
 
