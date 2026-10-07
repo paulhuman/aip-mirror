@@ -310,3 +310,29 @@ Phase 3 begins from the completed evidence above and SHOULD specify:
 5. one minimal environment conformance test.
 
 The architecture notes above explicitly point back to this handoff so future chapters can recover this research chain even if they do not independently read C0069.
+
+## C0069 migration checkpoint — AI-infrastructure context mode
+
+The chapter also established a second work track concerning the AI-infrastructure itself.
+
+Durable proposal:
+
+- `.ai/` is a portable, project-agnostic AI-infrastructure layer intended for applications, plugins, websites, libraries, services, tooling, and other software projects.
+- `.ai/docs/` documents the AI-infrastructure; `docs/` documents the project itself.
+- A root `.ai/README.md` is needed as the human- and AI-readable orientation document for the whole `.ai/` layer.
+- `.ai/archive/` SHOULD be renamed to `.ai/archives/`; `archives` is the clearer plural taxonomy.
+- `.ai/archives/` is historical/disposable storage, not active context and not an eternal museum of old files.
+- `.ai/archives/README.md` SHOULD explain that lifecycle and SHOULD be read by the elevated infrastructure operation without loading archive contents.
+- The proposed domain-switch operation is `>>ai-infrastructure`.
+- `>>ai-infrastructure` is not merely a larger context load: it switches the AI's working domain from project-specific implementation to AI-infrastructure work.
+- Its elevated context SHOULD include the root `README.md`, `docs/PROJECT-INSTRUCTIONS.md`, `.ai/README.md`, active `.ai/**/README.md`, `.ai/AGENTS.md`, `.ai/INDEX.md`, `.ai/config.yaml`, an orientation survey of `.ai/docs/`, and `.ai/archives/README.md`.
+- `.ai/archives/**` contents SHOULD NOT be loaded by this operation unless explicitly required.
+- The operation SHOULD remain a thin context-loading capability and MUST NOT introduce a second routing registry, semantic owner, skill registry, duplicated project instructions, or speculative `.ai/interfaces/` namespace.
+- The full proposal is preserved in `.ai/docs/architecture/ai-infrastructure-context-mode.md`.
+
+The two current work tracks are independent:
+
+1. **Phase 3 — Agentic AI adaptation:** minimal adapter/conformance specification from the completed C0069 Phase 2 result.
+2. **AI-infrastructure orientation:** define and test `>>ai-infrastructure`, add `.ai/README.md`, rename the archive taxonomy, add `.ai/archives/README.md`, and update affected active references.
+
+No future chapter handoff is created by this checkpoint. C0069 remains the current chapter until a future conversation executes bootstrap.
