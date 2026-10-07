@@ -97,7 +97,7 @@ A handoff SHOULD point to relevant architecture notes when they are part of the 
 
 Architecture notes are working durable memory, not permanent active infrastructure.
 
-When an architecture investigation is complete and its remaining useful content has been incorporated into the appropriate active owners or otherwise preserved as historical evidence, the architecture files MAY be moved to `.ai/archive/docs/architecture/` according to the repository's archive rules.
+When an architecture investigation is complete and its remaining useful content has been incorporated into the appropriate active owners or otherwise preserved as historical evidence, the architecture files MAY be moved to `.ai/archives/docs/architecture/` according to the repository's archive rules.
 
 The archive is outside the active `.ai` scan.
 
