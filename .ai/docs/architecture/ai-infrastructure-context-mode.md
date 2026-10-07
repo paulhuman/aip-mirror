@@ -34,7 +34,7 @@ The intended distinction is:
 
 ## 2. Root `.ai/README.md`
 
-A root `.ai/README.md` is needed as the human- and AI-readable orientation document for the entire `.ai/` layer.
+A root `.ai/README.md` now serves as the human- and AI-readable orientation document for the entire `.ai/` layer.
 
 It SHOULD explain that `.ai/` is the project's reusable AI-infrastructure; that the infrastructure is project-agnostic in architectural intent; that it is not application source code; the semantic roles of the major `.ai/` subdirectories; the boundary between `.ai/` and project-specific `docs/`; the distinction between active infrastructure and historical archives; and that canonical semantic ownership remains in rules, skills, workflows, and other explicitly defined owners rather than in README files or architecture notes.
 
@@ -42,11 +42,11 @@ The root README is an orientation document, not a replacement for `.ai/INDEX.md`
 
 ## 3. `.ai/archive` → `.ai/archives`
 
-The current `.ai/archive/` directory SHOULD be renamed to `.ai/archives/`.
+The legacy `.ai/archive/` directory has been renamed to `.ai/archives/`.
 
 `archives` is the clearer plural because the directory contains multiple historical collections, including archived architecture documentation and historical handoffs.
 
-The current contents are already organized as historical material, including `.ai/archive/docs/architecture/` and `.ai/archive/handoffs/`.
+The renamed contents remain organized as historical material under `.ai/archives/docs/architecture/` and `.ai/archives/handoffs/`.
 
 The rename is a taxonomy correction, not a change in semantic ownership.
 
@@ -87,13 +87,13 @@ This preserves awareness without allowing historical material to pollute the act
 
 ## 6. `>>ai-infrastructure` operation
 
-The proposed command is a context-loading and domain-switching operation.
+The `>>ai-infrastructure` command is implemented as a context-loading and domain-switching operation through `.ai/INDEX.md` and `.ai/skills/ai-infrastructure/SKILL.md`.
 
 Its semantic meaning is:
 
 > Switch the AI's working domain to the repository's AI-infrastructure rather than project-specific implementation, and load elevated infrastructure context before proceeding.
 
-The operation SHOULD establish at least:
+The operation establishes at least:
 
 ### Repository-level orientation
 
@@ -172,7 +172,7 @@ Phase 3 SHOULD specify the minimal adapter/conformance contract without introduc
 
 ### Track B — AI-infrastructure orientation
 
-Define and implement the minimal infrastructure-context operation `>>ai-infrastructure` with `.ai/README.md`, active README discovery, root project README awareness, `docs/PROJECT-INSTRUCTIONS.md` awareness, `.ai/docs/` orientation, `.ai/archives/README.md` archive-boundary awareness, and explicit exclusion of archive contents from normal elevated context.
+The minimal infrastructure-context operation `>>ai-infrastructure` is implemented with `.ai/README.md`, active README discovery, root project README awareness, `docs/PROJECT-INSTRUCTIONS.md` awareness, `.ai/docs/` orientation, `.ai/archives/README.md` archive-boundary awareness, and explicit exclusion of archive contents from normal elevated context.
 
 The two tracks MAY be developed independently and SHOULD NOT be conflated.
 
@@ -193,20 +193,20 @@ The semantic ownership model already established by the existing `.ai` architect
 
 ## 10. Migration and implementation sequence
 
-The proposed implementation sequence is:
+The implementation sequence has now reached the validation stage:
 
-1. add `.ai/README.md`;
-2. rename `.ai/archive/` to `.ai/archives/`;
-3. add `.ai/archives/README.md`;
-4. update active references from `.ai/archive/` to `.ai/archives/`;
-5. define the new `>>ai-infrastructure` skill and route it through the existing command/skill architecture;
-6. define its elevated-context read set and its deliberate exclusion of archive contents;
-7. update relevant README and architecture references;
-8. verify that ordinary bootstrap still reads only its intended initialization context;
-9. test `>>ai-infrastructure` as a separate operation;
-10. document the result as durable AI-infrastructure architecture.
+1. **COMPLETE** — add `.ai/README.md`;
+2. **COMPLETE** — rename `.ai/archive/` to `.ai/archives/`;
+3. **COMPLETE** — add `.ai/archives/README.md`;
+4. **COMPLETE** — update active archive-path references;
+5. **COMPLETE** — define `.ai/skills/ai-infrastructure/SKILL.md` and route `>>ai-infrastructure` through `.ai/INDEX.md`;
+6. **COMPLETE** — define the elevated-context read set and explicit archive exclusion;
+7. **COMPLETE** — update relevant README and architecture references;
+8. **PENDING VALIDATION** — verify ordinary bootstrap still reads only its intended initialization context;
+9. **PENDING VALIDATION** — execute `>>ai-infrastructure` as a separate operation and inspect its TRACE/read set;
+10. **IN PROGRESS** — retain this architecture note as the durable record of the implementation and validation result.
 
-No future chapter handoff is created by this note. The current chapter remains the owner of this checkpoint until the next conversation executes bootstrap.
+The current chapter remains the owner of this implementation checkpoint.
 
 ## 11. Architectural intent
 
@@ -234,6 +234,6 @@ This is a domain switch, not merely a larger context window.
 
 The current durable chapter checkpoint is:
 
-`.ai/handoffs/C/C0069-Architecture-&-Research.md`
+`.ai/handoffs/C/C0070-Architecture-&-Research.md`
 
 Future chapters continuing this work SHOULD read that handoff first and then this architecture note.
