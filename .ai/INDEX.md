@@ -75,6 +75,7 @@ Use this map to find the canonical capability without reading the entire `.ai/` 
 | Commit construction                                                       | `.ai/skills/commits/SKILL.md`        | reusable commit-message construction                                               |
 | Conversation bootstrap                                                    | `.ai/workflows/handoff/BOOTSTRAP.md` | ordered new-chapter bootstrap procedure                                            |
 | Code explanation                                                          | `.ai/skills/explain-code/SKILL.md`   | explain code with analogies, ASCII diagrams, step-by-step walkthrough, and gotchas |
+| Knowledge capture                                                         | `.ai/skills/knowledge-capture/SKILL.md` | capture durable developer knowledge into the configured external knowledge repository |
 
 ## Structural references
 
