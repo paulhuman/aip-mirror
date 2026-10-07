@@ -861,3 +861,92 @@ knowledge-capture
 With this model, the archive is no longer primarily a place to save useful snippets. It is a place to preserve **reproducible understanding**.
 
 Implementation of the external repository and `knowledge-capture` remains intentionally outside this bounded design task.
+
+
+## 26. Implementation checkpoint: C0073
+
+C0073 moved the design into the first bounded implementation step.
+
+### 26.1 External repository configuration
+
+The external Developer Knowledge Repository is now referenced through the existing `.ai/config.yaml` repository-reference layer:
+
+```yaml
+references:
+  repositories:
+    developer_knowledge:
+      repository: paulhuman/developer-knowledge
+      role: Project-independent repository for durable developer knowledge
+```
+
+This is intentionally the minimum configuration boundary.
+
+The configuration does not introduce capture-specific paths, taxonomy settings, or workflow switches. The repository remains project-independent; `aip-mirror` is provenance when relevant, not semantic ownership.
+
+### 26.2 Initial `knowledge-capture` capability
+
+The first operational skill is now implemented at:
+
+```
+.ai/skills/knowledge-capture/SKILL.md
+```
+
+The skill owns the capture workflow rather than the knowledge model.
+
+Its minimum operational contract is:
+
+```
+capture
+    ↓
+classify
+    ↓
+discover
+    ↓
+normalize
+    ↓
+verify
+    ↓
+provenance
+    ↓
+version context
+    ↓
+write
+    ↓
+read back
+    ↓
+verify scope
+    ↓
+report
+```
+
+The skill resolves the target repository from `.ai/config.yaml` and MUST NOT hard-code the external repository identity.
+
+The skill is registered in `.ai/INDEX.md` as a capability. No dedicated `>>capture` command is introduced yet. Command-surface expansion remains deferred until actual usage demonstrates that an explicit invocation boundary is useful.
+
+### 26.3 First-entry validation strategy
+
+The first real knowledge entry remains the Git + PowerShell branch-cleanup fixture described earlier in this document.
+
+The fixture is deliberately treated as a validation of the capture model, not merely as content to save.
+
+It should demonstrate that the skill can preserve:
+
+- an immediate practical procedure;
+- the reusable mental model behind it;
+- safety and verification considerations;
+- project-independent taxonomy;
+- provenance back to the originating project conversation when useful.
+
+The first entry therefore remains the next bounded validation step after the skill implementation.
+
+### 26.4 C0073 implementation boundary
+
+The implementation intentionally does not yet add:
+
+- a dedicated capture command;
+- capture-specific configuration sections;
+- a rigid universal document template;
+- a pre-created knowledge taxonomy;
+- a separate AI infrastructure inside the external knowledge repository.
+
+These remain future decisions that should be driven by real entry creation and validation rather than speculative architecture.
