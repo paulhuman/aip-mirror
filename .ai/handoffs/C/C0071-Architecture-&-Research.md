@@ -18,6 +18,18 @@ Continue the Architecture & Research track from the completed C0070 context-mode
 
 C0070 established and validated the `>>ai-infrastructure` context mode, including automatic normative-language dependency activation and explicit exclusion of `.ai/archives/**` from elevated active context. Preserve these boundaries unless new repository evidence requires a change.
 
+## C0071 current objective
+
+Design the architecture for a separate, project-independent personal developer knowledge repository: an educational archive for reusable technical understanding captured from real development work and AI-assisted conversations.
+
+The user explicitly wants to preserve explanations, not merely copy/paste snippets. The proposed system should support knowledge across Git, PowerShell, DeepSeek Harness, Python, C++, CMake, Windows, and future technologies without making the current project repository the owner of that knowledge.
+
+A new durable architecture note was created:
+
+- `.ai/docs/architecture/developer-knowledge-archive.md`
+
+This note is the current design starting point. It is intentionally a draft architecture design, not yet an active semantic owner or implemented workflow.
+
 ## Known starting implementation state
 
 - Repository: `paulhuman/aip-mirror`
@@ -52,6 +64,96 @@ Confirmed from the predecessor handoff:
 - `.ai/README.md` uses project-agnostic wording for the `.ai/` versus `docs/` boundary.
 - `.ai/rules/normative-language.md` uses the current `.ai/archives/**` archive path in its scope exception.
 
+## New architecture direction
+
+### Separation of concerns
+
+The proposed external repository is human-facing reusable knowledge, not another copy of `.ai/`.
+
+```
+Current project .ai/
+    = how AI works with the project and its infrastructure
+
+Developer Knowledge Repository
+    = what the human learner wants to understand and remember
+```
+
+The repository should be independent of the project where a piece of knowledge was discovered.
+
+### Educational target
+
+The central design principle is:
+
+> Do not preserve snippets merely because they are useful. Preserve understanding that makes the snippet reproducible.
+
+The proposed knowledge model includes, at minimum:
+
+- concepts;
+- procedures;
+- mental models;
+- recipes;
+- troubleshooting;
+- reference/comparison material.
+
+Entries should explain what, how, and why; identify assumptions, gotchas, verification steps, alternatives, version sensitivity, and provenance where relevant.
+
+### Proposed future capability
+
+A provisional new skill name is `knowledge-capture`.
+
+It should eventually transform useful source material into durable educational entries by:
+
+1. classifying the topic/domain;
+2. determining the knowledge type;
+3. checking for an existing related entry;
+4. identifying claims that require verification;
+5. normalizing the material into a consistent educational structure;
+6. capturing provenance and version context;
+7. writing/updating the configured knowledge repository;
+8. verifying the resulting change.
+
+The existing `.ai/skills/explain-code` remains a teaching capability and should not be repurposed as the storage/capture owner.
+
+### Configuration boundary
+
+The external knowledge repository location should be configured in `.ai/config.yaml`, rather than hard-coded inside the future skill.
+
+The exact configuration key and repository name remain open.
+
+## Real-world source example
+
+The user supplied a real answer from Grok about maintaining DSH Desktop / Harness / dshmarket on Windows.
+
+The material is a useful candidate for a future knowledge entry because it contains:
+
+- version inspection commands;
+- `DSH_HOME` usage;
+- Desktop versus CLI distinction;
+- profile/plugin relationships;
+- upgrade procedure;
+- maintenance checklist;
+- a system diagram.
+
+However, the answer MUST be treated as source material rather than unquestioned authority. Claims about exact Desktop/Harness version relationships, update ownership, plugin semantics, and version-specific behavior should be verified before being marked as confirmed knowledge.
+
+This example is important to the architecture because it demonstrates the intended capture workflow:
+
+```
+external AI answer
+    ↓
+useful educational material
+    ↓
+fact/version verification
+    ↓
+correction or enrichment
+    ↓
+normalized learning entry
+    ↓
+developer knowledge repository
+```
+
+The future system should be able to preserve the useful explanation while correcting errors, adding alternatives, and distinguishing confirmed facts from assumptions.
+
 ## Relevant files and references
 
 ### Canonical infrastructure owners
@@ -78,6 +180,11 @@ Confirmed from the predecessor handoff:
 - `.ai/docs/architecture/agentic-ai-owner-seam-audit.md`
 - `.ai/docs/architecture/agentic-ai-compatibility-boundaries.md`
 - `.ai/docs/architecture/agentic-ai-compatibility-capability-audit.md`
+- `.ai/docs/architecture/developer-knowledge-archive.md`
+
+### Relevant existing skill
+
+- `.ai/skills/explain-code/SKILL.md`
 
 ### Predecessor
 
@@ -89,28 +196,57 @@ Confirmed from the predecessor handoff:
 - `>>ai-infrastructure` automatically activates normative-language as a dependency without absorbing its semantic ownership.
 - Archive contents remain outside the normal elevated AI-infrastructure context.
 - The project-specific documentation boundary remains `docs/`.
-- The next sequential chapter for C0071 is derived from C0070 and matches the user assertion `>>migrate 0071`.
+- C0071 is now explicitly focused on Developer Knowledge Archive architecture.
+- `.ai/docs/architecture/developer-knowledge-archive.md` exists as a draft architecture note describing the proposed system.
+- The external knowledge repository is intended to be project-independent.
+- The future capture capability and the existing `explain-code` capability have distinct responsibilities.
 
 ## Inferred
 
-- Future work should preserve the established semantic ownership boundaries unless current repository evidence justifies a change.
-- Any new AI-infrastructure operation SHOULD reuse existing canonical owners rather than introducing duplicate registries or parallel semantic definitions.
+- A dedicated knowledge-capture skill is preferable to expanding `explain-code` into a storage workflow.
+- Technology/domain should generally be the primary taxonomy, while project and conversation are provenance.
+- External AI answers should be treated as source material requiring verification rather than as authoritative knowledge.
+- The knowledge repository should prioritize learner understanding and mental models over snippet accumulation.
+- Repository location belongs in configuration, while capture behavior belongs in the skill.
 
 ## Assumed / unverified
 
-- No new C0071-specific implementation objective has been established yet beyond continuation from the completed C0070 checkpoint.
+- Final repository name is not selected.
+- Exact repository structure is not selected.
+- Exact metadata/front-matter schema is not selected.
+- Exact verification-state vocabulary is not selected.
+- Exact command/interaction name (`>>capture`, `>>learn`, etc.) is not selected.
+- It is not yet decided whether the external knowledge repository needs its own lightweight `.ai` infrastructure.
+- The supplied Grok DSH material has not yet been independently fact-checked or converted into a final learning entry.
 
 ## Open
 
-- Establish the first bounded C0071 task from the user's next objective.
-- Continue to use current repository state as the source of truth.
-- Do not automatically load archive contents.
-- Do not reopen completed Agentic AI Compatibility Phase 2 work without new evidence.
+- Select the final conceptual and repository name.
+- Refine the taxonomy using realistic entries rather than precreating a large directory tree.
+- Define the canonical knowledge-entry schema.
+- Define provenance and verification metadata.
+- Define the capture workflow and future `knowledge-capture` skill contract.
+- Decide the exact `.ai/config.yaml` repository reference.
+- Determine how duplicate/overlapping knowledge entries are detected.
+- Determine how cross-topic and related-concept links are represented.
+- Determine the validation and write-safety workflow for the external repository.
+- Later, use the Grok DSH example and the Git branch cleanup example as concrete design fixtures.
 
 ## Immediate next task
 
-Initialize C0071 from this handoff, then establish the user's first bounded Architecture & Research objective.
+Continue the architecture design before implementing the new repository or skill.
+
+Recommended next bounded work:
+
+1. settle the repository concept/name;
+2. design one ideal knowledge entry in detail;
+3. use the Git branch cleanup and Grok DSH examples as fixtures;
+4. derive the minimum metadata schema;
+5. derive the minimum `knowledge-capture` skill contract;
+6. only then decide the initial external repository skeleton and `.ai/config.yaml` integration.
+
+Do not start Agentic AI Compatibility Phase 3 unless the user explicitly reopens it.
 
 ## Recommended starting context
 
-Start with this handoff, the current `.ai/workflows/handoff/BOOTSTRAP.md`, the active canonical owners, and the C0070 checkpoint. Treat C0070 implementation and validation as completed baseline state.
+Start with this handoff, `.ai/docs/architecture/developer-knowledge-archive.md`, the current `.ai/workflows/handoff/BOOTSTRAP.md`, the active canonical owners, and the C0070 checkpoint. Treat C0070 implementation and validation as completed baseline state and keep `.ai/archives/**` outside active elevated context.
