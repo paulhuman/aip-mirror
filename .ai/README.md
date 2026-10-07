@@ -40,7 +40,7 @@ Active infrastructure is the material used to understand and execute the current
 
 `.ai/archives/` is different. It contains historical material that is retained for recovery, audit, or reference when explicitly needed. Archived content is not part of normal active context and is not a permanent source of truth.
 
-The `>>ai-infrastructure` operation is the explicit context switch for work on the AI infrastructure itself. Its elevated context includes active infrastructure orientation and the archive boundary, but it MUST NOT automatically load archive contents.
+The `>>ai-infrastructure` operation is the explicit context switch for work on the AI infrastructure itself. Its elevated context includes active infrastructure orientation, normative-language activation, and the archive boundary, but it MUST NOT automatically load archive contents.
 
 ## Canonical ownership
 
