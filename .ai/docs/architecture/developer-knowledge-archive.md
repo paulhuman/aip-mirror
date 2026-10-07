@@ -596,7 +596,7 @@ Before implementation, decide:
 3. Exact metadata format.
 4. Whether metadata belongs in front matter, a separate index, or both.
 5. Exact verification-state vocabulary.
-6. Whether `provenance.chapter` should be retained as an optional field or removed entirely.
+6. How `provenance.chapter` should be treated in the minimum provenance contract.
 7. How duplicate / overlapping knowledge entries are detected.
 7. How cross-topic concepts are linked.
 8. How version-specific knowledge is represented.
@@ -616,3 +616,248 @@ A successful knowledge entry should make it possible for the learner to return l
 > “What is this doing, why does it work, what assumptions does it make, and how could I derive or adapt it myself?”
 
 That is the target quality bar for the future Developer Knowledge Archive.
+
+
+## 20. Concrete minimum knowledge entry
+
+The first concrete model is deliberately a **single educational entry**, not a rigid document template. The entry has a small metadata envelope and a variable explanatory body.
+
+### 20.1 Minimum metadata
+
+The minimum metadata is:
+
+```yaml
+---
+title: <human-readable title>
+type: <concept | procedure | mental-model | recipe | troubleshooting | reference>
+topics:
+  - <technology/domain>
+status: <draft | verified | version-sensitive | unverified>
+provenance:
+  - kind: <source category>
+    agent: <optional>
+    project: <optional>
+    chapter: <optional>
+    source: <optional URL or other locator>
+    captured: <optional ISO date>
+version:
+  <optional version/context>
+---
+```
+
+Required semantic fields:
+
+- `title` — stable human-facing identity of the entry;
+- `type` — primary educational form;
+- `topics` — technology/domain taxonomy;
+- `status` — current trust/verification state;
+- `provenance` — one or more sources.
+
+The body remains intentionally flexible. Sections are selected by educational need rather than generated mechanically.
+
+### 20.2 Why these fields are enough
+
+The minimum model separates four different questions:
+
+```
+What is it?
+    title + type
+
+Where does it belong?
+    topics
+
+How much should I trust it?
+    status + version
+
+Where did it come from?
+    provenance[]
+```
+
+Nothing in this minimum metadata makes the source project the semantic owner of the entry.
+
+A procedure discovered in `aip-mirror` can therefore live under `git` without becoming an AIP Mirror document.
+
+### 20.3 Ideal body shape
+
+A strong entry SHOULD normally follow this conceptual order:
+
+```
+Goal / problem
+    ↓
+Short answer
+    ↓
+How it works
+    ↓
+Step-by-step
+    ↓
+Why it works
+    ↓
+Gotchas / safety
+    ↓
+Verification
+    ↓
+Alternatives
+    ↓
+Version notes
+    ↓
+Related concepts
+```
+
+Sections MAY be omitted when they do not add educational value.
+
+The important distinction is between **answer** and **understanding**:
+
+- the short answer lets the learner solve the immediate problem;
+- the explanation makes the solution reproducible;
+- the mental model makes adaptation possible.
+
+## 21. Fixture test: Git branch cleanup
+
+The Git fixture fits naturally as a `procedure` with a strong `mental-model` component.
+
+Conceptual entry:
+
+```yaml
+title: Delete all local Git branches except main
+type: procedure
+topics:
+  - git
+  - powershell
+status: verified
+provenance:
+  - kind: ai-conversation
+    agent: ChatGPT
+    project: aip-mirror
+    chapter: C0071
+```
+
+The body should not begin and end with the command. It should teach the reusable mechanism:
+
+```
+Git produces branch names
+        ↓
+--format turns refs into clean names
+        ↓
+PowerShell pipeline carries each name
+        ↓
+Where-Object excludes main
+        ↓
+ForEach-Object performs an operation per branch
+        ↓
+git branch -D deletes each selected local branch
+```
+
+The command remains a concrete application of this model.
+
+The entry should also explicitly distinguish:
+
+- local branch deletion from remote branch deletion;
+- `-D` from the safer `-d`;
+- filtering by branch name from checking whether a branch contains unmerged work;
+- a reusable PowerShell pipeline from this one destructive operation.
+
+This fixture therefore validates that the schema can preserve both the immediate recipe and the underlying concepts without creating separate mandatory documents for every sub-concept.
+
+## 22. Fixture test: DSH Desktop / Harness material
+
+The DSH fixture demonstrates the opposite pressure: the source material is useful but contains claims whose exact truth depends on version and implementation.
+
+A candidate entry can therefore start with:
+
+```yaml
+title: DSH Desktop, Harness, profiles, and plugins
+type: mental-model
+topics:
+  - deepseek-harness
+status: unverified
+provenance:
+  - kind: ai-conversation
+    agent: Grok
+    project: <optional if the original project is known>
+    source: <optional source locator>
+```
+
+The body should separate:
+
+1. **Observed / verified facts** — backed by installed files, commands, source, or authoritative documentation.
+2. **Working model** — the relationship the learner currently uses to reason about Desktop, Harness, profiles, and plugins.
+3. **Version-sensitive claims** — statements that must name the relevant DSH/Desktop version.
+4. **Open claims** — useful assertions that still require verification.
+
+The entry must not silently promote a plausible AI explanation into a confirmed fact.
+
+This fixture validates two architectural requirements:
+
+- `status` cannot be inferred solely from the fact that a source is an AI answer;
+- `version` belongs alongside provenance when behavior depends on a concrete software version.
+
+## 23. Final decision: `provenance.chapter`
+
+**Decision: retain `provenance.chapter` as an optional provenance field.**
+
+The field survives because a project conversation chapter can materially improve reconstruction of how a knowledge item was discovered, tested, or explained. This is especially useful for knowledge captured from long-running project work.
+
+However, the field has strict boundaries:
+
+1. It is **never required**.
+2. It is **not part of taxonomy**.
+3. It is **not a knowledge-entry identifier**.
+4. It is **not the semantic owner of the knowledge**.
+5. It MUST be omitted when the source has no meaningful chapter.
+6. A future capture workflow SHOULD include it only when it materially improves traceability.
+
+Therefore:
+
+```
+kind
+    = what kind of source is this?
+
+project
+    = where did the source originate?
+
+chapter
+    = optional locator inside that project context
+```
+
+This resolves the earlier tension between chapter-free universal provenance and useful project-conversation traceability.
+
+An agentic AI response, official documentation page, personal experiment, or external article can have provenance with no `project` and no `chapter`.
+
+## 24. Refined `knowledge-capture` contract
+
+The minimum future skill contract is now:
+
+1. **Capture** — accept the material selected by the user.
+2. **Classify** — determine `type` and primary `topics`.
+3. **Discover** — search for related existing entries before creating a new one.
+4. **Normalize** — turn the source into an educational artifact rather than copying it verbatim.
+5. **Verify** — distinguish confirmed, inferred, version-sensitive, and unverified claims.
+6. **Provenance** — preserve one or more sources; include `chapter` only when useful.
+7. **Version context** — record concrete software/tool versions when they affect correctness.
+8. **Write** — create or minimally update the configured knowledge repository.
+9. **Read back** — verify the written artifact.
+10. **Report** — tell the user what was captured, what was verified, and what remains uncertain.
+
+The skill therefore owns the **capture workflow**, not the knowledge model itself.
+
+The repository owns the durable knowledge. The entry schema defines its semantic envelope. The skill is the controlled mechanism for producing and maintaining entries.
+
+## 25. Resulting minimum architecture
+
+The C0072 model can now be summarized as:
+
+```
+source material
+    ↓
+knowledge-capture
+    ├── classify → type + topics
+    ├── discover → related entries
+    ├── normalize → educational body
+    ├── verify → status + version
+    ├── provenance → source-oriented trace
+    └── write/verify → knowledge repository
+```
+
+With this model, the archive is no longer primarily a place to save useful snippets. It is a place to preserve **reproducible understanding**.
+
+Implementation of the external repository and `knowledge-capture` remains intentionally outside this bounded design task.
