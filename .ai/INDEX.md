@@ -42,6 +42,7 @@ The current documented user-facing command surface is:
 | `>>generate-bootstrap <chapter>` | generate bootstrap instruction for the future receiving chapter | `.ai/skills/handoff/SKILL.md` + `.ai/workflows/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow; current handoff |
 | `>>explain-code`                 | explain code or codebase behavior                               | `.ai/skills/explain-code/SKILL.md`                                   | explain-code skill                                 |
 | `>>normative-language`          | activate normative-language context                              | `.ai/skills/normative-language/SKILL.md`                             | normative-language skill                           |
+| `>>ai-infrastructure`           | switch to AI-infrastructure context and establish elevated active-infrastructure context | `.ai/skills/ai-infrastructure/SKILL.md` | `.ai/rules/repository.md`; `.ai/rules/workflow.md`; `.ai/skills/activation/SKILL.md`; `.ai/INDEX.md` |
 
 The table records only information needed to recognize and activate the canonical operation. It does not define write authorization, commit construction, or workflow steps.
 
@@ -65,6 +66,7 @@ Use this map to find the canonical capability without reading the entire `.ai/` 
 | Repository identity, path resolution, repository boundaries, write safety | `.ai/rules/repository.md`            | canonical repository semantics and mutation safety                                 |
 | General workflow principles                                               | `.ai/rules/workflow.md`              | general AI development workflow constraints                                        |
 | Activation                                                                | `.ai/skills/activation/SKILL.md`     | establish the current canonical operational context before executing an operation  |
+| AI-infrastructure context mode                                          | `.ai/skills/ai-infrastructure/SKILL.md` | switch the working domain to AI-infrastructure and establish elevated active context without loading archives |
 | Normative language                                                        | `.ai/skills/normative-language/SKILL.md` | command entry point; the skill requires `.ai/rules/normative-language.md`       |
 | Conversation continuity                                                   | `.ai/rules/handoff/lifecycle.md`     | chapter naming, handoff continuity, and context preservation                       |
 | Handoff reference preservation                                            | `.ai/rules/handoff/references.md`    | material research references that survive handoff                                  |
