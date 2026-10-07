@@ -184,7 +184,47 @@ Captures a durable comparison or lookup that is useful for learning.
 
 These types MAY coexist in one entry when that produces a clearer educational document.
 
-## 7. Educational quality contract
+## 7. Educational language policy
+
+The knowledge repository uses a deliberate two-layer language model:
+
+> **Russian is the explanatory language; English is the canonical vocabulary of professional terminology.**
+
+Educational materials SHOULD be written in Russian so that the explanatory layer minimizes cognitive load during learning.
+
+The following SHOULD remain in their canonical English form:
+
+- names of entities;
+- professional terminology;
+- technology and product names;
+- command names;
+- API names;
+- parameter and option names;
+- identifiers from source code;
+- stable technical expressions.
+
+Normative wording:
+
+> **Учебные материалы пишутся на русском языке. Названия сущностей, профессиональная терминология, имена технологий, команд, API, параметров и устойчивые технические выражения сохраняются на English.**
+
+A professional term SHOULD NOT be translated merely for the sake of translation. When a term benefits from explanation, introduce it in its canonical English form and explain its meaning in Russian.
+
+For example:
+
+> `branch` — это именованная movable reference на commit. В дальнейшем используется термин `branch`, а не «ветка», если контекст не требует русского описания.
+
+This policy does **not** require English everywhere. Natural Russian phrasing remains appropriate when the concept is being described in ordinary explanatory language.
+
+For example:
+
+- «удалить ветку» is natural when describing an operation;
+- «Git `branch` — это movable reference...» is preferable when teaching the canonical technical concept.
+
+The objective is to preserve the vocabulary the learner will encounter in English-language documentation, CLI output, IDEs, source code, and other technical environments, while keeping the explanatory layer comfortable to read.
+
+This language policy applies to the future knowledge repository itself and SHOULD be treated as a foundational architectural rule rather than a formatting preference.
+
+## 8. Educational quality contract
 
 The repository SHOULD optimize for **understanding and future recall**, not command density.
 
@@ -321,31 +361,48 @@ Each entry SHOULD preserve enough provenance to answer:
 
 > Where did this knowledge come from?
 
-Potential metadata:
+Provenance is a **universal source model**, not a project-chapter model.
 
-\`\`\`yaml
-topic: git/branches
-type: procedure
-source_project: paulhuman/aip-mirror
-source_context: C0071
-source_kind: ai-conversation
-source_agent: ChatGPT
-verified: true
-verified_at: 2026-10-07
-version_context:
-  powershell: "7.x"
-\`\`\`
+The provenance model SHOULD distinguish:
 
-The exact schema remains open.
+```yaml
+provenance:
+  kind: ai-conversation
+  agent: ChatGPT
+  project: aip-mirror
+  chapter: C0071
+```
 
-Provenance SHOULD support multiple source kinds, including:
+Semantic roles:
 
-- current project conversation;
-- another AI assistant;
-- official documentation;
-- personal experimentation;
-- issue / discussion;
-- external article or tutorial.
+- `kind` → the semantic source category;
+- `agent` → who or what provided the material, when applicable;
+- `project` → where the material originated, when applicable;
+- `chapter` → optional project-local context, when applicable.
+
+The `kind` field SHOULD be the primary semantic discriminator. Candidate values include:
+
+- `ai-conversation`;
+- `agentic-ai`;
+- `official-documentation`;
+- `personal-experiment`;
+- `github-issue` / `github-discussion`;
+- `external-article` / `tutorial`;
+- other source categories as the archive encounters them.
+
+Additional provenance fields MAY be introduced where they materially improve traceability, for example:
+
+- source URL;
+- publication or capture date;
+- version/context;
+- author or organization;
+- relevant identifier.
+
+The `chapter` field is intentionally **not required** and its long-term retention is still an open design question. A chapter is a project-local organizational mechanism, not a universal unit of knowledge provenance. An agentic AI source, official documentation page, personal experiment, or external article may have no meaningful chapter at all.
+
+The source project and source chapter are provenance metadata, not semantic ownership. A knowledge entry remains independent of the project in which it was discovered.
+
+Provenance SHOULD support multiple sources for one entry when knowledge was assembled or verified from more than one origin.
 
 ## 12. Verification state
 
@@ -530,7 +587,7 @@ It SHOULD NOT become the canonical owner of the knowledge itself.
 
 The knowledge repository remains the human-facing storage layer; the skill is the operational capability for interacting with it.
 
-## 18. Open architecture questions
+## 19. Open architecture questions
 
 Before implementation, decide:
 
@@ -539,7 +596,8 @@ Before implementation, decide:
 3. Exact metadata format.
 4. Whether metadata belongs in front matter, a separate index, or both.
 5. Exact verification-state vocabulary.
-6. How duplicate / overlapping knowledge entries are detected.
+6. Whether `provenance.chapter` should be retained as an optional field or removed entirely.
+7. How duplicate / overlapping knowledge entries are detected.
 7. How cross-topic concepts are linked.
 8. How version-specific knowledge is represented.
 9. Whether external source URLs are mandatory when available.
@@ -547,7 +605,7 @@ Before implementation, decide:
 11. Which operations should be exposed as explicit commands such as \`>>capture\`, \`>>learn\`, or another name.
 12. How repository writes and validation should be authorized.
 
-## 19. Initial design principle
+## 20. Initial design principle
 
 The central principle for the whole system is:
 
