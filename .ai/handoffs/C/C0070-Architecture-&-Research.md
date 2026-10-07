@@ -94,6 +94,29 @@ C0069 established a separate active architecture track:
 
 - `.ai/handoffs/C/C0069-Architecture-&-Research.md`
 
+## Runtime activation test result
+
+Clean repository-level activation test performed against `main` after the project-agnostic README correction and normative-language archive-scope correction.
+
+Expected activation owners were reread from the current repository:
+
+- `.ai/rules/repository.md`
+- `.ai/rules/workflow.md`
+- `.ai/skills/activation/SKILL.md`
+- `.ai/skills/normative-language/SKILL.md`
+- `.ai/rules/normative-language.md`
+- `.ai/INDEX.md`
+
+Observed operation semantics:
+
+- `>>ai-infrastructure` identifies `.ai/skills/ai-infrastructure/SKILL.md` as its canonical operation owner.
+- `normative-language` is explicitly required as a dependency and its canonical rule is reread.
+- Elevated context reads `.ai/README.md`, `README.md`, `docs/PROJECT-INSTRUCTIONS.md`, `.ai/AGENTS.md`, `.ai/INDEX.md`, `.ai/config.yaml`, active infrastructure orientation, and `.ai/archives/README.md` as defined by the skill.
+- No `.ai/archives/**` content was read; only `.ai/archives/README.md` was read for the archive boundary.
+- The canonical normative-language scope now excludes `.ai/archives/**` rather than the obsolete `.ai/archive/**` path.
+
+Result: PASS for repository-level activation semantics. This test verifies the repository-defined activation contract; it does not simulate an external AI runtime that can execute the user command independently.
+
 ## Confirmed / observed
 
 - The requested receiving chapter is C0070.
@@ -115,7 +138,7 @@ C0069 established a separate active architecture track:
 ## Assumed / unverified
 
 - The legacy `.ai/archive/` directory has been renamed to `.ai/archives/`; active references were updated as part of C0070 implementation.
-- `.ai/README.md`, `.ai/archives/README.md`, the archive taxonomy, and the `>>ai-infrastructure` command routing are implemented; runtime activation behavior remains to be tested.
+- `.ai/README.md`, `.ai/archives/README.md`, the archive taxonomy, and the `>>ai-infrastructure` command routing are implemented; a clean repository-level activation test has now been performed.
 - No structural migration should be assumed complete until the current repository state is read and verified.
 
 ## Open
@@ -123,20 +146,15 @@ C0069 established a separate active architecture track:
 - **COMPLETE** — verify the implemented `>>ai-infrastructure` operation against its canonical elevated-context read set.
 - **COMPLETE** — verify ordinary bootstrap remains bounded to its intended initialization context.
 - **COMPLETE** — normalize the C0070-created active infrastructure documents under `.ai/rules/normative-language.md` and define automatic normative-language activation for `>>ai-infrastructure`.
-- **IN PROGRESS** — perform a clean runtime/activation test of `>>ai-infrastructure`, including automatic normative-language dependency activation and archive exclusion.
-- Keep the runtime test separate from the completed Agentic AI Compatibility Phase 2 work.
+- **COMPLETE** — perform a clean repository-level activation test of `>>ai-infrastructure`, including automatic normative-language dependency activation and archive exclusion.
+- Keep future runtime tests separate from the completed Agentic AI Compatibility Phase 2 work.
 - Define the minimal operational semantics of `>>ai-infrastructure` without loading archive contents automatically.
 - If structural changes are required, apply them incrementally with repository read-back, diff, scope, and commit verification.
 - Keep `.ai/docs/` as AI-infrastructure documentation and `docs/` as project-specific documentation.
 
 ## Immediate next task
 
-1. Complete the project-agnostic wording correction in `.ai/README.md` so the semantic boundary remains reusable across repositories.
-2. Run a clean runtime/activation test of `>>ai-infrastructure` against the current repository state.
-3. Verify from the activation TRACE that `normative-language` is activated automatically as a dependency and that `.ai/archives/**` is not loaded.
-4. Record the test result and any required correction in this handoff.
-
-Do not automatically load archive contents and do not redesign unrelated Agentic compatibility infrastructure.
+C0070 implementation and the planned context-mode validation are complete. Future work MAY perform additional runtime tests if an actual command-execution environment becomes available. Do not automatically load archive contents and do not redesign unrelated Agentic compatibility infrastructure.
 
 ## Recommended starting context
 
