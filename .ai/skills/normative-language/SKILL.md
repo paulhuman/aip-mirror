@@ -5,7 +5,7 @@ description: Activate the project's normative-language conventions by reading th
 
 # Normative language
 
-Use this skill when the normative-language capability is explicitly requested.
+Use this skill when the normative-language capability is explicitly requested or when a canonical higher-level operation explicitly requires normative-language activation.
 
 ## Canonical owner
 
