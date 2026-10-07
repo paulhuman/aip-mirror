@@ -115,7 +115,7 @@ C0069 established a separate active architecture track:
 ## Assumed / unverified
 
 - The legacy `.ai/archive/` directory has been renamed to `.ai/archives/`; active references were updated as part of C0070 implementation.
-- `.ai/README.md`, `.ai/archives/README.md`, the archive taxonomy, and the `>>ai-infrastructure` command routing are now implemented; validation remains.
+- `.ai/README.md`, `.ai/archives/README.md`, the archive taxonomy, and the `>>ai-infrastructure` command routing are implemented; runtime activation behavior remains to be tested.
 - No structural migration should be assumed complete until the current repository state is read and verified.
 
 ## Open
@@ -123,14 +123,18 @@ C0069 established a separate active architecture track:
 - **COMPLETE** — verify the implemented `>>ai-infrastructure` operation against its canonical elevated-context read set.
 - **COMPLETE** — verify ordinary bootstrap remains bounded to its intended initialization context.
 - **COMPLETE** — normalize the C0070-created active infrastructure documents under `.ai/rules/normative-language.md` and define automatic normative-language activation for `>>ai-infrastructure`.
-- Next bounded work may continue with deeper `>>ai-infrastructure` usage tests or the separate Agentic AI Phase 3 track; do not conflate the two.
+- **IN PROGRESS** — perform a clean runtime/activation test of `>>ai-infrastructure`, including automatic normative-language dependency activation and archive exclusion.
+- Keep the runtime test separate from the completed Agentic AI Compatibility Phase 2 work.
 - Define the minimal operational semantics of `>>ai-infrastructure` without loading archive contents automatically.
 - If structural changes are required, apply them incrementally with repository read-back, diff, scope, and commit verification.
 - Keep `.ai/docs/` as AI-infrastructure documentation and `docs/` as project-specific documentation.
 
 ## Immediate next task
 
-Validation is complete for the C0070 implementation checkpoint: `>>ai-infrastructure` routing, activation owners, elevated-context reads, explicit archive exclusion, and ordinary bootstrap scope were verified.
+1. Complete the project-agnostic wording correction in `.ai/README.md` so the semantic boundary remains reusable across repositories.
+2. Run a clean runtime/activation test of `>>ai-infrastructure` against the current repository state.
+3. Verify from the activation TRACE that `normative-language` is activated automatically as a dependency and that `.ai/archives/**` is not loaded.
+4. Record the test result and any required correction in this handoff.
 
 Do not automatically load archive contents and do not redesign unrelated Agentic compatibility infrastructure.
 
