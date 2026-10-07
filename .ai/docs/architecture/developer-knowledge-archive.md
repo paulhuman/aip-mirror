@@ -961,3 +961,18 @@ The implementation intentionally does not yet add:
 - a separate AI infrastructure inside the external knowledge repository.
 
 These remain future decisions that should be driven by real entry creation and validation rather than speculative architecture.
+
+
+### 26.6 C0073 correction: policy ownership
+
+The first implementation placed an active educational-language validation policy directly in `.ai/skills/knowledge-capture/SKILL.md` while the architectural source was an architecture note.
+
+This conflicted with the architecture README's ownership boundary: architecture notes are durable context and MUST NOT become replacements for active `.ai/rules/`, `.ai/skills/`, or `.ai/workflows/` owners.
+
+The educational language policy and related active capture constraints were therefore moved to the canonical rule:
+
+`.ai/rules/developer-knowledge.md`
+
+The `knowledge-capture` skill now acts as the operational capability and explicitly reads that rule before writing an entry. The architecture note remains the durable rationale and history.
+
+This correction is an **ownership-boundary correction**, not a change to the educational policy itself.
