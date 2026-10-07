@@ -119,15 +119,16 @@ C0069 established a separate active architecture track:
 
 ## Open
 
-- Verify the implemented `>>ai-infrastructure` operation against its canonical elevated-context read set.
-- Verify ordinary bootstrap remains bounded to its intended initialization context.
+- **COMPLETE** — verify the implemented `>>ai-infrastructure` operation against its canonical elevated-context read set.
+- **COMPLETE** — verify ordinary bootstrap remains bounded to its intended initialization context.
+- Next bounded work may continue with deeper `>>ai-infrastructure` usage tests or the separate Agentic AI Phase 3 track; do not conflate the two.
 - Define the minimal operational semantics of `>>ai-infrastructure` without loading archive contents automatically.
 - If structural changes are required, apply them incrementally with repository read-back, diff, scope, and commit verification.
 - Keep `.ai/docs/` as AI-infrastructure documentation and `docs/` as project-specific documentation.
 
 ## Immediate next task
 
-Validate the implemented AI-infrastructure context mode: confirm `>>ai-infrastructure` routing, activation owners, elevated-context reads, and explicit archive exclusion. Then verify ordinary bootstrap remains unchanged in scope.
+Validation is complete for the C0070 implementation checkpoint: `>>ai-infrastructure` routing, activation owners, elevated-context reads, explicit archive exclusion, and ordinary bootstrap scope were verified.
 
 Do not automatically load archive contents and do not redesign unrelated Agentic compatibility infrastructure.
 
