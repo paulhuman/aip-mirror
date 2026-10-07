@@ -493,3 +493,12 @@ It is NOT a replacement for:
 If research produces an operational rule, skill, workflow, or routing requirement, that definition MUST be placed in its appropriate canonical owner during a later implementation phase.
 
 The research document SHOULD preserve the reasoning, evidence, and decision history rather than becoming a second operational owner.
+
+
+## Chapter continuity
+
+The current durable chapter checkpoint is maintained in:
+
+- `.ai/handoffs/C/C0069-Architecture-&-Research.md`
+
+Future chapters continuing this research SHOULD read that handoff as the current chapter continuity snapshot before relying on this architecture note alone.
