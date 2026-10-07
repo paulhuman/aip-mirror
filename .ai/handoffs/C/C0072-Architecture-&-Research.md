@@ -271,6 +271,22 @@ Implementation of the external repository and skill remains outside this bounded
 
 Do not start Agentic AI Compatibility Phase 3 unless the user explicitly reopens it.
 
+## Migration checkpoint
+
+C0072 migration checkpoint for C0073:
+
+- The external repository `paulhuman/developer-knowledge` has been created and verified as **private** with default branch `main`.
+- Its initial state is intentionally minimal: `README.md` and `.gitignore` only; no taxonomy directories have been pre-created.
+- `README.md` records the accepted repository model: Markdown + YAML front matter, one self-contained entry per document, filesystem path as primary semantic topic, `topics[]` as additional semantic relationships, and flat-by-default / hierarchical-by-need taxonomy.
+- `.gitignore` contains the cross-platform housekeeping entries `.DS_Store` and `Thumbs.db`.
+- The next bounded scope is in `aip-mirror`: determine the minimal external-repository reference in `.ai/config.yaml`, then create the first real knowledge entry in `developer-knowledge/git/branches/delete-local-branches-except-main.md`.
+- Do not pre-create taxonomy directories beyond what the first real entry requires.
+- Do not design additional repository layers, indexes, databases, or capture infrastructure unless the next bounded scope produces a concrete need.
+
+### Immediate next task
+
+In C0073, read the current `.ai/config.yaml` and determine the minimal configuration representation for the external `developer-knowledge` repository. Then, after that bounded configuration decision is verified, create the first knowledge entry using the accepted minimum entry model. Keep the external repository project-independent; `aip-mirror` is provenance, not semantic ownership.
+
 ## Recommended starting context
 
 Start with this handoff, `.ai/docs/architecture/developer-knowledge-archive.md`, the current `.ai/workflows/handoff/BOOTSTRAP.md`, the active canonical owners, and the C0071 checkpoint. Treat C0070 and C0071 as completed baseline state and keep `.ai/archives/**` outside active elevated context.
