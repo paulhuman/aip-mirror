@@ -316,3 +316,12 @@ This survey does not conclude that `.ai/interfaces/` should be created, that `/`
 - https://geminicli.com/docs/reference/configuration/
 - https://geminicli.com/docs/cli/cli-reference/
 - https://geminicli.com/docs/cli/sandbox/
+
+
+## Chapter continuity
+
+The current durable chapter checkpoint is maintained in:
+
+- `.ai/handoffs/C/C0069-Architecture-&-Research.md`
+
+Future chapters continuing this research SHOULD read that handoff as the current chapter continuity snapshot before relying on this architecture note alone.
