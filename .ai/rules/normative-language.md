@@ -6,7 +6,7 @@ This rule defines how normative meaning is expressed in active project-controlle
 
 This rule applies to:
 
-- active `.ai/**`, except `.ai/archive/**`;
+- active `.ai/**`, except `.ai/archives/**`;
 - `.ai/handoffs/README.md`;
 - the entire `docs/**` tree.
 
