@@ -32,7 +32,7 @@ Project-specific configuration that generic infrastructure needs is intentionall
 - `.ai/templates/` — human-oriented templates owned by their applicable workflows.
 - `.ai/archives/` — historical/disposable storage; not active infrastructure context.
 
-The README files inside active subdirectories provide orientation only. They do not replace canonical semantic owners.
+The README files inside active subdirectories provide orientation only. They MUST NOT replace canonical semantic owners.
 
 ## Active infrastructure versus archives
 
@@ -51,7 +51,7 @@ In particular:
 - `.ai/AGENTS.md` does not replace bootstrap or operation routing.
 - `.ai/INDEX.md` routes operations and discovers capabilities; it does not become a second procedure owner.
 - `.ai/docs/` architecture notes preserve durable reasoning and decisions; they are not runtime execution owners.
-- README files orient humans and AI but do not redefine canonical procedures.
+- README files orient humans and AI but MUST NOT redefine canonical procedures.
 
 When this README conflicts with a canonical owner, the canonical owner governs.
 
