@@ -52,17 +52,22 @@ Architecture tests are durable infrastructure evidence, not active semantic owne
 
 ## Ownership boundary
 
-Architecture notes are **not active execution owners**.
+Documents under `.ai/docs/` are **supporting/contextual material, not active semantic owners**.
 
-They MUST NOT become replacements for:
+This includes architecture notes and other documentation such as `.ai/docs/faq/`. These documents MAY be actively read and used, sometimes for long periods, but their role is to explain, preserve rationale, provide research context, or orient users and AI.
 
-- `.ai/rules/` — canonical semantic constraints;
+Canonical active owners live in operational subsystems such as:
+
+- `.ai/rules/` — semantic constraints;
 - `.ai/skills/` — reusable capabilities;
 - `.ai/workflows/` — ordered procedures;
-- `.ai/INDEX.md` — routing and capability discovery.
+- `.ai/templates/` — reusable structural templates;
+- `.ai/INDEX.md` — routing and capability discovery;
+- future `.ai` subsystems MAY become active owners when explicitly assigned that role.
 
-When an architectural decision becomes an active rule, skill, workflow, or other operational semantic, the active owner MUST contain the usable definition. The architecture note preserves the durable explanation and history rather than becoming a second owner.
+Supporting/contextual layers such as `.ai/handoffs/`, `.ai/docs/`, and `.ai/archives/` MUST NOT become second owners merely because an active owner refers to them.
 
+When an architectural decision becomes an active rule, skill, workflow, template, or other operational semantic, the active owner MUST contain the usable definition. The `.ai/docs/` material preserves explanation, rationale, research, or orientation rather than becoming a second owner.
 ## When to read
 
 Read the relevant architecture note when:
