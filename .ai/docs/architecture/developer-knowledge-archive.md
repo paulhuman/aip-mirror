@@ -2,7 +2,7 @@
 
 **Status:** Draft architecture design  
 **Chapter:** C0071 — Architecture & Research  
-**Purpose:** Define the architecture of a separate, project-independent personal developer knowledge repository and the \`.ai\` capability required to capture, normalize, explain, and preserve useful technical knowledge.
+**Purpose:** Define the architecture of a separate, project-independent personal developer knowledge repository and the `.ai` capability required to capture, normalize, explain, and preserve useful technical knowledge.
 
 ## 1. Problem
 
@@ -10,7 +10,7 @@ During work on any project, the user frequently receives useful technical explan
 
 These materials currently arise inside project conversations, but their long-term value is usually **not project-specific**.
 
-For example, a PowerShell command used while maintaining \`aip-mirror\` may actually teach a reusable Git concept:
+For example, a PowerShell command used while maintaining `aip-mirror` may actually teach a reusable Git concept:
 
 > enumerate branches → filter the result → execute an operation for each remaining branch.
 
@@ -31,7 +31,7 @@ The repository should remain useful even when the original project or conversati
 
 The proposed system separates **AI working infrastructure** from **human developer knowledge**.
 
-\`\`\`
+```
 Current project repository
 └── .ai/
     = AI working infrastructure
@@ -42,11 +42,11 @@ Personal Developer Knowledge Repository
     = reusable knowledge for the human learner
     = concepts, procedures, recipes, mental models, troubleshooting,
       explanations, examples, and related references
-\`\`\`
+```
 
-The knowledge repository is not another copy of \`.ai/\`.
+The knowledge repository is not another copy of `.ai/`.
 
-\`.ai\` answers:
+`.ai` answers:
 
 > How should AI work with this project and its infrastructure?
 
@@ -60,7 +60,7 @@ The knowledge repository MUST be independent of the project in which a piece of 
 
 Example:
 
-\`\`\`
+```
 Source project:
     paulhuman/aip-mirror
 
@@ -69,13 +69,13 @@ Knowledge:
 
 Provenance:
     originally discovered while working on aip-mirror
-\`\`\`
+```
 
 The source project is metadata about the origin of the knowledge, not the semantic owner of that knowledge.
 
 This permits the same knowledge base to serve:
 
-- \`aip-mirror\`;
+- `aip-mirror`;
 - future personal projects;
 - experiments;
 - maintenance tasks;
@@ -86,7 +86,7 @@ This permits the same knowledge base to serve:
 
 The working concept is a **Personal Developer Knowledge Archive / Developer Knowledge Base**.
 
-\`FAQ\` is intentionally treated as a possible presentation format, not the primary architectural name. The repository is broader than FAQ because a durable entry may contain a complete explanation, procedure, mental model, troubleshooting guide, or learning note.
+`FAQ` is intentionally treated as a possible presentation format, not the primary architectural name. The repository is broader than FAQ because a durable entry may contain a complete explanation, procedure, mental model, troubleshooting guide, or learning note.
 
 Candidate repository names remain open.
 
@@ -98,7 +98,7 @@ The primary taxonomy SHOULD follow the technology/domain being learned, not the 
 
 A possible initial shape is:
 
-\`\`\`
+```
 knowledge/
 ├── git/
 │   ├── branches/
@@ -125,7 +125,7 @@ knowledge/
 ├── cmake/
 ├── windows/
 └── ...
-\`\`\`
+```
 
 This is only a starting hypothesis. The architecture SHOULD avoid creating dozens of empty categories before real material requires them.
 
@@ -151,7 +151,7 @@ Explains how to perform a concrete task.
 
 Examples:
 
-- Delete all local Git branches except \`main\`.
+- Delete all local Git branches except `main`.
 - Check installed DSH versions.
 - Update a plugin after a Desktop upgrade.
 
@@ -245,23 +245,23 @@ A good entry should answer, where applicable:
 
 The entry SHOULD prefer explanations that allow the learner to reconstruct the solution independently.
 
-## 8. Relationship to \`explain-code\`
+## 8. Relationship to `explain-code`
 
-\`.ai/skills/explain-code\` and the proposed knowledge-capture capability have different responsibilities.
+`.ai/skills/explain-code` and the proposed knowledge-capture capability have different responsibilities.
 
-\`explain-code\` is a **teaching capability**:
+`explain-code` is a **teaching capability**:
 
-\`\`\`
+```
 code / technical material
         ↓
 explanation
         ↓
 human understanding
-\`\`\`
+```
 
 The proposed capability is a **knowledge-capture capability**:
 
-\`\`\`
+```
 useful explanation / procedure / external AI answer
         ↓
 classify
@@ -275,9 +275,9 @@ add educational structure
 capture provenance
         ↓
 knowledge repository
-\`\`\`
+```
 
-The new capability SHOULD reuse the pedagogical principles of \`explain-code\` rather than replace or redefine that skill.
+The new capability SHOULD reuse the pedagogical principles of `explain-code` rather than replace or redefine that skill.
 
 In particular, the existing emphasis on:
 
@@ -309,7 +309,7 @@ The input may be:
 
 The AI SHOULD then determine:
 
-\`\`\`
+```
 What is this?
     ↓
 Which technology/domain?
@@ -325,7 +325,7 @@ What needs verification?
 Normalize into the educational schema
     ↓
 Write to configured knowledge repository
-\`\`\`
+```
 
 The user should not have to manually decide the final directory or document format for every capture.
 
@@ -335,14 +335,14 @@ An answer from another AI MUST NOT automatically be treated as verified truth.
 
 For example, the supplied DSH answer from Grok contains useful material, but before permanent capture the system should distinguish:
 
-\`\`\`
+```
 Claim
     ↓
 Known / verified?
     ├── yes → preserve as confirmed
     ├── uncertain → mark as unverified / verify
     └── version-dependent → record version context
-\`\`\`
+```
 
 The capture process SHOULD be able to improve an imported answer by:
 
@@ -419,17 +419,17 @@ This prevents the archive from becoming a permanent store of plausible-sounding 
 
 The real-life example that motivated this design is:
 
-\`\`\`powershell
+```powershell
 git branch --format='%(refname:short)' |
     Where-Object { $_ -ne 'main' } |
     ForEach-Object { git branch -D $_ }
-\`\`\`
+```
 
 The future knowledge entry should not merely preserve this command.
 
 It should explain the pipeline:
 
-\`\`\`
+```
 git branch
     ↓
 produce branch names
@@ -447,16 +447,16 @@ remove main from the candidates
 ForEach-Object
     ↓
 delete each remaining branch
-\`\`\`
+```
 
 It should then explain the important concepts separately:
 
 - Git's branch references;
-- \`git branch --format\`;
+- `git branch --format`;
 - PowerShell's pipeline;
-- \`Where-Object\`;
-- \`ForEach-Object\`;
-- \`git branch -D\`;
+- `Where-Object`;
+- `ForEach-Object`;
+- `git branch -D`;
 - why this is different from deleting remote branches;
 - what safety checks are appropriate.
 
@@ -468,7 +468,7 @@ The supplied DSH answer from Grok is a good candidate for a future entry, but it
 
 Its useful subject matter includes:
 
-\`\`\`
+```
 DSH Desktop
     ↓
 Harness runtime
@@ -478,12 +478,12 @@ profile
 plugins / dependencies
     ↓
 dshmarket
-\`\`\`
+```
 
 A durable entry could eventually cover:
 
 - how to identify the Desktop-managed Harness version;
-- how \`DSH_HOME\` changes the active Harness home;
+- how `DSH_HOME` changes the active Harness home;
 - how profiles are structured;
 - how to inspect installed plugin versions;
 - what is managed by Desktop versus the user;
@@ -498,7 +498,7 @@ Before publication, claims such as “version X is embedded in Desktop” or exa
 
 A first-pass entry schema could be:
 
-\`\`\`markdown
+```markdown
 # <Title>
 
 > Short statement of what the learner will understand or accomplish.
@@ -526,7 +526,7 @@ A first-pass entry schema could be:
 ## Related concepts
 
 ## Provenance
-\`\`\`
+```
 
 Not every section is mandatory.
 
@@ -534,23 +534,23 @@ The capture capability SHOULD select the sections that actually improve understa
 
 ## 16. Configuration boundary
 
-The location of the external knowledge repository SHOULD be configured in the current project's \`.ai/config.yaml\`.
+The location of the external knowledge repository SHOULD be configured in the current project's `.ai/config.yaml`.
 
 Conceptually:
 
-\`\`\`yaml
+```yaml
 references:
   repositories:
     developer_knowledge:
       repository: <configured repository>
       role: Personal developer knowledge archive
-\`\`\`
+```
 
 The skill MUST NOT hard-code the repository name or URL.
 
 This preserves portability:
 
-\`\`\`
+```
 .ai/config.yaml
     ↓
 where the knowledge repository lives
@@ -558,7 +558,7 @@ where the knowledge repository lives
 knowledge-capture skill
     ↓
 how knowledge is captured and maintained
-\`\`\`
+```
 
 The exact configuration key remains to be finalized.
 
@@ -568,7 +568,7 @@ The proposed skill is currently a design target, not yet an implemented skill.
 
 A provisional conceptual name is:
 
-\`knowledge-capture\`
+`knowledge-capture`
 
 Its responsibility would be to:
 
@@ -592,7 +592,7 @@ The knowledge repository remains the human-facing storage layer; the skill is th
 Before implementation, decide:
 
 1. Final repository name.
-2. Whether the repository root should contain \`knowledge/\` or use topic directories directly.
+2. Whether the repository root should contain `knowledge/` or use topic directories directly.
 3. Exact metadata format.
 4. Whether metadata belongs in front matter, a separate index, or both.
 5. Exact verification-state vocabulary.
@@ -601,8 +601,8 @@ Before implementation, decide:
 7. How cross-topic concepts are linked.
 8. How version-specific knowledge is represented.
 9. Whether external source URLs are mandatory when available.
-10. Whether the archive needs its own lightweight \`.ai\` infrastructure later.
-11. Which operations should be exposed as explicit commands such as \`>>capture\`, \`>>learn\`, or another name.
+10. Whether the archive needs its own lightweight `.ai` infrastructure later.
+11. Which operations should be exposed as explicit commands such as `>>capture`, `>>learn`, or another name.
 12. How repository writes and validation should be authorized.
 
 ## 20. Initial design principle
