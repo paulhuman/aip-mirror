@@ -136,7 +136,7 @@ Before migration, determine `CURRENT_CHAPTER_CONTEXT` as follows.
 When active conversation/bootstrap context does not establish `CURRENT_CHAPTER_CONTEXT`, inspect both repository handoff locations for the current specialization:
 
     .ai/handoffs/<SPECIALIZATION>/
-    .ai/archive/handoffs/<SPECIALIZATION>/
+    .ai/archives/handoffs/<SPECIALIZATION>/
 
 Both locations are repository evidence. Location alone MUST NOT determine the current chapter.
 
