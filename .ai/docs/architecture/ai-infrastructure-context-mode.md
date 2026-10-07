@@ -95,6 +95,10 @@ Its semantic meaning is:
 
 The operation establishes at least:
 
+### Normative-language activation
+
+Because the elevated mode operates directly on active `.ai` infrastructure, `>>ai-infrastructure` MUST activate the normative-language capability as a required dependency. This does not create a second semantic owner: `.ai/rules/normative-language.md` remains the canonical owner of normative-language semantics.
+
 ### Repository-level orientation
 
 - root `README.md`;
@@ -106,7 +110,9 @@ The operation establishes at least:
 - all active `.ai/**/README.md` files that define the structure of active infrastructure;
 - `.ai/AGENTS.md`;
 - `.ai/INDEX.md`;
-- `.ai/config.yaml`.
+- `.ai/config.yaml`;
+- `.ai/skills/normative-language/SKILL.md`;
+- `.ai/rules/normative-language.md`.
 
 ### Active infrastructure semantics
 
@@ -178,7 +184,7 @@ The two tracks MAY be developed independently and SHOULD NOT be conflated.
 
 ## 9. Minimality principle
 
-The new operation SHOULD remain a thin context-loading capability.
+The new operation SHOULD remain a thin context-loading capability. Required normative-language activation is part of that context contract, not a separate routing layer.
 
 It SHOULD NOT create:
 
@@ -200,7 +206,7 @@ The implementation sequence has now reached the validation stage:
 3. **COMPLETE** — add `.ai/archives/README.md`;
 4. **COMPLETE** — update active archive-path references;
 5. **COMPLETE** — define `.ai/skills/ai-infrastructure/SKILL.md` and route `>>ai-infrastructure` through `.ai/INDEX.md`;
-6. **COMPLETE** — define the elevated-context read set and explicit archive exclusion;
+6. **COMPLETE** — define the elevated-context read set, normative-language activation, and explicit archive exclusion;
 7. **COMPLETE** — update relevant README and architecture references;
 8. **VALIDATED** — ordinary bootstrap contains no archive-context expansion and retains its intended initialization workflow;
 9. **VALIDATED** — `>>ai-infrastructure` routing, activation owners, elevated-context reads, and explicit archive exclusion were executed and inspected;
