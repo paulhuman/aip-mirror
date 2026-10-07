@@ -32,6 +32,17 @@ The current repository versions are authoritative. Normative-language semantics 
 
 Establish the following context in this order.
 
+### Normative-language activation
+
+`>>ai-infrastructure` MUST activate the normative-language capability because the mode operates on the active `.ai` infrastructure layer.
+
+Read:
+
+    .ai/skills/normative-language/SKILL.md
+    .ai/rules/normative-language.md
+
+This is dependency activation, not semantic ownership: `.ai/rules/normative-language.md` remains the canonical owner of normative-language semantics.
+
 ### Repository-level orientation
 
 Read:
