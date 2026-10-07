@@ -42,7 +42,7 @@ The current documented user-facing command surface is:
 | `>>generate-bootstrap <chapter>` | generate bootstrap instruction for the future receiving chapter | `.ai/skills/handoff/SKILL.md` + `.ai/workflows/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow; current handoff |
 | `>>explain-code`                 | explain code or codebase behavior                               | `.ai/skills/explain-code/SKILL.md`                                   | explain-code skill                                 |
 | `>>normative-language`          | activate normative-language context                              | `.ai/skills/normative-language/SKILL.md`                             | normative-language skill                           |
-| `>>ai-infrastructure`           | switch to AI-infrastructure context and establish elevated active-infrastructure context | `.ai/skills/ai-infrastructure/SKILL.md` | `.ai/rules/repository.md`; `.ai/rules/workflow.md`; `.ai/skills/activation/SKILL.md`; `.ai/INDEX.md` |
+| `>>ai-infrastructure`           | switch to AI-infrastructure context and establish elevated active-infrastructure context | `.ai/skills/ai-infrastructure/SKILL.md` | `.ai/rules/repository.md`; `.ai/rules/workflow.md`; `.ai/skills/activation/SKILL.md`; `.ai/skills/normative-language/SKILL.md`; `.ai/rules/normative-language.md`; `.ai/INDEX.md` |
 
 The table records only information needed to recognize and activate the canonical operation. It does not define write authorization, commit construction, or workflow steps.
 
