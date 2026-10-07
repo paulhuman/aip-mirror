@@ -202,12 +202,26 @@ The implementation sequence has now reached the validation stage:
 5. **COMPLETE** — define `.ai/skills/ai-infrastructure/SKILL.md` and route `>>ai-infrastructure` through `.ai/INDEX.md`;
 6. **COMPLETE** — define the elevated-context read set and explicit archive exclusion;
 7. **COMPLETE** — update relevant README and architecture references;
-8. **PENDING VALIDATION** — verify ordinary bootstrap still reads only its intended initialization context;
-9. **PENDING VALIDATION** — execute `>>ai-infrastructure` as a separate operation and inspect its TRACE/read set;
-10. **IN PROGRESS** — retain this architecture note as the durable record of the implementation and validation result.
+8. **VALIDATED** — ordinary bootstrap contains no archive-context expansion and retains its intended initialization workflow;
+9. **VALIDATED** — `>>ai-infrastructure` routing, activation owners, elevated-context reads, and explicit archive exclusion were executed and inspected;
+10. **COMPLETE** — this architecture note remains the durable record of the implementation and validation result.
 
 The current chapter remains the owner of this implementation checkpoint.
 
+## 11. Validation result
+
+The C0070 implementation check confirms:
+
+- `.ai/README.md` exists as the active root AI-infrastructure orientation document.
+- `.ai/archive/` no longer exists; historical material is under `.ai/archives/`.
+- `.ai/archives/README.md` exists and defines the archive as historical, non-active, disposable context.
+- `.ai/skills/ai-infrastructure/SKILL.md` is the canonical skill for the new context mode.
+- `.ai/INDEX.md` routes `>>ai-infrastructure` to that skill and lists the activation owners.
+- The elevated read set includes repository orientation, active AI-infrastructure orientation, active README discovery, `.ai/docs/` survey, and `.ai/archives/README.md`.
+- Archive contents were not loaded during the operation.
+- The current `.ai/workflows/handoff/BOOTSTRAP.md` contains no archive-path reference and does not expand ordinary bootstrap into archive loading.
+
+The operation therefore satisfies the intended minimality boundary: it adds a thin domain/context-loading capability without introducing a second semantic registry, a second owner for `.ai/`, or automatic historical-context loading.
 ## 11. Architectural intent
 
 The intended long-term model is:
