@@ -1,0 +1,184 @@
+# Conversation Handoff
+
+**Conversation:**
+C0073 — Architecture & Research
+
+**Specialization:**
+C
+
+**Chapter:**
+0073
+
+**Previous chapter:**
+0072
+
+## Starting objective
+
+Continue the Architecture & Research track from the completed C0072 Developer Knowledge Repository design checkpoint.
+
+The bounded next scope is to connect the newly created external `paulhuman/developer-knowledge` repository to `aip-mirror` through the minimum necessary `.ai/config.yaml` reference, verify that configuration change, and then create the first real knowledge entry in the external repository.
+
+Keep the external knowledge repository project-independent: `aip-mirror` is provenance, not semantic ownership.
+
+## Known starting implementation state
+
+- Repository: `paulhuman/aip-mirror`
+- Canonical branch: `main`
+- Current chapter: C0073
+- Previous chapter: C0072
+- Specialization: C
+- Short name: Architecture & Research
+- Derived chapter identifier: C0073
+- Canonical bootstrap workflow: `.ai/workflows/handoff/BOOTSTRAP.md`
+- Repository write capability is available through the connected GitHub interface.
+- C0069 Agentic AI Compatibility Phase 2 is complete with Final Gate 2 = PASS.
+- C0070 implementation and validation of AI-infrastructure context mode are complete.
+- C0071 bounded provenance/language design work is complete.
+- C0072 bounded Developer Knowledge Repository design is complete.
+- The current repository versions of canonical owners MUST be reread before relying on remembered wording or procedure.
+
+## C0072 durable checkpoint
+
+### External Developer Knowledge Repository
+
+The external repository `paulhuman/developer-knowledge` has been created and verified as private with default branch `main`.
+
+Its initial state is intentionally minimal:
+
+- `README.md`
+- `.gitignore`
+
+No taxonomy directories have been pre-created.
+
+The external repository README records the accepted repository model:
+
+- Markdown + YAML front matter;
+- one self-contained Markdown document per entry;
+- filesystem path as the primary semantic topic;
+- `topics[]` for additional semantic relationships;
+- flat-by-default / hierarchical-by-need taxonomy;
+- provenance records where and in what context knowledge was captured;
+- the repository preserves durable understanding rather than project-specific implementation notes or transient conversation state.
+
+### Minimum knowledge entry model
+
+The accepted minimum metadata envelope is:
+
+- `title`
+- `type`
+- `topics`
+- `status`
+- `provenance[]`
+- optional `version` context
+
+The body is intentionally variable and educational. A strong entry generally follows:
+
+goal/problem → short answer → how it works → step-by-step → why it works → gotchas/safety → verification → alternatives → version notes → related concepts.
+
+The final provenance decision is:
+
+- `provenance.chapter` is retained as optional;
+- it is a project-conversation locator only;
+- it is never required, taxonomy, identity, or semantic ownership;
+- it should be included only when it materially improves traceability.
+
+The future `knowledge-capture` capability contract is:
+
+capture → classify → discover → normalize → verify → provenance → version context → write → read back → report.
+
+Implementation of the future skill remains outside the completed C0072 bounded design.
+
+### First knowledge fixture
+
+The first real entry is planned at:
+
+`paulhuman/developer-knowledge`:
+`git/branches/delete-local-branches-except-main.md`
+
+It should teach the reusable Git + PowerShell concepts behind the branch-cleanup procedure rather than merely preserve a command snippet.
+
+The accepted conceptual fixture is:
+
+```powershell
+git branch --format='%(refname:short)' |
+    Where-Object { $_ -ne 'main' } |
+    ForEach-Object { git branch -D $_ }
+```
+
+The entry should distinguish local branch deletion from remote deletion, `-D` from `-d`, filtering by branch name from checking unmerged work, and the reusable PowerShell pipeline from this particular destructive operation.
+
+## Relevant files and references
+
+### Canonical bootstrap / infrastructure owners
+
+- `.ai/config.yaml`
+- `.ai/AGENTS.md`
+- `.ai/rules/repository.md`
+- `.ai/rules/workflow.md`
+- `.ai/rules/handoff/lifecycle.md`
+- `.ai/rules/handoff/references.md`
+- `.ai/rules/commits.md`
+- `.ai/skills/activation/SKILL.md`
+- `.ai/skills/handoff/SKILL.md`
+- `.ai/skills/commits/SKILL.md`
+- `.ai/workflows/handoff/BOOTSTRAP.md`
+- `.ai/handoffs/README.md`
+- `.ai/docs/architecture/README.md`
+
+### Architecture context
+
+- `.ai/docs/architecture/developer-knowledge-archive.md`
+
+### Predecessor
+
+- `.ai/handoffs/C/C0072-Architecture-&-Research.md`
+
+### External repository
+
+- `paulhuman/developer-knowledge`
+  - Role: Personal, project-independent developer knowledge repository.
+  - Default branch: `main`
+  - Initial relevant file: `README.md`
+
+## Confirmed
+
+- C0072 completed the bounded architecture/design work for the external Developer Knowledge Repository.
+- `paulhuman/developer-knowledge` exists as a private repository on `main`.
+- The external repository intentionally starts with only `README.md` and `.gitignore`.
+- The external repository uses Markdown + YAML front matter with one self-contained entry per document.
+- Filesystem path is the primary semantic topic; `topics[]` provides additional semantic relationships.
+- Taxonomy is flat-by-default and hierarchical-by-need.
+- The minimum entry metadata is `title`, `type`, `topics`, `status`, and `provenance[]`, with optional `version`.
+- `provenance.chapter` is retained as an optional provenance locator.
+- The first real knowledge entry is the Git branch-cleanup fixture under `git/branches/`.
+- The external repository remains project-independent; `aip-mirror` belongs in provenance when relevant.
+
+## Inferred
+
+- The minimum `.ai/config.yaml` representation should use the existing `references.repositories` structure and the declared repository role, avoiding premature capture-specific configuration layers.
+- The first knowledge entry should validate the concrete model against a real document before designing additional repository infrastructure.
+- The Git branch-cleanup fixture is best represented as a `procedure` with a strong mental-model component.
+
+## Assumed / unverified
+
+- The exact final key name and wording for the `developer-knowledge` entry under `.ai/config.yaml` still require the C0073 bounded configuration decision.
+- The final exact front-matter values and explanatory wording for the first entry have not yet been authored and verified.
+- No `knowledge-capture` skill has been implemented.
+- No additional taxonomy, index, database, or repository layer should be introduced unless the first real entry demonstrates a concrete need.
+
+## Open
+
+- Determine and document the minimum `.ai/config.yaml` reference for `paulhuman/developer-knowledge`.
+- Verify the configuration change and its scope.
+- Create and verify `git/branches/delete-local-branches-except-main.md` in `paulhuman/developer-knowledge`.
+- Confirm the first entry follows the accepted minimum metadata and educational model.
+- Keep future repository structure driven by real entries rather than speculative layers.
+- Do not start Agentic AI Compatibility Phase 3 unless the user explicitly reopens it.
+
+## Immediate next task
+
+Read the current `.ai/config.yaml` and determine the minimal external-repository reference for `paulhuman/developer-knowledge`. Make only that bounded configuration change, verify the complete resulting file and diff scope, and then proceed to the first real knowledge entry in the external repository.
+
+## Recommended starting context
+
+Start with this handoff, `.ai/docs/architecture/developer-knowledge-archive.md`, the current `.ai/config.yaml`, the active canonical owners, and the external repository README. Treat C0072 as completed baseline state and keep `.ai/archives/**` outside active elevated context.
