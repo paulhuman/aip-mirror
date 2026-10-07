@@ -237,3 +237,76 @@ Phase 3 SHOULD specify the minimal adapter/conformance contract only:
 5. one conformance test proving that a future environment preserves existing semantic owners and the repository safety contract.
 
 No universal transport layer implementation is required by current evidence.
+
+
+## Phase 2 — complete research preservation
+
+Phase 2 is COMPLETE.
+
+**Final Gate 2: PASS — semantic coverage confirmed and adapter boundaries validated.**
+
+The complete durable research set is:
+
+- .ai/docs/architecture/agentic-ai-compatibility-architecture.md — research plan and architectural hypothesis; points back to this handoff.
+- .ai/docs/architecture/agentic-ai-compatibility-capability-audit.md — Phase 1 capability baseline; points back to this handoff.
+- .ai/docs/architecture/agentic-ai-environment-survey.md — official-source survey of OpenAI Codex, Claude Code, DeepSeek Harness / DSH Desktop, and Gemini CLI; includes the external source list and final Phase 2 completion checkpoint; points back to this handoff.
+- .ai/docs/architecture/agentic-ai-owner-seam-audit.md — mapping of surveyed capability seams to existing canonical AIP Mirror owners; points back to this handoff.
+- .ai/docs/architecture/agentic-ai-compatibility-boundaries.md — concrete skill portability test, transport-neutral evidence model, final adapter boundary, and Phase 3 input; points back to this handoff.
+
+### External research references
+
+These references materially support the Phase 2 findings and are preserved here so a future chapter does not depend on the old conversation.
+
+#### OpenAI Codex / Agents
+
+- OpenAI developer documentation
+  - Role: current evidence for Codex instruction discovery, Agent Skills, Agents, sessions/environments, and self-hosted execution.
+  - URLs: https://developers.openai.com/api/docs/guides/latest-model ; https://developers.openai.com/api/docs/guides/tools-skills ; https://developers.openai.com/api/docs/guides/agents ; https://developers.openai.com/api/docs/guides/agents-api/overview ; https://developers.openai.com/api/docs/guides/agents-api/environments/self-hosted
+
+#### Claude Code
+
+- Claude Code documentation
+  - Role: current evidence for project memory, Skills, @ context references, commands, permissions, and sandbox/policy controls.
+  - URLs: https://code.claude.com/docs/llms.txt ; https://code.claude.com/docs/en/memory.md ; https://code.claude.com/docs/en/skills.md ; https://code.claude.com/docs/en/permissions.md ; https://code.claude.com/docs/en/commands.md ; https://code.claude.com/docs/en/desktop.md
+
+#### DeepSeek Harness / DSH
+
+- deepseek-ai/deepseek-harness
+  - Role: primary source for DeepSeek Harness capability seams, skills, interaction, approval, sandbox, sessions, and ACP automation boundaries.
+  - URLs: https://github.com/deepseek-ai/deepseek-harness ; https://github.com/deepseek-ai/deepseek-harness/blob/master/AGENTS.md ; https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/capability-seams.md ; https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/skill/README.md ; https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/skill/tool-skill/README.md ; https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/interaction/README.md ; https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/approval.md ; https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/acp/acp/README.md
+- bruc3van/dsh-desktop
+  - Role: third-party DSH Desktop carrier used only to distinguish the desktop carrier from upstream DeepSeek Harness.
+  - URL: https://github.com/bruc3van/dsh-desktop/blob/main/README_EN.md
+
+#### Gemini CLI
+
+- Gemini CLI documentation
+  - Role: materially different Agentic environment evidence for hierarchical context, Agent Skills, slash/at/shell transport syntax, approvals, sandboxing, policy, diffs, and structured output.
+  - URLs: https://geminicli.com/docs/cli/skills/ ; https://geminicli.com/docs/reference/configuration/ ; https://geminicli.com/docs/cli/cli-reference/ ; https://geminicli.com/docs/cli/sandbox/
+
+### Phase 2 architectural result
+
+Validated dependency direction:
+
+environment transport → invocation/context adapter → existing AIP Mirror semantic owner → environment execution capability → transport-neutral evidence → environment-native presentation
+
+No second semantic owner was found. In particular:
+
+- no .ai/interfaces/ directory is justified;
+- no second skill registry is justified;
+- no environment-specific copies of canonical skills/rules/workflows are justified;
+- / and @ remain environment-specific transport/context syntax;
+- environment authorization remains outside AIP Mirror semantic ownership;
+- repository mutation safety remains governed by the existing repository contract.
+
+### Phase 3 starting point
+
+Phase 3 begins from the completed evidence above and SHOULD specify:
+
+1. invocation/context adapter responsibilities;
+2. skill discovery/packaging mapping;
+3. transport-neutral evidence fields;
+4. repository mutation verification mapping;
+5. one minimal environment conformance test.
+
+The architecture notes above explicitly point back to this handoff so future chapters can recover this research chain even if they do not independently read C0069.
