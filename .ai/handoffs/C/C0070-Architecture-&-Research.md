@@ -113,23 +113,21 @@ C0069 established a separate active architecture track:
 
 ## Assumed / unverified
 
-- The repository may still contain some pre-rename `.ai/archive/` paths or references; their current state MUST be inspected rather than assumed from C0069's proposal.
-- The proposed `.ai/README.md`, archive taxonomy, and command routing may not yet be fully implemented.
+- The legacy `.ai/archive/` directory has been renamed to `.ai/archives/`; active references were updated as part of C0070 implementation.
+- `.ai/README.md`, `.ai/archives/README.md`, the archive taxonomy, and the `>>ai-infrastructure` command routing are now implemented; validation remains.
 - No structural migration should be assumed complete until the current repository state is read and verified.
 
 ## Open
 
-- Inspect the current active `.ai` taxonomy and determine which parts of the C0069 context-mode proposal are already implemented.
-- Verify active references and canonical ownership boundaries before changing paths or command routing.
+- Verify the implemented `>>ai-infrastructure` operation against its canonical elevated-context read set.
+- Verify ordinary bootstrap remains bounded to its intended initialization context.
 - Define the minimal operational semantics of `>>ai-infrastructure` without loading archive contents automatically.
 - If structural changes are required, apply them incrementally with repository read-back, diff, scope, and commit verification.
 - Keep `.ai/docs/` as AI-infrastructure documentation and `docs/` as project-specific documentation.
 
 ## Immediate next task
 
-Inspect the current repository state for the AI-infrastructure context-mode track, beginning with `.ai/README.md`, `.ai/archives/` versus any legacy `.ai/archive/`, active `.ai/**/README.md`, `.ai/INDEX.md`, and the architecture proposal.
-
-Establish a concrete gap list against the C0069 proposal before performing any structural mutation.
+Validate the implemented AI-infrastructure context mode: confirm `>>ai-infrastructure` routing, activation owners, elevated-context reads, and explicit archive exclusion. Then verify ordinary bootstrap remains unchanged in scope.
 
 Do not automatically load archive contents and do not redesign unrelated Agentic compatibility infrastructure.
 
