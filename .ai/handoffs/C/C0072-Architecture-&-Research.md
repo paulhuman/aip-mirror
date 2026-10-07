@@ -222,7 +222,7 @@ The exact configuration key and repository name remain open.
 - Exact command/interaction name (`>>capture`, `>>learn`, etc.) is not selected.
 - It is not yet decided whether the external knowledge repository needs its own lightweight `.ai` infrastructure.
 - The supplied Grok DSH material has not yet been independently fact-checked or converted into a final learning entry.
-- The final decision on `provenance.chapter` has not yet been made.
+- `provenance.chapter` is retained as an optional provenance locator, not as taxonomy, identity, or semantic ownership.
 
 ## Open
 
@@ -237,17 +237,37 @@ The exact configuration key and repository name remain open.
 - Determine how cross-topic and related-concept links are represented.
 - Determine the validation and write-safety workflow for the external repository.
 
-## Immediate next task
+## C0072 design result
 
-Continue the architecture design in C0072 before implementing the new repository or skill.
+The bounded design task is complete at the architecture level.
 
-Recommended first bounded task:
+### Concrete entry model
 
-1. design one ideal knowledge entry in concrete detail;
-2. test that design against the Git branch cleanup and Grok DSH fixtures;
-3. derive the minimum metadata/front-matter model;
-4. make the explicit final decision on whether `provenance.chapter` survives as an optional field or is removed;
-5. use the resulting model to refine the minimum `knowledge-capture` skill contract.
+The minimum entry envelope is:
+
+- `title`
+- `type`
+- `topics`
+- `status`
+- `provenance[]`
+- optional `version` context
+
+The body is intentionally variable and educational. A typical order is goal/problem → short answer → how it works → step-by-step → why it works → gotchas/safety → verification → alternatives → version notes → related concepts.
+
+### Fixture results
+
+- Git branch cleanup validates a `procedure` entry with a strong mental-model component. The command is an example of Git reference handling plus PowerShell pipeline composition, not the knowledge itself.
+- DSH Desktop / Harness validates the need to separate verified facts, working models, version-sensitive claims, and unverified claims. The supplied Grok material remains unverified source material until independently checked.
+
+### Final `provenance.chapter` decision
+
+`provenance.chapter` is **retained as optional**. It is a project-conversation locator used only when it materially improves traceability. It is never required, never taxonomy, and never semantic ownership.
+
+### Refined `knowledge-capture` contract
+
+The future skill should minimally: capture → classify → discover → normalize → verify → provenance → version context → write → read back → report.
+
+Implementation of the external repository and skill remains outside this bounded design task.
 
 Do not start Agentic AI Compatibility Phase 3 unless the user explicitly reopens it.
 
