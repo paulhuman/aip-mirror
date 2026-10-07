@@ -939,6 +939,17 @@ It should demonstrate that the skill can preserve:
 
 The first entry therefore remains the next bounded validation step after the skill implementation.
 
+### 26.5 C0073 correction: educational language policy
+
+The first implementation exposed a validation gap: the initial real knowledge entry was written predominantly in English even though section 7 defines Russian as the explanatory language and English as the canonical technical vocabulary.
+
+The entry was corrected in `paulhuman/developer-knowledge` to use Russian explanatory prose while retaining canonical English technical terms.
+
+The `knowledge-capture` skill was also strengthened with an explicit pre-write language-policy validation gate.
+
+This correction is important because the language policy was already an architectural rule; the implementation failure was a **validation failure**, not a new architecture decision.
+
+
 ### 26.4 C0073 implementation boundary
 
 The implementation intentionally does not yet add:
