@@ -303,3 +303,11 @@ The architecture already contains the most important separation required by the 
     verification
 
 However, Phase 1 alone cannot establish Agentic compatibility. Phase 2 must test whether real Agentic environments can actually enter and execute this structure without introducing environment-specific semantic duplication.
+
+## Chapter continuity
+
+The current durable chapter checkpoint is maintained in:
+
+- `.ai/handoffs/C/C0069-Architecture-&-Research.md`
+
+Future chapters continuing this research SHOULD read that handoff as the current chapter continuity snapshot before relying on this architecture note alone.
