@@ -99,18 +99,34 @@ When a decision materially affects implementation, record it in the appropriate 
 
 Do not duplicate generic workflow guidance here; `.ai/rules/workflow.md` owns the general documentation principle.
 
-## 6.1 Active documentation and archive references
+## 6.1 Active owners and supporting AI-infrastructure layers
 
-The active repository documentation boundary and the historical archive boundary MUST remain separate.
+The `.ai` infrastructure distinguishes **active semantic owners** from **supporting or contextual layers**.
 
-Canonical active documents MUST NOT link to, depend on, or establish semantic requirements from files under `.ai/archives/`.
+Canonical active owners include:
 
-Archived material is historical evidence only. It MAY be read for explicitly requested recovery, audit, or bounded historical research, but such access MUST NOT turn archived content into an active semantic dependency.
+- `.ai/rules/` — semantic constraints;
+- `.ai/skills/` — reusable capabilities;
+- `.ai/workflows/` — ordered procedures;
+- `.ai/templates/` — reusable structural templates;
+- `.ai/INDEX.md` — routing and capability discovery;
+- future `.ai` subsystems MAY become active owners when their architecture explicitly assigns them that role.
 
-When active documentation supersedes or absorbs an architecture note or other durable document, the historical original MAY be moved from `.ai/docs/` to the corresponding `.ai/archives/docs/` path.
+Supporting or contextual layers include:
 
-Active documentation MUST remain understandable and operationally complete without references to archived documents.
+- `.ai/handoffs/` — chapter continuity state;
+- `.ai/docs/` — durable explanation, rationale, research, and orientation;
+- `.ai/archives/` — historical material.
 
+These supporting layers MAY be actively used for appropriate purposes and MAY remain active for different lengths of time. Their activity does not make them semantic owners.
+
+Canonical active owners MUST NOT establish semantic requirements that depend on supporting or contextual layers. In particular, `.ai/rules/`, `.ai/skills/`, `.ai/workflows/`, `.ai/templates/`, `.ai/INDEX.md`, and any future active owner MUST NOT link to, depend on, or require `.ai/handoffs/`, `.ai/docs/`, or `.ai/archives/` as sources of active semantics.
+
+Supporting or contextual material MAY describe, explain, or provide evidence for active owners, but it MUST NOT become a second semantic owner merely because an active owner references its explanation.
+
+When a handoff or document becomes obsolete, it MAY move into the appropriate archive location. This is a lifecycle transition, not a change in semantic ownership.
+
+The active semantic model MUST remain understandable and operationally complete from the active owners themselves, without requiring routine loading of handoffs, docs, or archives.
 ## 7. Repository write safety
 
 GitHub API file updates are full-content replacements, not line-level edits. When an existing file is updated through an API that accepts complete file content, the new content MUST contain the entire intended file.
