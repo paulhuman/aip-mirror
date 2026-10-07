@@ -109,6 +109,7 @@ C0069 established a separate active architecture track:
 
 - C0070 should first validate the current repository taxonomy and active-owner references against the AI-infrastructure context-mode proposal before making structural changes.
 - The `>>ai-infrastructure` operation should remain a thin domain/context-loading capability rather than becoming a second routing registry or semantic owner.
+- Because this mode operates on active `.ai` infrastructure, normative-language activation is a required dependency; `.ai/rules/normative-language.md` remains its canonical semantic owner.
 - Archive exclusion should be explicit in the active context-loading semantics, not merely an informal convention.
 
 ## Assumed / unverified
@@ -121,6 +122,7 @@ C0069 established a separate active architecture track:
 
 - **COMPLETE** — verify the implemented `>>ai-infrastructure` operation against its canonical elevated-context read set.
 - **COMPLETE** — verify ordinary bootstrap remains bounded to its intended initialization context.
+- **COMPLETE** — normalize the C0070-created active infrastructure documents under `.ai/rules/normative-language.md` and define automatic normative-language activation for `>>ai-infrastructure`.
 - Next bounded work may continue with deeper `>>ai-infrastructure` usage tests or the separate Agentic AI Phase 3 track; do not conflate the two.
 - Define the minimal operational semantics of `>>ai-infrastructure` without loading archive contents automatically.
 - If structural changes are required, apply them incrementally with repository read-back, diff, scope, and commit verification.
