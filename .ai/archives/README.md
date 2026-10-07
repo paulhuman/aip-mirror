@@ -19,7 +19,7 @@ Archived material is not an active semantic owner and is not a permanent source 
 
 In particular, the `>>ai-infrastructure` operation reads this README to establish the archive boundary, but does not automatically ingest the contents of `.ai/archives/`.
 
-Historical material may be read when a specific operation explicitly requires it. Such a read is an exceptional historical-context action, not a change to the active infrastructure boundary.
+Historical material MAY be read when a specific operation explicitly requires it. Such a read is an exceptional historical-context action, not a change to the active infrastructure boundary.
 
 ## Lifecycle
 
