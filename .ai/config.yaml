@@ -23,6 +23,9 @@ references:
     agent_md:
       repository: paulhuman/agent.md
       role: Fork used as a research reference for agent instruction-file conventions, instruction hierarchy, and durable repository guidance
+    developer_knowledge:
+      repository: paulhuman/developer-knowledge
+      role: Project-independent repository for durable developer knowledge
 
 specializations:
   A:
