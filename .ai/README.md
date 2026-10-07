@@ -11,7 +11,7 @@ Its architectural purpose is project-agnostic: it defines how AI-assisted work i
     = AI-assisted working infrastructure
 
 docs/
-    = AIP Mirror project knowledge
+    = project-specific knowledge
 ```
 
 Project-specific meaning belongs primarily in `docs/` and the project source tree. Generic AI infrastructure belongs in `.ai/`.
