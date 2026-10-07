@@ -564,7 +564,7 @@ The exact configuration key remains to be finalized.
 
 ## 17. Future skill
 
-The proposed skill is currently a design target, not yet an implemented skill.
+The `knowledge-capture` skill was implemented in C0073. This section is retained as the original architectural responsibility definition; the active operational contract now lives in `.ai/skills/knowledge-capture/SKILL.md`.
 
 A provisional conceptual name is:
 
@@ -825,7 +825,7 @@ An agentic AI response, official documentation page, personal experiment, or ext
 
 ## 24. Refined `knowledge-capture` contract
 
-The minimum future skill contract is now:
+The minimum operational skill contract is now:
 
 1. **Capture** — accept the material selected by the user.
 2. **Classify** — determine `type` and primary `topics`.
@@ -860,7 +860,7 @@ knowledge-capture
 
 With this model, the archive is no longer primarily a place to save useful snippets. It is a place to preserve **reproducible understanding**.
 
-Implementation of the external repository and `knowledge-capture` remains intentionally outside this bounded design task.
+The external repository and `knowledge-capture` capability are now implemented at the minimum bounded level. Further changes remain evidence-driven.
 
 
 ## 26. Implementation checkpoint: C0073
@@ -923,21 +923,23 @@ The skill resolves the target repository from `.ai/config.yaml` and MUST NOT har
 
 The skill is registered in `.ai/INDEX.md` as a capability. No dedicated `>>capture` command is introduced yet. Command-surface expansion remains deferred until actual usage demonstrates that an explicit invocation boundary is useful.
 
-### 26.3 First-entry validation strategy
+### 26.3 First-entry validation result
 
-The first real knowledge entry remains the Git + PowerShell branch-cleanup fixture described earlier in this document.
+The first real knowledge entry was created and verified in `paulhuman/developer-knowledge`.
 
-The fixture is deliberately treated as a validation of the capture model, not merely as content to save.
+The final path is:
 
-It should demonstrate that the skill can preserve:
+`git/branches/delete-branches.md`
+
+The entry validates that the capture model can preserve:
 
 - an immediate practical procedure;
-- the reusable mental model behind it;
+- the reusable Git + PowerShell mental model behind it;
 - safety and verification considerations;
 - project-independent taxonomy;
 - provenance back to the originating project conversation when useful.
 
-The first entry therefore remains the next bounded validation step after the skill implementation.
+The original fixture path in earlier design text is therefore historical; the final entry groups the simple Git deletion commands and the two mass-deletion pipelines in one educational document.
 
 ### 26.5 C0073 correction: educational language policy
 
@@ -976,3 +978,18 @@ The educational language policy and related active capture constraints were ther
 The `knowledge-capture` skill now acts as the operational capability and explicitly reads that rule before writing an entry. The architecture note remains the durable rationale and history.
 
 This correction is an **ownership-boundary correction**, not a change to the educational policy itself.
+
+
+## 27. C0074 remaining work after first implementation
+
+C0074 records the remaining work for this architecture note after the C0073 implementation baseline.
+
+The current implementation is intentionally sufficient for the first real capture. The remaining work is primarily **validation and cleanup of the architecture model**, not expansion of the infrastructure:
+
+1. **Validate the model against additional real knowledge entries.** The first Git fixture proved the minimum capture path, but the architecture should be tested against materially different knowledge, especially a version-sensitive or troubleshooting entry such as the DSH Desktop / Harness material described in §22.
+2. **Resolve only the remaining open repository-model questions when real usage requires them.** In particular, observe whether additional taxonomy structure, cross-topic linking, external-source requirements, or version representation need stronger rules. Do not pre-create infrastructure without evidence.
+3. **Keep the architecture note synchronized with active owners.** `.ai/rules/developer-knowledge.md` is the active semantic owner of educational-language and capture-policy constraints; `.ai/skills/knowledge-capture/SKILL.md` is the operational owner of the capture procedure. This note records rationale, design history, and remaining architectural questions rather than replacing either owner.
+4. **Reconcile and retire stale design wording as implementation evolves.** Historical sections may describe earlier hypotheses, but current implementation checkpoints should remain explicit enough that the document does not imply that implemented capabilities are still merely proposed.
+5. **Defer a dedicated `>>capture` command and additional external-repository infrastructure** until real usage demonstrates a concrete need.
+
+No broader redesign is required by C0074. The next bounded work should be driven by an actual second knowledge-capture case or by a concrete inconsistency discovered in the current model.
