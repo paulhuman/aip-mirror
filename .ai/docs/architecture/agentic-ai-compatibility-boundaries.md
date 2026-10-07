@@ -220,3 +220,12 @@ Phase 3 SHOULD specify only:
 - the minimum conformance test needed to prove that an environment preserves the existing semantic owners and repository safety contract.
 
 No implementation of a universal transport layer is required by the current evidence.
+
+
+## Chapter continuity
+
+The current durable chapter checkpoint is maintained in:
+
+- `.ai/handoffs/C/C0069-Architecture-&-Research.md`
+
+Future chapters continuing this research SHOULD read that handoff as the current chapter continuity snapshot before relying on this architecture note alone.
