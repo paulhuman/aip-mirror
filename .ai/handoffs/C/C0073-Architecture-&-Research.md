@@ -177,8 +177,55 @@ The entry should distinguish local branch deletion from remote deletion, `-D` fr
 
 ## Immediate next task
 
-Read the current `.ai/config.yaml` and determine the minimal external-repository reference for `paulhuman/developer-knowledge`. Make only that bounded configuration change, verify the complete resulting file and diff scope, and then proceed to the first real knowledge entry in the external repository.
+The minimum external-repository reference, `knowledge-capture` skill, and first real knowledge entry are now implemented and verified. The next chapter should treat these as the current validation baseline.
 
 ## Recommended starting context
 
 Start with this handoff, `.ai/docs/architecture/developer-knowledge-archive.md`, the current `.ai/config.yaml`, the active canonical owners, and the external repository README. Treat C0072 as completed baseline state and keep `.ai/archives/**` outside active elevated context.
+
+
+## C0073 implementation checkpoint
+
+### Configuration
+
+Verified `.ai/config.yaml` now contains the minimum `developer_knowledge` reference under the existing `references.repositories` layer. The configuration change was independently compared against the C0073 bootstrap checkpoint and contained only `.ai/config.yaml`.
+
+### Knowledge-capture skill
+
+Implemented `.ai/skills/knowledge-capture/SKILL.md` and registered it in `.ai/INDEX.md` as a capability. The bounded contract is:
+
+```text
+capture → classify → discover → normalize → verify
+        → provenance → version context → write
+        → read back → verify scope → report
+```
+
+The skill resolves the external repository from `.ai/config.yaml` and preserves the project-independent semantic boundary. A dedicated user command remains intentionally deferred.
+
+### First real knowledge entry
+
+Created and read back in `paulhuman/developer-knowledge`:
+
+```text
+git/branches/delete-local-branches-except-main.md
+```
+
+The entry uses `type: procedure`, `topics: [git, powershell]`, `status: verified`, and provenance containing C0073 plus authoritative Git and Microsoft Learn sources. The external Markdown was normalized so it contains ordinary source links rather than internal assistant citation markers.
+
+Verification established the documented behavior of the Git and PowerShell primitives used by the procedure. The complete destructive pipeline remains documented as a composition of those verified primitives and SHOULD be tested in a disposable repository before routine use.
+
+### Resulting architecture state
+
+```text
+.ai/config.yaml
+    ↓
+developer_knowledge repository reference
+    ↓
+knowledge-capture skill
+    ↓
+first real knowledge entry
+    ↓
+read-back / scope verification
+```
+
+This is the current C0073 validation baseline. Further infrastructure SHOULD be driven by evidence from additional real entries.
