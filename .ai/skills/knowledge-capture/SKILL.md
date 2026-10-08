@@ -68,9 +68,10 @@ For each capture operation:
 7. **Provenance** — reduce traceable origin to the compact `origin` value; place source URLs once under `## Источники`.
 8. **Version context** — record the environment in `env` when it affects correctness.
 9. **Write** — create a new entry or minimally update an existing entry in the configured repository.
-10. **Read back** — reread the resulting entry from the repository.
-11. **Verify scope** — inspect the resulting change and confirm that only the intended knowledge entry or entries changed.
-12. **Report** — state what was captured, what was verified, and what remains uncertain.
+10. **Validate front matter** — parse the front matter with an actual YAML parser before committing. A successful write, a visual check, or a hand-written pattern check is NOT sufficient evidence that the metadata is valid.
+11. **Read back** — reread the resulting entry from the repository.
+12. **Verify scope** — inspect the resulting change and confirm that only the intended knowledge entry or entries changed.
+13. **Report** — state what was captured, what was verified, and what remains uncertain.
 
 ## Verification state
 
@@ -93,6 +94,8 @@ READ CURRENT FILE
 MAKE MINIMAL CHANGE
     ↓
 WRITE COMPLETE FILE
+    ↓
+PARSE FRONT MATTER WITH A YAML PARSER
     ↓
 READ BACK
     ↓

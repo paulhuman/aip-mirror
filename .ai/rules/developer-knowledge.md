@@ -90,8 +90,15 @@ Constraints:
 1. The envelope MUST NOT exceed these six fields.
 2. Nested provenance objects, `provenance[]` arrays, `version:` sub-blocks, `chapter`, and `captured` MUST NOT be introduced as front matter fields.
 3. Source URLs MUST NOT appear in front matter. They belong in the body under a single `## Источники` section.
-4. `env` and `origin` MUST be single-line plain scalars. They MUST NOT contain `": "` sequences, which would break YAML plain-scalar parsing. Use `·` to separate parts.
-5. A field MUST be omitted rather than filled with a placeholder when the value is unknown.
+4. Every scalar value MUST be written so that it parses as a plain YAML scalar. A value MUST NOT contain a `": "` (colon followed by a space) sequence, because YAML reads it as the start of a nested mapping. Use `·` to separate parts, or `—` instead of a colon.
+5. `title`, `env`, and `origin` are the fields most likely to carry a colon, because they contain natural language. When a colon is genuinely needed in one of them, the value MUST be wrapped in double quotes.
+
+   ```yaml
+   title: "DSH Desktop — Plugin Market: диагностика установки"
+   ```
+
+6. A field MUST be omitted rather than filled with a placeholder when the value is unknown.
+7. Front matter MUST be validated by an actual YAML parser before the entry is committed. A visual check or a hand-written pattern check is not sufficient evidence: the colon defect parses as valid-looking text but fails as YAML.
 
 The envelope now carries only what is needed to answer four questions:
 
