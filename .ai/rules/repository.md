@@ -124,6 +124,8 @@ Canonical active owners MUST NOT establish semantic requirements that depend on 
 
 Supporting or contextual material MAY describe, explain, or provide evidence for active owners, but it MUST NOT become a second semantic owner merely because an active owner references its explanation.
 
+Active rules SHOULD define the valid semantic model and expected behavior rather than enumerate every possible incorrect form. A negative requirement is appropriate when omitting it would permit a concrete semantic or technical error, ambiguity, or invalid repository state. Project-specific examples and historical mistakes belong in supporting documentation, tests, or handoffs rather than in generic active rules unless they define a reusable invariant.
+
 When a handoff or document becomes obsolete, it MAY move into the appropriate archive location. This is a lifecycle transition, not a change in semantic ownership.
 
 The active semantic model MUST remain understandable and operationally complete from the active owners themselves, without requiring routine loading of handoffs, docs, or archives.
