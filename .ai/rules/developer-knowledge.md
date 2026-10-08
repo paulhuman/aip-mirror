@@ -83,28 +83,17 @@ Field semantics:
 - `topics` — technology/domain taxonomy; a flat inline list, not a nested block;
 - `status` — current trust/verification state;
 - `env` — the concrete environment in which the entry is known to hold; include it whenever correctness depends on versions, OS, or runtime;
-- `origin` — compact human-readable provenance, for example `ChatGPT · aip-mirror` or `Git documentation`. It names who or what provided the material and, when relevant, where it originated. It MUST NOT carry a project-local conversation identifier such as a chapter number.
+- `origin` — compact human-readable source, for example `ChatGPT · <project-repository>` or `Git documentation`. When the entry is captured from a project repository, the repository name identifies that project context without making it the semantic owner.
 
 Constraints:
 
 1. The envelope MUST NOT exceed these six fields.
-2. Nested provenance objects, `provenance[]` arrays, `version:` sub-blocks, `chapter`, and `captured` MUST NOT be introduced as front matter fields.
+2. Nested provenance objects, `provenance[]` arrays, `version:` sub-blocks, and unrelated metadata fields MUST NOT be introduced as front matter fields.
 3. Source URLs MUST NOT appear in front matter. They belong in the body under a single `## Источники` section.
 4. Every scalar value MUST be written so that it parses as a plain YAML scalar. A value MUST NOT contain a `": "` (colon followed by a space) sequence, because YAML reads it as the start of a nested mapping. Use `·` to separate parts, or `—` instead of a colon.
 5. `title`, `env`, and `origin` are the fields most likely to carry a colon, because they contain natural language. When a colon is genuinely needed in one of them, the value MUST be wrapped in double quotes.
-
-   ```yaml
-   title: "DSH Desktop — Plugin Market: диагностика установки"
-   ```
-
 6. A field MUST be omitted rather than filled with a placeholder when the value is unknown.
 7. Front matter MUST be valid YAML and MUST parse successfully as YAML before the entry is committed. The specific parser and validation mechanism are execution details of the active capture procedure or host.
-8. Conversation-chapter identifiers MUST NOT appear anywhere in an entry, in front matter or in the body. A chapter number such as `C0073` is project-local bookkeeping; it identifies a conversation in its source project, not a piece of knowledge, and it stops being meaningful once that project context is gone. This applies to `origin` and to every other field and section.
-
-   ```yaml
-   origin: ChatGPT · aip-mirror        # correct
-   origin: ChatGPT · aip-mirror C0073  # forbidden
-   ```
 
 The envelope now carries only what is needed to answer four questions:
 
@@ -169,7 +158,7 @@ Educational genre requirements:
 5. The explanatory tone SHOULD stay conversational. Prose is addressed to a learner, not written as a specification.
 6. Every command SHOULD be broken down by its options in a table (option → effect → difference from related options).
 7. At least one «что будет, если…» scenario SHOULD illustrate an incorrect or unsafe usage. The scenario SHOULD name the likely misconception, not only the misuse.
-8. Callout blockquotes SHOULD be used for the important cases: `> **Важно**`, `> **Частая ошибка**`, `> **Проверь**`.
+8. Callout blockquotes SHOULD be used for the important cases: `> **Важно**`, `> **Частая ошибка**`, `> **Проверь**.
 9. Sections MUST be omitted when they add nothing. A short entry is preferable to a padded one.
 
 ## 7. Single source mention
