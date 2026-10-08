@@ -127,3 +127,53 @@ Read and classify the remaining parked `agentic-ai-*` architecture documents and
 Start with this handoff, then read the C0075 handoff and the two current DSH/Agentic architecture notes. Inspect the parked research documents and Developer Knowledge architecture history from the repository before deciding what, if anything, needs normalization.
 
 Do not introduce `>>capture` before the natural-language activation/discovery test provides evidence.
+## C0076 completed bounded work
+
+C0076 completed the immediate AI-infrastructure restructuring needed before DSH-first adapter work:
+
+- `.ai/docs/architecture/developer-knowledge-archive.md` was moved unchanged to `.ai/archives/docs/architecture/developer-knowledge-archive.md` as historical material. Source and archive content were verified identical before the source was removed.
+- The six parked `.ai/docs/architecture/agentic-ai-*` documents were intentionally left unchanged. Their C0069/C0075 historical references are preserved as evidence and MUST NOT be treated as stale operational routing merely because newer architecture decisions exist.
+- Root `AGENTS.md` was created as an empty repository entry point. It is intentionally not populated yet; its exact universal-router role will be defined before adding content.
+- DSH Desktop global skill discovery is already configured through `customSkillDirs` for the user's global `C:\Users\Paul\.dsh\skills` path.
+- The agreed near-term architecture is DSH-first and deliberately simple:
+
+  `ROOT / AGENTS.md → .ai/ canonical source → .ai/skills/ → .agents/skills (DSH adapter) → DSH`
+
+- The project-local `.agents/skills` adapter is expected to be a Windows junction to `.ai/skills`. The junction is a local deployment detail and SHOULD be gitignored rather than represented as duplicated repository content.
+- The user will create the local junction and its `.gitignore` handling; the next chapter MUST verify the resulting repository state rather than assuming the adapter is correct.
+
+## C0076 decisions carried forward
+
+- Prefer one canonical `.ai/skills/` source with host-specific discovery/packaging adapters instead of maintaining separate semantic copies for Chat AI and Agentic AI.
+- Do not introduce speculative multi-host adapter infrastructure yet. DSH is the immediate Agentic AI target.
+- Do not modify the parked `agentic-ai-*` architecture research merely to make the new adapter model fit; preserve those documents as historical/research evidence until a bounded review explicitly requires changes.
+- Do not add `.ai/scripts/`, generated pointer layers, or other additional infrastructure before the DSH adapter has been exercised and verified.
+
+## C0076 final state
+
+### Confirmed
+
+- Main is the canonical repository branch.
+- Root `AGENTS.md` exists and is currently empty.
+- `.gitignore` is currently empty; no repository-side ignore rule for `.agents/skills/` has been added yet.
+- The global DSH `customSkillDirs` connection is already configured outside the repository.
+- The canonical skill source remains `.ai/skills/`.
+- The local `.agents/skills` junction has not been created or verified by this AI.
+
+### Open
+
+- Define and verify the exact `.gitignore` entry for the local `.agents/skills` junction.
+- Create the local Windows junction from `.agents/skills` to `.ai/skills`.
+- Verify that DSH actually discovers the project skills through that adapter.
+- Inspect existing `.ai/skills/*/SKILL.md` metadata against the observed DSH discovery requirements and correct only concrete incompatibilities.
+- Define the minimal root `AGENTS.md` router after the DSH adapter path is proven, rather than filling it speculatively.
+
+## Immediate next task for C0077
+
+Continue with the DSH-first adapter implementation and verification. Start by checking the user's `.gitignore` change and local `.agents/skills` junction, then perform a real DSH skill-discovery/invocation test against the canonical `.ai/skills/` content.
+
+Do not resume the deferred `agentic-ai-*` normalization task unless the user explicitly reopens it.
+
+## Recommended starting context for C0077
+
+Read this handoff first, then `.ai/docs/architecture/agentic-ai-dsh-observations.md`, the DSH skills-discovery lesson in the external `paulhuman/developer-knowledge` repository, `.ai/skills/activation/SKILL.md`, and the currently discovered `.ai/skills/*/SKILL.md` files. Treat DSH discovery facts as version-sensitive evidence from the user's installed environment and revalidate them before relying on them operationally.
