@@ -83,7 +83,7 @@ Field semantics:
 - `topics` — technology/domain taxonomy; a flat inline list, not a nested block;
 - `status` — current trust/verification state;
 - `env` — the concrete environment in which the entry is known to hold; include it whenever correctness depends on versions, OS, or runtime;
-- `origin` — compact human-readable provenance, for example `ChatGPT · aip-mirror C0073` or `Git documentation`.
+- `origin` — compact human-readable provenance, for example `ChatGPT · aip-mirror` or `Git documentation`. It names who or what provided the material and, when relevant, where it originated. It MUST NOT carry a project-local conversation identifier such as a chapter number.
 
 Constraints:
 
@@ -99,6 +99,12 @@ Constraints:
 
 6. A field MUST be omitted rather than filled with a placeholder when the value is unknown.
 7. Front matter MUST be validated by an actual YAML parser before the entry is committed. A visual check or a hand-written pattern check is not sufficient evidence: the colon defect parses as valid-looking text but fails as YAML.
+8. Conversation-chapter identifiers MUST NOT appear anywhere in an entry, in front matter or in the body. A chapter number such as `C0073` is project-local bookkeeping; it identifies a conversation in its source project, not a piece of knowledge, and it stops being meaningful once that project context is gone. This applies to `origin` and to every other field and section.
+
+   ```yaml
+   origin: ChatGPT · aip-mirror        # correct
+   origin: ChatGPT · aip-mirror C0073  # forbidden
+   ```
 
 The envelope now carries only what is needed to answer four questions:
 

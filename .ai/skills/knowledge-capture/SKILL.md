@@ -65,7 +65,7 @@ For each capture operation:
 4. **Normalize** — transform source material into a self-contained educational artifact; DO NOT copy conversational filler or another AI's answer verbatim.
 5. **Select genre** — choose the reference or educational body genre from `type` and follow the section set owned by the rule.
 6. **Verify** — distinguish confirmed facts, inferences, version-sensitive claims, and unverified claims.
-7. **Provenance** — reduce traceable origin to the compact `origin` value; place source URLs once under `## Источники`.
+7. **Provenance** — reduce traceable origin to the compact `origin` value; place source URLs once under `## Источники`. DO NOT carry a conversation-chapter identifier such as `C0073` into the entry: it is project-local bookkeeping, not knowledge. `origin: ChatGPT · aip-mirror` is complete; `origin: ChatGPT · aip-mirror C0073` is not allowed.
 8. **Version context** — record the environment in `env` when it affects correctness.
 9. **Write** — create a new entry or minimally update an existing entry in the configured repository.
 10. **Validate front matter** — parse the front matter with an actual YAML parser before committing. A successful write, a visual check, or a hand-written pattern check is NOT sufficient evidence that the metadata is valid.
