@@ -267,3 +267,39 @@ history, followed by the deferred contextual activation/discovery test.
 
 Do not introduce `>>capture` before the activation/discovery test provides
 evidence.
+## C0075 final DSH instruction-discovery findings
+
+A further DSH investigation established an additional host-boundary that MUST be preserved:
+
+- DSH does not have a native `.ai/rules/*.md` mechanism. Such files are not automatically loaded or indexed; they are read only when explicitly referenced by an instruction or skill.
+- DSH's observed always-on instruction channel is the `AGENTS.md` / `CLAUDE.md` family, including local variants, discovered through the project/cwd hierarchy and global `$DSH_HOME/AGENTS.md`.
+- DSH exposes skill metadata at startup, while skill bodies are loaded on invocation. This is distinct from arbitrary repository Markdown files.
+- A project-local `.ai/AGENTS.md` is therefore not guaranteed to be always-on in a DSH session started at the repository root. It may be discovered when the cwd/path hierarchy makes it applicable, or when the file is explicitly referenced.
+- A skill may explicitly instruct the model to read a project rule such as `.ai/rules/normative-language.md`. This is a project convention, not native DSH rule-reference resolution.
+- Global DSH skills MUST NOT assume that an arbitrary project contains `.ai/rules/...`. If shared content needs an external rule, the packaging/reference must be made host-appropriate.
+
+Architectural consequence: `.ai/rules/` is an organizational and semantic-ownership mechanism in AIP Mirror, not a portable AI-runtime ingestion channel. The host boundary now includes instruction ingestion in addition to skill packaging, discovery, activation, execution, and verification.
+
+This strengthens the existing layered model:
+
+```text
+portable instructional content
+        ↓
+host-specific always-on instruction channel
+        ↓
+host-specific skill packaging / metadata
+        ↓
+host-specific discovery
+        ↓
+host-specific activation / invocation
+        ↓
+host-specific execution capabilities
+```
+
+The DSH findings remain version-sensitive observations and MUST be revalidated before implementation depends on them.
+
+## C0075 handoff to C0076
+
+C0075 is complete for the current bounded scope. The next chapter SHOULD continue with a focused normalization pass over the parked `agentic-ai-*` research documents and Developer Knowledge architecture history, then run the deferred natural-language knowledge-capture activation/discovery test.
+
+Do not introduce `>>capture` before that test provides evidence.
