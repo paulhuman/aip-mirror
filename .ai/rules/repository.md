@@ -129,15 +129,16 @@ When a handoff or document becomes obsolete, it MAY move into the appropriate ar
 The active semantic model MUST remain understandable and operationally complete from the active owners themselves, without requiring routine loading of handoffs, docs, or archives.
 ## 7. Repository write safety
 
-GitHub API file updates are full-content replacements, not line-level edits. When an existing file is updated through an API that accepts complete file content, the new content MUST contain the entire intended file.
+Repository mutation safety is defined by a small set of invariants that apply
+regardless of the AI host or mutation mechanism.
 
 For an existing file:
 
     READ CURRENT FILE
         ↓
-    make minimal intended change
+    MAKE MINIMAL INTENDED CHANGE
         ↓
-    WRITE COMPLETE FILE
+    WRITE COMPLETE INTENDED CONTENT
         ↓
     READ BACK
         ↓
@@ -154,19 +155,49 @@ For an existing file:
 Therefore:
 
 - Read the current file from the repository before modifying it.
-- Use the current file content as the source of truth; DO NOT reconstruct an existing file from memory when it can be fetched.
-- Preserve all unrelated content exactly unless the change intentionally modifies it.
-- Treat the current blob SHA as part of the write precondition for an existing file.
+- Use the current file content as the source of truth; DO NOT reconstruct an
+  existing file from memory when it can be fetched.
+- Preserve all unrelated content exactly unless the change intentionally
+  modifies it.
 - After writing, read the resulting file back from the repository.
-- Verify that the intended change is present and unrelated content was not accidentally removed or altered.
-- Inspect the resulting diff and changed-file scope before considering the change ready for commit.
-- If the resulting content differs unexpectedly, stop and restore the correct content before making further changes.
+- Verify that the intended change is present and unrelated content was not
+  accidentally removed or altered.
+- Inspect the resulting diff and changed-file scope before considering the
+  change ready for commit.
+- If the resulting content differs unexpectedly, stop and restore the correct
+  content before making further changes.
+- A successful write, a valid commit, or a tool-level success response does
+  not by itself prove that repository content is correct.
+- Content integrity MUST be verified independently of mutation-tool success.
 
-A successful API operation, a valid blob SHA, or a valid Git commit does not by itself prove that the repository content is correct.
+### GitHub Connector-specific mechanics
 
-Content integrity MUST be verified independently of API success.
+When an existing file is updated through a GitHub Contents API that accepts
+complete file content:
 
-This rule applies to source code, documentation, configuration, scripts, tests, AI instructions, and every other existing repository file.
+- the new content MUST contain the entire intended file;
+- the current blob SHA MUST be treated as the write precondition;
+- the complete-file replacement semantics MUST NOT be mistaken for a
+  line-level edit.
+
+These are mechanics of the GitHub Connector/API path, not additional
+repository-safety invariants.
+
+### Agentic-host-specific mechanics
+
+Tool-using Agentic AI environments MAY use different mutation mechanisms,
+such as a local working copy, write, edit, shell commands, or native
+repository tools.
+
+Those mechanisms are host-specific and MUST NOT be copied into this
+repository-wide rule as a second implementation procedure. They remain valid
+only insofar as they satisfy the common repository-safety invariants above.
+
+The same principle applies when an environment provides its own enforced
+read-before-write or diff/commit safeguards: host enforcement MAY strengthen
+the mechanism, but it does not replace independent verification of the
+result.
+
 ## 8. Disposable repository fixtures
 
 When an isolated repository test requires synthetic or destructive repository state, the test harness MUST prefer creating a disposable branch directly from the known commit SHA that establishes the required baseline.
