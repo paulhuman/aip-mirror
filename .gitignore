@@ -11,5 +11,11 @@
 # Windows clone with `core.symlinks=false` it materializes as a plain text file
 # and the host skips the root silently.
 #
-# The junction is a local deployment detail. A fresh clone must recreate it.
+# The junction is a local deployment detail, so a fresh clone must recreate it
+# before DSH can discover the project skills:
+#
+#     pwsh -File .ai/scripts/adapters/New-SkillAdapters.ps1
+#
+# That script is repository content and remains tracked; only the link it
+# creates is ignored.
 /.agents/

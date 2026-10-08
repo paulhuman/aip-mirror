@@ -61,8 +61,9 @@ Detailed, evidence-backed facts and open tasks live in
 before touching skill discovery. The four things most likely to cost time:
 
 1. `.ai/skills/` is **not** a discovery root. The project adapter
-   `.agents/skills` is a Windows junction to it — structurally verified,
-   **behaviourally unproven** (discovery through it has not been observed yet).
+   `.agents/skills` is a Windows junction to it — confirmed working (discovery
+   through it is observed). It is gitignored, so a fresh clone must recreate it:
+   `pwsh -File .ai/scripts/adapters/New-SkillAdapters.ps1`.
 2. A `customSkillDirs` override on the `skill-filesystem` id does nothing: the
    host-plane row is disabled by `dsh-web-app`, which moved discovery into agent
    presets. Personal skills need no config — they live in `$DSH_HOME/skills`.
