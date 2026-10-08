@@ -98,7 +98,7 @@ Constraints:
    ```
 
 6. A field MUST be omitted rather than filled with a placeholder when the value is unknown.
-7. Front matter MUST be validated by an actual YAML parser before the entry is committed. A visual check or a hand-written pattern check is not sufficient evidence: the colon defect parses as valid-looking text but fails as YAML.
+7. Front matter MUST be valid YAML and MUST parse successfully as YAML before the entry is committed. The specific parser and validation mechanism are execution details of the active capture procedure or host.
 8. Conversation-chapter identifiers MUST NOT appear anywhere in an entry, in front matter or in the body. A chapter number such as `C0073` is project-local bookkeeping; it identifies a conversation in its source project, not a piece of knowledge, and it stops being meaningful once that project context is gone. This applies to `origin` and to every other field and section.
 
    ```yaml
