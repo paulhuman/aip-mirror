@@ -154,6 +154,7 @@ Inventory the DeepSeek changes in both repositories and build a file/commit/sema
 Start with this handoff, then read the C0074 handoff and architecture note, the current active repository/developer-knowledge rules and knowledge-capture skill, and the Git history/diffs of both repositories covering the external DeepSeek session.
 
 Do not assume the DeepSeek changes are wrong. Establish what changed and why before modifying them.
+
 ## C0075 completed bounded work
 
 The DeepSeek change audit was completed at the semantic-boundary level. The
@@ -195,7 +196,7 @@ specification.
 
 ### Active-owner corrections
 
-` .ai/rules/repository.md` now separates:
+`.ai/rules/repository.md` now separates:
 
 - common repository mutation invariants;
 - GitHub Connector/API-specific full-content and blob-SHA mechanics;
