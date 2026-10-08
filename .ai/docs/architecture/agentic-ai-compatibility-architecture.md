@@ -13,6 +13,61 @@ The investigation SHOULD distinguish:
 - transport interfaces — how an AI environment invokes or receives the operation;
 - execution capabilities — how an environment reads files, invokes tools, mutates repositories, and verifies results.
 
+## Current evidence boundary — C0075
+
+The original transport-compatibility hypothesis below remains historical
+research context. New DSH evidence requires a more precise boundary.
+
+The architecture MUST NOT assume one universal Agentic AI skill discovery or
+packaging contract. Portable instructional semantics and host-specific
+execution contracts are separate layers:
+
+```text
+portable instructional content
+        ↓
+host-specific packaging
+        ↓
+host-specific discovery
+        ↓
+host-specific activation / invocation
+        ↓
+host-specific execution capabilities
+```
+
+The common architecture should therefore preserve only invariants that are
+actually common. Host-specific concerns include, at minimum:
+
+- skill discovery roots;
+- skill packaging shape;
+- metadata fields and loaders;
+- activation / invocation mechanisms;
+- tool availability;
+- repository mutation mechanisms;
+- host-specific verification enforcement.
+
+The DSH observations are recorded in:
+
+`.ai/docs/architecture/agentic-ai-dsh-observations.md`
+
+They are version-sensitive evidence, not a universal DSH specification.
+
+The active repository mutation boundary is:
+
+```text
+.ai/rules/repository.md
+        ↓
+canonical repository mutation invariants
+        ↓
+    +----------------------+
+    |                      |
+ChatGPT + Connector     Agentic AI
+    |                      |
+GitHub API mechanics    host-specific execution
+```
+
+The active semantic owners remain authoritative. Architecture notes preserve
+the evidence and rationale but MUST NOT become a second execution owner.
+
 The central hypothesis is:
 
 ```text
