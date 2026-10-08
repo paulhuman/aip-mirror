@@ -53,17 +53,59 @@ It groups simple Git branch operations with the more complex PowerShell mass-del
 
 The external knowledge repository remains project-independent and uses Markdown + YAML front matter with one self-contained entry per document.
 
-## Remaining architecture work
+## C0074 evidence review and completed work
 
-The architecture note `.ai/docs/architecture/developer-knowledge-archive.md` identifies the following bounded remaining work:
+C0074 completed and verified the second real Developer Knowledge capture case:
 
-1. Validate the model against additional real knowledge entries, especially a materially different version-sensitive or troubleshooting case such as the DSH Desktop / Harness material.
-2. Resolve remaining repository-model questions only when real usage requires them: taxonomy growth, cross-topic linking, external-source requirements, and version representation.
-3. Keep the architecture note synchronized with active owners without making it a second semantic owner. `.ai/rules/developer-knowledge.md` owns active policy and `.ai/skills/knowledge-capture/SKILL.md` owns the capture procedure.
-4. Reconcile and retire stale design wording as implementation evolves.
-5. Keep a dedicated `>>capture` command and additional external-repository infrastructure deferred until real usage demonstrates a concrete need.
+- external entry: paulhuman/developer-knowledge:dsh/desktop-plugin-market.md;
+- type: troubleshooting;
+- status: version-sensitive;
+- concrete DSH Desktop / dsh / plugin / pnpm / Node.js / Volta / Windows context;
+- multiple provenance sources, including AI-conversation material and a personal experiment;
+- Russian explanatory prose with canonical English technical vocabulary;
+- read-back verification after removing leaked internal ChatGPT citation markers.
 
-No broader redesign is currently required.
+The second case supports the current minimum model:
+
+- the same metadata envelope handles Git and DSH material;
+- status has practical value;
+- version/environment context is necessary for version-sensitive knowledge;
+- multiple provenance sources do not require a new provenance mechanism;
+- the current flat-by-default taxonomy is sufficient;
+- no rigid universal body template is justified by the two fixtures;
+- no dedicated >>capture command is justified yet.
+
+### Activation/discovery test still open
+
+The two captures were performed with the knowledge-capture skill context explicitly activated. They therefore prove the capability itself works, but **do not prove contextual skill discovery** from a natural-language request.
+
+The next bounded test should deliberately omit explicit skill activation. For example:
+
+> “Систематизируй это как урок и сохрани в Developer Knowledge.”
+
+Possible outcomes:
+
+- **A — reliable contextual activation:** no command surface is needed;
+- **B — unreliable activation:** improve activation/discovery infrastructure first;
+- **C — genuinely ambiguous intent:** only then consider an explicit >>capture command.
+
+Do not decide the command surface before this test.
+
+### Repository-change audit deferred to next chapter
+
+At the end of C0074, an external agentic DeepSeek session made substantial changes in both aip-mirror and developer-knowledge. These changes are deliberately **not evaluated or normalized in this chapter**.
+
+The next chapter should first inventory and review those changes, then separate:
+
+1. intended improvements;
+2. accidental or duplicate changes;
+3. semantic-owner violations;
+4. stale or contradictory documentation;
+5. changes to preserve, correct, or revert.
+
+This is a separate bounded task and should not be mixed retroactively into the C0074 evidence review.
+
+No broader redesign is currently justified.
 
 ## Relevant files and references
 
@@ -96,39 +138,41 @@ No broader redesign is currently required.
 ## Confirmed
 
 - C0073 completed the bounded implementation and validation baseline for the external Developer Knowledge Repository.
-- `paulhuman/developer-knowledge` exists as a private repository on `main`.
-- The external repository remains project-independent.
-- The minimum `.ai/config.yaml` repository reference is implemented.
-- `knowledge-capture` is implemented and registered as a capability.
-- The first real knowledge entry has been created and verified.
-- Active semantic ownership is distinguished from supporting/contextual layers; `.ai/docs/` is not an active semantic owner.
-- `.ai/docs/architecture/developer-knowledge-archive.md` records the remaining bounded architecture work.
+- C0074 completed a materially different second capture case in paulhuman/developer-knowledge:dsh/desktop-plugin-market.md.
+- The DSH entry was successfully verified as a real troubleshooting artifact and marked version-sensitive.
+- The current minimum model handles type, topics, status, environment/version context, and multiple provenance sources without a new schema mechanism.
+- The DSH capture was performed with explicit knowledge-capture skill activation.
+- Internal ChatGPT citation markers were detected in the external entry and removed; read-back confirmed they were absent.
+- The architecture note remains a supporting/contextual layer, not an active semantic owner.
+- A dedicated >>capture command remains deferred.
+- An activation/discovery test from natural-language intent remains unperformed.
+- An external agentic DeepSeek session made substantial changes in both repositories near the end of C0074; those changes are intentionally not evaluated in this chapter.
 
 ## Inferred
 
-- A second real knowledge entry is the most useful next validation step because it can expose whether the current metadata, taxonomy, provenance, version, and educational structure generalize beyond the first Git-focused fixture.
-- DSH Desktop / Harness is a useful candidate because it is materially different and likely to exercise version-sensitive or troubleshooting-oriented knowledge representation.
+- The minimum knowledge model is sufficiently general for at least the Git and DSH fixtures.
+- The most useful next test is contextual discovery of the knowledge-capture capability, not expansion of the external repository architecture.
+- The next chapter should treat the DeepSeek changes as an inventory/review problem before making corrective edits.
 
 ## Assumed / unverified
 
-- The exact second knowledge entry to capture has not yet been selected.
-- It is not yet established that the current repository model requires additional taxonomy, cross-topic infrastructure, or new metadata.
-- No dedicated `>>capture` command should be added unless actual usage demonstrates a concrete need.
+- It is not yet established that the AI will reliably discover knowledge-capture from a natural-language capture request without explicit skill activation.
+- It is not yet established whether any of the unreviewed DeepSeek changes are desirable, harmless, duplicate, or architecturally incorrect.
+- No dedicated >>capture command should be added unless the activation/discovery test or later usage demonstrates a concrete need.
 
 ## Open
 
-- Select and capture a second real knowledge case, or identify a concrete inconsistency in the current model.
-- Verify whether the current external-entry structure remains sufficient.
-- Update the architecture note only when implementation evidence or a concrete decision warrants it.
-- Keep active semantic owners and supporting/contextual documentation aligned without creating duplicate ownership.
-- Do not start Agentic AI Compatibility Phase 3 unless the user explicitly reopens it.
+- Run the natural-language activation/discovery test for knowledge capture.
+- Inventory and review the unreviewed DeepSeek changes in both repositories.
+- Reconcile architecture documentation with the active semantic owners only after the repository-change audit.
+- Preserve the current bounded evidence model unless new evidence requires a change.
 
 ## Immediate next task
 
-Review the current C0073 baseline and choose the smallest evidence-driven validation step for a second real Developer Knowledge entry, preferably a materially different case such as DSH Desktop / Harness.
+First inventory and review the substantial changes made by the external agentic DeepSeek session in both aip-mirror and paulhuman/developer-knowledge. Do not blindly revert them. After that audit, run the contextual knowledge-capture activation/discovery test and decide whether any infrastructure change is actually justified.
 
 ## Recommended starting context
 
-Start with this handoff, `.ai/docs/architecture/developer-knowledge-archive.md`, the current `.ai/config.yaml`, `.ai/rules/developer-knowledge.md`, `.ai/skills/knowledge-capture/SKILL.md`, and the external `paulhuman/developer-knowledge` README and current entries.
+Start with this handoff, .ai/docs/architecture/developer-knowledge-archive.md, .ai/rules/repository.md, .ai/rules/developer-knowledge.md, .ai/skills/knowledge-capture/SKILL.md, the external paulhuman/developer-knowledge README and current entries, and the repository diff/history created by the external DeepSeek session.
 
-Do not redesign the external repository spec in advance. Let additional real usage establish whether any remaining architecture questions require decisions.
+Do not redesign the external repository spec in advance. First establish what the external agent changed, which changes are intended, and which active-owner semantics remain canonical.
