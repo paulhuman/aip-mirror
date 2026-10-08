@@ -1,0 +1,15 @@
+# Local agent-host adapters. Not repository content.
+#
+# `.agents/skills` is a Windows junction to `.ai/skills`, created locally so
+# that DSH can discover the canonical skills through its rank-200 project root.
+# `.ai/skills` is not a discovery root by itself.
+#
+# Git does NOT track a junction as a link: it walks through it and indexes one
+# real file per skill. Committing `.agents/` would therefore duplicate the
+# canonical skill content into the repository — the exact duplication the
+# architecture forbids. A committed symlink is not an alternative either: on a
+# Windows clone with `core.symlinks=false` it materializes as a plain text file
+# and the host skips the root silently.
+#
+# The junction is a local deployment detail. A fresh clone must recreate it.
+/.agents/
