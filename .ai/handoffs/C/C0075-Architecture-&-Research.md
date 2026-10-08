@@ -154,3 +154,115 @@ Inventory the DeepSeek changes in both repositories and build a file/commit/sema
 Start with this handoff, then read the C0074 handoff and architecture note, the current active repository/developer-knowledge rules and knowledge-capture skill, and the Git history/diffs of both repositories covering the external DeepSeek session.
 
 Do not assume the DeepSeek changes are wrong. Establish what changed and why before modifying them.
+## C0075 completed bounded work
+
+The DeepSeek change audit was completed at the semantic-boundary level. The
+external changes were not blindly reverted. The useful simplifications were
+preserved, and the newly discovered DSH behavior was incorporated into the
+architecture instead.
+
+### New Agentic AI architecture boundary
+
+Current evidence establishes that portable instructional content and
+host-specific Agentic AI contracts are separate layers:
+
+```text
+portable instructional content
+        ↓
+host-specific packaging
+        ↓
+host-specific discovery
+        ↓
+host-specific activation / invocation
+        ↓
+host-specific execution capabilities
+```
+
+Do NOT treat `.ai/skills/` as a universal Agentic AI skill-discovery root.
+Skill packaging, discovery roots, metadata, activation, tool availability,
+repository mutation mechanics, and host-specific verification are
+environment-specific concerns.
+
+### DSH evidence preserved
+
+Durable DSH observations are recorded in:
+
+- `.ai/docs/architecture/agentic-ai-dsh-observations.md`
+- `.ai/docs/architecture/agentic-ai-compatibility-architecture.md`
+
+The DSH observations are version-sensitive evidence, not a timeless DSH
+specification.
+
+### Active-owner corrections
+
+` .ai/rules/repository.md` now separates:
+
+- common repository mutation invariants;
+- GitHub Connector/API-specific full-content and blob-SHA mechanics;
+- Agentic-host-specific execution mechanics.
+
+The rule MUST remain the canonical owner of repository mutation safety.
+Host-specific mechanics MUST NOT be copied into it as a second universal
+procedure.
+
+`.ai/rules/developer-knowledge.md` now treats valid YAML front matter as the
+semantic invariant. The choice of parser is an execution detail.
+
+`.ai/skills/knowledge-capture/SKILL.md` now:
+
+- removes the duplicated `Repository mutation safety` block;
+- retains the capture workflow's read-back and scope verification steps;
+- adds an `Agent-specific procedures` section;
+- keeps `Parse front matter with an actual YAML parser` as the
+  Agent-specific procedure.
+
+This preserves the previous anti-duplication / mighty-sweep boundary:
+active skills MUST NOT copy the canonical repository-safety rule merely to
+make a tool-specific procedure visible.
+
+### Mutation verification
+
+Relevant changes were read back after each write.
+The comparison from the pre-C0075 external-agent head
+`6509ec825f1d7403c94391a6c9c89f088a064f02` to the current reviewed state
+`ec014da10429ce281bc493852bd437d2c7178e16` was inspected. The resulting
+scope includes the pre-existing DeepSeek changes plus the C0075 architecture
+corrections and DSH evidence record.
+
+## C0075 current state
+
+### Confirmed
+
+- The repository mutation-safety boundary is now host-neutral at the invariant
+  level and host-specific at the execution-mechanics level.
+- The `knowledge-capture` skill no longer duplicates the repository mutation
+  safety rule.
+- YAML validity is a Developer Knowledge semantic invariant; parser choice is
+  a capture/host procedure.
+- DSH skill discovery and packaging are not assumed to be universal across
+  Agentic AI hosts.
+- DSH observations have a durable architecture evidence file.
+- Architecture notes remain supporting/contextual layers and do not replace
+  active semantic owners.
+
+### Open
+
+- Review the remaining parked `agentic-ai-*` research documents against the
+  new boundary; do not blindly rewrite them until each document's historical
+  status and current usefulness are understood.
+- Revisit `.ai/docs/architecture/developer-knowledge-archive.md` for stale
+  historical claims now that the active Developer Knowledge owners have been
+  normalized.
+- Run the deferred natural-language knowledge-capture activation/discovery
+  test without explicitly activating the skill.
+- If DSH-specific implementation work resumes, revalidate the observed DSH
+  skill-loader behavior against the installed DSH version.
+
+## Recommended next chapter
+
+The next bounded scope SHOULD be a focused normalization pass over the parked
+`agentic-ai-*` architecture research and the Developer Knowledge architecture
+history, followed by the deferred contextual activation/discovery test.
+
+Do not introduce `>>capture` before the activation/discovery test provides
+evidence.
