@@ -109,3 +109,64 @@ Do not resume the deferred `agentic-ai-*` normalization task unless the user exp
 ## Recommended starting context
 
 Read this handoff first, then revalidate the DSH observations, inspect the local adapter state, and perform the smallest reproducible discovery/invocation test. Treat DSH behavior as version-sensitive evidence and keep the canonical semantic source in `.ai/skills/`.
+
+## C0077 late-chapter checkpoint
+
+C0077 completed the DSH-first adapter verification. The following state is now confirmed and should be treated as the starting point for C0078:
+
+- The canonical semantic skill source remains `.ai/skills/`.
+- The local `.agents/skills` Windows junction successfully exposes the canonical skills to DSH without duplicating their contents.
+- `.agents/` is gitignored.
+- DSH, when started from the repository root, discovered all eight top-level project skills through the adapter and successfully invoked project skills including `knowledge-capture`, `activation`, and `normative-language`.
+- The DSH verification and adapter implementation are recorded in `.ai/docs/architecture/agentic-ai-skill-discovery-verification.md` and `.ai/scripts/adapters/New-SkillAdapters.ps1`.
+- Root `AGENTS.md` was populated during this work. Its current content must be audited rather than accepted as final architecture.
+
+### New audit task for C0078
+
+Perform the previously proposed **read-only audit** of the actual root `AGENTS.md` and compare it with:
+
+- `.ai/AGENTS.md`;
+- `.ai/config.yaml`;
+- `.ai/rules/repository.md`;
+- the intended architectural boundary:
+
+  `ROOT / AGENTS.md → .ai/ canonical source`.
+
+The audit must determine what in root `AGENTS.md` is correct, what is unnecessary or violates the intended boundary, and whether anything should be changed. Do not mutate files merely to perform the audit.
+
+### New architectural concern: root AGENTS.md
+
+The user explicitly questions the current root `AGENTS.md` because it is not sufficiently **project-agnostic** and because it directly references `.ai/docs/architecture/agentic-ai-skill-discovery-verification.md`, which was created as a temporary/version-sensitive verification artifact.
+
+C0078 must therefore evaluate:
+
+- whether root `AGENTS.md` should contain only durable, project-agnostic entry/router semantics;
+- whether DSH-specific implementation details belong outside the root entry point;
+- whether references from an active entry/owner to temporary or version-sensitive architecture evidence violate the intended ownership boundary;
+- what the minimal durable root router should be, if any change is justified.
+
+No correction is authorized merely by recording this concern; inspect the current files and establish the intended design before editing.
+
+### New architectural question: rules versus skills
+
+The user also questions the current `.ai/rules/` architecture in light of DSH behavior:
+
+- DSH appears to force-load only skills.
+- DSH can load rule content when a skill explicitly references a rule, but this is an optional convention rather than a host-enforced rule mechanism.
+- Therefore, merely keeping semantics in `.ai/rules/` does not guarantee that an Agentic AI host will receive them.
+- The user asks whether the repository should instead:
+  - move rule semantics into skills where they must be loaded;
+  - convert some existing rules into dedicated skills;
+  - possibly eliminate `.ai/rules/` entirely.
+
+C0078 must treat this as an **open architectural research question**, not as a predetermined migration plan. First establish the current semantic ownership model and actual host-loading behavior, then determine whether the rules/skills split still serves the architecture.
+
+Important constraint: do not collapse rules into skills simply because DSH has no native rules mechanism. The decision must preserve the distinction between semantic ownership and host-specific loading, avoid duplicated owners, and be based on evidence.
+
+## C0078 starting focus
+
+1. Audit the current root `AGENTS.md` against the canonical `.ai/` sources and the ROOT → `.ai/` boundary.
+2. Decide whether the root entry point can remain project-agnostic and durable without depending on temporary DSH verification documents.
+3. Review the current `.ai/rules/` versus `.ai/skills/` ownership/loading model in light of the verified DSH behavior.
+4. Identify which rule semantics, if any, genuinely need dedicated skills or another always-loaded mechanism.
+5. Do not make structural changes to `.ai/rules/` or `.ai/skills/` until the architectural question has been researched and specified.
