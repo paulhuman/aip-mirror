@@ -150,10 +150,14 @@ Version notes
 Educational genre requirements:
 
 1. An analogy SHOULD be present unless it would be artificial for the topic.
-2. Every command SHOULD be broken down by its options in a table (option → effect → difference from related options).
-3. At least one «что будет, если…» scenario SHOULD illustrate an incorrect or unsafe usage.
-4. Callout blockquotes SHOULD be used for the important cases: `> **Важно**`, `> **Частая ошибка**`, `> **Проверь**`.
-5. Sections MUST be omitted when they add nothing. A short entry is preferable to a padded one.
+2. The analogy MUST lead the entry: it comes before the mechanism, not after it. Explain the everyday comparison first, then map it onto the technical material.
+3. A complex concept SHOULD be supported by more than one analogy when a single comparison cannot carry the whole mechanism. An analogy that breaks down part-way MUST be followed by another one rather than stretched past its limits.
+4. An analogy MUST be marked as an analogy. It is a teaching device, not evidence: it MUST NOT be presented as proof that the mechanism works the way the comparison suggests.
+5. The explanatory tone SHOULD stay conversational. Prose is addressed to a learner, not written as a specification.
+6. Every command SHOULD be broken down by its options in a table (option → effect → difference from related options).
+7. At least one «что будет, если…» scenario SHOULD illustrate an incorrect or unsafe usage. The scenario SHOULD name the likely misconception, not only the misuse.
+8. Callout blockquotes SHOULD be used for the important cases: `> **Важно**`, `> **Частая ошибка**`, `> **Проверь**`.
+9. Sections MUST be omitted when they add nothing. A short entry is preferable to a padded one.
 
 ## 7. Single source mention
 
