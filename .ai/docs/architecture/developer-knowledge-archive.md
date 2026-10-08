@@ -406,14 +406,20 @@ Provenance SHOULD support multiple sources for one entry when knowledge was asse
 
 ## 12. Verification state
 
-Knowledge entries SHOULD distinguish at least:
+Knowledge entries MUST distinguish their current verification state using the vocabulary owned by the active capture rule.
 
-- **confirmed** — checked against reliable evidence or successfully tested;
-- **inferred** — logically derived but not directly verified;
+The C0074 evidence baseline used these practical states:
+
+- **verified** — checked against reliable evidence or successfully tested;
 - **version-sensitive** — correct only within an identified version/context;
-- **unverified** — useful candidate knowledge that still requires validation.
+- **unverified** — useful candidate knowledge that still requires validation;
+- **draft** — work-in-progress knowledge not yet ready to be treated as a stable entry.
 
-This prevents the archive from becoming a permanent store of plausible-sounding AI hallucinations.
+The distinction is important because an entry may be useful while still requiring validation, and a version-sensitive entry may be verified only within a named environment.
+
+The exact active metadata contract is owned by .ai/rules/developer-knowledge.md; this architecture note records the rationale and observed use rather than becoming a second semantic owner.
+
+> **C0074 observation:** the architecture note previously used confirmed / inferred terminology while the active rule used verified / version-sensitive / unverified / draft. This was identified as a vocabulary synchronization issue. During the C0074 migration, the active rule was subsequently modified by external agentic work; that newer change is intentionally not reconciled here and must be reviewed as part of the next chapter's repository-change audit.
 
 ## 13. Example: Git branch cleanup
 
@@ -760,37 +766,46 @@ This fixture therefore validates that the schema can preserve both the immediate
 
 ## 22. Fixture test: DSH Desktop / Harness material
 
-The DSH fixture demonstrates the opposite pressure: the source material is useful but contains claims whose exact truth depends on version and implementation.
+C0074 converted the DSH Desktop / Harness material from a future candidate into a real second knowledge-capture case.
 
-A candidate entry can therefore start with:
+The resulting external entry is:
+
+paulhuman/developer-knowledge:dsh/desktop-plugin-market.md
+
+Its implemented classification is:
 
 ```yaml
-title: DSH Desktop, Harness, profiles, and plugins
-type: mental-model
+title: DSH Desktop: установка и обслуживание Plugin Market
+type: troubleshooting
 topics:
-  - deepseek-harness
-status: unverified
-provenance:
-  - kind: ai-conversation
-    agent: Grok
-    project: <optional if the original project is known>
-    source: <optional source locator>
+  - dsh
+  - dsh-desktop
+  - harness
+  - plugins
+  - pnpm
+  - nodejs
+  - volta
+status: version-sensitive
 ```
 
-The body should separate:
+The entry also records both an AI-conversation source and a personal-experiment source, together with concrete environment/version context. This demonstrates that the existing provenance model can represent multiple source kinds without introducing a second provenance mechanism.
 
-1. **Observed / verified facts** — backed by installed files, commands, source, or authoritative documentation.
-2. **Working model** — the relationship the learner currently uses to reason about Desktop, Harness, profiles, and plugins.
-3. **Version-sensitive claims** — statements that must name the relevant DSH/Desktop version.
-4. **Open claims** — useful assertions that still require verification.
+The real case exercised:
 
-The entry must not silently promote a plausible AI explanation into a confirmed fact.
+- a troubleshooting-oriented entry rather than the Git procedure fixture;
+- version-sensitive knowledge;
+- concrete version / environment context;
+- multiple provenance sources;
+- Russian explanatory prose with canonical English technical vocabulary;
+- separation of experiment-confirmed facts from version-sensitive or unverified claims;
+- maintenance guidance that distinguishes DSH Desktop, the dsh CLI, profile selection, plugin version, and package-manager version.
 
-This fixture validates two architectural requirements:
+The capture also exposed two important validation lessons:
 
-- `status` cannot be inferred solely from the fact that a source is an AI answer;
-- `version` belongs alongside provenance when behavior depends on a concrete software version.
+1. AI-generated source material must not be treated as authority. The successful installation of dshmarket 1.66.9 was personally verified, while broader claims about Desktop internals or future behavior remained version-sensitive or unverified.
+2. Internal ChatGPT citation markers must never leak into the external knowledge repository. A read-back check removed and verified the absence of such markers.
 
+This fixture validates that the current minimum entry model is broad enough for a materially different case. It does **not** by itself prove that every part of the capture workflow can be discovered automatically from natural-language intent.
 ## 23. Final decision: `provenance.chapter`
 
 **Decision: retain `provenance.chapter` as an optional provenance field.**
@@ -980,16 +995,55 @@ The `knowledge-capture` skill now acts as the operational capability and explici
 This correction is an **ownership-boundary correction**, not a change to the educational policy itself.
 
 
-## 27. C0074 remaining work after first implementation
+## 27. C0074 evidence review
 
-C0074 records the remaining work for this architecture note after the C0073 implementation baseline.
+C0074 completed the second real knowledge-capture case and reviewed the resulting architecture against the Git and DSH fixtures.
 
-The current implementation is intentionally sufficient for the first real capture. The remaining work is primarily **validation and cleanup of the architecture model**, not expansion of the infrastructure:
+The current evidence supports the following observations:
 
-1. **Validate the model against additional real knowledge entries.** The first Git fixture proved the minimum capture path, but the architecture should be tested against materially different knowledge, especially a version-sensitive or troubleshooting entry such as the DSH Desktop / Harness material described in §22.
-2. **Resolve only the remaining open repository-model questions when real usage requires them.** In particular, observe whether additional taxonomy structure, cross-topic linking, external-source requirements, or version representation need stronger rules. Do not pre-create infrastructure without evidence.
-3. **Keep the architecture note synchronized with active owners.** `.ai/rules/developer-knowledge.md` is the active semantic owner of educational-language and capture-policy constraints; `.ai/skills/knowledge-capture/SKILL.md` is the operational owner of the capture procedure. This note records rationale, design history, and remaining architectural questions rather than replacing either owner.
-4. **Reconcile and retire stale design wording as implementation evolves.** Historical sections may describe earlier hypotheses, but current implementation checkpoints should remain explicit enough that the document does not imply that implemented capabilities are still merely proposed.
-5. **Defer a dedicated `>>capture` command and additional external-repository infrastructure** until real usage demonstrates a concrete need.
+1. **The minimum model generalizes.** A Git procedure/mental-model entry and a DSH troubleshooting entry can both fit the same external repository envelope without adding a new taxonomy mechanism.
+2. **status has practical value.** The Git entry can be treated as verified, while the DSH entry is version-sensitive.
+3. **Version context is real, not hypothetical.** The DSH case required concrete Desktop, dsh, plugin, pnpm, and OS context.
+4. **Multiple provenance sources are sufficient.** The DSH entry combines AI-conversation material with a personal experiment without requiring a new provenance schema.
+5. **Educational structure is variable enough.** The two entries differ substantially in shape; no rigid universal document template is justified by current evidence.
+6. **Taxonomy remains flat-by-default.** dsh/ is sufficient for the current DSH fixture; no additional taxonomy layer is justified merely for architectural symmetry.
+7. **No dedicated >>capture command is justified yet.** Both real captures were successfully performed through the explicit knowledge-capture capability, but this does not test contextual skill discovery.
+8. **Active ownership remains separate from architecture notes.** The architecture note records rationale, evidence, and history; active rules and skills remain the semantic/operational owners.
 
-No broader redesign is required by C0074. The next bounded work should be driven by an actual second knowledge-capture case or by a concrete inconsistency discovered in the current model.
+### 27.1 Activation/discovery test remains open
+
+The two captures prove the capture capability works **when its skill context is explicitly activated**. They do not prove that a natural request automatically causes the AI to discover and activate the capability.
+
+The next bounded test SHOULD therefore be:
+
+> Give a natural request such as “Систематизируй это как урок и сохрани в Developer Knowledge” without explicitly naming or activating the knowledge-capture skill.
+
+Observe one of three outcomes:
+
+- **A — reliable contextual activation:** the AI recognizes the intent and activates the knowledge-capture capability; this further weakens the case for a dedicated >>capture command.
+- **B — unreliable activation:** improve skill activation/discovery infrastructure before adding a command.
+- **C — intent remains genuinely ambiguous:** only then consider whether an explicit >>capture invocation provides a useful architectural boundary.
+
+The test result must be recorded before deciding on a command surface.
+
+### 27.2 Architecture questions intentionally deferred
+
+No new taxonomy, cross-topic linking mechanism, provenance mechanism, or capture-specific infrastructure is justified by the current evidence.
+
+A dedicated >>capture command remains deferred until the activation/discovery test or later real usage demonstrates a concrete need.
+
+### 27.3 Current repository-change audit is deferred
+
+During the end of C0074, an external agentic DeepSeek session modified files in both repositories. These changes are intentionally **not evaluated, accepted, reverted, or normalized in C0074**.
+
+The next chapter MUST begin by inventorying those changes and distinguishing:
+
+- intended improvements;
+- accidental or duplicate changes;
+- semantic-owner violations;
+- stale or contradictory documentation;
+- changes that should be preserved, corrected, or reverted.
+
+This audit is a separate bounded task and MUST NOT be mixed retroactively into the C0074 architecture evidence.
+
+C0074 therefore closes with the knowledge-capture model validated at its current bounded level, while repository-change reconciliation remains the first task of the next chapter.
