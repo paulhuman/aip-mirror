@@ -49,6 +49,12 @@ npx --yes @deepseek-ai/dsh@0.2.0-rc.2 <args>
 
 Each finding is tied to its evidence. Do not restate these as speculation.
 
+> **V-numbers are local to this file.** The `agentic-ai-*` series and
+> `.ai/docs/architecture/ai-infrastructure-vnext-proposal.md` each carry their
+> own independent `V` numbering, and the numbers now collide (this file's `V10`
+> is not the proposal's `V10`). When citing a finding, name the file. The
+> cross-references below are written explicitly for that reason.
+
 ### V1 — Skill discovery lives in agent presets, not on the host plane
 
 The `dsh-web-app` bundle patch **disables** the host-plane row:
@@ -248,6 +254,60 @@ skill nested under another skill is never discovered — the claim in §7.3 of t
 vNext proposal now has direct evidence, and the catalogue count is 8 rather than
 9 for exactly this reason.
 
+### V10 — The upstream symlink model, re-observed on Windows
+
+Re-verified against a live clone of `adobe/spectrum-web-components`
+(`E:\Projects\repos\spectrum-web-components`, `main` @ `be922808`). This is the
+reference implementation the vNext proposal is modelled on, so its failure modes
+are directly relevant.
+
+**What upstream actually commits:**
+
+- Exactly **three** tracked symlinks, all mode `120000`: `.claude/rules` →
+  `../.ai/rules`, `.claude/skills` → `../.ai/skills`, `.cursor/skills` →
+  `../.ai/skills`. The last two share one blob (`6838a116…`), so the identical
+  target costs nothing.
+- `.cursor/rules/*.mdc` and `.github/instructions/*.instructions.md` are
+  **generated files**, not links — Cursor needs `globs:`, Claude needs `paths:`,
+  and one source serves both. They were per-file symlinks before commit
+  `4c97b0dd34`.
+
+**Windows behaviour, observed:**
+
+- A clone whose config resolved `core.symlinks=false` materialized the three
+  links as **12/13-byte text files** containing the target string — V6 of the
+  vNext proposal, reproduced exactly. `git status` stayed clean throughout; the
+  breakage is invisible to git.
+- After `git config --global core.symlinks true` and a re-clone, all three are
+  real `SymbolicLink` reparse points. Read-through resolves (35 skills, 8 rules),
+  and `.claude/skills` shares an **inode** with `.ai/skills` — one object, not a
+  copy.
+- **Developer Mode is genuinely off.** `AllowDevelopmentWithoutDevLicense` is
+  absent from `HKLM\...\AppModelUnlock`. Symlink creation nevertheless works
+  because the token holds `SeCreateSymbolicLinkPrivilege` (assigned to
+  `S-1-5-32-544`), **enabled** in this session. Creating a link needs the
+  privilege; reading one does not.
+- **A re-clone is not required to repair a broken checkout.** Once no
+  clone-local override remains, `git restore -- .claude .cursor` rewrites the
+  three paths as real symlinks and leaves `git status` clean. The upstream advice
+  ("enable Developer Mode and re-clone") overstates the remedy.
+
+**The upstream validator fails on Windows.** `validate-symlinks.js` compares
+`readlinkSync()` with `!==` against the literal `'../.ai/skills'`. On Windows
+`readlinkSync` returns `'..\\.ai\\skills'`, so all three checks report
+`points to "..\.ai\rules", expected "../.ai/rules"`. The links work; the check is
+separator-fragile. CI never sees it because `yarn lint:ai` runs on
+`ubuntu-latest` (`lint.yml`).
+
+**Consequence for this repository:** Option A (a committed symlink) is *viable*
+on this machine — a flat "not an option on Windows" is too strong — but it still
+depends on the creating user holding the privilege, and its failure mode stays
+**silent** (vNext proposal `V6`/`V7`: a text file where a directory is expected,
+and DSH skips the root without a message). The junction + gitignored adapter
+remains the choice for a Windows-primary workflow precisely because its failure
+is loud. If Option A is ever adopted, do **not** copy that separator-strict
+comparison as a Windows check.
+
 ---
 
 ## 4. Current state of relevant paths
@@ -314,10 +374,10 @@ The script never deletes a non-link, and it resolves the repository from its own
 location first so that it cannot be aimed at the wrong repository by the caller's
 working directory.
 
-**Deliberately not done:** no committed symlink (materializes as a text file on a
-`core.symlinks=false` Windows clone, V4), and no generated pointer skills (the
-vNext Tier 2 fallback — unnecessary while the adapter works and the failure mode
-is loud rather than silent).
+**Deliberately not done:** no committed symlink (its failure mode is silent on a
+clone without the privilege — V10 — and this workflow is Windows-primary), and no
+generated pointer skills (the vNext Tier 2 fallback — unnecessary while the
+adapter works and the failure mode is loud rather than silent).
 
 ### Task C — extend the verification to any second host, if one is ever used
 
@@ -433,3 +493,30 @@ Apply these when the `agentic-ai-*` series is next revised.
 | Discovery through `.agents/skills` is "structurally verified, behaviourally unproven" (root `AGENTS.md`) | **Now behaviourally confirmed** (V8). The root `AGENTS.md` sentence was updated in this session to say so and to name the setup command. |
 | `.gitignore` is empty and the entry is still pending (Task B of the previous revision) | `/.agents/` was added and committed as `5e5d380`; the setup command is documented in the ignore file itself and scripted at `.ai/scripts/adapters/New-SkillAdapters.ps1`. |
 | `@deepseek-ai/dsh-skill-filesystem` is only observable through experiments | The package source is readable in the npx cache and was read directly this session (V7, V9). Ranks, root order, the one-level scan, and the `.git`-walk project-root resolution are all source facts now, not inferences. |
+
+### 8.1 A correction to the conversation, not to these documents
+
+In the session that added V8/V9, the difference between the two adapter
+mechanisms was summarised to the user as: *"a committed symlink is not an option
+because git duplicates the content; only a junction does that."* **That summary
+was wrong, and these documents did not say it.**
+
+- This file's V4 and §7.1 of the vNext proposal correctly attribute git-side
+  duplication to the **junction** (`git add` walks through it and indexes 9 real
+  files), and correctly describe the symlink's own failure as "materializes as a
+  text file" — the proposal's `V6`, re-confirmed in this file's V10.
+- The two mechanisms fail differently and neither is a superset of the other:
+
+  | | committed symlink (mode `120000`) | junction |
+  |---|---|---|
+  | content in git | none — the blob is the 12-byte target | none, but only because it is ignored |
+  | `git add` behaviour | stores the link | walks through, indexes every real file |
+  | needs a setup step per clone | no | yes |
+  | needs a privilege to create | **yes** | no |
+  | failure mode when unavailable | **silent** text file | loud, the script reports |
+
+The rule that follows is narrower than "symlinks are bad": **do not rely on a
+mechanism whose failure is silent.** The junction was chosen for its loud
+failure, not because committing a symlink duplicates content.
+
+---

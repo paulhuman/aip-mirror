@@ -49,7 +49,7 @@ are kept strictly apart.
 | V3 | Skill discovery scans **one level only**; nested `**/SKILL.md` is invisible | source: `join(entry.path, "SKILL.md")` |
 | V4 | DSH auto-loads `AGENTS.md` / `CLAUDE.md` / `*.local.md` by walking from the `.git` root down to cwd **and** to touched directories | `dsh-agent-instructions` source |
 | V5 | `.ai/AGENTS.md` is **not** found from the project root unless the agent touches files inside `.ai/` | same source: discovery is directory-chain based |
-| V6 | Committed symlink on Windows with `core.symlinks=false` materializes as a 13-byte **plain file**; `readdir` then fails `ENOTDIR` | experiment: clone round-trip |
+| V6 | Committed symlink on Windows with `core.symlinks=false` materializes as a **plain text file** holding the target string — 12 bytes for `../.ai/rules`, 13 for `../.ai/skills`; `readdir` then fails `ENOTDIR` | experiment: clone round-trip, re-confirmed on `adobe/spectrum-web-components` |
 | V7 | DSH treats `ENOTDIR` as "root absent" and **silently** skips it — no error | source: `isAbsentSkillPathError` |
 | V8 | Directory **junction** works as a skill root and needs no admin rights | experiment |
 | V9 | Git does **not** track a junction as a link — it indexes the files behind it, duplicating content | experiment: two identical blobs |
@@ -58,6 +58,9 @@ are kept strictly apart.
 | V12 | DSH ignores unknown front matter keys | experiment with `license`, `allowed-tools`, `metadata`, `paths` |
 | V13 | DSH has no audience/agent-only field, and no user-facing prompt-editing API | DSH source |
 | V14 | Directory junction may be created without elevation; symbolic link creation succeeded in this shell but Developer Mode is off, so it is **not** guaranteed for the user | registry + experiment |
+| V15 | Symlink creation needs `SeCreateSymbolicLinkPrivilege`, **not** Developer Mode specifically. With `core.symlinks=true` a Windows clone materializes real `SymbolicLink` entries whose targets resolve to the same inode as the canonical directory; the privilege was enabled via `S-1-5-32-544` while Developer Mode stayed off | re-clone of `adobe/spectrum-web-components` + `whoami /priv` + `AppModelUnlock` probe |
+| V16 | A checkout broken by `core.symlinks=false` is repaired in place; a re-clone is not required. `git restore -- .claude .cursor` rewrites the paths as real symlinks and leaves `git status` clean | experiment on a deliberately broken clone |
+| V17 | `readlinkSync` returns **backslash-separated** targets on Windows, so the upstream `validate-symlinks.js` strict `!==` against `'../.ai/rules'` reports 3 false failures on a healthy Windows clone. Its CI runs `yarn lint:ai` on `ubuntu-latest`, where separators match | faithful replay of the upstream check |
 
 ### 2.2 From the reference implementation, read directly
 
@@ -65,16 +68,25 @@ The `paulhuman/spectrum-web-components` fork is the working precedent this
 infrastructure was modelled on. Its relevant, observed choices:
 
 - canonical content in `.ai/`; tool directories are **thin adapters**;
-- `.claude/rules` → `../.ai/rules` and `.claude/skills` → `../.ai/skills`
-  and `.cursor/skills` → `../.ai/skills` are **committed directory symlinks**;
+- exactly **three** tracked symlinks, all mode `120000`: `.claude/rules` →
+  `../.ai/rules`, `.claude/skills` → `../.ai/skills`, `.cursor/skills` →
+  `../.ai/skills`. The two identical targets share one blob;
 - `.github/instructions/*.instructions.md` and `.cursor/rules/*.mdc` are
-  **generated** by `.ai/scripts/sync.js`, never hand-edited;
+  **generated** by `.ai/scripts/sync.js`, never hand-edited. The `.mdc` files
+  were per-file symlinks until commit `4c97b0dd34`; they became generated files
+  because Cursor reads `globs:` where Claude reads `paths:`, and one `.ai/`
+  source must serve both;
 - `AGENTS.md` at the repository root is a **thin router table**, not a
   knowledge dump;
 - rules carry `paths:` front matter (path-scoped); skills are task-scoped;
 - a validator enforces that **skills are exactly one level deep**, that `name`
   equals the directory, and that `description` fits the host limits;
 - `yarn lint:ai` plus a pre-commit hook keep generated copies from drifting.
+
+Two cautions learned from re-observing that repository on Windows (V15–V17):
+its symlink model needs a privilege to *create* the links, and its own link
+validator gives three false failures on a healthy Windows clone because it
+compares targets separator-sensitively.
 
 ### 2.3 Explicitly not verified here
 
@@ -236,8 +248,16 @@ This is the crux. Four options, evaluated against the constraints.
 `.agents/skills` → `../.ai/skills`, tracked as mode `120000`.
 
 - (+) Zero duplication; the reference implementation's exact choice.
-- (−) On a Windows clone with `core.symlinks=false` it becomes a text file
-  (V6) and DSH skips it **silently** (V7). This is the user's primary platform.
+- (+) Verified working on this machine once `core.symlinks=true` and the
+  creating user holds `SeCreateSymbolicLinkPrivilege` (V15); Developer Mode is
+  not the deciding factor. A broken checkout is also repaired in place by
+  `git restore` (V16), not only by re-cloning.
+- (−) On a Windows clone whose config resolves `core.symlinks=false` it becomes
+  a text file (V6) and DSH skips it **silently** (V7). This is the user's primary
+  platform, and creation depends on a privilege that Developer Mode is off for
+  (V14, V15). The failure is invisible to git and to the host.
+- (−) A naive "does the target match" validator is separator-fragile on Windows
+  (V17), so the failure can also go unnoticed by the check meant to catch it.
 
 **Option B — local junction, gitignored, created by script**
 `.agents/skills` is a junction on Windows (or symlink on POSIX), excluded from
