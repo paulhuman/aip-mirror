@@ -126,7 +126,7 @@ Supporting or contextual layers include:
 
 These supporting layers MAY be actively used for appropriate purposes and MAY remain active for different lengths of time. Their activity does not make them semantic owners.
 
-Canonical active owners MUST NOT establish semantic requirements that depend on supporting or contextual layers. In particular, `AGENTS.md`, `.ai/AGENTS.md`, `.ai/skills/`, `.ai/workflows/`, `.ai/templates/`, `.ai/INDEX.md`, and any future active owner MUST NOT link to, depend on, or require `.ai/handoffs/`, `.ai/docs/`, or `.ai/archives/` as sources of active semantics.
+Canonical active owners MUST NOT establish semantic requirements that depend on supporting or contextual layers. In particular, `AGENTS.md`, `.ai/AGENTS.md`, `.ai/skills/`, `.ai/conversation-management/`, `.ai/templates/`, `.ai/INDEX.md`, and any future active owner MUST NOT link to, depend on, or require `.ai/handoffs/`, `.ai/docs/`, or `.ai/archives/` as sources of active semantics.
 
 Supporting or contextual material MAY describe, explain, or provide evidence for active owners, but it MUST NOT become a second semantic owner merely because an active owner references its explanation.
 

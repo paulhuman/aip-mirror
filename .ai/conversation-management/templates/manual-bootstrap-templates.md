@@ -2,14 +2,14 @@
 
 These templates are for **human users** who need to copy/paste a bootstrap instruction manually.
 
-They are not AI-generated transport. AI-generated bootstrap transport is owned exclusively by `.ai/skills/conversational-only/handoff/BOOTSTRAP.md`.
+They are not AI-generated transport. AI-generated bootstrap transport is owned exclusively by `.ai/conversation-management/handoff/BOOTSTRAP.md`.
 
 ## Template A — first chapter
 
     Initialize a new conversation chapter for the repository:
     https://github.com/paulhuman/aip-mirror
 
-    Follow the new-chapter initialization procedure in `.ai/skills/conversational-only/handoff/BOOTSTRAP.md`.
+    Follow the new-chapter initialization procedure in `.ai/conversation-management/handoff/BOOTSTRAP.md`.
 
     PREVIOUS_CHAPTER = N/A
     CURRENT_CHAPTER = <four-digit chapter>
@@ -21,7 +21,7 @@ They are not AI-generated transport. AI-generated bootstrap transport is owned e
     Initialize a new conversation chapter as a recovery from an interrupted migration for the repository:
     https://github.com/paulhuman/aip-mirror
 
-    Follow the new-chapter initialization procedure in `.ai/skills/conversational-only/handoff/BOOTSTRAP.md`.
+    Follow the new-chapter initialization procedure in `.ai/conversation-management/handoff/BOOTSTRAP.md`.
 
     PREVIOUS_CHAPTER = <four-digit previous chapter>
     CURRENT_CHAPTER = <four-digit current chapter>
