@@ -1,5 +1,7 @@
 # Agentic AI owner-by-seam audit
 
+**Historical snapshot note (2026-10-10):** This document records the C0069 owner-by-seam audit against the pre-migration `.ai` structure. References to `.ai/rules/`, `.ai/workflows/`, and first-level handoff skills preserve the inspected historical state and are not current routing. This audit remains historical evidence; the vNext proposal `.ai/docs/architecture/ai-infrastructure-vnext-proposal.md` supersedes the research series as a plan. Use `.ai/INDEX.md` and `.ai/README.md` for current routing.
+
 ## Purpose
 
 This document records the C0069 Phase 2 owner-by-seam audit.

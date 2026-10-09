@@ -1,5 +1,7 @@
 # Existing .ai architecture capability audit
 
+**Historical snapshot note (2026-10-10):** This document records the C0068 audit of revision `49219bca289291f03135ae549f9ba5995c95c446`, before the approved rules-to-skills migration. References to `.ai/rules/`, `.ai/workflows/`, and first-level handoff skills describe that inspected state, not current routing. This audit remains historical evidence; the vNext proposal `.ai/docs/architecture/ai-infrastructure-vnext-proposal.md` supersedes the research series as a plan. Use `.ai/INDEX.md` and `.ai/README.md` for current routing.
+
 ## Purpose
 
 This document records the Phase 1 audit for C0068 — Agentic AI compatibility architecture research.
@@ -8,7 +10,7 @@ Research objective:
 
 > Determine whether the existing .ai architecture can support multiple AI-environment transport interfaces without duplicating semantic ownership, and identify the minimal architecture required for Agentic AI compatibility.
 
-This audit evaluates the current main repository state only. It does not redesign the active .ai architecture.
+This audit evaluates the main repository state at the audited revision recorded below. It does not redesign the active .ai architecture.
 
 ## Baseline
 

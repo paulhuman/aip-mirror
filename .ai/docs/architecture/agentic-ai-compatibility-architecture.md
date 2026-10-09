@@ -54,7 +54,7 @@ They are version-sensitive evidence, not a universal DSH specification.
 The active repository mutation boundary is:
 
 ```text
-.ai/rules/repository.md
+.ai/skills/repository/SKILL.md
         ↓
 canonical repository mutation invariants
         ↓
@@ -536,13 +536,12 @@ The research is complete when:
 
 ## Relationship to active ownership
 
-This document is an architecture/research plan.
+This document preserves the original architecture/research plan as historical evidence. The vNext proposal `.ai/docs/architecture/ai-infrastructure-vnext-proposal.md` supersedes this research series as a plan.
 
-It is NOT a replacement for:
+It is NOT a replacement for current owners:
 
-- `.ai/rules/` — canonical semantic constraints;
-- `.ai/skills/` — reusable capabilities;
-- `.ai/workflows/` — ordered procedures;
+- `.ai/skills/` — canonical shared capabilities, semantic constraints, and general workflow principles;
+- `.ai/conversation-management/` — explicitly invoked conversation-continuity procedures and human-facing templates;
 - `.ai/INDEX.md` — routing and capability discovery.
 
 If research produces an operational rule, skill, workflow, or routing requirement, that definition MUST be placed in its appropriate canonical owner during a later implementation phase.
