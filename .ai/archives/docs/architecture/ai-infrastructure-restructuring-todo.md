@@ -538,3 +538,68 @@ Action:
 - Read back the changed skill and verify the corrected path exists in the repository tree.
 
 Status: OPEN
+
+## TODO 14 — Clean stale and duplicated infrastructure index entries
+
+Observed defects to correct after the current bounded migration work:
+
+- `.ai/README.md` lists `.ai/conversation-management/` twice with overlapping descriptions. Consolidate this into one accurate entry.
+- `.ai/README.md` still lists `.ai/templates/`, although that directory is no longer present. Remove or replace the entry according to the verified active taxonomy.
+- `.ai/INDEX.md` duplicates the `Commit policy` and `Commit construction` rows, both pointing to `.ai/skills/commits/SKILL.md`. Determine the intended capability distinction and represent it without duplicate rows.
+- The current `.ai/skills/repository/SKILL.md` also treats `.ai/templates/` as an active owner and refers to it in the active-owner boundary. Check this reference against the actual tree and reconcile it with the final taxonomy rather than fixing only the README.
+
+Action:
+
+- Inspect the current active tree and relevant canonical owners before editing.
+- Make the smallest consistent corrections to the README, INDEX, and any affected canonical taxonomy owner.
+- Read back every changed file; verify all referenced active paths exist and that no unrelated content changed.
+- Inspect the resulting diff and changed-file scope before committing.
+
+Status: OPEN
+
+## TODO 15 — Verify and adopt the three-level semantic-role model
+
+Proposed model to evaluate before changing canonical taxonomy rules:
+
+### Level 1 — Canonical semantic owners
+
+These define the authoritative meaning and requirements of a domain or operation. When different AI hosts perform the same operation, these sources determine what the operation means and which requirements apply.
+
+Candidate examples must be checked against the current tree and ownership assignments; historical paths are not evidence that a file is still active. Previously discussed examples included `.ai/rules/repository.md`, `.ai/skills/handoff/SKILL.md`, and `.ai/workflows/handoff/BOOTSTRAP.md`, but the recent restructuring moved or replaced some of these paths.
+
+### Level 2 — Entry, routing, and discovery surfaces
+
+These provide entry points, discover capabilities, and route invocations to the appropriate semantic owner. They may own their limited local entry/routing semantics, but MUST NOT duplicate the target operation's semantics.
+
+Candidate examples: root `AGENTS.md`, `.ai/AGENTS.md`, and `.ai/INDEX.md`.
+
+### Level 3 — Supporting and contextual layers
+
+These preserve rationale, research, evidence, historical state, and context. They can inform work but MUST NOT replace the active semantic owner.
+
+Candidate examples: `.ai/docs/`, `.ai/handoffs/`, `.ai/archives/`, and test-result artifacts as evidence rather than normative owners.
+
+### INDEX ownership boundary
+
+INDEX need not own the operation's semantic meaning. Its limited routing function maps an invocation to an operation and its canonical owner.
+
+Keep these concepts distinct during the review:
+
+- **routing semantics** — how an invocation maps to an operation;
+- **operation semantics** — what the operation means;
+- **execution semantics** — how its procedure is carried out;
+- **host mechanics** — how a specific AI host discovers instructions, obtains tools, and performs actions.
+
+Host mechanics MUST NOT automatically become a fourth level in the semantic-role taxonomy. They may be implemented through adapters, settings, or local scripts without becoming canonical semantic owners.
+
+Action:
+
+- Compare this three-level model with the current active files and the existing owner/supporting-layer model in `.ai/skills/repository/SKILL.md`.
+- Verify the role and boundaries of each category, including exceptions and hybrid files, against current repository paths and actual content.
+- Reconcile obsolete examples and stale paths introduced by restructuring.
+- Keep routing, operation, execution, and host-mechanics distinctions explicit.
+- Do NOT modify `.ai/skills/repository/SKILL.md` to adopt the proposed model until this boundary review is complete.
+- Record the evidence and any unresolved exceptions before deciding whether the model should be adopted.
+
+Status: OPEN
+
