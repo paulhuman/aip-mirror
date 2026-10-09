@@ -2,7 +2,7 @@
 
 This directory contains durable architecture context for the `.ai` infrastructure.
 
-The files here preserve longer-lived reasoning, architectural decisions, research results, historical context, and bounded open questions that would be too large or too detailed for ordinary handoffs or active `.ai` rules, skills, and workflows.
+The files here preserve longer-lived reasoning, architectural decisions, research results, historical context, and bounded open questions that would be too large or too detailed for ordinary handoffs or active `.ai` skills and workflows.
 
 ## Purpose
 
@@ -58,8 +58,8 @@ This includes architecture notes and other documentation such as `.ai/docs/faq/`
 
 Canonical active owners live in operational subsystems such as:
 
-- `.ai/rules/` — semantic constraints;
-- `.ai/skills/` — reusable capabilities;
+- `.ai/skills/` — canonical shared capabilities and semantic constraints;
+- `.ai/skills/conversational-only/` — explicitly invoked conversation-management procedures kept nested from ordinary skill discovery;
 - `.ai/workflows/` — ordered procedures;
 - `.ai/templates/` — reusable structural templates;
 - `.ai/INDEX.md` — routing and capability discovery;
@@ -67,7 +67,7 @@ Canonical active owners live in operational subsystems such as:
 
 Supporting/contextual layers such as `.ai/handoffs/`, `.ai/docs/`, and `.ai/archives/` MUST NOT become second owners merely because an active owner refers to them.
 
-When an architectural decision becomes an active rule, skill, workflow, template, or other operational semantic, the active owner MUST contain the usable definition. The `.ai/docs/` material preserves explanation, rationale, research, or orientation rather than becoming a second owner.
+When an architectural decision becomes an active skill, workflow, template, or other operational semantic, the active owner MUST contain the usable definition. The `.ai/docs/` material preserves explanation, rationale, research, or orientation rather than becoming a second owner.
 ## When to read
 
 Read the relevant architecture note when:
