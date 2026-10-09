@@ -94,7 +94,7 @@ Important behavior, architecture, specifications, research findings, decisions, 
 
 The general development workflow requires stable decisions to be documented; this rule defines the repository-level durability of that documentation.
 
-Conversation continuity and handoff lifecycle are owned by the explicitly invoked conversational-only handoff material and SHOULD NOT be redefined here.
+Conversation continuity and handoff lifecycle are owned by the explicitly invoked conversation-management procedures and SHOULD NOT be redefined here.
 
 ## 6. Documentation traceability
 
@@ -113,8 +113,7 @@ Canonical active owners include:
 - `AGENTS.md` (repository root) — the repository entry point, bootstrap routing, and always-on operating instructions;
 - `.ai/AGENTS.md` — the operating contract for work performed inside `.ai/`;
 - `.ai/skills/` — canonical shared capabilities and operational semantics;
-- `.ai/skills/conversational-only/` — explicitly invoked conversation-management procedures that must not be exposed as ordinary first-level discovered skills;
-- `.ai/workflows/` — ordered procedures that remain necessary outside the conversational-only handoff boundary;
+- `.ai/conversation-management/` — explicitly invoked conversation-management procedures that must not be exposed as ordinary first-level discovered skills;
 - `.ai/templates/` — reusable structural templates;
 - `.ai/INDEX.md` — routing and capability discovery;
 - future `.ai` subsystems MAY become active owners when their architecture explicitly assigns them that role.

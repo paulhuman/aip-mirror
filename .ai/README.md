@@ -24,8 +24,8 @@ Project-specific configuration that generic infrastructure needs is intentionall
 - `.ai/AGENTS.md` — compact always-on AI operating contract.
 - `.ai/INDEX.md` — operational command routing and capability discovery.
 - `.ai/skills/` — shared reusable AI capabilities and canonical semantic owners.
-- `.ai/skills/conversational-only/` — explicitly invoked conversation-management procedures kept nested so they are not ordinary discovered skills.
-- `.ai/workflows/` — ordered procedures that remain necessary outside the conversational-only handoff boundary.
+- `.ai/conversation-management/` — explicitly invoked conversation-management procedures kept nested so they are not ordinary discovered skills.
+- `.ai/conversation-management/` — explicitly invoked conversation-management procedures and their human-facing templates.
 - `.ai/handoffs/` — conversation continuity state.
 - `.ai/docs/` — durable documentation and architecture context for the AI infrastructure.
 - `.ai/tests/` — reproducible infrastructure test scenarios and historical test results.
@@ -57,9 +57,9 @@ When this README conflicts with a canonical owner, the canonical owner governs.
 
 ## Where to start
 
-For new conversation chapter initialization, follow the explicitly invoked conversational-only procedure:
+For new conversation chapter initialization, follow the explicitly invoked conversation-management procedure:
 
-`.ai/skills/conversational-only/handoff/BOOTSTRAP.md`
+`.ai/conversation-management/handoff/BOOTSTRAP.md`
 
 For ordinary AI-infrastructure operations, start with:
 

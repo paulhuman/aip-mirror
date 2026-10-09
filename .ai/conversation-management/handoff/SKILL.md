@@ -1,13 +1,13 @@
 ---
 name: handoff
-description: Explicitly manage conversation handoff checkpoints, sequential migration, chapter continuity, and recovery; conversational-only, not an ordinary discovered agent skill.
+description: Explicitly manage conversation handoff checkpoints, sequential migration, chapter continuity, and recovery; invoked through conversation-management routing, not ordinary skill discovery.
 ---
 
 # Conversation handoff
 
 Use this skill to preserve the working state of a conversation before continuing in a new chapter.
 
-The repository is the durable project memory; a conversation is a finite working context. This explicitly invoked conversational-only skill preserves continuity without requiring the next chapter to reconstruct important state from an old chat.
+The repository is the durable project memory; a conversation is a finite working context. This explicitly invoked conversation-management procedure preserves continuity without requiring the next chapter to reconstruct important state from an old chat.
 
 ## Repository paths
 
@@ -127,7 +127,7 @@ Example:
 
 ## New chapter initialization
 
-New chapter initialization is operationally defined by `.ai/skills/conversational-only/handoff/BOOTSTRAP.md`.
+New chapter initialization is operationally defined by `.ai/conversation-management/handoff/BOOTSTRAP.md`.
 
 This skill provides the handoff capability and structure; it does not duplicate the bootstrap procedure. When a new chapter is initialized, follow the applicable capability branch and verification sequence in the nested BOOTSTRAP.md.
 
@@ -254,7 +254,7 @@ The standard generated transport is:
     Initialize a new conversation chapter for the repository:
     https://github.com/paulhuman/aip-mirror
 
-    Follow the new-chapter initialization procedure in `.ai/skills/conversational-only/handoff/BOOTSTRAP.md`.
+    Follow the new-chapter initialization procedure in `.ai/conversation-management/handoff/BOOTSTRAP.md`.
 
     PREVIOUS_CHAPTER = <current chapter context>
     CURRENT_CHAPTER = <target chapter>
@@ -271,11 +271,11 @@ The instruction is for a future receiving conversation and MUST NOT be presented
 
 Human copy/paste bootstrap templates are maintained separately in:
 
-    `.ai/skills/conversational-only/handoff/handoff-bootstrap.md`
+    `.ai/conversation-management/templates/manual-bootstrap-templates.md`
 
 These templates are for **human users**, not AI-generated transport. They MUST NOT be treated as an alternative canonical transport owner.
 
-AI-generated bootstrap transport is owned exclusively by `.ai/skills/conversational-only/handoff/BOOTSTRAP.md` and MUST follow its transport instantiation rules.
+AI-generated bootstrap transport is owned exclusively by `.ai/conversation-management/handoff/BOOTSTRAP.md` and MUST follow its transport instantiation rules.
 
 ## Writing rules
 
@@ -326,6 +326,6 @@ Before a handoff is updated for migration or as a significant checkpoint, verify
 
 ## Receiving a handoff
 
-Receiving-chapter bootstrap is operationally defined by `.ai/skills/conversational-only/handoff/BOOTSTRAP.md`.
+Receiving-chapter bootstrap is operationally defined by `.ai/conversation-management/handoff/BOOTSTRAP.md`.
 
 This skill does not duplicate the bootstrap procedure or post-bootstrap verification. After bootstrap, use this skill for the ongoing handoff capability and checkpoint/migration operations.

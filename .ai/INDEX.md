@@ -33,13 +33,13 @@ Project work MUST read `docs/PROJECT-INSTRUCTIONS.md` before following project-s
 
 ## Command surface
 
-The current documented user-facing command surface is shown below. Handoff, migration, and bootstrap generation are conversational-only operations: their owners are nested under `.ai/skills/conversational-only/` and MUST be invoked explicitly, not exposed as ordinary discovered skills.
+The current documented user-facing command surface is shown below. Handoff, migration, and bootstrap generation are explicitly invoked conversation-management operations: their owners live under `.ai/conversation-management/` and MUST NOT be exposed as ordinary discovered skills.
 
 | Command phrase                   | Semantic operation                                              | Canonical owner                                                      | Read before execution                              |
 | -------------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------- |
-| `>>handoff`                      | checkpoint current chapter                                      | `.ai/skills/conversational-only/handoff/SKILL.md`                    | nested handoff skill; current handoff  |
-| `>>migrate <chapter>`            | migrate current chapter                                         | `.ai/skills/conversational-only/handoff/SKILL.md` + `.ai/skills/conversational-only/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow; current handoff |
-| `>>generate-bootstrap <chapter>` | generate bootstrap instruction for the future receiving chapter | `.ai/skills/conversational-only/handoff/SKILL.md` + `.ai/skills/conversational-only/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow; current handoff |
+| `>>handoff`                      | checkpoint current chapter                                      | `.ai/conversation-management/handoff/SKILL.md`                    | nested handoff skill; current handoff  |
+| `>>migrate <chapter>`            | migrate current chapter                                         | `.ai/conversation-management/handoff/SKILL.md` + `.ai/conversation-management/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow; current handoff |
+| `>>generate-bootstrap <chapter>` | generate bootstrap instruction for the future receiving chapter | `.ai/conversation-management/handoff/SKILL.md` + `.ai/conversation-management/handoff/BOOTSTRAP.md` | handoff skill; bootstrap workflow; current handoff |
 | `>>explain-code`                 | explain code or codebase behavior                               | `.ai/skills/explain-code/SKILL.md`                                   | explain-code skill                                 |
 | `>>normative-language`          | activate normative-language context                              | `.ai/skills/normative-language/SKILL.md`                             | normative-language skill                           |
 | `>>ai-infrastructure`           | switch to AI-infrastructure context and establish elevated active-infrastructure context | `.ai/skills/ai-infrastructure/SKILL.md` | `.ai/skills/repository/SKILL.md`; `.ai/skills/workflow/SKILL.md`; `.ai/skills/activation/SKILL.md`; `.ai/skills/normative-language/SKILL.md`; `.ai/INDEX.md` |
@@ -68,12 +68,12 @@ Use this map to find the canonical capability without reading the entire `.ai/` 
 | Activation                                                                | `.ai/skills/activation/SKILL.md`     | establish the current canonical operational context before executing an operation  |
 | AI-infrastructure context mode                                          | `.ai/skills/ai-infrastructure/SKILL.md` | switch the working domain to AI-infrastructure and establish elevated active context without loading archives |
 | Normative language                                                        | `.ai/skills/normative-language/SKILL.md` | canonical owner of normative-language semantics and normalization procedure       |
-| Conversation continuity                                                   | `.ai/skills/conversational-only/handoff/SKILL.md` | chapter naming, handoff continuity, and context preservation                       |
-| Handoff reference preservation                                            | `.ai/skills/conversational-only/handoff/reference-preservation/SKILL.md` | material research references that survive handoff                                  |
+| Conversation continuity                                                   | `.ai/conversation-management/handoff/SKILL.md` | chapter naming, handoff continuity, and context preservation                       |
+| Handoff reference preservation                                            | `.ai/conversation-management/handoff/reference-preservation/SKILL.md` | material research references that survive handoff                                  |
 | Commit policy                                                             | `.ai/skills/commits/SKILL.md`        | commit policy and project commit vocabulary                                        |
-| Handoff capability                                                        | `.ai/skills/conversational-only/handoff/SKILL.md` | checkpoint and migration capability                                                |
+| Handoff capability                                                        | `.ai/conversation-management/handoff/SKILL.md` | checkpoint and migration capability                                                |
 | Commit construction                                                       | `.ai/skills/commits/SKILL.md`        | reusable commit-message construction                                               |
-| Conversation bootstrap                                                    | `.ai/skills/conversational-only/handoff/BOOTSTRAP.md` | ordered new-chapter bootstrap procedure                                            |
+| Conversation bootstrap                                                    | `.ai/conversation-management/handoff/BOOTSTRAP.md` | ordered new-chapter bootstrap procedure                                            |
 | Code explanation                                                          | `.ai/skills/explain-code/SKILL.md`   | explain code with analogies, ASCII diagrams, step-by-step walkthrough, and gotchas |
 | Knowledge capture                                                         | `.ai/skills/knowledge-capture/SKILL.md` | capture durable developer knowledge into the configured external knowledge repository |
 

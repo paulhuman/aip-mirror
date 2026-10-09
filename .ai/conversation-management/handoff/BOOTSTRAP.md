@@ -75,7 +75,7 @@ The generated bootstrap transport is a canonical template instantiation, not new
 
 When generating bootstrap transport, the AI MUST:
 
-1. read the current `.ai/skills/conversational-only/handoff/BOOTSTRAP.md`;
+1. read the current `.ai/conversation-management/handoff/BOOTSTRAP.md`;
 2. copy the applicable canonical generated-transport template exactly;
 3. replace only the explicitly variable placeholders;
 4. preserve all fixed text, ordering, repository locator, field names, and required instructions exactly;
@@ -89,7 +89,7 @@ Before returning generated bootstrap transport, the AI MUST verify that it conta
 
 - the canonical repository locator;
 - the canonical nested BOOTSTRAP instruction;
-- the canonical `.ai/skills/conversational-only/handoff/BOOTSTRAP.md` reference;
+- the canonical `.ai/conversation-management/handoff/BOOTSTRAP.md` reference;
 - `PREVIOUS_CHAPTER`;
 - `CURRENT_CHAPTER`;
 - `SPECIALIZATION`;
@@ -98,7 +98,7 @@ Before returning generated bootstrap transport, the AI MUST verify that it conta
 
 ### Canonical invocation format
 
-The bootstrap message is the transport boundary for the initialization context. A generated migration instruction MUST explicitly identify itself as an instruction to initialize a new conversation chapter, MUST contain an explicit repository locator, and MUST direct the receiving AI to follow the procedure in the nested BOOTSTRAP workflow. Human manual bootstrap templates are maintained separately in `.ai/skills/conversational-only/handoff/handoff-bootstrap.md`.
+The bootstrap message is the transport boundary for the initialization context. A generated migration instruction MUST explicitly identify itself as an instruction to initialize a new conversation chapter, MUST contain an explicit repository locator, and MUST direct the receiving AI to follow the procedure in the nested BOOTSTRAP workflow. Human manual bootstrap templates are maintained separately in `.ai/conversation-management/templates/manual-bootstrap-templates.md`.
 
 The repository locator is transport context, not a canonical BOOTSTRAP runtime input. It exists so the receiving AI can identify the target repository before resolving any repository-relative path.
 
@@ -107,7 +107,7 @@ The canonical generated form is:
     Initialize a new conversation chapter for the repository:
     https://github.com/paulhuman/aip-mirror
 
-    Follow the new-chapter initialization procedure in `.ai/skills/conversational-only/handoff/BOOTSTRAP.md`.
+    Follow the new-chapter initialization procedure in `.ai/conversation-management/handoff/BOOTSTRAP.md`.
 
     PREVIOUS_CHAPTER = <four-digit previous chapter number or N/A>
     CURRENT_CHAPTER = <four-digit current chapter number>
@@ -225,8 +225,8 @@ This workflow does not route ordinary user commands, define command IDs, maintai
 After repository identity and path resolution are established, the AI MUST read `.ai/skills/activation/SKILL.md` and invoke ACTIVATE for the `conversation initialization` operation using the required canonical owners for the applicable branch. At minimum, the initialization owner set is:
 
 - `.ai/skills/workflow/SKILL.md`;
-- `.ai/skills/conversational-only/handoff/SKILL.md`;
-- `.ai/skills/conversational-only/handoff/reference-preservation/SKILL.md`;
+- `.ai/conversation-management/handoff/SKILL.md`;
+- `.ai/conversation-management/handoff/reference-preservation/SKILL.md`;
 - this BOOTSTRAP workflow.
 
 For a receiving chapter, the previous handoff is additional initialization context and MUST be read as required by the receiving branch. For a first chapter, no predecessor handoff is required.
@@ -257,7 +257,7 @@ After this self-check:
 3. If any canonical runtime input is missing or malformed, STOP before repository mutation and report exactly what is missing or malformed.
 4. Compute `CHAPTER_ID = SPECIALIZATION + CURRENT_CHAPTER` and `FILENAME_SHORT_NAME` by replacing spaces in `SHORT_NAME` with hyphens. Before repository mutation, verify that the resulting handoff path matches `.ai/handoffs/<SPECIALIZATION>/<CHAPTER_ID>-<FILENAME_SHORT_NAME>.md`. If it does not, STOP and report the mismatch.
 5. Read this file.
-6. Read .ai/skills/workflow/SKILL.md, .ai/skills/conversational-only/handoff/reference-preservation/SKILL.md, the handoff skill, `.ai/handoffs/README.md`, and `.ai/docs/architecture/README.md`. The two README files are bootstrap orientation reads, not activation owners.
+6. Read .ai/skills/workflow/SKILL.md, .ai/conversation-management/handoff/reference-preservation/SKILL.md, the handoff skill, `.ai/handoffs/README.md`, and `.ai/docs/architecture/README.md`. The two README files are bootstrap orientation reads, not activation owners.
 7. Read .ai/skills/activation/SKILL.md and invoke ACTIVATE.
 8. After the repository write-capability self-check, a WRITE-CAPABLE bootstrap MUST read .ai/skills/commits/SKILL.md before emitting the operation-level TRACE, because the bootstrap branch includes an authorized repository commit. For a READ-ONLY bootstrap, .ai/skills/commits/SKILL.md is not required solely for bootstrap.
 9. During bootstrap initialization, emit the required operation-level TRACE defined by `.ai/skills/activation/SKILL.md` before executing the applicable bootstrap branch. The TRACE MUST identify the bootstrap operation, list the canonical owners actually reread for ACTIVATE, report `status: ACTIVATED`, and include the unique additional repository files actually read in `OPERATION READS` without duplicating ACTIVATE owners. For a WRITE-CAPABLE bootstrap, `.ai/skills/commits/SKILL.md` MUST therefore appear in `OPERATION READS`. If bootstrap aborts or fails after ACTIVATE, the TRACE MUST still show the activation and the `OPERATION READS` accumulated up to that point.
@@ -319,7 +319,7 @@ If bootstrap aborts or fails after ACTIVATE, insert a TRACE into the assistant r
 
 ## Initial handoff
 
-The initial handoff MUST use the standard handoff structure from the `.ai/skills/conversational-only/handoff/SKILL.md` unless a project-specific format requires otherwise and MUST contain, at minimum:
+The initial handoff MUST use the standard handoff structure from the `.ai/conversation-management/handoff/SKILL.md` unless a project-specific format requires otherwise and MUST contain, at minimum:
 
 - conversation/chapter identity;
 - specialization;
