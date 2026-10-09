@@ -252,7 +252,7 @@ After this self-check:
 
 ### Shared steps
 
-1. Validate that new-chapter initialization was actually requested through the AGENTS item 6 entry path.
+1. Validate that this procedure was invoked by an explicit bootstrap instruction containing the canonical repository locator and directing the receiving AI to this BOOTSTRAP workflow. Do not require an AGENTS.md entry path for Conversational AI initialization.
 2. Confirm current chapter identity, previous chapter, specialization, and supplied contextual `SHORT_NAME` from the bootstrap message.
 3. If any canonical runtime input is missing or malformed, STOP before repository mutation and report exactly what is missing or malformed.
 4. Compute `CHAPTER_ID = SPECIALIZATION + CURRENT_CHAPTER` and `FILENAME_SHORT_NAME` by replacing spaces in `SHORT_NAME` with hyphens. Before repository mutation, verify that the resulting handoff path matches `.ai/handoffs/<SPECIALIZATION>/<CHAPTER_ID>-<FILENAME_SHORT_NAME>.md`. If it does not, STOP and report the mismatch.
