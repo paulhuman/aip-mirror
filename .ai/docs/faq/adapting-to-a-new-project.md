@@ -45,9 +45,9 @@ Copy:
     .ai/AGENTS.md
     .ai/INDEX.md
     .ai/config.yaml              ← replace
-    .ai/skills/conversational-only/  ← explicitly invoked handoff/bootstrap material
+    .ai/conversation-management/  ← explicitly invoked handoff/bootstrap material
     .ai/skills/
-    .ai/workflows/
+    .ai/skills/workflow/SKILL.md  ← general workflow principles
     .ai/docs/architecture/README.md
     .ai/docs/faq/
     .ai/tests/scenarios/     ← after checking scenarios
@@ -260,7 +260,7 @@ The exact architecture belongs to the new project, not to the reusable `.ai` inf
 
 Most `.ai` files are intentionally generic. A few are not completely generic.
 
-## 6.1 `.ai/skills/conversational-only/handoff/SKILL.md`
+## 6.1 `.ai/conversation-management/handoff/SKILL.md`
 
 This file is mostly reusable, but the current version contains a hardcoded repository locator:
 
@@ -278,7 +278,7 @@ The semantic handoff procedure itself should remain.
 
 ---
 
-## 6.2 `.ai/skills/conversational-only/handoff/BOOTSTRAP.md`
+## 6.2 `.ai/conversation-management/handoff/BOOTSTRAP.md`
 
 This is another mostly reusable file with an important embedded project reference.
 
@@ -336,7 +336,7 @@ cold-start test
 
 ---
 
-## 6.4 `.ai/skills/conversational-only/handoff/SKILL.md`
+## 6.4 `.ai/conversation-management/handoff/SKILL.md`
 
 The `A0001 / Project Workshop` example is the canonical neutral example of the filename/chapter contract.
 
@@ -407,7 +407,7 @@ There is no separate `.ai/rules/` layer in the target architecture. Shared opera
 - `.ai/skills/knowledge-capture/SKILL.md`;
 - `.ai/skills/normative-language/SKILL.md`.
 
-Conversation lifecycle and handoff procedures are deliberately separated from ordinary skill discovery under `.ai/skills/conversational-only/handoff/`. Do not create a `SKILL.md` directly under `.ai/skills/conversational-only/`.
+Conversation lifecycle and handoff procedures are deliberately kept under `.ai/conversation-management/handoff/`, separate from ordinary skill discovery. Do not move these procedures into the first-level `.ai/skills/` namespace.
 
 When adapting these owners, inspect examples and project references, but preserve reusable semantics. Do not create duplicate owners or mechanically copy old path references.
 
@@ -427,17 +427,17 @@ Shared skills are reusable capabilities and canonical owners. Keep the shared ca
 - repository;
 - workflow.
 
-Conversation handoff and reference-preservation material is explicitly conversational-only and belongs nested under `.ai/skills/conversational-only/handoff/`; it MUST NOT be treated as an ordinary discovered skill.
+Conversation handoff and reference-preservation material belongs under `.ai/conversation-management/handoff/`; it MUST NOT be treated as an ordinary first-level discovered skill.
 
 Check each skill for project-specific examples or hardcoded repository locators. Change project-specific examples and references, not reusable capability semantics.
 
 ---
 
-# 11. `.ai/workflows/`
+# 11. Workflow and conversation-management procedures
 
-The remaining `.ai/workflows/` files provide ordered procedures that are not part of the conversational-only handoff boundary, such as independent-review onboarding.
+General AI workflow principles are owned by `.ai/skills/workflow/SKILL.md`. Human-facing independent-review onboarding templates live under `.ai/conversation-management/templates/` and are governed by the corresponding conversation-management procedures.
 
-The receiving-chapter bootstrap procedure is nested under `.ai/skills/conversational-only/handoff/BOOTSTRAP.md`. Do not move it back into the ordinary workflow area or make it a first-level discovered skill.
+The receiving-chapter bootstrap procedure is owned by `.ai/conversation-management/handoff/BOOTSTRAP.md`. Keep it under conversation management rather than moving it into the first-level `.ai/skills/` namespace.
 
 ---
 
@@ -615,8 +615,8 @@ docs/architecture/project-architecture.md
 Check:
 
 ```text
-.ai/skills/conversational-only/handoff/SKILL.md
-.ai/skills/conversational-only/handoff/BOOTSTRAP.md
+.ai/conversation-management/handoff/SKILL.md
+.ai/conversation-management/handoff/BOOTSTRAP.md
 .ai/tests/scenarios/cold-start-command-trace.md
 ```
 
@@ -667,7 +667,7 @@ Use the canonical:
 ```text
 .ai/AGENTS.md
     ↓
-.ai/skills/conversational-only/handoff/BOOTSTRAP.md
+.ai/conversation-management/handoff/BOOTSTRAP.md
 ```
 
 path.
