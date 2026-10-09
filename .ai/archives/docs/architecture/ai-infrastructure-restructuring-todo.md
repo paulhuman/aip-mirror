@@ -519,3 +519,22 @@ Regression follow-up:
 - The regression SHOULD verify that the retired `>>activate-normative-language` phrase is no longer part of the active command surface.
 
 Status: RESOLVED
+
+## TODO 13 — Correct the manual-activation guidance path
+
+Observation:
+
+`.ai/skills/activation/SKILL.md` currently points to:
+
+`.ai/architecture/faq/manual-activation.md`
+
+That path is stale. The current repository location is:
+
+`.ai/docs/faq/manual-activation.md`
+
+Action:
+
+- Update the reference in `.ai/skills/activation/SKILL.md` to use `.ai/docs/faq/manual-activation.md`.
+- Read back the changed skill and verify the corrected path exists in the repository tree.
+
+Status: OPEN
