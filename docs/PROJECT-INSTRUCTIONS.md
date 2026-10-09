@@ -28,15 +28,15 @@ A0001 → A0002 → ... → A0999
 
 Conversation lifecycle, chapter transitions, and handoff state are defined by:
 
-`.ai/rules/handoff/lifecycle.md`
+.ai/skills/conversational-only/handoff/SKILL.md
 
 The handoff procedure is defined by:
 
-`.ai/skills/handoff/SKILL.md`
+.ai/skills/conversational-only/handoff/SKILL.md
 
 The bootstrap procedure is defined by:
 
-`.ai/workflows/handoff/BOOTSTRAP.md`
+.ai/skills/conversational-only/handoff/BOOTSTRAP.md
 
 DO NOT duplicate those procedures here.
 
@@ -128,13 +128,13 @@ Use the semantic owner rather than duplicating project knowledge:
 - **Project specifications and behavioral requirements** → appropriate project specification documents under `docs/`
 - **Reverse-engineering findings** → appropriate research documents under `docs/`
 - **Conversation migration state** → `.ai/handoffs/`
-- **AI infrastructure rules** → `.ai/rules/`
+- **AI infrastructure semantics** → `.ai/skills/`
 - **Reusable AI capabilities** → `.ai/skills/`
 - **Ordered AI procedures** → `.ai/workflows/`
 
 Repository identity is defined by `.ai/config.yaml`.
 
-Repository boundaries, repository taxonomy, path resolution, and write safety are defined by `.ai/rules/repository.md`. Commit policy is defined by `.ai/rules/commits.md` and `.ai/skills/commits/SKILL.md`.
+Repository boundaries, repository taxonomy, path resolution, and write safety are defined by `.ai/skills/repository/SKILL.md`. Commit policy and commit-message construction are defined by `.ai/skills/commits/SKILL.md`.
 
 DO NOT reproduce those rules here.
 
@@ -157,7 +157,7 @@ It provides:
 It is not:
 
 - a second AI infrastructure index;
-- a repository rules document;
+- a generic AI-infrastructure policy owner;
 - a handoff lifecycle document;
 - a complete architecture document;
 - a workstream registry;
