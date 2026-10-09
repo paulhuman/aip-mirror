@@ -28,15 +28,15 @@ A0001 → A0002 → ... → A0999
 
 Conversation lifecycle, chapter transitions, and handoff state are defined by:
 
-.ai/skills/conversational-only/handoff/SKILL.md
+.ai/conversation-management/handoff/SKILL.md
 
 The handoff procedure is defined by:
 
-.ai/skills/conversational-only/handoff/SKILL.md
+.ai/conversation-management/handoff/SKILL.md
 
 The bootstrap procedure is defined by:
 
-.ai/skills/conversational-only/handoff/BOOTSTRAP.md
+.ai/conversation-management/handoff/BOOTSTRAP.md
 
 DO NOT duplicate those procedures here.
 
@@ -130,7 +130,7 @@ Use the semantic owner rather than duplicating project knowledge:
 - **Conversation migration state** → `.ai/handoffs/`
 - **AI infrastructure semantics** → `.ai/skills/`
 - **Reusable AI capabilities** → `.ai/skills/`
-- **Ordered AI procedures** → `.ai/workflows/`
+- **General AI workflow principles** → `.ai/skills/workflow/SKILL.md`
 
 Repository identity is defined by `.ai/config.yaml`.
 

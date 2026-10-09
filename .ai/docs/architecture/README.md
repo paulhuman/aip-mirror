@@ -59,9 +59,8 @@ This includes architecture notes and other documentation such as `.ai/docs/faq/`
 Canonical active owners live in operational subsystems such as:
 
 - `.ai/skills/` — canonical shared capabilities and semantic constraints;
-- `.ai/skills/conversational-only/` — explicitly invoked conversation-management procedures kept nested from ordinary skill discovery;
-- `.ai/workflows/` — ordered procedures;
-- `.ai/templates/` — reusable structural templates;
+- `.ai/conversation-management/` — explicitly invoked conversation-management procedures kept nested from ordinary skill discovery;
+- `.ai/conversation-management/templates/` — human-facing templates governed by the corresponding conversation-management procedures; these templates are not an independent semantic owner;
 - `.ai/INDEX.md` — routing and capability discovery;
 - future `.ai` subsystems MAY become active owners when explicitly assigned that role.
 

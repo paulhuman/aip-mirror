@@ -114,7 +114,6 @@ The activation context identifies which canonical owner files MUST be reread. It
 INDEX does not record:
 
 - repository-state effects;
-- repository-state effects;
 - commit authorization;
 - commit construction;
 - procedural steps.

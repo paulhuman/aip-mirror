@@ -131,7 +131,7 @@ For example, an active repository-context inspection may be batched as:
     .ai/config.yaml
     .ai/docs/architecture/*
     .ai/skills/*
-    .ai/workflows/*
+    .ai/conversation-management/*
     .ai/handoffs/README.md
     docs/PROJECT-INSTRUCTIONS.md
 

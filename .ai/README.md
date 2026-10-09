@@ -25,11 +25,10 @@ Project-specific configuration that generic infrastructure needs is intentionall
 - `.ai/INDEX.md` — operational command routing and capability discovery.
 - `.ai/skills/` — shared reusable AI capabilities and canonical semantic owners.
 - `.ai/conversation-management/` — explicitly invoked conversation-management procedures kept nested so they are not ordinary discovered skills.
-- `.ai/conversation-management/` — explicitly invoked conversation-management procedures and their human-facing templates.
+- `.ai/conversation-management/templates/` — human-facing templates governed by the corresponding conversation-management procedures.
 - `.ai/handoffs/` — conversation continuity state.
 - `.ai/docs/` — durable documentation and architecture context for the AI infrastructure.
 - `.ai/tests/` — reproducible infrastructure test scenarios and historical test results.
-- `.ai/templates/` — human-oriented templates owned by their applicable workflows.
 - `.ai/archives/` — historical/disposable storage; not active infrastructure context.
 
 The README files inside active subdirectories provide orientation only. They MUST NOT replace canonical semantic owners.

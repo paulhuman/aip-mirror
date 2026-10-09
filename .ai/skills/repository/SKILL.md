@@ -113,8 +113,7 @@ Canonical active owners include:
 - `AGENTS.md` (repository root) — the repository entry point, bootstrap routing, and always-on operating instructions;
 - `.ai/AGENTS.md` — the operating contract for work performed inside `.ai/`;
 - `.ai/skills/` — canonical shared capabilities and operational semantics;
-- `.ai/conversation-management/` — explicitly invoked conversation-management procedures that must not be exposed as ordinary first-level discovered skills;
-- `.ai/templates/` — reusable structural templates;
+- `.ai/conversation-management/` — explicitly invoked conversation-management procedures that MUST NOT be exposed as ordinary first-level discovered skills;
 - `.ai/INDEX.md` — routing and capability discovery;
 - future `.ai` subsystems MAY become active owners when their architecture explicitly assigns them that role.
 
@@ -124,9 +123,11 @@ Supporting or contextual layers include:
 - `.ai/docs/` — durable explanation, rationale, research, and orientation;
 - `.ai/archives/` — historical material.
 
+Templates under `.ai/conversation-management/templates/` are human-facing transport aids governed by their corresponding conversation-management procedures; they are not an independent semantic owner.
+
 These supporting layers MAY be actively used for appropriate purposes and MAY remain active for different lengths of time. Their activity does not make them semantic owners.
 
-Canonical active owners MUST NOT establish semantic requirements that depend on supporting or contextual layers. In particular, `AGENTS.md`, `.ai/AGENTS.md`, `.ai/skills/`, `.ai/conversation-management/`, `.ai/templates/`, `.ai/INDEX.md`, and any future active owner MUST NOT link to, depend on, or require `.ai/handoffs/`, `.ai/docs/`, or `.ai/archives/` as sources of active semantics.
+Canonical active owners MUST NOT establish semantic requirements that depend on supporting or contextual layers. In particular, `AGENTS.md`, `.ai/AGENTS.md`, `.ai/skills/`, `.ai/conversation-management/`, `.ai/INDEX.md`, and any future active owner MUST NOT link to, depend on, or require `.ai/handoffs/`, `.ai/docs/`, or `.ai/archives/` as sources of active semantics.
 
 Supporting or contextual material MAY describe, explain, or provide evidence for active owners, but it MUST NOT become a second semantic owner merely because an active owner references its explanation.
 
