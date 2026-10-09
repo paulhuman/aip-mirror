@@ -204,9 +204,3 @@ Do not create empty taxonomy trees in advance.
 The source project MUST NOT determine the primary taxonomy merely because it was the place where the knowledge was discovered.
 
 File names MUST be lowercase kebab-case.
-
-## 10. Canonical relationship
-
-`.ai/docs/architecture/developer-knowledge-archive.md` preserves the architectural rationale and history for this policy. It is a supporting layer, not a source of active semantics.
-
-This rule is the active semantic owner used during knowledge capture. The architecture note MUST NOT be treated as a second execution owner.

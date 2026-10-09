@@ -1,8 +1,10 @@
 # Agent bootstrap — aip-mirror
 
-DSH auto-loads this file for the repository root. It is a **router**, not an
-owner: it orients a fresh session and points to the canonical sources. Every
-rule, procedure, and skill lives in `.ai/`.
+This file is the repository entry point. It orients a fresh session and routes
+to the canonical sources; every rule, procedure, and skill lives in `.ai/`.
+
+This file owns only what it states itself. It does not own the rules, skills, or
+workflows it routes to.
 
 ## What this repository is
 
@@ -14,8 +16,7 @@ working infrastructure.
 docs/    = project knowledge
 ```
 
-Infrastructure work and plugin work are different domains with different
-owners. Do not mix them.
+Infrastructure work and plugin work are different domains. DO NOT mix them.
 
 ## Read in this order
 
@@ -26,58 +27,52 @@ owners. Do not mix them.
 4. `.ai/INDEX.md` — operation routing and the capability map.
 
 Then read the specific owner for the operation at hand. `INDEX.md` routes; it
-never replaces the owner.
+does not replace the owner.
+
+For project work rather than infrastructure work, start from
+`docs/PROJECT-INSTRUCTIONS.md`.
 
 ## Ownership
 
-**Active owners** — behaviour is defined here:
-
-- `.ai/rules/` — semantic constraints
-- `.ai/skills/` — reusable capabilities
-- `.ai/workflows/` — ordered procedures
-- `.ai/INDEX.md` — routing and discovery
-
-**Supporting layers** — explain and record, own nothing: `.ai/handoffs/`,
-`.ai/docs/`, `.ai/archives/`.
+The infrastructure separates **active semantic owners** from **supporting
+layers**. Active owners define behaviour. Supporting layers explain and record;
+they own nothing. `.ai/rules/repository.md` owns the canonical list and the
+boundary between them.
 
 An active owner MUST NOT require a supporting file in order to be understood.
 When a supporting note and an active owner disagree, the owner governs.
 
 ## Operating rules
 
-- DO NOT infer conventions from memory. Read the current file.
-- Re-read the owner before executing its operation; the repository version is
+- DO NOT infer conventions from memory; DO read the current file.
+- DO reread the owner before executing its operation; the repository version is
   authoritative, not remembered wording.
-- A successful write or commit does not prove correct content. Read back,
-  inspect the diff, verify scope.
-- Distinguish confirmed from inferred from unverified. Never promote a
-  plausible claim to `verified` without evidence — including a claim you made
-  yourself in an earlier turn.
-
-## Agentic environment (DSH)
-
-Detailed, evidence-backed facts and open tasks live in
-`.ai/docs/architecture/agentic-ai-skill-discovery-verification.md`. Read it
-before touching skill discovery. The four things most likely to cost time:
-
-1. `.ai/skills/` is **not** a discovery root. The project adapter
-   `.agents/skills` is a Windows junction to it — confirmed working (discovery
-   through it is observed). It is gitignored, so a fresh clone must recreate it:
-   `pwsh -File .ai/scripts/adapters/New-SkillAdapters.ps1`.
-2. A `customSkillDirs` override on the `skill-filesystem` id does nothing: the
-   host-plane row is disabled by `dsh-web-app`, which moved discovery into agent
-   presets. Personal skills need no config — they live in `$DSH_HOME/skills`.
-3. `--dump-config` shows the merged tree, not what loads. Confirm against the
-   live available-skills catalog.
-4. The **Minimal** preset loads no skills at all. Use **Standard**.
-
-`dsh` is not on `PATH`. Use `npx --yes @deepseek-ai/dsh@0.2.0-rc.2` with
-`DSH_HOME` set to `%APPDATA%\dsh-desktop\harness`.
+- A successful write or commit does not prove correct content. DO read back,
+  inspect the diff, and verify scope.
+- DO distinguish confirmed from inferred from unverified. An AI MUST NOT promote
+  a plausible claim to `verified` without evidence, including a claim it made
+  itself in an earlier turn.
 
 ## Language
 
 Active rule, skill, and workflow files are written in **English**. Two
-intentional exceptions: `.ai/docs/faq/` may explain in Russian, and
+intentional exceptions: `.ai/docs/faq/` MAY explain in Russian, and
 `.ai/rules/developer-knowledge.md` quotes Russian because the policy it owns is
 *about* Russian prose. That knowledge-capture policy applies to the external
 knowledge repository, not to this infrastructure.
+
+## Host notes — DSH
+
+Host-specific; not part of the portable contract. These facts describe the
+installed build and are version-sensitive. DO revalidate them against the
+running host before relying on them.
+
+DSH auto-loads this file for the repository root. `.ai/skills/` is not a DSH
+discovery root: the project adapter `.agents/skills` is a Windows junction to
+it, and discovery through it is confirmed working. That adapter is gitignored,
+so a fresh clone has to recreate it with
+`pwsh -File .ai/scripts/adapters/New-SkillAdapters.ps1`. Whether any other host
+reads `.agents/skills` is unverified.
+
+`dsh` is not on `PATH`; run it as `npx --yes @deepseek-ai/dsh@0.2.0-rc.2` with
+`DSH_HOME` set to `%APPDATA%\dsh-desktop\harness`.

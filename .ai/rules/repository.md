@@ -105,6 +105,8 @@ The `.ai` infrastructure distinguishes **active semantic owners** from **support
 
 Canonical active owners include:
 
+- `AGENTS.md` (repository root) — the repository entry point, bootstrap routing, and always-on operating instructions;
+- `.ai/AGENTS.md` — the operating contract for work performed inside `.ai/`;
 - `.ai/rules/` — semantic constraints;
 - `.ai/skills/` — reusable capabilities;
 - `.ai/workflows/` — ordered procedures;
@@ -120,7 +122,7 @@ Supporting or contextual layers include:
 
 These supporting layers MAY be actively used for appropriate purposes and MAY remain active for different lengths of time. Their activity does not make them semantic owners.
 
-Canonical active owners MUST NOT establish semantic requirements that depend on supporting or contextual layers. In particular, `.ai/rules/`, `.ai/skills/`, `.ai/workflows/`, `.ai/templates/`, `.ai/INDEX.md`, and any future active owner MUST NOT link to, depend on, or require `.ai/handoffs/`, `.ai/docs/`, or `.ai/archives/` as sources of active semantics.
+Canonical active owners MUST NOT establish semantic requirements that depend on supporting or contextual layers. In particular, `AGENTS.md`, `.ai/AGENTS.md`, `.ai/rules/`, `.ai/skills/`, `.ai/workflows/`, `.ai/templates/`, `.ai/INDEX.md`, and any future active owner MUST NOT link to, depend on, or require `.ai/handoffs/`, `.ai/docs/`, or `.ai/archives/` as sources of active semantics.
 
 Supporting or contextual material MAY describe, explain, or provide evidence for active owners, but it MUST NOT become a second semantic owner merely because an active owner references its explanation.
 
@@ -129,6 +131,7 @@ Active rules SHOULD define the valid semantic model and expected behavior rather
 When a handoff or document becomes obsolete, it MAY move into the appropriate archive location. This is a lifecycle transition, not a change in semantic ownership.
 
 The active semantic model MUST remain understandable and operationally complete from the active owners themselves, without requiring routine loading of handoffs, docs, or archives.
+
 ## 7. Repository write safety
 
 Repository mutation safety is defined by a small set of invariants that apply
