@@ -57,6 +57,25 @@ Recover the interrupted migration into C0081 and continue the AI-infrastructure 
 4. Only after the historical contract is clear, propose the smallest canonical-owner correction. Do not implement a correction without evidence and a clear scope.
 5. Continue the wider infrastructure audit and validate the provisional semantic-role model against real files and hybrid cases; the three-level model is not accepted as final.
 
+## C0081 progress — bootstrap contract and semantic-role audit
+
+### Bootstrap contract correction
+
+- Updated `.ai/conversation-management/handoff/BOOTSTRAP.md` Shared steps item 1 to validate the explicit bootstrap transport: it must contain the canonical repository locator and direct the receiving AI to this BOOTSTRAP workflow. The text explicitly says an `AGENTS.md` entry path is not required for Conversational AI initialization.
+- Only that one line was changed. Commit: `c096f84cbcbe1d5e55929dfa2030141495456b00`.
+- Read-back confirmed the new line is present, the old “AGENTS item 6 entry path” wording is absent, and root `AGENTS.md` and `.ai/AGENTS.md` were not changed by this commit.
+
+### Initial validation of semantic-role model against current files
+
+- `.ai/INDEX.md` is a hybrid: it is a routing/discovery surface, but it has local routing semantics (the table records the operation/canonical owner/read-before-execution map). It currently has two rows, “Commit policy” and “Commit construction”, both pointing to `.ai/skills/commits/SKILL.md`. This is a concrete routing taxonomy issue, not proof that the INDEX must be classified only as a surface.
+- `.ai/skills/repository/SKILL.md` is also hybrid: it is a canonical semantic owner for repository identity and mutation safety, while its taxonomy section enumerates other active owners and supporting layers. Its active-owner list includes `.ai/templates/`, but the current architecture TODO records that directory as absent from the current tree and says current templates live under `.ai/conversation-management/`. This needs a deliberate ownership/taxonomy decision, not a blind path substitution.
+- `.ai/README.md` and `.ai/docs/architecture/README.md` are orientation surfaces, but both describe repository structure; the latter still lists removed `.ai/skills/conversational-only/`, `.ai/workflows/`, and `.ai/templates/` as current areas. Their function is more than a pure pointer, but their text is not thereby a canonical owner.
+- `.ai/handoffs/README.md` is an orientation/usage document for chapter state and currently points to the removed `.ai/skills/conversational-only/handoff/SKILL.md`. The handoff files themselves are state records, not owners of the lifecycle procedure.
+- `.ai/docs/architecture/ai-infrastructure-vnext-proposal.md` has a current-state note explicitly marking several old paths as proposal-time state, while its body still contains historical paths. This is evidence that stale-looking references must be classified by temporal status, not mechanically rewritten.
+- `.ai/docs/architecture/ai-infrastructure-context-mode.md` contains a current-state section but also old unqualified paths and statements about `.ai/rules/normative-language.md`. Its status and historical/current boundaries need a full-file review before any edits.
+
+These examples suggest the proposed three-level model should be tested as a **semantic-role taxonomy**, not treated as mutually exclusive file types. A file may own local semantics while also routing, orienting, or documenting other areas. The distinction between semantic authority and a file's functional role must remain explicit. No taxonomy adoption or broader file changes have been made.
+
 ## Confirmed versus open
 
 - **Confirmed:** Current root `AGENTS.md` is the repository entry point for AI agents and should remain Agentic AI-focused per the user's instruction.
