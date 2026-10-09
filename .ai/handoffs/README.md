@@ -6,7 +6,7 @@ A chat is a finite working context. The repository is the durable project record
 
 ## Naming
 
-Use the current Chapter Identifier Format defined canonically by `.ai/skills/conversational-only/handoff/SKILL.md`.
+Use the current Chapter Identifier Format defined canonically by `.ai/conversation-management/handoff/SKILL.md`.
 
 Handoff filenames use the full `CHAPTER_ID` and the resolved `SHORT_NAME` in filename-safe form:
 
@@ -45,4 +45,4 @@ It is not a replacement for normal project documentation.
 
 Handoffs MUST distinguish confirmed observations from inferences, assumptions, and open questions.
 
-See `.ai/skills/conversational-only/handoff/SKILL.md` for the workflow and format.
+See `.ai/conversation-management/handoff/SKILL.md` for the workflow and format.

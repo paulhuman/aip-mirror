@@ -96,7 +96,7 @@ Examples:
 
 When ACTIVATE is requested manually, DO identify the current operation and reread the canonical owners required for that operation. When TRACE is requested, DO present observable activation evidence without exposing hidden reasoning.
 
-See `.ai/architecture/faq/manual-activation.md` for practical examples and usage guidance.
+See `.ai/docs/faq/manual-activation.md` for practical examples and usage guidance.
 
 ## Boundary
 
