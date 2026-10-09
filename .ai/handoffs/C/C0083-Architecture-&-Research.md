@@ -81,14 +81,42 @@ Important constraints:
 7. Preserve historical snapshots and distinguish confirmed observations from inference, assumptions, and open questions.
 8. Do not modify predecessor handoff snapshots merely to record that they were consumed.
 
+## C0083 progress update (2026-10-10)
+
+### Verified current snapshot
+
+- After the structural-reference corrections and the manual-activation FAQ correction, `main` points to commit `2f18f94e74c34af84123b5d39d2e3d1756966af1`.
+- Root tree: `2825cd8d8a5fda5871da20c6cca5b7ea0319bb09`; recursive tree returned `truncated=false`, 254 entries.
+- The tree and all post-write reads were pinned to immutable commit SHAs. Candidate diffs and changed-file scope were inspected before updating `main`.
+
+### Completed narrow corrections
+
+1. Commit [`93f323c201c0bb66c40091558e5f14a2ece34300`](https://github.com/paulhuman/aip-mirror/commit/93f323c201c0bb66c40091558e5f14a2ece34300) corrected six files:
+   - `.ai/docs/architecture/README.md`: replaced absent `.ai/skills/conversational-only/`, `.ai/workflows/`, and `.ai/templates/` structural descriptions with current conversation-management locations.
+   - `.ai/README.md`: removed duplicate `.ai/conversation-management/` entry and described `.ai/conversation-management/templates/` instead of the absent root `.ai/templates/`.
+   - `.ai/skills/workflow/SKILL.md`: corrected the example batch path from `.ai/workflows/*` to the existing `.ai/conversation-management/*`.
+   - `.ai/skills/repository/SKILL.md`: removed `.ai/templates/` as a standalone active owner and clarified that `.ai/conversation-management/templates/` contains human-facing transport aids governed by conversation-management procedures, not an independent semantic owner. The proposed multi-level semantic-role model remains provisional.
+   - `.ai/INDEX.md`: removed the duplicate `repository-state effects` bullet.
+   - `docs/PROJECT-INSTRUCTIONS.md`: corrected three stale handoff/bootstrap paths and replaced the absent `.ai/workflows/` routing entry with the current general workflow owner.
+2. Commit [`2f18f94e74c34af84123b5d39d2e3d1756966af1`](https://github.com/paulhuman/aip-mirror/commit/2f18f94e74c34af84123b5d39d2e3d1756966af1) corrected the stale handoff-skill reference in `.ai/docs/faq/manual-activation.md`.
+3. Both commits were read back from their candidate commits, their diffs and scopes were inspected, and the branch head was verified after each update.
+
+### Remaining audit findings
+
+- `.ai/docs/faq/adapting-to-a-new-project.md` is an active how-to guide but contains many obsolete paths, including old conversational-only handoff paths and `.ai/workflows/`. Do not blindly rewrite the large document; decide whether to update its current instructions, clearly delimit historical examples, or otherwise retire obsolete guidance.
+- `.ai/docs/architecture/agentic-ai-compatibility-architecture.md`, `.ai/docs/architecture/agentic-ai-compatibility-capability-audit.md`, and `.ai/docs/architecture/agentic-ai-owner-seam-audit.md` contain pre-migration `.ai/rules/`, `.ai/workflows/`, and older handoff-owner references. Their continuity points to C0069-era research, so preserve historical evidence and classify whether a current-state addendum or archival transition is warranted before editing.
+- `.ai/docs/architecture/ai-infrastructure-context-mode.md` contains an old bootstrap path inside its historical validation record; `.ai/docs/architecture/ai-infrastructure-vnext-proposal.md` explicitly marks itself as predating the migration. Treat those occurrences as historical unless a specific current-facing passage is shown to be misleading.
+- The root `README.md` is empty in the verified snapshot. No change was made to it.
+
 ## Immediate next task
 
-1. The Git-ref → commit → root tree → recursive tree retrieval path is now proven and documented in `.ai/skills/workflow/SKILL.md`.
-2. Finish classifying the confirmed stale structural descriptions in `.ai/docs/architecture/README.md`, `.ai/README.md`, and the `.ai/skills/workflow/SKILL.md` example.
-3. Decide explicitly how `.ai/conversation-management/templates/` fits the repository taxonomy before changing `.ai/skills/repository/SKILL.md`; preserve the provisional status of any multi-level semantic-role model.
-4. Remove the duplicate `repository-state effects` bullet in `.ai/INDEX.md` as a separate, low-risk editorial correction if no conflicting context appears.
-5. Re-read each target at the pinned commit, make only narrow changes, inspect candidate diffs and changed-file scope before moving `main`, then verify branch head and read back every changed file.
+1. Continue the active-reference audit, separating actionable current instructions from historical evidence in supporting documentation.
+2. Inspect `.ai/docs/faq/adapting-to-a-new-project.md` as a current how-to guide. Classify its many obsolete paths and decide a bounded repair strategy before changing the large document.
+3. Review the three C0069-era Agentic AI architecture/audit documents listed above. Preserve historical findings; decide whether current-path addenda or archival transitions are appropriate instead of mechanically rewriting snapshots.
+4. Recheck active owner references only within a declared, pinned tree snapshot. Do not expand into archive contents or impose a final multi-level semantic-role taxonomy.
+5. For any further edits, read current files at the pinned commit, make minimal changes, inspect candidate diff and scope, update `main` with an expected-SHA guard, then read back and verify the result.
 
 ## Recommended starting context
 
-Start with this handoff, `.ai/skills/repository/SKILL.md`, `.ai/skills/workflow/SKILL.md`, `.ai/docs/architecture/README.md`, `.ai/README.md`, `.ai/INDEX.md`, and `.ai/conversation-management/templates/`. The current-tree retrieval method is verified; the remaining work is semantic classification and narrow cleanup.
+Start with this handoff, `.ai/skills/repository/SKILL.md`, `.ai/skills/workflow/SKILL.md`, `.ai/docs/faq/adapting-to-a-new-project.md`, `.ai/docs/architecture/agentic-ai-compatibility-architecture.md`, `.ai/docs/architecture/agentic-ai-compatibility-capability-audit.md`, and `.ai/docs/architecture/agentic-ai-owner-seam-audit.md`. Current tree proof and the Git ref → commit → root tree → recursive tree procedure are established; remaining work is classification of stale current-facing documentation versus preserved historical research.
+
