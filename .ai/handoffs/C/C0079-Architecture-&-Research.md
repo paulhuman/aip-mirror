@@ -101,5 +101,6 @@ Additional bootstrap reads include `.ai/config.yaml`, `.ai/rules/repository.md`,
 - Bootstrap: handoff creation and read-back verification completed.
 - Phase 0: baseline inventory and dependency map recorded in `.ai/tests/results/ai-infrastructure-rules-to-skills/20261009-c0079-phase-0-baseline.md`; evidence artifact read-back and commit scope verified.
 - Phase 1: shared replacement owners prepared and read-back checked: repository, workflow, commits, knowledge-capture, and normative-language. The five original shared rule files remain in place.
-- Phase 2: nested conversational-only destinations prepared and read-back checked for the handoff skill, reference-preservation skill, bootstrap workflow, and human template. Original source paths are temporarily retained until Phase 3 active routing is updated; no chapter-state files moved.
-- Infrastructure mutation: Phase 1 complete; Phase 2 destinations prepared; Phase 3 routing not started.
+- Phase 2: complete. The handoff skill, reference-preservation skill, bootstrap workflow, and human template now live under `.ai/skills/conversational-only/handoff/`; all four targets were read-back verified. Old non-rule source paths have been removed after routing checks. No actual chapter-state files moved.
+- Phase 3: primary operational routing and project-instruction updates are applied. Historical architecture/audit references were individually classified and preserved where they document earlier repository states. Final repository-wide stale-reference sweep remains pending.
+- Infrastructure mutation: Phases 1–2 complete; Phase 3 verification pending; `.ai/rules/` untouched.
