@@ -4,7 +4,7 @@ This file is the repository entry point. It orients a fresh session and routes
 to the canonical sources; the canonical operating contract and shared skills
 live in `.ai/`.
 
-This file owns only what it states itself. It does not own the rules, skills, or
+This file owns only what it states itself. It does not own the canonical skills or
 workflows it routes to.
 
 ## What this repository is
@@ -56,7 +56,7 @@ When a supporting note and an active owner disagree, the owner governs.
 
 ## Language
 
-Active rule, skill, and workflow files are written in **English**. Two
+Active skill and workflow files are written in **English**. Two
 intentional exceptions: `.ai/docs/faq/` MAY explain in Russian, and
 `.ai/skills/knowledge-capture/SKILL.md` defines Russian explanatory prose for
 captured knowledge because that policy is *about* Russian prose. That knowledge-capture policy applies to the external
