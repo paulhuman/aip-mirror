@@ -603,3 +603,43 @@ Action:
 
 Status: OPEN
 
+## TODO 16 — Reconcile active documentation with the current infrastructure paths
+
+The active repository tree no longer contains `.ai/skills/conversational-only/`, `.ai/workflows/`, or `.ai/templates/`. Current conversation-management procedures and templates live under `.ai/conversation-management/`.
+
+The initial audit found stale path references in these active files:
+
+- `docs/PROJECT-INSTRUCTIONS.md` — handoff and bootstrap references still use `.ai/skills/conversational-only/handoff/`; ordered AI procedures still point to `.ai/workflows/`.
+- `.ai/skills/activation/SKILL.md` — manual-activation FAQ reference still points to `.ai/architecture/faq/manual-activation.md` rather than `.ai/docs/faq/manual-activation.md`. This overlaps TODO 13 and SHOULD be resolved there.
+- `.ai/docs/architecture/README.md` — ownership examples still refer to `.ai/skills/conversational-only/`, `.ai/workflows/`, and `.ai/templates/`.
+- `.ai/handoffs/README.md` — canonical handoff owner still points to `.ai/skills/conversational-only/handoff/SKILL.md`.
+- `.ai/docs/faq/manual-activation.md` — its handoff-owner example still uses the removed `.ai/skills/conversational-only/handoff/SKILL.md` path.
+- `.ai/docs/faq/adapting-to-a-new-project.md` — multiple sections describe the removed `.ai/skills/conversational-only/` and `.ai/workflows/` layout. Review the whole document because these references are structural guidance, not just isolated links.
+
+Active architecture notes also contain old `.ai/workflows/` references. Some may be intentionally historical or explicitly superseded; classify their intended temporal status before editing rather than mechanically replacing every occurrence. In particular, review `.ai/docs/architecture/agentic-ai-compatibility-architecture.md`, `.ai/docs/architecture/agentic-ai-compatibility-capability-audit.md`, `.ai/docs/architecture/agentic-ai-owner-seam-audit.md`, `.ai/docs/architecture/ai-infrastructure-context-mode.md`, and `.ai/docs/architecture/ai-infrastructure-vnext-proposal.md`.
+
+Action:
+
+- Verify each cited file and line against the current `main` tree before mutation.
+- Distinguish actionable stale references from historical descriptions that must remain as evidence.
+- Update active instructions and practical orientation docs to the current paths and semantic boundaries.
+- Where an architecture proposal intentionally describes an earlier state, add or correct a clear temporal/status note instead of rewriting history.
+- Read back each changed file and verify every active path it names exists.
+- Inspect diff and scope before committing.
+
+Status: OPEN
+
+## TODO 17 — Decide whether the empty repository-root README is intentional
+
+Observation:
+
+The root `README.md` exists in the current tree but has an empty blob (zero bytes). The repository has a substantive root `AGENTS.md`, but it serves as the AI bootstrap entry point rather than a human-facing project overview.
+
+Action:
+
+- Determine whether an empty root README is intentional for this repository.
+- If not intentional, decide on a concise human-facing repository overview and canonical links; do not duplicate the AI operating contract or project architecture.
+- Keep this decision separate from the AI-infrastructure semantic taxonomy review.
+
+Status: OPEN
+
