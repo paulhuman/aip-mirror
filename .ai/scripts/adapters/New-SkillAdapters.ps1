@@ -158,7 +158,13 @@ $existing = Get-LinkInfo -Path $adapter
 if ($null -ne $existing) {
     $resolvedTarget = $null
     if ($existing.Target) {
-        $resolvedTarget = (Resolve-Path -LiteralPath $existing.Target -ErrorAction SilentlyContinue).Path
+        # A link may be dangling: its target can be gone after the repository was
+        # moved or renamed. Resolve-Path then yields nothing, and reading .Path
+        # from nothing throws under Set-StrictMode -Version Latest.
+        $resolved = Resolve-Path -LiteralPath $existing.Target -ErrorAction SilentlyContinue
+        if ($null -ne $resolved) {
+            $resolvedTarget = $resolved.Path
+        }
     }
 
     if ($existing.IsLink -and $resolvedTarget -eq (Resolve-Path -LiteralPath $canonical).Path) {
