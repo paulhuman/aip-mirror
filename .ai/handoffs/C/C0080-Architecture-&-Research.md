@@ -63,6 +63,27 @@ Continue the AI-infrastructure rules-to-skills restructuring follow-up in `paulh
 - **Unverified in C0080:** Whether the current `main` tree still matches the predecessor's final verification and whether all migration exit criteria remain satisfied.
 - **Open:** The concrete defects the user has in mind, unless independently established during the initial review.
 
+## Checkpoint — Agentic entry versus Conversational AI bootstrap
+
+**Confirmed observations (2026-10-09):**
+
+- Root `AGENTS.md` describes itself as the repository entry point for AI agents.
+- The current `.ai/conversation-management/handoff/BOOTSTRAP.md` establishes chapter initialization through an explicit bootstrap instruction, then reads `.ai/config.yaml` to resolve repository identity.
+- The bootstrap's required ACTIVATE owner set does not include root `AGENTS.md`.
+- Shared steps item 1 nevertheless requires validating that initialization was requested through the “AGENTS item 6 entry path”. This appears inconsistent with an explicit Conversational AI bootstrap flow that does not read root `AGENTS.md`.
+
+**Interpretation — not yet a final architecture decision:**
+
+- Root `AGENTS.md` appears intended as an Agentic AI entry surface for hosts that consume `AGENTS.md` instructions.
+- Conversational AI initialization appears intentionally driven by explicit transport and the nested BOOTSTRAP procedure.
+- Do not add root `AGENTS.md` to the Conversational AI bootstrap read set solely to resolve the wording mismatch. First determine whether “AGENTS item 6 entry path” is stale wording or represents a contract that needs a host-neutral formulation.
+
+**Open follow-up:**
+
+- Review root `AGENTS.md` item 6 and the complete bootstrap entry contract together.
+- Decide whether to replace the “AGENTS item 6 entry path” prerequisite with validation of the explicit bootstrap transport while preserving the separation between Agentic AI discovery and Conversational AI initialization.
+- Update canonical owners only after confirming the intended boundary.
+
 ## Recommended starting context
 
 Read this handoff together with:
