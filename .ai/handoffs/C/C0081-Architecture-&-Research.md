@@ -96,3 +96,13 @@ These examples suggest the proposed three-level model should be tested as a **se
 - `.ai/skills/activation/SKILL.md`
 - `.ai/conversation-management/handoff/SKILL.md`
 - `.ai/archives/docs/architecture/ai-infrastructure-restructuring-todo.md`
+
+
+## C0081 progress — context-mode architecture note correction
+
+- Decision: retain `.ai/docs/architecture/ai-infrastructure-context-mode.md` in active architecture documentation for now because it preserves useful architectural rationale and a bounded historical implementation record. Do not mass-rewrite its historical sections.
+- Corrected only the current owner-path addendum's receiving-chapter bootstrap path from the removed `.ai/skills/conversational-only/handoff/BOOTSTRAP.md` to the current `.ai/conversation-management/handoff/BOOTSTRAP.md`.
+- Commit: `6385f99b3abe089b01274cd3c630483a10475257`.
+- Read-back verified the corrected current path is present, the stale path is absent from that current-owner bullet, and the historical C0070 snapshot remains intact. The commit diff changes one line in the architecture note.
+- The older `.ai/rules/normative-language.md` and `.ai/workflows/handoff/BOOTSTRAP.md` references in the pre-addendum body remain as historical snapshot material; they were not mass-replaced.
+- No semantic-role taxonomy has been adopted. The model remains provisional pending further hybrid-file examples and current-tree verification.
