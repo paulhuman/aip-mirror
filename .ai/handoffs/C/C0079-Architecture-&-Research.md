@@ -100,4 +100,5 @@ Additional bootstrap reads include `.ai/config.yaml`, `.ai/rules/repository.md`,
 
 - Bootstrap: handoff creation and read-back verification completed.
 - Phase 0: baseline inventory and dependency map recorded in `.ai/tests/results/ai-infrastructure-rules-to-skills/20261009-c0079-phase-0-baseline.md`; evidence artifact read-back and commit scope verified.
-- Infrastructure mutation: not started.
+- Phase 1: shared replacement owners prepared and read-back checked: repository, workflow, commits, knowledge-capture, and normative-language. The five original shared rule files remain in place; handoff material has not yet been moved; active routing has not yet been rerouted.
+- Infrastructure mutation: Phase 1 complete; Phase 2 not started.
