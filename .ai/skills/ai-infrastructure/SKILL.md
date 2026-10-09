@@ -19,14 +19,13 @@ This is a domain/context switch, not an indiscriminate repository-wide context l
 
 Before executing the operation, activate the canonical owners required by this operation:
 
-    .ai/rules/repository.md
-    .ai/rules/workflow.md
+    .ai/skills/repository/SKILL.md
+    .ai/skills/workflow/SKILL.md
     .ai/skills/activation/SKILL.md
     .ai/skills/normative-language/SKILL.md
-    .ai/rules/normative-language.md
     .ai/INDEX.md
 
-The current repository versions are authoritative. Normative-language semantics remain owned by `.ai/rules/normative-language.md`.
+The current repository versions are authoritative. Normative-language semantics are owned by `.ai/skills/normative-language/SKILL.md`.
 
 ## Elevated context
 
@@ -39,9 +38,8 @@ Establish the following context in this order.
 Read:
 
     .ai/skills/normative-language/SKILL.md
-    .ai/rules/normative-language.md
 
-This is dependency activation, not semantic ownership: `.ai/rules/normative-language.md` remains the canonical owner of normative-language semantics.
+This is dependency activation of the canonical normative-language skill.
 
 ### Repository-level orientation
 
