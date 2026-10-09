@@ -117,3 +117,52 @@ Read this handoff alongside the current `.ai/conversation-management/handoff/BOO
 - No architecture files, README files, routing files, or skills were changed during the audit.
 - This checkpoint update is the only intended mutation in this operation.
 - Next: establish the authoritative current `main` tree through a supported GitHub interface if available; otherwise report the connector limitation clearly and continue only with a bounded, explicitly pinned-file audit. Then inspect the complete five target files and their cross-references before deciding whether to make narrowly scoped corrections.
+
+
+## Checkpoint — authoritative Git tree established and migration preparation (2026-10-09)
+
+### Authoritative revision and tree
+
+The previous checkpoint's tree blocker is resolved. The following Git objects were retrieved directly through the GitHub REST Git-data API, not inferred from repository search results:
+
+- `refs/heads/main` resolved to commit `fbd0d8bfa2e298538fffd5e1617a2dab41bf885d`.
+- That commit's root tree is `a53cc9f6f419c9ca818ad49316d29d44d06a7657`.
+- The recursive tree response reported `truncated: false` and contained 253 entries.
+
+This is a verified snapshot of `main` at the stated commit, not a guarantee about later branch state. The exact retrieval sequence was: GET the branch ref → read the referenced commit's root tree SHA → GET the root tree with `?recursive=1` → verify `truncated` and entry count → inspect returned paths. This is a reusable repository-inspection method and should not depend on a code-search index.
+
+### Updated active-tree evidence
+
+At the verified snapshot:
+
+- Present: `.ai/conversation-management/handoff/BOOTSTRAP.md`, `.ai/conversation-management/handoff/SKILL.md`, `.ai/conversation-management/templates/`, `.ai/docs/faq/manual-activation.md`, `.ai/docs/architecture/`, `.ai/skills/workflow/SKILL.md`, `.ai/tests/scenarios/`, and `.ai/tests/results/`.
+- Absent: `.ai/skills/conversational-only/`, `.ai/workflows/`, `.ai/templates/`, and `.ai/architecture/`.
+- The current handoff procedure owner is `.ai/conversation-management/handoff/SKILL.md`; the workflow owner is `.ai/skills/workflow/SKILL.md`; the existing template directory is `.ai/conversation-management/templates/`.
+
+Confirmed active stale-reference candidates now include:
+1. `.ai/handoffs/README.md` uses the absent `.ai/skills/conversational-only/handoff/SKILL.md` path in two operational references.
+2. `.ai/skills/activation/SKILL.md` links to absent `.ai/architecture/faq/manual-activation.md`; the current FAQ is `.ai/docs/faq/manual-activation.md`.
+3. `.ai/docs/faq/manual-activation.md` uses the absent conversational-only handoff path in a live example.
+4. `.ai/docs/architecture/README.md` describes absent `.ai/skills/conversational-only/`, `.ai/workflows/`, and `.ai/templates/` as active owner locations.
+5. `.ai/README.md` has duplicate/ambiguous conversation-management descriptions and lists the absent `.ai/templates/` directory.
+6. `.ai/skills/repository/SKILL.md` still names `.ai/templates/` as an active owner and includes it in the normative boundary sentence. This is a semantic ownership contract, so it needs a deliberate review rather than a blind path substitution.
+7. `.ai/skills/workflow/SKILL.md` gives `.ai/workflows/*` as a current-looking example path even though that directory is absent.
+
+Historical passages in `.ai/docs/architecture/ai-infrastructure-context-mode.md` remain intentionally preserved. No architecture, routing, README, or skill file has been modified as part of this checkpoint.
+
+### TODO — document the authoritative Git-ref/tree retrieval method
+
+**TODO C0082-01 — verify and formalize the repository snapshot method.**
+
+- Inspect the relevant canonical skills for an existing explicit procedure that resolves `refs/heads/main`, reads the referenced commit's root tree, retrieves the recursive Git tree, and checks `truncated` plus entry count.
+- The current `.ai/skills/workflow/SKILL.md` already says to prefer authoritative tree/contents APIs over incomplete search indexes, but does not spell out this exact Git-ref → commit → recursive-tree retrieval and completeness-verification sequence.
+- If no other canonical skill already defines the same procedure, make a minimal, reusable addition to the appropriate skill (initial candidate: `.ai/skills/workflow/SKILL.md`), including immutable commit pinning for subsequent file reads and a clear rule not to claim completeness when the tree response is truncated.
+- Read back and verify the change and its diff before committing; do not duplicate the procedure across multiple skills without a demonstrated ownership need.
+
+### Immediate next task for C0083
+
+1. Begin by refreshing `refs/heads/main` and pinning the actual current commit/tree; do not assume the snapshot above remains HEAD.
+2. Read the canonical owners and relevant full files, then complete a line-by-line classification of stale active references against the actual tree.
+3. Decide and implement only narrow, evidence-backed corrections to confirmed active references. Review the `.ai/skills/repository/SKILL.md` active-owner taxonomy separately because it defines a normative boundary.
+4. Address TODO C0082-01: verify whether the exact retrieval method is documented elsewhere, then add it to the appropriate canonical skill only if missing.
+5. Verify each write with read-back, content checks, diff/scope inspection, and commit-result verification. Preserve historical references and avoid broad architecture changes.
