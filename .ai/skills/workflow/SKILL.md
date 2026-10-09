@@ -92,6 +92,20 @@ AI instructions SHOULD help development rather than become development overhead.
 
 ## 9. Repository-wide inspection
 
+### Establishing an authoritative, pinned tree snapshot
+
+Before making repository-wide structural claims, resolve the target branch to an immutable commit and verify the complete tree:
+
+1. Read the Git ref for the configured branch (for example, `GET /repos/{owner}/{repo}/git/ref/heads/main`) and record the referenced commit SHA.
+2. Read that commit and record its root tree SHA.
+3. Request the recursive tree for that exact tree SHA (for example, `GET /repos/{owner}/{repo}/git/trees/{tree_sha}?recursive=1`).
+4. Verify that the returned tree SHA matches the requested tree SHA, record the number of returned entries, and inspect the `truncated` field.
+5. Treat the tree as complete only when `truncated` is `false`. If it is `true`, retrieve the affected subtrees in bounded, non-recursive batches and establish coverage before claiming completeness.
+6. Pin all subsequent file reads and reference checks to the recorded commit SHA. Do not mix a moving branch name with a supposedly consistent snapshot.
+7. Record the commit SHA, root tree SHA, completeness status, and entry count with the audit evidence.
+
+A successful API response alone does not prove that a recursive tree is complete. If the ref, commit, tree, or completeness status cannot be verified, state the limitation and keep conclusions bounded to the files and revision actually inspected.
+
 When a task requires reliable inspection of a substantial repository area, prefer the repository's authoritative tree/contents API and direct file retrieval over repository-wide code-search indexes when the latter are incomplete, stale, or otherwise untrusted.
 
 Use this sequence:
