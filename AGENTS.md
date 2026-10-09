@@ -1,7 +1,8 @@
 # Agent bootstrap — aip-mirror
 
 This file is the repository entry point. It orients a fresh session and routes
-to the canonical sources; every rule, procedure, and skill lives in `.ai/`.
+to the canonical sources; the canonical operating contract and shared skills
+live in `.ai/`.
 
 This file owns only what it states itself. It does not own the rules, skills, or
 workflows it routes to.
@@ -12,7 +13,7 @@ An Adobe Illustrator plugin project that also carries a project-independent AI
 working infrastructure.
 
 ```
-.ai/     = AI working infrastructure (rules, skills, workflows, handoffs)
+.ai/     = AI working infrastructure (skills, workflows, handoffs)
 docs/    = project knowledge
 ```
 
@@ -21,8 +22,8 @@ Infrastructure work and plugin work are different domains. DO NOT mix them.
 ## Read in this order
 
 1. `.ai/config.yaml` — repository identity and configured references.
-2. `.ai/rules/repository.md` — repository semantics, ownership boundary, write
-   safety.
+2. `.ai/skills/repository/SKILL.md` — repository semantics, ownership boundary,
+   write safety.
 3. `.ai/AGENTS.md` — the internal operating contract for work inside `.ai/`.
 4. `.ai/INDEX.md` — operation routing and the capability map.
 
@@ -36,7 +37,7 @@ For project work rather than infrastructure work, start from
 
 The infrastructure separates **active semantic owners** from **supporting
 layers**. Active owners define behaviour. Supporting layers explain and record;
-they own nothing. `.ai/rules/repository.md` owns the canonical list and the
+they own nothing. `.ai/skills/repository/SKILL.md` owns the canonical list and the
 boundary between them.
 
 An active owner MUST NOT require a supporting file in order to be understood.
@@ -57,22 +58,17 @@ When a supporting note and an active owner disagree, the owner governs.
 
 Active rule, skill, and workflow files are written in **English**. Two
 intentional exceptions: `.ai/docs/faq/` MAY explain in Russian, and
-`.ai/rules/developer-knowledge.md` quotes Russian because the policy it owns is
-*about* Russian prose. That knowledge-capture policy applies to the external
+`.ai/skills/knowledge-capture/SKILL.md` defines Russian explanatory prose for
+captured knowledge because that policy is *about* Russian prose. That knowledge-capture policy applies to the external
 knowledge repository, not to this infrastructure.
 
-## Host notes — DSH
+## Skill adapter
 
-Host-specific; not part of the portable contract. These facts describe the
-installed build and are version-sensitive. DO revalidate them against the
-running host before relying on them.
+The `.agents/skills` filesystem junction points to the canonical `.ai/skills/`
+directory. Recreate it after a fresh clone with:
 
-DSH auto-loads this file for the repository root. `.ai/skills/` is not a DSH
-discovery root: the project adapter `.agents/skills` is a Windows junction to
-it, and discovery through it is confirmed working. That adapter is gitignored,
-so a fresh clone has to recreate it with
-`pwsh -File .ai/scripts/adapters/New-SkillAdapters.ps1`. Whether any other host
-reads `.agents/skills` is unverified.
+`pwsh -File .ai/scripts/adapters/New-SkillAdapters.ps1`
 
-`dsh` is not on `PATH`; run it as `npx --yes @deepseek-ai/dsh@0.2.0-rc.2` with
-`DSH_HOME` set to `%APPDATA%\dsh-desktop\harness`.
+Skill discovery through this adapter depends on the host. This description does
+not claim that every host reads `.agents/skills` or supports the same discovery
+mechanism.
