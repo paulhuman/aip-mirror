@@ -1,11 +1,33 @@
 ---
 name: commits
-description: Create concise, consistent Git commit messages using Conventional Commit style and project-defined vocabulary.
+description: Apply commit authorization, scope, verification, repository-integrity, and commit-message conventions.
 ---
 
-# Commit messages
+# Commits
 
-Create clear, concise Git commit messages that describe the purpose of a change.
+This skill owns the repository's commit policy and commit-message construction. Create clear, concise Git commit messages that describe the purpose of a change.
+
+## Authorization
+
+AI-assisted development changes SHOULD NOT be committed automatically unless the user explicitly requests the commit or the change is an explicit part of an established automated workflow.
+
+Initial handoff creation, checkpoint updates, and migration handoff updates are pre-authorized parts of the handoff workflow only when that explicitly invoked conversational-only workflow calls for them.
+
+## Coherent commits and pre-commit verification
+
+A commit SHOULD represent one logical change. DO NOT commit unrelated changes together. Keep the changed-file scope intentional and split unrelated work when it can reasonably be separated.
+
+Before creating a commit:
+
+- verify the intended changed files and scope;
+- run relevant tests when available;
+- inspect the diff;
+- confirm that no unrelated change is included;
+- choose an appropriate commit message.
+
+## Repository integrity
+
+A successful write operation or valid Git commit does not by itself prove that repository content is correct. For existing files, follow the read-current-source, full-content write where required, read-back, content verification, diff inspection, scope verification, commit, and result-verification protocol owned by `.ai/skills/repository/SKILL.md`.
 
 Use Conventional Commit-style messages:
 
@@ -29,7 +51,7 @@ Migration MUST use `update`, not `migrate`, in the commit message.
 
 Keep these messages short. Do not append conversation titles, task descriptions, rationale, milestone summaries, or other explanatory suffixes.
 
-For other .ai/ infrastructure changes, use the ai-\* form that most clearly identifies the operation when a dedicated form is useful. Do not invent a larger taxonomy without a concrete need.
+For other `.ai/` infrastructure changes, use the `ai-*` form that most clearly identifies the operation when a dedicated form is useful. Do not invent a larger taxonomy without a concrete need.
 
 Project documentation remains under normal docs(...) vocabulary.
 
