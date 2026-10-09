@@ -45,7 +45,7 @@ Copy:
     .ai/AGENTS.md
     .ai/INDEX.md
     .ai/config.yaml              ← replace
-    .ai/rules/
+    .ai/skills/conversational-only/  ← explicitly invoked handoff/bootstrap material
     .ai/skills/
     .ai/workflows/
     .ai/docs/architecture/README.md
@@ -55,7 +55,7 @@ Copy:
 
 Do NOT blindly copy:
     .ai/handoffs/
-    .ai/archive/
+    .ai/archives/
     old project references/
     old runtime test results/
     old project architecture/research
@@ -260,7 +260,7 @@ The exact architecture belongs to the new project, not to the reusable `.ai` inf
 
 Most `.ai` files are intentionally generic. A few are not completely generic.
 
-## 6.1 `.ai/skills/handoff/SKILL.md`
+## 6.1 `.ai/skills/conversational-only/handoff/SKILL.md`
 
 This file is mostly reusable, but the current version contains a hardcoded repository locator:
 
@@ -278,7 +278,7 @@ The semantic handoff procedure itself should remain.
 
 ---
 
-## 6.2 `.ai/workflows/handoff/BOOTSTRAP.md`
+## 6.2 `.ai/skills/conversational-only/handoff/BOOTSTRAP.md`
 
 This is another mostly reusable file with an important embedded project reference.
 
@@ -336,7 +336,7 @@ cold-start test
 
 ---
 
-## 6.4 `.ai/rules/handoff/lifecycle.md`
+## 6.4 `.ai/skills/conversational-only/handoff/SKILL.md`
 
 The `A0001 / Project Workshop` example is the canonical neutral example of the filename/chapter contract.
 
@@ -381,7 +381,7 @@ Project technology belongs in `docs/PROJECT-INSTRUCTIONS.md` and project archite
 
 Normally this should remain unchanged.
 
-It describes the AI infrastructure entry contract and points new-chapter initialization to BOOTSTRAP.
+It describes the always-on operating contract. Ordinary agent startup does not trigger chapter initialization; a receiving conversation follows the explicitly supplied bootstrap instruction and nested BOOTSTRAP procedure.
 
 Do not put Sprite Sheet Editor-specific instructions here unless there is a genuine repository-wide AI infrastructure requirement.
 
@@ -397,63 +397,47 @@ PROJECT-INSTRUCTIONS
 
 ---
 
-# 9. `.ai/rules/`
+# 9. Canonical semantic ownership
 
-The rules are intended to be reusable.
+There is no separate `.ai/rules/` layer in the target architecture. Shared operational semantics belong to their canonical first-level skills, including:
 
-Normally keep:
+- `.ai/skills/repository/SKILL.md`;
+- `.ai/skills/workflow/SKILL.md`;
+- `.ai/skills/commits/SKILL.md`;
+- `.ai/skills/knowledge-capture/SKILL.md`;
+- `.ai/skills/normative-language/SKILL.md`.
 
-- `repository.md`
-- `workflow.md`
-- `commits.md`
-- `handoff/lifecycle.md`
-- `handoff/references.md`
-- `normative-language.md`
+Conversation lifecycle and handoff procedures are deliberately separated from ordinary skill discovery under `.ai/skills/conversational-only/handoff/`. Do not create a `SKILL.md` directly under `.ai/skills/conversational-only/`.
 
-After copying, check them for:
-
-1. literal repository URLs;
-2. project names;
-3. project technology assumptions;
-4. examples that could be mistaken for active configuration.
-
-Do not rewrite a generic rule merely because its examples use AIP Mirror terminology.
-
-The goal is to separate **example data** from **semantic rules**.
+When adapting these owners, inspect examples and project references, but preserve reusable semantics. Do not create duplicate owners or mechanically copy old path references.
 
 ---
 
 # 10. `.ai/skills/`
 
-The skills are mostly reusable capabilities.
-
-Keep the infrastructure skills:
+Shared skills are reusable capabilities and canonical owners. Keep the shared capabilities at the first level of `.ai/skills/`:
 
 - activation;
+- ai-infrastructure;
 - commits;
 - deep-understanding;
 - explain-code;
-- handoff;
-- reference-preservation;
-- normative-language.
+- knowledge-capture;
+- normative-language;
+- repository;
+- workflow.
 
-Then check each skill for project-specific examples or hardcoded repository locators.
+Conversation handoff and reference-preservation material is explicitly conversational-only and belongs nested under `.ai/skills/conversational-only/handoff/`; it MUST NOT be treated as an ordinary discovered skill.
 
-The important rule is:
-
-> Change project-specific examples and references, not the reusable capability semantics.
-
-For example, the handoff skill needs repository-locator generalization because that locator is part of its transport procedure. A generic code-explanation skill does not need to be rewritten just because the new project uses Rust instead of C++.
+Check each skill for project-specific examples or hardcoded repository locators. Change project-specific examples and references, not reusable capability semantics.
 
 ---
 
 # 11. `.ai/workflows/`
 
-The handoff bootstrap workflow is reusable, but its repository locator examples must not become a hidden dependency on AIP Mirror.
+The remaining `.ai/workflows/` files provide ordered procedures that are not part of the conversational-only handoff boundary, such as independent-review onboarding.
 
-The independent-review onboarding files are optional infrastructure.
-
-If the new project will not use Qwen/Grok independent-review conversations, they can be removed. If they are retained, verify that their wording describes a generic review role rather than AIP Mirror-specific responsibilities.
+The receiving-chapter bootstrap procedure is nested under `.ai/skills/conversational-only/handoff/BOOTSTRAP.md`. Do not move it back into the ordinary workflow area or make it a first-level discovered skill.
 
 ---
 
@@ -528,7 +512,7 @@ The README may remain as generic orientation.
 
 ---
 
-# 15. `.ai/archive/`
+# 15. `.ai/archives/`
 
 Do not treat the archive as active infrastructure.
 
@@ -537,7 +521,7 @@ The current archive contains historical AIP Mirror architecture and handoffs.
 When creating a new project from this repository, the safest default is:
 
 ```text
-.ai/archive/
+.ai/archives/
     = remove from the new project
 ```
 
@@ -631,8 +615,8 @@ docs/architecture/project-architecture.md
 Check:
 
 ```text
-.ai/skills/handoff/SKILL.md
-.ai/workflows/handoff/BOOTSTRAP.md
+.ai/skills/conversational-only/handoff/SKILL.md
+.ai/skills/conversational-only/handoff/BOOTSTRAP.md
 .ai/tests/scenarios/cold-start-command-trace.md
 ```
 
@@ -644,7 +628,7 @@ Remove old:
 
 ```text
 .ai/handoffs/<old-specializations>/*
-.ai/archive/handoffs/*
+.ai/archives/handoffs/*
 ```
 
 Keep only the generic handoff README if desired.
@@ -683,7 +667,7 @@ Use the canonical:
 ```text
 .ai/AGENTS.md
     ↓
-.ai/workflows/handoff/BOOTSTRAP.md
+.ai/skills/conversational-only/handoff/BOOTSTRAP.md
 ```
 
 path.
