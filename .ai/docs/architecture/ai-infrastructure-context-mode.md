@@ -257,3 +257,17 @@ The current durable chapter checkpoint is:
 `.ai/handoffs/C/C0070-Architecture-&-Research.md`
 
 Future chapters continuing this work SHOULD read that handoff first and then this architecture note.
+
+## Current owner-path addendum (2026-10-09)
+
+The C0070 implementation and validation statements above are a historical snapshot of the repository before the approved rules-to-skills migration. Their old paths are retained as evidence of the state inspected at that time; they are not current routing instructions.
+
+The current canonical owners for this context mode are:
+
+- Repository identity, path resolution, boundaries, and mutation safety: `.ai/skills/repository/SKILL.md`.
+- General development workflow: `.ai/skills/workflow/SKILL.md`.
+- Normative-language semantics and normalization: `.ai/skills/normative-language/SKILL.md`.
+- AI-infrastructure context mode: `.ai/skills/ai-infrastructure/SKILL.md`.
+- Receiving-chapter bootstrap: explicitly invoked, nested `.ai/skills/conversational-only/handoff/BOOTSTRAP.md`.
+
+This addendum records current routing only. It does not turn this architecture note into an operational owner or require normal context loading to ingest the historical validation material above.
