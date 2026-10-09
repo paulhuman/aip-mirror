@@ -33,9 +33,7 @@ Project work MUST read `docs/PROJECT-INSTRUCTIONS.md` before following project-s
 
 ## Command surface
 
-The current documented user-facing command surface is. Handoff, migration, and bootstrap generation are conversational-only operations: their owners are nested under `.ai/skills/conversational-only/` and MUST be invoked explicitly, not exposed as ordinary discovered skills.
-
-
+The current documented user-facing command surface is shown below. Handoff, migration, and bootstrap generation are conversational-only operations: their owners are nested under `.ai/skills/conversational-only/` and MUST be invoked explicitly, not exposed as ordinary discovered skills.
 
 | Command phrase                   | Semantic operation                                              | Canonical owner                                                      | Read before execution                              |
 | -------------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------- |
