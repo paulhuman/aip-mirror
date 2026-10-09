@@ -16,16 +16,16 @@ docs/
 
 Project-specific meaning belongs primarily in `docs/` and the project source tree. Generic AI infrastructure belongs in `.ai/`.
 
-Project-specific configuration that generic infrastructure needs is intentionally concentrated in `.ai/config.yaml`. This does not make the generic rules, skills, or workflows project-specific.
+Project-specific configuration that generic infrastructure needs is intentionally concentrated in `.ai/config.yaml`. This does not make shared skills or workflows project-specific.
 
 ## Major active areas
 
 - `.ai/config.yaml` — repository identity, configured references, and project-specific configuration facts used by the infrastructure.
 - `.ai/AGENTS.md` — compact always-on AI operating contract.
 - `.ai/INDEX.md` — operational command routing and capability discovery.
-- `.ai/rules/` — canonical semantic constraints.
-- `.ai/skills/` — reusable AI capabilities.
-- `.ai/workflows/` — ordered AI procedures.
+- `.ai/skills/` — shared reusable AI capabilities and canonical semantic owners.
+- `.ai/skills/conversational-only/` — explicitly invoked conversation-management procedures kept nested so they are not ordinary discovered skills.
+- `.ai/workflows/` — ordered procedures that remain necessary outside the conversational-only handoff boundary.
 - `.ai/handoffs/` — conversation continuity state.
 - `.ai/docs/` — durable documentation and architecture context for the AI infrastructure.
 - `.ai/tests/` — reproducible infrastructure test scenarios and historical test results.
@@ -44,11 +44,11 @@ The `>>ai-infrastructure` operation is the explicit context switch for work on t
 
 ## Canonical ownership
 
-Semantic ownership remains with the appropriate canonical rule, skill, workflow, or other explicitly defined owner.
+Semantic ownership remains with the appropriate canonical skill, workflow, or other explicitly defined owner.
 
 In particular:
 
-- `.ai/AGENTS.md` does not replace bootstrap or operation routing.
+- `.ai/AGENTS.md` does not replace operation routing or skill-owned procedures.
 - `.ai/INDEX.md` routes operations and discovers capabilities; it does not become a second procedure owner.
 - `.ai/docs/` architecture notes preserve durable reasoning and decisions; they are not runtime execution owners.
 - README files orient humans and AI but MUST NOT redefine canonical procedures.
@@ -57,9 +57,9 @@ When this README conflicts with a canonical owner, the canonical owner governs.
 
 ## Where to start
 
-For new conversation chapter initialization, follow:
+For new conversation chapter initialization, follow the explicitly invoked conversational-only procedure:
 
-`.ai/AGENTS.md` item 6 → `.ai/workflows/handoff/BOOTSTRAP.md`
+`.ai/skills/conversational-only/handoff/BOOTSTRAP.md`
 
 For ordinary AI-infrastructure operations, start with:
 
