@@ -32,7 +32,7 @@ Continue the AI-infrastructure active-file audit from C0082. Verify the current 
 - `.ai/config.yaml` confirms repository `paulhuman/aip-mirror`, default branch `main`, and specialization C short name `Architecture & Research`.
 - Repository write capability is available through the connected GitHub repository tools; bootstrap follows the WRITE-CAPABLE branch.
 - The predecessor handoff was read successfully. It records a previously verified snapshot at commit `fbd0d8bfa2e298538fffd5e1617a2dab41bf885d`, root tree `a53cc9f6f419c9ca818ad49316d29d44d06a7657`, recursive tree `truncated=false`, 253 entries. This is a historical snapshot only; it does not establish current `main` HEAD.
-- Direct reads of current `main` were available for the bootstrap files and audit targets listed below. However, the GitHub connector actions exposed in this session do not include a read-only Git ref / Git tree retrieval action. Current authoritative `main` HEAD and tree are therefore still **OPEN / UNVERIFIED**. Do not infer the branch HEAD from search results or file reads alone.
+- The generic GitHub `fetch` action supports Git Database REST endpoints. At the completed audit snapshot, `main` resolved to commit `05002d6f102ebd4bf5c359b77f9e1c85812eadcf`, root tree `2adc988ceb90d12cdb5a6edf0971bafd3971c8ee`; the recursive tree returned `truncated=false` and 254 entries. The audit reads below were pinned to immutable commit SHAs. The handoff update itself will create a later commit, so this snapshot identity is intentionally recorded rather than described as the future branch HEAD.
 
 ## Canonical files read during bootstrap
 
@@ -52,22 +52,22 @@ Continue the AI-infrastructure active-file audit from C0082. Verify the current 
 
 ## Confirmed current-file observations
 
-1. **`.ai/skills/workflow/SKILL.md`** already recommends authoritative tree/contents APIs over incomplete search indexes and says to retrieve active areas in complete, bounded batches. It does not spell out the precise reusable sequence: resolve `refs/heads/main` → obtain commit SHA → obtain root tree SHA → retrieve recursive tree → verify `truncated=false` and entry count → pin subsequent reads to that commit.
-2. **`.ai/handoffs/README.md`** names the absent path `.ai/skills/conversational-only/handoff/SKILL.md` in two operational references. The current owner is `.ai/conversation-management/handoff/SKILL.md`.
-3. **`.ai/skills/activation/SKILL.md`** links to `.ai/architecture/faq/manual-activation.md`; the current FAQ location recorded in the predecessor handoff is `.ai/docs/faq/manual-activation.md`. Revalidate against an authoritative current tree before making a tree-wide claim or edit.
-4. **`.ai/docs/architecture/README.md`** describes `.ai/skills/conversational-only/`, `.ai/workflows/`, and `.ai/templates/` as active owner locations. The prior complete tree snapshot showed these paths absent, and showed `.ai/conversation-management/templates/` present. Refresh the tree before treating this as current structural proof.
-5. **`.ai/README.md`** duplicates the `.ai/conversation-management/` entry and also lists `.ai/templates/`; this appears to be a narrow structural-description ambiguity pending current tree verification.
-6. **`.ai/skills/repository/SKILL.md`** contains a normative active-owner taxonomy that includes `.ai/templates/`. Review this separately; do not blindly replace paths because this is a semantic boundary, not merely a link correction.
-7. **`.ai/skills/workflow/SKILL.md`** contains a current-looking example path under `.ai/workflows/*`; the previous verified tree snapshot showed that directory absent.
-8. **`.ai/INDEX.md`** identifies itself coherently as a router/discovery surface, not a procedure owner. Its metadata-boundary exclusion list repeats the bullet `repository-state effects`; this is a narrow editorial candidate, not by itself an architectural defect.
+1. **`.ai/skills/workflow/SKILL.md`** now includes the missing reusable procedure: resolve the configured branch ref → record commit SHA → read root tree SHA → retrieve the recursive tree → verify tree identity, `truncated=false`, and entry count → pin subsequent reads to the commit. This was added after checking 14 canonical owner/entry files; no exact procedure was found there.
+2. **`.ai/handoffs/README.md`** had two operational references to the absent `.ai/skills/conversational-only/handoff/SKILL.md`. Both now point to `.ai/conversation-management/handoff/SKILL.md`; read-back verified the complete file and confirmed zero remaining occurrences of the stale path.
+3. **`.ai/skills/activation/SKILL.md`** linked to the absent `.ai/architecture/faq/manual-activation.md`. The link now points to the existing `.ai/docs/faq/manual-activation.md`; read-back verified the complete file and confirmed zero remaining occurrences of the stale path.
+4. **`.ai/docs/architecture/README.md`** still describes `.ai/skills/conversational-only/`, `.ai/workflows/`, and `.ai/templates/` as active owner locations. In the pinned complete tree, all three paths are absent; `.ai/conversation-management/` and `.ai/conversation-management/templates/` exist. This is a confirmed stale structural description, but correction must respect semantic ownership rather than mechanically replace every path.
+5. **`.ai/README.md`** duplicates the `.ai/conversation-management/` entry and lists absent `.ai/templates/`. Both are confirmed in the pinned snapshot; a minimal README correction is still pending.
+6. **`.ai/skills/repository/SKILL.md`** normatively classifies `.ai/templates/` as an active owner and includes it in the active-owner dependency prohibition, but that path is absent while templates live under `.ai/conversation-management/templates/`. This needs a deliberate taxonomy decision; do not mechanically substitute the nested path or treat the proposed three-level model as accepted.
+7. **`.ai/skills/workflow/SKILL.md`** still uses `.ai/workflows/*` in its example batch even though that directory is absent from the pinned complete tree. The new tree-inspection procedure is present, but this example remains a separate stale-path candidate.
+8. **`.ai/INDEX.md`** identifies itself coherently as a router/discovery surface, not a procedure owner. Its metadata-boundary exclusion list repeats `repository-state effects`; this is a confirmed narrow editorial defect, not by itself an architectural defect.
 9. The architecture note `.ai/docs/architecture/ai-infrastructure-context-mode.md` was previously confirmed present at the pinned snapshot. Preserve historical passages unless evidence and scope justify a targeted correction.
 
-These observations are preliminary and are not a completed current-tree audit. No architecture, README, INDEX, or skill file has been changed in this chapter.
+These findings are based on the complete pinned tree recorded above. This chapter changed `.ai/skills/workflow/SKILL.md` to document the reusable tree-inspection procedure and corrected two stale operational links in `.ai/handoffs/README.md` and `.ai/skills/activation/SKILL.md`. The architecture README, general README, INDEX, and repository taxonomy have not yet been changed.
 
 ## Open questions and constraints
 
-- Can the current execution environment obtain an authoritative Git ref and complete recursive tree through a supported interface? If yes, record the exact commit SHA, root tree SHA, `truncated` value, and entry count. If not, document the limitation and keep the audit explicitly bounded to directly fetched files at known refs.
-- Is the exact Git-ref → commit → recursive-tree completeness procedure already documented in another canonical owner? Search/retrieve the relevant owners before adding it. The current workflow skill contains only the higher-level tree/contents preference.
+- The GitHub `fetch` action can read the Git ref, commit, and recursive tree APIs. The current documented procedure is now in `.ai/skills/workflow/SKILL.md`.
+- The remaining question is how to update structural descriptions and the repository-owner taxonomy without accidentally creating a new or incorrect semantic boundary.
 - Which stale paths are actionable in active operational content, and which are historical or explanatory mentions that should remain?
 - How should the hybrid responsibilities in `.ai/skills/repository/SKILL.md` be classified without imposing a false mutually exclusive taxonomy?
 
@@ -76,20 +76,19 @@ Important constraints:
 2. Do not treat the three-level semantic-role model as final.
 3. Separate actionable stale active references, intentional historical references, and unresolved references requiring evidence.
 4. Do not mass-rewrite paths or mutate files merely because they mention removed locations.
-5. Establish the authoritative current `main` HEAD and actual tree before making repository-wide claims; record the exact revision used.
+5. Pin repository-wide claims to an immutable commit and record its root tree SHA, `truncated` value, and entry count; do not confuse an audit snapshot with a later `main` HEAD.
 6. For existing-file changes: READ CURRENT FILE → MAKE MINIMAL CHANGE → WRITE COMPLETE CONTENT → READ BACK → VERIFY CONTENT → INSPECT DIFF → VERIFY SCOPE → COMMIT → VERIFY RESULT.
 7. Preserve historical snapshots and distinguish confirmed observations from inference, assumptions, and open questions.
 8. Do not modify predecessor handoff snapshots merely to record that they were consumed.
 
 ## Immediate next task
 
-1. First try to establish the authoritative current `main` HEAD and complete tree. The required sequence is: resolve `refs/heads/main` → read the referenced commit and its root tree SHA → retrieve the recursive tree → verify `truncated=false` and record the entry count → pin subsequent file reads to that commit. If the current tool surface cannot perform this, explicitly report the blocker and do not claim a complete tree audit.
-2. Re-read the relevant canonical owners and confirm whether any owner already defines the exact Git-ref/tree retrieval procedure.
-3. If that exact method is missing, add a minimal reusable procedure to the appropriate canonical owner (initial candidate: `.ai/skills/workflow/SKILL.md`), including immutable commit pinning and the rule not to claim completeness when the tree is truncated. Avoid duplicate ownership.
-4. Complete a line-by-line, evidence-backed classification of the suspicious references above against the actual tree and full file context.
-5. Make only narrow, justified corrections after the evidence is complete; review the repository-skill taxonomy separately.
-6. Verify every write with read-back, content checks, diff/scope inspection, commit verification, and post-write read-back. Preserve historical passages.
+1. The Git-ref → commit → root tree → recursive tree retrieval path is now proven and documented in `.ai/skills/workflow/SKILL.md`.
+2. Finish classifying the confirmed stale structural descriptions in `.ai/docs/architecture/README.md`, `.ai/README.md`, and the `.ai/skills/workflow/SKILL.md` example.
+3. Decide explicitly how `.ai/conversation-management/templates/` fits the repository taxonomy before changing `.ai/skills/repository/SKILL.md`; preserve the provisional status of any multi-level semantic-role model.
+4. Remove the duplicate `repository-state effects` bullet in `.ai/INDEX.md` as a separate, low-risk editorial correction if no conflicting context appears.
+5. Re-read each target at the pinned commit, make only narrow changes, inspect candidate diffs and changed-file scope before moving `main`, then verify branch head and read back every changed file.
 
 ## Recommended starting context
 
-Start with this handoff, the current `.ai/conversation-management/handoff/BOOTSTRAP.md`, `.ai/skills/repository/SKILL.md`, `.ai/skills/workflow/SKILL.md`, and the audit targets listed above. Treat current tree identity as the first unresolved verification task.
+Start with this handoff, `.ai/skills/repository/SKILL.md`, `.ai/skills/workflow/SKILL.md`, `.ai/docs/architecture/README.md`, `.ai/README.md`, `.ai/INDEX.md`, and `.ai/conversation-management/templates/`. The current-tree retrieval method is verified; the remaining work is semantic classification and narrow cleanup.
