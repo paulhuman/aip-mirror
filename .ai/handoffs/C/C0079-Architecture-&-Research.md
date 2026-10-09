@@ -98,6 +98,6 @@ Additional bootstrap reads include `.ai/config.yaml`, `.ai/rules/repository.md`,
 
 ## Status
 
-- Bootstrap: initial handoff creation and read-back verification pending.
-- Phase 0: not yet complete.
+- Bootstrap: handoff creation and read-back verification completed.
+- Phase 0: baseline inventory and dependency map recorded in `.ai/tests/results/ai-infrastructure-rules-to-skills/20261009-c0079-phase-0-baseline.md`; evidence artifact read-back and commit scope verified.
 - Infrastructure mutation: not started.
