@@ -268,6 +268,6 @@ The current canonical owners for this context mode are:
 - General development workflow: `.ai/skills/workflow/SKILL.md`.
 - Normative-language semantics and normalization: `.ai/skills/normative-language/SKILL.md`.
 - AI-infrastructure context mode: `.ai/skills/ai-infrastructure/SKILL.md`.
-- Receiving-chapter bootstrap: explicitly invoked, nested `.ai/skills/conversational-only/handoff/BOOTSTRAP.md`.
+- Receiving-chapter bootstrap: explicitly invoked, nested `.ai/conversation-management/handoff/BOOTSTRAP.md`.
 
 This addendum records current routing only. It does not turn this architecture note into an operational owner or require normal context loading to ingest the historical validation material above.
