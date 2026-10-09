@@ -42,7 +42,7 @@ For example:
 ACTIVATE
   operation: handoff lifecycle change
   owners:
-    .ai/skills/conversational-only/handoff/SKILL.md
+    .ai/conversation-management/handoff/SKILL.md
   status: ACTIVATED
 ```
 
