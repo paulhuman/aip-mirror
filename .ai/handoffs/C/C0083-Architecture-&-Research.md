@@ -103,17 +103,23 @@ Important constraints:
 
 ### Remaining audit findings
 
-- `.ai/docs/faq/adapting-to-a-new-project.md` is an active how-to guide but contains many obsolete paths, including old conversational-only handoff paths and `.ai/workflows/`. Do not blindly rewrite the large document; decide whether to update its current instructions, clearly delimit historical examples, or otherwise retire obsolete guidance.
-- `.ai/docs/architecture/agentic-ai-compatibility-architecture.md`, `.ai/docs/architecture/agentic-ai-compatibility-capability-audit.md`, and `.ai/docs/architecture/agentic-ai-owner-seam-audit.md` contain pre-migration `.ai/rules/`, `.ai/workflows/`, and older handoff-owner references. Their continuity points to C0069-era research, so preserve historical evidence and classify whether a current-state addendum or archival transition is warranted before editing.
+- `.ai/docs/faq/adapting-to-a-new-project.md` was updated in commit [`2dd85a7e3fd8b7c1572abf4d107a1c8a23e48bbd`](https://github.com/paulhuman/aip-mirror/commit/2dd85a7e3fd8b7c1572abf4d107a1c8a23e48bbd): 11 old conversation-management path prefixes and the obsolete workflow directory references were corrected; owner descriptions were updated; all 740 lines were preserved. Candidate read-back verified no remaining `.ai/skills/conversational-only/`, `.ai/workflows/`, or `.ai/templates/` matches.
+- The three Agentic AI research documents were classified as superseded historical evidence because `.ai/docs/architecture/ai-infrastructure-vnext-proposal.md` explicitly supersedes the series as a plan. Commit [`0cecf6ef04792d5d181f08271ca437aedd90bec7`](https://github.com/paulhuman/aip-mirror/commit/0cecf6ef04792d5d181f08271ca437aedd90bec7) updated the current owner references in `agentic-ai-compatibility-architecture.md` and added dated historical-snapshot notes to the C0068 capability audit and C0069 owner-seam audit. Old paths inside their historical evidence remain intact.
 - `.ai/docs/architecture/ai-infrastructure-context-mode.md` contains an old bootstrap path inside its historical validation record; `.ai/docs/architecture/ai-infrastructure-vnext-proposal.md` explicitly marks itself as predating the migration. Treat those occurrences as historical unless a specific current-facing passage is shown to be misleading.
 - The root `README.md` is empty in the verified snapshot. No change was made to it.
 
+## Verified audit snapshot after follow-up corrections
+
+- `main` before this handoff update: `0cecf6ef04792d5d181f08271ca437aedd90bec7`.
+- Root tree: `e706ab0bbbfd4e94fcc9857a60b9c29959bd047d`; recursive tree `truncated=false`; 254 entries.
+- The declared scan covered active `.ai` content and `docs/**`, excluding archive contents, chapter handoffs, and historical test-result files. Remaining old path references were classified as historical in `ai-infrastructure-context-mode.md` and the vNext proposal, or explicitly marked as historical snapshots in the C0068/C0069 Agentic AI audit documents.
+
 ## Immediate next task
 
-1. Continue the active-reference audit, separating actionable current instructions from historical evidence in supporting documentation.
-2. Inspect `.ai/docs/faq/adapting-to-a-new-project.md` as a current how-to guide. Classify its many obsolete paths and decide a bounded repair strategy before changing the large document.
-3. Review the three C0069-era Agentic AI architecture/audit documents listed above. Preserve historical findings; decide whether current-path addenda or archival transitions are appropriate instead of mechanically rewriting snapshots.
-4. Recheck active owner references only within a declared, pinned tree snapshot. Do not expand into archive contents or impose a final multi-level semantic-role taxonomy.
+1. Re-verify the changed current-facing files against the active tree and confirm that stale operational paths are absent from the declared current-instruction scope.
+2. Review `.ai/docs/architecture/ai-infrastructure-context-mode.md` and `.ai/docs/architecture/ai-infrastructure-vnext-proposal.md` only for current-facing claims; preserve old paths in clearly historical validation/proposal sections.
+3. Continue the semantic-owner boundary audit in `.ai/skills/repository/SKILL.md` and related orientation documents. Keep the multi-level semantic-role model provisional; do not introduce a new taxonomy without evidence.
+4. Do not load archive contents. Any further repository-wide claims MUST use a fresh immutable commit/tree snapshot with verified `truncated=false`.
 5. For any further edits, read current files at the pinned commit, make minimal changes, inspect candidate diff and scope, update `main` with an expected-SHA guard, then read back and verify the result.
 
 ## Recommended starting context
