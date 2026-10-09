@@ -86,3 +86,34 @@ Continue the AI-infrastructure active-file audit from C0081. Establish the actua
 ## Recommended starting context
 
 Read this handoff alongside the current `.ai/conversation-management/handoff/BOOTSTRAP.md`, `.ai/skills/repository/SKILL.md`, `.ai/skills/workflow/SKILL.md`, and the five active-file audit targets above. Treat the commit/tree identity as an explicit first verification task.
+
+## Checkpoint — read-only audit progress (2026-10-09)
+
+### Revision and tree verification
+
+- The initial C0082 handoff was created by commit `cc842a696972ceca64889ca223dc4a501c613f9c`. Fetching that commit confirms its diff contains only this handoff file.
+- GitHub's recent-commit search returns `cc842a696972ceca64889ca223dc4a501c613f9c` as the newest indexed result during this checkpoint. This is evidence of recency, but the available connector does not expose an authoritative branch-ref plus recursive tree retrieval. Therefore exact current `main` HEAD/tree completeness remains **OPEN / BLOCKED**; do not claim the complete tree has been verified.
+- For reproducible targeted reads, the immutable ref `cc842a696972ceca64889ca223dc4a501c613f9c` was used for the five audit targets. The blob identifiers previously recorded in this handoff match those reads for the files that had not changed.
+
+### Confirmed targeted findings
+
+1. **`.ai/handoffs/README.md`: likely actionable stale reference.** It refers to `.ai/skills/conversational-only/handoff/SKILL.md` as an owner path. Fetching that exact path at the pinned ref returns 404; `.ai/conversation-management/handoff/SKILL.md` exists. This is strong targeted evidence, but the proposed edit is deferred until the full tree limitation is resolved or explicitly accepted.
+2. **`.ai/docs/architecture/README.md`: likely stale active-structure description.** Its owner-location list includes `.ai/skills/conversational-only/`. Do not globally replace every historical mention; inspect the full file context before any correction.
+3. **`.ai/README.md`: duplicated/ambiguous area description.** It describes `.ai/conversation-management/` as covering procedures and human-facing templates while also listing `.ai/templates/` as a major active area. This is a text-level ambiguity, not yet proof of which template location is canonical.
+4. **`.ai/INDEX.md`: routing boundary is coherent.** It explicitly describes INDEX as command routing/capability discovery, not a procedure owner, and routes handoff/migration to `.ai/conversation-management/`. A repeated bullet, “repository-state effects”, appears in its metadata-boundary exclusion list; this is a narrow editorial candidate, not an architectural defect.
+5. **`.ai/skills/repository/SKILL.md`: confirmed hybrid-role example.** Its declared ownership spans repository identity, boundaries, content taxonomy, durability, and safe mutation; the actual body includes path resolution, taxonomy, and documentation traceability. It also delegates general workflow and commit policy to their respective canonical owners. Do not force it into a single exclusive role.
+6. The architecture note `.ai/docs/architecture/ai-infrastructure-context-mode.md` exists at the pinned ref. Preserve historical passages; no change was made.
+
+### Current classification
+
+- **Likely actionable stale:** current handoff README owner path; current architecture README active-owner path.
+- **Ambiguous / needs structure evidence:** `.ai/README.md` template-location description; any `.ai/templates/` and `.ai/workflows/` status claims.
+- **Narrow editorial candidate:** duplicated “repository-state effects” bullet in INDEX.
+- **Confirmed hybrid:** repository skill combines several related canonical responsibilities while delegating adjacent procedures.
+- **Historical versus active references:** not exhaustively classified; full tree and line-by-line context review remain necessary.
+
+### Mutation state and next step
+
+- No architecture files, README files, routing files, or skills were changed during the audit.
+- This checkpoint update is the only intended mutation in this operation.
+- Next: establish the authoritative current `main` tree through a supported GitHub interface if available; otherwise report the connector limitation clearly and continue only with a bounded, explicitly pinned-file audit. Then inspect the complete five target files and their cross-references before deciding whether to make narrowly scoped corrections.
