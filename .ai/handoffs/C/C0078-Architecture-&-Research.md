@@ -14,109 +14,121 @@ C
 
 ## Starting objective
 
-Continue the Architecture & Research track by performing a read-only architectural audit of the root `AGENTS.md`, then investigate whether the repository's distinction between `.ai/rules/` and `.ai/skills/` remains appropriate given the verified DSH loading behavior.
+Continue the Architecture & Research track after auditing the root `AGENTS.md` and investigating the rules-versus-skills distinction. The user approved a bounded restructuring of the AI infrastructure and asked to move the actual infrastructure mutations into the next conversation because this chapter had become long.
 
-The audit must establish what belongs in the project-root entry point, whether it should remain project-agnostic and durable, and whether it may depend on temporary or version-sensitive DSH evidence. Do not edit files merely because a concern has been raised.
+Before migrating, create a detailed roadmap under `.ai/archives/docs/architecture/` that records the accepted target model, exact source-to-destination mapping, execution phases, verification criteria, risks, and non-goals. Then update this chapter's handoff and generate the canonical bootstrap transport for C0079.
 
-## Known starting implementation state
+## Current repository state
 
 - Repository: `paulhuman/aip-mirror`
 - Canonical branch: `main`
 - Current chapter: C0078
-- Previous chapter: C0077
+- Next chapter: C0079
 - Specialization: C
 - Short name: Architecture & Research
-- Derived chapter identifier: C0078
-- Canonical AI infrastructure lives under `.ai/`; project knowledge lives under `docs/`.
-- Root `AGENTS.md` exists and currently describes itself as a DSH-loaded router pointing to canonical sources in `.ai/`.
-- C0077 verified that DSH, when started at the repository root, discovers the eight top-level project skills through the local `.agents/skills` junction to `.ai/skills/`; the junction is gitignored and recreated by `.ai/scripts/adapters/New-SkillAdapters.ps1`.
-- The DSH-specific verification is documented in `.ai/docs/architecture/agentic-ai-skill-discovery-verification.md`. These findings are version-sensitive evidence, not universal or timeless host behavior.
-- The current root `AGENTS.md` directly instructs agents to read that DSH verification document before touching skill discovery and contains operational details about DSH version, profile, paths, and setup.
-- The root entry point must be audited against `.ai/AGENTS.md`, `.ai/config.yaml`, and `.ai/rules/repository.md`, with the intended boundary `ROOT / AGENTS.md → .ai/ canonical source`.
-- The architecture question about rules versus skills is open. Do not presume that rules should be deleted or copied into skills simply because DSH's loading model differs from a native rule mechanism.
+- Latest verified main commit at handoff preparation: `1cb918e7b1aecfde95b5d42244796e4e9f212522`
+- Roadmap created and committed at: `.ai/archives/docs/architecture/ai-infrastructure-rules-to-skills-roadmap.md`
+- Roadmap blob SHA: `967fbc71e0e1e1a242312e6ebfce0fbae622ef22`
+- Roadmap commit: `1cb918e7b1aecfde95b5d42244796e4e9f212522`
+- The rules-to-skills infrastructure migration has **not** been applied. The old rules and current paths still exist at this point.
+- This handoff update is part of the `>>migrate 0079` operation; it does not create the C0079 receiving handoff in advance.
 
 ## Decisions carried forward
 
-- Preserve a single canonical semantic source; do not create duplicated rule/skill owners.
-- Treat `.ai/INDEX.md` as an operational router/capability map, not a replacement for canonical owners.
-- Supporting documents under `.ai/docs/` and handoffs provide context/evidence but are not active semantic owners.
-- Distinguish semantic ownership from host-specific discovery and loading.
-- Do not make structural changes to `.ai/rules/` or `.ai/skills/` until research and a proposed semantic model justify them.
-- No repository changes are authorized merely by identifying a concern; inspect and establish the intended design first.
-
-## Relevant files and references
-
-### Root entry and canonical infrastructure
-
-- `AGENTS.md` — current root-level agent entry/router; primary audit target.
-- `.ai/AGENTS.md` — internal AI-infrastructure operating contract.
-- `.ai/config.yaml` — canonical repository identity, default branch, references, and specialization vocabulary.
-- `.ai/rules/repository.md` — repository boundaries, active-owner versus supporting-layer distinction, and write-safety requirements.
-- `.ai/INDEX.md` — operational routing and capability map.
-- `.ai/rules/workflow.md` — general workflow principles.
-- `.ai/rules/handoff/lifecycle.md` — handoff continuity and naming semantics.
-- `.ai/skills/activation/SKILL.md` — canonical activation and visible TRACE contract.
-- `.ai/skills/handoff/SKILL.md` — handoff structure and operation.
-- `.ai/workflows/handoff/BOOTSTRAP.md` — canonical chapter initialization workflow.
-
-### DSH-specific evidence
-
-- `.ai/docs/architecture/agentic-ai-skill-discovery-verification.md` — detailed, version-sensitive DSH discovery experiments and observations.
-- `.ai/scripts/adapters/New-SkillAdapters.ps1` — creates/verifies the local adapter.
-- `.gitignore` — ignores the local `.agents/` adapter.
-- `.ai/docs/architecture/agentic-ai-compatibility-architecture.md` — broader host-compatibility architecture context.
-- `.ai/docs/architecture/agentic-ai-dsh-observations.md` — DSH observations, subject to revalidation when relied upon operationally.
-
-### External research references
-
-- `paulhuman/codex` — declared in `.ai/config.yaml` as a research reference for coding-agent architecture, agent behavior, instruction handling, and repository-oriented workflows.
-- `paulhuman/skills` — declared as a reference for reusable skill structure, discovery, and capability conventions.
-- `paulhuman/agent.md` — declared as a reference for agent instruction-file conventions, instruction hierarchy, and durable repository guidance.
-
-These external repositories are research references, not authority over this project's canonical owners.
+1. Eliminate `.ai/rules/` entirely; do not retain it as a parallel source type or compatibility layer.
+2. Put all handoff-related skills and procedures under `.ai/skills/conversational-only/`, including the handoff skill, reference-preservation skill, bootstrap workflow, and human bootstrap template.
+3. Do not create `.ai/skills/conversational-only/SKILL.md`. Handoff skills remain nested so DSH does not discover them as ordinary first-level skills.
+4. Keep shared skills such as activation, commits, knowledge-capture, normative-language, deep-understanding, explain-code, repository, and workflow at `.ai/skills/<skill-name>/SKILL.md`.
+5. Merge each rule's unique semantics into one canonical skill owner. Avoid blind concatenation and avoid duplicate semantic owners.
+6. Preserve critical repository and mutation-safety invariants directly in `.ai/AGENTS.md` as a concise always-on contract. Detailed repository taxonomy and write-safety procedure belong in the repository skill.
+7. Update root `AGENTS.md` to replace its installed-DSH-specific host-notes section with the agreed portable skill-adapter note. Do not claim that all AI hosts support the same discovery behavior.
+8. Update active routing and documentation references before deleting the old rule files. Keep `.ai/INDEX.md` as a router/capability map, not a procedure owner.
+9. Actual per-chapter state remains under `.ai/handoffs/`; only reusable handoff instructions, skills, and templates move.
+10. Other AI hosts are out of scope. The confirmed DSH discovery behavior has already been tested and must not be re-tested without a concrete reason.
+11. Do not treat archived architecture documents as active semantic owners. The roadmap is historical planning context; current active files remain authoritative until changed and verified.
 
 ## Confirmed
 
-- Bootstrap context identifies the receiving chapter as C0078, specialization C, previous chapter 0077, short name Architecture & Research.
 - `.ai/config.yaml` identifies `paulhuman/aip-mirror` as the repository, `main` as the default branch, and C's short name as Architecture & Research.
-- `.ai/AGENTS.md` item 6 directs new-chapter initialization to `.ai/workflows/handoff/BOOTSTRAP.md`.
-- The canonical predecessor handoff is `.ai/handoffs/C/C0077-Architecture-&-Research.md`; it was read successfully.
-- C0077 records the DSH-first adapter path as behaviorally verified and identifies the root `AGENTS.md` audit as C0078's immediate task.
-- The current root `AGENTS.md` contains a section explicitly titled “Agentic environment (DSH)” and points directly to the version-sensitive verification document.
-- The current repository rules explicitly distinguish active semantic owners from supporting/contextual layers and prohibit active owners from depending on supporting layers as sources of active semantics.
-- `.ai/skills/activation/SKILL.md` requires visible operation-level TRACE for operations routed through ACTIVATE, using the actual files read.
-- The current receiving handoff did not exist at the canonical path when checked during bootstrap.
+- The current chapter is C0078, and `>>migrate 0079` is the correct sequential migration assertion.
+- The active infrastructure currently has seven files under `.ai/rules/`: repository, workflow, commits, developer-knowledge, normative-language, handoff/lifecycle, and handoff/references.
+- Current related owners include `.ai/skills/commits/SKILL.md`, `.ai/skills/knowledge-capture/SKILL.md`, `.ai/skills/normative-language/SKILL.md`, `.ai/skills/handoff/SKILL.md`, `.ai/skills/handoff/reference-preservation/SKILL.md`, `.ai/workflows/handoff/BOOTSTRAP.md`, and `.ai/templates/handoff-bootstrap.md`.
+- Current active references also exist in root `AGENTS.md`, `.ai/AGENTS.md`, `.ai/README.md`, `.ai/INDEX.md`, `.ai/docs/architecture/README.md`, `.ai/handoffs/README.md`, and `docs/PROJECT-INSTRUCTIONS.md`.
+- DSH discovers skills one level deep at `.agents/skills/<skill-name>/SKILL.md`; the local `.agents/skills` adapter points to `.ai/skills/` and is gitignored/recreated by `.ai/scripts/adapters/New-SkillAdapters.ps1`.
+- The roadmap was created at `.ai/archives/docs/architecture/ai-infrastructure-rules-to-skills-roadmap.md` and is intended as a detailed, phased execution plan.
+- The roadmap creation commit succeeded and the `main` branch was updated using the expected prior SHA. Its content was read back from GitHub and its blob SHA matched the created blob.
 
-## Inferred
+## Inferred / rationale
 
-- The root `AGENTS.md` may be carrying too much host-specific operational content for a durable, project-agnostic entry point. The audit must determine this from the intended root-entry contract and actual host behavior, not assume the conclusion.
-- A more durable design may keep root instructions minimal and route host-specific setup details to an appropriate adapter or supporting document, but the correct location and loading guarantees remain to be established.
-- The rules/skills distinction may still be valuable as semantic ownership even if a particular host loads only skills by default. Whether any critical semantics require a host-loading adapter or dedicated skill is an evidence-driven design question.
+- Moving handoff procedures under a nested conversational-only boundary is the simplest design consistent with the tested DSH first-level discovery behavior and the user's requirement that ordinary agents not discover handoff instructions.
+- Because the existing rules contain critical safety semantics, deletion must be the final structural phase after replacement owners and all active references have been verified.
+- The migration is a multi-file semantic refactor; it should be implemented in coherent groups and validated against the actual tree rather than performed as a blind path rename.
 
 ## Assumed / unverified
 
-- Whether DSH automatically loads root `AGENTS.md` in every relevant launch context has not been independently revalidated in this chapter.
-- Whether another current Agentic AI host is in scope has not been established; do not design speculative adapters without a concrete target.
-- No proposed rewrite of root `AGENTS.md` has been accepted.
-- No decision has been made to move, duplicate, wrap, or eliminate any existing rule semantics.
+- No implementation mutation to the rules/skills structure has been applied yet.
+- No root `AGENTS.md` rewrite has been applied yet.
+- No claim has been made that every stale path is already known; C0079 must run a complete active-tree reference sweep.
+- The roadmap's phase sequence is approved planning context, but each phase must still be verified against the actual repository state when executed.
+
+## Relevant files
+
+### Plan and current owners
+
+- `.ai/archives/docs/architecture/ai-infrastructure-rules-to-skills-roadmap.md` — detailed execution roadmap; read this first in C0079.
+- `.ai/AGENTS.md` — always-on AI-infrastructure contract.
+- `.ai/INDEX.md` — command routing and capability discovery.
+- `.ai/README.md` — active infrastructure orientation.
+- `.ai/config.yaml` — repository identity and specialization vocabulary.
+- `AGENTS.md` — root entry point; replace the DSH-specific section with the agreed generic adapter note.
+- `.ai/docs/architecture/README.md` — active-owner/supporting-layer architecture description.
+- `docs/PROJECT-INSTRUCTIONS.md` — project-level agent instructions; must not route ordinary agents into conversational-only handoff procedures.
+
+### Rule sources to consolidate
+
+- `.ai/rules/repository.md`
+- `.ai/rules/workflow.md`
+- `.ai/rules/commits.md`
+- `.ai/rules/developer-knowledge.md`
+- `.ai/rules/normative-language.md`
+- `.ai/rules/handoff/lifecycle.md`
+- `.ai/rules/handoff/references.md`
+
+### Existing skills and handoff material to merge/move
+
+- `.ai/skills/commits/SKILL.md`
+- `.ai/skills/knowledge-capture/SKILL.md`
+- `.ai/skills/normative-language/SKILL.md`
+- `.ai/skills/handoff/SKILL.md`
+- `.ai/skills/handoff/reference-preservation/SKILL.md`
+- `.ai/workflows/handoff/BOOTSTRAP.md`
+- `.ai/templates/handoff-bootstrap.md`
+- `.ai/handoffs/README.md` — update references, but do not move the actual handoff-state tree.
 
 ## Open
 
-- Audit root `AGENTS.md` against `.ai/AGENTS.md`, `.ai/config.yaml`, `.ai/rules/repository.md`, and the ROOT → `.ai/` canonical-source boundary.
-- Classify root `AGENTS.md` content into durable router guidance, duplicated canonical semantics, host-specific mechanics, and temporary/version-sensitive evidence references.
-- Determine whether the DSH-specific section belongs in the root entry point, and whether the direct dependency on the verification artifact violates the intended ownership boundary.
-- Decide whether root `AGENTS.md` needs changes. Keep this audit read-only until the user approves or requests a change.
-- Establish the current semantic responsibility of `.ai/rules/`, `.ai/skills/`, and `.ai/workflows/` from their canonical owners.
-- Research the actual DSH skill-loading contract and compare it with the project's intended semantics; separate evidence about host loading from the question of semantic ownership.
-- Identify any rule whose semantics are not reliably delivered to the relevant host context, and evaluate minimal remedies without duplicating owners.
-- Produce a bounded architectural recommendation before making structural changes.
+- Execute the roadmap's phases 0–6 in C0079, beginning with a fresh tree and source-content baseline.
+- Consolidate shared owners before deleting old rules.
+- Move the handoff material into nested `.ai/skills/conversational-only/handoff/` paths and update every active reference.
+- Keep the always-on invariants in `.ai/AGENTS.md` concise and self-contained.
+- Remove `.ai/rules/` only after every rule section has a verified replacement and the active-tree reference sweep is clean.
+- Read back changed files, inspect the complete diff, verify scope, commit coherently, and verify the final branch state.
+- If an unexpected concurrent commit or semantic conflict appears, stop and reconcile against the actual repository state rather than forcing the planned patch.
 
-## Immediate next task
+## Immediate next task for C0079
 
-Perform the requested **read-only audit** of the actual root `AGENTS.md`. Compare it directly with `.ai/AGENTS.md`, `.ai/config.yaml`, and `.ai/rules/repository.md`, and report what is correct, redundant, host-specific, or inconsistent with the intended ROOT → `.ai/` boundary. Explicitly evaluate the direct link to the DSH verification artifact. Do not mutate any file during this audit.
+1. Read the roadmap in full:
+   `.ai/archives/docs/architecture/ai-infrastructure-rules-to-skills-roadmap.md`
+2. Read the new C0079 handoff after its own bootstrap creates it, along with the current active infrastructure entry points and canonical owner files relevant to mutation safety, activation, and commits.
+3. Fetch the actual current `main` tree and record its head SHA; the roadmap commit is the known baseline, but do not assume no intervening changes occurred.
+4. Start with Phase 0: inspect all source files and active references in complete, bounded batches. Do not start by deleting or moving the rules directory.
+5. Execute Phase 1 and Phase 2 by creating and verifying replacement owners; then update routing and references; delete `.ai/rules/` only after the specified exit criteria pass.
+6. Follow the roadmap's Phase 5 acceptance checklist and Phase 6 read-back/diff/scope/published-result verification.
 
-After that, investigate the rules-versus-skills architecture as a separate, evidence-driven question. Do not start by moving or deleting rules.
+## Do not redo
 
-## Recommended starting context
-
-Read this handoff, then use the already-read root `AGENTS.md`, `.ai/AGENTS.md`, `.ai/config.yaml`, and `.ai/rules/repository.md` as the starting comparison set. Re-read any canonical owner before executing a subsequent operation. Use the DSH verification artifact as supporting evidence only, and revalidate version-sensitive claims if they materially affect a recommendation.
+- Do not reopen the user's accepted architectural decisions without a concrete contradiction in current repository evidence.
+- Do not repeat the DSH nested-skill discovery experiment; the discovery boundary has already been tested.
+- Do not treat `.ai/archives/` as normal active context or promote this roadmap into an active semantic owner.
+- Do not change Illustrator plugin implementation as part of this infrastructure-only task.
+- Do not claim the rules-to-skills migration is complete merely because the roadmap or handoff commit succeeds.
