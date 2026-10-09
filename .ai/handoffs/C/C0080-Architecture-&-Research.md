@@ -24,7 +24,7 @@ Continue the AI-infrastructure rules-to-skills restructuring follow-up in `paulh
 - Specialization / short name: `C` / `Architecture & Research`
 - Previous chapter handoff: `.ai/handoffs/C/C0079-Architecture-&-Research.md`
 - Current handoff: `.ai/handoffs/C/C0080-Architecture-&-Research.md`
-- Canonical initialization procedure: `.ai/skills/conversational-only/handoff/BOOTSTRAP.md`
+- Canonical initialization procedure: `.ai/conversation-management/handoff/BOOTSTRAP.md`
 - Roadmap: `.ai/archives/docs/architecture/ai-infrastructure-rules-to-skills-roadmap.md`
 
 ## Confirmed starting context
@@ -94,4 +94,4 @@ Read this handoff together with:
 - `.ai/skills/repository/SKILL.md`
 - `.ai/skills/workflow/SKILL.md`
 - `.ai/skills/commits/SKILL.md`
-- `.ai/skills/conversational-only/handoff/BOOTSTRAP.md`
+- `.ai/conversation-management/handoff/BOOTSTRAP.md`
