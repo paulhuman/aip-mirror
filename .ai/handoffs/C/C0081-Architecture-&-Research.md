@@ -106,3 +106,24 @@ These examples suggest the proposed three-level model should be tested as a **se
 - Read-back verified the corrected current path is present, the stale path is absent from that current-owner bullet, and the historical C0070 snapshot remains intact. The commit diff changes one line in the architecture note.
 - The older `.ai/rules/normative-language.md` and `.ai/workflows/handoff/BOOTSTRAP.md` references in the pre-addendum body remain as historical snapshot material; they were not mass-replaced.
 - No semantic-role taxonomy has been adopted. The model remains provisional pending further hybrid-file examples and current-tree verification.
+
+## Migration checkpoint — C0082
+
+- Migration request: `>>migrate 0082`. Current chapter C0081 is established by the active conversation context; the asserted next chapter 0082 matches the sequential target.
+- The C0081 bootstrap-contract correction and context-mode architecture-note correction are committed and verified. The context-mode document remains active; its historical passages were deliberately preserved.
+- No broad changes were made to the active-file audit targets. The provisional semantic-role model remains unaccepted.
+
+### Immediate next task for C0082
+
+1. Independently retrieve the authoritative current `main` tree and record the exact revision used; do not rely on prior path inventories alone.
+2. Continue the read-only audit of active files, especially `.ai/docs/architecture/README.md`, `.ai/handoffs/README.md`, `.ai/README.md`, `.ai/skills/repository/SKILL.md`, and `.ai/INDEX.md`.
+3. Classify suspicious path references as current actionable stale references, intentional historical references, or unresolved pending evidence. Do not mass-replace old paths and do not edit files merely because they mention removed locations.
+4. Validate hybrid semantic-role examples against the actual current tree. Keep the model provisional until examples and boundaries support a precise formulation.
+5. Make no broad mutation; first produce evidence-backed findings and identify any minimal, clearly scoped correction that may be needed.
+
+### Carry-forward constraints
+
+- Root `AGENTS.md` remains exclusively the Agentic AI entry surface; Conversational AI bootstrap begins from explicit transport.
+- Existing-file mutation protocol: READ CURRENT FILE → MAKE MINIMAL CHANGE → WRITE COMPLETE CONTENT → READ BACK → VERIFY CONTENT → INSPECT DIFF → VERIFY SCOPE → COMMIT → VERIFY RESULT.
+- Preserve historical snapshots and distinguish confirmed observations from inferences and open questions.
+- The three-level semantic-role model is provisional, not an accepted taxonomy.
