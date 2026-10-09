@@ -1,6 +1,7 @@
 # AI infrastructure vNext — multi-host architecture proposal
 
 **Status:** design proposal, not an implementation decision
+**Current-state note (2026-10-09):** This proposal predates the approved rules-to-skills migration. References below to `.ai/rules/`, first-level handoff skills, and `.ai/workflows/handoff/BOOTSTRAP.md` describe the proposal-time repository state and are not current routing. Use `.ai/INDEX.md` and `.ai/README.md` for current owner paths.
 **Supersedes:** the `agentic-ai-*` research series (2026-10-07…08), which is now
 evidence, not a plan
 **Scope:** how `.ai/` serves two incompatible classes of AI consumers from one
