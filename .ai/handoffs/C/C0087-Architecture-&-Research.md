@@ -12,7 +12,6 @@ C
 **Previous chapter:**
 0086
 
-
 ## Starting objective
 
 Continue the AI-infrastructure documentation review from C0086. Work on the existing branch `c0086/ai-docs-audit-translation`; do not merge its substantive changes into `main` without explicit user approval. Finish the Russian translations and bounded audits of the remaining maintained documents under `.ai/docs/`, preserve experiment/version boundaries and proposal status, and keep the open TODO accurate.
