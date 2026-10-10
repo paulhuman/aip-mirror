@@ -114,8 +114,9 @@ Continue the accepted AI-infrastructure documentation review after the completed
 
 ### Current state and next work
 
-- The working branch has independent commits; these changes have not been merged into `main`.
+- The working branch `c0086/ai-docs-audit-translation` has independent commits; these changes have not been merged into `main`.
 - Three maintained documents have been translated; three English documents remain to be translated and audited. `.ai/docs/ai-document-hierarchy-and-authoring.md` is already in Russian and still needs consistency review.
+- Continue on the existing working branch `c0086/ai-docs-audit-translation` unless the user explicitly authorizes another branch or a merge. Before substantive work, resolve and record its current head.
 - Continue with the DSH verification journal and vNext proposal translations, then inspect and translate the practical guide with current-tree verification.
 - Keep the memory TODO OPEN until its evidence, semantic-owner, reference, and translation criteria have actually been verified.
 
@@ -125,3 +126,13 @@ Continue the accepted AI-infrastructure documentation review after the completed
 - Do not classify proposal-only paths as broken current links unless they are presented as current instructions.
 - Do not mass-rewrite historical paths.
 - Before each repository edit, read the current file; after writing, read it back, verify content, inspect the diff and changed-file scope, and verify the resulting commit.
+
+
+## Migration checkpoint — C0086 → C0087 (2026-10-10)
+
+- Migration validation: active chapter context is `C0086`; the user asserted `0087`; expected sequential target is `0087`. The argument matches the canonical migration rule.
+- The migration handoff update is recorded on the existing working branch `c0086/ai-docs-audit-translation`.
+- The translation and audit commits on that branch are independent of `main`; they have not been merged. The receiving chapter must explicitly inspect and continue from the working branch rather than assume that its contents are already present on `main`.
+- The current handoff on the configured default branch must point the receiving chapter to that working branch and its existing task state, without merging the substantive documentation changes.
+- C0087's first substantive task remains: translate `.ai/docs/agentic-ai-skill-discovery-verification.md` while preserving versioned experimental evidence and open questions, then translate `.ai/docs/ai-infrastructure-vnext-proposal.md` without implying acceptance/implementation, and audit/translate `.ai/docs/adapting-to-a-new-project.md` against the current repository structure.
+- Practical tests of DSH harness behavior remain assigned to DSH and must stay open in the TODO; do not claim those tests were performed here.
