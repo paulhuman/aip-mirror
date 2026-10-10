@@ -676,64 +676,64 @@ path.
 
 ---
 
-# 19. Final adaptation checklist
+# 19. Итоговый checklist адаптации
 
-Before starting real development, verify:
+Перед началом реальной разработки проверьте:
 
-- [ ] `.ai/config.yaml` contains the new repository identity.
-- [ ] `references.repositories` contains only relevant external references.
-- [ ] `specializations` describes the new project's work areas.
-- [ ] `terminology.commit_scopes` uses the new project's vocabulary.
-- [ ] `terminology.project_terms` uses the new project's vocabulary.
-- [ ] `docs/PROJECT-INSTRUCTIONS.md` has been completely replaced.
-- [ ] `docs/architecture/project-architecture.md` has been completely replaced.
-- [ ] No active workflow contains the old repository URL.
-- [ ] No active test scenario contains the old repository locator.
-- [ ] Old handoffs have been removed.
-- [ ] Old archive/history has been removed or deliberately retained with a reason.
-- [ ] Old project references have been removed.
-- [ ] Old runtime test results have been removed.
-- [ ] `.ai/AGENTS.md` still points to the canonical bootstrap workflow.
-- [ ] `.ai/INDEX.md` still points to valid canonical owners.
-- [ ] Generic rules remain generic.
-- [ ] Generic skills remain generic.
-- [ ] Bootstrap still resolves repository identity from `.ai/config.yaml`.
-- [ ] A first new chapter can be initialized without guessing any AIP Mirror-specific data.
+- [ ] `.ai/config.yaml` содержит идентичность нового репозитория.
+- [ ] `references.repositories` содержит только релевантные внешние ссылки.
+- [ ] `specializations` описывает направления работы нового проекта.
+- [ ] `terminology.commit_scopes` использует терминологию нового проекта.
+- [ ] `terminology.project_terms` использует терминологию нового проекта.
+- [ ] `docs/PROJECT-INSTRUCTIONS.md` полностью заменён.
+- [ ] `docs/architecture/project-architecture.md` полностью заменён.
+- [ ] Ни один активный workflow не содержит URL старого репозитория.
+- [ ] Ни один активный тестовый сценарий не содержит locator старого репозитория.
+- [ ] Старые handoffs удалены.
+- [ ] Старый архив и история удалены либо осознанно сохранены с объяснением причины.
+- [ ] Старые ссылки на проект удалены.
+- [ ] Старые результаты runtime-тестов удалены.
+- [ ] `.ai/AGENTS.md` по-прежнему указывает на canonical bootstrap workflow.
+- [ ] `.ai/INDEX.md` по-прежнему указывает на действующие canonical owners.
+- [ ] Универсальные rules остались универсальными.
+- [ ] Универсальные skills остались универсальными.
+- [ ] Bootstrap по-прежнему получает идентичность репозитория из `.ai/config.yaml`.
+- [ ] Первую chapter нового проекта можно инициализировать без догадок о данных AIP Mirror.
 
 ---
 
-# 20. The shortest mental model
+# 20. Краткая ментальная модель
 
-When turning `aip-mirror` into another project, think in three layers:
+При превращении `aip-mirror` в другой проект мыслите тремя слоями:
 
 ```text
 ┌─────────────────────────────────────────────┐
-│ GENERIC AI INFRASTRUCTURE                   │
+│ УНИВЕРСАЛЬНАЯ AI-ИНФРАСТРУКТУРА             │
 │                                             │
 │ AGENTS / INDEX / rules / skills / workflows │
 │                                             │
-│ Mostly keep                                 │
+│ В основном сохранить                        │
 └─────────────────────────────────────────────┘
                       │
                       ▼
 ┌─────────────────────────────────────────────┐
-│ PROJECT IDENTITY + PROJECT CONTRACT         │
+│ ИДЕНТИЧНОСТЬ ПРОЕКТА + КОНТРАКТ ПРОЕКТА     │
 │                                             │
 │ config.yaml                                 │
 │ docs/PROJECT-INSTRUCTIONS.md                │
 │ docs/architecture/                          │
 │                                             │
-│ Replace                                    │
+│ Заменить                                    │
 └─────────────────────────────────────────────┘
                       │
                       ▼
 ┌─────────────────────────────────────────────┐
-│ PROJECT HISTORY + RESEARCH                  │
+│ ИСТОРИЯ ПРОЕКТА + ИССЛЕДОВАНИЯ              │
 │                                             │
 │ handoffs / archive / references / results   │
 │                                             │
-│ Reset, remove, or deliberately replace      │
+│ Сбросить, удалить или осознанно заменить    │
 └─────────────────────────────────────────────┘
 ```
 
-The most dangerous state is the hybrid one: a new project with a correct `config.yaml` but old AIP Mirror assumptions still hiding in `docs/`, handoff transport, test scenarios, archives, or references.
+Самое опасное состояние — гибридное: у нового проекта правильный `config.yaml`, но старые предположения AIP Mirror всё ещё скрыты в `docs/`, handoff transport, тестовых сценариях, архивах или references.
