@@ -1,273 +1,288 @@
-# AI-infrastructure context mode and active/archive boundary
+# Режим контекста AI-инфраструктуры и граница активных данных / архива
 
-## Purpose
+## Назначение
 
-This note records the architectural direction agreed at the end of C0069 for making the repository's AI-infrastructure easier for both humans and AI environments to understand.
+Эта заметка фиксирует архитектурное направление, согласованное в конце C0069, чтобы людям и AI-средам было проще понимать AI-инфраструктуру репозитория.
 
-The immediate motivation is contextual: ordinary chapter bootstrap intentionally reads only the canonical initialization context. That is sufficient for project work, but it does not automatically provide enough orientation when the task itself concerns the AI-infrastructure.
+Непосредственная причина связана с контекстом: обычная инициализация новой главы намеренно читает только canonical initialization context. Этого достаточно для работы над проектом, но не всегда достаточно, когда сама задача касается AI-инфраструктуры.
 
-The proposed response is a dedicated operation:
+Предлагаемое решение — отдельная операция:
 
-    >>ai-infrastructure
+```text
+>>ai-infrastructure
+```
 
-Its purpose is not merely to load more files. It switches the AI's working domain from project-specific implementation to the repository's AI-infrastructure itself and loads a deliberately broader infrastructure context.
+Её цель — не просто загрузить больше файлов. Она переключает рабочую область AI с реализации конкретного проекта на AI-инфраструктуру репозитория и загружает намеренно расширенный инфраструктурный контекст.
 
-## 1. `.ai/` as a portable AI-infrastructure layer
+## 1. `.ai/` как переносимый слой AI-инфраструктуры
 
-`.ai/` is intended to be a reusable AI-infrastructure layer that lives inside a software project repository.
+Каталог `.ai/` задуман как повторно используемый слой AI-инфраструктуры внутри репозитория программного проекта.
 
-It is not specific to AIP Mirror or to Adobe Illustrator. The same architectural role SHOULD remain applicable to applications, plugins and extensions, websites, libraries, services, tooling, and other software projects.
+Он не привязан к AIP Mirror или Adobe Illustrator. Та же архитектурная роль SHOULD сохраняться для приложений, плагинов и расширений, сайтов, библиотек, сервисов, инструментов и других программных проектов.
 
-The project-specific meaning belongs primarily to `docs/` and the project source tree. The generic AI working system belongs in `.ai/`.
+Проектная специфика в основном принадлежит `docs/` и исходному дереву проекта. Общая рабочая система AI находится в `.ai/`.
 
-This boundary is important because an AI working on the project can otherwise mistake `.ai/docs/` for ordinary project documentation and move infrastructure documentation into `docs/`.
+Это разделение важно: иначе AI, работающий над проектом, может принять `.ai/docs/` за обычную проектную документацию и перенести инфраструктурные документы в `docs/`.
 
-The intended distinction is:
+Предполагаемое различие:
 
-    .ai/
-        = how AI-assisted work is organized, constrained, routed, continued,
-          verified, and documented
+```text
+.ai/
+    = как организуется, ограничивается, маршрутизируется,
+      продолжается, проверяется и документируется работа с AI
 
-    docs/
-        = how this particular project is designed, implemented,
-          instructed, and documented
+docs/
+    = как устроен, реализован, описан и документирован конкретный проект
+```
 
-## 2. Root `.ai/README.md`
+## 2. Корневой `.ai/README.md`
 
-A root `.ai/README.md` now serves as the human- and AI-readable orientation document for the entire `.ai/` layer.
+Корневой `.ai/README.md` служит ориентирующим документом для людей и AI по всему слою `.ai/`.
 
-It SHOULD explain that `.ai/` is the project's reusable AI-infrastructure; that the infrastructure is project-agnostic in architectural intent; that it is not application source code; the semantic roles of the major `.ai/` subdirectories; the boundary between `.ai/` and project-specific `docs/`; the distinction between active infrastructure and historical archives; and that canonical semantic ownership remains in rules, skills, workflows, and other explicitly defined owners rather than in README files or architecture notes.
+Он SHOULD объяснять, что `.ai/` — повторно используемая инфраструктура AI проекта; что её архитектурный замысел не зависит от конкретного проекта; что это не исходный код приложения; каковы смысловые роли основных подкаталогов `.ai/`; где проходит граница между `.ai/` и проектной документацией в `docs/`; чем активная инфраструктура отличается от исторического архива; и почему canonical semantic ownership остаётся у rules, skills, workflows и других явно назначенных владельцев, а не у README или архитектурных заметок.
 
-The root README is an orientation document, not a replacement for `.ai/INDEX.md`, `.ai/AGENTS.md`, or any canonical rule/skill/workflow.
+Корневой README предназначен для ориентации. Он не заменяет `.ai/INDEX.md`, `.ai/AGENTS.md` или canonical rule/skill/workflow.
 
-## 3. `.ai/archive` → `.ai/archives`
+## 3. Переименование `.ai/archive` → `.ai/archives`
 
-The legacy `.ai/archive/` directory has been renamed to `.ai/archives/`.
+Устаревший каталог `.ai/archive/` был переименован в `.ai/archives/`.
 
-`archives` is the clearer plural because the directory contains multiple historical collections, including archived architecture documentation and historical handoffs.
+Форма множественного числа точнее, поскольку каталог содержит несколько исторических коллекций, в том числе архивную архитектурную документацию и прежние handoffs.
 
-The renamed contents remain organized as historical material under `.ai/archives/docs/architecture/` and `.ai/archives/handoffs/`.
+В момент переименования содержимое было организовано как исторический материал в `.ai/archives/docs/architecture/` и `.ai/archives/handoffs/`.
 
-The rename is a taxonomy correction, not a change in semantic ownership.
+Переименование исправило таксономию, но не изменило semantic ownership. Указанные пути относятся к историческому состоянию и не должны приниматься за текущую структуру без проверки.
 
-## 4. Archives are disposable historical storage
+## 4. Архив — временное хранилище исторических материалов
 
-`.ai/archives/` is not active AI-infrastructure context.
+`.ai/archives/` не относится к активному контексту AI-инфраструктуры.
 
-An AI working in normal project mode MUST NOT treat the archive as part of the active context by default.
+При обычной работе над проектом AI MUST NOT считать архив частью активного контекста по умолчанию.
 
-The archive exists more like a controlled historical wastebasket than a permanent museum:
+Архив похож скорее на контролируемое хранилище для устаревших материалов, чем на вечный музей:
 
-- completed or obsolete material can be moved there;
-- historical material can remain available for recovery or audit when explicitly needed;
-- old material MAY eventually be deleted when it no longer provides useful evidence;
-- the archive is therefore not an eternal source of truth.
+- завершённые или устаревшие материалы можно перемещать туда;
+- исторические материалы можно читать для восстановления или аудита, если это явно необходимо;
+- старые материалы MAY быть удалены, когда перестанут предоставлять полезные свидетельства;
+- архив поэтому не является вечным источником истины.
 
-The active repository state MUST remain understandable without routine archive loading.
+Текущее состояние репозитория MUST оставаться понятным без регулярной загрузки архива.
 
-A dedicated `.ai/archives/README.md` SHOULD explain this lifecycle and MUST make clear that archived material is historical, non-active, and subject to eventual cleanup.
+Отдельный `.ai/archives/README.md` SHOULD описывать этот lifecycle и MUST ясно указывать, что архивные материалы исторические, неактивные и со временем могут быть удалены.
 
-## 5. Archive README and `>>ai-infrastructure`
+## 5. README архива и операция `>>ai-infrastructure`
 
-Although archive contents themselves are excluded from the elevated context, `.ai/archives/README.md` SHOULD be included in `>>ai-infrastructure`.
+Хотя содержимое архива исключено из расширенного контекста, `.ai/archives/README.md` SHOULD входить в операцию `>>ai-infrastructure`.
 
-This gives the AI the archive boundary without loading the archive contents.
+Так AI узнаёт границу архива, не загружая сами архивные документы.
 
-The intended behavior is therefore:
+Предполагаемое поведение:
 
-    >>ai-infrastructure
-        ↓
-    read active AI-infrastructure orientation
-        ↓
-    read archive boundary README
-        ↓
-    DO NOT load archive contents unless explicitly required
+```text
+>>ai-infrastructure
+    ↓
+чтение ориентации по активной AI-инфраструктуре
+    ↓
+чтение README, описывающего границу архива
+    ↓
+DO NOT загружать содержимое архива без явной необходимости
+```
 
-This preserves awareness without allowing historical material to pollute the active architectural context.
+Это сохраняет осведомлённость об архиве и не позволяет историческим материалам загрязнять активный архитектурный контекст.
 
-## 6. `>>ai-infrastructure` operation
+## 6. Операция `>>ai-infrastructure`
 
-The `>>ai-infrastructure` command is implemented as a context-loading and domain-switching operation through `.ai/INDEX.md` and `.ai/skills/ai-infrastructure/SKILL.md`.
+Команда `>>ai-infrastructure` реализована как операция переключения области работы и загрузки контекста через `.ai/INDEX.md` и `.ai/skills/ai-infrastructure/SKILL.md`.
 
-Its semantic meaning is:
+Её смысл:
 
-> Switch the AI's working domain to the repository's AI-infrastructure rather than project-specific implementation, and load elevated infrastructure context before proceeding.
+> Переключить рабочую область AI с реализации конкретного проекта на AI-инфраструктуру репозитория и установить расширенный инфраструктурный контекст до продолжения работы.
 
-The operation establishes at least:
+Операция устанавливает как минимум следующий контекст.
 
-### Normative-language activation
+### Активация normative language
 
-Because the elevated mode operates directly on active `.ai` infrastructure, `>>ai-infrastructure` MUST activate the normative-language capability as a required dependency. This does not create a second semantic owner: `.ai/rules/normative-language.md` remains the canonical owner of normative-language semantics.
+Поскольку расширенный режим работает непосредственно с активной инфраструктурой `.ai`, операция `>>ai-infrastructure` MUST активировать capability normative-language как обязательную зависимость. Это не создаёт второго semantic owner: текущим владельцем семантики normative language является `.ai/skills/normative-language/SKILL.md`.
 
-### Repository-level orientation
+### Ориентация на уровне репозитория
 
-- root `README.md`;
+- корневой `README.md`;
 - `docs/PROJECT-INSTRUCTIONS.md`.
 
-### AI-infrastructure orientation
+### Ориентация в AI-инфраструктуре
 
 - `.ai/README.md`;
-- all active `.ai/**/README.md` files that define the structure of active infrastructure;
+- все активные файлы `.ai/**/README.md`, описывающие структуру действующей инфраструктуры;
 - `.ai/AGENTS.md`;
 - `.ai/INDEX.md`;
 - `.ai/config.yaml`;
-- `.ai/skills/normative-language/SKILL.md`;
-- `.ai/rules/normative-language.md`.
+- `.ai/skills/normative-language/SKILL.md`.
 
-### Active infrastructure semantics
+### Семантика активной инфраструктуры
 
-The operation SHOULD quickly survey `.ai/docs/` so the AI knows what durable architecture, FAQ, and other infrastructure documentation exists.
+Операция SHOULD быстро просмотреть дерево `.ai/docs/`, чтобы AI знал, какие устойчивые архитектурные заметки, FAQ и другие инфраструктурные документы существуют.
 
-It SHOULD NOT automatically ingest every large document in full. The purpose is elevated orientation and correct domain selection; deeper documents can then be read when relevant.
+Она SHOULD NOT автоматически загружать целиком каждый большой документ. Цель — расширенная ориентация и корректный выбор области работы; более глубокие документы читаются затем по мере необходимости.
 
-### Archive boundary
+### Граница архива
 
-- `.ai/archives/README.md` SHOULD be read;
-- `.ai/archives/**` contents SHOULD NOT be loaded as part of the normal operation.
+- `.ai/archives/README.md` SHOULD быть прочитан;
+- содержимое `.ai/archives/**` SHOULD NOT загружаться в рамках обычной операции.
 
-The operation is therefore intentionally broader than ordinary bootstrap but narrower than indiscriminate repository ingestion.
+Операция намеренно шире обычного bootstrap, но уже, чем безразборная загрузка всего репозитория.
 
-## 7. Why this is a separate operation
+## 7. Почему это отдельная операция
 
-Ordinary chapter bootstrap and AI-infrastructure mode have different purposes.
+У обычной инициализации главы и режима AI-инфраструктуры разные цели.
 
-Bootstrap establishes:
+Bootstrap устанавливает:
 
-    who am I?
-    which chapter?
-    what predecessor state?
-    which canonical initialization owners?
-    what must be done to start this conversation safely?
+```text
+кто я?
+какая текущая глава?
+каково состояние предыдущей главы?
+какие canonical owners нужны для инициализации?
+что нужно сделать, чтобы безопасно начать эту беседу?
+```
 
-`>>ai-infrastructure` establishes:
+Операция `>>ai-infrastructure` устанавливает:
 
-    what is this AI-infrastructure?
-    what are its boundaries?
-    what are its active semantic owners?
-    what infrastructure documentation exists?
-    what is project-specific and what is infrastructure-level?
-    how should I reason about changes to `.ai/` itself?
+```text
+что это за AI-инфраструктура?
+где проходят её границы?
+каковы её активные semantic owners?
+какая инфраструктурная документация существует?
+что относится к проекту, а что — к инфраструктуре?
+как анализировать изменения в самой .ai/?
+```
 
-The second operation therefore SHOULD NOT be implemented by silently expanding every ordinary bootstrap.
+Поэтому вторую операцию SHOULD NOT реализовывать как незаметное расширение каждого обычного bootstrap.
 
-That would make every project task pay the context cost of the entire AI-infrastructure and would blur the initialization boundary.
+Иначе каждая задача проекта будет платить контекстную стоимость загрузки всей AI-инфраструктуры, а граница инициализации размоется.
 
-## 8. Relationship to Agentic AI compatibility work
+## 8. Связь с работой над совместимостью Agentic AI
 
-This context-mode proposal is independent of the Phase 3 Agentic AI compatibility track, but it provides a useful infrastructure capability for that work.
+Предложение о режиме контекста не зависит от направления Phase 3 по совместимости Agentic AI, но предоставляет полезную инфраструктурную capability для этой работы.
 
-The two current research directions are:
+Существуют два исследовательских направления.
 
-### Track A — Agentic AI adaptation
+### Направление A — адаптация Agentic AI
 
-Continue from the completed C0069 Phase 2 result:
+Продолжить работу после завершённого результата C0069 Phase 2:
 
-    environment transport
-        →
-    invocation/context adapter
-        →
-    existing AIP Mirror semantic owner
-        →
-    environment execution capability
-        →
-    transport-neutral evidence
-        →
-    environment-native presentation
+```text
+передача данных среды
+    →
+adapter вызова и контекста
+    →
+существующий semantic owner AIP Mirror
+    →
+исполняющая capability среды
+    →
+не зависящие от транспорта свидетельства
+    →
+нативное представление в среде
+```
 
-Phase 3 SHOULD specify the minimal adapter/conformance contract without introducing a second semantic registry or speculative `.ai/interfaces/` layer.
+Phase 3 SHOULD определить минимальный контракт adapter/conformance, не вводя второй semantic registry или спекулятивный слой `.ai/interfaces/`.
 
-### Track B — AI-infrastructure orientation
+### Направление B — ориентация в AI-инфраструктуре
 
-The minimal infrastructure-context operation `>>ai-infrastructure` is implemented with `.ai/README.md`, active README discovery, root project README awareness, `docs/PROJECT-INSTRUCTIONS.md` awareness, `.ai/docs/` orientation, `.ai/archives/README.md` archive-boundary awareness, and explicit exclusion of archive contents from normal elevated context.
+Минимальная операция `>>ai-infrastructure` реализована с использованием `.ai/README.md`, обнаружения активных README, ориентации на корневой README проекта и `docs/PROJECT-INSTRUCTIONS.md`, обзора `.ai/docs/`, чтения `.ai/archives/README.md` и явного исключения содержимого архива из обычного расширенного контекста.
 
-The two tracks MAY be developed independently and SHOULD NOT be conflated.
+Эти два направления MAY разрабатываться независимо и SHOULD NOT смешиваться.
 
-## 9. Minimality principle
+## 9. Принцип минимальности
 
-The new operation SHOULD remain a thin context-loading capability. Required normative-language activation is part of that context contract, not a separate routing layer.
+Новая операция SHOULD оставаться тонкой capability для загрузки контекста. Обязательная активация normative-language входит в контракт этого контекста, а не образует отдельный слой маршрутизации.
 
-It SHOULD NOT create:
+Операция SHOULD NOT создавать:
 
-- a second routing registry;
-- a second semantic owner for `.ai/`;
-- duplicated project instructions;
-- an `.ai/interfaces/` namespace merely for this operation;
-- a permanent requirement to read every architecture document in full;
-- a requirement to read historical archives as active context.
+- второй реестр маршрутизации;
+- второго semantic owner для `.ai/`;
+- дублирующие проектные инструкции;
+- пространство имён `.ai/interfaces/` только ради этой операции;
+- постоянное требование полностью читать каждый архитектурный документ;
+- требование загружать исторический архив в активный контекст.
 
-The semantic ownership model already established by the existing `.ai` architecture remains authoritative.
+Модель semantic ownership, уже установленная архитектурой `.ai`, остаётся авторитетной.
 
-## 10. Migration and implementation sequence
+## 10. Последовательность реализации и миграции
 
-The implementation sequence has now reached the validation stage:
+Реализация достигла этапа проверки:
 
-1. **COMPLETE** — add `.ai/README.md`;
-2. **COMPLETE** — rename `.ai/archive/` to `.ai/archives/`;
-3. **COMPLETE** — add `.ai/archives/README.md`;
-4. **COMPLETE** — update active archive-path references;
-5. **COMPLETE** — define `.ai/skills/ai-infrastructure/SKILL.md` and route `>>ai-infrastructure` through `.ai/INDEX.md`;
-6. **COMPLETE** — define the elevated-context read set, normative-language activation, and explicit archive exclusion;
-7. **COMPLETE** — update relevant README and architecture references;
-8. **VALIDATED** — ordinary bootstrap contains no archive-context expansion and retains its intended initialization workflow;
-9. **VALIDATED** — `>>ai-infrastructure` routing, activation owners, elevated-context reads, and explicit archive exclusion were executed and inspected;
-10. **COMPLETE** — this architecture note remains the durable record of the implementation and validation result.
+1. **COMPLETE** — добавлен `.ai/README.md`;
+2. **COMPLETE** — `.ai/archive/` переименован в `.ai/archives/`;
+3. **COMPLETE** — добавлен `.ai/archives/README.md`;
+4. **COMPLETE** — обновлены активные ссылки на архивные пути;
+5. **COMPLETE** — создан `.ai/skills/ai-infrastructure/SKILL.md`, команда `>>ai-infrastructure` направлена через `.ai/INDEX.md`;
+6. **COMPLETE** — определены набор чтения расширенного контекста, активация normative-language и явное исключение архива;
+7. **COMPLETE** — обновлены соответствующие README и архитектурные ссылки;
+8. **VALIDATED** — обычный bootstrap не расширен загрузкой архива и сохраняет предусмотренный процесс инициализации;
+9. **VALIDATED** — маршрутизация `>>ai-infrastructure`, владельцы ACTIVATE, чтение расширенного контекста и исключение архива были выполнены и проверены;
+10. **COMPLETE** — эта архитектурная заметка сохраняет результаты реализации и проверки.
 
-The current chapter remains the owner of this implementation checkpoint.
+Текущая глава остаётся владельцем этого контрольного результата.
 
-## 11. Validation result
+## 11. Результаты проверки
 
-The C0070 implementation check confirms:
+В ходе проверки реализации C0070 было подтверждено следующее:
 
-- `.ai/README.md` exists as the active root AI-infrastructure orientation document.
-- `.ai/archive/` no longer exists; historical material is under `.ai/archives/`.
-- `.ai/archives/README.md` exists and defines the archive as historical, non-active, disposable context.
-- `.ai/skills/ai-infrastructure/SKILL.md` is the canonical skill for the new context mode.
-- `.ai/INDEX.md` routes `>>ai-infrastructure` to that skill and lists the activation owners.
-- The elevated read set includes repository orientation, active AI-infrastructure orientation, active README discovery, `.ai/docs/` survey, and `.ai/archives/README.md`.
-- Archive contents were not loaded during the operation.
-- The current `.ai/workflows/handoff/BOOTSTRAP.md` contains no archive-path reference and does not expand ordinary bootstrap into archive loading.
+- `.ai/README.md` существует как корневой документ ориентации в AI-инфраструктуре.
+- Каталог `.ai/archive/` больше не существует; исторические материалы находятся в `.ai/archives/`.
+- `.ai/archives/README.md` существует и описывает архив как исторический, неактивный и допускающий удаление контекст.
+- `.ai/skills/ai-infrastructure/SKILL.md` — canonical skill для нового режима контекста.
+- `.ai/INDEX.md` направляет `>>ai-infrastructure` к этому skill и перечисляет владельцев активации.
+- Набор чтения расширенного контекста включает ориентацию в репозитории, ориентацию в активной AI-инфраструктуре, обнаружение активных README, обзор `.ai/docs/` и `.ai/archives/README.md`.
+- Содержимое архива во время операции не загружалось.
+- В тогдашнем состоянии `.ai/workflows/handoff/BOOTSTRAP.md` не содержал ссылок на архивные пути и не расширял обычный bootstrap загрузкой архива.
 
-The operation therefore satisfies the intended minimality boundary: it adds a thin domain/context-loading capability without introducing a second semantic registry, a second owner for `.ai/`, or automatic historical-context loading.
-## 11. Architectural intent
+Эти утверждения — исторический снимок проверки C0070, а не свидетельство того, что все перечисленные в них пути существуют сейчас. Текущая структура и владельцы указаны в addendum ниже.
 
-The intended long-term model is:
+Операция соответствовала предполагаемой границе минимальности: добавляла тонкую capability переключения области работы и загрузки контекста, не вводя второй semantic registry, второго владельца `.ai/` или автоматическую загрузку исторических материалов.
 
-    ordinary project work
-        →
-    ordinary bootstrap / relevant canonical owners
-        →
-    project-specific task
+## 12. Архитектурный замысел
 
-    AI-infrastructure work
-        →
-    >>ai-infrastructure
-        →
-    elevated AI-infrastructure context
-        →
-    .ai/ semantic owners
-        →
-    infrastructure change / research / verification
+Предполагаемая долгосрочная модель:
 
-This is a domain switch, not merely a larger context window.
+```text
+обычная работа над проектом
+    →
+обычный bootstrap / необходимые canonical owners
+    →
+задача, специфичная для проекта
 
-## Chapter continuity
+работа над AI-инфраструктурой
+    →
+>>ai-infrastructure
+    →
+расширенный контекст AI-инфраструктуры
+    →
+semantic owners в .ai/
+    →
+изменение инфраструктуры / исследование / проверка
+```
 
-The current durable chapter checkpoint is:
+Это переключение области работы, а не просто увеличение окна контекста.
+
+## Непрерывность глав
+
+Историческая контрольная точка главы C0070:
 
 `.ai/handoffs/C/C0070-Architecture-&-Research.md`
 
-Future chapters continuing this work SHOULD read that handoff first and then this architecture note.
+Этот путь оставлен как историческая ссылка. Он не является инструкцией читать старый handoff в рамках текущей задачи.
 
-## Current owner-path addendum (2026-10-09)
+## Дополнение о текущих путях владельцев (2026-10-09)
 
-The C0070 implementation and validation statements above are a historical snapshot of the repository before the approved rules-to-skills migration. Their old paths are retained as evidence of the state inspected at that time; they are not current routing instructions.
+Утверждения о реализации и проверке C0070 выше описывают историческое состояние репозитория до одобренной миграции от rules к skills. Старые пути сохранены как свидетельства того состояния; они не являются текущими указаниями маршрутизации.
 
-The current canonical owners for this context mode are:
+Текущие canonical owners:
 
-- Repository identity, path resolution, boundaries, and mutation safety: `.ai/skills/repository/SKILL.md`.
-- General development workflow: `.ai/skills/workflow/SKILL.md`.
-- Normative-language semantics and normalization: `.ai/skills/normative-language/SKILL.md`.
-- AI-infrastructure context mode: `.ai/skills/ai-infrastructure/SKILL.md`.
-- Receiving-chapter bootstrap: explicitly invoked, nested `.ai/conversation-management/handoff/BOOTSTRAP.md`.
+- Идентичность репозитория, разрешение путей, границы и безопасность изменений: `.ai/skills/repository/SKILL.md`.
+- Общий workflow разработки: `.ai/skills/workflow/SKILL.md`.
+- Семантика и нормализация normative-language: `.ai/skills/normative-language/SKILL.md`.
+- Режим контекста AI-инфраструктуры: `.ai/skills/ai-infrastructure/SKILL.md`.
+- Инициализация принимающей главы: явно вызываемый вложенный файл `.ai/conversation-management/handoff/BOOTSTRAP.md`.
 
-This addendum records current routing only. It does not turn this architecture note into an operational owner or require normal context loading to ingest the historical validation material above.
+Это дополнение фиксирует текущую маршрутизацию. Оно не превращает архитектурную заметку в операционного владельца и не требует загружать исторические материалы проверки при обычной активации контекста.

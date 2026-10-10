@@ -1,42 +1,42 @@
-# Manual use of ACTIVATE and TRACE
+# Ручное использование ACTIVATE и TRACE
 
-## Why this exists
+## Назначение
 
-The activation skill is part of the internal `.ai` infrastructure, but a user may sometimes want to explicitly ask the AI to perform or show these functions.
+Activation skill — часть внутренней инфраструктуры `.ai`, но иногда пользователь может явно попросить AI выполнить или показать эти действия.
 
-The important point is that these are **not new commands**. They are natural-language requests for behavior already defined by `.ai/skills/activation/SKILL.md`.
+Важно: это **не новые команды**. Это запросы на естественном языке, обращающиеся к поведению, уже определённому в `.ai/skills/activation/SKILL.md`.
 
-## How to think about them
+## Как их понимать
 
-- `ACTIVATE` = перечитай актуальные canonical owners.
-- `TRACE` = покажи observable execution evidence в assistant response.
+- `ACTIVATE` = перечитать актуальные canonical owners.
+- `TRACE` = показать наблюдаемое свидетельство выполнения в ответе assistant.
 
-The two concepts have different roles:
+У этих понятий разные роли:
 
 ```text
 ACTIVATE ≠ выполнение задачи
 TRACE    ≠ выполнение задачи
 ```
 
-ACTIVATE prepares current operational context. TRACE makes the observable execution result visible.
+ACTIVATE подготавливает актуальный операционный контекст. TRACE делает наблюдаемый результат выполнения видимым.
 
 ## ACTIVATE
 
-ACTIVATE is not normally a user-facing command. It is the mechanism used before an operation when the current canonical context needs to be established.
+Обычно ACTIVATE не является пользовательской командой. Это механизм, применяемый перед операцией, когда необходимо установить актуальный canonical context.
 
-A natural-language request can be as simple as:
+Запрос на естественном языке может быть простым:
 
 > Активируй контекст для этой операции.
 
-The AI should then:
+Затем AI должен:
 
-1. identify the operation;
-2. identify the canonical owners required for that operation;
-3. reread their current repository versions;
-4. treat those versions as authoritative;
-5. continue with the actual operation.
+1. определить операцию;
+2. определить необходимые для неё canonical owners;
+3. перечитать их текущие версии из репозитория;
+4. считать эти версии авторитетными для операции;
+5. перейти к самой операции.
 
-For example:
+Например:
 
 ```text
 ACTIVATE
@@ -46,17 +46,17 @@ ACTIVATE
   status: ACTIVATED
 ```
 
-ACTIVATE itself does not execute the requested operation.
+Сам по себе ACTIVATE не выполняет запрошенную операцию.
 
 ## TRACE
 
-TRACE is an observable presentation of activation, not another operation.
+TRACE — это наблюдаемое представление активации, а не отдельная операция.
 
-A user can ask:
+Пользователь может попросить:
 
 > Покажи TRACE для ACTIVATE.
 
-The AI may then show:
+AI может показать:
 
 ```text
 TRACE
@@ -65,65 +65,65 @@ TRACE
   ACTIVATE
     owners:
       .ai/skills/activation/SKILL.md
-      .ai/docs/architecture/ai-infrastructure-restructuring.md
+      .ai/docs/ai-document-hierarchy-and-authoring.md
     status: ACTIVATED
 ```
 
-TRACE should describe observable execution facts. It should not expose hidden reasoning. For operation-level TRACE, the completed TRACE block is inserted into the assistant response after the operation is complete.
+TRACE должен описывать наблюдаемые факты выполнения. Он не должен раскрывать скрытые рассуждения. Для TRACE уровня операции завершённый блок вставляется в ответ assistant после окончания операции.
 
-For an operation-level TRACE, the presentation may also contain:
+TRACE уровня операции также может содержать:
 
 ```text
 OPERATION READS
   files:
-    <additional unique repository files actually read>
+    <дополнительные уникальные файлы репозитория, фактически прочитанные>
 ```
 
-ACTIVATE owners are not repeated under OPERATION READS.
+Файлы из ACTIVATE не следует повторять в OPERATION READS.
 
 ## ACTIVATE + TRACE
 
-The user can request both together:
+Пользователь может запросить оба действия одновременно:
 
 > Сначала активируй контекст и покажи TRACE.
 
-The resulting interaction is conceptually:
+Концептуально взаимодействие выглядит так:
 
 ```text
-user request
+запрос пользователя
     ↓
 ACTIVATE
     ↓
-canonical owners reread
+перечитывание canonical owners
     ↓
-actual operation
+выполнение операции
     ↓
-TRACE inserted into assistant response
+вставка TRACE в ответ assistant
 ```
 
-## Natural-language examples
+## Примеры запросов на естественном языке
 
-The user does not need a special command syntax. Examples:
+Пользователю не нужен специальный синтаксис команды. Например:
 
-- «Активируй контекст для этой операции.»
-- «Покажи TRACE последнего ACTIVATE.»
-- «Давай сначала перечитаем актуальные canonical owners, прежде чем продолжать работу. Покажи, что именно активировалось.»
+- «Активируй контекст для этой операции».
+- «Покажи TRACE последнего ACTIVATE».
+- «Давай сначала перечитаем актуальные canonical owners, прежде чем продолжать работу. Покажи, что именно активировалось».
 
-These requests should be interpreted through the existing activation semantics rather than through a new command registry.
+Эти запросы следует интерпретировать в рамках существующей семантики activation, а не как новую систему регистрации команд.
 
-## Practical rule of thumb
+## Практическое правило
 
-When the user says **ACTIVATE**, the AI should understand it as:
+Когда пользователь говорит **ACTIVATE**, AI должен понимать это так:
 
-> перечитай актуальные canonical owners, необходимые для текущей операции.
+> Перечитай актуальные canonical owners, необходимые для текущей операции.
 
-When the user says **TRACE**, the AI should understand it as:
+Когда пользователь говорит **TRACE**, AI должен понимать это так:
 
-> покажи observable execution evidence в assistant response.
+> Покажи наблюдаемое свидетельство выполнения в ответе assistant.
 
-The core model remains:
+Основная модель:
 
 ```text
 ACTIVATE = перечитай актуальные canonical owners
-TRACE    = вставь observable execution evidence в assistant response
+TRACE    = вставь наблюдаемое свидетельство выполнения в ответ assistant
 ```

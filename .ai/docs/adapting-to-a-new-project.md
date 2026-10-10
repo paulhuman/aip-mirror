@@ -1,75 +1,75 @@
-# FAQ: Adapting `.ai/` to a New Project
+# FAQ: адаптация `.ai/` к новому проекту
 
-## Purpose
+## Назначение
 
-This FAQ explains how to copy the `.ai/` infrastructure from `aip-mirror` into a different repository and adapt it without accidentally carrying the Illustrator-specific project identity into the new project.
+Этот FAQ объясняет, как перенести инфраструктуру `.ai/` из `aip-mirror` в другой репозиторий и адаптировать её, не перенося случайно в новый проект идентичность и специфику Illustrator.
 
-Example target project:
+Пример целевого проекта:
 
-> **Sprite Sheet Editor** — desktop application using Rust + Tauri + Python + Pillow.
+> **Sprite Sheet Editor** — настольное приложение на Rust, Tauri, Python и Pillow.
 
-The key idea is:
+Основная идея:
 
 ```text
 .ai/ = reusable AI infrastructure
 config.yaml + docs/ + selected history = project-specific context
 ```
 
-Do not treat the current `aip-mirror` repository as a clean project template. It contains both reusable infrastructure and historical/project-specific material.
+Не считайте текущий репозиторий `aip-mirror` чистым шаблоном проекта. В нём есть как повторно используемая инфраструктура, так и исторические и проектно-специфичные материалы.
 
 ---
 
-## 1. What must change?
+## 1. Что необходимо изменить?
 
-There are four practical categories.
+Есть четыре практические категории.
 
-| Category | Action | Typical examples |
+| Категория | Действие | Типичные примеры |
 | --- | --- | --- |
-| Project identity | MUST change | repository name, project name, branch, hosting |
-| Project knowledge | MUST replace | `docs/PROJECT-INSTRUCTIONS.md`, project architecture |
-| Embedded project references | MUST change or generalize | hardcoded GitHub URLs, test locators, project examples |
-| Historical material | SHOULD remove/reset | old handoffs, old test results, AIP Mirror research, old references |
+| Идентичность проекта | ОБЯЗАТЕЛЬНО изменить | имя репозитория и проекта, ветка, hosting |
+| Знания о проекте | ОБЯЗАТЕЛЬНО заменить | `docs/PROJECT-INSTRUCTIONS.md`, архитектура проекта |
+| Встроенные ссылки на проект | ОБЯЗАТЕЛЬНО изменить или обобщить | жёстко заданные GitHub URL, test locators, примеры проекта |
+| Исторические материалы | СЛЕДУЕТ удалить или сбросить | старые handoffs, результаты тестов, исследования AIP Mirror, старые references |
 
-The most important misconception is:
+Самое важное заблуждение:
 
-> `config.yaml` is the main project-specific configuration file, but it is not the only place where project-specific data can appear.
+> `config.yaml` — основной файл проектной конфигурации, но проектные данные могут встречаться и в других местах.
 
 ---
 
-# 2. First step: decide what you are actually copying
+# 2. Первый шаг: определите, что именно вы копируете
 
-A useful new-project starting point is:
+Полезная исходная структура для нового проекта:
 
 ```text
-Copy:
+Копировать:
     .ai/AGENTS.md
     .ai/INDEX.md
-    .ai/config.yaml              ← replace
-    .ai/conversation-management/  ← explicitly invoked handoff/bootstrap material
+    .ai/config.yaml              ← заменить
+    .ai/conversation-management/  ← явно вызываемые процедуры handoff/bootstrap
     .ai/skills/
-    .ai/skills/workflow/SKILL.md  ← general workflow principles
-    .ai/docs/architecture/README.md
-    .ai/docs/faq/
-    .ai/tests/scenarios/     ← after checking scenarios
-    docs/                        ← replace project-specific documents
+    .ai/skills/workflow/SKILL.md  ← общие принципы workflow
+    .ai/docs/README.md
+    selected reusable documents from .ai/docs/  ← after reviewing project relevance
+    .ai/tests/scenarios/     ← после проверки сценариев
+    docs/                        ← заменить проектно-специфичные документы
 
-Do NOT blindly copy:
+Не копировать вслепую:
     .ai/handoffs/
     .ai/archives/
-    old project references/
-    old runtime test results/
-    old project architecture/research
+    старые ссылки на проект/
+    старые результаты runtime-тестов/
+    старая архитектура и исследования проекта
 ```
 
-If the entire repository is copied, perform a cleanup pass before starting the new project.
+Если копируется весь репозиторий, перед началом работы над новым проектом выполните очистку.
 
 ---
 
-# 3. `.ai/config.yaml` is the primary project configuration
+# 3. `.ai/config.yaml` — основной файл конфигурации проекта
 
-This is the first file to replace.
+Его следует заменить в первую очередь.
 
-For Sprite Sheet Editor, the beginning might conceptually become:
+Для Sprite Sheet Editor начало файла концептуально может выглядеть так:
 
 ```yaml
 project:
@@ -83,35 +83,35 @@ project:
 
 ### 3.1 `project`
 
-Change:
+Измените:
 
 - `project.name`
 - `project.repository`
 - `project.default_branch`
-- `project.hosting` if the new project uses another hosting provider
+- `project.hosting`, если новый проект использует другого hosting provider
 
-These values are used by repository/path-resolution and bootstrap infrastructure.
+Эти значения используются инфраструктурой репозитория, разрешения путей и bootstrap.
 
 ### 3.2 `references.repositories`
 
-This section is also project-specific.
+Этот раздел тоже зависит от проекта.
 
-For AIP Mirror it contains Illustrator SDK, Spectrum Web Components, Codex, Skills, and agent.md references.
+В AIP Mirror здесь находятся ссылки на Illustrator SDK, Spectrum Web Components, Codex, Skills и agent.md.
 
-For Sprite Sheet Editor, replace these with references actually relevant to the new project, for example:
+Для Sprite Sheet Editor замените их ссылками, действительно относящимися к новому проекту, например:
 
-- Tauri documentation/reference repository;
-- Rust ecosystem references;
-- Pillow/Python references;
-- any project-specific research repositories.
+- документация и reference repository Tauri;
+- материалы экосистемы Rust;
+- материалы Pillow/Python;
+- исследовательские репозитории, относящиеся к конкретному проекту.
 
-Do not keep a reference merely because it existed in the template.
+Не сохраняйте ссылку только потому, что она присутствовала в шаблоне.
 
 ### 3.3 `specializations`
 
-Specializations are project vocabulary, not universal AI-infrastructure constants.
+Specializations — это словарь конкретного проекта, а не универсальные константы AI-инфраструктуры.
 
-For example, a new project could define:
+Например, новый проект может определить:
 
 ```yaml
 specializations:
@@ -125,13 +125,13 @@ specializations:
     short_name: Python Image Processing
 ```
 
-The `A / Project Workshop` pairing is the canonical neutral example used by the handoff documentation. It is a format example, not a universal specialization requirement. Other specialization letters and names are project-specific.
+Пара `A / Project Workshop` — canonical нейтральный пример из документации handoff. Это пример формата, а не обязательная специализация для всех проектов. Остальные буквы и названия специализаций зависят от проекта.
 
-If you change them, make sure existing handoff files are not copied into the new repository with incompatible names.
+Если вы изменяете их, убедитесь, что старые handoff-файлы с несовместимыми именами не попали в новый репозиторий.
 
 ### 3.4 `terminology.commit_scopes`
 
-Replace the AIP Mirror scopes:
+Замените scopes AIP Mirror:
 
 ```text
 mirror
@@ -142,7 +142,7 @@ jsx
 sdk
 ```
 
-with scopes meaningful to the new project, for example:
+на scopes, подходящие новому проекту, например:
 
 ```text
 core
@@ -157,9 +157,9 @@ tests
 
 ### 3.5 `terminology.project_terms`
 
-Replace Illustrator/FreeHand terminology with the vocabulary of the new project.
+Замените терминологию Illustrator/FreeHand словарём нового проекта.
 
-For example:
+Например:
 
 ```text
 sprite sheet
@@ -172,27 +172,27 @@ Python tooling
 Pillow
 ```
 
-This section is important because the commit skill explicitly uses configured terminology when constructing project-facing commit messages and descriptions.
+Этот раздел важен: commit skill использует настроенную терминологию при составлении commit messages и описаний, связанных с проектом.
 
 ---
 
-# 4. `docs/PROJECT-INSTRUCTIONS.md` must be rewritten
+# 4. `docs/PROJECT-INSTRUCTIONS.md` необходимо переписать
 
-This is the largest project-specific document outside `config.yaml`.
+Это самый большой проектно-специфичный документ за пределами `config.yaml`.
 
-The AIP Mirror version contains:
+Версия для AIP Mirror содержит:
 
-- Adobe Illustrator assumptions;
-- FreeHand behavioral targets;
-- JSX prototype workflow;
-- native C++ / AIP implementation;
-- Illustrator-specific milestones;
-- AIP Mirror workstream language;
-- Illustrator SDK references.
+- предположения, связанные с Adobe Illustrator;
+- целевые поведенческие характеристики FreeHand;
+- workflow JSX-прототипа;
+- реализация на native C++ / AIP;
+- этапы, специфичные для Illustrator;
+- терминология рабочих направлений AIP Mirror;
+- ссылки на Illustrator SDK.
 
-For Sprite Sheet Editor, replace the entire document with the equivalent project contract.
+Для Sprite Sheet Editor замените весь документ соответствующим контрактом нового проекта.
 
-For example, it should describe things such as:
+Например, в нём следует описать:
 
 ```text
 Project purpose
@@ -208,9 +208,9 @@ Python/Pillow tooling
 validation/tests
 ```
 
-Do not try to preserve AIP Mirror's development chain and simply rename technologies. The architecture itself is different.
+Не пытайтесь сохранить цепочку разработки AIP Mirror, просто переименовав технологии. Сама архитектура будет другой.
 
-Keep the document thin. It should provide:
+Документ должен оставаться компактным. В нём следует описать:
 
 - project orientation;
 - project-specific constraints;
@@ -218,15 +218,15 @@ Keep the document thin. It should provide:
 - workstream coordination;
 - routing to canonical project documentation.
 
-It should NOT become a second `.ai/INDEX.md`, repository rulebook, or handoff manual.
+Он НЕ должен превращаться во второй `.ai/INDEX.md`, свод правил репозитория или руководство по handoff.
 
 ---
 
-# 5. `docs/architecture/project-architecture.md` must be replaced
+# 5. `docs/architecture/project-architecture.md` необходимо заменить
 
-This is also project-specific.
+Этот документ тоже зависит от проекта.
 
-The current file contains AIP Mirror architecture such as:
+Текущий файл описывает архитектуру AIP Mirror, включая:
 
 - JSX prototype versus production plugin;
 - C++ + Illustrator AIP;
@@ -236,7 +236,7 @@ The current file contains AIP Mirror architecture such as:
 - Illustrator integration;
 - four AIP Mirror specializations.
 
-For Sprite Sheet Editor this should become the project's actual architecture, for example:
+Для Sprite Sheet Editor здесь следует описать реальную архитектуру проекта, например:
 
 ```text
 Rust
@@ -252,75 +252,75 @@ Python + Pillow
   = image-processing/tooling boundary
 ```
 
-The exact architecture belongs to the new project, not to the reusable `.ai` infrastructure.
+Конкретная архитектура относится к новому проекту, а не к повторно используемой инфраструктуре `.ai`.
 
 ---
 
-# 6. Files inside `.ai/` that contain project-specific material
+# 6. Файлы внутри `.ai/` с проектно-специфичным содержимым
 
-Most `.ai` files are intentionally generic. A few are not completely generic.
+Большинство файлов `.ai` намеренно универсальны. Некоторые из них не полностью универсальны.
 
 ## 6.1 `.ai/conversation-management/handoff/SKILL.md`
 
-This file is mostly reusable, but the current version contains a hardcoded repository locator:
+Этот файл в основном пригоден для повторного использования, но текущая версия содержит жёстко заданный locator репозитория:
 
 ```text
 https://github.com/paulhuman/aip-mirror
 ```
 
-It appears in generated/manual bootstrap transport examples.
+Он встречается в примерах transport для generated/manual bootstrap.
 
-For a reusable template, this should be generalized so the actual repository locator is derived from `.ai/config.yaml`, rather than being permanently embedded as an AIP Mirror URL.
+В универсальном шаблоне это следует обобщить: фактический locator репозитория должен вычисляться из `.ai/config.yaml`, а не быть навсегда заданным URL AIP Mirror.
 
-Any project-specific illustrative sentence should be neutralized or removed when adapting the infrastructure.
+При адаптации инфраструктуры любые проектно-специфичные примеры следует сделать нейтральными или удалить.
 
-The semantic handoff procedure itself should remain.
+Саму семантику процедуры handoff следует сохранить.
 
 ---
 
 ## 6.2 `.ai/conversation-management/handoff/BOOTSTRAP.md`
 
-This is another mostly reusable file with an important embedded project reference.
+Это ещё один в основном универсальный файл, содержащий важную встроенную ссылку на проект.
 
-It currently contains:
+Сейчас в нём указано:
 
 ```text
 https://github.com/paulhuman/aip-mirror
 ```
 
-The workflow already states that generated repository locators come from:
+В workflow уже указано, что generated repository locators берутся из:
 
 ```text
 project.hosting.base_url
 project.repository
 ```
 
-Therefore the reusable workflow should not contain a literal AIP Mirror URL as if it were the new project's canonical locator.
+Поэтому универсальный workflow не должен содержать буквальный URL AIP Mirror, как будто это canonical locator нового проекта.
 
-Its example:
+Его пример:
 
 ```text
 SPECIALIZATION = A
 SHORT_NAME = Project Workshop
 ```
 
-is the canonical neutral example and SHOULD remain unchanged. It is an example, not project configuration.
+— canonical нейтральный пример, который СЛЕДУЕТ оставить без изменений. Это пример, а не конфигурация проекта.
 
 ---
 
 ## 6.3 `.ai/tests/scenarios/cold-start-command-trace.md`
 
-The test scenario is conceptually reusable, but it currently hardcodes:
+Сценарий тестирования концептуально универсален, но сейчас в нём жёстко задано:
 
 ```text
 paulhuman/aip-mirror@main:/.ai/AGENTS.md
 ```
 
-For a new project, this must be generalized or parameterized.
+Для нового проекта это необходимо обобщить или параметризовать.
 
-The scenario also mentions the current five-command surface. That list is intentionally derived from the current `.ai/INDEX.md`, so the scenario should retain that dynamic rule rather than hardcoding AIP Mirror commands as the expected permanent command set.
+Сценарий также упоминает текущий набор из пяти команд. Этот список намеренно выводится из актуального `.ai/INDEX.md`, поэтому следует сохранить динамическое правило, а не жёстко фиксировать команды AIP Mirror как постоянный ожидаемый набор.
 
-The correct reusable principle is:
+Правильный универсальный принцип:
 
 ```text
 explicit repository locator
@@ -336,70 +336,70 @@ cold-start test
 
 ---
 
-## 6.4 `.ai/conversation-management/handoff/SKILL.md`
+## 6.4 Нейтральный пример chapter и соглашение об именах
 
-The `A0001 / Project Workshop` example is the canonical neutral example of the filename/chapter contract.
+Пример `A0001 / Project Workshop` — canonical нейтральный образец соглашения об имени файла и chapter.
 
-Keep it when adapting the infrastructure to another project. It is an example of the required generic `A` specialization, not a project-specific technology name.
+Сохраните его при адаптации инфраструктуры к другому проекту. Это пример универсальной specialization `A`, а не название проектной технологии.
 
-The actual chapter format and lifecycle rules are reusable.
+Сам формат chapter и правила lifecycle универсальны.
 
 ---
 
 ## 6.5 `.ai/handoffs/README.md`
 
-Same principle.
+Действует тот же принцип.
 
-Its `A0001 / Project Workshop` example is a neutral format example, not an active project dependency.
+Пример `A0001 / Project Workshop` демонстрирует формат и не является активной зависимостью проекта.
 
-Keep this example unchanged when adapting the infrastructure to another project.
+Сохраните этот пример без изменений при адаптации инфраструктуры к другому проекту.
 
-Do not copy the actual AIP Mirror handoff files themselves.
+Не копируйте сами handoff-файлы AIP Mirror.
 
 ---
 
 # 7. `.ai/INDEX.md`
 
-Normally this should require little or no project-specific editing.
+Обычно этот файл почти не требует проектных изменений или не требует их вовсе.
 
-Its role is to route commands to canonical infrastructure owners.
+Его задача — направлять команды к canonical owners инфраструктуры.
 
-However, verify it after adapting:
+Однако после адаптации проверьте:
 
 - command names;
 - canonical owner paths;
 - capability map;
 - structural references.
 
-Do not add project architecture or project technology descriptions to INDEX merely because the new project uses Rust, Tauri, Python, etc.
+Не добавляйте в INDEX описание архитектуры или технологий только потому, что новый проект использует Rust, Tauri, Python и т. п.
 
-Project technology belongs in `docs/PROJECT-INSTRUCTIONS.md` and project architecture documentation.
+Технологии проекта следует описывать в `docs/PROJECT-INSTRUCTIONS.md` и документации архитектуры проекта.
 
 ---
 
 # 8. `.ai/AGENTS.md`
 
-Normally this should remain unchanged.
+Обычно этот файл следует оставить без изменений.
 
-It describes the always-on operating contract. Ordinary agent startup does not trigger chapter initialization; a receiving conversation follows the explicitly supplied bootstrap instruction and nested BOOTSTRAP procedure.
+Он описывает постоянный операционный контракт (always-on operating contract). Обычный запуск agent не инициирует создание chapter; принимающий разговор следует явно переданной bootstrap-инструкции и вложенной процедуре BOOTSTRAP.
 
-Do not put Sprite Sheet Editor-specific instructions here unless there is a genuine repository-wide AI infrastructure requirement.
+Не добавляйте сюда инструкции, специфичные для Sprite Sheet Editor, если только они не являются настоящим требованием AI-инфраструктуры всего репозитория.
 
-The distinction is:
+Различие следующее:
 
 ```text
 AGENTS
-    = how the AI infrastructure enters the repository
+    = как AI-инфраструктура входит в контекст репозитория
 
 PROJECT-INSTRUCTIONS
-    = what this particular project is
+    = что представляет собой конкретный проект
 ```
 
 ---
 
-# 9. Canonical semantic ownership
+# 9. Каноническое владение семантикой
 
-There is no separate `.ai/rules/` layer in the target architecture. Shared operational semantics belong to their canonical first-level skills, including:
+В целевой архитектуре нет отдельного слоя `.ai/rules/`. Общая операционная семантика принадлежит соответствующим canonical skills первого уровня, включая:
 
 - `.ai/skills/repository/SKILL.md`;
 - `.ai/skills/workflow/SKILL.md`;
@@ -407,15 +407,15 @@ There is no separate `.ai/rules/` layer in the target architecture. Shared opera
 - `.ai/skills/knowledge-capture/SKILL.md`;
 - `.ai/skills/normative-language/SKILL.md`.
 
-Conversation lifecycle and handoff procedures are deliberately kept under `.ai/conversation-management/handoff/`, separate from ordinary skill discovery. Do not move these procedures into the first-level `.ai/skills/` namespace.
+Lifecycle разговора и процедуры handoff намеренно находятся в `.ai/conversation-management/handoff/`, отдельно от обычного skill discovery. Не переносите эти процедуры в пространство имён `.ai/skills/` первого уровня.
 
-When adapting these owners, inspect examples and project references, but preserve reusable semantics. Do not create duplicate owners or mechanically copy old path references.
+При адаптации этих owners проверяйте примеры и ссылки на проект, но сохраняйте универсальную семантику. Не создавайте дублирующие owners и не копируйте старые пути механически.
 
 ---
 
 # 10. `.ai/skills/`
 
-Shared skills are reusable capabilities and canonical owners. Keep the shared capabilities at the first level of `.ai/skills/`:
+Общие skills — это повторно используемые возможности и canonical owners. Оставляйте общие возможности на первом уровне `.ai/skills/`:
 
 - activation;
 - ai-infrastructure;
@@ -427,124 +427,118 @@ Shared skills are reusable capabilities and canonical owners. Keep the shared ca
 - repository;
 - workflow.
 
-Conversation handoff and reference-preservation material belongs under `.ai/conversation-management/handoff/`; it MUST NOT be treated as an ordinary first-level discovered skill.
+Материалы handoff и reference-preservation относятся к `.ai/conversation-management/handoff/`; их НЕЛЬЗЯ считать обычными обнаруживаемыми skills первого уровня.
 
-Check each skill for project-specific examples or hardcoded repository locators. Change project-specific examples and references, not reusable capability semantics.
-
----
-
-# 11. Workflow and conversation-management procedures
-
-General AI workflow principles are owned by `.ai/skills/workflow/SKILL.md`. Human-facing independent-review onboarding templates live under `.ai/conversation-management/templates/` and are governed by the corresponding conversation-management procedures.
-
-The receiving-chapter bootstrap procedure is owned by `.ai/conversation-management/handoff/BOOTSTRAP.md`. Keep it under conversation management rather than moving it into the first-level `.ai/skills/` namespace.
+Проверьте каждый skill на проектно-специфичные примеры и жёстко заданные repository locators. Изменяйте примеры и ссылки на проект, а не универсальную семантику возможностей.
 
 ---
 
-# 12. `.ai/docs/architecture/`
+# 11. Процедуры workflow и conversation management
 
-This directory has two different kinds of content.
+Общие принципы AI workflow принадлежат `.ai/skills/workflow/SKILL.md`. Шаблоны onboarding для независимой проверки человеком находятся в `.ai/conversation-management/templates/` и регулируются соответствующими процедурами conversation management.
 
-## Reusable infrastructure material
+Процедура bootstrap для принимающего chapter принадлежит `.ai/conversation-management/handoff/BOOTSTRAP.md`. Оставьте её в conversation management, не перемещая в пространство имён `.ai/skills/` первого уровня.
 
-Keep:
+---
 
-- `.ai/docs/architecture/README.md`
-- reusable FAQ material;
-- reusable architecture test scenarios after checking them.
+# 12. `.ai/docs/`
 
-## AIP Mirror historical material
+Текущий каталог `.ai/docs/` плоский: тематических подкаталогов `architecture/` и `faq/` в актуальной структуре нет. Документы следует оценивать по их назначению и переносимости, а не по прежнему расположению.
 
-The current:
+## Повторно используемые материалы об инфраструктуре
 
-```text
-.ai/docs/architecture/ai-infrastructure-restructuring.md
-```
+Сохранить:
 
-is an architecture-history document for this repository's infrastructure evolution.
+- `.ai/docs/README.md` — описание структуры и назначения документации;
+- отдельные документы из `.ai/docs/`, если их содержание переносимо в новый проект;
+- повторно используемые test scenarios после проверки их актуальности.
 
-It is useful as historical evidence for AIP Mirror, but it should not automatically become part of a fresh Sprite Sheet Editor project.
+## Материалы с контекстом и историей AIP Mirror
 
-For a copied template, remove it or replace it with the new project's own architecture-history document if one is needed.
+Ранее здесь указывался файл `.ai/docs/architecture/ai-infrastructure-restructuring.md`, но такого пути в текущей структуре больше нет. `ai-infrastructure-context-mode.md` находится в `.ai/docs/` и содержит архитектурный контекст, часть которого относится к истории этого репозитория.
+
+Этот материал может быть полезен как свидетельство развития AIP Mirror, но его нельзя автоматически переносить в новый проект Sprite Sheet Editor.
+
+При адаптации переносите только обобщаемые решения и rationale. Исторические детали AIP Mirror не следует включать в новый проект; при необходимости создайте отдельную историю архитектуры нового проекта.
 
 ---
 
 # 13. `.ai/tests/scenarios/results/`
 
-Do not copy old runtime results into a new project.
+Не копируйте старые результаты runtime-тестов в новый проект.
 
-For example:
+Например:
 
 ```text
 .ai/tests/scenarios/results/cold-start-command-trace/...
 .ai/tests/scenarios/results/trace-runtime-presentation/...
 ```
 
-are evidence about previous runs of this repository's infrastructure.
+— свидетельства о предыдущих запусках инфраструктуры этого репозитория.
 
-They are historical records, not reusable project configuration.
+Это исторические записи, а не повторно используемая конфигурация проекта.
 
-For a new project:
+Для нового проекта:
 
-1. keep the reusable test scenario;
-2. remove old result artifacts;
-3. run the test against the new repository;
-4. create new result artifacts with the new repository revision and runtime context.
+1. сохранить универсальный тестовый сценарий;
+2. удалить старые артефакты результатов;
+3. запустить тест в новом репозитории;
+4. создать новые артефакты с revision нового репозитория и контекстом runtime.
 
 ---
 
 # 14. `.ai/handoffs/`
 
-Treat the current handoffs as disposable project state when creating a new project from this repository.
+При создании нового проекта на основе этого репозитория считайте текущие handoffs временным состоянием проекта.
 
-Do not carry the existing project handoff files into the new repository.
+Не переносите существующие handoff-файлы проекта в новый репозиторий.
 
-The `A0001-Project-Workshop.md` example is a format example only. It is not a handoff to copy into the new project.
+Пример `A0001-Project-Workshop.md` показывает только формат. Это не handoff, который следует копировать в новый проект.
 
-Instead:
+Вместо этого:
 
-1. create the new project's specialization vocabulary in `.ai/config.yaml`;
-2. start the first chapter of each required specialization from chapter `0001`;
-3. use the canonical bootstrap procedure;
-4. let new handoffs be generated from the new project's actual work.
+1. определить названия специализаций нового проекта в `.ai/config.yaml`;
+2. начать первую главу каждой необходимой специализации с chapter `0001`;
+3. использовать canonical bootstrap procedure;
+4. создавать новые handoffs на основе реальной работы над новым проектом.
 
-The README may remain as generic orientation.
+README можно оставить как универсальное вводное описание.
 
 ---
 
 # 15. `.ai/archives/`
 
-Do not treat the archive as active infrastructure.
+Не считайте архив активной инфраструктурой.
 
-The current archive contains historical AIP Mirror architecture and handoffs.
+Текущий архив содержит исторические материалы архитектуры AIP Mirror и handoffs.
 
-When creating a new project from this repository, the safest default is:
+При создании нового проекта на основе этого репозитория самый безопасный вариант по умолчанию:
 
 ```text
 .ai/archives/
     = remove from the new project
 ```
 
-If the archive contains a genuinely reusable infrastructure decision, manually extract that knowledge into the corresponding generic rule/skill/workflow/FAQ instead of copying the entire historical archive.
+Если архив содержит действительно универсальное решение по инфраструктуре, вручную перенесите эти знания в соответствующий общий rule/skill/workflow/FAQ вместо копирования всего исторического архива.
 
-This prevents historical AIP Mirror decisions from silently becoming requirements of Sprite Sheet Editor.
+Так исторические решения AIP Mirror не станут незаметно требованиями Sprite Sheet Editor.
 
 ---
 
 # 16. `references/`
 
-The current repository contains AIP Mirror research material such as:
+Текущий репозиторий содержит исследовательские материалы AIP Mirror, например:
 
 - FreeHand manuals;
 - Illustrator JavaScript documentation;
 - Illustrator test screenshots;
 - FreeHand test videos.
 
-These are project-specific research references.
+Это исследовательские ссылки и материалы конкретного проекта.
 
-They should not be copied into Sprite Sheet Editor unless a reference is independently relevant.
+Не копируйте их в Sprite Sheet Editor, если конкретный материал не имеет самостоятельной ценности для нового проекта.
 
-For the new project, replace them with relevant material, for example:
+Для нового проекта замените их актуальными материалами, например:
 
 ```text
 references/
@@ -556,26 +550,26 @@ references/
     test-data/
 ```
 
-The exact taxonomy is a project decision.
+Точная классификация каталогов определяется проектом.
 
 ---
 
-# 17. AIP Mirror-specific files outside `.ai/`
+# 17. Файлы AIP Mirror за пределами `.ai/`
 
-This is easy to miss because the request may sound like an `.ai` migration.
+Об этом легко забыть, поскольку задача может звучать как перенос только `.ai`.
 
-The current repository also has project-specific files under:
+В текущем репозитории также есть проектно-специфичные файлы в каталогах:
 
 ```text
 docs/
 references/
 ```
 
-and potentially project source/prototype/test directories as the implementation grows.
+а по мере развития реализации — возможно, и в каталогах исходного кода, прототипов и тестов.
 
-The `.ai` infrastructure does not make those files reusable.
+Наличие инфраструктуры `.ai` не делает эти файлы универсальными.
 
-A copied repository therefore needs two separate audits:
+Поэтому скопированный репозиторий требует двух отдельных аудитов:
 
 ```text
 Audit A
@@ -589,30 +583,30 @@ actual project implementation and knowledge
 
 ---
 
-# 18. Recommended Sprite Sheet Editor adaptation
+# 18. Рекомендуемый порядок адаптации для Sprite Sheet Editor
 
-A practical sequence is:
+Практическая последовательность:
 
-### Step 1 — Copy
+### Шаг 1 — Копирование
 
-Copy the repository structure into the new repository.
+Скопируйте структуру репозитория в новый репозиторий.
 
-### Step 2 — Reset project identity
+### Шаг 2 — Сброс идентичности проекта
 
-Replace `.ai/config.yaml`.
+Замените `.ai/config.yaml`.
 
-### Step 3 — Replace project instructions
+### Шаг 3 — Замена инструкций проекта
 
-Rewrite:
+Перепишите:
 
 ```text
 docs/PROJECT-INSTRUCTIONS.md
 docs/architecture/project-architecture.md
 ```
 
-### Step 4 — Generalize embedded repository locators
+### Шаг 4 — Обобщение встроенных repository locators
 
-Check:
+Проверьте:
 
 ```text
 .ai/conversation-management/handoff/SKILL.md
@@ -620,30 +614,30 @@ Check:
 .ai/tests/scenarios/cold-start-command-trace.md
 ```
 
-for the old repository URL and make those references configuration-driven or neutral.
+на наличие URL старого репозитория и сделайте эти ссылки зависимыми от конфигурации либо нейтральными.
 
-### Step 5 — Reset conversation state
+### Шаг 5 — Сброс состояния conversation
 
-Remove old:
+Удалите старые:
 
 ```text
 .ai/handoffs/<old-specializations>/*
 .ai/archives/handoffs/*
 ```
 
-Keep only the generic handoff README if desired.
+При необходимости оставьте только универсальный handoff README.
 
-### Step 6 — Reset historical architecture evidence
+### Шаг 6 — Сброс исторических архитектурных свидетельств
 
-Remove old AIP Mirror architecture history and runtime test results.
+Удалите историю архитектуры AIP Mirror и результаты runtime-тестов.
 
-### Step 7 — Replace research references
+### Шаг 7 — Замена исследовательских материалов
 
-Remove FreeHand/Illustrator material and add references relevant to the new application.
+Удалите материалы FreeHand/Illustrator и добавьте ссылки на материалы, относящиеся к новому приложению.
 
-### Step 8 — Define the new project vocabulary
+### Шаг 8 — Определение терминологии нового проекта
 
-Update:
+Обновите:
 
 ```text
 specializations
@@ -652,17 +646,17 @@ terminology.project_terms
 references.repositories
 ```
 
-in `.ai/config.yaml`.
+в `.ai/config.yaml`.
 
-### Step 9 — Review the active command surface
+### Шаг 9 — Проверка активного набора команд
 
-Check `.ai/INDEX.md`.
+Проверьте `.ai/INDEX.md`.
 
-Keep the infrastructure commands that are useful for the new project. Do not create new commands merely because the technology stack changed.
+Сохраните команды инфраструктуры, полезные новому проекту. Не создавайте новые команды только потому, что изменился технологический стек.
 
-### Step 10 — Bootstrap the first real chapter
+### Шаг 10 — Bootstrap первой реальной главы
 
-Use the canonical:
+Используйте canonical путь:
 
 ```text
 .ai/AGENTS.md
@@ -672,68 +666,68 @@ Use the canonical:
 
 path.
 
-Do not invent a special "new project initialization" command.
+Не придумывайте отдельную команду «инициализация нового проекта».
 
 ---
 
-# 19. Final adaptation checklist
+# 19. Итоговый checklist адаптации
 
-Before starting real development, verify:
+Перед началом реальной разработки проверьте:
 
-- [ ] `.ai/config.yaml` contains the new repository identity.
-- [ ] `references.repositories` contains only relevant external references.
-- [ ] `specializations` describes the new project's work areas.
-- [ ] `terminology.commit_scopes` uses the new project's vocabulary.
-- [ ] `terminology.project_terms` uses the new project's vocabulary.
-- [ ] `docs/PROJECT-INSTRUCTIONS.md` has been completely replaced.
-- [ ] `docs/architecture/project-architecture.md` has been completely replaced.
-- [ ] No active workflow contains the old repository URL.
-- [ ] No active test scenario contains the old repository locator.
-- [ ] Old handoffs have been removed.
-- [ ] Old archive/history has been removed or deliberately retained with a reason.
-- [ ] Old project references have been removed.
-- [ ] Old runtime test results have been removed.
-- [ ] `.ai/AGENTS.md` still points to the canonical bootstrap workflow.
-- [ ] `.ai/INDEX.md` still points to valid canonical owners.
-- [ ] Generic rules remain generic.
-- [ ] Generic skills remain generic.
-- [ ] Bootstrap still resolves repository identity from `.ai/config.yaml`.
-- [ ] A first new chapter can be initialized without guessing any AIP Mirror-specific data.
+- [ ] `.ai/config.yaml` содержит идентичность нового репозитория.
+- [ ] `references.repositories` содержит только релевантные внешние ссылки.
+- [ ] `specializations` описывает направления работы нового проекта.
+- [ ] `terminology.commit_scopes` использует терминологию нового проекта.
+- [ ] `terminology.project_terms` использует терминологию нового проекта.
+- [ ] `docs/PROJECT-INSTRUCTIONS.md` полностью заменён.
+- [ ] `docs/architecture/project-architecture.md` полностью заменён.
+- [ ] Ни один активный workflow не содержит URL старого репозитория.
+- [ ] Ни один активный тестовый сценарий не содержит locator старого репозитория.
+- [ ] Старые handoffs удалены.
+- [ ] Старый архив и история удалены либо осознанно сохранены с объяснением причины.
+- [ ] Старые ссылки на проект удалены.
+- [ ] Старые результаты runtime-тестов удалены.
+- [ ] `.ai/AGENTS.md` по-прежнему указывает на canonical bootstrap workflow.
+- [ ] `.ai/INDEX.md` по-прежнему указывает на действующие canonical owners.
+- [ ] Универсальные rules остались универсальными.
+- [ ] Универсальные skills остались универсальными.
+- [ ] Bootstrap по-прежнему получает идентичность репозитория из `.ai/config.yaml`.
+- [ ] Первую chapter нового проекта можно инициализировать без догадок о данных AIP Mirror.
 
 ---
 
-# 20. The shortest mental model
+# 20. Краткая ментальная модель
 
-When turning `aip-mirror` into another project, think in three layers:
+При превращении `aip-mirror` в другой проект мыслите тремя слоями:
 
 ```text
 ┌─────────────────────────────────────────────┐
-│ GENERIC AI INFRASTRUCTURE                   │
+│ УНИВЕРСАЛЬНАЯ AI-ИНФРАСТРУКТУРА             │
 │                                             │
 │ AGENTS / INDEX / rules / skills / workflows │
 │                                             │
-│ Mostly keep                                 │
+│ В основном сохранить                        │
 └─────────────────────────────────────────────┘
                       │
                       ▼
 ┌─────────────────────────────────────────────┐
-│ PROJECT IDENTITY + PROJECT CONTRACT         │
+│ ИДЕНТИЧНОСТЬ ПРОЕКТА + КОНТРАКТ ПРОЕКТА     │
 │                                             │
 │ config.yaml                                 │
 │ docs/PROJECT-INSTRUCTIONS.md                │
 │ docs/architecture/                          │
 │                                             │
-│ Replace                                    │
+│ Заменить                                    │
 └─────────────────────────────────────────────┘
                       │
                       ▼
 ┌─────────────────────────────────────────────┐
-│ PROJECT HISTORY + RESEARCH                  │
+│ ИСТОРИЯ ПРОЕКТА + ИССЛЕДОВАНИЯ              │
 │                                             │
 │ handoffs / archive / references / results   │
 │                                             │
-│ Reset, remove, or deliberately replace      │
+│ Сбросить, удалить или осознанно заменить    │
 └─────────────────────────────────────────────┘
 ```
 
-The most dangerous state is the hybrid one: a new project with a correct `config.yaml` but old AIP Mirror assumptions still hiding in `docs/`, handoff transport, test scenarios, archives, or references.
+Самое опасное состояние — гибридное: у нового проекта правильный `config.yaml`, но старые предположения AIP Mirror всё ещё скрыты в `docs/`, handoff transport, тестовых сценариях, архивах или references.
