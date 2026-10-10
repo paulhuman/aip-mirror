@@ -7,7 +7,7 @@ this verification work without reconstructing it from conversation history.
 **Revision:** second pass. Project-scoped discovery is confirmed (V8), Task A is
 closed and Task B applied; the open list is now short and genuinely open.
 
-Read this file first, then `.ai/docs/architecture/ai-infrastructure-vnext-proposal.md`
+Read this file first, then `.ai/docs/ai-infrastructure-vnext-proposal.md`
 for the design that these findings feed.
 
 ---
@@ -50,7 +50,7 @@ npx --yes @deepseek-ai/dsh@0.2.0-rc.2 <args>
 Each finding is tied to its evidence. Do not restate these as speculation.
 
 > **V-numbers are local to this file.** The `agentic-ai-*` series and
-> `.ai/docs/architecture/ai-infrastructure-vnext-proposal.md` each carry their
+> `.ai/docs/ai-infrastructure-vnext-proposal.md` each carry their
 > own independent `V` numbering, and the numbers now collide (this file's `V10`
 > is not the proposal's `V10`). When citing a finding, name the file. The
 > cross-references below are written explicitly for that reason.
