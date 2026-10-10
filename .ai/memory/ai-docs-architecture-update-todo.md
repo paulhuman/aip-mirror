@@ -28,13 +28,21 @@
 - Ссылки и границы semantic ownership проверены.
 - В TODO записаны evidence и итоговый статус; завершённый документ перенесён в архив только после проверки.
 
+## Выполненная структурная реорганизация (2026-10-10)
+
+- Добавлен `.ai/docs/README.md` с назначением каталога, текущим перечнем документов и правилом языка.
+- Сохранённые документы перемещены в корень `.ai/docs/`; завершённые исследовательские материалы перенесены в плоский `.ai/archives/memory/`.
+- `.ai/archives/docs/` переименован в `.ai/archives/memory/`; записи внутри архива расположены на одном уровне.
+- `.ai/memory/` остаётся плоским каталогом для README и незавершённых рабочих записей.
+- Эта реорганизация не закрывает TODO: содержательная проверка retained docs, актуализация фактов и проверка ссылок ещё требуются.
+
 ## Контекст
 
 Особенно ценные документы, которые следует сохранить в поддерживаемой документации при реорганизации:
 
-- `.ai/docs/architecture/agentic-ai-dsh-observations.md`
-- `.ai/docs/architecture/agentic-ai-skill-discovery-verification.md`
-- `.ai/docs/architecture/ai-infrastructure-context-mode.md`
+- `.ai/docs/agentic-ai-dsh-observations.md`
+- `.ai/docs/agentic-ai-skill-discovery-verification.md`
+- `.ai/docs/ai-infrastructure-context-mode.md`
 
 Их целевое размещение — корень `.ai/docs/`, рядом с FAQ, а не в `.ai/memory/` или архиве. При переносе сохранить содержимое и историю изменений настолько, насколько позволяет выбранный Git workflow.
 

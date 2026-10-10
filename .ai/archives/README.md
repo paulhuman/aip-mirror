@@ -1,39 +1,32 @@
-# AI infrastructure archives
+# Архив AI-инфраструктуры
 
-This directory contains historical AI-infrastructure material that is no longer part of the active working context.
+Каталог `.ai/archives/` хранит исторические материалы, которые не входят в обычный активный контекст.
 
-## Purpose
+## Назначение
 
-Archives preserve useful historical evidence for:
+Архив нужен для восстановления, аудита и ограниченного исторического исследования. Архивные документы не являются active semantic owners и не заменяют актуальные источники истины.
 
-- recovery;
-- audit;
-- understanding why an older structure or decision existed;
-- explicitly requested historical research.
+## Организация
 
-Archived material is not an active semantic owner and is not a permanent source of truth.
+- `.ai/archives/memory/` — плоский архив бывших документов, рабочих записей и завершённых архитектурных исследований. Все файлы этого раздела находятся непосредственно в каталоге, без тематических подпапок.
+- `.ai/archives/handoffs/` — архив истории глав; может сохранять структуру, необходимую для идентификации специализации и номера главы.
+- Другие специализированные архивные области могут сохранять собственную структуру, если она нужна для однозначного восстановления исторических материалов.
 
-## Active-context boundary
+Плоская организация `.ai/archives/memory/` не означает, что все виды исторических данных должны терять свои необходимые идентификаторы или структуру.
 
-`.ai/archives/` MUST NOT be loaded as active infrastructure context by default.
+## Граница активного контекста
 
-In particular, the `>>ai-infrastructure` operation reads this README to establish the archive boundary, but does not automatically ingest the contents of `.ai/archives/`.
+`.ai/archives/` MUST NOT загружаться как активный контекст по умолчанию.
 
-Historical material MAY be read when a specific operation explicitly requires it. Such a read is an exceptional historical-context action, not a change to the active infrastructure boundary.
+Операция `>>ai-infrastructure` читает этот README, чтобы установить границу архива, но не загружает архивные документы автоматически.
 
-## Lifecycle
+Исторический материал MAY читаться, когда конкретная задача явно этого требует. Такой доступ является ограниченным обращением к истории, а не изменением границы активного контекста.
 
-Archive storage is disposable historical memory:
+## Жизненный цикл
 
-1. completed or obsolete material MAY be moved here;
-2. historical material MAY remain available for recovery or audit;
-3. useful decisions SHOULD be represented by the appropriate active semantic owner or durable architecture documentation;
-4. archived material MAY eventually be deleted when it no longer provides useful evidence.
+1. Завершённые, устаревшие или замещённые записи MAY переноситься в архив после проверки.
+2. Незавершённые задачи и открытые исследования остаются в `.ai/memory/`, пока их статус не подтверждён.
+3. Полезные действующие решения SHOULD отражаться в соответствующих active semantic owners или поддерживаемой документации.
+4. Архивные материалы MAY быть удалены в будущем, когда перестанут представлять полезное историческое свидетельство.
 
-The archive therefore does not need to remain complete forever. The active repository state MUST remain understandable without routine archive loading.
-
-## Ownership boundary
-
-This README is orientation and lifecycle guidance. It is not a replacement for the canonical rule, skill, workflow, or other owner governing the material being archived.
-
-When historical evidence is needed, prefer the current active owner first and use the archive only to answer a bounded historical question.
+Этот README описывает ориентацию и границы хранения; он не заменяет владельца процедуры архивирования.
