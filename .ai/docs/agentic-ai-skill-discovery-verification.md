@@ -57,9 +57,9 @@ Each finding is tied to its evidence. Do not restate these as speculation.
 > is not the proposal's `V10`). When citing a finding, name the file. The
 > cross-references below are written explicitly for that reason.
 
-### V1 — Skill discovery lives in agent presets, not on the host plane
+### V1 — Обнаружение skills выполняется в agent presets, а не на уровне host
 
-The `dsh-web-app` bundle patch **disables** the host-plane row:
+Patch из bundle `dsh-web-app` **отключает** запись host-level:
 
 ```yaml
 # from @deepseek-ai/dsh-web-app/cordis.patch.yml
@@ -69,40 +69,42 @@ The `dsh-web-app` bundle patch **disables** the host-plane row:
   disabled: true
 ```
 
-Evidence: `--dump-config` shows the host row with `disabled: true`, and each
-preset (`standard`, `ptc`, `cordis`) carries its own enabled `skill-filesystem`
-row with no config.
+Свидетельство: `--dump-config` показывает host-level запись с
+`disabled: true`, а каждый preset (`standard`, `ptc`, `cordis`) содержит
+собственную включённую запись `skill-filesystem` без конфигурации.
 
-**Consequence:** the effective `dshHome` for skill discovery is the default
-`$DSH_HOME`, because the preset row passes no `dshHome`.
+**Следствие:** для обнаружения skills используется значение `dshHome` по
+умолчанию — `$DSH_HOME`, поскольку preset не передаёт `dshHome`.
 
-### V2 — `$DSH_HOME/skills` is read with no configuration
+### V2 — `$DSH_HOME/skills` читается без дополнительной конфигурации
 
-The preset row resolves `resolveDshHome(undefined)` → `$DSH_HOME` → root
-`join($DSH_HOME, "skills")` = `...\harness\skills` (rank 400, `user-dsh`).
+Запись preset разрешается по цепочке
+`resolveDshHome(undefined)` → `$DSH_HOME` → корень
+`join($DSH_HOME, "skills")` = `...\harness\skills`
+(rank 400, `user-dsh`).
 
-**Empirically confirmed this session.** After a skill named `explain-code` was
-placed in `harness\skills` with only `name` and `description` in its front
-matter, DSH added it to the live available-skills catalog without a restart.
-Likewise `review-agent` became visible once its
-`disable-model-invocation` flipped to `false`.
+**Эмпирически подтверждено в этом сеансе.** После того как в
+`harness\skills` поместили skill с именем `explain-code`, содержащий в
+front matter только `name` и `description`, DSH добавил его в живой каталог
+доступных skills без перезапуска. Аналогично, `review-agent` появился после
+изменения `disable-model-invocation` на `false`.
 
-This closes the gap noted in the previous session, where `review-agent` was
-absent from the catalog and the root could not be proven.
+Это закрывает пробел, отмеченный в предыдущем сеансе: тогда `review-agent`
+отсутствовал в каталоге, и подтвердить корень обнаружения не удалось.
 
-### V3 — A `customSkillDirs` override on the host row id is dead
+### V3 — Переопределение `customSkillDirs` для host-row не работает
 
-The override was added to the profile patch layer:
+Переопределение было добавлено на уровне profile patch:
 
 ```yaml
 # WRONG — merged onto a disabled row
 - id: skill-filesystem
   config:
     customSkillDirs:
-      - 'C:\Users\Paul\.dsh\skills'
+      - 'C:\\Users\\Paul\\.dsh\\skills'
 ```
 
-`--dump-config` showed it merged into the **disabled** host row:
+`--dump-config` показал, что параметр слился с **отключённой** host-level записью:
 
 ```yaml
 - id: skill-filesystem
@@ -110,17 +112,19 @@ The override was added to the profile patch layer:
   disabled: true                        # row is dropped
   config:
     customSkillDirs:                    # never read
-      - C:\Users\Paul\.dsh\skills
+      - C:\\Users\\Paul\\.dsh\\skills
 ```
 
-**Consequence:** the override never worked. Desktop never read
-`~/.dsh/skills` from it. The override has been **removed** from
-`cordis.patch.yml`, replaced by a comment recording why it must not return.
+**Следствие:** переопределение никогда не работало. Desktop не читал
+`~/.dsh/skills` через этот параметр. Переопределение удалено из
+`cordis.patch.yml`; вместо него добавлен комментарий с объяснением, почему
+его нельзя возвращать.
 
-> **Important:** `--dump-config` prints the **merged** result, not what is
-> loaded. A row can appear in the dump with its config and still be dropped by
-> `disabled: true`. Never conclude that a patch works from the dump alone.
-> Confirm it against the live available-skills catalog.
+> **Важно:** `--dump-config` показывает объединённую конфигурацию, а не то,
+> что действительно загружено. Запись может присутствовать в dump вместе со
+> своей конфигурацией, но при `disabled: true` она всё равно отбрасывается.
+> Не делайте вывод, что patch работает, только по dump. Подтверждайте результат
+> через живой каталог доступных skills.
 
 ### V4 — `.agents/skills` junction is correct, discoverable, and gitignored
 
