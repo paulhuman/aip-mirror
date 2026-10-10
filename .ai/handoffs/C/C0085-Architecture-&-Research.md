@@ -233,3 +233,29 @@ Read the current canonical versions of:
 - `.ai/README.md`
 
 Use `paulhuman/aip-mirror@78c321d62714463ddd3e420dfc311f11d1a7dd13` as the initial pinned inventory baseline. The C0084 tree at `cf4cfbede97b58cc25ac4f8b635f5bb70f44010d` is historical evidence only.
+
+
+## Checkpoint — hierarchy and active-document authoring principles
+
+### Completed in this checkpoint
+
+- Created and read back .ai/docs/ai-document-hierarchy-and-authoring.md as a stable Russian-language architecture document, retaining necessary English technical terminology.
+- The document records the agreed hierarchy and boundaries for canonical semantic owners, structural README files, maintained documentation, working memory, and archives.
+- It explicitly distinguishes reading a document for a bounded task from depending on that document as a required source of semantics.
+- It defines authoring principles for SKILL.md, INDEX.md, README.md, AGENTS.md, and BOOTSTRAP.md, including skill self-containment, progressive disclosure, evidence-backed technical claims, and final verification.
+- It preserves the open research requirement not to assume undocumented behavior for whenToUse, disable-model-invocation, or user-invocable.
+- Confirmed that .ai/memory/ exists and contains:
+  - .ai/memory/README.md
+  - .ai/memory/ai-docs-architecture-update-todo.md
+- The memory TODO remains OPEN and records the later review of retained .ai/docs/ documents, Russian-language policy for future docs, separation of DSH technical authorship from AIP Mirror integration, and metadata research.
+
+### Verification evidence
+
+- Architecture document creation commit: d16b0a9a46810732cdadea1d4b552e9ee99b1aa5
+- Read-back blob SHA: 6b8aadb7a77f7f80b9980b9fa8cb868b0c0389ec
+- Read-back checks confirmed the hierarchy section, dependency-versus-reading distinction, skill-authoring rules, and coverage of INDEX.md, README.md, AGENTS.md, and BOOTSTRAP.md.
+- The commit diff adds one new 152-line document and contains no unrelated paths.
+
+### Immediate next task
+
+Resume Stage 1 inventory and reference classification on the pinned baseline 78c321d62714463ddd3e420dfc311f11d1a7dd13, while accounting for the newly created .ai/memory/ files and the new stable document in .ai/docs/. Complete the evidence-backed inventory before moving or archiving any existing documents. Then continue the planned minimal semantic-boundary update and directory migration. Do not treat this checkpoint as completion of the broader restructuring.
