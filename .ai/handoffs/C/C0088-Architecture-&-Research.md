@@ -65,3 +65,38 @@ Continue the open AI-infrastructure documentation review recorded in `.ai/memory
 - `.ai/skills/commits/SKILL.md`
 - `.ai/conversation-management/handoff/BOOTSTRAP.md`
 - `.ai/handoffs/C/C0086-Architecture-&-Research.md`
+
+## Migration checkpoint — C0089 (2026-10-10)
+
+### Migration validation
+
+- Migration command: `>>migrate 0089`.
+- Current chapter context: `C0088`, established by this conversation's active chapter and the canonical header above.
+- Expected successor: `C0089`; the supplied assertion `0089` matches exactly one sequential increment.
+- Repository: `paulhuman/aip-mirror`; canonical branch: `main`, confirmed by `.ai/config.yaml`.
+- Main HEAD at migration start: `776f56aefd1fc1bad4088402bfe50b808280302d`.
+- PR #2, “Integrate AI infrastructure documentation updates”, was merged into `main` using a merge commit. The migration continues from `main`; the former working branch `c0086/ai-docs-audit-translation` remains behind by eight commits and was not deleted or moved.
+- The merged documentation TODO `.ai/memory/ai-docs-architecture-update-todo.md` is `CLOSED`.
+- The separate external DSH task `.ai/memory/dsh-todo-skill-metadata-runtime.md` remains `OPEN`. No DSH runtime behavior for `whenToUse`, `disable-model-invocation`, or `user-invocable` is claimed as verified.
+
+### Completed in C0088 after its initial recovery snapshot
+
+- The documentation and integration changes were merged into `main` after the user explicitly approved the merge.
+- Post-merge reads confirmed the documentation TODO is CLOSED and the external DSH task is OPEN.
+- Merge commit: `776f56aefd1fc1bad4088402bfe50b808280302d`.
+- PR: https://github.com/paulhuman/aip-mirror/pull/2
+- Verification boundary: the merge result and the two memory records were read back; this was not a fresh exhaustive audit of every documentation claim.
+
+### Immediate next task for C0089
+
+1. Start from the canonical `main` branch and verify its current HEAD before substantive repository work.
+2. Treat `.ai/memory/dsh-todo-skill-metadata-runtime.md` as the only currently open task carried forward from this workstream. Check for DSH-produced primary sources and reproducible evidence before making integration changes.
+3. Do not close the DSH task or assert runtime semantics until its listed evidence and completion criteria are satisfied.
+4. If no new DSH evidence or user-assigned task is available, ask the user what they want to work on next rather than inventing additional scope.
+
+### Migration constraints
+
+- Preserve the repository's existing history; do not rewrite commit history.
+- Do not delete or move the former working branch as part of this migration.
+- For future `.ai/` edits, follow READ CURRENT FILE → MAKE MINIMAL CHANGE → WRITE COMPLETE FILE → READ BACK → VERIFY CONTENT → INSPECT DIFF → VERIFY SCOPE → COMMIT → VERIFY RESULT.
+- Keep DSH-specific observations distinct from confirmed AIP Mirror integration decisions.
