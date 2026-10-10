@@ -47,15 +47,15 @@ npx --yes @deepseek-ai/dsh@0.2.0-rc.2 <args>
 
 ---
 
-## 3. Verified findings
+## 3. Подтверждённые результаты
 
-Each finding is tied to its evidence. Do not restate these as speculation.
+Каждый вывод связан со своими свидетельствами. Не представляйте эти результаты как предположения.
 
-> **V-numbers are local to this file.** The `agentic-ai-*` series and
-> `.ai/docs/ai-infrastructure-vnext-proposal.md` each carry their
-> own independent `V` numbering, and the numbers now collide (this file's `V10`
-> is not the proposal's `V10`). When citing a finding, name the file. The
-> cross-references below are written explicitly for that reason.
+> **Нумерация V локальна для этого файла.** Серия `agentic-ai-*` и
+> `.ai/docs/ai-infrastructure-vnext-proposal.md` имеют независимую нумерацию `V`,
+> и теперь номера пересекаются (этот файл `V10` — не тот же результат, что `V10`
+> в proposal). При ссылке на результат указывайте файл. Перекрёстные ссылки ниже
+> сформулированы явно именно по этой причине.
 
 ### V1 — Обнаружение skills выполняется в agent presets, а не на уровне host
 
@@ -173,49 +173,48 @@ junction из V4 делает содержимое доступным для DSH
 
 **Оставайтесь в режиме `standard`.**
 
-### V7 — Per-agent-row ranking is unchanged
+### V7 — Ранжирование по строкам agent presets не изменилось
 
-Ranks still come from `dsh-skill-filesystem`, lower wins. Read directly from the
-installed package source
-(`@deepseek-ai/dsh-skill-filesystem/lib/index.js`, `FileSystemSkillProvider.roots`):
+Ранги по-прежнему задаются `dsh-skill-filesystem`; чем меньше значение, тем выше
+приоритет. Данные прочитаны непосредственно из исходного кода установленного
+пакета (`@deepseek-ai/dsh-skill-filesystem/lib/index.js`, `FileSystemSkillProvider.roots`):
 
 ```
-100  <project>/.dsh/skills      source project-dsh    rank PROJECT_DSH_RANK
-200  <project>/.agents/skills   source project-agents rank PROJECT_AGENTS_RANK
-250  runtime provider           source runtime        rank RUNTIME_RANK (dsh-skill)
-300  customSkillDirs            source custom         rank CUSTOM_RANK
-400  $DSH_HOME/skills           source user-dsh       rank USER_DSH_RANK
-500  $AGENTS_HOME/skills        source user-agents    rank USER_AGENTS_RANK
-600  bundled                    source bundled        rank BUNDLED_SKILL_RANK
+100  <project>/.dsh/skills      источник project-dsh    ранг PROJECT_DSH_RANK
+200  <project>/.agents/skills   источник project-agents ранг PROJECT_AGENTS_RANK
+250  runtime provider           источник runtime        ранг RUNTIME_RANK (dsh-skill)
+300  customSkillDirs            источник custom         ранг CUSTOM_RANK
+400  $DSH_HOME/skills           источник user-dsh       ранг USER_DSH_RANK
+500  $AGENTS_HOME/skills        источник user-agents    ранг USER_AGENTS_RANK
+600  bundled                    источник bundled        ранг BUNDLED_SKILL_RANK
 ```
 
-The 250 row is a separate provider registered through `ctx.skills`, not a
-filesystem root; it is listed for completeness of the precedence order.
+Строка 250 соответствует отдельному provider, зарегистрированному через
+`ctx.skills`, а не файловому корню; она приведена для полноты порядка приоритетов.
 
-Two details the earlier listing did not record:
+В предыдущем списке не были зафиксированы ещё две детали:
 
-- the project root is found by walking up from `cwd` until a directory contains
-  `.git` (`findProjectRoot`); if no `.git` is found it falls back to `cwd`
-  itself, so project roots still resolve outside a git repository;
-- `$AGENTS_HOME` defaults to `~/.agents` and can be overridden by the
-  `DSH_AGENTS_HOME` environment variable. `C:\Users\Paul\.agents` does not
-  exist on this machine, so rank 500 contributes nothing here.
+- корень проекта определяется подъёмом от `cwd` до каталога, содержащего
+  `.git` (`findProjectRoot`); если `.git` не найден, используется сам `cwd`,
+  поэтому корень проекта разрешается и вне Git-репозитория;
+- `$AGENTS_HOME` по умолчанию равен `~/.agents`; его можно переопределить
+  переменной окружения `DSH_AGENTS_HOME`. На этой машине каталога
+  `C:\Users\Paul\.agents` нет, поэтому ранг 500 ничего не добавляет.
 
-### V8 — Project-scoped discovery through the junction is now CONFIRMED
+### V8 — Обнаружение skills в пределах проекта через junction теперь ПОДТВЕРЖДЕНО
 
-This closes Task A. Evidence:
+Это закрывает Task A. Свидетельства:
 
-1. **Live catalog in the target session.** The available-skills catalog injected
-   into the running DSH session whose working directory is
-   `E:\Projects\repos\aip-mirror` (extracted from
-   `$DSH_HOME\sessions\--E-Projects-repos-aip-mirror--\session-4b41fea6-…\session.v4.jsonl.zstd`)
-   contains all eight `.ai/skills` names: `activation`, `ai-infrastructure`,
+1. **Живой каталог целевой сессии.** Каталог доступных skills, внедрённый
+   в работающую сессию DSH с рабочим каталогом `E:\Projects\repos\aip-mirror`
+   (извлечён из `$DSH_HOME\sessions\--E-Projects-repos-aip-mirror--\session-4b41fea6-…\session.v4.jsonl.zstd`),
+   содержит все восемь имён из `.ai/skills`: `activation`, `ai-infrastructure`,
    `commits`, `deep-understanding`, `explain-code`, `handoff`,
    `knowledge-capture`, `normative-language`.
 
-2. **The body loads, not just the metadata line.** Invoking the `skill` tool for
-   `knowledge-capture`, `activation`, and `normative-language` returned skill
-   bodies whose resource base is the junction path:
+2. **Загружается тело skill, а не только строка metadata.** Вызов инструмента
+   `skill` для `knowledge-capture`, `activation` и `normative-language` вернул
+   тела skills, базовый путь ресурсов которых проходит через junction:
 
    ```
    Base directory for this skill: E:\Projects\repos\aip-mirror\.agents\skills\knowledge-capture
@@ -223,24 +222,25 @@ This closes Task A. Evidence:
    Base directory for this skill: E:\Projects\repos\aip-mirror\.agents\skills\normative-language
    ```
 
-   `knowledge-capture`, `activation`, and `normative-language` exist **nowhere
-   else** on this machine (not in `$DSH_HOME\skills`, not in the bundled preset
-   skills, not in the market checkout), so rank 400 cannot explain them. Only
-   `explain-code` is ambiguous — it is the one name present in both roots.
+   `knowledge-capture`, `activation` и `normative-language` **больше нигде** на
+   этой машине не существуют (ни в `$DSH_HOME\skills`, ни среди bundled preset
+   skills, ни в checkout skills market), поэтому ранг 400 не объясняет их
+   появление. Неоднозначен только `explain-code` — это единственное имя,
+   присутствующее в обоих корнях.
 
-3. **Name-only, isolated replay.** A headless DSH run whose `cwd` was the
-   repository listed the same eight names. A control run in a directory outside
-   any git repository listed only `diagnose-windows-sandbox-acl`,
-   `explain-code`, `review-agent`; `knowledge-capture` was `NOT PRESENT` there.
-   A second control whose `cwd` was an empty directory containing only `.git`
-   produced the same reduced catalog, proving it is the `.agents/skills` root
-   and not the mere presence of `.git` that supplies them.
+3. **Изолированный повторный запуск только для получения имён.** Headless-запуск
+   DSH с `cwd`, равным репозиторию, показал те же восемь имён. Контрольный запуск
+   вне любого Git-репозитория показал только `diagnose-windows-sandbox-acl`,
+   `explain-code`, `review-agent`; `knowledge-capture` там отсутствовал (`NOT PRESENT`).
+   Второй контроль из пустого каталога, содержащего только `.git`, дал тот же
+   сокращённый каталог. Это подтверждает, что skills поступают из корня
+   `.agents/skills`, а не просто из-за наличия `.git`.
 
-4. **A fresh clone reproduces the result only after the adapter exists.** A
-   clean `git clone` has **no** `.agents/` (it is gitignored, V4) and therefore
-   exposes only the personal and bundled skills. Creating the junction in that
-   clone (`New-SkillAdapters.ps1`) made `knowledge-capture` appear again, with
-   its resource base resolved inside the clone.
+4. **Результат воспроизводится в новом clone только после создания adapter.**
+   В чистом `git clone` каталога `.agents/` **нет** (он исключён из Git, V4),
+   поэтому доступны только personal и bundled skills. Создание junction в этом
+   clone с помощью `New-SkillAdapters.ps1` снова сделало `knowledge-capture`
+   доступным, причём базовый путь ресурсов разрешился внутри clone.
 
 **Negative controls that were ruled out** (each examined, none can supply the
 eight names): repository `.dsh/skills` (absent), `~/.dsh` (absent),
@@ -250,72 +250,74 @@ office runtime skill pack (3 unrelated names), and the skills-market checkout
 (3818 `SKILL.md` files, only the name `handoff` collides — with a different,
 Chinese description, and the rank-200 candidate wins on the name anyway).
 
-**Consequence:** `.ai/skills` stays the single canonical source, `.agents/skills`
-stays a gitignored local adapter, and the adapter is now a **documented,
-scriptable setup step** rather than an undocumented manual one (Task B).
+**Следствие:** `.ai/skills` остаётся единственным canonical source, `.agents/skills`
+— локальным adapter, исключённым из Git, а создание adapter теперь является
+**документированным и автоматизированным шагом настройки**, а не недокументированной
+ручной операцией (Task B).
 
-### V9 — The one-level rule is confirmed by the same evidence
+### V9 — То же свидетельство подтверждает правило одного уровня вложенности
 
-`.ai/skills/handoff/reference-preservation/SKILL.md` exists and is tracked, but
-`handoff-reference-preservation` appears in **neither** the live catalog nor any
-headless run. `discoverRoot` reads only the immediate entries of each root, so a
-skill nested under another skill is never discovered — the claim in §7.3 of the
-vNext proposal now has direct evidence, and the catalogue count is 8 rather than
-9 for exactly this reason.
+`.ai/skills/handoff/reference-preservation/SKILL.md` существует и отслеживается
+Git, но `handoff-reference-preservation` не появляется **ни в живом каталоге, ни
+в одном headless-запуске**. `discoverRoot` читает только непосредственные элементы
+каждого корня, поэтому вложенный в другой skill skill не обнаруживается.
+Утверждение из §7.3 vNext proposal теперь подтверждено напрямую; по этой же
+причине в каталоге 8 skills, а не 9.
 
-### V10 — The upstream symlink model, re-observed on Windows
+### V10 — Повторная проверка upstream-модели symlink в Windows
 
-Re-verified against a live clone of `adobe/spectrum-web-components`
-(`E:\Projects\repos\spectrum-web-components`, `main` @ `be922808`). This is the
-reference implementation the vNext proposal is modelled on, so its failure modes
-are directly relevant.
+Повторная проверка выполнена на актуальном clone `adobe/spectrum-web-components`
+(`E:\Projects\repos\spectrum-web-components`, `main` @ `be922808`). Именно эта
+реализация служит образцом для vNext proposal, поэтому её режимы отказа имеют
+непосредственное отношение к проекту.
 
-**What upstream actually commits:**
+**Что upstream действительно хранит в Git:**
 
-- Exactly **three** tracked symlinks, all mode `120000`: `.claude/rules` →
+- Ровно **три** отслеживаемых symlink, все с mode `120000`: `.claude/rules` →
   `../.ai/rules`, `.claude/skills` → `../.ai/skills`, `.cursor/skills` →
-  `../.ai/skills`. The last two share one blob (`6838a116…`), so the identical
-  target costs nothing.
-- `.cursor/rules/*.mdc` and `.github/instructions/*.instructions.md` are
-  **generated files**, not links — Cursor needs `globs:`, Claude needs `paths:`,
-  and one source serves both. They were per-file symlinks before commit
-  `4c97b0dd34`.
+  `../.ai/skills`. Последние два используют один blob (`6838a116…`), поэтому
+  одинаковая цель не создаёт дополнительных затрат.
+- `.cursor/rules/*.mdc` и `.github/instructions/*.instructions.md` — это
+  **сгенерированные файлы**, а не ссылки: Cursor нужен `globs:`, Claude — `paths:`,
+  и один источник обслуживает оба формата. До commit `4c97b0dd34` они были
+  symlink на каждый файл.
 
-**Windows behaviour, observed:**
+**Наблюдаемое поведение в Windows:**
 
-- A clone whose config resolved `core.symlinks=false` materialized the three
-  links as **12/13-byte text files** containing the target string — V6 of the
-  vNext proposal, reproduced exactly. `git status` stayed clean throughout; the
-  breakage is invisible to git.
-- After `git config --global core.symlinks true` and a re-clone, all three are
-  real `SymbolicLink` reparse points. Read-through resolves (35 skills, 8 rules),
-  and `.claude/skills` shares an **inode** with `.ai/skills` — one object, not a
-  copy.
-- **Developer Mode is genuinely off.** `AllowDevelopmentWithoutDevLicense` is
-  absent from `HKLM\...\AppModelUnlock`. Symlink creation nevertheless works
-  because the token holds `SeCreateSymbolicLinkPrivilege` (assigned to
-  `S-1-5-32-544`), **enabled** in this session. Creating a link needs the
-  privilege; reading one does not.
-- **A re-clone is not required to repair a broken checkout.** Once no
-  clone-local override remains, `git restore -- .claude .cursor` rewrites the
-  three paths as real symlinks and leaves `git status` clean. The upstream advice
-  ("enable Developer Mode and re-clone") overstates the remedy.
+- В clone, где конфигурация разрешила `core.symlinks=false`, три ссылки
+  материализовались как **текстовые файлы размером 12/13 байт** со строкой цели
+  — точное воспроизведение V6 из vNext proposal. `git status` всё время оставался
+  чистым: Git не показывает это повреждение.
+- После `git config --global core.symlinks true` и повторного clone все три пути
+  стали настоящими reparse point типа `SymbolicLink`. Чтение через ссылки работает
+  (35 skills, 8 rules), а `.claude/skills` разделяет **inode** с `.ai/skills` — это
+  один объект, а не копия.
+- **Developer Mode действительно выключен.** `AllowDevelopmentWithoutDevLicense`
+  отсутствует в `HKLM\...\AppModelUnlock`. Тем не менее создание symlink работает,
+  поскольку токен содержит `SeCreateSymbolicLinkPrivilege` (назначен
+  `S-1-5-32-544`) и эта привилегия **включена** в текущей сессии. Для создания
+  ссылки привилегия нужна; для чтения — нет.
+- **Для восстановления сломанного checkout повторный clone не нужен.** Если
+  локальное переопределение clone удалено, `git restore -- .claude .cursor`
+  восстанавливает три настоящие symlink и оставляет `git status` чистым. Совет
+  upstream («включить Developer Mode и выполнить clone заново») преувеличивает
+  необходимый объём действий.
 
-**The upstream validator fails on Windows.** `validate-symlinks.js` compares
-`readlinkSync()` with `!==` against the literal `'../.ai/skills'`. On Windows
-`readlinkSync` returns `'..\\.ai\\skills'`, so all three checks report
-`points to "..\.ai\rules", expected "../.ai/rules"`. The links work; the check is
-separator-fragile. CI never sees it because `yarn lint:ai` runs on
-`ubuntu-latest` (`lint.yml`).
+**Upstream validator не проходит в Windows.** `validate-symlinks.js` сравнивает
+результат `readlinkSync()` оператором `!==` с буквальной строкой `'../.ai/skills'`.
+В Windows `readlinkSync` возвращает `'..\\.ai\\skills'`, поэтому все три проверки
+сообщают `points to "..\.ai\rules", expected "../.ai/rules"`. Ссылки работают;
+проверка чувствительна к разделителям путей. CI этого не обнаруживает, потому что
+`yarn lint:ai` выполняется на `ubuntu-latest` (`lint.yml`).
 
-**Consequence for this repository:** Option A (a committed symlink) is *viable*
-on this machine — a flat "not an option on Windows" is too strong — but it still
-depends on the creating user holding the privilege, and its failure mode stays
-**silent** (vNext proposal `V6`/`V7`: a text file where a directory is expected,
-and DSH skips the root without a message). The junction + gitignored adapter
-remains the choice for a Windows-primary workflow precisely because its failure
-is loud. If Option A is ever adopted, do **not** copy that separator-strict
-comparison as a Windows check.
+**Следствие для этого репозитория:** Option A (symlink, хранящийся в Git) на этой
+машине *работоспособен* — утверждение «в Windows это невозможно» слишком категорично.
+Но механизм зависит от наличия у пользователя, создающего ссылку, соответствующей
+привилегии, а отказ остаётся **тихим** (vNext proposal `V6`/`V7`: вместо каталога
+получается текстовый файл, а DSH пропускает корень без сообщения). Для workflow,
+ориентированного на Windows, остаётся выбран вариант junction + adapter, исключённый
+из Git, именно потому, что его отказ заметен. Если Option A когда-либо будет принят,
+**не копируйте** это строгое сравнение разделителей в Windows-проверку.
 
 ---
 
