@@ -32,7 +32,7 @@
 |---|---|
 | DSH Desktop | `0.11.0` |
 | Harness / `@deepseek-ai/dsh` | `0.2.0-rc.2` (версия прочитана из `app.asar`) |
-| `DSH_HOME` | `C:\\Users\\Paul\\AppData\\Roaming\\dsh-desktop\\harness` |
+| `DSH_HOME` | `C:\Users\Paul\AppData\Roaming\dsh-desktop\harness` |
 | Profile | `web` |
 | Активный agent preset | `standard` |
 | `dsh` в `PATH` | **нет** — используйте `npx --yes @deepseek-ai/dsh@0.2.0-rc.2`, предварительно задав `DSH_HOME` |
