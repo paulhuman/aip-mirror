@@ -14,7 +14,7 @@ C
 
 ## Starting objective
 
-Continue the accepted AI-infrastructure documentation review after the completed directory reorganization. Work through `.ai/memory/ai-docs-architecture-update-todo.md` using current repository evidence. Review all seven maintained documents in `.ai/docs/`, classify claims, fix current-use stale paths/references, verify semantic-owner boundaries, and record evidence. Do not translate existing documents as part of this review.
+Continue the accepted AI-infrastructure documentation review after the completed directory reorganization. Work through `.ai/memory/ai-docs-architecture-update-todo.md` using current repository evidence. Review all seven maintained documents in `.ai/docs/`, translate the existing English documents into Russian while preserving exact technical terms and identifiers, classify claims, fix current-use stale paths/references, verify semantic-owner boundaries, and record evidence. DSH-specific practical testing is deferred to DSH and tracked in the TODO.
 
 ## Bootstrap and repository identity
 
@@ -57,7 +57,7 @@ Continue the accepted AI-infrastructure documentation review after the completed
 - `.ai/docs/` contains maintained AI-infrastructure documentation; `.ai/memory/` contains working memory and open TODOs; `.ai/archives/memory/` contains completed, superseded, or historical material.
 - Active semantic owners must remain self-contained. Reading supporting documentation for a bounded task is permitted; depending on it to supply required owner semantics is not.
 - README files orient readers and describe structure; they must not become duplicate semantic owners.
-- Existing documents retained in `.ai/docs/` should not be translated as part of this review. New documents in `.ai/docs/` are written in Russian while necessary technical terms, identifiers, paths, field names, and exact technical designations remain in their original form.
+- Existing English documents retained in `.ai/docs/` are to be translated into Russian as explicitly confirmed by the user in C0086. Preserve necessary technical terms, identifiers, paths, field names, exact technical designations, and verifiable source fragments in their original form.
 - DSH-specific technical claims must be corrected only using authoritative DSH sources or primary technical evidence/controlled tests. Keep DSH technical authorship separate from AIP Mirror integration.
 - Do not assume `whenToUse`, `disable-model-invocation`, or `user-invocable` behavior without evidence. In particular, whether `whenToUse` affects discovery, ranking, selection, or automatic invocation remains an open research question.
 - For existing-file changes: READ CURRENT FILE → MAKE MINIMAL CHANGE → WRITE COMPLETE FILE → READ BACK → VERIFY CONTENT → INSPECT DIFF → VERIFY SCOPE → COMMIT → VERIFY RESULT.
@@ -66,11 +66,12 @@ Continue the accepted AI-infrastructure documentation review after the completed
 
 ## Immediate next task
 
-1. Read the current canonical owners and establish a fresh immutable `main` commit/tree snapshot before making repository-wide claims.
-2. Continue the OPEN TODO in `.ai/memory/ai-docs-architecture-update-todo.md`.
-3. Inventory and read the seven maintained documents listed in `.ai/docs/README.md`; record which files were actually retrieved.
-4. Classify claims as current/confirmed, historical, inferred, or open; verify current-facing paths and links, semantic-owner boundaries, and DSH-related assertions against evidence.
-5. Make only bounded, evidence-backed edits, each with independent read-back and diff/scope verification. Record evidence and final status in the TODO. Archive completed work only after verification.
+1. Continue the OPEN TODO in `.ai/memory/ai-docs-architecture-update-todo.md`; the initial tree and current docs inventory were already established for this working branch.
+2. Finish translating `.ai/docs/agentic-ai-skill-discovery-verification.md` and `.ai/docs/ai-infrastructure-vnext-proposal.md`, preserving experiment/version boundaries and clearly marking the proposal as proposed rather than accepted or implemented.
+3. Audit and translate `.ai/docs/adapting-to-a-new-project.md`; verify its examples and current-facing paths against the active repository tree, distinguishing historical examples from current instructions.
+4. Audit `.ai/docs/ai-document-hierarchy-and-authoring.md` and the seven-document index/links for consistency; classify claims as current/confirmed, historical, inferred, or open.
+5. Leave practical DSH harness tests for `whenToUse`, `disable-model-invocation`, and `user-invocable` to DSH; keep this as an explicit open task in the TODO. Do not claim the harness was tested here.
+6. For each bounded edit, read back the complete file, verify content, inspect diff/scope, and verify the resulting commit. Do not merge this branch into `main` without explicit user approval.
 
 ## Confirmed versus unresolved
 
@@ -91,3 +92,47 @@ Continue the accepted AI-infrastructure documentation review after the completed
 - `.ai/docs/manual-activation.md`
 - `.ai/skills/ai-infrastructure/SKILL.md`
 - `.ai/skills/normative-language/SKILL.md`
+
+
+## Checkpoint — documentation translation and revised responsibility boundary (2026-10-10)
+
+### Completed on working branch `c0086/ai-docs-audit-translation`
+
+- Translated `.ai/docs/manual-activation.md`, `.ai/docs/agentic-ai-dsh-observations.md`, and `.ai/docs/ai-infrastructure-context-mode.md` into Russian.
+- Corrected the current-facing manual-activation link in `.ai/skills/activation/SKILL.md` from the obsolete `.ai/docs/faq/manual-activation.md` path to `.ai/docs/manual-activation.md`.
+- Updated current semantic-owner references in the DSH observations document while retaining old paths only where they explain historical structure.
+- Updated `.ai/memory/ai-docs-architecture-update-todo.md` to require translation of the existing English documents in `.ai/docs/`, not only future documents.
+- Recorded the current upstream DSH metadata findings with the caveat that they do not establish the behavior of every earlier or locally installed version.
+
+### User decisions recorded
+
+- Practical tests of DSH harness behavior—including the role of `whenToUse`, `disable-model-invocation`, and `user-invocable`—are deferred to DSH itself. Keep these as open TODO work; do not present upstream reading as a local harness test.
+- Translate `.ai/docs/agentic-ai-skill-discovery-verification.md` without collapsing experimental observations, environment versions, historical results, and open questions into current facts.
+- Translate `.ai/docs/ai-infrastructure-vnext-proposal.md` while explicitly preserving its proposal status; do not imply the proposed architecture has been accepted or implemented.
+- Audit and translate `.ai/docs/adapting-to-a-new-project.md`; current-facing examples and paths can be checked against the repository tree, while historical examples should be classified rather than mechanically rewritten.
+- Only documents under `.ai/docs/` are in scope for the Russian translation. Do not translate unrelated repository documents.
+
+### Current state and next work
+
+- The working branch `c0086/ai-docs-audit-translation` has independent commits; these changes have not been merged into `main`.
+- Three maintained documents have been translated; three English documents remain to be translated and audited. `.ai/docs/ai-document-hierarchy-and-authoring.md` is already in Russian and still needs consistency review.
+- Continue on the existing working branch `c0086/ai-docs-audit-translation` unless the user explicitly authorizes another branch or a merge. Before substantive work, resolve and record its current head.
+- Continue with the DSH verification journal and vNext proposal translations, then inspect and translate the practical guide with current-tree verification.
+- Keep the memory TODO OPEN until its evidence, semantic-owner, reference, and translation criteria have actually been verified.
+
+### Verification boundaries
+
+- Do not claim practical DSH harness testing was performed.
+- Do not classify proposal-only paths as broken current links unless they are presented as current instructions.
+- Do not mass-rewrite historical paths.
+- Before each repository edit, read the current file; after writing, read it back, verify content, inspect the diff and changed-file scope, and verify the resulting commit.
+
+
+## Migration checkpoint — C0086 → C0087 (2026-10-10)
+
+- Migration validation: active chapter context is `C0086`; the user asserted `0087`; expected sequential target is `0087`. The argument matches the canonical migration rule.
+- The migration handoff update is recorded on the existing working branch `c0086/ai-docs-audit-translation`.
+- The translation and audit commits on that branch are independent of `main`; they have not been merged. The receiving chapter must explicitly inspect and continue from the working branch rather than assume that its contents are already present on `main`.
+- The current handoff on the configured default branch must point the receiving chapter to that working branch and its existing task state, without merging the substantive documentation changes.
+- C0087's first substantive task remains: translate `.ai/docs/agentic-ai-skill-discovery-verification.md` while preserving versioned experimental evidence and open questions, then translate `.ai/docs/ai-infrastructure-vnext-proposal.md` without implying acceptance/implementation, and audit/translate `.ai/docs/adapting-to-a-new-project.md` against the current repository structure.
+- Practical tests of DSH harness behavior remain assigned to DSH and must stay open in the TODO; do not claim those tests were performed here.
