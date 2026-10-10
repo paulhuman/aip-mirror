@@ -1,47 +1,47 @@
-# FAQ: Adapting `.ai/` to a New Project
+# FAQ: адаптация `.ai/` к новому проекту
 
-## Purpose
+## Назначение
 
-This FAQ explains how to copy the `.ai/` infrastructure from `aip-mirror` into a different repository and adapt it without accidentally carrying the Illustrator-specific project identity into the new project.
+Этот FAQ объясняет, как перенести инфраструктуру `.ai/` из `aip-mirror` в другой репозиторий и адаптировать её, не перенося случайно в новый проект идентичность и специфику Illustrator.
 
-Example target project:
+Пример целевого проекта:
 
 > **Sprite Sheet Editor** — desktop application using Rust + Tauri + Python + Pillow.
 
-The key idea is:
+Основная идея:
 
 ```text
 .ai/ = reusable AI infrastructure
 config.yaml + docs/ + selected history = project-specific context
 ```
 
-Do not treat the current `aip-mirror` repository as a clean project template. It contains both reusable infrastructure and historical/project-specific material.
+Не считайте текущий репозиторий `aip-mirror` чистым шаблоном проекта. В нём есть как повторно используемая инфраструктура, так и исторические и проектно-специфичные материалы.
 
 ---
 
-## 1. What must change?
+## 1. Что необходимо изменить?
 
-There are four practical categories.
+Есть четыре практические категории.
 
-| Category | Action | Typical examples |
+| Категория | Действие | Типичные примеры |
 | --- | --- | --- |
-| Project identity | MUST change | repository name, project name, branch, hosting |
-| Project knowledge | MUST replace | `docs/PROJECT-INSTRUCTIONS.md`, project architecture |
-| Embedded project references | MUST change or generalize | hardcoded GitHub URLs, test locators, project examples |
-| Historical material | SHOULD remove/reset | old handoffs, old test results, AIP Mirror research, old references |
+| Идентичность проекта | ОБЯЗАТЕЛЬНО изменить | имя репозитория и проекта, ветка, hosting |
+| Знания о проекте | ОБЯЗАТЕЛЬНО заменить | `docs/PROJECT-INSTRUCTIONS.md`, архитектура проекта |
+| Встроенные ссылки на проект | ОБЯЗАТЕЛЬНО изменить или обобщить | жёстко заданные GitHub URL, test locators, примеры проекта |
+| Исторические материалы | СЛЕДУЕТ удалить или сбросить | старые handoffs, результаты тестов, исследования AIP Mirror, старые references |
 
-The most important misconception is:
+Самое важное заблуждение:
 
-> `config.yaml` is the main project-specific configuration file, but it is not the only place where project-specific data can appear.
+> `config.yaml` — основной файл проектной конфигурации, но проектные данные могут встречаться и в других местах.
 
 ---
 
-# 2. First step: decide what you are actually copying
+# 2. Первый шаг: определите, что именно вы копируете
 
-A useful new-project starting point is:
+Полезная исходная структура для нового проекта:
 
 ```text
-Copy:
+Копировать:
     .ai/AGENTS.md
     .ai/INDEX.md
     .ai/config.yaml              ← replace
@@ -53,7 +53,7 @@ Copy:
     .ai/tests/scenarios/     ← after checking scenarios
     docs/                        ← replace project-specific documents
 
-Do NOT blindly copy:
+Не копировать вслепую:
     .ai/handoffs/
     .ai/archives/
     old project references/
@@ -61,15 +61,15 @@ Do NOT blindly copy:
     old project architecture/research
 ```
 
-If the entire repository is copied, perform a cleanup pass before starting the new project.
+Если копируется весь репозиторий, перед началом работы над новым проектом выполните очистку.
 
 ---
 
-# 3. `.ai/config.yaml` is the primary project configuration
+# 3. `.ai/config.yaml` — основной файл конфигурации проекта
 
-This is the first file to replace.
+Его следует заменить в первую очередь.
 
-For Sprite Sheet Editor, the beginning might conceptually become:
+Для Sprite Sheet Editor начало файла концептуально может выглядеть так:
 
 ```yaml
 project:
@@ -83,35 +83,35 @@ project:
 
 ### 3.1 `project`
 
-Change:
+Измените:
 
 - `project.name`
 - `project.repository`
 - `project.default_branch`
 - `project.hosting` if the new project uses another hosting provider
 
-These values are used by repository/path-resolution and bootstrap infrastructure.
+Эти значения используются инфраструктурой репозитория, разрешения путей и bootstrap.
 
 ### 3.2 `references.repositories`
 
-This section is also project-specific.
+Этот раздел тоже зависит от проекта.
 
-For AIP Mirror it contains Illustrator SDK, Spectrum Web Components, Codex, Skills, and agent.md references.
+В AIP Mirror здесь находятся ссылки на Illustrator SDK, Spectrum Web Components, Codex, Skills и agent.md.
 
-For Sprite Sheet Editor, replace these with references actually relevant to the new project, for example:
+Для Sprite Sheet Editor замените их ссылками, действительно относящимися к новому проекту, например:
 
 - Tauri documentation/reference repository;
 - Rust ecosystem references;
 - Pillow/Python references;
 - any project-specific research repositories.
 
-Do not keep a reference merely because it existed in the template.
+Не сохраняйте ссылку только потому, что она присутствовала в шаблоне.
 
 ### 3.3 `specializations`
 
-Specializations are project vocabulary, not universal AI-infrastructure constants.
+Specializations — это словарь конкретного проекта, а не универсальные константы AI-инфраструктуры.
 
-For example, a new project could define:
+Например, новый проект может определить:
 
 ```yaml
 specializations:
@@ -125,13 +125,13 @@ specializations:
     short_name: Python Image Processing
 ```
 
-The `A / Project Workshop` pairing is the canonical neutral example used by the handoff documentation. It is a format example, not a universal specialization requirement. Other specialization letters and names are project-specific.
+Пара `A / Project Workshop` — canonical нейтральный пример из документации handoff. Это пример формата, а не обязательная специализация для всех проектов. Остальные буквы и названия специализаций зависят от проекта.
 
-If you change them, make sure existing handoff files are not copied into the new repository with incompatible names.
+Если вы изменяете их, убедитесь, что старые handoff-файлы с несовместимыми именами не попали в новый репозиторий.
 
 ### 3.4 `terminology.commit_scopes`
 
-Replace the AIP Mirror scopes:
+Замените scopes AIP Mirror:
 
 ```text
 mirror
@@ -142,7 +142,7 @@ jsx
 sdk
 ```
 
-with scopes meaningful to the new project, for example:
+на scopes, подходящие новому проекту, например:
 
 ```text
 core
@@ -157,7 +157,7 @@ tests
 
 ### 3.5 `terminology.project_terms`
 
-Replace Illustrator/FreeHand terminology with the vocabulary of the new project.
+Замените терминологию Illustrator/FreeHand словарём нового проекта.
 
 For example:
 
@@ -172,15 +172,15 @@ Python tooling
 Pillow
 ```
 
-This section is important because the commit skill explicitly uses configured terminology when constructing project-facing commit messages and descriptions.
+Этот раздел важен: commit skill использует настроенную терминологию при составлении commit messages и описаний, связанных с проектом.
 
 ---
 
-# 4. `docs/PROJECT-INSTRUCTIONS.md` must be rewritten
+# 4. `docs/PROJECT-INSTRUCTIONS.md` необходимо переписать
 
-This is the largest project-specific document outside `config.yaml`.
+Это самый большой проектно-специфичный документ за пределами `config.yaml`.
 
-The AIP Mirror version contains:
+Версия для AIP Mirror содержит:
 
 - Adobe Illustrator assumptions;
 - FreeHand behavioral targets;
@@ -190,9 +190,9 @@ The AIP Mirror version contains:
 - AIP Mirror workstream language;
 - Illustrator SDK references.
 
-For Sprite Sheet Editor, replace the entire document with the equivalent project contract.
+Для Sprite Sheet Editor замените весь документ соответствующим контрактом нового проекта.
 
-For example, it should describe things such as:
+Например, в нём следует описать:
 
 ```text
 Project purpose
@@ -208,9 +208,9 @@ Python/Pillow tooling
 validation/tests
 ```
 
-Do not try to preserve AIP Mirror's development chain and simply rename technologies. The architecture itself is different.
+Не пытайтесь сохранить цепочку разработки AIP Mirror, просто переименовав технологии. Сама архитектура будет другой.
 
-Keep the document thin. It should provide:
+Документ должен оставаться компактным. В нём следует описать:
 
 - project orientation;
 - project-specific constraints;
@@ -218,15 +218,15 @@ Keep the document thin. It should provide:
 - workstream coordination;
 - routing to canonical project documentation.
 
-It should NOT become a second `.ai/INDEX.md`, repository rulebook, or handoff manual.
+Он НЕ должен превращаться во второй `.ai/INDEX.md`, свод правил репозитория или руководство по handoff.
 
 ---
 
-# 5. `docs/architecture/project-architecture.md` must be replaced
+# 5. `docs/architecture/project-architecture.md` необходимо заменить
 
-This is also project-specific.
+Этот документ тоже зависит от проекта.
 
-The current file contains AIP Mirror architecture such as:
+Текущий файл описывает архитектуру AIP Mirror, включая:
 
 - JSX prototype versus production plugin;
 - C++ + Illustrator AIP;
@@ -236,7 +236,7 @@ The current file contains AIP Mirror architecture such as:
 - Illustrator integration;
 - four AIP Mirror specializations.
 
-For Sprite Sheet Editor this should become the project's actual architecture, for example:
+Для Sprite Sheet Editor здесь следует описать реальную архитектуру проекта, например:
 
 ```text
 Rust
@@ -252,7 +252,7 @@ Python + Pillow
   = image-processing/tooling boundary
 ```
 
-The exact architecture belongs to the new project, not to the reusable `.ai` infrastructure.
+Конкретная архитектура относится к новому проекту, а не к повторно используемой инфраструктуре `.ai`.
 
 ---
 
