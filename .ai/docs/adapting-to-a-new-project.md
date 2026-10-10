@@ -282,7 +282,7 @@ https://github.com/paulhuman/aip-mirror
 
 Это ещё один в основном универсальный файл, содержащий важную встроенную ссылку на проект.
 
-It currently contains:
+Сейчас в нём указано:
 
 ```text
 https://github.com/paulhuman/aip-mirror
@@ -467,7 +467,7 @@ Lifecycle разговора и процедуры handoff намеренно н
 
 Не копируйте старые результаты runtime-тестов в новый проект.
 
-For example:
+Например:
 
 ```text
 .ai/tests/scenarios/results/cold-start-command-trace/...
