@@ -153,20 +153,20 @@ Fork `paulhuman/spectrum-web-components` — практический образ
 Три слоя при строгом условии: **смыслом владеет только Layer 1.**
 
 ```text
-LAYER 1 — canonical semantics (host-agnostic, the only owner)
+СЛОЙ 1 — canonical semantics (не зависит от host, единственный owner)
     .ai/config.yaml        project identity + configured references
     .ai/rules/             constraints
     .ai/skills/            task-scoped capabilities
     .ai/workflows/         ordered procedures
     .ai/INDEX.md           operation routing + capability map
 
-LAYER 2 — host adapters (thin, generated or linked, never authoritative)
+СЛОЙ 2 — host adapters (тонкие, генерируемые или связанные, не авторитетные)
     AGENTS.md              universal entry point (all AGENTS.md-aware hosts)
     .agents/skills/        DSH rank 200 + cross-host convention
     .github/instructions/  generated for Copilot
     .cursor/rules/         generated for Cursor
 
-LAYER 3 — host runtime (outside the repository)
+СЛОЙ 3 — host runtime (за пределами репозитория)
     $DSH_HOME/profiles/web/cordis.patch.yml   personal skill roots, plugin config
     $DSH_HOME/AGENTS.md                       personal always-on instructions
     ~/.dsh/skills                             personal global skills
@@ -214,8 +214,8 @@ LAYER 3 — host runtime (outside the repository)
 не видит его, если только агент не обращается к файлу внутри `.ai/` (V5).
 
 ```text
-today:  .ai/AGENTS.md        found only by accident
-target: AGENTS.md            found always, by every host
+сейчас:  .ai/AGENTS.md        обнаруживается лишь случайно
+цель:    AGENTS.md            всегда обнаруживается каждым host
 ```
 
 ### 6.2 Сохранить файл компактным
