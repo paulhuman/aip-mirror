@@ -321,11 +321,11 @@ Git, но `handoff-reference-preservation` не появляется **ни в �
 
 ---
 
-## 4. Current state of relevant paths
+## 4. Текущее состояние соответствующих путей
 
-State re-verified at the start of the current session.
+Состояние повторно проверено в начале текущего сеанса.
 
-| Path | State |
+| Путь | Состояние |
 |---|---|
 | `...\harness\skills` | exists — `explain-code`, `review-agent` (personal, rank 400) |
 | `...\harness\AGENTS.md` | exists — personal always-on instructions, Russian |
@@ -337,31 +337,33 @@ State re-verified at the start of the current session.
 | `E:\Projects\repos\aip-mirror\.ai\scripts\adapters\New-SkillAdapters.ps1` | exists — creates the adapter, verifies it (Task B) |
 | `...\profiles\web\cordis.patch.yml` | `skill-filesystem` override removed; comment added |
 
-Repository state at the time of writing: branch `main` at `5e5d380`, working tree
-clean before this session's edits, `.agents/` present but ignored.
+Состояние репозитория на момент записи: ветка `main` на `5e5d380`; до изменений
+в этом сеансе рабочее дерево было чистым, `.agents/` присутствовал, но игнорировался.
 
 ---
 
-## 5. Open tasks
+## 5. Открытые задачи
 
-### Task A — prove project-scoped discovery in `aip-mirror` — **CLOSED**
+### Task A — подтвердить обнаружение skills в пределах `aip-mirror` — **ЗАКРЫТА**
 
-**Result: confirmed (V8).** Project-scoped discovery through the rank-200
-`.agents/skills` junction is observed: the live catalog of a session whose `cwd`
-is `E:\Projects\repos\aip-mirror` lists all eight `.ai/skills` names, the bodies
-of `knowledge-capture`, `activation`, and `normative-language` load from the
-junction path, and an out-of-repository control cannot see them. A fresh clone
-reproduces them only after the adapter is created.
+**Результат: подтверждено (V8).** Наблюдалось обнаружение в пределах проекта через
+junction `.agents/skills` с рангом 200: живой каталог сессии, у которой `cwd` равен
+`E:\Projects\repos\aip-mirror`, содержит все восемь имён из `.ai/skills`; тела
+`knowledge-capture`, `activation` и `normative-language` загружаются через путь
+junction, а контрольный запуск вне репозитория их не видит. В новом clone они
+появляются только после создания adapter.
 
-The one open sub-question — whether a fresh clone recovers the skills — is now
-answered **no, not without the setup step**, and the step is scripted (Task B).
+На единственный открытый подвопрос — восстанавливаются ли skills в новом clone —
+теперь дан ответ: **нет, без шага настройки они не появляются**; этот шаг
+автоматизирован скриптом (Task B).
 
-### Task B — the `.gitignore` entry and the adapter setup step — **APPLIED**
+### Task B — запись в `.gitignore` и шаг настройки adapter — **ПРИМЕНЕНЫ**
 
-**Why:** V4 — 9 duplicate files would otherwise be committed; and a fresh clone
-has no `.agents/` at all, so project skills would silently not be discovered.
+**Причина:** согласно V4, иначе в Git попали бы 9 дублирующих файлов; кроме того,
+в новом clone вообще нет `.agents/`, поэтому project skills не обнаруживались бы
+без каких-либо сообщений.
 
-**Applied:**
+**Применено:**
 
 1. `/.agents/` is ignored in `E:\Projects\repos\aip-mirror\.gitignore`, with the
    rationale and the setup command recorded in the file itself. Committed as
@@ -370,10 +372,10 @@ has no `.agents/` at all, so project skills would silently not be discovered.
    the part that matters — **verifies** it. A setup step that reports success
    while the host silently skips the root would just move the failure.
 
-**Verified behaviour of the script** (all cases exercised against a real fresh
-clone of this repository, and against this working copy):
+**Проверенное поведение скрипта** (все случаи проверены на настоящем новом clone
+этого репозитория и на текущей рабочей копии):
 
-| Case | Result |
+| Сценарий | Результат |
 |---|---|
 | fresh clone, no adapter, run from an unrelated cwd | junction created to the clone's `.ai\skills`, 8 skills visible, `SKILL.md` readable, exit 0 |
 | re-run when already correct | reports `already correct`, no change, exit 0 |
@@ -381,26 +383,26 @@ clone of this repository, and against this working copy):
 | link points somewhere else, `-Force` | replaces the link, exit 0 |
 | a **real directory** sits at the adapter path | refuses to delete it, exits 1, directory contents survive |
 
-The script never deletes a non-link, and it resolves the repository from its own
-location first so that it cannot be aimed at the wrong repository by the caller's
-working directory.
+Скрипт никогда не удаляет объект, который не является ссылкой, и сначала
+определяет репозиторий по собственному расположению, поэтому рабочий каталог
+вызывающей стороны не может случайно направить его на другой репозиторий.
 
-**Deliberately not done:** no committed symlink (its failure mode is silent on a
-clone without the privilege — V10 — and this workflow is Windows-primary), and no
-generated pointer skills (the vNext Tier 2 fallback — unnecessary while the
-adapter works and the failure mode is loud rather than silent).
+**Сознательно не сделано:** symlink не добавлялся в Git (в clone без нужной
+привилегии его отказ незаметен — V10, а основной workflow ориентирован на Windows);
+также не создавались generated pointer skills (резервный вариант Tier 2 из vNext,
+пока не нужный, поскольку adapter работает, а его отказ заметен).
 
-### Task C — extend the verification to any second host, if one is ever used
+### Task C — расширить проверку на второй host, если он когда-либо появится
 
-Currently DSH is the only agentic host in use. The design in the vNext proposal
-keeps host-specific mechanics in an adapter layer. Do not build adapters for
-hypothetical hosts.
+Сейчас DSH — единственный используемый agentic host. Архитектура из vNext proposal
+оставляет host-specific механизмы в adapter layer. Не создавайте adapters для
+гипотетических hosts.
 
 ---
 
-## 6. Commands for the next session
+## 6. Команды для следующего сеанса
 
-Repository and adapter state:
+Состояние репозитория и adapter:
 
 ```powershell
 cd E:\Projects\repos\aip-mirror
@@ -410,21 +412,22 @@ Get-ChildItem .agents\skills -Directory | Select-Object -ExpandProperty Name
 git add --dry-run --all -- .agents      # must report the path as ignored
 ```
 
-Recreate or repair the adapter (idempotent; safe to re-run):
+Создать или восстановить adapter (идемпотентно; команду безопасно запускать повторно):
 
 ```powershell
 cd E:\Projects\repos\aip-mirror
 pwsh -File .ai/scripts/adapters/New-SkillAdapters.ps1
 ```
 
-Effective composition (remember V3 — the dump shows merged, not loaded):
+Итоговая конфигурация (помните V3: dump показывает объединённую конфигурацию,
+а не фактически загруженные компоненты):
 
 ```powershell
 $env:DSH_HOME = "$env:APPDATA\dsh-desktop\harness"
 npx --yes @deepseek-ai/dsh@0.2.0-rc.2 --profile web --dump-config
 ```
 
-Live catalog for a session (the ground truth, better than the dump):
+Живой каталог сессии — фактическое свидетельство, более надёжное, чем dump:
 
 ```
 <available_skills> ... </available_skills>
@@ -444,8 +447,8 @@ node -e "const fs=require('fs'),z=require('zlib');const buf=fs.readFileSync(proc
 # then read the line containing 'A skill is a reusable'
 ```
 
-Personal skills live in `$DSH_HOME\skills`; the catalog updates live, no
-restart needed (V2).
+Personal skills находятся в `$DSH_HOME\skills`; каталог обновляется на лету,
+перезапуск не требуется (V2).
 
 **Name-only replay without touching the live session.** The `headless` profile
 reads the same `skill-filesystem` provider (host-plane row, no preset) but has no
@@ -466,7 +469,7 @@ catalog. Note that `headless` uses `deepseek-official` by default and fails with
 
 ---
 
-## 7. What remains uncertain
+## 7. Что остаётся неопределённым
 
 1. **Whether `.agents/skills` is genuinely cross-host.** Earlier research
    claimed Gemini CLI reads it; that was never verified here. Until it is,
@@ -490,11 +493,11 @@ catalog. Note that `headless` uses `deepseek-official` by default and fails with
 
 ---
 
-## 8. Corrections to earlier documents
+## 8. Исправления для более ранних документов
 
-Apply these when the `agentic-ai-*` series is next revised.
+Внесите эти исправления при следующем обновлении серии `agentic-ai-*`.
 
-| Earlier claim | Corrected state |
+| Прежнее утверждение | Исправленное состояние |
 |---|---|
 | `customSkillDirs` is the way to add a personal root | It is dead on the host row (V3). Use `$DSH_HOME/skills`, which needs no config (V2). |
 | `~/.dsh/skills` is a usable personal root | Only for a standalone CLI, not for Desktop. The user removed the folder. |
@@ -505,7 +508,7 @@ Apply these when the `agentic-ai-*` series is next revised.
 | `.gitignore` is empty and the entry is still pending (Task B of the previous revision) | `/.agents/` was added and committed as `5e5d380`; the setup command is documented in the ignore file itself and scripted at `.ai/scripts/adapters/New-SkillAdapters.ps1`. |
 | `@deepseek-ai/dsh-skill-filesystem` is only observable through experiments | The package source is readable in the npx cache and was read directly this session (V7, V9). Ranks, root order, the one-level scan, and the `.git`-walk project-root resolution are all source facts now, not inferences. |
 
-### 8.1 A correction to the conversation, not to these documents
+### 8.1 Исправление в истории обсуждения, а не в документах
 
 In the session that added V8/V9, the difference between the two adapter
 mechanisms was summarised to the user as: *"a committed symlink is not an option
