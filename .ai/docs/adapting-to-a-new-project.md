@@ -44,21 +44,21 @@ config.yaml + docs/ + selected history = project-specific context
 Копировать:
     .ai/AGENTS.md
     .ai/INDEX.md
-    .ai/config.yaml              ← replace
-    .ai/conversation-management/  ← explicitly invoked handoff/bootstrap material
+    .ai/config.yaml              ← заменить
+    .ai/conversation-management/  ← явно вызываемые процедуры handoff/bootstrap
     .ai/skills/
-    .ai/skills/workflow/SKILL.md  ← general workflow principles
-    .ai/docs/architecture/README.md
-    .ai/docs/faq/
-    .ai/tests/scenarios/     ← after checking scenarios
-    docs/                        ← replace project-specific documents
+    .ai/skills/workflow/SKILL.md  ← общие принципы workflow
+    .ai/docs/README.md
+    selected reusable documents from .ai/docs/  ← after reviewing project relevance
+    .ai/tests/scenarios/     ← после проверки сценариев
+    docs/                        ← заменить проектно-специфичные документы
 
 Не копировать вслепую:
     .ai/handoffs/
     .ai/archives/
-    old project references/
-    old runtime test results/
-    old project architecture/research
+    старые ссылки на проект/
+    старые результаты runtime-тестов/
+    старая архитектура и исследования проекта
 ```
 
 Если копируется весь репозиторий, перед началом работы над новым проектом выполните очистку.
@@ -88,7 +88,7 @@ project:
 - `project.name`
 - `project.repository`
 - `project.default_branch`
-- `project.hosting` if the new project uses another hosting provider
+- `project.hosting`, если новый проект использует другого hosting provider
 
 Эти значения используются инфраструктурой репозитория, разрешения путей и bootstrap.
 
@@ -100,10 +100,10 @@ project:
 
 Для Sprite Sheet Editor замените их ссылками, действительно относящимися к новому проекту, например:
 
-- Tauri documentation/reference repository;
-- Rust ecosystem references;
-- Pillow/Python references;
-- any project-specific research repositories.
+- документация и reference repository Tauri;
+- материалы экосистемы Rust;
+- материалы Pillow/Python;
+- исследовательские репозитории, относящиеся к конкретному проекту.
 
 Не сохраняйте ссылку только потому, что она присутствовала в шаблоне.
 
@@ -159,7 +159,7 @@ tests
 
 Замените терминологию Illustrator/FreeHand словарём нового проекта.
 
-For example:
+Например:
 
 ```text
 sprite sheet
@@ -182,13 +182,13 @@ Pillow
 
 Версия для AIP Mirror содержит:
 
-- Adobe Illustrator assumptions;
-- FreeHand behavioral targets;
-- JSX prototype workflow;
-- native C++ / AIP implementation;
-- Illustrator-specific milestones;
-- AIP Mirror workstream language;
-- Illustrator SDK references.
+- предположения, связанные с Adobe Illustrator;
+- целевые поведенческие характеристики FreeHand;
+- workflow JSX-прототипа;
+- реализация на native C++ / AIP;
+- этапы, специфичные для Illustrator;
+- терминология рабочих направлений AIP Mirror;
+- ссылки на Illustrator SDK.
 
 Для Sprite Sheet Editor замените весь документ соответствующим контрактом нового проекта.
 
@@ -397,7 +397,7 @@ PROJECT-INSTRUCTIONS
 
 ---
 
-# 9. Canonical semantic ownership
+# 9. Каноническое владение семантикой
 
 В целевой архитектуре нет отдельного слоя `.ai/rules/`. Общая операционная семантика принадлежит соответствующим canonical skills первого уровня, включая:
 
@@ -441,31 +441,25 @@ Lifecycle разговора и процедуры handoff намеренно н
 
 ---
 
-# 12. `.ai/docs/architecture/`
+# 12. `.ai/docs/`
 
-В этом каталоге два разных типа материалов.
+Текущий каталог `.ai/docs/` плоский: тематических подкаталогов `architecture/` и `faq/` в актуальной структуре нет. Документы следует оценивать по их назначению и переносимости, а не по прежнему расположению.
 
 ## Повторно используемые материалы об инфраструктуре
 
 Сохранить:
 
-- `.ai/docs/architecture/README.md`
-- reusable FAQ material;
-- reusable architecture test scenarios after checking them.
+- `.ai/docs/README.md` — описание структуры и назначения документации;
+- отдельные документы из `.ai/docs/`, если их содержание переносимо в новый проект;
+- повторно используемые test scenarios после проверки их актуальности.
 
-## Исторические материалы AIP Mirror
+## Материалы с контекстом и историей AIP Mirror
 
-Текущий файл:
+Ранее здесь указывался файл `.ai/docs/architecture/ai-infrastructure-restructuring.md`, но такого пути в текущей структуре больше нет. `ai-infrastructure-context-mode.md` находится в `.ai/docs/` и содержит архитектурный контекст, часть которого относится к истории этого репозитория.
 
-```text
-.ai/docs/architecture/ai-infrastructure-restructuring.md
-```
+Этот материал может быть полезен как свидетельство развития AIP Mirror, но его нельзя автоматически переносить в новый проект Sprite Sheet Editor.
 
-— документ об истории развития инфраструктуры этого репозитория.
-
-Он полезен как историческое свидетельство для AIP Mirror, но не должен автоматически попадать в новый проект Sprite Sheet Editor.
-
-При копировании шаблона удалите его или замените историческим документом архитектуры нового проекта, если такой документ нужен.
+При адаптации переносите только обобщаемые решения и rationale. Исторические детали AIP Mirror не следует включать в новый проект; при необходимости создайте отдельную историю архитектуры нового проекта.
 
 ---
 
@@ -660,7 +654,7 @@ Check `.ai/INDEX.md`.
 
 Сохраните команды инфраструктуры, полезные новому проекту. Не создавайте новые команды только потому, что изменился технологический стек.
 
-### Шаг 10 — Bootstrap первой реальной chapter
+### Шаг 10 — Bootstrap первой реальной главы
 
 Используйте canonical путь:
 
