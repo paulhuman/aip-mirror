@@ -12,7 +12,6 @@ C
 **Previous chapter:**
 0085
 
-
 ## Starting objective
 
 Continue the accepted AI-infrastructure documentation review after the completed directory reorganization. Work through `.ai/memory/ai-docs-architecture-update-todo.md` using current repository evidence. Review all seven maintained documents in `.ai/docs/`, translate the existing English documents into Russian while preserving exact technical terms and identifiers, classify claims, fix current-use stale paths/references, verify semantic-owner boundaries, and record evidence. DSH-specific practical testing is deferred to DSH and tracked in the TODO.
