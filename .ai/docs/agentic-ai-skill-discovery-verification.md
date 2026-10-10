@@ -365,12 +365,11 @@ junction, а контрольный запуск вне репозитория �
 
 **Применено:**
 
-1. `/.agents/` is ignored in `E:\Projects\repos\aip-mirror\.gitignore`, with the
-   rationale and the setup command recorded in the file itself. Committed as
-   `5e5d380`.
-2. `.ai/scripts/adapters/New-SkillAdapters.ps1` creates the adapter and — this is
-   the part that matters — **verifies** it. A setup step that reports success
-   while the host silently skips the root would just move the failure.
+1. `/.agents/` исключён из Git в `E:\Projects\repos\aip-mirror\.gitignore`; там же
+   записаны обоснование и команда настройки. Commit: `5e5d380`.
+2. `.ai/scripts/adapters/New-SkillAdapters.ps1` создаёт adapter и — что особенно
+   важно — **проверяет** его. Если шаг настройки сообщает об успехе, а host молча
+   пропускает корень, это лишь переносит точку отказа.
 
 **Проверенное поведение скрипта** (все случаи проверены на настоящем новом clone
 этого репозитория и на текущей рабочей копии):
@@ -378,10 +377,10 @@ junction, а контрольный запуск вне репозитория �
 | Сценарий | Результат |
 |---|---|
 | fresh clone, no adapter, run from an unrelated cwd | junction created to the clone's `.ai\skills`, 8 skills visible, `SKILL.md` readable, exit 0 |
-| re-run when already correct | reports `already correct`, no change, exit 0 |
-| link points somewhere else, no `-Force` | refuses, prints current and expected target, target unchanged, exit 1 |
-| link points somewhere else, `-Force` | replaces the link, exit 0 |
-| a **real directory** sits at the adapter path | refuses to delete it, exits 1, directory contents survive |
+| повторный запуск при корректной настройке | сообщает `already correct`, ничего не меняет, exit 0 |
+| ссылка указывает в другое место, без `-Force` | отказывается, выводит текущую и ожидаемую цель, ничего не меняет, exit 1 |
+| ссылка указывает в другое место, с `-Force` | заменяет ссылку, exit 0 |
+| по пути adapter находится **настоящий каталог** | отказывается удалять его, exit 1, содержимое каталога сохраняется |
 
 Скрипт никогда не удаляет объект, который не является ссылкой, и сначала
 определяет репозиторий по собственному расположению, поэтому рабочий каталог
@@ -498,14 +497,14 @@ npx --yes @deepseek-ai/dsh@0.2.0-rc.2 headless --patch <patch.yml> "<task asking
 
 | Прежнее утверждение | Исправленное состояние |
 |---|---|
-| `customSkillDirs` is the way to add a personal root | It is dead on the host row (V3). Use `$DSH_HOME/skills`, which needs no config (V2). |
-| `~/.dsh/skills` is a usable personal root | Only for a standalone CLI, not for Desktop. The user removed the folder. |
-| `.ai/skills` may be reused "without duplicating" via ranking | True only through a link or generated pointers; the canonical path is not a root (V5), and a committed junction duplicates content in git (V4). |
-| Skill discovery roots and precedence | Roots and ranks unchanged (V7), but the **owning row moved into agent presets**, and Minimal mode loads no skills at all (V1, V6). |
-| `review-agent` absence from the catalog was unexplained | It was `disable-model-invocation: true`; the catalog filters on model-invocability (V2). |
-| Discovery through `.agents/skills` is "structurally verified, behaviourally unproven" (root `AGENTS.md`) | **Now behaviourally confirmed** (V8). The root `AGENTS.md` sentence was updated in this session to say so and to name the setup command. |
-| `.gitignore` is empty and the entry is still pending (Task B of the previous revision) | `/.agents/` was added and committed as `5e5d380`; the setup command is documented in the ignore file itself and scripted at `.ai/scripts/adapters/New-SkillAdapters.ps1`. |
-| `@deepseek-ai/dsh-skill-filesystem` is only observable through experiments | The package source is readable in the npx cache and was read directly this session (V7, V9). Ranks, root order, the one-level scan, and the `.git`-walk project-root resolution are all source facts now, not inferences. |
+| `customSkillDirs` используется для добавления personal root | На host-level row он не работает (V3). Используйте `$DSH_HOME/skills`, который не требует конфигурации (V2). |
+| `~/.dsh/skills` — подходящий personal root | Только для standalone CLI, не для Desktop. Пользователь удалил этот каталог. |
+| `.ai/skills` можно повторно использовать «без дублирования» благодаря ranking | Это возможно только через ссылку или generated pointers; canonical path не является корнем discovery (V5), а junction, добавленная в Git, дублирует содержимое (V4). |
+| Корни discovery и порядок приоритетов skills | Корни и ранги не изменились (V7), но **владеющая строка перемещена в agent presets**, а Minimal mode вообще не загружает skills (V1, V6). |
+| Отсутствие `review-agent` в каталоге не было объяснено | Причиной было `disable-model-invocation: true`; каталог фильтруется по возможности вызова моделью (V2). |
+| Обнаружение через `.agents/skills` «структурно подтверждено, поведенчески не доказано» (корневой `AGENTS.md`) | **Теперь поведение подтверждено** (V8). В этом сеансе фраза в корневом `AGENTS.md` была обновлена, чтобы отразить это и указать команду настройки. |
+| `.gitignore` пуст, запись ещё не добавлена (Task B предыдущей редакции) | `/.agents/` добавлен и закоммичен как `5e5d380`; команда настройки указана в `.gitignore` и реализована в `.ai/scripts/adapters/New-SkillAdapters.ps1`. |
+| `@deepseek-ai/dsh-skill-filesystem` можно изучить только экспериментально | Исходный код пакета доступен в npx cache и был прочитан напрямую в этом сеансе (V7, V9). Ранги, порядок корней, обход на один уровень и поиск корня проекта подъёмом по `.git` теперь являются фактами из исходников, а не выводами по косвенным признакам. |
 
 ### 8.1 Исправление в истории обсуждения, а не в документах
 
