@@ -126,49 +126,52 @@ front matter только `name` и `description`, DSH добавил его в 
 > Не делайте вывод, что patch работает, только по dump. Подтверждайте результат
 > через живой каталог доступных skills.
 
-### V4 — `.agents/skills` junction is correct, discoverable, and gitignored
+### V4 — Junction `.agents/skills` работает, обнаруживается и исключён из Git
 
-**Status: CONFIRMED behaviourally.** Structural correctness was checked earlier;
-discovery through the junction is now observed (V8). In
+**Статус: поведение ПОДТВЕРЖДЕНО.** Структурная корректность проверялась ранее;
+обнаружение через junction теперь также наблюдалось (V8). В
 `E:\Projects\repos\aip-mirror`:
 
 ```
 .agents\skills  →  Junction  →  E:\Projects\repos\aip-mirror\.ai\skills
 ```
 
-Verified structurally: `LinkType = Junction`; the canonical and adapter
-listings are identical (8 skill directories); `activation/SKILL.md` and
-`normative-language/SKILL.md` have identical SHA-256 through both paths. No
-content copy exists.
+Структурно подтверждено: `LinkType = Junction`; списки canonical-каталога и
+adapter совпадают (8 каталогов skills); файлы `activation/SKILL.md` и
+`normative-language/SKILL.md` имеют одинаковый SHA-256 при чтении через оба
+пути. Копий содержимого нет.
 
-But git does **not** track a junction as a link. `git add --dry-run --all -f -- .agents`
-lists **9 files** — `.agents/skills/<name>/SKILL.md` for every skill, plus the
-depth-2 `handoff/reference-preservation/SKILL.md`. Without an ignore entry the
-first `git add` would commit duplicate skill content into the repository —
-exactly the duplication the architecture forbids. That entry now exists
-(`/.agents/`, committed in `5e5d380`), after which `git status` stays clean and
-`git add --dry-run --all -- .agents` reports the path as ignored.
+Однако Git **не отслеживает junction как ссылку**. Команда
+`git add --dry-run --all -f -- .agents` перечисляет **9 файлов** —
+`.agents/skills/<name>/SKILL.md` для каждого skill, а также
+`handoff/reference-preservation/SKILL.md` на втором уровне вложенности.
+Без правила ignore первая команда `git add` добавила бы в репозиторий
+дубликаты содержимого skills — именно то дублирование, которое запрещает
+архитектура. Правило уже добавлено (`/.agents/`, commit `5e5d380`); после
+этого `git status` остаётся чистым, а `git add --dry-run --all -- .agents`
+показывает, что путь игнорируется.
 
-### V5 — `.ai/skills` is still not a native discovery root
+### V5 — `.ai/skills` по-прежнему не является нативным корнем discovery в DSH
 
-None of the six roots names `.ai/skills`. The junction in V4 is what makes the
-content discoverable to DSH; the canonical path is not itself a root.
+Ни один из шести корней обнаружения не содержит путь `.ai/skills`. Именно
+junction из V4 делает содержимое доступным для DSH; canonical-путь сам по себе
+не является корнем обнаружения.
 
-### V6 — Presets differ in whether skills load at all
+### V6 — В разных presets skills загружаются по-разному
 
-| UI name | preset id | `skill-filesystem` | Skills load |
+| Название в UI | ID preset | `skill-filesystem` | Skills загружаются |
 |---|---|---|---|
-| Standard mode | `standard` | yes | **yes** |
-| PTC mode | `ptc` | yes | **yes** |
-| Minimal mode | `minimal` | **no** | **NO** |
-| Creator mode | `cordis` | yes | yes |
+| Standard mode | `standard` | да | **да** |
+| PTC mode | `ptc` | да | **да** |
+| Minimal mode | `minimal` | **нет** | **НЕТ** |
+| Creator mode | `cordis` | да | да |
 
-PTC differs from `standard` by exactly one row:
-`@deepseek-ai/dsh-agent-tool-presentation` with `mode: ptc`. That changes the
-**tool-call form** (the agent writes a TypeScript program via `run_code`), not
-skill discovery. Minimal mode loads no skills by design.
+Отличие PTC от `standard` ровно в одной записи:
+`@deepseek-ai/dsh-agent-tool-presentation` с `mode: ptc`. Это меняет **форму
+вызова инструмента** (agent пишет TypeScript-программу для `run_code`), а не
+обнаружение skills. В Minimal mode skills намеренно не загружаются.
 
-**Stay on `standard`.**
+**Оставайтесь в режиме `standard`.**
 
 ### V7 — Per-agent-row ranking is unchanged
 
