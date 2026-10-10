@@ -1,42 +1,44 @@
-# Agentic AI skill discovery — verification record
+# Проверка обнаружения skills в Agentic AI — журнал результатов
 
-**Status:** working record. Supersedes the DSH-specific claims in the
-`agentic-ai-*` series where they disagree.
-**Purpose:** preserve enough verified state that a fresh session can continue
-this verification work without reconstructing it from conversation history.
-**Revision:** second pass. Project-scoped discovery is confirmed (V8), Task A is
-closed and Task B applied; the open list is now short and genuinely open.
+**Статус:** рабочая запись. При расхождениях заменяет DSH-specific утверждения из серии
+`agentic-ai-*`.
+**Назначение:** сохранить достаточно подтверждённого состояния, чтобы новый сеанс мог
+продолжить проверку без реконструкции контекста из истории переписки.
+**Редакция:** второй проход. Обнаружение в контексте проекта подтверждено (V8),
+задача A закрыта, задача B выполнена; список открытых вопросов теперь короткий и
+содержит только действительно нерешённые пункты.
 
-Read this file first, then `.ai/docs/ai-infrastructure-vnext-proposal.md`
-for the design that these findings feed.
-
----
-
-## 1. How to use this file
-
-This is a **state + task** record, not an architecture rationale. It holds:
-
-- what was verified, and by what evidence;
-- what turned out to be wrong;
-- the exact next steps, with commands.
-
-It is supporting material. It does not own any semantic rule.
+Сначала прочитайте этот файл, затем `.ai/docs/ai-infrastructure-vnext-proposal.md`,
+где описана архитектура, для которой нужны эти результаты.
 
 ---
 
-## 2. Environment baseline
+## 1. Как пользоваться этим файлом
 
-| Fact | Value |
+Это запись о **состоянии и задачах**, а не архитектурное обоснование. В ней
+сохранены:
+
+- что проверено и какими свидетельствами это подтверждается;
+- какие прежние выводы оказались неверными;
+- точные следующие шаги и команды.
+
+Это вспомогательный материал. Он не является владельцем каких-либо семантических правил.
+
+---
+
+## 2. Исходное состояние среды
+
+| Факт | Значение |
 |---|---|
 | DSH Desktop | `0.11.0` |
-| Harness / `@deepseek-ai/dsh` | `0.2.0-rc.2` (read from `app.asar`) |
-| `DSH_HOME` | `C:\Users\Paul\AppData\Roaming\dsh-desktop\harness` |
+| Harness / `@deepseek-ai/dsh` | `0.2.0-rc.2` (версия прочитана из `app.asar`) |
+| `DSH_HOME` | `C:\\Users\\Paul\\AppData\\Roaming\\dsh-desktop\\harness` |
 | Profile | `web` |
-| Active agent preset | `standard` |
-| `dsh` on `PATH` | **no** — use `npx --yes @deepseek-ai/dsh@0.2.0-rc.2` with `DSH_HOME` set |
-| OS | Windows 10 |
+| Активный agent preset | `standard` |
+| `dsh` в `PATH` | **нет** — используйте `npx --yes @deepseek-ai/dsh@0.2.0-rc.2`, предварительно задав `DSH_HOME` |
+| ОС | Windows 10 |
 
-`dsh` is not installed globally. Every CLI check must be:
+`dsh` глобально не установлен. Каждую проверку CLI следует выполнять так:
 
 ```powershell
 $env:DSH_HOME = "$env:APPDATA\dsh-desktop\harness"
