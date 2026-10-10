@@ -433,45 +433,45 @@ Lifecycle разговора и процедуры handoff намеренно н
 
 ---
 
-# 11. Workflow and conversation-management procedures
+# 11. Процедуры workflow и conversation management
 
-General AI workflow principles are owned by `.ai/skills/workflow/SKILL.md`. Human-facing independent-review onboarding templates live under `.ai/conversation-management/templates/` and are governed by the corresponding conversation-management procedures.
+Общие принципы AI workflow принадлежат `.ai/skills/workflow/SKILL.md`. Шаблоны onboarding для независимой проверки человеком находятся в `.ai/conversation-management/templates/` и регулируются соответствующими процедурами conversation management.
 
-The receiving-chapter bootstrap procedure is owned by `.ai/conversation-management/handoff/BOOTSTRAP.md`. Keep it under conversation management rather than moving it into the first-level `.ai/skills/` namespace.
+Процедура bootstrap для принимающего chapter принадлежит `.ai/conversation-management/handoff/BOOTSTRAP.md`. Оставьте её в conversation management, не перемещая в пространство имён `.ai/skills/` первого уровня.
 
 ---
 
 # 12. `.ai/docs/architecture/`
 
-This directory has two different kinds of content.
+В этом каталоге два разных типа материалов.
 
-## Reusable infrastructure material
+## Повторно используемые материалы об инфраструктуре
 
-Keep:
+Сохранить:
 
 - `.ai/docs/architecture/README.md`
 - reusable FAQ material;
 - reusable architecture test scenarios after checking them.
 
-## AIP Mirror historical material
+## Исторические материалы AIP Mirror
 
-The current:
+Текущий файл:
 
 ```text
 .ai/docs/architecture/ai-infrastructure-restructuring.md
 ```
 
-is an architecture-history document for this repository's infrastructure evolution.
+— документ об истории развития инфраструктуры этого репозитория.
 
-It is useful as historical evidence for AIP Mirror, but it should not automatically become part of a fresh Sprite Sheet Editor project.
+Он полезен как историческое свидетельство для AIP Mirror, но не должен автоматически попадать в новый проект Sprite Sheet Editor.
 
-For a copied template, remove it or replace it with the new project's own architecture-history document if one is needed.
+При копировании шаблона удалите его или замените историческим документом архитектуры нового проекта, если такой документ нужен.
 
 ---
 
 # 13. `.ai/tests/scenarios/results/`
 
-Do not copy old runtime results into a new project.
+Не копируйте старые результаты runtime-тестов в новый проект.
 
 For example:
 
@@ -480,71 +480,71 @@ For example:
 .ai/tests/scenarios/results/trace-runtime-presentation/...
 ```
 
-are evidence about previous runs of this repository's infrastructure.
+— свидетельства о предыдущих запусках инфраструктуры этого репозитория.
 
-They are historical records, not reusable project configuration.
+Это исторические записи, а не повторно используемая конфигурация проекта.
 
-For a new project:
+Для нового проекта:
 
-1. keep the reusable test scenario;
-2. remove old result artifacts;
-3. run the test against the new repository;
-4. create new result artifacts with the new repository revision and runtime context.
+1. сохранить универсальный тестовый сценарий;
+2. удалить старые артефакты результатов;
+3. запустить тест в новом репозитории;
+4. создать новые артефакты с revision нового репозитория и контекстом runtime.
 
 ---
 
 # 14. `.ai/handoffs/`
 
-Treat the current handoffs as disposable project state when creating a new project from this repository.
+При создании нового проекта на основе этого репозитория считайте текущие handoffs временным состоянием проекта.
 
-Do not carry the existing project handoff files into the new repository.
+Не переносите существующие handoff-файлы проекта в новый репозиторий.
 
-The `A0001-Project-Workshop.md` example is a format example only. It is not a handoff to copy into the new project.
+Пример `A0001-Project-Workshop.md` показывает только формат. Это не handoff, который следует копировать в новый проект.
 
-Instead:
+Вместо этого:
 
-1. create the new project's specialization vocabulary in `.ai/config.yaml`;
-2. start the first chapter of each required specialization from chapter `0001`;
-3. use the canonical bootstrap procedure;
-4. let new handoffs be generated from the new project's actual work.
+1. определить названия специализаций нового проекта в `.ai/config.yaml`;
+2. начать первую главу каждой необходимой специализации с chapter `0001`;
+3. использовать canonical bootstrap procedure;
+4. создавать новые handoffs на основе реальной работы над новым проектом.
 
-The README may remain as generic orientation.
+README можно оставить как универсальное вводное описание.
 
 ---
 
 # 15. `.ai/archives/`
 
-Do not treat the archive as active infrastructure.
+Не считайте архив активной инфраструктурой.
 
-The current archive contains historical AIP Mirror architecture and handoffs.
+Текущий архив содержит исторические материалы архитектуры AIP Mirror и handoffs.
 
-When creating a new project from this repository, the safest default is:
+При создании нового проекта на основе этого репозитория самый безопасный вариант по умолчанию:
 
 ```text
 .ai/archives/
     = remove from the new project
 ```
 
-If the archive contains a genuinely reusable infrastructure decision, manually extract that knowledge into the corresponding generic rule/skill/workflow/FAQ instead of copying the entire historical archive.
+Если архив содержит действительно универсальное решение по инфраструктуре, вручную перенесите эти знания в соответствующий общий rule/skill/workflow/FAQ вместо копирования всего исторического архива.
 
-This prevents historical AIP Mirror decisions from silently becoming requirements of Sprite Sheet Editor.
+Так исторические решения AIP Mirror не станут незаметно требованиями Sprite Sheet Editor.
 
 ---
 
 # 16. `references/`
 
-The current repository contains AIP Mirror research material such as:
+Текущий репозиторий содержит исследовательские материалы AIP Mirror, например:
 
 - FreeHand manuals;
 - Illustrator JavaScript documentation;
 - Illustrator test screenshots;
 - FreeHand test videos.
 
-These are project-specific research references.
+Это исследовательские ссылки и материалы конкретного проекта.
 
-They should not be copied into Sprite Sheet Editor unless a reference is independently relevant.
+Не копируйте их в Sprite Sheet Editor, если конкретный материал не имеет самостоятельной ценности для нового проекта.
 
-For the new project, replace them with relevant material, for example:
+Для нового проекта замените их актуальными материалами, например:
 
 ```text
 references/
@@ -556,26 +556,26 @@ references/
     test-data/
 ```
 
-The exact taxonomy is a project decision.
+Точная классификация каталогов определяется проектом.
 
 ---
 
-# 17. AIP Mirror-specific files outside `.ai/`
+# 17. Файлы AIP Mirror за пределами `.ai/`
 
-This is easy to miss because the request may sound like an `.ai` migration.
+Об этом легко забыть, поскольку задача может звучать как перенос только `.ai`.
 
-The current repository also has project-specific files under:
+В текущем репозитории также есть проектно-специфичные файлы в каталогах:
 
 ```text
 docs/
 references/
 ```
 
-and potentially project source/prototype/test directories as the implementation grows.
+а по мере развития реализации — возможно, и в каталогах исходного кода, прототипов и тестов.
 
-The `.ai` infrastructure does not make those files reusable.
+Наличие инфраструктуры `.ai` не делает эти файлы универсальными.
 
-A copied repository therefore needs two separate audits:
+Поэтому скопированный репозиторий требует двух отдельных аудитов:
 
 ```text
 Audit A
@@ -589,30 +589,30 @@ actual project implementation and knowledge
 
 ---
 
-# 18. Recommended Sprite Sheet Editor adaptation
+# 18. Рекомендуемый порядок адаптации для Sprite Sheet Editor
 
-A practical sequence is:
+Практическая последовательность:
 
-### Step 1 — Copy
+### Шаг 1 — Копирование
 
-Copy the repository structure into the new repository.
+Скопируйте структуру репозитория в новый репозиторий.
 
-### Step 2 — Reset project identity
+### Шаг 2 — Сброс идентичности проекта
 
-Replace `.ai/config.yaml`.
+Замените `.ai/config.yaml`.
 
-### Step 3 — Replace project instructions
+### Шаг 3 — Замена инструкций проекта
 
-Rewrite:
+Перепишите:
 
 ```text
 docs/PROJECT-INSTRUCTIONS.md
 docs/architecture/project-architecture.md
 ```
 
-### Step 4 — Generalize embedded repository locators
+### Шаг 4 — Обобщение встроенных repository locators
 
-Check:
+Проверьте:
 
 ```text
 .ai/conversation-management/handoff/SKILL.md
@@ -620,30 +620,30 @@ Check:
 .ai/tests/scenarios/cold-start-command-trace.md
 ```
 
-for the old repository URL and make those references configuration-driven or neutral.
+на наличие URL старого репозитория и сделайте эти ссылки зависимыми от конфигурации либо нейтральными.
 
-### Step 5 — Reset conversation state
+### Шаг 5 — Сброс состояния conversation
 
-Remove old:
+Удалите старые:
 
 ```text
 .ai/handoffs/<old-specializations>/*
 .ai/archives/handoffs/*
 ```
 
-Keep only the generic handoff README if desired.
+При необходимости оставьте только универсальный handoff README.
 
-### Step 6 — Reset historical architecture evidence
+### Шаг 6 — Сброс исторических архитектурных свидетельств
 
-Remove old AIP Mirror architecture history and runtime test results.
+Удалите историю архитектуры AIP Mirror и результаты runtime-тестов.
 
-### Step 7 — Replace research references
+### Шаг 7 — Замена исследовательских материалов
 
-Remove FreeHand/Illustrator material and add references relevant to the new application.
+Удалите материалы FreeHand/Illustrator и добавьте ссылки на материалы, относящиеся к новому приложению.
 
-### Step 8 — Define the new project vocabulary
+### Шаг 8 — Определение терминологии нового проекта
 
-Update:
+Обновите:
 
 ```text
 specializations
@@ -652,17 +652,17 @@ terminology.project_terms
 references.repositories
 ```
 
-in `.ai/config.yaml`.
+в `.ai/config.yaml`.
 
-### Step 9 — Review the active command surface
+### Шаг 9 — Проверка активного набора команд
 
 Check `.ai/INDEX.md`.
 
-Keep the infrastructure commands that are useful for the new project. Do not create new commands merely because the technology stack changed.
+Сохраните команды инфраструктуры, полезные новому проекту. Не создавайте новые команды только потому, что изменился технологический стек.
 
-### Step 10 — Bootstrap the first real chapter
+### Шаг 10 — Bootstrap первой реальной chapter
 
-Use the canonical:
+Используйте canonical путь:
 
 ```text
 .ai/AGENTS.md
@@ -672,7 +672,7 @@ Use the canonical:
 
 path.
 
-Do not invent a special "new project initialization" command.
+Не придумывайте отдельную команду «инициализация нового проекта».
 
 ---
 
