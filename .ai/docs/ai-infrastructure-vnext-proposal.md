@@ -240,7 +240,7 @@ Layer 1/2, и эту границу следует явно обозначить
 
 ---
 
-## 7. Skills: как сделать единый источник доступным для discovery
+## 7. Skills: как сделать единый источник доступным для обнаружения
 
 Это ключевой вопрос. Ниже четыре варианта, оценённые с учётом ограничений.
 
@@ -284,9 +284,9 @@ Layer 1/2, и эту границу следует явно обозначить
 читает соответствующий `.ai/skills/<name>/SKILL.md`.
 
 - (+) Не требует настройки и новых файлов; подходит для всех hosts и ОС.
-- (−) Skills are absent from the host's native skill listing, so automatic
-  description-matching by the host registry does not happen. The agent must
-  route through `AGENTS.md` first.
+- (−) Skills отсутствуют в нативном списке host, поэтому registry не может автоматически
+  сопоставлять описания. Сначала агент должен пройти маршрутизацию через `AGENTS.md`.
+
 
 ### 7.2 Рекомендация
 
@@ -413,15 +413,15 @@ DSH сканирует только один уровень (V3), а validator �
 
 ---
 
-## 10. Personal и project scope
+## 10. Личная область и область проекта
 
 Уже принято и подтверждено на практике:
 
 ```text
-~/.dsh/skills                    personal, all projects  (DSH rank 300 via customSkillDirs)
-$DSH_HOME/AGENTS.md              personal always-on instructions
-<project>/.agents/skills         project-scoped         (DSH rank 200)
-<project>/.dsh/skills            project-scoped, DSH-only (rank 100)
+~/.dsh/skills                    личные skills для всех проектов (DSH rank 300 через customSkillDirs)
+$DSH_HOME/AGENTS.md              личные инструкции, действующие всегда
+<project>/.agents/skills         область проекта          (DSH rank 200)
+<project>/.dsh/skills            область проекта, только DSH (rank 100)
 ```
 
 Рекомендуемое разделение:
@@ -444,25 +444,25 @@ $DSH_HOME/AGENTS.md              personal always-on instructions
 Ограниченная по объёму, обратимая последовательность, упорядоченная по ценности.
 
 ```text
-Step 1  Move the operating contract to the repository root AGENTS.md
-        → makes the project legible to every host at once           (no risk)
+Шаг 1  Перенести operating contract в корневой AGENTS.md
+        → проект сразу становится понятен каждому host              (без риска)
 
-Step 2  Flatten .ai/skills/handoff/reference-preservation
-        → removes a skill that can never be discovered              (no risk)
+Шаг 2  Уплощить .ai/skills/handoff/reference-preservation
+        → удалить skill, который невозможно обнаружить             (без риска)
 
-Step 3  Add .ai/scripts/ with the depth, name, description and
-        adapter-resolves checks; wire into the pre-commit path
-        → makes silent failure impossible                           (low risk)
+Шаг 3  Добавить .ai/scripts/ с проверками глубины, name, description
+        и adapter-resolves; подключить к pre-commit
+        → сделать незаметный отказ невозможным                      (низкий риск)
 
-Step 4  Add Tier 0: a skill catalog inside the root AGENTS.md
-        → agent can route to skills without any adapter              (low risk)
+Шаг 4  Добавить Tier 0: каталог skills в корневой AGENTS.md
+        → agent сможет находить skills без adapter                 (низкий риск)
 
-Step 5  Add Tier 1 on the local machine: .agents/skills as a
-        gitignored link, created by .ai/scripts/adapters
-        → native discovery, no git noise                            (reversible)
+Шаг 5  Добавить Tier 1 на локальной машине: .agents/skills как
+        ссылку, исключённую из Git и созданную через .ai/scripts/adapters
+        → нативный discovery без лишних файлов в Git                (обратимо)
 
-Step 6  Archive the superseded research series and record the
-        decision (§13)                                              (documentation)
+Шаг 6  Архивировать заменённую исследовательскую серию и записать
+        решение (§13)                                               (документация)
 ```
 
 Шаги 1–4 составляют основную часть и не зависят от host. Шаг 5 повышает удобство,
