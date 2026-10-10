@@ -114,15 +114,32 @@ Important constraints:
 - Root tree: `e706ab0bbbfd4e94fcc9857a60b9c29959bd047d`; recursive tree `truncated=false`; 254 entries.
 - The declared scan covered active `.ai` content and `docs/**`, excluding archive contents, chapter handoffs, and historical test-result files. Remaining old path references were classified as historical in `ai-infrastructure-context-mode.md` and the vNext proposal, or explicitly marked as historical snapshots in the C0068/C0069 Agentic AI audit documents.
 
+## Migration preparation update (2026-10-10)
+
+### Current migration baseline
+
+- Immediately before this handoff update, `main` resolved to commit `76b5948f9811cd2742561d627e769a4779f8b5b2`.
+- Root tree: `af283d7414e4d17c69c8186b896fedfb78001eff`; recursive tree returned `truncated=false`, 254 entries.
+- This is the current migration baseline, distinct from the earlier audit snapshot at `0cecf6ef04792d5d181f08271ca437aedd90bec7`. The handoff update will create a later commit.
+
+### Paused GitHub-tool availability experiment
+
+- In three consecutive posts, the GitHub Tool was enabled, disabled, then enabled again. Each check observed 112 total runtime tools and 89 GitHub-related tools; repository search continued to work while the UI toggle was disabled.
+- No repository writes were performed during this experiment.
+- The observation supports only the narrow conclusion that the UI toggle did not change the observable tool catalog or tested search behavior in this runtime. It does not establish the internal architecture or prove that all GitHub actions use the same connection mechanism.
+- This side experiment is paused while the main architecture audit continues. Resume only if requested; do not let it displace the next task below.
+
 ## Immediate next task
 
-1. Re-verify the changed current-facing files against the active tree and confirm that stale operational paths are absent from the declared current-instruction scope.
-2. Review `.ai/docs/architecture/ai-infrastructure-context-mode.md` and `.ai/docs/architecture/ai-infrastructure-vnext-proposal.md` only for current-facing claims; preserve old paths in clearly historical validation/proposal sections.
-3. Continue the semantic-owner boundary audit in `.ai/skills/repository/SKILL.md` and related orientation documents. Keep the multi-level semantic-role model provisional; do not introduce a new taxonomy without evidence.
-4. Do not load archive contents. Any further repository-wide claims MUST use a fresh immutable commit/tree snapshot with verified `truncated=false`.
-5. For any further edits, read current files at the pinned commit, make minimal changes, inspect candidate diff and scope, update `main` with an expected-SHA guard, then read back and verify the result.
+Continue the evidence-backed audit of semantic-owner boundaries, starting with `.ai/skills/repository/SKILL.md` and the related orientation documents.
+
+1. Classify the boundaries between active semantic owners, supporting/contextual material, and historical evidence based on actual current files and their operational roles.
+2. Keep the proposed multi-level semantic-role model provisional. Do not finalize a taxonomy or impose mutually exclusive categories without evidence.
+3. Before making repository-wide claims, establish a fresh immutable commit/tree snapshot, verify `truncated=false`, record the entry count, and pin subsequent reads to that commit.
+4. Inspect `.ai/docs/architecture/ai-infrastructure-context-mode.md` and `.ai/docs/architecture/ai-infrastructure-vnext-proposal.md` only for current-facing claims; preserve passages that are clearly historical evidence.
+5. Avoid mass changes. Make only narrow, evidence-backed corrections after reviewing the current files and their semantic ownership.
 
 ## Recommended starting context
 
-Start with this handoff, `.ai/skills/repository/SKILL.md`, `.ai/skills/workflow/SKILL.md`, `.ai/docs/faq/adapting-to-a-new-project.md`, `.ai/docs/architecture/agentic-ai-compatibility-architecture.md`, `.ai/docs/architecture/agentic-ai-compatibility-capability-audit.md`, and `.ai/docs/architecture/agentic-ai-owner-seam-audit.md`. Current tree proof and the Git ref → commit → root tree → recursive tree procedure are established; remaining work is classification of stale current-facing documentation versus preserved historical research.
+Start with this handoff, `.ai/skills/repository/SKILL.md`, `.ai/skills/workflow/SKILL.md`, `.ai/docs/architecture/README.md`, `.ai/README.md`, `.ai/INDEX.md`, `.ai/docs/faq/adapting-to-a-new-project.md`, `.ai/docs/architecture/ai-infrastructure-context-mode.md`, `.ai/docs/architecture/ai-infrastructure-vnext-proposal.md`, `.ai/docs/architecture/agentic-ai-compatibility-architecture.md`, `.ai/docs/architecture/agentic-ai-compatibility-capability-audit.md`, and `.ai/docs/architecture/agentic-ai-owner-seam-audit.md`. Treat the prior audit snapshot as historical evidence, and refresh the immutable tree baseline before new tree-wide conclusions.
 
