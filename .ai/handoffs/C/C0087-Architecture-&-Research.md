@@ -12,9 +12,6 @@ C
 **Previous chapter:**
 0086
 
-## Status
-
-DRAFT
 
 ## Starting objective
 
