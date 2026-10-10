@@ -6,7 +6,7 @@
 
 Пример целевого проекта:
 
-> **Sprite Sheet Editor** — desktop application using Rust + Tauri + Python + Pillow.
+> **Sprite Sheet Editor** — настольное приложение на Rust, Tauri, Python и Pillow.
 
 Основная идея:
 
@@ -381,7 +381,7 @@ cold-start test
 
 Обычно этот файл следует оставить без изменений.
 
-Он описывает always-on operating contract. Обычный запуск agent не инициирует создание chapter; принимающий разговор следует явно переданной bootstrap-инструкции и вложенной процедуре BOOTSTRAP.
+Он описывает постоянный операционный контракт (always-on operating contract). Обычный запуск agent не инициирует создание chapter; принимающий разговор следует явно переданной bootstrap-инструкции и вложенной процедуре BOOTSTRAP.
 
 Не добавляйте сюда инструкции, специфичные для Sprite Sheet Editor, если только они не являются настоящим требованием AI-инфраструктуры всего репозитория.
 
@@ -389,10 +389,10 @@ cold-start test
 
 ```text
 AGENTS
-    = how the AI infrastructure enters the repository
+    = как AI-инфраструктура входит в контекст репозитория
 
 PROJECT-INSTRUCTIONS
-    = what this particular project is
+    = что представляет собой конкретный проект
 ```
 
 ---
