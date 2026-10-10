@@ -166,6 +166,59 @@ Verify FAQ content preservation and new paths, removal of old active paths, accu
 
 Begin Stage 1: use the immutable snapshot at commit `78c321d62714463ddd3e420dfc311f11d1a7dd13` to inventory the current `.ai/docs/`, `.ai/memory/` (if present), `.ai/archives/`, README files, and current-facing references. Pin direct file reads to this commit. Do not edit or move files until the inventory and implementation-status classification are evidence-backed.
 
+
+## User clarifications accepted during Stage 1
+
+### Self-contained skills and documentation links
+
+- Every .ai/skills/*/SKILL.md MUST be semantically self-contained: the AI must be able to understand and apply the skill without consulting supporting documentation to discover its actual behavior.
+- A narrowly justified link to documentation for human help is permitted, e.g. .ai/skills/activation/SKILL.md linking to .ai/docs/manual-activation.md for practical examples. This is not an operational dependency and MUST NOT be used to offload required skill semantics.
+- .ai/skills/ai-infrastructure/SKILL.md is specialized for infrastructure maintenance. It SHOULD inspect structural descriptions, README files, and the organization/status of .ai/docs/ and .ai/memory/ so it can maintain their cleanliness and layout, without reading every memory/document payload indiscriminately.
+- Normal elevated context MUST NOT load all memory entries. Inspect the structure and relevant README/indicators first; read individual records only when the bounded task needs them. .ai/archives/** remains excluded from normal context, except for bounded historical retrieval.
+
+### User-selected documentation to retain
+
+The following documents are valuable and MUST remain in maintained .ai/docs/, relocated from .ai/docs/architecture/ to the root of .ai/docs/ together with the two FAQ files:
+
+- .ai/docs/architecture/agentic-ai-dsh-observations.md → .ai/docs/agentic-ai-dsh-observations.md
+- .ai/docs/architecture/agentic-ai-skill-discovery-verification.md → .ai/docs/agentic-ai-skill-discovery-verification.md
+- .ai/docs/architecture/ai-infrastructure-context-mode.md → .ai/docs/ai-infrastructure-context-mode.md
+
+The user explicitly values the DSH observations and skill-discovery verification as long-lived technical records. Do not archive them merely because they belong to the earlier agentic-ai-* series.
+
+### Documentation update TODO and language/ownership policy
+
+Created and read back successfully:
+
+- .ai/memory/README.md — commit 0e04426618905a821d3c35943057d7f024c57623.
+- .ai/memory/ai-docs-architecture-update-todo.md — commit eb3b53987d402c6ae61bf5edf1386d5981f726c2.
+
+The TODO records a later review of all documents retained in .ai/docs/, requires new .ai/docs/ documents to be written in Russian apart from necessary technical terms/identifiers, and separates responsibilities for DSH-specific material: DSH should update technical descriptions of its own internals; AIP Mirror work should handle integration into AI-infrastructure semantics. The TODO also requires a technical-source/experiment-backed investigation of whenToUse, disable-model-invocation, and user-invocable. Do not assume whenToUse guarantees automatic activation until verified.
+
+### Metadata field whenToUse
+
+The user considers whenToUse especially valuable and wants its implications investigated for future common skills. Treat this as an open research question, not a confirmed claim about DSH's activation mechanism. Determine whether the field affects discovery, ranking, selection, or automatic invocation, and distinguish documented behavior from observed behavior.
+
+### Refined semantic boundary
+
+The distinction is dependency versus reading:
+
+- Reading .ai/docs/ or .ai/memory/ for a justified infrastructure-maintenance task is permitted.
+- Active skills MUST NOT require those documents to understand or apply their own required semantics.
+- A human-help link from a skill to an explanatory FAQ is a narrow, explicit exception; it does not authorize skill behavior to be delegated to that FAQ.
+- ai-infrastructure may consult supporting material when adding, correcting, or reviewing skills because infrastructure maintenance is its specialization—not because skills are allowed to be incomplete.
+
+## Revised active TODOs
+
+Keep existing TODOs 1–7. Add:
+
+8. After the directory migration, review every retained .ai/docs/ document for conformance with the new architecture; write future .ai/docs/ files in Russian (retaining necessary technical terms); for DSH-authored technical findings, defer technical corrections to DSH or primary technical evidence while handling AIP Mirror integration here. Track work in .ai/memory/ai-docs-architecture-update-todo.md.
+9. Investigate whenToUse, disable-model-invocation, and user-invocable from authoritative DSH technical evidence and/or controlled tests, and only then decide how confirmed behavior should inform common AIP Mirror skills.
+
+## Updated immediate next task
+
+Continue Stage 1 using the pinned baseline 78c321d62714463ddd3e420dfc311f11d1a7dd13 for inventory claims. Incorporate the user-approved target placement of the three valuable documents above and the FAQ moves. Complete the evidence-backed inventory and reference classification before moving files or changing active owners. Then begin the minimal repository-boundary edit, preserving the distinction between permitted structural reads and forbidden semantic dependence. The newly created .ai/memory/ directory now has its own README and active documentation-update TODO; account for both in the resulting tree/README checks.
+
 ## Recommended starting context
 
 Read the current canonical versions of:
