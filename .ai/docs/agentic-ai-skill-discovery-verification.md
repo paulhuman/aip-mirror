@@ -329,10 +329,10 @@ Git, но `handoff-reference-preservation` не появляется **ни в �
 |---|---|
 | `...\harness\skills` | существует — `explain-code`, `review-agent` (personal, ранг 400) |
 | `...\harness\AGENTS.md` | существует — личные always-on инструкции на русском языке |
-| `C:\Users\Paul\.dsh` | **удалён пользователем** (the `customSkillDirs` цель, теперь неактуальна) |
+| `C:\Users\Paul\.dsh` | **удалён пользователем** (цель `customSkillDirs`, теперь неактуальна) |
 | `C:\Users\Paul\.agents` | **отсутствует** — ранг 500 ничего не добавляет |
 | `E:\Projects\repos\aip-mirror\.dsh` | **отсутствует** — ранг 100 ничего не добавляет |
-| `E:\Projects\repos\aip-mirror\.agents\skills` | exists — junction to `.ai\skills`, 8 skills, gitignored (V8) |
+| `E:\Projects\repos\aip-mirror\.agents\skills` | существует — junction на `.ai\skills`, 8 skills, исключён из Git (V8) |
 | `E:\Projects\repos\aip-mirror\.gitignore` | существует — 782 байта, `/.agents/` игнорируется, рецепт создания junction документирован |
 | `E:\Projects\repos\aip-mirror\.ai\scripts\adapters\New-SkillAdapters.ps1` | существует — создаёт adapter и проверяет его (Task B) |
 | `...\profiles\web\cordis.patch.yml` | переопределение `skill-filesystem` удалено; добавлен комментарий |
@@ -376,7 +376,7 @@ junction, а контрольный запуск вне репозитория �
 
 | Сценарий | Результат |
 |---|---|
-| новый clone без adapter, запуск из постороннего `cwd` | junction created to the clone's `.ai\skills`, 8 skills visible, `SKILL.md` readable, exit 0 |
+| новый clone без adapter, запуск из постороннего `cwd` | junction создан на `.ai\skills` внутри clone; видны 8 skills, `SKILL.md` читается, exit 0 |
 | повторный запуск при корректной настройке | сообщает `already correct`, ничего не меняет, exit 0 |
 | ссылка указывает в другое место, без `-Force` | отказывается, выводит текущую и ожидаемую цель, ничего не меняет, exit 1 |
 | ссылка указывает в другое место, с `-Force` | заменяет ссылку, exit 0 |
