@@ -256,31 +256,31 @@ Python + Pillow
 
 ---
 
-# 6. Files inside `.ai/` that contain project-specific material
+# 6. Файлы внутри `.ai/` с проектно-специфичным содержимым
 
-Most `.ai` files are intentionally generic. A few are not completely generic.
+Большинство файлов `.ai` намеренно универсальны. Некоторые из них не полностью универсальны.
 
 ## 6.1 `.ai/conversation-management/handoff/SKILL.md`
 
-This file is mostly reusable, but the current version contains a hardcoded repository locator:
+Этот файл в основном пригоден для повторного использования, но текущая версия содержит жёстко заданный locator репозитория:
 
 ```text
 https://github.com/paulhuman/aip-mirror
 ```
 
-It appears in generated/manual bootstrap transport examples.
+Он встречается в примерах transport для generated/manual bootstrap.
 
-For a reusable template, this should be generalized so the actual repository locator is derived from `.ai/config.yaml`, rather than being permanently embedded as an AIP Mirror URL.
+В универсальном шаблоне это следует обобщить: фактический locator репозитория должен вычисляться из `.ai/config.yaml`, а не быть навсегда заданным URL AIP Mirror.
 
-Any project-specific illustrative sentence should be neutralized or removed when adapting the infrastructure.
+При адаптации инфраструктуры любые проектно-специфичные примеры следует сделать нейтральными или удалить.
 
-The semantic handoff procedure itself should remain.
+Саму семантику процедуры handoff следует сохранить.
 
 ---
 
 ## 6.2 `.ai/conversation-management/handoff/BOOTSTRAP.md`
 
-This is another mostly reusable file with an important embedded project reference.
+Это ещё один в основном универсальный файл, содержащий важную встроенную ссылку на проект.
 
 It currently contains:
 
@@ -288,39 +288,39 @@ It currently contains:
 https://github.com/paulhuman/aip-mirror
 ```
 
-The workflow already states that generated repository locators come from:
+В workflow уже указано, что generated repository locators берутся из:
 
 ```text
 project.hosting.base_url
 project.repository
 ```
 
-Therefore the reusable workflow should not contain a literal AIP Mirror URL as if it were the new project's canonical locator.
+Поэтому универсальный workflow не должен содержать буквальный URL AIP Mirror, как будто это canonical locator нового проекта.
 
-Its example:
+Его пример:
 
 ```text
 SPECIALIZATION = A
 SHORT_NAME = Project Workshop
 ```
 
-is the canonical neutral example and SHOULD remain unchanged. It is an example, not project configuration.
+— canonical нейтральный пример, который СЛЕДУЕТ оставить без изменений. Это пример, а не конфигурация проекта.
 
 ---
 
 ## 6.3 `.ai/tests/scenarios/cold-start-command-trace.md`
 
-The test scenario is conceptually reusable, but it currently hardcodes:
+Сценарий тестирования концептуально универсален, но сейчас в нём жёстко задано:
 
 ```text
 paulhuman/aip-mirror@main:/.ai/AGENTS.md
 ```
 
-For a new project, this must be generalized or parameterized.
+Для нового проекта это необходимо обобщить или параметризовать.
 
-The scenario also mentions the current five-command surface. That list is intentionally derived from the current `.ai/INDEX.md`, so the scenario should retain that dynamic rule rather than hardcoding AIP Mirror commands as the expected permanent command set.
+Сценарий также упоминает текущий набор из пяти команд. Этот список намеренно выводится из актуального `.ai/INDEX.md`, поэтому следует сохранить динамическое правило, а не жёстко фиксировать команды AIP Mirror как постоянный ожидаемый набор.
 
-The correct reusable principle is:
+Правильный универсальный принцип:
 
 ```text
 explicit repository locator
@@ -338,54 +338,54 @@ cold-start test
 
 ## 6.4 `.ai/conversation-management/handoff/SKILL.md`
 
-The `A0001 / Project Workshop` example is the canonical neutral example of the filename/chapter contract.
+Пример `A0001 / Project Workshop` — canonical нейтральный образец соглашения об имени файла и chapter.
 
-Keep it when adapting the infrastructure to another project. It is an example of the required generic `A` specialization, not a project-specific technology name.
+Сохраните его при адаптации инфраструктуры к другому проекту. Это пример универсальной specialization `A`, а не название проектной технологии.
 
-The actual chapter format and lifecycle rules are reusable.
+Сам формат chapter и правила lifecycle универсальны.
 
 ---
 
 ## 6.5 `.ai/handoffs/README.md`
 
-Same principle.
+Действует тот же принцип.
 
-Its `A0001 / Project Workshop` example is a neutral format example, not an active project dependency.
+Пример `A0001 / Project Workshop` демонстрирует формат и не является активной зависимостью проекта.
 
-Keep this example unchanged when adapting the infrastructure to another project.
+Сохраните этот пример без изменений при адаптации инфраструктуры к другому проекту.
 
-Do not copy the actual AIP Mirror handoff files themselves.
+Не копируйте сами handoff-файлы AIP Mirror.
 
 ---
 
 # 7. `.ai/INDEX.md`
 
-Normally this should require little or no project-specific editing.
+Обычно этот файл почти не требует проектных изменений или не требует их вовсе.
 
-Its role is to route commands to canonical infrastructure owners.
+Его задача — направлять команды к canonical owners инфраструктуры.
 
-However, verify it after adapting:
+Однако после адаптации проверьте:
 
 - command names;
 - canonical owner paths;
 - capability map;
 - structural references.
 
-Do not add project architecture or project technology descriptions to INDEX merely because the new project uses Rust, Tauri, Python, etc.
+Не добавляйте в INDEX описание архитектуры или технологий только потому, что новый проект использует Rust, Tauri, Python и т. п.
 
-Project technology belongs in `docs/PROJECT-INSTRUCTIONS.md` and project architecture documentation.
+Технологии проекта следует описывать в `docs/PROJECT-INSTRUCTIONS.md` и документации архитектуры проекта.
 
 ---
 
 # 8. `.ai/AGENTS.md`
 
-Normally this should remain unchanged.
+Обычно этот файл следует оставить без изменений.
 
-It describes the always-on operating contract. Ordinary agent startup does not trigger chapter initialization; a receiving conversation follows the explicitly supplied bootstrap instruction and nested BOOTSTRAP procedure.
+Он описывает always-on operating contract. Обычный запуск agent не инициирует создание chapter; принимающий разговор следует явно переданной bootstrap-инструкции и вложенной процедуре BOOTSTRAP.
 
-Do not put Sprite Sheet Editor-specific instructions here unless there is a genuine repository-wide AI infrastructure requirement.
+Не добавляйте сюда инструкции, специфичные для Sprite Sheet Editor, если только они не являются настоящим требованием AI-инфраструктуры всего репозитория.
 
-The distinction is:
+Различие следующее:
 
 ```text
 AGENTS
@@ -399,7 +399,7 @@ PROJECT-INSTRUCTIONS
 
 # 9. Canonical semantic ownership
 
-There is no separate `.ai/rules/` layer in the target architecture. Shared operational semantics belong to their canonical first-level skills, including:
+В целевой архитектуре нет отдельного слоя `.ai/rules/`. Общая операционная семантика принадлежит соответствующим canonical skills первого уровня, включая:
 
 - `.ai/skills/repository/SKILL.md`;
 - `.ai/skills/workflow/SKILL.md`;
@@ -407,15 +407,15 @@ There is no separate `.ai/rules/` layer in the target architecture. Shared opera
 - `.ai/skills/knowledge-capture/SKILL.md`;
 - `.ai/skills/normative-language/SKILL.md`.
 
-Conversation lifecycle and handoff procedures are deliberately kept under `.ai/conversation-management/handoff/`, separate from ordinary skill discovery. Do not move these procedures into the first-level `.ai/skills/` namespace.
+Lifecycle разговора и процедуры handoff намеренно находятся в `.ai/conversation-management/handoff/`, отдельно от обычного skill discovery. Не переносите эти процедуры в пространство имён `.ai/skills/` первого уровня.
 
-When adapting these owners, inspect examples and project references, but preserve reusable semantics. Do not create duplicate owners or mechanically copy old path references.
+При адаптации этих owners проверяйте примеры и ссылки на проект, но сохраняйте универсальную семантику. Не создавайте дублирующие owners и не копируйте старые пути механически.
 
 ---
 
 # 10. `.ai/skills/`
 
-Shared skills are reusable capabilities and canonical owners. Keep the shared capabilities at the first level of `.ai/skills/`:
+Общие skills — это повторно используемые возможности и canonical owners. Оставляйте общие возможности на первом уровне `.ai/skills/`:
 
 - activation;
 - ai-infrastructure;
@@ -427,9 +427,9 @@ Shared skills are reusable capabilities and canonical owners. Keep the shared ca
 - repository;
 - workflow.
 
-Conversation handoff and reference-preservation material belongs under `.ai/conversation-management/handoff/`; it MUST NOT be treated as an ordinary first-level discovered skill.
+Материалы handoff и reference-preservation относятся к `.ai/conversation-management/handoff/`; их НЕЛЬЗЯ считать обычными обнаруживаемыми skills первого уровня.
 
-Check each skill for project-specific examples or hardcoded repository locators. Change project-specific examples and references, not reusable capability semantics.
+Проверьте каждый skill на проектно-специфичные примеры и жёстко заданные repository locators. Изменяйте примеры и ссылки на проект, а не универсальную семантику возможностей.
 
 ---
 
