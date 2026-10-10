@@ -1,20 +1,20 @@
-# AI infrastructure vNext — multi-host architecture proposal
+# AI infrastructure vNext — предложение по multi-host архитектуре
 
-**Status:** design proposal, not an implementation decision
-**Current-state note (2026-10-09):** This proposal predates the approved rules-to-skills migration. References below to `.ai/rules/`, first-level handoff skills, and `.ai/workflows/handoff/BOOTSTRAP.md` describe the proposal-time repository state and are not current routing. Use `.ai/INDEX.md` and `.ai/README.md` for current owner paths.
-**Supersedes:** the `agentic-ai-*` research series (2026-10-07…08), which is now
-evidence, not a plan
-**Scope:** how `.ai/` serves two incompatible classes of AI consumers from one
+**Статус:** проектное предложение, не решение о реализации
+**Примечание о текущем состоянии (2026-10-09):** это предложение создано до утверждённого переноса rules в skills. Упоминания `.ai/rules/`, handoff skills первого уровня и `.ai/workflows/handoff/BOOTSTRAP.md` ниже описывают состояние репозитория на момент подготовки предложения и не отражают текущую маршрутизацию. Для актуальных путей owners используйте `.ai/INDEX.md` и `.ai/README.md`.
+**Заменяет:** исследовательскую серию `agentic-ai-*` (2026-10-07…08), которая теперь
+служит свидетельствами, а не планом
+**Область:** как `.ai/` обслуживает два несовместимых класса AI-потребителей из одного
 canonical source
 
 ---
 
-## 1. Purpose
+## 1. Назначение
 
-This note proposes the next version of the `.ai/` infrastructure for AIP Mirror
-and, more importantly, as a **portable template** for other projects.
+В этом документе предлагается следующая версия инфраструктуры `.ai/` для AIP Mirror,
+и, что важнее, **переносимый шаблон** для других проектов.
 
-The driving requirement is unchanged: one project, two AI consumers.
+Ключевое требование не изменилось: один проект — два AI-потребителя.
 
 ```text
                     .ai/  (one canonical source)
@@ -27,23 +27,23 @@ The driving requirement is unchanged: one project, two AI consumers.
      cannot follow symlinks         scans fixed discovery roots
 ```
 
-The previous research series established that these two classes differ in
-discovery, packaging, activation, and execution. It did **not** produce a
-concrete adapter design. This note does.
+Предыдущая исследовательская серия установила, что эти два класса различаются
+механизмами discovery, packaging, activation и execution. Она **не** предложила
+конкретный дизайн adapter. Этот документ предлагает его.
 
-This document is supporting/contextual material. It does not replace
-`.ai/rules/`, `.ai/skills/`, `.ai/workflows/`, or `.ai/INDEX.md`.
+Этот документ — вспомогательный контекстный материал. Он не заменяет
+`.ai/rules/`, `.ai/skills/`, `.ai/workflows/` или `.ai/INDEX.md`.
 
 ---
 
-## 2. Evidence base
+## 2. Основания и свидетельства
 
-Everything below rests on facts verified in this work session. Two categories
-are kept strictly apart.
+Всё изложенное ниже основано на фактах, проверенных в рабочем сеансе. Две категории
+строго разделены.
 
-### 2.1 Verified against source or by experiment
+### 2.1 Подтверждено по исходному коду или экспериментом
 
-| # | Finding | How verified |
+| № | Результат | Способ проверки |
 |---|---|---|
 | V1 | DSH discovers skills in six ranked roots; lower rank wins | DSH `dsh-skill-filesystem` source |
 | V2 | `.ai/skills` is **not** a DSH discovery root | zero `.ai/skills` occurrences in DSH bundle |
@@ -63,10 +63,10 @@ are kept strictly apart.
 | V16 | A checkout broken by `core.symlinks=false` is repaired in place; a re-clone is not required. `git restore -- .claude .cursor` rewrites the paths as real symlinks and leaves `git status` clean | experiment on a deliberately broken clone |
 | V17 | `readlinkSync` returns **backslash-separated** targets on Windows, so the upstream `validate-symlinks.js` strict `!==` against `'../.ai/rules'` reports 3 false failures on a healthy Windows clone. Its CI runs `yarn lint:ai` on `ubuntu-latest`, where separators match | faithful replay of the upstream check |
 
-### 2.2 From the reference implementation, read directly
+### 2.2 Непосредственно изученная reference implementation
 
-The `paulhuman/spectrum-web-components` fork is the working precedent this
-infrastructure was modelled on. Its relevant, observed choices:
+Fork `paulhuman/spectrum-web-components` — практический образец, на котором
+моделировалась эта инфраструктура. В нём непосредственно наблюдались следующие решения:
 
 - canonical content in `.ai/`; tool directories are **thin adapters**;
 - exactly **three** tracked symlinks, all mode `120000`: `.claude/rules` →
@@ -84,24 +84,24 @@ infrastructure was modelled on. Its relevant, observed choices:
   equals the directory, and that `description` fits the host limits;
 - `yarn lint:ai` plus a pre-commit hook keep generated copies from drifting.
 
-Two cautions learned from re-observing that repository on Windows (V15–V17):
-its symlink model needs a privilege to *create* the links, and its own link
-validator gives three false failures on a healthy Windows clone because it
-compares targets separator-sensitively.
+Повторное исследование этого репозитория в Windows выявило два предостережения
+(V15–V17): для *создания* symlink требуется привилегия, а validator ссылок выдаёт
+три ложных ошибки на исправном Windows clone, поскольку сравнивает цели с учётом
+разделителей пути.
 
-### 2.3 Explicitly not verified here
+### 2.3 Здесь не проверялось
 
-- Upstream DeepSeek Harness documentation URLs cited by the older survey.
-- Whether Gemini CLI, Codex, or Claude Code still read `.agents/skills` as the
-  older survey claimed. Treat as unconfirmed.
+- URL upstream-документации DeepSeek Harness, указанные в прежнем обзоре.
+- Читают ли Gemini CLI, Codex или Claude Code `.agents/skills`, как утверждалось
+  в прежнем обзоре. Считайте это неподтверждённым.
 
 ---
 
-## 3. The core problem
+## 3. Основная проблема
 
-The infrastructure has **one semantic source and two incompatible access
-mechanisms**. Every previous document treated this as a portability question.
-It is really a **discovery** question, and discovery is host-local.
+В инфраструктуре есть **один источник семантики и два несовместимых механизма доступа**.
+Во всех предыдущих документах это рассматривалось как проблема переносимости.
+На самом деле это проблема **discovery**, а discovery зависит от host.
 
 ```text
                      .ai/skills/<name>/SKILL.md
@@ -112,43 +112,45 @@ It is really a **discovery** question, and discovery is host-local.
       (by explicit path)               (not in any scanned root)
 ```
 
-Two hard constraints collide:
+Здесь сталкиваются два жёстких ограничения:
 
-1. **DSH only scans fixed roots.** `.ai/skills` is not one of them (V2).
-2. **The obvious fix — a committed symlink — is fragile exactly where this user
-   works.** On a Windows clone the link becomes a text file (V6) and DSH skips
-   the root silently (V7). Nothing reports the failure.
+1. **DSH сканирует только фиксированные корни.** `.ai/skills` не входит в их число (V2).
+2. **Очевидное решение — symlink в Git — ненадёжно именно в основной среде пользователя.**
+   В Windows clone ссылка превращается в текстовый файл (V6), а DSH молча пропускает
+   корень (V7). Ничто не сообщает об ошибке.
 
-A third constraint removes the naive workaround: a junction solves Windows but
-breaks git, because git duplicates the linked content into the index (V9).
+Третье ограничение исключает наивный обходной путь: junction решает проблему Windows,
+но создаёт проблему для Git, поскольку Git добавляет связанное содержимое в index,
+дублируя файлы (V9).
 
-So there is no single mechanism that is simultaneously link-free, tracked,
-cross-OS, and DSH-discoverable — except generating real files.
-
----
-
-## 4. Design principles
-
-1. **One semantic owner.** `.ai/` stays canonical. No second registry, no
-   per-host copies of rules or procedures.
-2. **Adapters are disposable.** Any host-specific artifact must be
-   regenerable from `.ai/` and must be safe to delete.
-3. **Discovery is host-local; semantics are not.** Never let a host's packaging
-   shape leak into the canonical artifact.
-4. **Failures must be loud.** The current silent-skip behaviour (V7) is the
-   worst property of the status quo. Anything that can silently disappear needs
-   a check.
-5. **Applicability follows capability, not labels.** There is no audience field
-   (V13), so a skill that requires a tool-using agent should say so by naming
-   the tool.
-6. **Zero-adapter first.** Prefer the mechanism that works everywhere with no
-   setup; add adapters only where the ergonomic gain justifies the fragility.
+Следовательно, единого механизма, который одновременно не требует ссылок,
+отслеживается Git, работает на разных ОС и доступен DSH, не существует — кроме
+генерации настоящих файлов.
 
 ---
 
-## 5. Proposed architecture
+## 4. Принципы проектирования
 
-Three layers, with a strict rule: **only Layer 1 owns meaning.**
+1. **Один semantic owner.** `.ai/` остаётся canonical source. Никаких вторых реестров
+   или копий rules и procedures для отдельных hosts.
+2. **Adapters можно удалить и восстановить.** Любой host-specific артефакт должен
+   восстанавливаться из `.ai/` и безопасно удаляться.
+3. **Discovery зависит от host, семантика — нет.** Не допускайте, чтобы формат
+   packaging конкретного host проникал в canonical artifact.
+4. **Сбои должны быть заметны.** Текущее поведение с молчаливым пропуском (V7) —
+   худшая особенность существующего решения. Всё, что может незаметно исчезнуть,
+   должно проверяться.
+5. **Применимость определяется возможностями, а не ярлыками.** Поля audience нет (V13),
+   поэтому skill, требующий агента с инструментами, должен указывать соответствующий
+   инструмент.
+6. **Сначала вариант без adapter.** Предпочитайте механизм, работающий везде без
+   настройки; добавляйте adapters только тогда, когда удобство оправдывает хрупкость.
+
+---
+
+## 5. Предлагаемая архитектура
+
+Три слоя при строгом условии: **смыслом владеет только Layer 1.**
 
 ```text
 LAYER 1 — canonical semantics (host-agnostic, the only owner)
@@ -170,7 +172,7 @@ LAYER 3 — host runtime (outside the repository)
     ~/.dsh/skills                             personal global skills
 ```
 
-### 5.1 Repository shape
+### 5.1 Структура репозитория
 
 ```text
 <project>/
@@ -195,47 +197,46 @@ LAYER 3 — host runtime (outside the repository)
 └── .cursor/rules/                ← adapter: generated (optional)
 ```
 
-`.ai/scripts/` is the one genuinely new directory. It is what turns the
-adapters from fragile hand-maintained links into a checked, regenerable
-artefact.
+`.ai/scripts/` — единственный действительно новый каталог. Он превращает adapters
+из хрупких ссылок, обслуживаемых вручную, в проверяемые и восстанавливаемые артефакты.
 
 ---
 
-## 6. `AGENTS.md` as the universal entry point
+## 6. `AGENTS.md` как универсальная точка входа
 
-This is the single highest-value change, because it is the only file that
-**every** host in scope reads automatically (V4), needs no adapter, and is
-already an open cross-vendor standard.
+Это самое ценное изменение: данный файл автоматически читает **каждый** host
+в области охвата (V4), ему не нужен adapter, и он уже является открытым
+межвендорным стандартом.
 
-### 6.1 Move it to the repository root
+### 6.1 Перенести файл в корень репозитория
 
-Today the operating contract lives at `.ai/AGENTS.md`. From the root it is
-invisible to DSH unless the agent happens to touch a file inside `.ai/` (V5).
+Сейчас operating contract находится в `.ai/AGENTS.md`. Из корня репозитория DSH
+не видит его, если только агент не обращается к файлу внутри `.ai/` (V5).
 
 ```text
 today:  .ai/AGENTS.md        found only by accident
 target: AGENTS.md            found always, by every host
 ```
 
-### 6.2 Keep it thin
+### 6.2 Сохранить файл компактным
 
-The root `AGENTS.md` must be a **router**, not a knowledge dump. Its job:
+Корневой `AGENTS.md` должен быть **router**, а не хранилищем знаний. Его задачи:
 
-1. state that `.ai/` is canonical;
-2. give the table of where things live and when they load;
-3. name the always-relevant obligations (repository context, write safety);
-4. point to `.ai/INDEX.md` for operations and `.ai/README.md` for the catalog.
+1. указать, что `.ai/` — canonical source;
+2. дать таблицу расположения материалов и условий их загрузки;
+3. перечислить постоянно действующие обязательства (контекст репозитория, безопасность записи);
+4. направить к `.ai/INDEX.md` для операций и `.ai/README.md` для каталога.
 
-The reference implementation does exactly this and it is the right model.
-Long procedures belong in skills, not here — a rule of thumb worth enforcing:
-warn when an instruction file exceeds ~12 KB.
+Reference implementation делает именно это, и такой подход стоит взять за образец.
+Длинные процедуры должны находиться в skills, а не здесь. Полезное правило:
+выдавать предупреждение, если файл инструкций превышает примерно 12 KB.
 
-### 6.3 What happens to `.ai/AGENTS.md`
+### 6.3 Что делать с `.ai/AGENTS.md`
 
-Keep it as the **internal** operating contract for work performed *inside*
-`.ai/`, and have the root file reference it. This is not duplication: the root
-file routes, the internal file owns the detail. Both are Layer 1/2 boundary
-artefacts, and the boundary should be stated in both.
+Сохранить его как **внутренний** operating contract для работы *внутри* `.ai/`
+и сослаться на него из корневого файла. Это не дублирование: корневой файл
+маршрутизирует, внутренний содержит подробности. Оба файла находятся на границе
+Layer 1/2, и эту границу следует явно обозначить в обоих.
 
 ---
 
