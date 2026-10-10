@@ -433,11 +433,10 @@ npx --yes @deepseek-ai/dsh@0.2.0-rc.2 --profile web --dump-config
 <available_skills> ... </available_skills>
 ```
 
-It appears in the session log, in the system-reminder user message. Extract it
-from
-`$DSH_HOME\sessions\--<cwd-with-dashes>--\<session-id>\session.v4.jsonl.zstd`,
-which is written in multiple zstd frames — decompress frame by frame by
-scanning for the `28 B5 2F FD` magic:
+Он появляется в журнале сессии внутри user message с system reminder. Извлеките
+его из `$DSH_HOME\sessions\--<cwd-with-dashes>--\<session-id>\session.v4.jsonl.zstd`.
+Файл содержит несколько zstd frames; распакуйте каждый frame отдельно, находя
+magic bytes `28 B5 2F FD`:
 
 ```powershell
 $h = "$env:APPDATA\dsh-desktop\harness"
@@ -450,10 +449,10 @@ node -e "const fs=require('fs'),z=require('zlib');const buf=fs.readFileSync(proc
 Personal skills находятся в `$DSH_HOME\skills`; каталог обновляется на лету,
 перезапуск не требуется (V2).
 
-**Name-only replay without touching the live session.** The `headless` profile
-reads the same `skill-filesystem` provider (host-plane row, no preset) but has no
-`llm-pi-ai` provider configured, so a repository patch overlay is required to
-give it a model:
+**Повторный запуск только для получения имён, без воздействия на живую сессию.**
+Профиль `headless` использует тот же provider `skill-filesystem` (host-level row,
+без preset), но для него не настроен provider `llm-pi-ai`. Поэтому, чтобы назначить
+ему модель, требуется patch overlay репозитория:
 
 ```powershell
 $env:DSH_HOME = "$env:APPDATA\dsh-desktop\harness"
@@ -462,34 +461,34 @@ $env:DSH_HOME = "$env:APPDATA\dsh-desktop\harness"
 npx --yes @deepseek-ai/dsh@0.2.0-rc.2 headless --patch <patch.yml> "<task asking for the catalog + a skill load>"
 ```
 
-Run it with `cwd` set to the repository, then repeat in a directory outside any
-git repository as the negative control. The control must show a strictly smaller
-catalog. Note that `headless` uses `deepseek-official` by default and fails with
-`MISSING_CREDENTIAL` unless the overlay is applied.
+Запустите команду с `cwd`, установленным в каталог репозитория, а затем повторите
+её вне любого Git-репозитория как negative control. Контрольный запуск должен
+показать строго меньший каталог. Учтите, что по умолчанию `headless` использует
+`deepseek-official` и завершается с `MISSING_CREDENTIAL`, если overlay не применён.
 
 ---
 
 ## 7. Что остаётся неопределённым
 
-1. **Whether `.agents/skills` is genuinely cross-host.** Earlier research
-   claimed Gemini CLI reads it; that was never verified here. Until it is,
-   treat `.agents/skills` as a DSH adapter, not a portability layer.
-2. **Upstream DSH documentation URLs** cited by the older survey were never
-   opened. All DSH facts here come from the installed bundle, from the installed
-   package sources under the npx cache (`@deepseek-ai/dsh-skill-filesystem`), and
-   from experiments.
-3. **Duplication between the personal root and the project root.** `explain-code`
-   exists in both roots and the two files are byte-identical (same length 771,
-   same SHA-256), so rank 200 currently makes it harmless — but the copies can
-   drift, and §10 of the vNext proposal says never to duplicate a skill between
-   the two scopes. `review-agent`, by contrast, exists **only** in
-   `$DSH_HOME\skills`; `git log --all` shows it was never in this repository's
-   history. Either the personal `explain-code` should be removed, or the
-   duplication should be a deliberate, documented exception.
-4. **Notification of skill-catalog changes to an already-running session.** V8
-   establishes discovery at session start; whether a newly created adapter
-   appears in a **live** session without a restart (the way the personal root
-   does, V2) was not tested.
+1. **Действительно ли `.agents/skills` поддерживается разными hosts.** В прежнем
+   исследовании утверждалось, что его читает Gemini CLI, но здесь это не проверялось.
+   Пока это не подтверждено, считайте `.agents/skills` adapter для DSH, а не
+   универсальным слоем переносимости.
+2. **URL документации upstream DSH**, указанные в прежнем обзоре, не открывались.
+   Все приведённые здесь сведения о DSH получены из установленного bundle,
+   исходников пакетов в npx cache (`@deepseek-ai/dsh-skill-filesystem`) и экспериментов.
+3. **Дублирование между personal root и project root.** `explain-code` существует
+   в обоих корнях, а файлы побайтно идентичны (длина 771, одинаковый SHA-256),
+   поэтому сейчас ранг 200 делает дублирование безвредным. Однако копии могут
+   разойтись, а §10 vNext proposal запрещает дублировать skill между этими областями.
+   `review-agent`, напротив, существует **только** в `$DSH_HOME\skills`; `git log --all`
+   показывает, что его никогда не было в истории этого репозитория. Следует либо
+   удалить personal-копию `explain-code`, либо оформить дублирование как намеренное
+   и документированное исключение.
+4. **Уведомление уже работающей сессии об изменении каталога skills.** V8
+   подтверждает обнаружение при старте сессии; не проверялось, появляется ли новый
+   adapter в **уже работающей** сессии без перезапуска (как это происходит с
+   personal root, V2).
 
 ---
 
@@ -510,10 +509,10 @@ catalog. Note that `headless` uses `deepseek-official` by default and fails with
 
 ### 8.1 Исправление в истории обсуждения, а не в документах
 
-In the session that added V8/V9, the difference between the two adapter
-mechanisms was summarised to the user as: *"a committed symlink is not an option
-because git duplicates the content; only a junction does that."* **That summary
-was wrong, and these documents did not say it.**
+В сеансе, в котором были добавлены V8/V9, различие между двумя механизмами
+adapter было описано пользователю так: *«symlink нельзя хранить в Git, потому что
+Git дублирует содержимое; это происходит только с junction».* **Это резюме было
+ошибочным; в самих документах такого утверждения не было.**
 
 - This file's V4 and §7.1 of the vNext proposal correctly attribute git-side
   duplication to the **junction** (`git add` walks through it and indexes 9 real
@@ -521,16 +520,16 @@ was wrong, and these documents did not say it.**
   text file" — the proposal's `V6`, re-confirmed in this file's V10.
 - The two mechanisms fail differently and neither is a superset of the other:
 
-  | | committed symlink (mode `120000`) | junction |
+  | | symlink в Git (mode `120000`) | junction |
   |---|---|---|
-  | content in git | none — the blob is the 12-byte target | none, but only because it is ignored |
-  | `git add` behaviour | stores the link | walks through, indexes every real file |
-  | needs a setup step per clone | no | yes |
-  | needs a privilege to create | **yes** | no |
-  | failure mode when unavailable | **silent** text file | loud, the script reports |
+  | содержимое в Git | отсутствует — blob содержит 12-байтовую цель | отсутствует только потому, что путь исключён из Git |
+  | поведение `git add` | сохраняет ссылку | проходит по ссылке и индексирует каждый обычный файл |
+  | нужен шаг настройки для каждого clone | нет | да |
+  | нужна привилегия для создания | **да** | нет |
+  | поведение при невозможности создать | **тихий сбой** — текстовый файл | заметный сбой, о котором сообщает скрипт |
 
-The rule that follows is narrower than "symlinks are bad": **do not rely on a
-mechanism whose failure is silent.** The junction was chosen for its loud
-failure, not because committing a symlink duplicates content.
+Из этого следует более узкое правило, чем «symlink — это плохо»: **не полагайтесь
+на механизм, который отказывает незаметно**. Junction выбрана из-за заметного
+поведения при отказе, а не потому, что symlink при хранении в Git дублирует содержимое.
 
 ---
