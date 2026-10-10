@@ -240,57 +240,57 @@ Layer 1/2, и эту границу следует явно обозначить
 
 ---
 
-## 7. Skills: making one source discoverable
+## 7. Skills: как сделать единый источник доступным для discovery
 
-This is the crux. Four options, evaluated against the constraints.
+Это ключевой вопрос. Ниже четыре варианта, оценённые с учётом ограничений.
 
-### 7.1 Options
+### 7.1 Варианты
 
-**Option A — committed directory symlink**
+**Вариант A — symlink на каталог, сохранённый в Git**
 `.agents/skills` → `../.ai/skills`, tracked as mode `120000`.
 
-- (+) Zero duplication; the reference implementation's exact choice.
-- (+) Verified working on this machine once `core.symlinks=true` and the
-  creating user holds `SeCreateSymbolicLinkPrivilege` (V15); Developer Mode is
-  not the deciding factor. A broken checkout is also repaired in place by
-  `git restore` (V16), not only by re-cloning.
-- (−) On a Windows clone whose config resolves `core.symlinks=false` it becomes
-  a text file (V6) and DSH skips it **silently** (V7). This is the user's primary
-  platform, and creation depends on a privilege that Developer Mode is off for
-  (V14, V15). The failure is invisible to git and to the host.
-- (−) A naive "does the target match" validator is separator-fragile on Windows
-  (V17), so the failure can also go unnoticed by the check meant to catch it.
+- (+) Никакого дублирования; именно этот вариант использован в reference implementation.
+- (+) На этой машине работоспособность подтверждена при `core.symlinks=true` и
+  наличии у создающего ссылку пользователя `SeCreateSymbolicLinkPrivilege` (V15);
+  Developer Mode не является определяющим фактором. Повреждённый checkout можно
+  восстановить на месте командой `git restore` (V16), без повторного clone.
+- (−) В Windows clone, где конфигурация приводит к `core.symlinks=false`, ссылка
+  становится текстовым файлом (V6), а DSH **молча** пропускает её (V7). Это основная
+  платформа пользователя, а создание зависит от привилегии, наличие которой нельзя
+  вывести из состояния Developer Mode (V14, V15). Git и host не замечают отказ.
+- (−) Наивный validator, проверяющий совпадение цели, чувствителен к разделителям
+  в Windows (V17), поэтому проверка, призванная обнаружить сбой, сама может его пропустить.
 
-**Option B — local junction, gitignored, created by script**
-`.agents/skills` is a junction on Windows (or symlink on POSIX), excluded from
-git and recreated by `.ai/scripts/adapters`.
+**Вариант B — локальная junction, исключённая из Git и создаваемая скриптом**
+`.agents/skills` — junction в Windows (или symlink в POSIX), исключённая из Git
+и восстанавливаемая скриптом из `.ai/scripts/adapters`.
 
-- (+) Works on Windows with no admin rights (V8); no git content duplication (V9).
-- (+) No silent breakage: the script either succeeds or reports.
-- (−) Not shared through git; each clone runs one setup command.
+- (+) Работает в Windows без прав администратора (V8); содержимое не дублируется в Git (V9).
+- (+) Нет незаметного отказа: скрипт либо выполняется успешно, либо сообщает об ошибке.
+- (−) Не распространяется через Git; для каждого clone нужно выполнить одну команду настройки.
 
-**Option C — generated pointer skills**
-`.agents/skills/<name>/SKILL.md` is a real, committed, ~6-line file that
-carries `name` + `description` and instructs the reader to load
+**Вариант C — генерируемые skills-указатели**
+`.agents/skills/<name>/SKILL.md` — настоящий файл примерно из шести строк, хранящийся
+в Git: он содержит `name` и `description` и указывает читателю загрузить
 `.ai/skills/<name>/SKILL.md`.
 
-- (+) Fully cross-OS, tracked, Connector-readable, DSH-discoverable.
-- (+) Degrades gracefully: the pointer is valid Markdown everywhere.
-- (−) One extra read per activation, and a duplicated `description` that can
-  drift — mitigated by a validator.
+- (+) Работает на разных ОС, отслеживается Git, читается Connector и обнаруживается DSH.
+- (+) При проблемах деградирует корректно: указатель остаётся валидным Markdown.
+- (−) При каждой activation требуется дополнительное чтение; дублированный `description`
+  может разойтись с источником — это можно контролировать validator.
 
-**Option D — no adapter; rely on `AGENTS.md`**
-The root `AGENTS.md` carries a skill catalog with descriptions; the agent reads
-the matching `.ai/skills/<name>/SKILL.md` on demand.
+**Вариант D — без adapter, только `AGENTS.md`**
+Корневой `AGENTS.md` содержит каталог skills с описаниями; агент при необходимости
+читает соответствующий `.ai/skills/<name>/SKILL.md`.
 
-- (+) Zero setup, zero new files, all hosts, all OSes.
+- (+) Не требует настройки и новых файлов; подходит для всех hosts и ОС.
 - (−) Skills are absent from the host's native skill listing, so automatic
   description-matching by the host registry does not happen. The agent must
   route through `AGENTS.md` first.
 
-### 7.2 Recommendation
+### 7.2 Рекомендация
 
-**Layer them. Start with D, add B, treat C as the portable fallback.**
+**Использовать уровни: начать с D, добавить B, а C оставить переносимым резервным вариантом.**
 
 ```text
 Tier 0  AGENTS.md catalog                    always on, zero setup   ← baseline
@@ -299,92 +299,93 @@ Tier 2  generated pointer files              when the repo must be self-sufficie
 Tier 3  committed symlink                    POSIX-first teams only
 ```
 
-Rationale: Tier 0 costs nothing and is the only tier that cannot silently
-fail. Tier 1 is worth it for a Windows-primary single-machine workflow (B is
-strictly better than A there). Tier 2 is the answer when the template must work
-for someone else on an unknown OS without a setup step.
+Обоснование: Tier 0 ничего не стоит и это единственный уровень, который не может
+отказать незаметно. Tier 1 оправдан для workflow на одной машине с приоритетом Windows
+(в этой среде B однозначно лучше A). Tier 2 нужен, когда шаблон должен работать у
+другого пользователя на неизвестной ОС без дополнительной настройки.
 
-**Do not** commit a symlink as the primary mechanism for a Windows-primary
-project. That is the specific trap this design exists to avoid.
+**Не** используйте symlink в Git как основной механизм в проекте, ориентированном
+на Windows. Именно этой ловушки и призвано избежать данное предложение.
 
-### 7.3 The one-level rule
+### 7.3 Правило одного уровня вложенности
 
-DSH scans a single level (V3), and the reference validator declares nesting an
-**error**. The current tree violates this:
+DSH сканирует только один уровень (V3), а validator из reference implementation
+считает вложенность **ошибкой**. Текущая структура нарушает это правило:
 
 ```text
 .ai/skills/handoff/SKILL.md                        depth 1  OK
 .ai/skills/handoff/reference-preservation/SKILL.md depth 2  INVISIBLE to DSH
 ```
 
-Flatten to `handoff-reference-preservation/SKILL.md`, or adopt the reference
-convention of sibling directories with prefixed names
-(`migration-prep`, `migration-review`, …). This is a concrete, cheap fix and
-should be enforced by the validator.
+Перенесите skill в `handoff-reference-preservation/SKILL.md` либо используйте
+принятое в reference implementation соглашение о соседних каталогах с префиксами
+(`migration-prep`, `migration-review` и т. д.). Это простое и недорогое исправление;
+его следует закрепить в validator.
 
 ---
 
-## 8. Rules, and what "two branches" should really mean
+## 8. Rules и что на самом деле должно означать «две ветви»
 
-The user's framing was: some skills are for chat AI, some for the agent, some
-for both. **Do not implement that as an audience split.** There is no audience
-field (V13), and a split would create exactly the duplication the architecture
-forbids.
+Постановка пользователя была такой: одни skills предназначены для chat AI, другие
+для агента, а некоторые — для обоих. **Не реализуйте это разделением по audience.**
+Поля audience нет (V13), а такое разделение породило бы именно то дублирование,
+которое запрещает архитектура.
 
-Use these three orthogonal distinctions instead.
+Вместо этого используйте три независимых различия.
 
-### 8.1 By loading trigger, not by reader
+### 8.1 По триггеру загрузки, а не по читателю
 
-Borrowed from the reference and worth adopting verbatim:
+Заимствовано из reference implementation; это соглашение стоит принять без изменений:
 
-| Guidance is about | Form | Loads |
+| О чём инструкция | Форма | Когда загружается |
 |---|---|---|
-| specific file paths | rule with `paths:` | deterministically, when a matching file is in context |
-| a task or intent | skill | on demand, by description match |
-| always-true obligations | root `AGENTS.md` | always |
+| конкретные пути файлов | rule с `paths:` | детерминированно, когда соответствующий файл находится в контексте |
+| задача или намерение | skill | по запросу, при совпадении описания |
+| обязательства, действующие всегда | корневой `AGENTS.md` | всегда |
 
-Choosing wrong is costly in both directions: forcing task guidance into a rule
-wastes context or never triggers; forcing file guidance into a skill loses the
-deterministic trigger.
+Неправильный выбор вреден в обоих направлениях: инструкции для задач в rule
+расходуют контекст или вообще не срабатывают; инструкции для файлов в skill
+теряют детерминированный триггер.
 
-### 8.2 By required capability
+### 8.2 По требуемым возможностям
 
-This is the real answer to "for me or for chat AI". Make applicability follow
-from the capability the instruction needs:
+Это и есть настоящий ответ на вопрос «для меня или для chat AI». Применимость
+должна определяться возможностями, необходимыми для выполнения инструкции:
 
 ```markdown
-## Agent-specific procedures
+## Процедуры только для agent
 
-These procedures apply when working as a tool-using agent that can inspect and
-modify repository files. They are not instructions for a chat-only assistant
-and are not something a user performs manually.
+Эти процедуры применяются при работе в роли agent с инструментами, который может
+проверять и изменять файлы репозитория. Они не предназначены для chat-only assistant
+и не являются действиями, которые пользователь выполняет вручную.
 ```
 
-This pattern already exists in `.ai/skills/knowledge-capture/SKILL.md` and it
-works. The section is inert for a chat AI reading the file (it has no shell) and
-load-bearing for an agent. No metadata, no filtering, no second copy.
+Этот шаблон уже используется в `.ai/skills/knowledge-capture/SKILL.md` и работает.
+Для chat AI, читающего файл без shell, этот раздел неактивен, а для agent он необходим.
+Не нужны metadata, фильтрация или вторая копия.
 
-A stronger variant is to name the tools outright: an instruction that mentions
-`pptd_render` or a local `write` tool is self-evidently agent-scoped, because a
-Connector-based chat AI cannot call it.
+Более строгий вариант — прямо указывать инструменты: инструкция, в которой упоминается
+`pptd_render` или локальный инструмент `write`, очевидно предназначена для agent,
+поскольку chat AI на базе Connector не может его вызвать.
 
-### 8.3 By host, at the adapter layer only
+### 8.3 По host — только на уровне adapter
 
-Host differences that cannot be expressed as a capability belong in Layer 2:
+Различия между hosts, которые нельзя выразить через требуемые возможности, относятся к Layer 2:
 
-- the repository mutation rule keeps host-neutral invariants, and each host's
-  *mechanics* stay out of it — GitHub API blob-SHA preconditions for the
-  Connector, read-back-and-diff for the agent;
-- `>>command` stays a **chat transport convention**. It must not become a
-  project-wide semantic primitive, and INDEX must remain invocation-neutral.
+- правило изменения репозитория сохраняет host-neutral инварианты, а *механика* каждого
+  host остаётся за его пределами: preconditions по blob SHA для GitHub API в Connector,
+  read-back-and-diff для agent;
+- `>>command` остаётся **соглашением транспортного уровня чата**. Оно не должно
+  превращаться в семантический примитив всего проекта, а INDEX должен оставаться
+  нейтральным к способу вызова.
 
 ---
 
-## 9. Keeping adapters honest
+## 9. Как поддерживать корректность adapters
 
-The reference's strongest idea is that adapters are **generated and validated**,
-so drift is a build failure rather than a silent regression. This toolkit is the
-professional core of the proposal.
+Самая сильная идея reference implementation — **генерировать и проверять adapters**,
+чтобы расхождение приводило к ошибке проверки, а не к незаметной регрессии. Этот
+набор инструментов — профессиональное ядро предложения.
 
 ```text
 .ai/scripts/
@@ -395,26 +396,26 @@ professional core of the proposal.
 └── validate.js              entry point
 ```
 
-Checks worth implementing, all of which catch a real failure mode above:
+Проверки, которые стоит реализовать; каждая обнаруживает один из описанных выше реальных сбоев:
 
-| Check | Catches |
+| Проверка | Что обнаруживает |
 |---|---|
-| skill depth == 1 | V3 — the invisible-skill trap |
-| `name` == directory, kebab-case, ≤64 | host rejects mismatched skills |
-| `description` present, ≤1024, says when to use | host rejects or ignores |
-| adapters match `.ai/` sources | drift |
-| adapter paths actually resolve as directories | V6/V7 — the silent-skip trap |
-| every `.ai/...` reference in docs exists | broken routing after refactors |
-| instruction file size warning >12 KB | context dilution |
+| глубина skill == 1 | V3 — skill, невидимый для discovery |
+| `name` == имя каталога, kebab-case, ≤64 | host отклоняет skill с несовпадающими данными |
+| `description` задано, ≤1024, указано когда использовать | host отклоняет skill или игнорирует его |
+| adapters соответствуют источникам в `.ai/` | расхождение источника и копии |
+| пути adapters действительно разрешаются в каталоги | V6/V7 — незаметный пропуск |
+| все ссылки `.ai/...` в документах существуют | сломанная маршрутизация после рефакторинга |
+| предупреждение при размере файла инструкций >12 KB | размывание контекста |
 
-The **adapter-resolves** check is the important new one: it turns "skills
-silently vanished on this machine" into a failing check.
+Особенно важна новая проверка **adapter-resolves**: она превращает ситуацию
+«skills незаметно исчезли на этой машине» в явную ошибку проверки.
 
 ---
 
-## 10. Personal versus project scope
+## 10. Personal и project scope
 
-Already decided and confirmed working:
+Уже принято и подтверждено на практике:
 
 ```text
 ~/.dsh/skills                    personal, all projects  (DSH rank 300 via customSkillDirs)
@@ -423,12 +424,11 @@ $DSH_HOME/AGENTS.md              personal always-on instructions
 <project>/.dsh/skills            project-scoped, DSH-only (rank 100)
 ```
 
-Recommended split:
+Рекомендуемое разделение:
 
-- **Personal (`~/.dsh/skills`)** — cross-project habits: commit style,
-  explanation style, review checklists, knowledge capture.
-- **Project (`.ai/skills/`)** — anything referencing project paths, project
-  rules, or project vocabulary.
+- **Personal (`~/.dsh/skills`)** — привычки, общие для разных проектов: стиль commit,
+  стиль объяснений, review checklists, фиксация знаний.
+- **Project (`.ai/skills/`)** — всё, что ссылается на пути, rules или терминологию конкретного проекта.
 - **Never duplicate** between the two; a personal skill that needs project
   context should read that context at runtime.
 
