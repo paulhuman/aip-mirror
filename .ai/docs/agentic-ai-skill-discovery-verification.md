@@ -242,13 +242,13 @@ junction из V4 делает содержимое доступным для DSH
    clone с помощью `New-SkillAdapters.ps1` снова сделало `knowledge-capture`
    доступным, причём базовый путь ресурсов разрешился внутри clone.
 
-**Negative controls that were ruled out** (each examined, none can supply the
-eight names): repository `.dsh/skills` (absent), `~/.dsh` (absent),
-`C:\Users\Paul\.agents` (absent), `$DSH_HOME\skills` (only `explain-code` and
-`review-agent`), the bundled `dsh-agent-preset/skills` (4 unrelated names), the
-office runtime skill pack (3 unrelated names), and the skills-market checkout
-(3818 `SKILL.md` files, only the name `handoff` collides — with a different,
-Chinese description, and the rank-200 candidate wins on the name anyway).
+**Исключённые negative controls** (каждый проверен; ни один не объясняет все
+восемь имён): `.dsh/skills` в репозитории (отсутствует), `~/.dsh` (отсутствует),
+`C:\Users\Paul\.agents` (отсутствует), `$DSH_HOME\skills` (содержит только
+`explain-code` и `review-agent`), bundled `dsh-agent-preset/skills` (4 посторонних
+имени), office runtime skill pack (3 посторонних имени) и checkout skills market
+(3818 файлов `SKILL.md`; совпадает только имя `handoff`, но описание другое,
+на китайском языке, а кандидат с рангом 200 всё равно выигрывает по имени).
 
 **Следствие:** `.ai/skills` остаётся единственным canonical source, `.agents/skills`
 — локальным adapter, исключённым из Git, а создание adapter теперь является
@@ -513,11 +513,11 @@ adapter было описано пользователю так: *«symlink не
 Git дублирует содержимое; это происходит только с junction».* **Это резюме было
 ошибочным; в самих документах такого утверждения не было.**
 
-- This file's V4 and §7.1 of the vNext proposal correctly attribute git-side
-  duplication to the **junction** (`git add` walks through it and indexes 9 real
-  files), and correctly describe the symlink's own failure as "materializes as a
-  text file" — the proposal's `V6`, re-confirmed in this file's V10.
-- The two mechanisms fail differently and neither is a superset of the other:
+- V4 этого файла и §7.1 vNext proposal правильно связывают дублирование в Git
+  с **junction** (`git add` проходит по ней и индексирует 9 обычных файлов), а
+  отказ symlink описывают как «материализацию в текстовый файл» — это V6 proposal,
+  повторно подтверждённый в V10 этого файла.
+- Эти два механизма дают разные сбои, и ни один не является полным надмножеством другого:
 
   | | symlink в Git (mode `120000`) | junction |
   |---|---|---|
