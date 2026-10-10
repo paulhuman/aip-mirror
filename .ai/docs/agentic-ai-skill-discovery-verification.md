@@ -264,6 +264,12 @@ Git, но `handoff-reference-preservation` не появляется **ни в �
 Утверждение из §7.3 vNext proposal теперь подтверждено напрямую; по этой же
 причине в каталоге 8 skills, а не 9.
 
+Путь `.ai/skills/handoff/reference-preservation/SKILL.md` — исторический путь
+в состоянии репозитория, использованном для этого эксперимента. В текущей структуре
+AIP Mirror соответствующий файл находится в
+`.ai/conversation-management/handoff/reference-preservation/SKILL.md`; это изменение
+пути не меняет зафиксированное свидетельство о поведении DSH при обнаружении вложенных skills.
+
 ### V10 — Повторная проверка upstream-модели symlink в Windows
 
 Повторная проверка выполнена на актуальном clone `adobe/spectrum-web-components`
