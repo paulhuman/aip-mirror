@@ -21,10 +21,10 @@ canonical source
                             |
             +---------------+---------------+
             |                               |
-     Chat AI + Connector            Agentic AI (DSH)
-     no working copy                real working copy
-     API read / full-content PUT    shell, git, local tools
-     cannot follow symlinks         scans fixed discovery roots
+      Chat AI + Connector              Agentic AI (DSH)
+      нет рабочей копии              есть рабочая копия
+      API read / full-content PUT    shell, git, локальные инструменты
+      не может следовать symlink     сканирует фиксированные корни discovery
 ```
 
 Предыдущая исследовательская серия установила, что эти два класса различаются
@@ -108,8 +108,8 @@ Fork `paulhuman/spectrum-web-components` — практический образ
                               |
               +---------------+---------------+
               |                               |
-      Connector can read it            DSH cannot find it
-      (by explicit path)               (not in any scanned root)
+       Connector может прочитать     DSH не может обнаружить
+       (по явному пути)               (нет в сканируемых корнях)
 ```
 
 Здесь сталкиваются два жёстких ограничения:
