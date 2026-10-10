@@ -68,21 +68,23 @@ canonical source
 Fork `paulhuman/spectrum-web-components` — практический образец, на котором
 моделировалась эта инфраструктура. В нём непосредственно наблюдались следующие решения:
 
-- canonical content in `.ai/`; tool directories are **thin adapters**;
-- exactly **three** tracked symlinks, all mode `120000`: `.claude/rules` →
-  `../.ai/rules`, `.claude/skills` → `../.ai/skills`, `.cursor/skills` →
-  `../.ai/skills`. The two identical targets share one blob;
-- `.github/instructions/*.instructions.md` and `.cursor/rules/*.mdc` are
-  **generated** by `.ai/scripts/sync.js`, never hand-edited. The `.mdc` files
-  were per-file symlinks until commit `4c97b0dd34`; they became generated files
-  because Cursor reads `globs:` where Claude reads `paths:`, and one `.ai/`
-  source must serve both;
-- `AGENTS.md` at the repository root is a **thin router table**, not a
-  knowledge dump;
-- rules carry `paths:` front matter (path-scoped); skills are task-scoped;
-- a validator enforces that **skills are exactly one level deep**, that `name`
-  equals the directory, and that `description` fits the host limits;
-- `yarn lint:ai` plus a pre-commit hook keep generated copies from drifting.
+- каноническое содержимое хранится в `.ai/`, а каталоги инструментов являются **тонкими адаптерами**;
+- отслеживаются ровно **три** symlink с Git mode `120000`: `.claude/rules` →
+  `../.ai/rules`, `.claude/skills` → `../.ai/skills` и `.cursor/skills` →
+  `../.ai/skills`. Две одинаковые цели используют один blob;
+- файлы `.github/instructions/*.instructions.md` и `.cursor/rules/*.mdc`
+  генерируются через `.ai/scripts/sync.js` и не редактируются вручную. До коммита
+  `4c97b0dd34` файлы `.mdc` были отдельными symlink; затем их заменили
+  генерируемыми файлами, поскольку Cursor использует `globs:`, а Claude —
+  `paths:`, и оба формата должны строиться из одного источника в `.ai/`;
+- корневой `AGENTS.md` — это **тонкая таблица маршрутизации**, а не хранилище
+  всей проектной информации;
+- rules содержат front matter `paths:` для ограничения по путям, а skills
+  предназначены для задач;
+- validator проверяет, что **skills находятся ровно на одном уровне вложенности**,
+  значение `name` совпадает с именем каталога, а `description` укладывается
+  в ограничения host;
+- `yarn lint:ai` и pre-commit hook предотвращают расхождение сгенерированных копий.
 
 Повторное исследование этого репозитория в Windows выявило два предостережения
 (V15–V17): для *создания* symlink требуется привилегия, а validator ссылок выдаёт
@@ -483,11 +485,14 @@ AGENTS.md  +  .ai/{config.yaml,rules,skills,workflows,templates,scripts}
 
 ---
 
-## 12. Что архивировать
+## 12. Рекомендация по архивированию на момент подготовки предложения
 
-Шесть документов `agentic-ai-*` теперь являются свидетельствами в рамках устаревшей
-концепции. Согласно действующему lifecycle архива, переместите их туда, оставив
-в активном дереве три материала.
+Этот раздел фиксирует первоначальную рекомендацию, сформулированную в контексте
+исследования vNext, а не актуальную инвентаризацию `.ai/docs/` и не самостоятельное
+разрешение на перемещение файлов. Фактический поддерживаемый набор перечислен в
+`.ai/docs/README.md`. Не выполняйте перечисленные ниже перемещения автоматически:
+сначала проверьте, остаётся ли каждый документ необходимым evidence для текущей
+архитектуры и открытых исследований.
 
 | Документ | Решение |
 |---|---|
