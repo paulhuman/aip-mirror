@@ -45,23 +45,23 @@ canonical source
 
 | № | Результат | Способ проверки |
 |---|---|---|
-| V1 | DSH discovers skills in six ranked roots; lower rank wins | DSH `dsh-skill-filesystem` source |
-| V2 | `.ai/skills` is **not** a DSH discovery root | zero `.ai/skills` occurrences in DSH bundle |
-| V3 | Skill discovery scans **one level only**; nested `**/SKILL.md` is invisible | source: `join(entry.path, "SKILL.md")` |
-| V4 | DSH auto-loads `AGENTS.md` / `CLAUDE.md` / `*.local.md` by walking from the `.git` root down to cwd **and** to touched directories | `dsh-agent-instructions` source |
-| V5 | `.ai/AGENTS.md` is **not** found from the project root unless the agent touches files inside `.ai/` | same source: discovery is directory-chain based |
-| V6 | Committed symlink on Windows with `core.symlinks=false` materializes as a **plain text file** holding the target string — 12 bytes for `../.ai/rules`, 13 for `../.ai/skills`; `readdir` then fails `ENOTDIR` | experiment: clone round-trip, re-confirmed on `adobe/spectrum-web-components` |
-| V7 | DSH treats `ENOTDIR` as "root absent" and **silently** skips it — no error | source: `isAbsentSkillPathError` |
-| V8 | Directory **junction** works as a skill root and needs no admin rights | experiment |
-| V9 | Git does **not** track a junction as a link — it indexes the files behind it, duplicating content | experiment: two identical blobs |
-| V10 | GitHub API and `raw.githubusercontent` return **404** through a symlink; the symlink blob itself is readable as text | experiment against a live repo |
-| V11 | The Connector reads `.ai/skills/<name>/SKILL.md` **directly**, with no symlink needed | API fetch of `explain-code/SKILL.md` |
-| V12 | DSH ignores unknown front matter keys | experiment with `license`, `allowed-tools`, `metadata`, `paths` |
-| V13 | DSH has no audience/agent-only field, and no user-facing prompt-editing API | DSH source |
-| V14 | Directory junction may be created without elevation; symbolic link creation succeeded in this shell but Developer Mode is off, so it is **not** guaranteed for the user | registry + experiment |
-| V15 | Symlink creation needs `SeCreateSymbolicLinkPrivilege`, **not** Developer Mode specifically. With `core.symlinks=true` a Windows clone materializes real `SymbolicLink` entries whose targets resolve to the same inode as the canonical directory; the privilege was enabled via `S-1-5-32-544` while Developer Mode stayed off | re-clone of `adobe/spectrum-web-components` + `whoami /priv` + `AppModelUnlock` probe |
-| V16 | A checkout broken by `core.symlinks=false` is repaired in place; a re-clone is not required. `git restore -- .claude .cursor` rewrites the paths as real symlinks and leaves `git status` clean | experiment on a deliberately broken clone |
-| V17 | `readlinkSync` returns **backslash-separated** targets on Windows, so the upstream `validate-symlinks.js` strict `!==` against `'../.ai/rules'` reports 3 false failures on a healthy Windows clone. Its CI runs `yarn lint:ai` on `ubuntu-latest`, where separators match | faithful replay of the upstream check |
+| V1 | DSH обнаруживает skills в шести ранжированных корнях; меньший ранг имеет приоритет | исходный код DSH `dsh-skill-filesystem` |
+| V2 | `.ai/skills` **не является** корнем discovery в DSH | в bundle DSH нет ни одного вхождения `.ai/skills` |
+| V3 | Discovery skills сканирует только **один уровень**; вложенные `**/SKILL.md` не обнаруживаются | исходный код: `join(entry.path, "SKILL.md")` |
+| V4 | DSH автоматически загружает `AGENTS.md` / `CLAUDE.md` / `*.local.md`, проходя от корня `.git` к `cwd` **и** к каталогам затронутых файлов | исходный код `dsh-agent-instructions` |
+| V5 | `.ai/AGENTS.md` **не обнаруживается** от корня проекта, пока агент не обратится к файлам внутри `.ai/` | тот же исходный код: discovery идёт по цепочке каталогов |
+| V6 | Symlink, сохранённая в Git, при `core.symlinks=false` в Windows материализуется как **обычный текстовый файл** со строкой цели — 12 байт для `../.ai/rules`, 13 для `../.ai/skills`; затем `readdir` завершается с `ENOTDIR` | эксперимент с clone round-trip, повторно подтверждённый на `adobe/spectrum-web-components` |
+| V7 | DSH считает `ENOTDIR` признаком «корень отсутствует» и **молча** пропускает его без ошибки | исходный код: `isAbsentSkillPathError` |
+| V8 | Directory **junction** работает как корень skills и не требует прав администратора | эксперимент |
+| V9 | Git **не** отслеживает junction как ссылку — он индексирует файлы за ней и дублирует содержимое | эксперимент: два одинаковых blob |
+| V10 | GitHub API и `raw.githubusercontent` возвращают **404** при обращении через symlink; сам blob ссылки читается как текст | эксперимент с действующим репозиторием |
+| V11 | Connector читает `.ai/skills/<name>/SKILL.md` **напрямую**, без symlink | API fetch `explain-code/SKILL.md` |
+| V12 | DSH игнорирует неизвестные ключи front matter | эксперимент с `license`, `allowed-tools`, `metadata`, `paths` |
+| V13 | В DSH нет поля audience/agent-only и нет пользовательского API для редактирования prompt | исходный код DSH |
+| V14 | Directory junction можно создать без повышения прав; создание symbolic link удалось в этой shell-сессии, но Developer Mode выключен, поэтому это **не** гарантировано для пользователя | проверка реестра и эксперимент |
+| V15 | Для создания symlink нужна привилегия `SeCreateSymbolicLinkPrivilege`, а **не** обязательно Developer Mode. При `core.symlinks=true` Windows clone создаёт настоящие записи `SymbolicLink`, цели которых разрешаются в тот же inode, что и canonical directory; привилегия была включена через `S-1-5-32-544`, хотя Developer Mode оставался выключенным | повторный clone `adobe/spectrum-web-components`, `whoami /priv` и проверка `AppModelUnlock` |
+| V16 | Checkout, повреждённый при `core.symlinks=false`, можно восстановить на месте без повторного clone. `git restore -- .claude .cursor` восстанавливает настоящие symlink и оставляет `git status` чистым | эксперимент на намеренно повреждённом clone |
+| V17 | В Windows `readlinkSync` возвращает цели с разделителями **backslash**, поэтому строгое сравнение `!==` в upstream `validate-symlinks.js` со строкой `'../.ai/rules'` выдаёт три ложных сбоя на исправном Windows clone. CI запускает `yarn lint:ai` на `ubuntu-latest`, где разделители совпадают | точное воспроизведение upstream-проверки |
 
 ### 2.2 Непосредственно изученная reference implementation
 
@@ -293,10 +293,10 @@ Layer 1/2, и эту границу следует явно обозначить
 **Использовать уровни: начать с D, добавить B, а C оставить переносимым резервным вариантом.**
 
 ```text
-Tier 0  AGENTS.md catalog                    always on, zero setup   ← baseline
-Tier 1  .agents/skills link (gitignored)     personal machine ergonomics
-Tier 2  generated pointer files              when the repo must be self-sufficient
-Tier 3  committed symlink                    POSIX-first teams only
+Tier 0  каталог AGENTS.md                     всегда включён, без настройки ← база
+Tier 1  ссылка .agents/skills (gitignored)     удобство на личной машине
+Tier 2  generated pointer files                когда репозиторий должен быть самодостаточным
+Tier 3  symlink в Git                          только для команд с приоритетом POSIX
 ```
 
 Обоснование: Tier 0 ничего не стоит и это единственный уровень, который не может
@@ -491,12 +491,12 @@ AGENTS.md  +  .ai/{config.yaml,rules,skills,workflows,templates,scripts}
 
 | Документ | Решение |
 |---|---|
-| `agentic-ai-compatibility-architecture.md` | **Archive.** Its Phase 1–4 apparatus is closed; the chapter pinning (C0068) is stale by several chapters. Keep only the host-contract layering. |
-| `agentic-ai-compatibility-boundaries.md` | **Keep the evidence model** (§ its transport-neutral record), archive the rest. Its "without duplicating" conclusion is unexecutable as written without a discovery mechanism. |
-| `agentic-ai-compatibility-capability-audit.md` | **Archive.** Branch-hygiene section is factually wrong (39 branches vs 1), and its inventories predate two skills and one rule. |
-| `agentic-ai-dsh-observations.md` | **Keep and upgrade.** The most accurate document in the set. Promote "was reported" to "verified (source)", add the `metadata` field, the hard rejection of legacy camelCase keys, the one-level rule, and the `.system` / `includeDefaultRoots` details. |
-| `agentic-ai-environment-survey.md` | **Archive**, retaining the capability-seam matrix and the Finding set. Source URLs for upstream DSH were never verified here. |
-| `agentic-ai-owner-seam-audit.md` | **Archive** after folding its gap list into this note. Its owner inventory is missing `ai-infrastructure`, `knowledge-capture`, and `developer-knowledge.md`. |
+| `agentic-ai-compatibility-architecture.md` | **В архив.** Этапы 1–4 завершены; привязка к chapter C0068 отстаёт на несколько глав. Сохранить только модель слоёв host-контрактов. |
+| `agentic-ai-compatibility-boundaries.md` | **Сохранить модель свидетельств** (раздел с transport-neutral записью), остальное архивировать. Вывод «без дублирования» нельзя реализовать в текущей формулировке без механизма discovery. |
+| `agentic-ai-compatibility-capability-audit.md` | **В архив.** Раздел о branch hygiene фактически неверен (39 веток вместо 1), а инвентаризации сделаны до появления двух skills и одного rule. |
+| `agentic-ai-dsh-observations.md` | **Сохранить и обновить.** Самый точный документ в наборе. Заменить формулировку «сообщалось» на «подтверждено по исходному коду», добавить поле `metadata`, строгий отказ от устаревших camelCase keys, правило одного уровня и сведения о `.system` / `includeDefaultRoots`. |
+| `agentic-ai-environment-survey.md` | **В архив**, сохранив матрицу capability seams и набор Finding. URL первоисточников DSH здесь не проверялись. |
+| `agentic-ai-owner-seam-audit.md` | **В архив** после переноса списка пробелов в эту записку. В инвентаризации owners отсутствуют `ai-infrastructure`, `knowledge-capture` и `developer-knowledge.md`. |
 
 В активной документации должны остаться три артефакта:
 
