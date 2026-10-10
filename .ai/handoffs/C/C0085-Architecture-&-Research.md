@@ -217,7 +217,7 @@ Keep existing TODOs 1–7. Add:
 
 ## Updated immediate next task
 
-Continue Stage 1 using the pinned baseline 78c321d62714463ddd3e420dfc311f11d1a7dd13 for inventory claims. Incorporate the user-approved target placement of the three valuable documents above and the FAQ moves. Complete the evidence-backed inventory and reference classification before moving files or changing active owners. Then begin the minimal repository-boundary edit, preserving the distinction between permitted structural reads and forbidden semantic dependence. The newly created .ai/memory/ directory now has its own README and active documentation-update TODO; account for both in the resulting tree/README checks.
+The directory reorganization is now committed and verified on `main`; do not repeat Stage 1 or the completed moves. In C0086, continue the still-open `.ai/memory/ai-docs-architecture-update-todo.md`: review all seven maintained documents in `.ai/docs/`, classify claims as current/confirmed, historical, inferred, or open, fix current-use stale paths and references, verify semantic-owner boundaries, and record evidence. Do not translate existing documents as part of this review. For DSH-specific technical assertions, use authoritative DSH sources or controlled evidence and keep technical authorship separate from AIP Mirror integration.
 
 ## Recommended starting context
 
@@ -258,4 +258,24 @@ Use `paulhuman/aip-mirror@78c321d62714463ddd3e420dfc311f11d1a7dd13` as the initi
 
 ### Immediate next task
 
-Resume Stage 1 inventory and reference classification on the pinned baseline 78c321d62714463ddd3e420dfc311f11d1a7dd13, while accounting for the newly created .ai/memory/ files and the new stable document in .ai/docs/. Complete the evidence-backed inventory before moving or archiving any existing documents. Then continue the planned minimal semantic-boundary update and directory migration. Do not treat this checkpoint as completion of the broader restructuring.
+C0086 must begin with the seven maintained documents now at the root of `.ai/docs/` and continue the OPEN documentation-update TODO. Inspect each document and its current-use links against the current repository tree; preserve historical paths where they are evidence rather than live instructions. Separate confirmed/current technical claims from historical observations, inference, and unresolved questions. Do not translate existing documents during this review. Update the TODO with evidence and verified outcomes; do not mark it complete until all criteria in the TODO are satisfied.
+
+
+## Checkpoint — documentation and archive reorganization (2026-10-10)
+
+### Completed and verified
+
+- Added `.ai/docs/README.md`, including the rule that new documents in `.ai/docs/` are written in Russian apart from necessary technical terms and exact identifiers.
+- Moved the two FAQ documents and four retained architecture/context documents to the root of `.ai/docs/`; all seven maintained documents plus the new README are now at one level.
+- Moved five completed compatibility research notes and the former architecture README into the flat `.ai/archives/memory/` area.
+- Flattened the former `.ai/archives/docs/architecture/` contents into `.ai/archives/memory/`; the archive now has 23 files at one level. `.ai/memory/` also remains flat.
+- Updated `.ai/archives/README.md`, `.ai/INDEX.md`, and the active memory TODO to match the new paths and lifecycle boundaries.
+- Added the same Russian-language policy to `.ai/memory/README.md`: new memory documents are written in Russian while necessary technical terminology and exact identifiers remain in their original form.
+- The content and branch tree were read back and checked. The recursive tree was not truncated; no old `.ai/docs/architecture/`, `.ai/docs/faq/`, or `.ai/archives/docs/` paths remain.
+
+### Verification evidence
+
+- Main structural commit: `8ad398be5a1fb301894a6beefd96b786a941d3ce`.
+- TODO status/path correction: `c2acbdaa352fc3d8ee9b9d182e3b5bbb5390261d`.
+- Memory README language policy: `11701759e68e34b8c2cf60d27f29b06fe64230e1`; read-back blob SHA `d612bd070257766b9f0d023a05059c691dd1adc5`.
+- Documentation review remains OPEN; structural reorganization does not establish that all retained content is current.
