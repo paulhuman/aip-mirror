@@ -1,53 +1,42 @@
-# DSH Desktop — Agentic AI observations
+# Наблюдения о DSH Desktop и Agentic AI
 
-## Purpose
+## Назначение и статус свидетельств
 
-This document preserves the DSH observations discussed during C0075 so later
-chapters do not have to reconstruct the findings from conversation history.
-They describe the inspected DSH Desktop environment and MUST be treated as
-version-sensitive observations rather than a timeless DSH specification.
+Документ сохраняет наблюдения о среде DSH Desktop, исследованной в рамках C0075. Они относятся к конкретной проверенной версии и **не являются бессрочной спецификацией DSH**.
 
-## 1. Audience labels are semantic, not technical
+Текущая upstream-документация DSH может измениться. Перед тем как опираться на деталь DSH в реализации, перепроверьте её для установленной версии по первичным техническим источникам или контролируемым экспериментом.
 
-DSH does not provide an observed skill metadata field such as `audience` or
-`agent-only` that filters instruction content by reader. `user-invocable` and
-`disable-model-invocation` control invocation permissions, not the semantic
-audience of instructions inside a skill.
+## 1. Метки аудитории — семантические, а не технические
 
-Therefore a note such as `Agent-only rules` can be useful as an explicit
-semantic boundary, but it is not a technical filter. A stronger pattern is
-to make applicability follow from the required capability or tool itself.
+В исследованной среде не было обнаружено отдельного metadata-поля вроде `audience` или `agent-only`, которое фильтровало бы содержимое инструкций по типу читателя. Поля `user-invocable` и `disable-model-invocation` управляют доступностью способов вызова, а не семантической аудиторией инструкций внутри skill.
 
-Observed examples discussed with DSH included instructions referring to tools
-that exist only in the tool-using environment. This lets the required
-capability act as an objective applicability condition.
+Поэтому заголовок вроде `Agent-only rules` может обозначать смысловую границу, но не является техническим фильтром. Более надёжный подход — формулировать применимость через требуемую capability или инструмент.
 
-## 2. Observed DSH skill discovery and packaging
+В ходе исследования DSH обсуждались инструкции, ссылающиеся на инструменты, доступные только в среде, использующей инструменты. Наличие такой capability становится объективным условием применимости инструкции.
 
-The inspected DSH skill loader was reported to search these roots, in priority
-order:
+## 2. Обнаружение и упаковка skills в исследованной версии DSH
+
+Для исследованного loader DSH сообщался следующий порядок поиска корней:
 
 1. `<project>/.dsh/skills`
 2. `<project>/.agents/skills`
-3. configured `customSkillDirs`
+3. настроенные `customSkillDirs`
 4. `%APPDATA%\\dsh-desktop\\harness\\skills`
 5. `~/.agents/skills`
-6. bundled skills
+6. встроенные skills (bundled)
 
-The exact roots and precedence are version-sensitive observations.
+Точный список корней и их приоритет — наблюдения, зависящие от версии.
 
-`.ai/skills` is not an observed native DSH discovery root. The AIP Mirror
-`.ai/skills/` tree therefore MUST NOT be described as a universal Agentic AI
-skill directory.
+`.ai/skills` не являлся обнаруженным нативным корнем DSH. Поэтому дерево `.ai/skills/` в AIP Mirror **нельзя описывать как универсальный каталог skills для Agentic AI**.
 
-Observed supported package shapes included:
+Наблюдались следующие допустимые формы пакета:
 
 ```text
 skills/my-skill/SKILL.md
 skills/flat-skill.md
 ```
 
-Observed required front matter:
+Наблюдавшийся обязательный front matter:
 
 ```yaml
 ---
@@ -56,40 +45,32 @@ description: What the skill does and when to use it.
 ---
 ```
 
-Observed optional DSH-specific fields included:
+Среди необязательных полей, специфичных для DSH, наблюдались:
 
 - `whenToUse`
 - `disable-model-invocation`
 - `user-invocable`
 
-Legacy camelCase variants such as `disableModelInvocation` and
-`modelInvocable` should not be assumed to be equivalent.
+Не следует без проверки считать устаревшие варианты camelCase, например `disableModelInvocation` и `modelInvocable`, эквивалентами этих полей.
 
-Invalid YAML or missing required `name` / `description` was reported as a
-reason for the loader to skip a skill, with a log warning.
+Сообщалось, что невалидный YAML или отсутствие обязательных `name` / `description` приводило к пропуску skill loader'ом с предупреждением в журнале.
 
-## 3. `openai.yaml` is not a universal skill contract
+## 3. `openai.yaml` — не универсальный контракт skill
 
-DSH was reported not to require `openai.yaml` for its native skill loading.
-`openai.yaml` associated with a `review-agent` package should therefore not be
-used as evidence for a universal rule that skills require an `agents/`
-subdirectory or OpenAI-specific metadata.
+В исследованной среде DSH нативная загрузка skills, согласно наблюдениям, не требовала `openai.yaml`. Поэтому наличие `openai.yaml` в пакете `review-agent` не является доказательством универсального требования к skills иметь подкаталог `agents/` или metadata в формате OpenAI.
 
-Platform metadata and skill instruction content are separate concerns.
+Metadata платформы и содержимое инструкций skill — разные вопросы.
 
-## 4. Repository mutation safety
+## 4. Безопасность изменения репозитория
 
-DSH has a real working copy and can use mechanisms such as local `write`,
-`edit`, shell commands, and Git. Its tool layer was reported to enforce
-read-before-edit behavior.
+DSH использует рабочую копию и может применять локальные механизмы вроде `write`, `edit`, shell-команд и Git. Для исследованной версии сообщалось, что её tool layer обеспечивает read-before-edit.
 
-That does not make the mutation mechanism identical to the GitHub Connector.
-The common architecture is therefore:
+Это не делает механизм изменения идентичным GitHub Connector. Общая архитектура такова:
 
 ```text
-.ai/rules/repository.md
+.ai/skills/repository/SKILL.md
         ↓
-canonical repository mutation invariants
+общие инварианты безопасного изменения репозитория
         ↓
     +----------------------+
     |                      |
@@ -98,57 +79,52 @@ ChatGPT + Connector     Agentic AI
 GitHub API mechanics    host-specific execution
 ```
 
-Host-specific mechanics MUST NOT be copied into the repository-wide rule as a
-second universal procedure.
+Host-specific механизмы нельзя копировать в общее repository rule как вторую универсальную процедуру.
 
-## 5. Front matter parsing boundary
+## 5. Граница разбора front matter
 
-Valid YAML front matter is a semantic invariant of Developer Knowledge.
-Using an actual YAML parser is a validation procedure appropriate to a
-tool-using capture workflow. The parser implementation and loader contract
-remain host-specific.
+Валидный YAML front matter является семантическим инвариантом Developer Knowledge. Использование настоящего YAML parser — подходящая процедура проверки в capture workflow, который умеет работать с инструментами. Конкретная реализация parser и контракт loader остаются host-specific.
 
-This distinction is now reflected in the active owners:
+Текущие владельцы в AIP Mirror:
 
-- `.ai/rules/developer-knowledge.md` owns the semantic metadata contract;
-- `.ai/skills/knowledge-capture/SKILL.md` owns the capture procedure and
-  contains the Agent-specific YAML-parser procedure.
+- `.ai/skills/knowledge-capture/SKILL.md` — процедура capture;
+- `.ai/skills/repository/SKILL.md` — общие правила безопасности изменения файлов и репозитория.
 
-## 6. Architectural consequence
+Прежние ссылки на `.ai/rules/developer-knowledge.md` и `.ai/rules/repository.md` не соответствуют текущей структуре репозитория и здесь заменены актуальными владельцами. Это изменение интеграционной маршрутизации AIP Mirror, а не новое утверждение о внутреннем устройстве DSH.
 
-Agentic AI compatibility must not be modeled as one universal skill folder or
-one universal metadata format.
+## 6. Архитектурное следствие
 
-The durable boundary is:
+Совместимость с Agentic AI не следует моделировать как единый универсальный каталог skills или единый формат metadata.
+
+Устойчивая граница:
 
 ```text
-portable instructional content
+переносимое содержимое инструкций
         ↓
-host-specific packaging
+упаковка под конкретный host
         ↓
-host-specific discovery
+обнаружение в конкретном host
         ↓
-host-specific activation / invocation
+активация / вызов в конкретном host
         ↓
-host-specific execution capabilities
+исполнение с доступными host capabilities
 ```
 
-Shared content can therefore be portable without requiring identical host
-contracts.
+Таким образом, общий текст инструкций может быть переносимым без требования идентичности контрактов разных host-сред.
 
-## 7. DSH-specific adaptation
+## 7. Адаптация под DSH
 
-A DSH adaptation of a shared capability may need a DSH-native package or
-discovery location. This does not justify changing the ChatGPT-oriented
-`.ai/skills/` owner to contain DSH-specific runtime assumptions.
+Адаптация общей capability для DSH может требовать нативного пакета или расположения, которое обнаруживается DSH. Это не оправдывает добавление DSH-specific runtime-предположений в canonical owner `.ai/skills/`, предназначенный для AIP Mirror.
 
-The same principle applies to Codex, Claude Code, and other Agentic AI hosts:
-first separate portable instructional semantics from the host's packaging,
-discovery, activation, metadata, and execution contracts.
+Тот же принцип применим к Codex, Claude Code и другим Agentic AI hosts: сначала разделите переносимую семантику инструкций и host-specific контракты упаковки, обнаружения, активации, metadata и исполнения.
 
-## 8. Evidence status
+## 8. Ограничения доказательств
 
-These findings are a durable research checkpoint, not a normative DSH
-specification. Before implementation work depends on a DSH-specific detail,
-revalidate it against the installed DSH version and, where practical, its
-source code or current primary documentation.
+Эти выводы — зафиксированная исследовательская точка, а не нормативная спецификация DSH.
+
+- Наблюдения о конкретной установленной версии следует считать **версионно-зависимыми**.
+- Утверждения о текущем upstream-поведении требуют сверки с текущей первичной документацией или исходным кодом.
+- Экспериментальные наблюдения не следует представлять как универсальные гарантии.
+- Интеграционные решения AIP Mirror должны опираться на подтверждённое поведение DSH, но оставаться в пределах собственных canonical owners.
+
+Текущая upstream-документация описывает `whenToUse`, `disable-model-invocation` и `user-invocable` как необязательные поля. При этом само наличие `whenToUse` не доказывает автоматическую активацию: в актуальном описании model-facing каталога перечисляются имя и ограниченное описание skill. Точную роль `whenToUse` в иных слоях необходимо устанавливать по текущему исходному коду и проверкам для целевой версии.
