@@ -429,19 +429,19 @@ $DSH_HOME/AGENTS.md              personal always-on instructions
 - **Personal (`~/.dsh/skills`)** — привычки, общие для разных проектов: стиль commit,
   стиль объяснений, review checklists, фиксация знаний.
 - **Project (`.ai/skills/`)** — всё, что ссылается на пути, rules или терминологию конкретного проекта.
-- **Never duplicate** between the two; a personal skill that needs project
-  context should read that context at runtime.
+- **Не дублируйте** skills между этими областями: personal skill, которому нужен
+  контекст проекта, должен читать его во время выполнения.
 
-Note the asymmetry a project template must document: `customSkillDirs` is a
-**global** setting (Layer 3) and cannot be project-relative, so a project
-cannot grant itself a custom root. Project discovery must use one of the two
-project-relative roots or Tier 0.
+Обратите внимание на асимметрию, которую должен описывать шаблон проекта:
+`customSkillDirs` — **глобальная** настройка (Layer 3), она не может быть привязана
+к пути проекта, поэтому проект не может самостоятельно назначить себе custom root.
+Для project discovery нужно использовать один из двух project-relative roots или Tier 0.
 
 ---
 
-## 11. Migration sequence
+## 11. Последовательность миграции
 
-Bounded, reversible, ordered by value.
+Ограниченная по объёму, обратимая последовательность, упорядоченная по ценности.
 
 ```text
 Step 1  Move the operating contract to the repository root AGENTS.md
@@ -465,31 +465,31 @@ Step 6  Archive the superseded research series and record the
         decision (§13)                                              (documentation)
 ```
 
-Steps 1–4 are the substance and are all host-neutral. Steps 5 is an ergonomic
-upgrade, not an architectural requirement.
+Шаги 1–4 составляют основную часть и не зависят от host. Шаг 5 повышает удобство,
+но не является архитектурным требованием.
 
-### Template extraction
+### Выделение шаблона
 
-Once Steps 1–4 hold, the template is exactly the `.ai/` tree plus a root
-`AGENTS.md`, with `.ai/config.yaml` as the only project-specific file. The
-portable unit is:
+После выполнения шагов 1–4 шаблон состоит ровно из дерева `.ai/` и корневого
+`AGENTS.md`, при этом `.ai/config.yaml` — единственный файл с настройками конкретного
+проекта. Переносимая единица:
 
 ```text
 AGENTS.md  +  .ai/{config.yaml,rules,skills,workflows,templates,scripts}
 ```
 
-This is consistent with the existing rule that generic infrastructure is
-project-agnostic and project specifics concentrate in `config.yaml`.
+Это соответствует существующему правилу: общая инфраструктура не зависит от проекта,
+а проектные особенности сосредоточены в `config.yaml`.
 
 ---
 
-## 12. What to archive
+## 12. Что архивировать
 
-The six `agentic-ai-*` documents are now evidence with a superseded frame. Per
-the existing archive lifecycle, move them and keep three things in the active
-tree.
+Шесть документов `agentic-ai-*` теперь являются свидетельствами в рамках устаревшей
+концепции. Согласно действующему lifecycle архива, переместите их туда, оставив
+в активном дереве три материала.
 
-| Document | Disposition |
+| Документ | Решение |
 |---|---|
 | `agentic-ai-compatibility-architecture.md` | **Archive.** Its Phase 1–4 apparatus is closed; the chapter pinning (C0068) is stale by several chapters. Keep only the host-contract layering. |
 | `agentic-ai-compatibility-boundaries.md` | **Keep the evidence model** (§ its transport-neutral record), archive the rest. Its "without duplicating" conclusion is unexecutable as written without a discovery mechanism. |
@@ -498,59 +498,59 @@ tree.
 | `agentic-ai-environment-survey.md` | **Archive**, retaining the capability-seam matrix and the Finding set. Source URLs for upstream DSH were never verified here. |
 | `agentic-ai-owner-seam-audit.md` | **Archive** after folding its gap list into this note. Its owner inventory is missing `ai-infrastructure`, `knowledge-capture`, and `developer-knowledge.md`. |
 
-Three artefacts should remain active:
+В активной документации должны остаться три артефакта:
 
-1. this proposal;
-2. an upgraded DSH observations note (verified facts only);
-3. the transport-neutral evidence model, relocated into this note or its own
-   short file.
+1. это предложение;
+2. обновлённая запись наблюдений о DSH (только подтверждённые факты);
+3. транспортно-нейтральная модель свидетельств, перенесённая сюда или в отдельный
+   короткий файл.
 
-Consolidation is part of the value: the same mutation contract is currently
-restated in four of the six documents.
+Консолидация — часть ценности этой работы: сейчас один и тот же контракт изменения
+репозитория повторяется в четырёх из шести документов.
 
 ---
 
-## 13. Decision summary
+## 13. Сводка решений
 
-| Question | Recommendation |
+| Вопрос | Рекомендация |
 |---|---|
-| Where does `AGENTS.md` live? | Repository root, thin router; keep `.ai/AGENTS.md` as the internal contract |
-| Does `INDEX.md` survive? | Yes, unchanged role. Root `AGENTS.md` points to it; `>>` stays a chat convention |
-| Split skills by audience? | No. Capability-gated sections inside one skill |
-| Native DSH discovery of `.ai/skills`? | Via `.agents/skills` adapter; Tier 0 (`AGENTS.md` catalog) is the baseline |
-| Committed symlink? | Not as primary on Windows — it fails silently. Use a gitignored link, or generated pointers |
-| New `.ai/interfaces/` layer? | No. Not justified by the evidence, and not needed by this design |
-| What is genuinely new? | `.ai/scripts/` (generate + validate) and a root `AGENTS.md` |
-| Biggest single win? | Root `AGENTS.md` — one file that makes the project legible to every host at once |
+| Где должен находиться `AGENTS.md`? | В корне репозитория как компактный router; `.ai/AGENTS.md` сохраняется как внутренний контракт |
+| Сохраняется ли `INDEX.md`? | Да, его роль не меняется. Корневой `AGENTS.md` ссылается на него; `>>` остаётся соглашением чата |
+| Разделять skills по audience? | Нет. Разделы одного skill ограничиваются требуемыми возможностями |
+| Как обеспечить нативный discovery `.ai/skills` в DSH? | Через adapter `.agents/skills`; базовый вариант — Tier 0 (каталог в `AGENTS.md`) |
+| Symlink в Git? | Не как основной вариант для Windows — отказ незаметен. Используйте ссылку, исключённую из Git, или generated pointers |
+| Нужен ли новый слой `.ai/interfaces/`? | Нет. Свидетельства этого не обосновывают, и для данного дизайна он не нужен |
+| Что действительно новое? | `.ai/scripts/` (генерация и проверка) и корневой `AGENTS.md` |
+| Самое ценное одиночное изменение? | Корневой `AGENTS.md`: один файл, который сразу делает проект понятным каждому host |
 
 ---
 
-## 14. Open questions
+## 14. Открытые вопросы
 
-1. Which host, if any, other than DSH will actually be used as an agent here?
-   The adapter set should follow real usage, not speculation.
-2. Should the template ship Tier 1 setup, or stay Tier 0 and let each clone
-   opt in?
-3. Is `.agents/skills` genuinely cross-host (as the older survey claimed for
-   Gemini), or is it effectively DSH-only? This changes whether it is a
-   compatibility layer or a DSH adapter.
-4. Do `.ai/rules/` need `paths:` front matter? It buys deterministic loading in
-   path-aware hosts, but DSH has no rules concept, so the value is
-   host-dependent.
-5. Should the personal/global split be enforced by a validator, or remain a
-   convention?
+1. Какой host, кроме DSH, если такой вообще есть, действительно будет использоваться
+   здесь в роли agent? Набор adapters должен определяться реальным использованием,
+   а не предположениями.
+2. Должен ли шаблон включать настройку Tier 1 или остаться на Tier 0, предоставив
+   каждому clone возможность подключить его по желанию?
+3. Действительно ли `.agents/skills` поддерживается разными hosts (как утверждалось
+   в прежнем обзоре для Gemini) или фактически предназначен только для DSH? От этого
+   зависит, является ли он compatibility layer или DSH adapter.
+4. Нужен ли `.ai/rules/` front matter `paths:`? Он обеспечивает детерминированную
+   загрузку в hosts, учитывающих пути, но в DSH нет понятия rules, поэтому польза
+   зависит от host.
+5. Следует ли закрепить разделение personal/global с помощью validator или оставить
+   его соглашением?
 
 ---
 
-## 15. Relationship to active ownership
+## 15. Связь с текущим semantic ownership
 
-This is an architecture note, not an execution owner.
+Это архитектурная записка, а не execution owner.
 
-The rules, skills, and workflows that currently own behaviour remain
-authoritative. Where this proposal implies new behaviour, the definition must be
-placed in the appropriate canonical owner during an implementation phase — for
-example, a skill-depth and adapter check belongs to the repository rules, and
-the root `AGENTS.md` contract belongs to whatever owner the infrastructure
-assigns to instruction discovery.
+Rules, skills и workflows, которые сейчас владеют поведением, остаются авторитетными.
+Если предложение подразумевает новое поведение, его определение должно быть размещено
+в соответствующем canonical owner на этапе реализации. Например, проверка глубины
+вложенности skills и adapters относится к repository rules, а контракт корневого
+`AGENTS.md` — к тому owner, которому инфраструктура поручит discovery инструкций.
 
-Nothing in this note authorizes a change to `main`.
+Эта записка не даёт разрешения на изменения в `main`.
