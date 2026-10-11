@@ -81,3 +81,37 @@ Continue the Architecture & Research workstream from the post-merge state on `ma
 - **Reported by predecessor:** PR #2 was merged and the AIP Mirror documentation TODO was closed; the recorded merge SHA is the parent of current `main` HEAD.
 - **Open:** DSH runtime behavior for `whenToUse`, `disable-model-invocation`, and `user-invocable`; primary evidence and reproducible tests for the relevant version.
 - **Not assumed:** That absence of local evidence proves a mechanism does not exist, or that metadata documentation alone proves invocation behavior.
+
+## Migration checkpoint — C0090 (2026-10-11)
+
+### Migration validation
+
+- Migration command: `>>migrate 0090`.
+- Current chapter context: `C0089`, established by this conversation's active chapter and the canonical handoff header.
+- Expected successor: `C0090`; the supplied assertion `0090` matches exactly one sequential increment.
+- Repository: `paulhuman/aip-mirror`; canonical branch: `main`, confirmed by `.ai/config.yaml`.
+- Main HEAD at migration start: `849e8f20eb2f96dc29435d1ea0c2cf64c3a1fd9e`.
+- The current C0089 handoff was reread from the current main commit before this update. No predecessor handoff was modified.
+
+### Completed in C0089 after the initial handoff snapshot
+
+- Added the three principles of document hierarchy and authoring to `.ai/docs/ai-document-hierarchy-and-authoring.md`: SKILL defines procedure; README explains subsystem; canonical owner defines semantics.
+- Updated `.ai/skills/ai-infrastructure/SKILL.md` to include root `AGENTS.md` in repository-level orientation, clarify README discovery and bounded reading, explicitly read the hierarchy-and-authoring guide during `>>ai-infrastructure`, and retain the archive README boundary without repeating its explanation.
+- Updated `.ai/README.md` to list `.ai/memory/` among the major active areas.
+- Commit: `849e8f20eb2f96dc29435d1ea0c2cf64c3a1fd9e` — `ai-docs(architecture): clarify document hierarchy and orientation`.
+- Post-write read-back verified the three files and the main HEAD.
+
+### Immediate next task for C0090
+
+1. Verify the current `main` HEAD before substantive repository work.
+2. Treat `.ai/memory/dsh-todo-skill-metadata-runtime.md` as the only currently open task carried forward from this workstream unless the user assigns a different task.
+3. Look for DSH-produced primary sources and reproducible, version-scoped evidence before proposing integration changes.
+4. Keep the DSH TODO OPEN until its evidence and completion criteria are satisfied. If no new evidence or user-assigned task is available, ask the user what to work on next rather than inventing additional scope.
+
+### Migration constraints
+
+- Preserve repository history; do not rewrite commits.
+- Do not delete or move the former working branch `c0086/ai-docs-audit-translation`.
+- For future repository edits, follow the canonical read-current-source, minimal-change, read-back, content verification, diff inspection, scope verification, commit, and result-verification protocol.
+- Keep DSH-specific observations separate from confirmed AIP Mirror integration decisions.
+
