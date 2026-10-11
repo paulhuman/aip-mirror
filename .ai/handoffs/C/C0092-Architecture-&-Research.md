@@ -101,20 +101,32 @@ The user clarified that `user-invocable: false` is not redundant merely because 
 - **Confirmed:** The user requires physically separate remote and local operational files to prevent unrelated host-specific context from being loaded.
 - **Confirmed as version-scoped evidence:** In the tested DSH versions, invoked skill body content is loaded as a whole; adjacent resource files are not automatically included by default.
 - **Confirmed:** The user accepts duplication when needed for context separation.
-- **Confirmed:** The review branch is comparison material, not an authorized integration target.
-- **Confirmed:** Metadata fields have distinct effects; `user-invocable: false` should not be treated as equivalent to `disable-model-invocation: true`.
-- **Inferred:** A layered design with shared host-neutral semantics and physically separate remote/local procedures remains the likely direction.
-- **Open:** Exact file boundaries and routing; differences between the four audit reports; how to separate host-specific workflow inspection while preserving one coherent shared contract; how metadata visibility/invocation controls should be assigned to each skill.
-- **Not assumed:** That DSH runtime findings generalize beyond tested versions; that review-branch changes are safe to integrate as-is; or that the proposed architecture has already been accepted or implemented.
+- **Confirmed:** The review branch is comparison material, not an authorized integration target; its changes must be evaluated individually, not copied wholesale.
+- **Confirmed:** Metadata fields have distinct effects. `user-invocable: false` improves user-facing invocation/UI cleanliness and prevents explicit user invocation; it is not equivalent to `disable-model-invocation: true`, which hides the skill from the model-facing catalog and blocks loading through the skill tool. Keep these effects distinct and version-scoped to the tested DSH runtime.
+- **Confirmed target file layout:**
+  ```text
+  .ai/skills/
+  ├── repository/SKILL.md
+  ├── workflow/SKILL.md
+  ├── github-api-repository/SKILL.md
+  ├── github-api-workflow/SKILL.md
+  ├── git-cli-repository/SKILL.md
+  └── git-cli-workflow/SKILL.md
+  ```
+- **Confirmed ownership intent:** `repository/SKILL.md` owns shared repository semantics, boundaries, taxonomy, and universal safety invariants; `workflow/SKILL.md` owns common research/implementation/testing/verification methodology. The four new skills own the corresponding host-specific repository and workflow mechanics for GitHub API or local Git.
+- **Confirmed:** `prototypes/` is intended for artifacts from specialization A — JSX Prototype. It was empty when the user noticed it missing and the user recreated it. Do not describe it as an accidental or merely incidental directory; do not claim it currently contains artifacts.
+- **Confirmed:** The two newer audit reports and both earlier reports have now been read in this chapter. The working-context file was also read. The architecture matrix is the next deliverable, not another round of reading the same materials.
+- **Inferred:** A layered design with shared host-neutral semantics and physically separate remote/local procedures is the right architecture, subject to review of the detailed migration matrix.
+- **Open:** Exact section-by-section migration mapping and routing/activation behavior across the six skills; which individual proposals from the review branch should be retained; skill metadata for each new skill.
+- **Not assumed:** That DSH runtime findings generalize beyond tested versions; that review-branch changes are safe to integrate as-is; or that any new skill or canonical-owner edit has already been implemented.
 
 ## Immediate next task
 
-1. Read `.ai/memory/dsh-report-repository-skill.md`, `.ai/memory/dsh-report-workflow-skill.md`, and `.ai/memory/dsh-skill-host-separation-working-context.md` in full.
-2. Compare all four audit reports against the current canonical `repository` and `workflow` skills on `main`.
-3. Reconcile the metadata discussion with `.ai/memory/dsh-todo-skill-metadata-runtime.md` and `.ai/docs/skill-authoring-reference.md`, preserving the distinction between UI visibility, explicit user invocation, and model invocation.
-4. Inspect the review branch as evidence only; do not merge or cherry-pick.
-5. Present a concrete proposed file layout and routing model before changing canonical owners.
+1. Build a section-by-section migration matrix for the current `.ai/skills/repository/SKILL.md` and `.ai/skills/workflow/SKILL.md`, using all four DSH reports, the working-context file, and the review-branch versions as evidence.
+2. For each section or distinct rule, classify it as shared `repository`, shared `workflow`, `github-api-repository`, `github-api-workflow`, `git-cli-repository`, `git-cli-workflow`, duplicate shared invariant, or remove/correct; give the rationale and flag conflicts or risks.
+3. Preserve the user's exact six-file layout. Include `prototypes/` as the specialization A — JSX Prototype artifact location in the target taxonomy.
+4. Present the matrix for user review before modifying any canonical owner. Do not merge or cherry-pick the review branch.
 
 ## Recommended starting context
 
-Begin with the three unread working-context/audit files listed in the immediate next task. Then compare the current `main` versions of the canonical skills and the review branch, using the actual repository contents rather than reconstructing prior state from conversation memory.
+Start with the migration matrix. The four reports, working-context record, current canonical skills, and review-branch proposals have been read in C0092; use their actual contents and distinguish source findings from architectural decisions. No canonical-owner edits or review-branch integration have been performed.
