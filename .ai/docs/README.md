@@ -15,6 +15,7 @@
 - `ai-infrastructure-vnext-proposal.md` — предложение по multi-host архитектуре. Это design proposal, а не автоматически принятое решение.
 - `adapting-to-a-new-project.md` — практическое руководство по адаптации инфраструктуры к другому проекту.
 - `manual-activation.md` — примеры ручного запроса ACTIVATE и TRACE.
+- `skill-authoring-reference.md` — справочник по оформлению `SKILL.md`: поля front matter, допустимые значения, синтаксис и полные примеры, проверенные на DSH Harness `0.2.0-rc.2`.
 
 ## Организация и границы
 
