@@ -39,11 +39,42 @@ Design a safe host-separated architecture for AIP Mirror's AI infrastructure. Ke
 
 ## Immediate next task
 
-1. Read the two earlier reports in full: `.ai/memory/dsh-report-repository-skill.md` and `.ai/memory/dsh-report-workflow-skill.md`.
-2. Compare all four audits against the current canonical owners and the detailed working record `.ai/memory/dsh-skill-host-separation-working-context.md`. Separate independently supported evidence, repeated findings, recommendations, and unresolved questions.
-3. Re-check the current `main` HEAD and relevant branch state using authoritative repository evidence before making repository-wide claims.
-4. Propose a minimal target file structure distinguishing shared contract, remote API operations, local Git operations, and host-specific workflows. Decide which host-specific files belong inside versus outside `.ai/skills/` based on whether they should be discoverable/loaded by the other host.
-5. Do not modify canonical owners or integrate the review branch until the audit comparison and target architecture have been evaluated and the implementation scope is clear.
+1. Create a Russian-language working-memory record under `.ai/memory/` capturing the confirmed DSH prototype matrix, the meaning of both visibility metadata fields, the fresh-log verification lesson, and the remaining Connector-side uncertainty. Treat DSH observations as version-scoped evidence.
+2. Re-read that memory record and verify its content and scope.
+3. Finalize the host-separated target layout using `repository` / `workflow` as shared contracts and `github-api-*` / `git-cli-*` as host-mechanism skills.
+4. Only after the evidence is recorded and the target layout is coherent, prepare a minimal implementation plan for the canonical owners. Do not integrate `ai-infra/host-mechanics-review` automatically.
+5. Before changing canonical owners, verify the latest `main` state and all target files; apply the repository mutation sequence and independently inspect/read back the resulting changes.
+
+## Latest checkpoint — DSH visibility prototype
+
+The user approved the direction `github-api-*` / `git-cli-*` after a two-file DSH runtime prototype. DSH reports that the temporary probes were removed, the repository returned to nine skills, the working tree was clean, and no commit was made for the experiment. This is a report from the DSH session, not independently observed by this Conversational AI.
+
+### Reported prototype matrix
+
+- `github-api-repository` with `disable-model-invocation: true` and `user-invocable: false`: absent from the DSH model skill catalog; direct `skill` invocation returns `not available for model invocation`; file remains readable by path and visible through the `.agents/skills` junction.
+- `git-cli-repository`: visible in the DSH model catalog; body loads through the `skill` tool; file is readable by path and visible through the junction.
+- The marker-body check reportedly found no automatic body injection; logged marker occurrences were attributed to the test's own write/read/tool-result actions.
+- The DSH report says it checked a freshly exported session log after discovering that a stale export gave a false result. Re-read logs after each test change; do not rely on stale captures.
+
+### Accepted metadata semantics
+
+For `github-api-*`, retain both fields:
+
+```yaml
+disable-model-invocation: true
+user-invocable: false
+```
+
+The user clarified that `user-invocable: false` is not redundant: besides the model's invocation boundary, the project needs to hide incompatible API skills from the user's available-skills list in DSH GUI. A hidden-from-model skill must not remain a user-callable path for forcibly loading incompatible instructions.
+
+### Architecture direction and limits
+
+- Shared semantic contracts remain in `.ai/skills/repository/SKILL.md` and `.ai/skills/workflow/SKILL.md`.
+- Separate mechanism-specific skills are proposed as `github-api-repository`, `github-api-workflow`, `git-cli-repository`, and `git-cli-workflow`.
+- DSH's tested metadata mechanism can hide the `github-api-*` skills from DSH model invocation and GUI while keeping their files available by path to a path-reading consumer.
+- The metadata fields do not hide `git-cli-*` from the GitHub Connector. Connector discovery behavior remains unverified in this environment; do not claim symmetric isolation.
+- The user agreed to record the prototype evidence in `.ai/memory/` before modifying canonical owners.
+- No canonical owner has been modified as part of this investigation. The review branch remains research-only and is not approved for automatic integration.
 
 ## Important constraints
 
