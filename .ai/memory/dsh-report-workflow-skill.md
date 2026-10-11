@@ -1,10 +1,10 @@
 # Отчёт DSH: `.ai/skills/workflow/SKILL.md`
 
-**Статус:** CLOSED for the recommendations below — применено в владельце (см. «Что применено»)
-**Тип:** анализ пригодности canonical owner для Agentic AI
-**Владелец технической проверки:** DSH (Agentic AI, локальный git)
-**Потребитель результата:** AIP Mirror — AI-infrastructure
-**Проанализированный материал:** `.ai/skills/workflow/SKILL.md`, редакция `a0fbc8d`
+**Статус:** CLOSED for the recommendations below — применено в владельце (см. «Что применено»)  
+**Тип:** анализ пригодности canonical owner для Agentic AI  
+**Владелец технической проверки:** DSH (Agentic AI, локальный git)  
+**Потребитель результата:** AIP Mirror — AI-infrastructure  
+**Проанализированный материал:** `.ai/skills/workflow/SKILL.md`, редакция `a0fbc8d`  
 **Область действия:** среда DSH с локальной рабочей копией git; версии указаны в каждом пункте
 
 ## Что это за документ
