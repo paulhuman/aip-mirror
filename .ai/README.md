@@ -28,6 +28,7 @@ Project-specific configuration that generic infrastructure needs is intentionall
 - `.ai/conversation-management/templates/` — human-facing templates governed by the corresponding conversation-management procedures.
 - `.ai/handoffs/` — conversation continuity state.
 - `.ai/docs/` — durable documentation and architecture context for the AI infrastructure.
+- `.ai/memory/` — active TODOs, open questions, and temporary working context.
 - `.ai/tests/` — reproducible infrastructure test scenarios and historical test results.
 - `.ai/archives/` — historical/disposable storage; not active infrastructure context.
 

@@ -45,6 +45,7 @@ This is dependency activation of the canonical normative-language skill.
 
 Read:
 
+    AGENTS.md
     README.md
     docs/PROJECT-INSTRUCTIONS.md
 
@@ -59,31 +60,19 @@ Read:
     .ai/INDEX.md
     .ai/config.yaml
 
-Then discover the active `.ai/**/README.md` files from the current repository tree and read those README files that orient active infrastructure.
+Discover the current set of `README.md` files from the repository tree. Read the README files of active subsystems needed for broad orientation. In particular, read `.ai/archives/README.md` to understand the archive boundary, but DO NOT automatically read `.ai/archives/**`.
 
-README files are orientation sources. They MUST NOT replace canonical semantic owners.
+Use README files for subsystem orientation, navigation, and additional context; they MUST NOT replace canonical semantic owners. Reading a README does not imply reading every document in its directory.
 
 ### Active infrastructure semantics
 
 Survey the active `.ai/docs/` tree to establish what durable architecture, FAQ, and other infrastructure documentation exists.
 
+Read `.ai/docs/ai-document-hierarchy-and-authoring.md` as the maintained orientation guide for document hierarchy, semantic ownership, and authoring boundaries. It provides architectural rationale and orientation; it does not replace canonical owners.
+
 The survey is an orientation step. DO NOT automatically read every large architecture document in full.
 
 Read deeper architecture or FAQ documents only when the current task requires them.
-
-### Archive boundary
-
-Read:
-
-    .ai/archives/README.md
-
-DO NOT automatically read:
-
-    .ai/archives/**
-
-Archive contents are historical memory, not active AI-infrastructure context.
-
-A specific later operation MAY explicitly request historical material. Such a read is an exceptional bounded historical-context action and MUST NOT silently expand the normal `>>ai-infrastructure` read set.
 
 ## Context boundary
 
