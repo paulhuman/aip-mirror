@@ -45,6 +45,15 @@ Design a safe host-separated architecture for AIP Mirror's AI infrastructure. Ke
 4. Only after the evidence is recorded and the target layout is coherent, prepare a minimal implementation plan for the canonical owners. Do not integrate `ai-infra/host-mechanics-review` automatically.
 5. Before changing canonical owners, verify the latest `main` state and all target files; apply the repository mutation sequence and independently inspect/read back the resulting changes.
 
+## Migration checkpoint — C0091 → C0092
+
+- Migration command: `>>migrate 0092`.
+- Current chapter: `C0091`; derived target: `C0092`. The asserted target matches the required one-step increment.
+- Receiving chapter title: `Architecture & Research`, resolved from `.ai/config.yaml` specialization `C`.
+- Next chapter's first task: record the DSH visibility prototype evidence in a Russian-language `.ai/memory/` file, reread and verify it, then continue the host-separated architecture work as listed under Immediate next task.
+- No receiving-chapter handoff is created in advance; C0092 must initialize its own handoff through BOOTSTRAP.
+- Review branch `ai-infra/host-mechanics-review` remains unapproved for automatic integration.
+
 ## Latest checkpoint — DSH visibility prototype
 
 The user approved the direction `github-api-*` / `git-cli-*` after a two-file DSH runtime prototype. DSH reports that the temporary probes were removed, the repository returned to nine skills, the working tree was clean, and no commit was made for the experiment. This is a report from the DSH session, not independently observed by this Conversational AI.
