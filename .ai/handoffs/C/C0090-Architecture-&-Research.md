@@ -24,23 +24,27 @@ C
 
 ## Current project objective
 
-Continue Architecture & Research work from the current repository state. Unless the user assigns another task, carry forward the only open task identified by C0089: obtain primary-source and reproducible, version-scoped evidence for DSH skill metadata runtime semantics.
+Continue Architecture & Research work on separating AI-infrastructure instructions by host execution mechanism. The user has confirmed that remote API and local Git instructions must live in separate files, including separate host-specific workflow files, because a host reads the entire skill and labels inside one file do not prevent irrelevant instructions from entering context. Duplication is acceptable when it prevents cross-host context contamination.
+
+Do not integrate the review branch or modify canonical owners yet. The next chapter must read and compare the two additional DSH audits listed below before proposing a target architecture.
 
 ## Confirmed starting state
 
-- The current `.ai/memory/dsh-todo-skill-metadata-runtime.md` was read on `main`; its status is **OPEN**.
-- The task concerns `whenToUse`, `disable-model-invocation`, and `user-invocable`, and requires exact tested version/environment, primary-source references, reproducible test setups and outcomes, and explicit separation of guarantees, observations, hypotheses, and unresolved questions.
-- `.ai/docs/agentic-ai-dsh-observations.md` cautions that its findings are version-dependent observations rather than a timeless DSH specification. It notes that documenting a metadata field alone does not establish runtime behavior.
-- `.ai/docs/agentic-ai-skill-discovery-verification.md` contains a longer working verification record and historical DSH-specific observations. Its current relevance and version scope must be evaluated before relying on individual claims.
-- No new DSH-produced primary sources or reproducible runtime evidence have been established by this bootstrap.
+- .ai/memory/dsh-todo-skill-metadata-runtime.md now has the title “ЗАКРЫТО: runtime-семантика skill metadata в DSH” and records version-scoped results for DSH Desktop 0.11.0 and Harness 0.2.0-rc.2. Do not carry forward the former OPEN status from the initial C0090 handoff snapshot.
+- The tested findings distinguish whenToUse, disable-model-invocation, and user-invocable; they are DSH-specific and version-dependent, not universal guarantees for other hosts.
+- Two earlier audits are available: .ai/memory/dsh-report-repository-skill.md and .ai/memory/dsh-report-workflow-skill.md.
+- Two additional audits are now present on main: .ai/memory/dsh-audit-repository-skill.md and .ai/memory/dsh-audit-workflow-skill.md. Their contents were intentionally not read in C0090 at the user's request. C0091 MUST read both before architecture decisions.
+- .ai/docs/skill-authoring-reference.md documents the investigated DSH front matter/runtime behavior. .ai/docs/agentic-ai-dsh-observations.md and .ai/docs/agentic-ai-skill-discovery-verification.md provide supporting context and version-dependent discovery evidence.
+- ai-infra/host-mechanics-review contains proposed revisions to repository/SKILL.md and workflow/SKILL.md, but these revisions are not integrated into main and do not fully implement the user's requirement to split host-specific guidance into separate files.
 
 ## Immediate next task
 
-1. Before substantive repository work, verify the current `main` HEAD again.
-2. Investigate DSH primary sources and reproducible, version-scoped evidence relevant to the open TODO.
-3. Assess whether the evidence satisfies the TODO's completion criteria before proposing AIP Mirror integration changes.
-4. Keep the DSH TODO OPEN until its evidence requirements are met.
-5. If no new evidence or user-assigned task is available, ask the user what to work on next instead of inventing additional scope.
+1. Verify the current main HEAD and reread applicable canonical owners.
+2. Read both new DSH audits in full: .ai/memory/dsh-audit-repository-skill.md and .ai/memory/dsh-audit-workflow-skill.md.
+3. Compare them with .ai/memory/dsh-report-repository-skill.md and .ai/memory/dsh-report-workflow-skill.md; distinguish new evidence, repeated findings, and recommendations.
+4. Reassess the current owners and review branch. Design separate files for shared contract, remote API operations, local Git operations, and host-specific workflows as appropriate. Exact names and boundaries remain undecided.
+5. Do not integrate or modify canonical owners until the audit comparison and target architecture have been evaluated. Do not merge or cherry-pick ai-infra/host-mechanics-review automatically.
+6. Keep DSH-specific runtime observations separate from AIP Mirror's own integration decisions.
 
 ## Important constraints
 
@@ -54,15 +58,19 @@ Continue Architecture & Research work from the current repository state. Unless 
 
 ## Relevant files
 
-- `.ai/memory/dsh-todo-skill-metadata-runtime.md` — open task and completion criteria.
-- `.ai/docs/agentic-ai-dsh-observations.md` — supporting, version-dependent DSH observations.
-- `.ai/docs/agentic-ai-skill-discovery-verification.md` — working verification record and historical observations.
-- `.ai/memory/README.md` — working-memory purpose and language policy.
-- `.ai/docs/README.md` — documentation inventory, language policy, and ownership boundaries.
-- `.ai/skills/repository/SKILL.md` — repository identity, safe mutation, and verification.
-- `.ai/skills/workflow/SKILL.md` — research-first workflow.
-- `.ai/skills/commits/SKILL.md` — commit policy and message conventions.
-- `.ai/conversation-management/handoff/BOOTSTRAP.md` — receiving-chapter bootstrap procedure.
+- .ai/memory/dsh-skill-host-separation-working-context.md — detailed C0090 working record, decisions, findings, and links.
+- .ai/memory/dsh-report-repository-skill.md — first DSH audit of the repository skill.
+- .ai/memory/dsh-report-workflow-skill.md — first DSH audit of the workflow skill.
+- .ai/memory/dsh-audit-repository-skill.md — additional audit; MUST be read in C0091.
+- .ai/memory/dsh-audit-workflow-skill.md — additional audit; MUST be read in C0091.
+- .ai/memory/dsh-todo-skill-metadata-runtime.md — closed, version-scoped runtime investigation.
+- .ai/docs/skill-authoring-reference.md — investigated skill front matter and DSH behavior.
+- .ai/docs/agentic-ai-dsh-observations.md — supporting, version-dependent DSH observations.
+- .ai/docs/agentic-ai-skill-discovery-verification.md — discovery verification record and historical observations.
+- .ai/memory/README.md — working-memory purpose and language policy.
+- .ai/docs/README.md — documentation inventory and ownership boundaries.
+- .ai/skills/repository/SKILL.md and .ai/skills/workflow/SKILL.md — current main owners to reassess.
+- ai-infra/host-mechanics-review — review branch containing a partial proposed adaptation, not approved for integration.
 
 ## Research references
 
@@ -71,14 +79,54 @@ Continue Architecture & Research work from the current repository state. Unless 
 - Repository: https://github.com/paulhuman/aip-mirror
   - Role: Canonical source for current AIP Mirror AI-infrastructure integration rules, working records, and supporting documentation.
 
-### DSH primary sources
+### DSH research references
 
-- Exact source URLs and tested DSH revision remain to be identified or revalidated.
-  - Role: Required evidence for the external runtime-semantics task; unversioned assumptions and incidental browsing are not substitutes.
+- .ai/memory/dsh-todo-skill-metadata-runtime.md
+- .ai/docs/skill-authoring-reference.md
+- .ai/docs/agentic-ai-dsh-observations.md
+- .ai/docs/agentic-ai-skill-discovery-verification.md
+  - Role: Version-scoped DSH runtime/discovery evidence and supporting records. Consult the detailed working-context memory for exact GitHub links and findings.
 
 ## Confirmed / inferred / open
 
-- **Confirmed:** Repository identity, configured default branch, current main head from recent commit evidence, bootstrap inputs, predecessor handoff, and OPEN status/content of the DSH TODO were read from repository sources.
-- **Confirmed as recorded observations, not universal guarantees:** The DSH documents contain version-dependent observations and explicitly call for checking primary sources or controlled experiments for the target version.
-- **Open:** Runtime behavior and version-scoped guarantees for `whenToUse`, `disable-model-invocation`, and `user-invocable`; exact primary evidence and reproducible tests.
-- **Not assumed:** That missing local evidence proves a mechanism does not exist, or that documentation of a field proves runtime behavior.
+- **Confirmed:** The user requires host-specific instructions to be physically separated into different files, including workflow guidance; duplication is acceptable if it prevents cross-host context contamination.
+- **Confirmed as version-scoped DSH findings:** The metadata runtime record is marked closed and reports tested behavior for DSH Desktop 0.11.0 / Harness 0.2.0-rc.2.
+- **Confirmed:** The two new audit files exist on main; their contents were not read in C0090 and must be read in C0091.
+- **Confirmed:** The review branch and main have diverged. The review branch is material for comparison, not an approved integration target.
+- **Open:** Exact target file names/boundaries and the minimal set of changes to implement the user's host-separation decision.
+- **Not assumed:** That recommendations in any audit are already integrated, that a branch's current skill edits fully satisfy the agreed architecture, or that DSH observations generalize to other hosts.
+
+## Migration checkpoint — C0090 → C0091 (2026-10-11)
+
+### Migration validation
+
+- Command: >>migrate 0091.
+- Current chapter context: C0090, established by the active chapter and canonical handoff header.
+- Expected target: C0091; the supplied assertion 0091 matches exactly one sequential increment.
+- Repository: paulhuman/aip-mirror; default branch: main, confirmed by .ai/config.yaml.
+- main HEAD before this migration checkpoint update: ea14fab6f56935eee3a4c85569dd16519c56ae23, which created .ai/memory/dsh-skill-host-separation-working-context.md.
+- The current C0090 handoff was reread from main before editing. Only this handoff is being updated by the migration checkpoint.
+
+### Work completed in C0090
+
+- Read the two initial DSH audits for repository/SKILL.md and workflow/SKILL.md, the DSH metadata runtime report, the skill-authoring reference, the DSH observations and discovery verification documents, and current main versions of relevant canonical owners.
+- Confirmed that the DSH metadata runtime record is now closed and contains version-scoped findings for DSH Desktop 0.11.0 and Harness 0.2.0-rc.2.
+- Reviewed the review branch ai-infra/host-mechanics-review as a source of candidate improvements, not as an approved integration.
+- Recorded the user's architectural decision: physically separate remote API and local Git guidance into different files; split workflow guidance too; duplication is acceptable where it reduces context contamination.
+- Created .ai/memory/dsh-skill-host-separation-working-context.md with accumulated findings, relevant links, branch state, constraints, and the next-step plan.
+- The two new audits .ai/memory/dsh-audit-repository-skill.md and .ai/memory/dsh-audit-workflow-skill.md are present on main, but their contents were intentionally not read in C0090 per the user's instruction to read them in the new chat.
+
+### Immediate next task for C0091
+
+1. Read both .ai/memory/dsh-audit-repository-skill.md and .ai/memory/dsh-audit-workflow-skill.md before making architecture decisions.
+2. Read .ai/memory/dsh-skill-host-separation-working-context.md for detailed findings and links.
+3. Compare all four audit reports and current canonical owners; separate new evidence from repeated findings and proposals.
+4. Decide the target file structure before editing. Do not merge/cherry-pick the review branch or integrate its changes automatically.
+5. If implementation is then authorized by the agreed task, follow the full repository mutation verification protocol.
+
+### Migration constraints
+
+- Preserve repository history; do not rebase or rewrite commits.
+- Do not delete or move ai-infra/host-mechanics-review as part of this migration.
+- Do not modify canonical owners before reading the two additional audits and assessing the full evidence set.
+- Keep DSH runtime findings and AIP Mirror integration decisions clearly distinguished.
