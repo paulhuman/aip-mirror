@@ -63,8 +63,12 @@ Use this map to find the canonical capability without reading the entire `.ai/` 
 
 | Capability                                                                | Canonical owner                      | Purpose                                                                            |
 | ------------------------------------------------------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------- |
-| Repository identity, path resolution, repository boundaries, write safety | `.ai/skills/repository/SKILL.md`     | canonical repository semantics and mutation safety                                 |
-| General workflow principles                                               | `.ai/skills/workflow/SKILL.md`       | general AI development workflow constraints                                        |
+| Repository identity, path resolution, repository boundaries, write safety | `.ai/skills/repository/SKILL.md`     | shared repository semantics and universal mutation-safety invariants               |
+| General workflow principles                                               | `.ai/skills/workflow/SKILL.md`       | shared research, implementation, testing, and verification methodology             |
+| Remote GitHub API repository operations                                   | `.ai/skills/github-api-repository/SKILL.md` | remote file reads/writes and GitHub Contents API mechanics                         |
+| Remote GitHub API repository inspection                                   | `.ai/skills/github-api-workflow/SKILL.md`   | pinned remote trees, completeness, and inspection coverage                         |
+| Local Git repository operations                                           | `.ai/skills/git-cli-repository/SKILL.md`    | local paths, working-copy/index protection, and mutation mechanics                |
+| Local Git repository inspection                                           | `.ai/skills/git-cli-workflow/SKILL.md`      | local revision pinning, tracked-tree inspection, and isolated fixture workflow     |
 | Activation                                                                | `.ai/skills/activation/SKILL.md`     | establish the current canonical operational context before executing an operation  |
 | AI-infrastructure context mode                                          | `.ai/skills/ai-infrastructure/SKILL.md` | switch the working domain to AI-infrastructure and establish elevated active context without loading archives |
 | Normative language                                                        | `.ai/skills/normative-language/SKILL.md` | canonical owner of normative-language semantics and normalization procedure       |
