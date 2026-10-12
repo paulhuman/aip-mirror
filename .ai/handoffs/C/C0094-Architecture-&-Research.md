@@ -153,3 +153,39 @@ Read the current versions on `main` of `.ai/skills/github-api-repository/SKILL.m
 - `ai-infra/six-skill-host-separation`
   - Role: Review branch used to source the seven transferred files and compare candidate architecture changes; not an approved wholesale integration target.
   - URL: https://github.com/paulhuman/aip-mirror/tree/ai-infra/six-skill-host-separation
+
+## Migration checkpoint — C0094 → C0095 (2026-10-12)
+
+This section supersedes the earlier "Immediate next task" and older wrapper-research status where they conflict with the later verified laboratory results below.
+
+### Confirmed laboratory results
+
+The private lab `paulhuman/github-api-lab` is registered in `.ai/config.yaml`; its canonical branch is `main`. The disposable experiment branch remains preserved:
+
+`experiment/control-read-completeness-20261012`
+
+The first controlled series used deterministic ASCII fixtures with expected bytes and Git blob SHAs independently calculated before comparing wrapper reads. Results are recorded in the lab report:
+
+https://github.com/paulhuman/github-api-lab/blob/main/results/fetch-completeness-2026-10-12.md
+
+Observed in the current wrapper setup:
+
+- `fetch_file` returned exact content through 1,048,575 bytes for the tested fixtures.
+- At 1,048,576 bytes (both one long line and many lines) and 1,153,440 bytes, `fetch_file` returned empty content while retaining the expected blob SHA.
+- `fetch_blob` returned full expected content for tested fixtures through 1,153,440 bytes.
+- Attempting to create a 5 MiB fixture failed with a transport error before the fixture was created. This is **INCONCLUSIVE** for 5 MiB reading.
+
+These results are limited to the tested wrapper setup. They do not establish a universal API limit or the wrapper's underlying endpoint/media type.
+
+### Immediate next task for C0095
+
+Run the first small-file control experiment specifically to verify that expected content is established independently of both `fetch_file` and `fetch_blob`. Define and record the expected bytes before invoking either method; do not use one method's output as the other's oracle. Compare both results independently against that oracle, including exact bytes, byte count, encoding, and independently calculated Git blob SHA.
+
+### Additional open work
+
+1. Publish stable verified data and tables under `docs/` on `main` in `paulhuman/github-api-lab`. Read back the canonical docs, verify the diff and changed-file scope, and ensure the lab README links to them. The existing `results/` report remains evidence but does not close this task.
+2. Continue the large-file investigation, including 5 MiB, without treating a transport failure as a read result.
+3. Before considering deletion of the lab experiment branch, inventory unique commits and paths, promote durable results to the canonical destination, read them back, and verify preservation. Do not delete the branch without explicit owner authorization.
+
+The general pre-deletion preservation invariant is now recorded in `.ai/skills/repository/SKILL.md`. The branch remains intentionally retained pending the evidence-preservation work and an authorized deletion decision.
+
