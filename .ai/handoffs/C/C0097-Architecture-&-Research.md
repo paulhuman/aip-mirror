@@ -20,28 +20,24 @@ Run a controlled receiving-chapter initialization to test the corrected bootstra
 
 - Canonical repository: paulhuman/aip-mirror.
 - Canonical branch: main, from .ai/config.yaml.
-- Previous handoff: .ai/handoffs/C/C0096-Architecture-&-Research.md, read successfully from main.
-- This handoff was absent before initialization and is being created for C0097.
-- Repository writes and commits are available through the connected GitHub tools; bootstrap follows the WRITE-CAPABLE branch.
-- Bootstrap discovery sequence exercised: .ai/config.yaml → .ai/AGENTS.md → .ai/INDEX.md → applicable canonical owners. INDEX was used as a discovery map; unrelated entries were not read indiscriminately.
+- Repository writes and commits are available through the connected GitHub tools.
+- The bootstrap discovery contract is: read .ai/config.yaml to establish repository identity, then .ai/AGENTS.md, then .ai/INDEX.md; use INDEX to select applicable canonical owners rather than reading every indexed file.
 - Do not restore the removed sixth item in .ai/AGENTS.md. The intended correction is in .ai/conversation-management/handoff/BOOTSTRAP.md, committed as 77e5ae410b016f53ba8571c39f082e44c28acd05.
 
-## Confirmed starting research state
+## Confirmed GitHub API wrapper research state
 
-The active working research record is .ai/memory/github-api-wrapper-research.md (read from main).
+The detailed research record is .ai/memory/github-api-wrapper-research.md.
 
 For the tested wrapper/tool configuration:
 - fetch_file returned exact expected content for tested fixtures through 1,048,575 bytes.
 - For tested fixtures from 1,048,576 bytes through 5,242,880 bytes, fetch_file returned empty content while reporting the expected blob SHA.
 - fetch_blob returned full content for tested fixtures through 5 MiB.
 - The 5 MiB returned content matched the independently recorded Git blob SHA-1 and SHA-256.
-- These are observations scoped to the tested configuration. The exact wrapper implementation, endpoint/media type, and cause of empty fetch_file.content remain unknown. The Free-plan hypothesis is unverified.
+- These observations are scoped to the tested configuration. The exact wrapper implementation, endpoint/media type, and cause of empty fetch_file.content remain unknown. The Free-plan hypothesis is unverified.
 
 Canonical lab evidence:
 - Summary: https://github.com/paulhuman/github-api-lab/blob/main/docs/fetch-completeness-2026-10-12.md
 - Chronological report: https://github.com/paulhuman/github-api-lab/blob/main/results/fetch-completeness-2026-10-12.md
-
-## Branch preservation constraints
 
 Two laboratory branches remain protected from deletion or history rewriting unless the owner separately authorizes it:
 - experiment/control-read-completeness-20261012
@@ -49,21 +45,38 @@ Two laboratory branches remain protected from deletion or history rewriting unle
 
 Their unique fixture artifacts and branch-only commits were inventoried against the lab's canonical main. Documentation of findings does not make the original fixture artifacts disposable.
 
-## Bootstrap correction and current validation
+## Recent completed work in this chapter
 
-C0096 committed the discovery-order correction in .ai/conversation-management/handoff/BOOTSTRAP.md:
-- Commit: https://github.com/paulhuman/aip-mirror/commit/77e5ae410b016f53ba8571c39f082e44c28acd05
-- Commit message: ai-docs(bootstrap): require INDEX-based owner discovery
-- Changed-file scope: only .ai/conversation-management/handoff/BOOTSTRAP.md.
+The recent work shifted to auditing procedural language and the shared/host-specific skill boundary.
 
-C0097's bootstrap reads .ai/AGENTS.md before .ai/INDEX.md, then selects relevant canonical owners based on the operation and GitHub API access mechanism. The host-specific github-api-repository and github-api-workflow skills were read as applicable owners, not treated merely as incidental references. The operation TRACE records the actual activation set and additional reads.
+Commits on main, each limited to the stated file and verified by read-back:
+- 133e1f320dc62a3cbdf4ddf12ff0127ce0da6cff — ai-docs(normative-language): simplify procedural wording; updated .ai/skills/normative-language/SKILL.md to retain direct prohibitions using DO NOT without prefixing ordinary affirmative imperatives with DO.
+- 07ff5ed3125b21544f2f78ba54f7da01d124587a — ai-skills(git-cli-repository): simplify imperative wording; removed unnecessary affirmative DO prefixes while preserving prohibitions.
+- a2b800fe6a018176a823518393a402a115344b39 — ai-skills(git-cli-workflow): simplify imperative wording; removed unnecessary affirmative DO prefixes.
+- 8f140d849b76f8a65b3808f1f107538e075b8bcf — ai-skills(activation): simplify imperative wording; removed unnecessary affirmative DO prefixes.
+- 0bf217914a80aab536daefb523b6ad3e495fbd4f — ai-skills(git-cli-workflow): fix imperative capitalization; corrected capitalization left behind by the prior wording change.
 
-## Immediate next tasks
+A targeted audit covered:
+- .ai/skills/normative-language/SKILL.md
+- .ai/skills/git-cli-repository/SKILL.md
+- .ai/skills/git-cli-workflow/SKILL.md
+- .ai/skills/activation/SKILL.md
+- .ai/skills/repository/SKILL.md
+- .ai/skills/workflow/SKILL.md
+- .ai/skills/github-api-repository/SKILL.md
+- .ai/skills/github-api-workflow/SKILL.md
+- .ai/skills/commits/SKILL.md
+- other available active skills and relevant saved audit/context records.
 
-1. Continue investigating the wrapper implementation only if authoritative implementation or contract evidence is accessible; otherwise preserve the cause as unknown.
-2. Recheck the relevant portion of .ai/memory/github-api-wrapper-research.md before making any research update.
-3. Do not modify github-api-* skills unless a concrete failure mode or useful verifiable safeguard is established.
-4. Preserve both lab experiment branches; no deletion or history rewrite is authorized.
+The regex check for affirmative `DO + verb` constructions found no remaining matches in the inspected SKILL files; DO NOT remains. The audit was targeted to recently edited skills, normative wording, host separation, and retained findings; it was not a line-by-line semantic audit of every topic in every skill.
+
+The current architecture remains: shared host-neutral repository/workflow guidance, with remote GitHub API and local Git mechanics delegated to separate host-specific skills. Some duplication is intentional to prevent a host from loading irrelevant operational detail.
+
+## Open review: isolation invariant in repository §9
+
+A question was identified about the wording of .ai/skills/repository/SKILL.md §9. The shared skill describes test fixtures as preferring a disposable branch or isolated working copy, while .ai/skills/git-cli-workflow/SKILL.md requires a separate git worktree and prohibits returning to a disposable branch in the primary working copy.
+
+This is not necessarily a conflict across all hosts, but the shared wording may delegate the mechanism insufficiently precisely. The proposed next step is to ask DSH to review both current files in full, determine whether the issue is a real ambiguity or conflict, and propose a minimal host-neutral wording change only if warranted. No file changes or commits have been made for this question; await the user's DSH response before editing.
 
 ## Repository operation invariants
 
@@ -79,21 +92,29 @@ READ CURRENT STATE → MINIMAL CHANGE → WRITE COMPLETE CONTENT → READ BACK �
 ## Confirmed / inferred / assumed / open
 
 **Confirmed**
-- The bootstrap correction commit exists on main.
-- The current wrapper/tool configuration showed size-dependent empty fetch_file.content results on tested fixtures, while tested fetch_blob reads matched expected content.
+- The bootstrap discovery correction commit exists on main.
+- The tested wrapper/tool configuration showed size-dependent empty fetch_file.content results on tested fixtures, while tested fetch_blob reads matched expected content.
 - Both lab experiment branches remain preserved.
+- The five procedural-language commits listed above exist on main and were read back.
+- The targeted audit found no remaining affirmative `DO + verb` constructions in the inspected SKILL files.
 
 **Inferred**
 - Empty fetch_file.content with a matching blob SHA is a practical completeness risk in the tested configuration; it does not establish the cause.
+- The shared fixture-isolation wording may be too vague about delegating host-specific mechanisms; DSH review is pending.
 
 **Assumed / unverified**
-- The user's Free plan might be related; no evidence establishes this.
+- The user's Free plan might be related to the wrapper behavior; no evidence establishes this.
 
 **Open**
 - Which endpoint/media type and decoding behavior the wrapper uses.
 - Whether authoritative wrapper implementation details are available.
-- Whether a narrowly scoped additional safeguard is warranted beyond the existing completeness warning.
+- Whether a narrowly scoped additional safeguard is warranted for wrapper completeness.
+- Whether .ai/skills/repository/SKILL.md §9 needs a minimal clarification after DSH reviews it alongside .ai/skills/git-cli-workflow/SKILL.md.
+
+## Immediate next task
+
+Receive and review the user's DSH response about the fixture-isolation wording in repository §9. Compare its evidence and proposed diff against the current canonical files. Do not modify the skills unless the review establishes a concrete ambiguity and a minimal host-neutral correction.
 
 ## Recommended starting context
 
-Use .ai/memory/github-api-wrapper-research.md for the detailed chronology and TODOs. Do not repeat the completed fixture-size experiments without a specific reason. Keep all conclusions limited to the evidence available and do not delete or rewrite either lab branch.
+Read the current .ai/skills/repository/SKILL.md and .ai/skills/git-cli-workflow/SKILL.md before evaluating DSH's proposal. Use .ai/memory/github-api-wrapper-research.md only if resuming the wrapper investigation. Do not repeat the completed fixture-size experiments without a specific reason, and do not delete or rewrite either lab branch.
