@@ -30,6 +30,15 @@ Before changing an existing file:
 9. verify the intended content and preservation of unrelated content;
 10. inspect the resulting commit's parent, diff, and changed-file scope before treating the change as complete.
 
+
+### Verify read completeness before full-file replacement
+
+A successful `fetch_file` response and a returned blob SHA do not, by themselves, prove that the returned `content` is complete. The blob SHA identifies the underlying file blob; it does not validate the completeness of the content field.
+
+Before using fetched content as the basis for a full-file replacement, independently establish that the content is complete using available evidence, such as an independently known byte length and digest or an alternate retrieval path verified against the same expected content.
+
+If the content is unexpectedly empty, or its completeness cannot be established, STOP. Do not use that response as the basis for a full-file replacement. Obtain and verify the content through another suitable retrieval path, or report that the read remains unverified.
+
 For a new file, first verify that the intended path does not already exist at the target revision. Do not replace an existing file merely because a create operation failed.
 
 Never reconstruct an existing file from memory when it can be fetched. A successful API write or commit does not establish that the content is correct.
