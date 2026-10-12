@@ -132,3 +132,17 @@ For repository changes, use the sequence:
 ## Recommended starting context
 
 Start with the independent-oracle control experiment. First inspect and pin the laboratory repository's current `main` and experiment branch, then establish fixture bytes and expected hashes before calling either checked read method. Do not begin by publishing conclusions or deleting the branch.
+
+
+### Branch inventory checkpoint — 2026-10-12
+
+Инвентаризация paulhuman/github-api-lab завершена на уровне уникальных commits/paths:
+
+- Compare: main vs experiment/control-read-completeness-20261012.
+- Merge base: 203f1b7dab82b8a014ccbca074a9d192790f0502.
+- 11 commits only on experiment branch; 5 commits only on main; compare status diverged.
+- Parent chain was walked from branch head 405ef375f12cc6ea5ea92841a363b184b7b334c9 to merge base. Each branch-only commit adds one fixture path.
+- Canonical lab report now records all 11 commit/path pairs and the unresolved 5 MiB creation route: https://github.com/paulhuman/github-api-lab/commit/28c7e26f21784559f409870090b5dd24832bc381.
+- Report was read back and exact content verified. No branch or history was deleted/rewritten.
+- Do not delete the experiment branch without separate explicit owner authorization. Documentation preserves findings and hashes, but does not automatically make original fixture objects disposable.
+- 5 MiB remains untested. create_blob would still transmit the large body; switching API methods is not a verified workaround. A small-recipe GitHub Actions generation approach is only a candidate and has not been attempted.
