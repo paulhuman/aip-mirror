@@ -35,11 +35,11 @@ DO NOT introduce alternative normative keywords such as `SHALL`, `SHALL NOT`, `R
 
 ## 3. Procedural vocabulary
 
-`DO` and `DO NOT` are the project's local procedural vocabulary.
+Use ordinary imperative wording for direct affirmative procedural instructions. Do not prepend `DO` to an affirmative verb merely to mark the sentence as an instruction.
 
-Use `DO` or `DO NOT` for direct procedural instructions when the text tells an AI what action to perform or avoid.
+Use `DO NOT` for direct procedural prohibitions when that wording fits the intended meaning.
 
-`DO` and `DO NOT` are not BCP 14 normative keywords.
+`DO NOT` is local procedural vocabulary, not a BCP 14 normative keyword.
 
 DO NOT treat every procedural instruction as a `MUST` or `MUST NOT` merely because it is important.
 
