@@ -157,3 +157,29 @@ Start with the independent-oracle control experiment. First inspect and pin the 
 - Workflow has not run. No fixture branch from Actions exists as a result of this workflow, and no 5 MiB read has been attempted.
 - Lab repository is private. Before manual run, owner should inspect Actions usage/budget; GitHub Free lists 2,000 monthly minutes for standard runners in private repositories, but remaining allowance is unknown. Do not claim the run is guaranteed free until account quota/budget is checked.
 - Next: give owner beginner-friendly UI steps to inspect Actions billing/usage, then, if the quota/budget is acceptable, manually trigger the workflow. After success, pin generated branch commit, independently verify fixture bytes/hashes, then test `fetch_file` and `fetch_blob`. Preserve the existing experiment branch; do not delete any branch without explicit owner authorization.
+
+
+## C0095 update — 5 MiB fixture generated and read-tested
+
+The manually triggered workflow completed successfully and published:
+
+- Repository: `paulhuman/github-api-lab`
+- Branch: `experiment/fixture-5m-c0095-38260305834`
+- Fixture commit: `0a55aeac7948e2dd9984795cbd968c134a731ad7`
+- Path: `fixtures/size-5m-c0095.txt`
+- Expected size: 5,242,880 ASCII bytes
+- SHA-256 reported by the generator: `01aa375d43dba8abfb1c996c495aae9a07e94c330ed01dda316aa5365fe66bd6`
+- Expected Git blob SHA-1: `5c1cb4d9f4cdaa984ecb4a42f9cdc8032fbcf339`
+
+Results pinned to the generated branch:
+
+- `fetch_file` with UTF-8 encoding returned 0 characters, while reporting the expected blob SHA-1: **FAIL — content missing**.
+- `fetch_blob` with the expected blob SHA-1 returned 5,242,880 ASCII characters. An independent local Git blob SHA-1 calculation over the returned bytes and Git object header matched the expected hash exactly: **PASS**.
+
+This closes the previous “5 MiB untested” item for the tested tool configuration. It does not establish a universal GitHub API limit or reveal the wrapper's underlying implementation. The run reported Node.js 20 deprecation and future `ubuntu-latest` migration notices; the workflow nevertheless published the fixture successfully.
+
+Canonical lab report was updated and read back exactly in commit https://github.com/paulhuman/github-api-lab/commit/883ca4bb68d3211acd45472642779adfb29802e7. Project memory and this handoff are being updated to preserve the new evidence. Do not delete either the new fixture branch or the earlier experiment branch without completing preservation review and receiving separate explicit owner authorization.
+
+### Recommended next step
+
+Review the current research table and original chronological log for consistent status language, then determine whether a SHA-256 recalculation of the returned `fetch_blob` bytes is useful as an additional independent digest check. The Git blob SHA-1 already matches the independently generated expected blob and confirms exact Git object content. Only after the evidence is stable should a minimal, evidence-based safeguard be considered for `.ai/skills/github-api-repository/SKILL.md` and/or `.ai/skills/github-api-workflow/SKILL.md`; do not edit those skills merely to state an unproven internal cause.
