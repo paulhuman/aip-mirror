@@ -183,3 +183,44 @@ Canonical lab report was updated and read back exactly in commit https://github.
 ### Recommended next step
 
 Review the current research table and original chronological log for consistent status language, then determine whether a SHA-256 recalculation of the returned `fetch_blob` bytes is useful as an additional independent digest check. The Git blob SHA-1 already matches the independently generated expected blob and confirms exact Git object content. Only after the evidence is stable should a minimal, evidence-based safeguard be considered for `.ai/skills/github-api-repository/SKILL.md` and/or `.ai/skills/github-api-workflow/SKILL.md`; do not edit those skills merely to state an unproven internal cause.
+
+ 
+## C0095 closing update — safeguard committed and next work clarified (2026-10-12)
+
+The earlier “Recommended next step” above is superseded by this closing update.
+
+### Safeguard in canonical project main
+
+- Read the current `.ai/skills/github-api-repository/SKILL.md` from `paulhuman/aip-mirror@main` before editing.
+- Added a narrow section, “Verify read completeness before full-file replacement.” It states that a successful `fetch_file` response and blob SHA alone do not establish that `content` is complete; before full-file replacement, completeness must be independently established; unexpected empty content or unverified completeness requires STOP.
+- No cause is asserted. The Free-plan hypothesis remains unverified, as do the wrapper's internal endpoint/adapter details.
+- Commit: https://github.com/paulhuman/aip-mirror/commit/9fde083667554b22fa2139aeda002a2f0e1a6197
+- Read-back at the immutable commit and then at `main` matched the resulting blob SHA `ddcbe704b3c5722b4e5861473f3fc29e04fabec1`. Commit diff shows only `.ai/skills/github-api-repository/SKILL.md`.
+
+### Current laboratory branch state
+
+A fresh branch search and compare against `paulhuman/github-api-lab@main` found two experiment branches; neither was deleted.
+
+1. `experiment/control-read-completeness-20261012`
+   - Compare status: diverged; 11 commits ahead, 10 behind; merge base `203f1b7dab82b8a014ccbca074a9d192790f0502`.
+   - The previously recorded 11 branch-only commits/fixture paths are documented in the canonical lab report at https://github.com/paulhuman/github-api-lab/commit/28c7e26f21784559f409870090b5dd24832bc381.
+   - Preserve the branch; do not delete without separate explicit owner authorization.
+
+2. `experiment/fixture-5m-c0095-38260305834`
+   - Fixture commit: `0a55aeac7948e2dd9984795cbd968c134a731ad7`.
+   - Compare status: diverged; one branch-only commit and one branch-only path, `fixtures/size-5m-c0095.txt`; merge base `d471f0f73b73063eb2bc1fa04ba9aee885eec235`; current lab main is ahead by the subsequent report publication commit.
+   - This fixture is unique to the branch and must not be treated as disposable merely because its findings are documented. Do not delete without separate explicit owner authorization.
+
+### Immediate next task for C0096
+
+1. Complete a preservation-oriented inventory of both laboratory experiment branches against the current pinned `main`: record exact branch heads, branch-only commit SHAs/parents, paths, and which evidence exists canonically. The 5 MiB branch's one unique fixture path is already visible from compare, but verify its commit metadata and exact branch head before declaring the inventory complete.
+2. Optionally strengthen the 5 MiB byte-integrity evidence by independently calculating SHA-256 over the bytes returned by `fetch_blob` and comparing it with the generator's pre-recorded SHA-256 `01aa375d43dba8abfb1c996c495aae9a07e94c330ed01dda316aa5365fe66bd6`. Do not use `fetch_file` or `fetch_blob` output to define the expected value. The Git blob SHA-1 already matches the independently established expected blob SHA; this is an additional digest cross-check, not a prerequisite for the observed result.
+3. Update `.ai/memory/github-api-wrapper-research.md` so its active TODO/status summary reflects the completed 5 MiB test, the safeguard commit, the remaining implementation uncertainty, and the current branch-preservation status. Read back and verify any update.
+4. If accessible, investigate the wrapper implementation/authoritative contract to test the Free-plan hypothesis and identify the actual cause. If the implementation is unavailable, keep the cause explicitly unknown; do not infer it from the current observations.
+5. Do not delete either experiment branch. Branch cleanup is not authorized by this handoff; if unique artifacts remain or their future need is uncertain, stop and ask the owner.
+
+### Evidence classification
+
+**Confirmed:** tested `fetch_file` calls returned empty content for tested sizes from 1,048,576 bytes through 5,242,880 bytes inclusive, with the expected blob SHA; tested `fetch_blob` returned full content through 5,242,880 bytes and its independently recalculated Git blob SHA-1 matched. These results apply to the tested tool configuration only.
+
+**Not established:** whether the Free plan causes the behavior; the wrapper's internal endpoint, media type, or decoding implementation; a universal size limit; whether all branch-only fixture objects can be discarded safely.
