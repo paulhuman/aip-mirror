@@ -312,3 +312,20 @@ Read tests against this generated fixture:
 This is the first verified 5 MiB read case; replace prior “5 MiB untested” status where summarizing current state. The observation extends the tested pattern for the current wrapper/tool configuration, but does not establish a universal GitHub API limit or prove which internal endpoint/adapter is used. The successful workflow showed Node.js 20 deprecation and future `ubuntu-latest` migration notices; treat those as maintenance items, not failures of this run.
 
 Canonical lab report updated and read back exactly: https://github.com/paulhuman/github-api-lab/commit/883ca4bb68d3211acd45472642779adfb29802e7. No branch was deleted. Preserve both this generated fixture branch and the earlier experiment branch until separate inventory/preservation review and explicit owner authorization.
+
+
+### TODO 7 — восстановить bootstrap discovery и полную активацию необходимых skills
+
+**Проблема:** TRACE инициализации C0096 перечисляет прочитанные файлы, но не показывает чтение `.ai/INDEX.md`. При этом `.ai/skills/github-api-repository/SKILL.md` был указан как `OPERATION READS`, а не как `ACTIVATE owner`; `.ai/skills/github-api-workflow/SKILL.md` в списке чтения отсутствует. Сам TRACE не доказывает, что необходимые специализированные skills были обнаружены и активированы по текущему контракту.
+
+**Действия:**
+
+1. Сверить актуальные `.ai/INDEX.md`, `.ai/conversation-management/handoff/BOOTSTRAP.md`, `.ai/skills/activation/SKILL.md` и применимые host-specific skills, чтобы определить нормативную последовательность discovery → activation → operation reads.
+2. Установить, каким предусмотренным механизмом bootstrap должен обнаруживать `INDEX` и дополнительные skills после изменений архитектуры. Не считать прежнее поведение гарантией текущего контракта.
+3. Проверить, какие skills обязательны для bootstrap и последующих операций через GitHub API; отдельно различать «прочитан» и «активирован».
+4. При подтверждении пробела внести минимальную согласованную поправку в канонический owner (не дублировать процедуру в INDEX), затем проверить bootstrap на новом контролируемом проходе.
+5. Убедиться, что user-visible TRACE включает фактически перечитанные activation owners и отдельно перечисляет только дополнительные operation reads без дубликатов.
+
+**Критерий завершения:** канонический контракт однозначно определяет начальное обнаружение skills и необходимые activation owners; повторный bootstrap показывает проверяемую последовательность, а TRACE не смешивает чтение с активацией.
+
+**Статус:** OPEN — проблема выявлена по TRACE C0096; нормативная причина и место минимального исправления ещё не установлены.
