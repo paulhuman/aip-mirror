@@ -194,7 +194,7 @@ This preservation check applies to all branch hosts and workflows; the host-spec
 
 ## 9. Disposable repository fixtures
 
-When an isolated repository test requires synthetic or destructive repository state, the test harness MUST prefer a disposable branch or isolated working copy created from the known commit SHA that establishes the required baseline.
+When an isolated repository test requires synthetic or destructive repository state, the test harness MUST isolate the fixture from canonical project state and unrelated user work, using the known commit SHA that establishes the required baseline. The host-specific repository and workflow skills define the applicable isolation mechanism and its safe use.
 
 The fixture lifecycle MUST:
 
