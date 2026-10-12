@@ -207,6 +207,28 @@ https://github.com/paulhuman/github-api-lab/blob/main/results/fetch-completeness
 
 Это эмпирическая граница для проверенных случаев, а не доказательство внутреннего endpoint, media type или универсального лимита wrapper. Стабильные данные и таблицы ещё требуется отдельно оформить в каноническом каталоге `docs/` репозитория лаборатории на `main`; существующий отчёт в `results/` сохраняется как evidence и не заменяет этот TODO.
 
+### Актуализация C0095 — независимый small-file control и публикация результатов
+
+Независимый контрольный эксперимент выполнен на ветке `experiment/control-read-completeness-20261012` в `paulhuman/github-api-lab`.
+
+- Fixture: `fixtures/control-independent-oracle-c0095.txt`.
+- Immutable fixture commit: `405ef375f12cc6ea5ea92841a363b184b7b334c9`.
+- Expected UTF-8 content was defined before either read: `C0095 independent oracle control\nASCII fixture\nExpected bytes are defined before either read method.\n`.
+- Expected byte length: 101; character count: 101.
+- Independently calculated UTF-8 SHA-256: `8ab2b9b5b4420c89120aec0c1f31307b84831ca2456aa4b87c22d66644566f4a`.
+- Independently calculated Git blob SHA-1: `9e6338eec493037c8a5d0001a1e33e96b553fd41`.
+- `fetch_file`, pinned to the fixture commit, returned 101 characters, exact expected content, and the expected blob SHA: PASS.
+- `fetch_blob`, called with the independently calculated expected blob SHA, returned the exact expected content: PASS.
+- This confirms the small-file control case only; it does not establish general completeness guarantees.
+
+Canonical publication on laboratory `main`:
+
+- `docs/README.md`: commit `29c849b5aa380ee6e377f7e805ab7daf96effd7d`.
+- `docs/fetch-completeness-2026-10-12.md`: commit `04427c9ed073a906f38ed9cd93dc0dea90b7890b`.
+- Root `README.md` canonical-documentation link: commit `4cb9093ae1598a02a773edfdbaad995ab9fd36af`.
+- All three published paths were read back from `main`; the canonical summary contains the independent-oracle data, size-boundary table, and explicit INCONCLUSIVE status for the unperformed 5 MiB read.
+- Published document: https://github.com/paulhuman/github-api-lab/blob/main/docs/fetch-completeness-2026-10-12.md
+
 ### TODO 4 — опубликовать стабильные проверенные результаты в `github-api-lab/docs/` на `main`
 
 **Ожидаемый результат:** стабильные, проверенные выводы и таблицы экспериментов находятся в канонической ветке `main` лабораторного репозитория, в предназначенном для документации каталоге `docs/`, независимо от жизненного цикла временных тестовых веток.
@@ -221,7 +243,7 @@ https://github.com/paulhuman/github-api-lab/blob/main/results/fetch-completeness
 
 **Критерий завершения:** проверенная документация и таблицы доступны из `main/docs/`; их сохранность не зависит от временных экспериментальных веток.
 
-**Статус:** OPEN.
+**Статус:** COMPLETED — проверенный документ опубликован в `main/docs/`, перечитан обратно; root README ссылается на canonical summary. Commits и ссылки зафиксированы в разделе актуализации C0095 выше.
 
 ### TODO 5 — завершить проверку крупных фикстур и определить безопасный критерий полноты
 
