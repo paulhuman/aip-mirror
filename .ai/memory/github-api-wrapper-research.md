@@ -282,3 +282,12 @@ Canonical publication on laboratory `main`:
 Канонический отчёт на lab main дополнен таблицей commit/path и статусом безопасного создания 5 MiB: https://github.com/paulhuman/github-api-lab/commit/28c7e26f21784559f409870090b5dd24832bc381. Файл прочитан обратно; содержимое совпало полностью. Никакой ветки или истории не удаляли и не переписывали.
 
 Сохранение результатов в документации не означает, что исходные fixture blobs больше не нужны: ветку оставить. Удаление требует отдельного явного разрешения владельца. 5 MiB по-прежнему не создан и не прочитан; замена create_file на create_blob сама по себе не обходит транспорт, поскольку обе операции всё ещё передают большое тело. Вариант генерации фикстуры внутри GitHub Actions только предложен для оценки; он не запускался и не считается проверенным.
+
+
+### C0095 — подготовлен manual-only генератор 5 MiB fixture
+
+В `paulhuman/github-api-lab` добавлен `.github/workflows/create-5m-fixture.yml` (commit `92a952eb91e0269c95acaaf7cc5ec0b6aca00dd0`), затем усилена проверка Git blob SHA (`5f978093a34975cf3296327c22a6663ddfefe77c`). Workflow доступен только через `workflow_dispatch`, использует standard `ubuntu-latest`, `timeout-minutes: 5`, `contents: write` и не имеет автоматических триггеров. Он генерирует детерминированный ASCII fixture размером ровно 5,242,880 bytes, вычисляет SHA-256 и Git blob SHA-1, сравнивает blob SHA с `git hash-object`, затем публикует новую ветку `experiment/fixture-5m-c0095-<run-id>` от `main`. Существующий branch/path перезаписывать не должен.
+
+Workflow и его итоговый отчёт перечитаны обратно; изменения задокументированы в canonical lab report commit `d471f0f73b73063eb2bc1fa04ba9aee885eec235`. Workflow ещё не запускался: создание ветки, commit и 5 MiB read не подтверждены. Поскольку lab repo private, перед запуском владелец должен проверить Actions usage/budget. GitHub Free включает 2,000 standard runner minutes/month для private repos, но текущий остаток квоты неизвестен. До ручного запуска не считать тест пройденным.
+
+Official refs: https://docs.github.com/en/billing/concepts/product-billing/github-actions and https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax.
