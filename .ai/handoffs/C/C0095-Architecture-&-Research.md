@@ -56,11 +56,11 @@ The next experiment MUST establish the expected content independently before eit
 
 ## Immediate tasks
 
-1. In `paulhuman/github-api-lab`, inspect the current canonical `main`, experiment branch, report, README, and available tree/commit evidence before making changes.
-2. Run the independent-oracle control experiment on small deterministic fixtures. Record exact immutable refs and verify both methods separately against the independently generated expected bytes.
-3. Publish the verified findings and tables in `github-api-lab/docs/` on `main`. Read back the published files, verify contents, inspect parent/diff/changed-path scope, and update README links where appropriate.
-4. Continue investigating a safe way to create and read a 5 MiB fixture. Do not classify the prior transport error as a read result.
-5. Before any future branch deletion, inventory unique commits and paths relative to the base/canonical branch, preserve durable evidence in canonical locations, read it back, and obtain separate owner authorization.
+1. **Completed:** establish and run the independent-oracle small-file control before either checked read method. Both `fetch_file` and `fetch_blob` returned the exact expected 101-byte fixture.
+2. **Completed:** publish the stable findings and tables in `github-api-lab/docs/` on `main`, read the files back, verify the canonical README link, and inspect the per-commit changed-path scope.
+3. Find a safe way to create and read a 5 MiB fixture without repeating the failed multi-megabyte transport submission. The previous transport error remains INCONCLUSIVE about reading.
+4. Inventory the experiment branch's unique commits and paths relative to canonical `main`; identify any durable evidence not yet preserved in `main/docs/` or another canonical location.
+5. Do not delete the experiment branch without completing preservation/read-back checks and obtaining separate owner authorization.
 
 ## Repository operation invariants
 
@@ -96,6 +96,27 @@ For repository changes, use the sequence:
 - Target canonical publication area: `docs/` on `main`.
 - README and exact branch/commit/tree state must be read from the laboratory repository before planning mutations; do not assume they match this handoff.
 
+## Progress during C0095
+
+### Independent-oracle small-file control
+
+- Fixture: `paulhuman/github-api-lab@405ef375f12cc6ea5ea92841a363b184b7b334c9:/fixtures/control-independent-oracle-c0095.txt`.
+- Expected content was defined before reads; 101 UTF-8 bytes and 101 characters.
+- Independent SHA-256: `8ab2b9b5b4420c89120aec0c1f31307b84831ca2456aa4b87c22d66644566f4a`.
+- Independent Git blob SHA-1: `9e6338eec493037c8a5d0001a1e33e96b553fd41`.
+- `fetch_file` at the immutable fixture commit matched the exact content and expected SHA: PASS.
+- `fetch_blob` called with the independently calculated SHA matched the exact expected content: PASS.
+- Fixture commit changed only the new fixture path; its read-back matched the pre-established content.
+
+### Canonical publication on laboratory main
+
+- `docs/README.md`: https://github.com/paulhuman/github-api-lab/commit/29c849b5aa380ee6e377f7e805ab7daf96effd7d
+- `docs/fetch-completeness-2026-10-12.md`: https://github.com/paulhuman/github-api-lab/commit/04427c9ed073a906f38ed9cd93dc0dea90b7890b
+- Root README link update: https://github.com/paulhuman/github-api-lab/commit/4cb9093ae1598a02a773edfdbaad995ab9fd36af
+- All published files were read back from `main`; the root README points to the canonical summary. Each publication commit's diff showed only its intended file.
+- The canonical summary reproduces the independent control content and hashes, the size-boundary table, and the INCONCLUSIVE status of the unperformed 5 MiB read.
+- Project memory updated: https://github.com/paulhuman/aip-mirror/commit/ef375f0af36be9c7e6b3a7161d863acd3c3a41dc and corrected to avoid a stale TODO statement in https://github.com/paulhuman/aip-mirror/commit/7b8832d328b9e52dfa9c21e0e4e6106597cd00d7.
+
 ## Confirmed versus open
 
 **Confirmed**
@@ -104,11 +125,9 @@ For repository changes, use the sequence:
 - The laboratory repository is configured in `.ai/config.yaml` as `paulhuman/github-api-lab`, with `main` as its default branch.
 
 **Open / not yet verified in this chapter**
-- Whether the report and all fixture artifacts on the laboratory repository still match the supplied commit/path evidence.
-- Results of an independent-oracle small-file control experiment.
-- The contents and structure of `github-api-lab/docs/` and current README links.
-- A successful 5 MiB fixture creation/read.
+- A successful 5 MiB fixture creation/read; the earlier transport error does not count as a read result.
 - The full unique-commit/path inventory of the experiment branch and whether any additional durable artifacts need preservation.
+- Whether all experimental fixture artifacts and commit histories have been accounted for before any eventual branch cleanup.
 
 ## Recommended starting context
 
