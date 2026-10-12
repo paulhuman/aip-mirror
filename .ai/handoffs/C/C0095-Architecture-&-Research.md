@@ -146,3 +146,14 @@ Start with the independent-oracle control experiment. First inspect and pin the 
 - Report was read back and exact content verified. No branch or history was deleted/rewritten.
 - Do not delete the experiment branch without separate explicit owner authorization. Documentation preserves findings and hashes, but does not automatically make original fixture objects disposable.
 - 5 MiB remains untested. create_blob would still transmit the large body; switching API methods is not a verified workaround. A small-recipe GitHub Actions generation approach is only a candidate and has not been attempted.
+
+
+### Manual 5 MiB generator — prepared, not run
+
+- Added `.github/workflows/create-5m-fixture.yml` to `paulhuman/github-api-lab@main` in commit `92a952eb91e0269c95acaaf7cc5ec0b6aca00dd0`; verified read-back and single-file diff.
+- Follow-up commit `5f978093a34975cf3296327c22a6663ddfefe77c` added comparison between independently calculated Git blob SHA-1 and `git hash-object`; read-back verified.
+- Canonical lab report update: `https://github.com/paulhuman/github-api-lab/commit/d471f0f73b73063eb2bc1fa04ba9aee885eec235`, exact read-back PASS.
+- Manual-only `workflow_dispatch`; no automatic triggers. Uses `ubuntu-latest`, five-minute timeout, and `contents: write` to publish a fresh branch `experiment/fixture-5m-c0095-<run-id>` from `main`. It generates `fixtures/size-5m-c0095.txt` with exactly 5,242,880 ASCII bytes and reports hashes/commit.
+- Workflow has not run. No fixture branch from Actions exists as a result of this workflow, and no 5 MiB read has been attempted.
+- Lab repository is private. Before manual run, owner should inspect Actions usage/budget; GitHub Free lists 2,000 monthly minutes for standard runners in private repositories, but remaining allowance is unknown. Do not claim the run is guaranteed free until account quota/budget is checked.
+- Next: give owner beginner-friendly UI steps to inspect Actions billing/usage, then, if the quota/budget is acceptable, manually trigger the workflow. After success, pin generated branch commit, independently verify fixture bytes/hashes, then test `fetch_file` and `fetch_blob`. Preserve the existing experiment branch; do not delete any branch without explicit owner authorization.
