@@ -320,6 +320,8 @@ Canonical lab report updated and read back exactly: https://github.com/paulhuman
 
 **Проблема:** TRACE инициализации C0096 перечисляет прочитанные файлы, но не показывает чтение `.ai/INDEX.md`. При этом `.ai/skills/github-api-repository/SKILL.md` был указан как `OPERATION READS`, а не как `ACTIVATE owner`; `.ai/skills/github-api-workflow/SKILL.md` в списке чтения отсутствует. Сам TRACE не доказывает, что необходимые специализированные skills были обнаружены и активированы по текущему контракту.
 
+**Уточнение по текущему нормативному тексту:** `BOOTSTRAP.md` не включает `INDEX` в минимальный список `ACTIVATE owners` и одновременно говорит, что bootstrap не заменяет `.ai/INDEX.md`; он также требует активировать другие applicable canonical skills. Поэтому само отсутствие `INDEX` в TRACE пока не доказывает нарушение прямого требования. Неясно именно то, каким обязательным шагом bootstrap должен обнаруживать дополнительные host-specific owners и включать их в ACTIVATE.
+
 **Действия:**
 
 1. Сверить актуальные `.ai/INDEX.md`, `.ai/conversation-management/handoff/BOOTSTRAP.md`, `.ai/skills/activation/SKILL.md` и применимые host-specific skills, чтобы определить нормативную последовательность discovery → activation → operation reads.
