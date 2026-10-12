@@ -27,6 +27,13 @@ references:
       repository: paulhuman/developer-knowledge
       role: Project-independent repository for durable developer knowledge
 
+experiments:
+  repositories:
+    github_api_lab:
+      repository: paulhuman/github-api-lab
+      default_branch: main
+      role: Isolated private test lab for empirical validation of GitHub API wrapper behavior, including fetch_file/fetch_blob completeness, size boundaries, and reproducible fixtures
+
 specializations:
   A:
     short_name: JSX Prototype
