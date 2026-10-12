@@ -176,7 +176,23 @@ Therefore:
 - Content integrity MUST be verified independently of mutation-tool success.
 - Scope verification MUST account for the actual repository state affected by the operation, not only the files visible in a tracked-file list or diff. The host-specific repository skill defines how to inspect that state.
 
-## 8. Disposable repository fixtures
+## 8. Branch deletion and preservation of unique work
+
+Before deleting a branch or any other ref that may contain work not present elsewhere, inventory the branch's commits and changed paths relative to its base and determine which files or changes exist only on that ref.
+
+The inventory MUST distinguish:
+- changes already preserved on a canonical branch or in another durable location;
+- stable, verified results or documentation that should be promoted to the canonical branch before cleanup;
+- unfinished experiments and temporary fixtures that may remain disposable;
+- files or commits whose only surviving copy is on the branch being considered for deletion.
+
+Do not delete a branch merely because its implementation was reviewed, selected changes were copied, or its purpose is considered complete. First verify that every unique durable artifact that must be retained has been preserved and read back from its intended canonical destination. A successful cherry-pick, merge, file write, or commit is not enough without checking the actual paths and content.
+
+If unique work remains, preserve it before deletion or obtain an explicit decision to discard it. When ownership or intended retention is unclear, stop and ask. After any authorized deletion, verify the ref is gone and that retained artifacts remain reachable from their canonical destination.
+
+This preservation check applies to all branch hosts and workflows; the host-specific repository skill defines how to inventory refs, commits, trees, and local working-copy state.
+
+## 9. Disposable repository fixtures
 
 When an isolated repository test requires synthetic or destructive repository state, the test harness MUST prefer a disposable branch or isolated working copy created from the known commit SHA that establishes the required baseline.
 
