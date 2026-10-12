@@ -11,7 +11,7 @@ This skill owns repository mechanics specific to a local Git working copy. Share
 
 ## 1. Resolve the local repository root
 
-DO resolve the actual working copy root with:
+Resolve the actual working copy root with:
 
     git rev-parse --show-toplevel
 
@@ -19,7 +19,7 @@ A hosting URL is not a local filesystem path. Keep the local path used by Git se
 
 ## 2. Protect working-copy state
 
-Before mutation or cleanup, DO inspect the local state and distinguish:
+Before mutation or cleanup, inspect the local state and distinguish:
 
 - committed files;
 - staged changes in the index;
@@ -37,7 +37,7 @@ Useful starting commands include:
 
 A normal status or tracked-file listing does not show every ignored or untracked path. DO NOT infer that the working copy is clean or unaffected from tracked paths or a diff alone. Machine-specific ignored paths, such as a locally created adapter link, appear only under `--ignored`.
 
-DO preserve all pre-existing user changes, whether staged, unstaged, untracked, or ignored. DO NOT overwrite or delete them as incidental cleanup.
+Preserve all pre-existing user changes, whether staged, unstaged, untracked, or ignored. DO NOT overwrite or delete them as incidental cleanup.
 
 Destructive operations such as `git reset --hard`, `git checkout --force`, `git clean -f`, or `git restore` over a dirty range MUST NOT be run in a working copy that contains unrelated user work.
 
@@ -48,18 +48,18 @@ The destructive commands are not interchangeable, and their scopes differ in way
 - `git restore` over a path discards unstaged tracked changes in that path without a confirmation prompt.
 - `git checkout --force` overwrites tracked files from the index or the given revision.
 
-Because the scopes differ, DO determine which categories a command actually affects before running it, then DO verify the resulting state rather than assuming the intended removal happened. Removing ignored files is destructive to data that `--ignored` inspection is specifically needed to reveal.
+Because the scopes differ, determine which categories a command actually affects before running it, then verify the resulting state rather than assuming the intended removal happened. Removing ignored files is destructive to data that `--ignored` inspection is specifically needed to reveal.
 
 ## 3. Verify local mutations
 
 After changing files:
 
-1. DO inspect the relevant file contents;
-2. DO inspect staged and unstaged diffs separately;
-3. DO check untracked and ignored paths where relevant;
-4. DO verify that the actual changed scope matches the intended scope;
-5. DO commit only under the authorization and policy defined by `.ai/skills/commits/SKILL.md`;
-6. DO verify the resulting commit and working-copy state.
+1. Inspect the relevant file contents;
+2. Inspect staged and unstaged diffs separately;
+3. Check untracked and ignored paths where relevant;
+4. Verify that the actual changed scope matches the intended scope;
+5. Commit only under the authorization and policy defined by `.ai/skills/commits/SKILL.md`;
+6. Verify the resulting commit and working-copy state.
 
 A clean tracked diff does not prove that no ignored or untracked side effects occurred.
 
