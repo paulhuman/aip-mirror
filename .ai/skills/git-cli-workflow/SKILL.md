@@ -30,7 +30,7 @@ After running the command, confirm that the output is a tree object SHA rather t
 
 ## 2. Inspect the working copy separately
 
-The committed tree and the working copy are different scopes. inspect the local state separately:
+The committed tree and the working copy are different scopes. Inspect the local state separately:
 
     git status --porcelain
     git status --porcelain --ignored
@@ -72,7 +72,7 @@ Removal behavior differs by file category, and the differences are not symmetric
 - An **ignored** file alone does **not** make removal refuse. Normal `git worktree remove` exits successfully and **silently discards ignored files**. This was verified directly: an ignored file with content was destroyed by a non-forced removal that reported no message and returned exit code 0.
 - Forced removal discards everything the fixture contains.
 
-Therefore, Inspect ignored content before removing a fixture, not only modified and untracked content:
+Therefore, inspect ignored content before removing a fixture, not only modified and untracked content:
 
     git -C <fixture-path> status --short --ignored --untracked-files=all
 
