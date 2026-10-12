@@ -73,11 +73,11 @@ Documentation of findings does not automatically make original fixture commits o
 
 ## Immediate next tasks
 
-1. Complete a preservation-oriented inventory of both experiment branches against a freshly pinned current lab `main`: record branch heads, merge bases, branch-only commit SHAs and parents, changed paths, and which artifacts/evidence exist canonically. Read the relevant report and branch state before drawing conclusions.
-2. Optionally calculate SHA-256 independently over the exact `fetch_blob` bytes for the 5 MiB fixture and compare it to the pre-recorded generator digest `01aa375d43dba8abfb1c996c495aae9a07e94c330ed01dda316aa5365fe66bd6`. This is an additional cross-check, not a prerequisite for the already matching Git blob SHA-1 result.
-3. Update `.ai/memory/github-api-wrapper-research.md` so its active TODO/status summary reflects the completed 5 MiB test, safeguard commit, remaining implementation uncertainty, and current branch-preservation state. Read back and verify any change.
-4. If accessible, investigate the wrapper implementation or authoritative contract to test the Free-plan hypothesis and identify the actual cause. If implementation evidence is unavailable, leave the cause explicitly unknown; do not infer it from observed outputs.
-5. Do not delete either experiment branch. If unique artifacts remain or their future need is uncertain, stop and ask the owner.
+1. Run a controlled receiving-chapter initialization in C0097 to test the amended `.ai/conversation-management/handoff/BOOTSTRAP.md`: confirm the actual read order `.ai/config.yaml` → `.ai/AGENTS.md` → `.ai/INDEX.md` → applicable canonical owners, without indiscriminately reading every INDEX entry.
+2. Verify the initialization TRACE against the files actually reread: list all required activation owners under `ACTIVATE`, and list only unique additional files under `OPERATION READS`. In particular, confirm that the applicable GitHub API repository/workflow skills are activated rather than merely mentioned as operation reads.
+3. Verify that the C0097 receiving handoff is created and read back correctly, and that its header, predecessor linkage, and first real task match the migration transport.
+4. Once the bootstrap test is complete, resume the remaining wrapper-cause investigation only if authoritative implementation or contract evidence is accessible. Keep the Free-plan hypothesis explicitly unverified unless evidence establishes it.
+5. Preserve both lab experiment branches; no deletion or history rewrite is authorized.
 
 ## Repository operation invariants
 
@@ -119,7 +119,9 @@ For existing files, follow:
 - The observed size-dependent `fetch_file` empty-content results and tested `fetch_blob` content results are documented in the lab report.
 - The small independent-oracle control passed for both methods.
 - The repository-level read-completeness safeguard is present on project `main`.
-- The two experiment branches were present at the latest recorded checkpoint and were not deleted.
+- The branch-only commit/parent/path inventory for both experiment branches has been checked against the current lab `main`; the 5 MiB fixture's independently recalculated SHA-256 matches the generator digest.
+- Both experiment branches and their unique fixture artifacts remain preserved.
+- The C0096 bootstrap discovery correction was committed in `77e5ae410b016f53ba8571c39f082e44c28acd05`; the corrected bootstrap has not yet been tested by a fresh receiving-chapter initialization.
 
 **Inferred**
 - The observed pattern indicates a practical risk when treating `fetch_file.content` as complete for large files in the tested configuration. It does not identify the cause.
@@ -129,15 +131,25 @@ For existing files, follow:
 - The wrapper's underlying endpoint, headers, media type, and adapter/decoding implementation have not been established.
 
 **Open**
-- Fresh exact branch-head and unique-path inventory for both experiment branches.
-- Optional independent SHA-256 cross-check for the 5 MiB `fetch_blob` output.
 - Whether wrapper implementation or authoritative contracts are available to establish the cause.
+- Whether the corrected bootstrap produces the expected discovery, activation, and TRACE in a fresh receiving chapter.
 - Whether any unique fixture artifacts may eventually be discarded; no deletion is authorized.
 
 ## Immediate next task
 
-Begin by pinning the current `paulhuman/github-api-lab@main` commit and both experiment branch heads. Compare each branch against that pinned state, verify commit parents and unique paths, and reconcile the results with the canonical report before making any cleanup recommendation.
+Initialize C0097 using the generated migration instruction and run the first controlled test of the corrected bootstrap discovery/activation contract. Inspect the resulting TRACE against actual reads, then continue only after confirming the C0097 handoff and activation evidence. Do not delete or rewrite either laboratory experiment branch.
+
+## C0096 bootstrap discovery correction
+
+The prior C0096 initialization TRACE did not show `.ai/INDEX.md`, listed `.ai/skills/github-api-repository/SKILL.md` as an operation read rather than an activation owner, and omitted `.ai/skills/github-api-workflow/SKILL.md`. Do **not** restore the removed point 6 in `.ai/AGENTS.md`; it was removed intentionally to avoid loading conversation-management instructions as general agent guidance.
+
+`.ai/conversation-management/handoff/BOOTSTRAP.md` was minimally corrected so that after `.ai/config.yaml` it requires `.ai/AGENTS.md`, then `.ai/INDEX.md`, then only the applicable canonical owners discovered through INDEX. INDEX is a discovery map, not a requirement to read every listed skill. `.ai/skills/repository/SKILL.md` remains the first semantic owner after the AGENTS/INDEX orientation reads.
+
+- Commit: https://github.com/paulhuman/aip-mirror/commit/77e5ae410b016f53ba8571c39f082e44c28acd05
+- Commit message: `ai-docs(bootstrap): require INDEX-based owner discovery`
+- Changed-file scope verified: only `.ai/conversation-management/handoff/BOOTSTRAP.md`.
+- The corrected bootstrap has **not** yet been exercised by a fresh receiving-chapter initialization. That is the first C0097 task.
 
 ## Recommended starting context
 
-Read the current `.ai/memory/github-api-wrapper-research.md`, the canonical lab report and chronological report, then inspect the live laboratory branch/commit state. Keep all conclusions scoped to observed evidence and preserve both branches.
+Read the current `.ai/memory/github-api-wrapper-research.md` for remaining wrapper research status, and use the C0096 bootstrap-correction section above to focus the C0097 initialization test. During bootstrap, read the current `.ai/config.yaml`, `.ai/AGENTS.md`, and `.ai/INDEX.md` in the required order, then only applicable owners; do not read every INDEX entry indiscriminately. Keep all conclusions scoped to observed evidence and preserve both laboratory experiment branches.
