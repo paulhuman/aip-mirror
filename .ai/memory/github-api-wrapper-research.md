@@ -291,3 +291,24 @@ Canonical publication on laboratory `main`:
 Workflow и его итоговый отчёт перечитаны обратно; изменения задокументированы в canonical lab report commit `d471f0f73b73063eb2bc1fa04ba9aee885eec235`. Workflow ещё не запускался: создание ветки, commit и 5 MiB read не подтверждены. Поскольку lab repo private, перед запуском владелец должен проверить Actions usage/budget. GitHub Free включает 2,000 standard runner minutes/month для private repos, но текущий остаток квоты неизвестен. До ручного запуска не считать тест пройденным.
 
 Official refs: https://docs.github.com/en/billing/concepts/product-billing/github-actions and https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax.
+
+
+### C0095 — 5 MiB read test completed (2026-10-12)
+
+Manual workflow `paulhuman/github-api-lab/.github/workflows/create-5m-fixture.yml` successfully generated and published the deterministic fixture:
+
+- Branch: `experiment/fixture-5m-c0095-38260305834`
+- Commit: `0a55aeac7948e2dd9984795cbd968c134a731ad7`
+- Path: `fixtures/size-5m-c0095.txt`
+- Expected size: 5,242,880 bytes; all bytes are ASCII.
+- Workflow-reported SHA-256: `01aa375d43dba8abfb1c996c495aae9a07e94c330ed01dda316aa5365fe66bd6`
+- Independently verified Git blob SHA-1: `5c1cb4d9f4cdaa984ecb4a42f9cdc8032fbcf339`
+
+Read tests against this generated fixture:
+
+- `fetch_file(repository_full_name="paulhuman/github-api-lab", path="fixtures/size-5m-c0095.txt", ref="experiment/fixture-5m-c0095-38260305834", encoding="utf-8")` returned an empty string (0 characters) but reported the expected blob SHA-1. Assessment: **FAIL — content missing**.
+- `fetch_blob(repository_full_name="paulhuman/github-api-lab", blob_sha="5c1cb4d9f4cdaa984ecb4a42f9cdc8032fbcf339")` returned 5,242,880 ASCII characters. A separate local calculation of Git's blob SHA-1 over the returned bytes plus the `blob <length> NUL` header matched the expected SHA-1 exactly. Assessment: **PASS**.
+
+This is the first verified 5 MiB read case; replace prior “5 MiB untested” status where summarizing current state. The observation extends the tested pattern for the current wrapper/tool configuration, but does not establish a universal GitHub API limit or prove which internal endpoint/adapter is used. The successful workflow showed Node.js 20 deprecation and future `ubuntu-latest` migration notices; treat those as maintenance items, not failures of this run.
+
+Canonical lab report updated and read back exactly: https://github.com/paulhuman/github-api-lab/commit/883ca4bb68d3211acd45472642779adfb29802e7. No branch was deleted. Preserve both this generated fixture branch and the earlier experiment branch until separate inventory/preservation review and explicit owner authorization.
