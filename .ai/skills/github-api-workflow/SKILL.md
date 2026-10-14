@@ -36,8 +36,6 @@ Use the available `mcp__GitHub__fetch` tool for these Git Data API reads; do not
 
 Record the repository, original ref, resolved commit SHA, root tree SHA, recursive entry count, `truncated` value, any non-recursive subtree traversal, and the final in-scope coverage result. If any identifier or completeness check fails, stop and state the exact coverage limitation rather than inferring a complete snapshot.
 
-
-
 A successful API response alone does not prove that a recursive tree is complete. If the ref, commit, tree, or completeness status cannot be verified, state the limitation and keep conclusions bounded to the files and revision actually inspected.
 
 ## 2. Retrieve the declared scope completely
