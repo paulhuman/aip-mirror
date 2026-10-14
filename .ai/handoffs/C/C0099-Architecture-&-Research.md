@@ -15,9 +15,7 @@ C
 
 ## Starting objective
 
-Continue the AI-infrastructure bootstrap and activation audit from C0098. Determine whether the current canonical owners define an unambiguous sequence for bootstrap discovery, ACTIVATE owner selection, and additional operation reads. Establish the normative gap, if any, before proposing a minimal change. If a gap is confirmed, correct the canonical owner and validate the behavior with a controlled bootstrap pass; if not, record the evidence and close TODO 7 without speculative edits.
-
-After this audit, resume the GitHub API wrapper investigation by seeking authoritative implementation details before deciding whether any further safeguard is warranted.
+Continue the GitHub API wrapper investigation while preserving the confirmed repository workflow. TODO 7 (bootstrap discovery and activation audit) and TODO 8 (documenting Git tree retrieval through the universal GET tool) are complete. The immediate open task is TODO 1 in `.ai/memory/github-api-wrapper-research.md`: seek authoritative evidence about the implementation of the connected `fetch_file` and `fetch_blob` wrappers, without inferring their internal behavior from unrelated tools.
 
 ## Bootstrap and repository state
 
@@ -30,24 +28,16 @@ After this audit, resume the GitHub API wrapper investigation by seeking authori
 - INDEX was used as a discovery map, not as a requirement to read every listed file.
 - The host-specific mechanism for this chapter is the GitHub API / Contents API, not a local working copy.
 
-## Active task: bootstrap discovery and activation (TODO 7)
+## Completed in C0099: bootstrap discovery and activation audit (TODO 7)
 
-The working record is `.ai/memory/github-api-wrapper-research.md`, TODO 7.
+The audit found no demonstrated normative gap in the current discovery → activation contract:
 
-C0098 describes the issue as follows:
+- BOOTSTRAP orders discovery as configuration → `.ai/AGENTS.md` → `.ai/INDEX.md` → `.ai/skills/repository/SKILL.md` → other applicable canonical owners.
+- INDEX selects applicable owners; it does not require indiscriminate reading of every listed skill.
+- INDEX is a discovery/router file, not an ACTIVATE owner merely because bootstrap reads it. If read during an operation, it belongs in `OPERATION READS`, not duplicated among ACTIVATE owners.
+- The C0096 TRACE does not prove whether INDEX was skipped or omitted from the trace. That historical evidence is incomplete, not proof of a current normative violation.
 
-- The C0096 TRACE did not show `.ai/INDEX.md` among operation reads.
-- `.ai/skills/github-api-repository/SKILL.md` was listed as an operation read rather than an ACTIVATE owner, and `.ai/skills/github-api-workflow/SKILL.md` was not listed.
-- The absence of INDEX from a TRACE does not alone prove a normative violation: the existing BOOTSTRAP minimum ACTIVATE list does not explicitly name INDEX as an activation owner.
-- The unresolved question is how bootstrap is required to discover additional applicable host-specific canonical owners and distinguish “read” from “activated.”
-
-Next steps:
-
-1. Pin a single repository revision and compare the current `.ai/INDEX.md`, `.ai/conversation-management/handoff/BOOTSTRAP.md`, `.ai/skills/activation/SKILL.md`, and applicable host-specific skills.
-2. Establish which files are required ACTIVATE owners and which are contextual/operation reads. Do not treat a read as proof of activation.
-3. Identify the canonical owner for any missing discovery requirement; avoid duplicating procedural ownership in INDEX.
-4. If a concrete gap is confirmed, make the smallest justified edit and perform a controlled bootstrap validation. Verify TRACE against the actual owner/read sets.
-5. If no gap is confirmed, document the evidence and close TODO 7 without changing canonical files.
+No canonical skills were changed for TODO 7. The conclusion and evidence boundaries are recorded in `.ai/memory/github-api-wrapper-research.md`; TODO 7 is CLOSED.
 
 ## Confirmed GitHub API wrapper research
 
