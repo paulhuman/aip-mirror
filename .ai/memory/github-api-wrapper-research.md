@@ -386,7 +386,7 @@ Canonical lab report updated and read back exactly: https://github.com/paulhuman
 6. Последующие чтения файлов и проверки привязать к тому же commit SHA; tree подтверждает структуру, но сам по себе не заменяет чтение содержимого файлов.
 7. В качестве evidence фиксировать ref, commit SHA, root tree SHA, число entries, `truncated` и результаты проверки coverage.
 
-**Статус:** OPEN — универсальный `mcp__GitHub__fetch` обнаружен и успешно использован для полного recursive snapshot на C0099; нормативную процедуру ещё нужно внести в canonical skill и проверить readback/diff/scope.
+**Статус:** CLOSED — процедура добавлена в `.ai/skills/github-api-workflow/SKILL.md`, перечитана обратно и проверена по diff и changed-file scope. Commit: `a55ed27fd319eceac94d897b2fe11fa43093a67b`; финальная правка форматирования skill: `77e1d6ab7ed7e7b071d1ab862d0c76730fbdd7d1`.
 
 
 
