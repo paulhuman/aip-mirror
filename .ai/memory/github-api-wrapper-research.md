@@ -360,3 +360,21 @@ Canonical lab report updated and read back exactly: https://github.com/paulhuman
 - SHA-256: `01aa375d43dba8abfb1c996c495aae9a07e94c330ed01dda316aa5365fe66bd6`, совпадает с independently recorded expected digest.
 
 Итог: evidence сохранено в canonical lab report; обе experiment branches и их уникальные fixture objects оставить без изменений. Удаление не разрешено. Точная причина пустого `fetch_file.content` не установлена; видимый wrapper contract не раскрывает endpoint/media type/внутреннее декодирование, и гипотеза о Free plan остаётся неподтверждённой. TODO 1 и TODO 3 остаются открытыми до получения авторитетной информации о реализации или иного конкретного evidence.
+
+
+### TODO 8 — документировать Git tree snapshot через универсальный `mcp__GitHub__fetch`
+
+**Ожидаемый результат:** `.ai/skills/github-api-workflow/SKILL.md` описывает проверенный способ получить полный repository tree через универсальный GET-инструмент `mcp__GitHub__fetch`, не предполагая наличие отдельного `fetch_tree`.
+
+**Шаги, которые нужно закрепить в skill:**
+
+1. Получить целевой ref и закрепить его на точном commit SHA.
+2. Вызвать `mcp__GitHub__fetch` через GitHub REST API: `GET /repos/{owner}/{repo}/git/commits/{commit_sha}`; извлечь `commit.tree.sha` как root tree SHA.
+3. Вызвать `mcp__GitHub__fetch` для `GET /repos/{owner}/{repo}/git/trees/{tree_sha}?recursive=1`.
+4. Проверить, что возвращённый `tree.sha` совпадает с запрошенным SHA, записать количество entries и явно проверить `truncated`.
+5. Считать recursive snapshot полным только при `truncated: false`. Если `truncated: true`, пройти дерево через bounded non-recursive GET-запросы для root tree и всех необходимых поддеревьев, пока все entries в scope не будут учтены.
+6. Последующие чтения файлов и проверки привязать к тому же commit SHA; tree подтверждает структуру, но сам по себе не заменяет чтение содержимого файлов.
+7. В качестве evidence фиксировать ref, commit SHA, root tree SHA, число entries, `truncated` и результаты проверки coverage.
+
+**Статус:** OPEN — универсальный `mcp__GitHub__fetch` обнаружен и успешно использован для полного recursive snapshot на C0099; нормативную процедуру ещё нужно внести в canonical skill и проверить readback/diff/scope.
+
