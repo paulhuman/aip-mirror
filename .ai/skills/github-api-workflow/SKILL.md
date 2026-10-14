@@ -24,6 +24,20 @@ Before making repository-wide structural claims:
 
 Keep the branch/ref name, commit SHA, and root tree SHA distinct in notes and conclusions: the ref is a movable name, the commit identifies a revision, and the tree identifies its committed path structure.
 
+### Concrete retrieval sequence with the universal GitHub GET tool
+
+Use the available `mcp__GitHub__fetch` tool for these Git Data API reads; do not assume a separate `fetch_tree` tool exists. The tool accepts a GitHub REST API URL and returns JSON responses unchanged.
+
+1. Resolve the intended branch or ref to an exact commit SHA. For a branch, a request such as `GET https://api.github.com/repos/{owner}/{repo}/branches/{branch}` returns the current `commit.sha`. Record that SHA immediately; do not use the moving branch name for subsequent snapshot reads.
+2. Request `GET https://api.github.com/repos/{owner}/{repo}/git/commits/{commit_sha}`. Extract `tree.sha` from the returned Git commit object as the root tree SHA.
+3. Request `GET https://api.github.com/repos/{owner}/{repo}/git/trees/{tree_sha}?recursive=1`. Check that the returned `sha` matches the requested root tree SHA, record the number of returned `tree` entries, and inspect `truncated` explicitly.
+4. Accept this recursive snapshot as complete only when `truncated` is `false`. If it is `true`, do not rely on the recursive response for coverage: restart accounting at the recorded root tree SHA and request non-recursive trees for the root and each in-scope subtree, descending until all in-scope entries have been enumerated. Record each visited tree SHA and account for every in-scope path.
+5. Retrieve file contents and perform any further revision-specific checks using the same recorded `commit_sha`. The tree is evidence of committed path structure, not a substitute for reading the file contents themselves.
+
+Record the repository, original ref, resolved commit SHA, root tree SHA, recursive entry count, `truncated` value, any non-recursive subtree traversal, and the final in-scope coverage result. If any identifier or completeness check fails, stop and state the exact coverage limitation rather than inferring a complete snapshot.
+
+
+
 A successful API response alone does not prove that a recursive tree is complete. If the ref, commit, tree, or completeness status cannot be verified, state the limitation and keep conclusions bounded to the files and revision actually inspected.
 
 ## 2. Retrieve the declared scope completely
