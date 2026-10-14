@@ -12,9 +12,10 @@ C
 **Previous chapter:**
 0097
 
+
 ## Starting objective
 
-Continue the controlled bootstrap and AI-infrastructure architecture work. First, receive and evaluate the pending DSH review of the fixture-isolation wording in the shared repository skill; make no change unless the review establishes a concrete ambiguity and supports a minimal host-neutral correction.
+Continue the controlled bootstrap and AI-infrastructure architecture work. The next chapter should audit the bootstrap discovery and skill-activation contract (TODO 7 in `.ai/memory/github-api-wrapper-research.md`), establish whether the current canonical owners define an unambiguous `discovery → activation → operation reads` sequence, and make a minimal correction only if a concrete normative gap is confirmed. After that, resume the GitHub API wrapper investigation by looking for authoritative implementation details before deciding whether any further safeguards are warranted.
 
 ## Bootstrap and repository state
 
@@ -25,15 +26,26 @@ Continue the controlled bootstrap and AI-infrastructure architecture work. First
 - INDEX was used as a discovery map; unrelated indexed skills were not loaded indiscriminately.
 - New handoff path: `.ai/handoffs/C/C0098-Architecture-&-Research.md`.
 
-## Immediate pending review: shared fixture-isolation wording
 
-The predecessor C0097 handoff records this open question:
+## Completed in C0098: shared fixture-isolation wording
 
-- `.ai/skills/repository/SKILL.md` §9 says an isolated repository test should prefer a disposable branch or isolated working copy.
-- `.ai/skills/git-cli-workflow/SKILL.md` requires a separate Git worktree and prohibits returning to a disposable branch in the primary working copy.
-- The concern is whether the shared wording delegates host-specific isolation mechanics precisely enough. This is not yet established as a cross-host contradiction.
+The shared/host-specific boundary issue in `.ai/skills/repository/SKILL.md` §9 was resolved with a local edit to the first paragraph only. The agreed wording requires isolating the fixture from canonical project state and unrelated user work, and delegates the applicable isolation mechanism to the host-specific repository and workflow skills.
 
-**Next action:** receive the user's DSH response; reread the current full versions of both canonical skills; compare the evidence and proposed diff. Do not edit either file unless a concrete ambiguity is demonstrated and the minimal correction remains host-neutral.
+- Commit: `1e13fe0ca61b6a9476f54a2d17ca87d23a41e31b` — `ai-skills(repository): delegate fixture isolation mechanics`.
+- The update was read back from the resulting immutable commit; the content/blob SHA matched, the commit parent was verified, and comparison showed exactly one changed file with one addition and one deletion.
+- The two following delegation/invariant sentences in §9 were intentionally left unchanged.
+- The user explicitly cancelled the proposed DSH control review; do not revive it as a pending task.
+
+
+## Next planned work: bootstrap discovery and activation
+
+The active open task is TODO 7 in `.ai/memory/github-api-wrapper-research.md`. The C0096 TRACE listed files read but did not establish that `.ai/INDEX.md` had been read, and specialized GitHub API skills may have been read as operation context rather than activated owners. The existing normative text does not yet make the exact gap certain, so investigate before editing.
+
+1. Re-read `.ai/INDEX.md`, `.ai/conversation-management/handoff/BOOTSTRAP.md`, `.ai/skills/activation/SKILL.md`, and the applicable host-specific skills from one pinned revision.
+2. Establish which skills are required activation owners for bootstrap and which are additional operation reads. Keep “read” and “activated” distinct.
+3. Identify the canonical owner that should define any missing discovery step; avoid duplicating procedure in INDEX.
+4. If a concrete gap is confirmed, make a minimal change and run a controlled bootstrap pass. Verify that TRACE reports the actual activation owners and distinct operation reads.
+5. If the current contract is already sufficient, document the evidence and close the TODO without changing files.
 
 ## Confirmed research state: GitHub API wrapper completeness
 
@@ -54,6 +66,7 @@ Do not repeat completed fixture-size experiments without a specific reason. Two 
 - `experiment/control-read-completeness-20261012`
 - `experiment/fixture-5m-c0095-38260305834`
 
+
 ## Recent completed work in C0097
 
 C0097 performed the controlled receiving-chapter bootstrap and reviewed procedural language and host-specific skill boundaries. The following commits on `main` were recorded in its handoff as verified by read-back and limited to their stated files:
@@ -66,6 +79,7 @@ C0097 performed the controlled receiving-chapter bootstrap and reviewed procedur
 
 A targeted regex audit found no remaining affirmative `DO + verb` constructions in the inspected SKILL files; prohibitions using `DO NOT` remain. The audit was targeted, not a complete line-by-line semantic audit of every skill.
 
+
 ## Architecture and operating constraints
 
 - Current direction: shared host-neutral repository/workflow guidance, with separate GitHub API and local Git mechanics. Some duplication is intentional to avoid loading irrelevant host-specific instructions.
@@ -75,32 +89,37 @@ A targeted regex audit found no remaining affirmative `DO + verb` constructions 
 - All branches except `main` in the project repository were previously deleted; do not rely on deleted branches for research state. Search current `.ai/docs/` and `.ai/memory/` when relevant.
 - Do not restore the removed sixth item in `.ai/AGENTS.md`.
 
+
 ## Confirmed / inferred / assumed / open
 
 **Confirmed**
-- Bootstrap discovery order requires reading `.ai/config.yaml`, then `.ai/AGENTS.md`, then `.ai/INDEX.md`; INDEX selects applicable owners rather than requiring every indexed file to be read.
-- The tested GitHub wrapper configuration exhibits size-dependent empty `fetch_file.content` responses while `fetch_blob` succeeded on the tested large fixtures.
-- The two lab experiment branches listed above remain preserved.
-- The C0097 targeted procedural-language audit and listed commits are recorded in the predecessor handoff.
+- Bootstrap discovery begins with `.ai/config.yaml` → `.ai/AGENTS.md` → `.ai/INDEX.md`; INDEX is a discovery map, not a requirement to read every listed file.
+- The §9 fixture-isolation clarification is committed on `main` in `1e13fe0ca61b6a9476f54a2d17ca87d23a41e31b`; the user cancelled DSH re-review.
+- In the tested wrapper/tool configuration, `fetch_file` returned empty content for tested fixtures from 1 MiB through 5 MiB while reporting the expected blob SHA; `fetch_blob` returned complete tested 5 MiB content matching independently checked Git blob SHA-1 and SHA-256.
+- The two protected lab branches remain preserved, and the fixture artifacts have unique paths.
+- The targeted procedural-language audit and commits listed above remain recorded in this handoff.
 
 **Inferred**
-- The shared fixture-isolation wording may be too vague about delegating host-specific mechanisms; DSH review is pending.
+- The empty `fetch_file.content` behavior is a practical completeness risk in the tested configuration, but it does not establish the underlying cause or a universal API limit.
 
 **Assumed / unverified**
 - The user's Free plan might relate to wrapper behavior; no evidence establishes this.
+- The exact wrapper endpoint, media type, and decoding path remain unknown.
 
 **Open**
-- Whether `.ai/skills/repository/SKILL.md` §9 needs a minimal clarification after DSH reviews it alongside `.ai/skills/git-cli-workflow/SKILL.md`.
-- The exact endpoint/media type and decoding behavior behind `fetch_file` responses.
+- Whether the bootstrap discovery/activation contract has a concrete normative gap (TODO 7).
+- Whether authoritative wrapper implementation details can be obtained and whether they justify any additional safeguard in `github-api-*` skills.
 
 ## Immediate next task
 
-Receive and review the user's DSH response about fixture-isolation wording. Compare it with the current full canonical files and make no changes until the evidence warrants a minimal correction.
+Audit bootstrap discovery and activation (TODO 7). Establish the exact normative contract before proposing any edit. Use the current canonical files and one pinned repository revision; distinguish required ACTIVATE owners from contextual and operation reads. If a gap is confirmed, make a minimal change and validate it with a controlled bootstrap TRACE. If no gap exists, record the evidence and close the TODO without a speculative change.
 
 ## Recommended starting context
 
-1. `.ai/skills/repository/SKILL.md` §9.
-2. `.ai/skills/git-cli-workflow/SKILL.md` fixture-isolation requirements.
-3. `.ai/memory/github-api-wrapper-research.md` only if resuming wrapper-completeness research.
+1. `.ai/INDEX.md` — command routing and capability discovery.
+2. `.ai/conversation-management/handoff/BOOTSTRAP.md` — canonical bootstrap ordering and minimum activation set.
+3. `.ai/skills/activation/SKILL.md` — ACTIVATE and operation-level TRACE contract.
+4. `.ai/skills/github-api-repository/SKILL.md` and `.ai/skills/github-api-workflow/SKILL.md` — host-specific owners relevant to remote operations.
+5. `.ai/memory/github-api-wrapper-research.md` — TODO 7 and evidence for the later wrapper investigation.
 
-Do not repeat completed fixture-size tests without a specific reason, and do not delete or rewrite either protected lab branch.
+Do not revive the completed §9 review, repeat completed fixture-size tests without a specific reason, or delete/rewrite either protected laboratory branch.
