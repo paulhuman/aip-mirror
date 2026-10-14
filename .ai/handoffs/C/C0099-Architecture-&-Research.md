@@ -127,17 +127,27 @@ A targeted regex audit found no remaining affirmative `DO + verb` constructions 
 - Whether the bootstrap discovery/activation contract has a concrete normative gap (TODO 7).
 - Whether authoritative wrapper implementation details can be obtained and whether they justify an additional safeguard in `github-api-*` skills.
 
+### C0099 — завершение TODO 8: Git tree retrieval procedure
+
+TODO 8 is CLOSED. The canonical `.ai/skills/github-api-workflow/SKILL.md` now documents the concrete retrieval sequence through the universal `mcp__GitHub__fetch` GET tool: resolve a ref to a commit SHA, obtain the root tree SHA from the commit object, fetch the recursive tree, verify the returned SHA and `truncated` field, fall back to bounded non-recursive subtree traversal when needed, and pin file reads to the same commit.
+
+Commits:
+- `a55ed27fd319eceac94d897b2fe11fa43093a67b` — `ai-skills(github-api-workflow): document tree fetch sequence`.
+- `77e1d6ab7ed7e7b071d1ab862d0c76730fbdd7d1` — `ai-skills(github-api-workflow): tidy tree procedure spacing`.
+- `6f0433f9164edaf1096c4e629b80c19602d8422b` — `ai-memory(github-api): close Git tree fetch TODO`.
+
+The final skill and memory state were read back and checked; the final `main` head is `6f0433f9164edaf1096c4e629b80c19602d8422b`. A separate pinned-tree check at this revision returned 294 entries with `truncated: false`; the returned tree SHA matched the requested root tree SHA. This verifies that particular snapshot, not the content of every file.
+
 ## Immediate next task
 
-Audit bootstrap discovery and activation (TODO 7). Establish the exact normative contract from a pinned revision; distinguish required ACTIVATE owners from contextual and operation reads. If a concrete gap is confirmed, make a minimal change and validate it with a controlled bootstrap TRACE. If no gap exists, document the evidence and close the TODO without a speculative change.
+Continue TODO 1 in `.ai/memory/github-api-wrapper-research.md`: seek authoritative implementation details for the connected `mcp__GitHub__fetch_file` and `mcp__GitHub__fetch_blob` wrappers. The prior public-source search did not identify their actual implementation, endpoint, media type, or decoding path. Do not infer implementation details from unrelated public MCP servers. If no authoritative source is available, identify a concrete reproducible experiment that could narrow the behavior without repeating the completed fixture-size tests or mutating protected lab branches.
 
 ## Recommended starting context
 
 1. `.ai/INDEX.md` — command routing and capability discovery.
-2. `.ai/conversation-management/handoff/BOOTSTRAP.md` — canonical bootstrap ordering and minimum activation set.
-3. `.ai/skills/activation/SKILL.md` — ACTIVATE and operation-level TRACE contract.
-4. `.ai/skills/repository/SKILL.md` — shared repository invariants.
-5. `.ai/skills/github-api-repository/SKILL.md` and `.ai/skills/github-api-workflow/SKILL.md` — remote operation and inspection mechanics.
-6. `.ai/memory/github-api-wrapper-research.md` — TODO 7 and wrapper evidence.
+2. `.ai/memory/github-api-wrapper-research.md` — open TODO 1 and evidence/constraints from earlier wrapper experiments.
+3. `.ai/skills/github-api-repository/SKILL.md` — remote read/write safety and completeness requirements.
+4. `.ai/skills/github-api-workflow/SKILL.md` — pinned GitHub API tree inspection and coverage procedure.
+5. `.ai/skills/workflow/SKILL.md` — research-first workflow and evidence classification.
 
-Do not revive completed/cancelled work, repeat completed fixture tests without a specific reason, or delete/rewrite either protected laboratory branch.
+Do not reopen completed TODO 7 or TODO 8, repeat completed fixture-size experiments without a specific reason, or delete/rewrite either protected laboratory branch.
