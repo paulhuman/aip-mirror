@@ -458,3 +458,28 @@ Canonical lab report updated and read back exactly: https://github.com/paulhuman
 - Официальный `github/github-mcp-server` остаётся отдельной публичной реализацией; совпадение предметной области или имён не доказывает, что текущие wrappers вызывают его.
 
 **Итог:** публичные reports подтверждают, что похожий симптом наблюдался и в другом сценарии, а текущий контракт generic `fetch` явно исключает oversized/non-UTF-8 responses. Ни один из этих фактов не устанавливает причину пустого `fetch_file.content` для текстового fixture размером 1 MiB и не раскрывает его внутренний endpoint/media type. TODO 1 остаётся OPEN; менять canonical skills на основании этого свидетельства не следует.
+
+### Актуализация C0100 — line-range на крупном multi-line fixture (2026-10-15)
+
+**Вопрос:** может ли `fetch_file` вернуть хотя бы отдельную строку крупного файла, если запрос без диапазона возвращает пустой `content`?
+
+**Фиксированный образец:**
+- Repository: `paulhuman/github-api-lab`.
+- Path: `fixtures/size-1m-exact-many-lines.txt`.
+- Immutable commit: `5ea255866d8d27eaa569b1b29f532c3ecea62cf0`.
+- Независимо зафиксированный blob SHA-1: `437268e84a7d9985d369e8ff474cc96fd665534c`.
+
+**Контроль ожиданий через generic `fetch`:**
+- GET к GitHub Contents API на том же immutable commit вернул 1,048,576 символов.
+- Текст разбивается на 61,681 строку; первая и последняя строки обе равны `0123456789abcdef`.
+
+**Новые наблюдения `fetch_file`:**
+- Запрос `start_line=1, end_line=1` вернул пустой `content` (0 символов).
+- Запрос `start_line=61681, end_line=61681` также вернул пустой `content` (0 символов).
+- Оба ответа вернули ожидаемый blob SHA `437268e84a7d9985d369e8ff474cc96fd665534c` и `encoding=utf-8`.
+
+**Вывод ограниченного scope:** в этом случае диапазон строк не позволяет извлечь ни первую, ни последнюю строку из multi-line fixture размером 1 MiB через `fetch_file`, тогда как generic `fetch` возвращает полный текст того же объекта. Это дополнительное подтверждение расхождения read surfaces; не устанавливает внутренний endpoint, причину пустого содержимого или универсальное ограничение.
+
+Дополнительно проверен положительный контроль line-range на небольшом файле `fixtures/control-independent-oracle-c0095.txt` в commit `405ef375f12cc6ea5ea92841a363b184b7b334c9`: `start_line=1, end_line=2` вернул две ожидаемые строки (`C0095 independent oracle control` и `ASCII fixture`). Следовательно, line-range аргументы работают в малом контрольном случае, но не в описанном крупном fixture.
+
+**Ограничение:** этот опыт не повторяет size-boundary sweep; он проверяет поведение line-range на двух концах уже известного multi-line объекта и включает малый положительный контроль. TODO 1 остаётся OPEN.
