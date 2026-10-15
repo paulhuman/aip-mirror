@@ -443,3 +443,18 @@ Canonical lab report updated and read back exactly: https://github.com/paulhuman
 **Дополнительное публичное свидетельство (найдено после записи выше):**
 - В `openai/codex` открыт issue [#52739 — ChatGPT GitHub connector cannot read ~60 MB PDF from private repo](https://github.com/openai/codex/issues/52739), опубликованный 2026-10-10. Автор сообщает о корректных метаданных/blob SHA и пустом `content` у `fetch_file(..., encoding="base64")`, а также об ограничении generic `fetch` для крупных binary/non-UTF-8 ответов.
 - Issue фиксирует похожий наблюдаемый симптом в другом сценарии, но сам автор отмечает, что точная стадия сбоя/root cause не подтверждены. Это issue/репродукция, не исходный код и не доказательство реализации нашего wrapper.
+### Актуализация C0100 — публичные issue и контракт generic fetch (2026-10-15)
+
+**Проверка публичных сообщений:**
+- Открытый issue `openai/codex#52739`, созданный 2026-10-10: https://github.com/openai/codex/issues/52739.
+- Автор сообщает о `fetch_file(encoding="base64")`, который для PDF около 60 MB возвращает валидные blob SHA/encoding, но пустой `content`; generic fetch в описанном сценарии не поддерживает большие binary/non-UTF-8 ответы.
+- Issue содержит `performed_via_github_app.slug = chatgpt-codex-connector`, 0 комментариев на момент чтения, и прямо говорит, что точная стадия сбоя/root cause не подтверждены. Это независимый report о симптоме, не реализационный источник.
+- Дополнительный GitHub code search по точным именам `mcp__GitHub__fetch_file`, `mcp__GitHub__fetch_blob` и комбинациям с ошибкой не выявил публичного исходного кода именно этих wrappers. Результаты преимущественно упоминают имена инструментов в сторонних заметках/каталогах.
+
+**Уточнение доступного контракта инструмента в текущем окружении:**
+- Метаданные `mcp__GitHub__fetch` прямо описывают его как GET к разрешённым public GitHub repository resources и говорят, что oversized или non-UTF-8 responses rejected; binary downloads не поддерживаются.
+- Это прямое свидетельство ограничения generic `fetch` в текущем tool contract. Оно не определяет endpoint или implementation path `fetch_file` / `fetch_blob`.
+- Публичная справка OpenAI по GitHub connector описывает retrieval разрешённого repository content on demand, но не раскрывает внутреннюю реализацию wrappers: https://help.openai.com/en/articles/11145903-connecting-github-to-chatgpt.
+- Официальный `github/github-mcp-server` остаётся отдельной публичной реализацией; совпадение предметной области или имён не доказывает, что текущие wrappers вызывают его.
+
+**Итог:** публичные reports подтверждают, что похожий симптом наблюдался и в другом сценарии, а текущий контракт generic `fetch` явно исключает oversized/non-UTF-8 responses. Ни один из этих фактов не устанавливает причину пустого `fetch_file.content` для текстового fixture размером 1 MiB и не раскрывает его внутренний endpoint/media type. TODO 1 остаётся OPEN; менять canonical skills на основании этого свидетельства не следует.
