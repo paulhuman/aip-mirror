@@ -483,3 +483,35 @@ Canonical lab report updated and read back exactly: https://github.com/paulhuman
 Дополнительно проверен положительный контроль line-range на небольшом файле `fixtures/control-independent-oracle-c0095.txt` в commit `405ef375f12cc6ea5ea92841a363b184b7b334c9`: `start_line=1, end_line=2` вернул две ожидаемые строки (`C0095 independent oracle control` и `ASCII fixture`). Следовательно, line-range аргументы работают в малом контрольном случае, но не в описанном крупном fixture.
 
 **Ограничение:** этот опыт не повторяет size-boundary sweep; он проверяет поведение line-range на двух концах уже известного multi-line объекта и включает малый положительный контроль. TODO 1 остаётся OPEN.
+
+
+### Актуализация C0100 — encoding и Git Blobs API (2026-10-15)
+
+#### Эксперимент: изменить encoding у `fetch_file`
+
+Использован тот же крупный multi-line fixture и тот же immutable commit:
+- Path: `fixtures/size-1m-exact-many-lines.txt`.
+- Commit: `5ea255866d8d27eaa569b1b29f532c3ecea62cf0`.
+- Expected blob SHA-1: `437268e84a7d9985d369e8ff474cc96fd665534c`.
+
+Результаты:
+- `fetch_file(encoding=utf-8)` ранее возвращал пустое содержимое.
+- `fetch_file(encoding=base64)` также вернул пустое содержимое (0 символов), сохранив ожидаемый blob SHA и указав `encoding=base64`.
+- Положительный контроль: `fetch_file(encoding=base64)` для малого `fixtures/control-independent-oracle-c0095.txt` вернул base64-текст длиной 139 символов и ожидаемый blob SHA `9e6338eec493037c8a5d0001a1e33e96b553fd41`.
+
+**Вывод ограниченного scope:** смена запрошенного encoding с UTF-8 на base64 не устраняет пустое содержимое для этого 1 MiB объекта. Малый base64-контроль возвращает содержимое. Это исключает простую гипотезу, что наблюдаемый симптом объясняется только выбором UTF-8 encoding, но не определяет конкретную причину.
+
+#### Независимый read surface: Git Blobs REST API через generic `fetch`
+
+Generic `fetch` вызвал GitHub REST endpoint:
+`https://api.github.com/repos/paulhuman/github-api-lab/git/blobs/437268e84a7d9985d369e8ff474cc96fd665534c`
+
+Ответ содержал полный текст ожидаемого fixture размером 1,048,576 символов. Это добавляет второй успешный API read surface к ранее проверенному Contents API; оба работают для объекта, у которого `fetch_file` возвращает пустое содержимое. Ответ Git Blobs API был текстово преобразован generic `fetch`, поэтому этот опыт подтверждает доступность текста через этот инструмент, но не документирует внутренний endpoint, используемый `fetch_file`.
+
+#### Дополнительный поиск публичных источников реализации
+
+Поиск по точным именам `mcp__codex_apps__github_fetch_file`, `chatgpt-codex-connector`, `GithubPlugin` и их сочетаниям нашёл публичные архивы схем инструментов и журналы использования, включая упоминания `GithubPlugin`. Найденные материалы описывают доступную схему/поверхность инструмента, но не содержат подтверждённого исходного кода реализации метода `fetch_file`. Это не позволяет установить конкретный backend, endpoint, лимит или причину пустого содержимого.
+
+Прямая попытка прочитать GitHub App metadata endpoint через generic `fetch` не прошла: инструмент отклонил URL как находящийся вне разрешённой области. Поэтому сведения о конфигурации GitHub App этим способом не получены.
+
+**Итог:** две новые независимые проверки завершены: (1) смена encoding не помогла крупному fixture, (2) Git Blobs API через generic `fetch` вернул полный текст. TODO 1 остаётся OPEN; root cause и гипотеза о плане не установлены.
